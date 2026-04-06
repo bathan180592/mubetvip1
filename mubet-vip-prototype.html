@@ -1,0 +1,3914 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mubet VIP Club - Chương Trình Khách Hàng Thân Thiết</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+/* ===== DESIGN TOKENS (Mubet Style) ===== */
+:root {
+  --bg: #0a0c13;
+  --panel: #11131c;
+  --panel-2: #171a24;
+  --panel-3: #1d2230;
+  --text: #f5f7fb;
+  --muted: #9aa3b2;
+  --line: rgba(255,255,255,.08);
+  --soft-line: rgba(255,255,255,.05);
+  --primary-50: #fceaeb;
+  --primary-100: #f8d5d7;
+  --primary-300: #ec4a51;
+  --primary-400: #de2e36;
+  --primary-500: #ca2930;
+  --primary-600: #b2252b;
+  --primary-700: #851c20;
+  --primary-800: #301c1c;
+  --secondary-300: #4a7dfe;
+  --secondary-400: #265de9;
+  --secondary-500: #2b34f2;
+  --secondary-700: #1d23a1;
+  --secondary-800: #020b29;
+  --black-50: #7b7f8a;
+  --black-100: #3d404d;
+  --black-200: #343744;
+  --black-300: #292b35;
+  --black-400: #22242d;
+  --black-500: #1b1e26;
+  --black-600: #14161b;
+  --black-700: #0a0c13;
+  --gray-0: #ffffff;
+  --gray-50: #d3d3d3;
+  --gray-70: #cfd4e1;
+  --gray-100: #b5b5b5;
+  --gray-200: #7c828b;
+  --tertiary-500: #ff8400;
+  --tertiary-400: #ffe23e;
+  --success-100: #05a158;
+  --error-100: #ff274e;
+  --warning-100: #ffa602;
+  --disable-200: #888888;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-card: 0px 4px 10.8px rgba(0,0,0,.06);
+  --shadow-light-bt: 0px 1px 6px rgba(225,44,47,.29);
+  --gift-gradient: linear-gradient(96.64deg, #E7BB08 5.01%, #AF2F00 83.13%);
+}
+
+/* ===== RESET ===== */
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; }
+input { font-family: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ===== UTILITIES ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.eyebrow {
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--primary-400); font-weight: 700;
+}
+.section-title {
+  font-family: Montserrat, sans-serif; font-size: 28px; font-weight: 800;
+  line-height: 1.15; letter-spacing: -.01em; margin-top: 8px;
+}
+.section-sub { color: var(--muted); font-size: 15px; margin-top: 10px; max-width: 680px; }
+
+/* ===== HEADER ===== */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,12,19,.88); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.logo { display: flex; align-items: center; gap: 0; }
+.logo img { height: 32px; width: auto; }
+.header-nav { display: flex; gap: 6px; }
+.header-nav a {
+  padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 500;
+  color: var(--gray-70); transition: all .2s;
+}
+.header-nav a:hover { background: rgba(255,255,255,.05); color: var(--text); }
+.header-nav a.active { color: var(--tertiary-400); }
+.header-actions { display: flex; gap: 10px; }
+.btn-login {
+  padding: 9px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
+  background: transparent; border: 1px solid var(--line); color: var(--text);
+  transition: all .2s;
+}
+.btn-login:hover { border-color: rgba(255,255,255,.2); }
+.btn-register {
+  padding: 9px 18px; border-radius: 10px; font-size: 13px; font-weight: 700;
+  background: var(--primary-400); color: #fff; font-family: Montserrat, sans-serif;
+  text-transform: uppercase; letter-spacing: .03em;
+  box-shadow: var(--shadow-light-bt); transition: all .2s;
+}
+.btn-register:hover { background: var(--primary-300); }
+
+/* Mobile hamburger */
+.mobile-menu-btn {
+  display: none; background: none; padding: 8px;
+  color: var(--text); flex-direction: column; gap: 5px;
+  align-items: center; justify-content: center;
+}
+.mobile-menu-btn span {
+  display: block; width: 22px; height: 2px; background: var(--text);
+  border-radius: 2px; transition: all .3s;
+}
+.mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translateY(5px); }
+.mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+.mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translateY(-5px); }
+
+/* Mobile nav drawer */
+.mobile-nav {
+  display: none; position: fixed; top: 60px; left: 0; right: 0; bottom: 0;
+  background: rgba(10,12,19,.97); backdrop-filter: blur(20px);
+  z-index: 99; padding: 24px;
+  transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1);
+  overflow-y: auto;
+}
+.mobile-nav.open { transform: translateX(0); }
+.mobile-nav a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 0; font-size: 16px; font-weight: 600;
+  color: var(--gray-70); border-bottom: 1px solid var(--soft-line);
+  transition: color .2s;
+}
+.mobile-nav a:last-child { border-bottom: none; }
+.mobile-nav a.active { color: var(--tertiary-400); }
+.mobile-nav-actions {
+  display: flex; gap: 12px; margin-top: 24px; padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.mobile-nav-actions button { flex: 1; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 700; }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative; overflow: hidden;
+  padding: 0 0 60px;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(222,46,54,.14), transparent),
+    radial-gradient(ellipse 50% 60% at 10% 80%, rgba(74,125,254,.10), transparent),
+    radial-gradient(ellipse 40% 40% at 50% 0%, rgba(231,187,8,.06), transparent);
+}
+.hero-bg-image {
+  position: absolute; top: 0; left: 0; right: 0; height: 220px;
+  z-index: 0; overflow: hidden;
+}
+.hero-bg-image img {
+  width: 100%; height: 100%; object-fit: cover; object-position: right top;
+  opacity: .55;
+}
+.hero-bg-image::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+}
+.hero-glow {
+  position: absolute; top: -60px; right: -20px;
+  width: 400px; height: 400px;
+  pointer-events: none; z-index: 0; opacity: .7;
+}
+.hero-glow img { width: 100%; height: 100%; object-fit: contain; }
+.hero::before {
+  content: ''; position: absolute; top: -80px; right: -40px;
+  width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(222,46,54,.12), transparent 65%);
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-title-area { text-align: left; min-height: 140px; display: flex; align-items: flex-end; padding-bottom: 20px; }
+.hero-below { text-align: center; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 18px; border-radius: 999px;
+  background: rgba(222,46,54,.12); border: 1px solid rgba(222,46,54,.25);
+  font-size: 12px; font-weight: 600; color: var(--primary-300);
+  margin-bottom: 24px;
+}
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary-400); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+.hero h1 {
+  font-family: Montserrat, sans-serif; font-size: clamp(32px, 5vw, 52px);
+  font-weight: 900; line-height: 1.05; letter-spacing: -.02em;
+  text-transform: uppercase;
+}
+.hero h1 .gold { background: var(--gift-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-desc {
+  color: var(--muted); font-size: 16px; max-width: 600px;
+  margin: 18px auto 0; line-height: 1.7;
+}
+.hero-stats {
+  display: flex; justify-content: center; gap: 36px; margin-top: 36px;
+  flex-wrap: wrap;
+}
+.hero-stat { text-align: center; }
+.hero-stat-value {
+  font-family: Montserrat, sans-serif; font-size: 28px; font-weight: 800;
+  background: linear-gradient(135deg, var(--tertiary-400), var(--tertiary-500));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; }
+.hero-cta {
+  margin-top: 36px;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px; border-radius: 14px;
+  background: var(--primary-400); color: #fff;
+  font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px;
+  text-transform: uppercase; letter-spacing: .04em;
+  box-shadow: 0 2px 20px rgba(222,46,54,.35);
+  transition: all .25s;
+}
+.hero-cta:hover { background: var(--primary-300); box-shadow: 0 4px 30px rgba(222,46,54,.45); transform: translateY(-1px); }
+.hero-cta.secondary {
+  background: transparent; border: 1px solid var(--line); color: var(--muted);
+  box-shadow: none; font-size: 13px; padding: 12px 28px;
+}
+.hero-cta.secondary:hover { border-color: var(--primary-400); color: var(--text); background: rgba(222,46,54,.06); box-shadow: none; }
+.hero-cta svg { width: 18px; height: 18px; }
+
+/* ===== ESTIMATOR TRIGGER (inline CTA) ===== */
+/* ===== AUTH MODALS ===== */
+.auth-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,.65); backdrop-filter: blur(8px);
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+}
+.auth-overlay.open { opacity: 1; visibility: visible; }
+
+.auth-modal {
+  position: fixed; z-index: 301;
+  top: 50%; left: 50%; transform: translate(-50%, -50%) scale(.95);
+  width: 90%; max-width: 440px; max-height: 90vh;
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 24px;
+  overflow: hidden; overflow-y: auto;
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s, transform .3s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column;
+}
+.auth-modal.open {
+  opacity: 1; visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+.auth-modal-banner {
+  position: relative; padding: 28px 28px 20px;
+  background: linear-gradient(135deg, #1a0508, #2a0a10 50%, #0d0f18);
+  overflow: hidden; text-align: center;
+}
+.auth-modal-banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 30%, rgba(222,46,54,.15), transparent 70%);
+  pointer-events: none;
+}
+.auth-modal-banner-logo {
+  height: 28px; width: auto; margin: 0 auto 14px;
+  position: relative;
+}
+.auth-modal-banner-text {
+  position: relative;
+  font-family: Montserrat, sans-serif; font-weight: 800;
+  font-size: 14px; color: var(--tertiary-400);
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.auth-modal-banner-promos {
+  position: relative;
+  display: flex; justify-content: center; gap: 16px;
+  margin-top: 12px; font-size: 11px; color: var(--gray-70);
+}
+.auth-modal-banner-promos span {
+  display: flex; align-items: center; gap: 4px;
+}
+.auth-modal-close {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(255,255,255,.08); border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); cursor: pointer; transition: all .2s;
+}
+.auth-modal-close:hover { background: rgba(255,255,255,.15); color: var(--text); }
+.auth-modal-close svg { width: 16px; height: 16px; }
+
+.auth-modal-form {
+  padding: 24px 28px 28px;
+}
+.auth-modal-title {
+  font-family: Montserrat, sans-serif; font-weight: 800; font-size: 22px;
+  margin-bottom: 20px;
+}
+.auth-field {
+  margin-bottom: 16px;
+}
+.auth-field-label {
+  display: block; font-size: 12px; color: var(--gray-70);
+  font-weight: 600; margin-bottom: 6px;
+}
+.auth-field-wrap {
+  position: relative;
+}
+.auth-field-input {
+  width: 100%; padding: 14px 16px;
+  background: var(--black-500); border: 1.5px solid rgba(255,255,255,.1);
+  border-radius: 12px; color: var(--text);
+  font-size: 14px; transition: border-color .2s;
+}
+.auth-field-input:focus { outline: none; border-color: var(--primary-400); }
+.auth-field-input::placeholder { color: var(--black-50); }
+.auth-field-toggle {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--muted); cursor: pointer;
+  padding: 4px; display: flex; align-items: center; justify-content: center;
+}
+.auth-field-toggle:hover { color: var(--text); }
+.auth-field-toggle svg { width: 18px; height: 18px; }
+
+.auth-forgot {
+  display: block; text-align: right; margin: -8px 0 16px;
+  font-size: 12px; color: var(--secondary-300); cursor: pointer;
+}
+.auth-forgot:hover { text-decoration: underline; }
+
+.auth-terms {
+  font-size: 11px; color: var(--muted); line-height: 1.5;
+  margin-bottom: 16px;
+}
+.auth-terms a { color: var(--primary-300); }
+.auth-terms a:hover { text-decoration: underline; }
+
+.auth-submit {
+  width: 100%; padding: 14px; border-radius: 12px;
+  background: var(--primary-400); color: #fff;
+  font-family: Montserrat, sans-serif; font-weight: 700; font-size: 14px;
+  text-transform: uppercase; letter-spacing: .04em;
+  box-shadow: 0 2px 16px rgba(222,46,54,.35);
+  transition: all .25s; border: none; cursor: pointer;
+}
+.auth-submit:hover { background: var(--primary-300); transform: translateY(-1px); }
+
+.auth-switch {
+  text-align: center; margin-top: 16px; font-size: 13px; color: var(--muted);
+}
+.auth-switch a {
+  color: var(--primary-300); font-weight: 600; cursor: pointer;
+}
+.auth-switch a:hover { text-decoration: underline; }
+
+/* Logged-in header state */
+.header-user {
+  display: flex; align-items: center; gap: 10px;
+}
+.header-user-avatar {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary-400), var(--tertiary-500));
+  display: flex; align-items: center; justify-content: center;
+  font-family: Montserrat, sans-serif; font-weight: 700; font-size: 14px;
+  color: #fff;
+}
+.header-user-info {
+  display: flex; flex-direction: column;
+}
+.header-user-name {
+  font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.2;
+}
+.header-user-tier {
+  font-size: 10px; color: var(--tertiary-400); font-weight: 600;
+}
+.header-user-logout {
+  padding: 7px 14px; border-radius: 8px; font-size: 12px;
+  background: rgba(255,255,255,.06); border: 1px solid var(--line);
+  color: var(--muted); cursor: pointer; transition: all .2s; margin-left: 4px;
+}
+.header-user-logout:hover { background: rgba(255,255,255,.1); color: var(--text); }
+
+/* Mobile bottom sheet for auth */
+@media (max-width: 768px) {
+  .auth-modal {
+    top: auto; left: 0; right: 0; bottom: 0;
+    transform: translateY(100%);
+    width: 100%; max-width: 100%;
+    max-height: 92vh;
+    border-radius: 24px 24px 0 0;
+  }
+  .auth-modal.open { transform: translateY(0); }
+  .auth-modal-form { padding: 20px; }
+  .auth-modal-form::before {
+    content: ''; display: block;
+    width: 40px; height: 4px; border-radius: 4px;
+    background: var(--black-300);
+    margin: 0 auto 16px;
+  }
+  .auth-modal-banner { padding: 20px 20px 16px; }
+  .header-user-info { display: none; }
+}
+
+/* ===== ESTIMATOR MODAL / BOTTOM SHEET ===== */
+.est-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.6); backdrop-filter: blur(8px);
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+}
+.est-overlay.open { opacity: 1; visibility: visible; }
+
+.est-modal {
+  position: fixed; z-index: 201;
+  top: 50%; left: 50%; transform: translate(-50%, -50%) scale(.95);
+  width: 90%; max-width: 520px; max-height: 90vh;
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 24px;
+  overflow: hidden;
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s, transform .3s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column;
+}
+.est-modal.open {
+  opacity: 1; visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+.est-modal-header {
+  padding: 24px 28px 0;
+  position: relative;
+}
+.est-modal-header::after {
+  content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(222,46,54,.08), transparent 70%);
+  pointer-events: none;
+}
+.est-modal-close {
+  position: absolute; top: 16px; right: 16px; z-index: 2;
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(255,255,255,.06); border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); cursor: pointer; transition: all .2s;
+}
+.est-modal-close:hover { background: rgba(255,255,255,.1); color: var(--text); }
+.est-modal-close svg { width: 18px; height: 18px; }
+.est-modal-title {
+  font-family: Montserrat, sans-serif; font-weight: 800; font-size: 20px;
+  margin-bottom: 4px;
+}
+.est-modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+
+.est-modal-body {
+  padding: 0 28px 28px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Input area */
+.est-input-label {
+  font-size: 12px; color: var(--gray-70); font-weight: 600; margin-bottom: 8px;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.est-input-wrap {
+  position: relative; margin-bottom: 12px;
+}
+.est-input {
+  width: 100%; padding: 18px 70px 18px 20px;
+  background: var(--black-500); border: 1.5px solid rgba(255,255,255,.1);
+  border-radius: 16px; color: var(--text);
+  font-size: 18px; font-weight: 700; font-family: Montserrat, sans-serif;
+  transition: border-color .2s;
+}
+.est-input:focus { outline: none; border-color: var(--primary-400); }
+.est-input-suffix {
+  position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+  font-size: 13px; color: var(--muted); font-weight: 600;
+}
+.est-quick-row {
+  display: flex; flex-wrap: nowrap; gap: 4px; margin-bottom: 24px; overflow: hidden;
+}
+.est-quick-btn {
+  flex: 1; padding: 8px 0; border-radius: 10px; font-size: 12px; font-weight: 600; text-align: center;
+  background: rgba(255,255,255,.04); border: 1px solid var(--line);
+  color: var(--gray-70); cursor: pointer; transition: all .2s;
+}
+.est-quick-btn:hover { border-color: var(--primary-400); color: var(--primary-300); background: rgba(222,46,54,.06); }
+.est-quick-btn.active { border-color: var(--primary-400); color: var(--primary-400); background: rgba(222,46,54,.1); }
+
+/* Divider */
+.est-divider {
+  height: 1px; background: var(--line); margin: 0 0 20px;
+}
+
+/* Result tier header */
+.est-result-tier {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px; border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+.est-result-tier-icon { width: 52px; height: 52px; flex-shrink: 0; }
+.est-result-tier-icon img { width: 100%; height: 100%; object-fit: contain; }
+.est-result-tier-info { flex: 1; }
+.est-result-tier-name {
+  font-family: Montserrat, sans-serif; font-weight: 800; font-size: 20px;
+  text-transform: uppercase;
+}
+.est-result-tier-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* Result stats grid */
+.est-stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+  margin-bottom: 16px;
+}
+.est-stat-card {
+  padding: 14px; border-radius: 14px;
+  background: rgba(255,255,255,.03); border: 1px solid var(--soft-line);
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.est-stat-card.full-width { grid-column: 1 / -1; }
+.est-stat-card.muted { background: rgba(255,255,255,.015); border-color: rgba(255,255,255,.04); }
+.est-stat-card.muted .est-stat-label { opacity: .6; }
+.est-stat-card.muted .est-stat-value { font-size: 14px; color: var(--muted) !important; -webkit-text-fill-color: var(--muted) !important; font-weight: 600; }
+.est-stat-card.hero { background: rgba(255,226,62,.05); border-color: rgba(255,226,62,.2); padding: 16px; }
+.est-stat-card.hero .est-stat-value { font-size: 20px; }
+.est-stat-label {
+  font-size: 10px; color: var(--muted); text-transform: uppercase;
+  letter-spacing: .05em; margin-bottom: auto;
+}
+.est-stat-value {
+  font-family: Montserrat, sans-serif; font-size: clamp(13px, 3.5vw, 18px); font-weight: 800;
+}
+.est-stat-value.gold {
+  background: linear-gradient(135deg, var(--tertiary-400), var(--tertiary-500));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.est-stat-value.green { color: var(--success-100); }
+.est-stat-value.blue { color: var(--secondary-300); }
+.est-stat-value.orange { color: var(--warning-100); }
+.est-stat-value.white { color: var(--text); }
+.est-stat-hint {
+  font-size: 10px; color: var(--black-50); margin-top: 2px; font-weight: 400;
+}
+
+/* Progress in modal */
+.est-progress { margin-bottom: 16px; }
+.est-progress-labels {
+  display: flex; justify-content: space-between; font-size: 11px; color: var(--muted);
+  margin-bottom: 6px;
+}
+.est-progress-track {
+  height: 6px; border-radius: 99px; background: var(--black-300); overflow: hidden;
+}
+.est-progress-fill {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, var(--primary-400), var(--tertiary-500));
+  transition: width .6s cubic-bezier(.4,0,.2,1);
+}
+.est-progress-info {
+  display: flex; justify-content: space-between; margin-top: 6px; font-size: 11px;
+}
+.est-progress-remain { color: var(--tertiary-400); font-weight: 600; }
+.est-progress-pct { color: var(--muted); }
+
+/* Benefits in modal */
+.est-benefits { margin-bottom: 16px; }
+.est-benefits-title {
+  font-size: 10px; color: var(--muted); text-transform: uppercase;
+  letter-spacing: .06em; margin-bottom: 8px;
+}
+.est-benefit-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 0; font-size: 12px; color: var(--gray-70);
+}
+.est-benefit-check { color: var(--success-100); font-size: 13px; flex-shrink: 0; }
+
+/* Disclaimer */
+.est-disclaimer {
+  font-size: 10px; color: var(--black-50); line-height: 1.5;
+  padding-top: 12px; border-top: 1px solid var(--soft-line);
+}
+
+/* ===== MOBILE BOTTOM SHEET MODE ===== */
+@media (max-width: 768px) {
+  .est-modal {
+    top: auto; left: 0; right: 0; bottom: 0;
+    transform: translateY(100%);
+    width: 100%; max-width: 100%;
+    max-height: 92vh;
+    border-radius: 24px 24px 0 0;
+  }
+  .est-modal.open {
+    transform: translateY(0);
+  }
+  .est-modal-header { padding: 20px 20px 0; }
+  .est-modal-header::before {
+    content: ''; display: block;
+    width: 40px; height: 4px; border-radius: 4px;
+    background: var(--black-300);
+    margin: 0 auto 16px;
+  }
+  .est-modal-title { font-size: 18px; }
+  .est-modal-body { padding: 0 20px 20px; }
+  .est-input { font-size: 16px; padding: 16px 60px 16px 16px; border-radius: 14px; }
+  .est-quick-btn { padding: 7px 0; font-size: 11px; min-width: 0; }
+  .est-result-tier { padding: 14px; border-radius: 14px; }
+  .est-result-tier-icon { width: 44px; height: 44px; }
+  .est-result-tier-name { font-size: 17px; }
+  .est-stat-card { padding: 12px; border-radius: 12px; }
+  .est-stat-value { font-size: 15px; }
+  .est-stat-label { font-size: 9px; }
+}
+
+/* ===== DEPOSIT VIEW ===== */
+.dep-overlay {
+  position: fixed; inset: 0; z-index: 400;
+  background: rgba(0,0,0,.6); backdrop-filter: blur(8px);
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+}
+.dep-overlay.open { opacity: 1; visibility: visible; }
+
+.dep-view {
+  position: fixed; z-index: 401;
+  top: 50%; left: 50%; transform: translate(-50%, -50%) scale(.95);
+  width: 94%; max-width: 560px; max-height: 92vh;
+  background: var(--bg);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  overflow: hidden;
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s, transform .3s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column;
+}
+.dep-view.open {
+  opacity: 1; visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Deposit header */
+.dep-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.dep-header-left { display: flex; align-items: center; gap: 8px; }
+.dep-close {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(255,255,255,.06); border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); cursor: pointer; transition: all .2s;
+}
+.dep-close:hover { background: rgba(255,255,255,.12); color: var(--text); }
+.dep-close svg { width: 16px; height: 16px; }
+.dep-balance {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 10px;
+  background: rgba(255,255,255,.04); border: 1px solid var(--line);
+}
+.dep-balance-plus {
+  width: 22px; height: 22px; border-radius: 6px;
+  background: var(--tertiary-400); display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: #000;
+}
+.dep-balance-amount {
+  font-family: Montserrat, sans-serif; font-weight: 700; font-size: 14px; color: var(--text);
+}
+.dep-balance-avatar {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--primary-400), var(--tertiary-500));
+  display: flex; align-items: center; justify-content: center;
+  font-family: Montserrat, sans-serif; font-weight: 700; font-size: 12px; color: #fff;
+}
+
+/* Tabs */
+.dep-tabs {
+  display: flex; border-bottom: 1px solid var(--line);
+  overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
+}
+.dep-tabs::-webkit-scrollbar { display: none; }
+.dep-tab {
+  flex: 1; min-width: 0; padding: 12px 8px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: Montserrat, sans-serif; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .03em;
+  color: var(--muted); background: none; border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.dep-tab svg { width: 16px; height: 16px; flex-shrink: 0; }
+.dep-tab.active { color: var(--primary-400); border-bottom-color: var(--primary-400); }
+.dep-tab:hover:not(.active) { color: var(--text); }
+
+/* Banner */
+.dep-banner {
+  padding: 16px 20px; text-align: center;
+  background: linear-gradient(135deg, rgba(13,15,24,.9), rgba(26,5,8,.7));
+}
+.dep-banner-title {
+  font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .03em; color: var(--text);
+}
+.dep-banner-sub {
+  font-size: 12px; font-weight: 600; color: var(--muted); margin-top: 2px;
+  text-transform: uppercase; letter-spacing: .02em;
+}
+.dep-banner-sub em {
+  font-style: normal; color: var(--tertiary-400); font-weight: 700;
+}
+
+/* Scrollable body */
+.dep-body {
+  flex: 1; overflow-y: auto; padding: 12px 16px 20px;
+}
+
+/* Screens */
+.dep-screen { display: flex; flex-direction: column; height: 100%; }
+.dep-screen-body { flex: 1; overflow-y: auto; }
+
+/* Method cards */
+.dep-method-card {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px; margin-bottom: 8px;
+  background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: 16px; cursor: pointer; transition: all .25s;
+}
+.dep-method-card:hover {
+  border-color: rgba(255,255,255,.14);
+  background: var(--panel-3);
+  transform: translateY(-1px);
+}
+.dep-method-info { flex: 1; min-width: 0; }
+.dep-method-name {
+  font-family: Montserrat, sans-serif; font-size: 15px; font-weight: 800;
+  text-transform: uppercase; color: var(--text);
+  display: flex; align-items: center; gap: 8px;
+}
+.dep-method-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 4px;
+  background: var(--success-100); color: #fff;
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.dep-method-sub {
+  font-size: 13px; color: var(--muted); margin-top: 4px;
+}
+.dep-method-icon {
+  width: 56px; height: 56px; flex-shrink: 0; margin-left: 16px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+}
+
+/* Detail screen */
+.dep-detail-header {
+  display: flex; align-items: center; padding: 14px 20px;
+  border-bottom: 1px solid var(--line); position: relative;
+}
+.dep-back {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: none; border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text); cursor: pointer; transition: all .2s;
+}
+.dep-back:hover { background: rgba(255,255,255,.06); }
+.dep-back svg { width: 20px; height: 20px; }
+.dep-detail-title {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  font-family: Montserrat, sans-serif; font-size: 15px; font-weight: 800;
+  text-transform: uppercase;
+}
+.dep-detail-subtitle {
+  padding: 14px 20px; text-align: center;
+  font-size: 13px; color: var(--gray-70); font-weight: 500;
+  background: linear-gradient(135deg, rgba(13,15,24,.9), rgba(26,5,8,.5));
+  border-bottom: 1px solid var(--line);
+}
+.dep-detail-body {
+  flex: 1; overflow-y: auto; padding: 20px;
+}
+
+/* Amount section */
+.dep-amount-label {
+  font-size: 11px; color: var(--gray-70); font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px;
+}
+.dep-amount-wrap {
+  position: relative; margin-bottom: 10px;
+}
+.dep-amount-input {
+  width: 100%; padding: 14px 120px 14px 16px;
+  background: var(--black-500); border: 1.5px solid rgba(255,255,255,.1);
+  border-radius: 12px; color: var(--text);
+  font-size: 16px; font-weight: 700; font-family: Montserrat, sans-serif;
+  transition: border-color .2s;
+}
+.dep-amount-input:focus { outline: none; border-color: var(--primary-400); }
+.dep-amount-input::placeholder { color: var(--black-50); font-weight: 500; font-size: 13px; }
+.dep-amount-hint {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  font-size: 11px; color: var(--tertiary-400); font-weight: 700;
+}
+.dep-quick-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+  margin-bottom: 24px;
+}
+.dep-quick-btn {
+  padding: 10px 4px; border-radius: 10px; font-size: 12px; font-weight: 700;
+  font-family: Montserrat, sans-serif;
+  background: rgba(255,255,255,.04); border: 1px solid var(--line);
+  color: var(--gray-70); cursor: pointer; transition: all .2s;
+  text-align: center;
+}
+.dep-quick-btn:hover { border-color: var(--primary-400); color: var(--primary-300); }
+.dep-quick-btn.active { border-color: var(--primary-400); color: var(--primary-400); background: rgba(222,46,54,.08); }
+
+/* Promo */
+.dep-promo-label {
+  font-size: 11px; color: var(--gray-70); font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px;
+}
+.dep-promo-card {
+  position: relative; padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(222,46,54,.08), rgba(231,187,8,.04));
+  border: 2px solid var(--primary-400);
+  border-radius: 12px; cursor: pointer;
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 24px;
+}
+.dep-promo-check {
+  position: absolute; top: -6px; right: -6px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--primary-400);
+  display: flex; align-items: center; justify-content: center;
+}
+.dep-promo-check svg { width: 12px; height: 12px; color: #fff; }
+.dep-promo-text {
+  font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 700;
+  color: var(--text);
+}
+.dep-promo-text span { color: var(--tertiary-400); }
+
+/* Instructions */
+.dep-info-box {
+  padding: 16px; border-radius: 12px;
+  background: rgba(255,255,255,.02); border: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+.dep-info-title {
+  display: flex; align-items: center; gap: 8px;
+  font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 800;
+  text-transform: uppercase; margin-bottom: 10px; color: var(--text);
+}
+.dep-info-icon {
+  width: 22px; height: 22px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+}
+.dep-info-icon.blue { background: var(--secondary-400); color: #fff; }
+.dep-info-icon.red { background: var(--error-100); color: #fff; }
+.dep-info-body { font-size: 13px; color: var(--gray-70); line-height: 1.6; }
+.dep-info-body strong { color: var(--tertiary-400); font-weight: 700; }
+.dep-info-body a { color: var(--secondary-300); }
+.dep-info-body a.yellow { color: var(--tertiary-400); }
+.dep-warning-box {
+  border-left: 3px solid var(--error-100);
+  background: rgba(255,39,78,.03);
+}
+.dep-info-body p { margin: 0 0 8px; }
+.dep-info-body p:last-child { margin-bottom: 0; }
+
+/* Submit */
+.dep-submit {
+  width: 100%; padding: 14px; border-radius: 12px; margin-top: 20px;
+  background: var(--primary-400); color: #fff;
+  font-family: Montserrat, sans-serif; font-weight: 700; font-size: 14px;
+  text-transform: uppercase; letter-spacing: .04em;
+  box-shadow: 0 2px 16px rgba(222,46,54,.35);
+  transition: all .25s; border: none; cursor: pointer;
+}
+.dep-submit:hover { background: var(--primary-300); transform: translateY(-1px); }
+.dep-submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+/* Success toast */
+.dep-toast {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
+  z-index: 500; padding: 14px 24px; border-radius: 12px;
+  background: var(--success-100); color: #fff;
+  font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 700;
+  box-shadow: 0 4px 20px rgba(5,161,88,.4);
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+  white-space: nowrap;
+}
+.dep-toast.show { transform: translateX(-50%) translateY(0); }
+
+/* Mobile full-screen */
+@media (max-width: 768px) {
+  .dep-view {
+    top: 0; left: 0; right: 0; bottom: 0;
+    transform: translateY(100%);
+    width: 100%; max-width: 100%; max-height: 100vh;
+    border-radius: 0; border: none;
+  }
+  .dep-view.open { transform: translateY(0); }
+  .dep-method-card { padding: 16px; border-radius: 14px; }
+  .dep-method-name { font-size: 14px; }
+  .dep-method-icon { width: 48px; height: 48px; border-radius: 12px; font-size: 24px; }
+  .dep-tab { font-size: 10px; padding: 10px 6px; }
+  .dep-quick-btn { font-size: 11px; padding: 9px 2px; }
+}
+
+/* ===== VIP SELECTOR + DETAIL CARD ===== */
+.tiers-section { padding: 0 0 60px; }
+.tiers-header { margin-bottom: 28px; }
+
+/* VIP icon selector bar */
+.vip-selector {
+  position: relative;
+  padding: 20px 0 0;
+  margin-bottom: 8px;
+}
+.vip-selector-scroll {
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: 0; overflow-x: auto;
+  padding: 0 12px 36px;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none; scrollbar-width: none;
+  position: relative;
+}
+.vip-selector-scroll::-webkit-scrollbar { display: none; }
+
+.vip-selector-item {
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer; position: relative;
+  flex: 0 0 auto; min-width: 64px;
+  padding: 0 4px;
+  scroll-snap-align: center;
+  transition: all .3s ease;
+}
+.vip-selector-icon {
+  width: 52px; height: 52px;
+  transition: all .35s cubic-bezier(.4,0,.2,1);
+  filter: brightness(.6) saturate(.5);
+  margin-bottom: 8px;
+}
+.vip-selector-icon img { width: 100%; height: 100%; object-fit: contain; }
+.vip-selector-label {
+  font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 700;
+  color: var(--muted); transition: all .3s;
+  white-space: nowrap;
+}
+
+/* Active state */
+.vip-selector-item.active .vip-selector-icon {
+  width: 72px; height: 72px;
+  filter: brightness(1.1) saturate(1.2) drop-shadow(0 0 12px rgba(231,187,8,.35));
+}
+.vip-selector-item.active .vip-selector-label {
+  color: var(--tertiary-400); font-size: 14px; font-weight: 800;
+}
+
+/* Diamond marker */
+.vip-selector-marker {
+  position: absolute; bottom: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--tertiary-400), transparent);
+  transition: left .35s cubic-bezier(.4,0,.2,1), width .35s cubic-bezier(.4,0,.2,1);
+}
+.vip-selector-diamond {
+  position: absolute; bottom: -4px;
+  width: 12px; height: 12px;
+  transition: left .35s cubic-bezier(.4,0,.2,1);
+}
+.vip-selector-diamond::before {
+  content: '◆'; display: block;
+  color: var(--tertiary-400); font-size: 12px;
+  text-align: center; line-height: 12px;
+  filter: drop-shadow(0 0 4px rgba(231,187,8,.6));
+}
+
+/* Divider line */
+.vip-selector-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line), var(--line), transparent);
+  margin: 0 24px;
+}
+
+/* VIP detail card */
+.vip-detail-card {
+  margin: 0;
+  padding: 0 24px 0;
+  position: relative;
+  min-height: 200px;
+}
+.vip-detail-inner {
+  background: linear-gradient(180deg, rgba(13,18,30,.95), rgba(10,12,19,.98));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color .3s;
+}
+.vip-detail-inner:hover { border-color: rgba(255,255,255,.12); }
+
+.vip-detail-content {
+  transition: opacity .25s, transform .25s;
+}
+.vip-detail-content.fade-out {
+  opacity: 0; transform: translateY(6px);
+}
+
+/* Section inside detail card */
+.vip-detail-section {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.vip-detail-section:last-child { border-bottom: none; }
+
+.vip-detail-section-title {
+  display: flex; align-items: center; gap: 10px;
+  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 700;
+  color: var(--text); margin-bottom: 14px;
+}
+.vip-detail-section-title img {
+  width: 24px; height: 24px; object-fit: contain;
+}
+
+.vip-detail-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 7px 0;
+}
+.vip-detail-row-label {
+  font-size: 13px; color: var(--muted); font-weight: 500;
+}
+.vip-detail-row-value {
+  font-size: 13px; color: var(--text); font-weight: 700;
+  font-family: Montserrat, sans-serif;
+  text-align: right;
+}
+.vip-detail-row-value.highlight {
+  color: var(--tertiary-400);
+}
+.vip-detail-row-value.green {
+  color: var(--success-100);
+}
+.vip-detail-row-value.invite {
+  color: var(--warning-100); font-style: italic;
+}
+
+/* ===== BENEFITS ===== */
+.benefits-section { padding: 0 0 60px; }
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-top: 28px;
+}
+.benefit-card {
+  padding: 24px; border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+  border: 1px solid var(--line);
+  transition: all .3s ease;
+}
+.benefit-card:hover { border-color: rgba(255,255,255,.14); transform: translateY(-2px); }
+.benefit-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px; overflow: hidden;
+}
+.benefit-icon img {
+  width: 100%; height: 100%; object-fit: contain;
+}
+.benefit-icon.red { background: rgba(222,46,54,.12); }
+.benefit-icon.gold { background: rgba(231,187,8,.12); }
+.benefit-icon.blue { background: rgba(74,125,254,.12); }
+.benefit-icon.green { background: rgba(5,161,88,.12); }
+.benefit-title { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+.benefit-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ===== VIP BANNER ===== */
+.vip-banner-section { padding: 0 0 60px; }
+.vip-banner {
+  position: relative; border-radius: 24px; overflow: hidden;
+  background: linear-gradient(135deg, #0a0c13, #1a0008);
+  border: 1px solid var(--line);
+  min-height: 200px;
+}
+.vip-banner-bg {
+  position: absolute; inset: 0;
+}
+.vip-banner-bg img {
+  width: 100%; height: 100%; object-fit: cover; opacity: .5;
+}
+.vip-banner-content {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 40px 48px; gap: 32px;
+}
+.vip-banner-text { flex: 1; }
+.vip-banner-text h3 {
+  font-family: Montserrat, sans-serif; font-weight: 900; font-size: 28px;
+  text-transform: uppercase; margin-bottom: 8px;
+  background: var(--gift-gradient); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+}
+.vip-banner-text p { color: var(--muted); font-size: 14px; max-width: 400px; }
+.vip-banner-cta {
+  padding: 14px 32px; border-radius: 14px;
+  background: var(--primary-400); color: #fff;
+  font-family: Montserrat, sans-serif; font-weight: 700; font-size: 14px;
+  text-transform: uppercase; letter-spacing: .03em;
+  box-shadow: 0 2px 20px rgba(222,46,54,.35);
+  transition: all .25s; white-space: nowrap;
+}
+.vip-banner-cta:hover { background: var(--primary-300); transform: translateY(-1px); }
+
+/* ===== COMPARISON TABLE ===== */
+.table-section { padding: 0 0 60px; }
+.table-wrapper {
+  border-radius: 20px; overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.02);
+}
+.table-tabs {
+  display: flex; border-bottom: 1px solid var(--line);
+  background: rgba(0,0,0,.2);
+}
+.table-tab {
+  padding: 14px 24px; font-size: 13px; font-weight: 600;
+  color: var(--muted); background: none; transition: all .2s;
+  border-bottom: 2px solid transparent;
+}
+.table-tab:hover { color: var(--text); }
+.table-tab.active { color: var(--primary-400); border-bottom-color: var(--primary-400); }
+.table-scroll { overflow-x: auto; }
+.comp-table {
+  width: 100%; border-collapse: collapse; font-size: 13px;
+  min-width: 900px;
+}
+.comp-table th {
+  padding: 14px 16px; text-align: center; font-weight: 700;
+  background: rgba(0,0,0,.25); border-bottom: 1px solid var(--line);
+  font-family: Montserrat, sans-serif; font-size: 12px; text-transform: uppercase;
+  letter-spacing: .04em; position: sticky; top: 0;
+}
+.comp-table th:first-child { text-align: left; position: sticky; left: 0; z-index: 2; background: var(--panel); }
+.comp-table td {
+  padding: 12px 16px; text-align: center;
+  border-bottom: 1px solid var(--soft-line);
+  transition: background .2s;
+}
+.comp-table td:first-child {
+  text-align: left; font-weight: 500; color: var(--gray-70);
+  position: sticky; left: 0; background: var(--panel);
+  border-right: 1px solid var(--soft-line);
+  min-width: 180px;
+}
+.comp-table tr:hover td { background: rgba(255,255,255,.02); }
+.comp-table tr:hover td:first-child { background: var(--panel-2); }
+.comp-table .tier-highlight { background: rgba(222,46,54,.05); }
+.comp-table .tier-header-highlight { background: rgba(222,46,54,.12); color: var(--primary-300); }
+.comp-table .invite-cell { color: var(--muted); font-style: italic; font-size: 11px; }
+
+/* ===== TERMS ===== */
+.terms-section { padding: 0 0 60px; }
+.terms-card {
+  border-radius: 20px; padding: 32px;
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  border: 1px solid var(--line);
+}
+.terms-list { list-style: none; counter-reset: terms; }
+.terms-list li {
+  counter-increment: terms;
+  padding: 10px 0; font-size: 13px; color: var(--muted); line-height: 1.7;
+  border-bottom: 1px solid var(--soft-line);
+  display: flex; gap: 12px;
+}
+.terms-list li:last-child { border-bottom: none; }
+.terms-list li::before {
+  content: counter(terms) ".";
+  color: var(--primary-400); font-weight: 700; font-size: 13px; flex-shrink: 0;
+  min-width: 20px;
+}
+
+/* ===== FAQ ===== */
+.faq-section { padding: 0 0 60px; }
+.faq-list { margin-top: 28px; display: grid; gap: 10px; }
+.faq-item {
+  border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.025);
+  transition: border-color .2s;
+}
+.faq-item.open { border-color: rgba(255,255,255,.12); }
+.faq-question {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px; width: 100%;
+  background: none; color: var(--text); font-size: 14px; font-weight: 600;
+  text-align: left; transition: color .2s;
+}
+.faq-question:hover { color: var(--primary-300); }
+.faq-chevron {
+  width: 20px; height: 20px; flex-shrink: 0;
+  transition: transform .25s; color: var(--muted);
+}
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height .3s ease;
+}
+.faq-answer-inner {
+  padding: 0 22px 18px;
+  font-size: 13px; color: var(--muted); line-height: 1.7;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 48px 0 32px;
+  background: rgba(0,0,0,.3);
+}
+.footer-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px;
+}
+.footer-col-title {
+  font-family: Montserrat, sans-serif; font-weight: 700; font-size: 13px;
+  text-transform: uppercase; letter-spacing: .04em; margin-bottom: 14px;
+}
+.footer-col a {
+  display: block; font-size: 13px; color: var(--muted); padding: 4px 0;
+  transition: color .2s;
+}
+.footer-col a:hover { color: var(--text); }
+.footer-social {
+  display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap;
+}
+.footer-social a {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(255,255,255,.06); border: 1px solid var(--line);
+  transition: all .2s; padding: 0;
+}
+.footer-social a:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.15); transform: translateY(-2px); }
+.footer-social a img { width: 24px; height: 24px; }
+.footer-bottom {
+  margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--black-50);
+}
+.footer-brand { display: flex; align-items: center; }
+.footer-brand img { height: 24px; width: auto; }
+
+/* ===== MOBILE CATEGORY NAV ===== */
+.mobile-cat-nav {
+  display: none;
+  position: sticky; top: 60px; z-index: 98;
+  background: var(--panel); border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.mobile-cat-nav-inner {
+  display: flex; overflow-x: auto; gap: 0;
+  -ms-overflow-style: none; scrollbar-width: none;
+}
+.mobile-cat-nav-inner::-webkit-scrollbar { display: none; }
+.mobile-cat-nav-inner a {
+  padding: 12px 16px; font-size: 12px; font-weight: 600;
+  color: var(--gray-70); white-space: nowrap; text-transform: uppercase;
+  letter-spacing: .02em; transition: color .2s;
+  position: relative; flex-shrink: 0;
+}
+.mobile-cat-nav-inner a:hover { color: var(--text); }
+.mobile-cat-nav-inner a.active {
+  color: var(--tertiary-400);
+}
+.mobile-cat-nav-inner a.active::after {
+  content: ''; position: absolute; bottom: 0; left: 16px; right: 16px;
+  height: 2px; background: var(--tertiary-400); border-radius: 2px;
+}
+.mobile-cat-nav-inner a .cat-badge {
+  display: inline-block; padding: 1px 5px; border-radius: 4px;
+  font-size: 8px; font-weight: 700; margin-left: 4px;
+  vertical-align: super; text-transform: uppercase;
+}
+.cat-badge.live { background: var(--primary-400); color: #fff; }
+.cat-badge.new { background: var(--success-100); color: #fff; }
+
+/* ===== BOTTOM NAVIGATION ===== */
+.bottom-nav {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  padding: 0 0 env(safe-area-inset-bottom, 0);
+}
+.bottom-nav-inner {
+  display: flex; align-items: flex-end; justify-content: space-around;
+  max-width: 500px; margin: 0 auto;
+  height: 60px; position: relative;
+}
+.bottom-nav-item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; padding: 8px 0 6px;
+  background: none; color: var(--muted);
+  font-size: 10px; font-weight: 500; letter-spacing: .01em;
+  transition: color .2s; flex: 1;
+  text-decoration: none; position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.bottom-nav-item svg { width: 22px; height: 22px; flex-shrink: 0; }
+.bottom-nav-item:hover,
+.bottom-nav-item.active { color: var(--text); }
+.bottom-nav-item.active svg { color: var(--tertiary-400); }
+
+/* Center deposit button */
+.bottom-nav-item.center-btn {
+  position: relative; margin-top: -18px;
+}
+.bottom-nav-center-circle {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-400), #ff4b52);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(222,46,54,.4);
+  transition: transform .2s, box-shadow .2s;
+}
+.bottom-nav-item.center-btn:hover .bottom-nav-center-circle,
+.bottom-nav-item.center-btn:active .bottom-nav-center-circle {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(222,46,54,.5);
+}
+.bottom-nav-center-circle svg { width: 24px; height: 24px; color: #fff; }
+.bottom-nav-item.center-btn span {
+  margin-top: 4px; font-weight: 600; color: var(--text);
+}
+
+/* Live Chat notification dot */
+.bottom-nav-dot {
+  position: absolute; top: 5px; right: calc(50% - 16px);
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--primary-400); border: 2px solid var(--panel);
+  animation: pulse-dot 2s infinite;
+}
+
+/* ===== MOBILE STICKY CTA (above bottom nav) ===== */
+.sticky-cta {
+  display: none;
+  position: fixed; left: 0; right: 0; z-index: 99;
+  padding: 10px 16px;
+  background: rgba(10,12,19,.97); backdrop-filter: blur(20px);
+  border-top: 1px solid var(--line);
+  transform: translateY(100%);
+  transition: transform .3s ease;
+  bottom: 60px; /* above bottom nav */
+}
+.sticky-cta.visible { transform: translateY(0); }
+.sticky-cta-inner {
+  display: flex; gap: 12px; align-items: center;
+  max-width: 600px; margin: 0 auto;
+}
+.sticky-cta-info {
+  flex: 1; min-width: 0;
+}
+.sticky-cta-tier {
+  font-family: Montserrat, sans-serif; font-weight: 800; font-size: 13px;
+  text-transform: uppercase; white-space: nowrap;
+  display: flex; align-items: center; gap: 8px;
+}
+.sticky-cta-tier img { width: 24px; height: 24px; object-fit: contain; }
+.sticky-cta-cashback {
+  font-size: 10px; color: var(--tertiary-400); font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sticky-cta-btn {
+  padding: 10px 18px; border-radius: 10px;
+  background: var(--primary-400); color: #fff;
+  font-family: Montserrat, sans-serif; font-weight: 700; font-size: 12px;
+  text-transform: uppercase; letter-spacing: .03em;
+  box-shadow: var(--shadow-light-bt);
+  white-space: nowrap; flex-shrink: 0;
+  transition: background .2s;
+}
+.sticky-cta-btn:hover { background: var(--primary-300); }
+
+/* ===== TRIAL VIP1 ===== */
+.trial-hero-card {
+  max-width: 480px; margin: 20px auto 0; position: relative;
+}
+.trial-hero-card-inner {
+  background: linear-gradient(135deg, rgba(255,226,62,.06), rgba(255,132,0,.04), rgba(255,226,62,.02));
+  border: 1px solid rgba(255,226,62,.2); border-radius: var(--radius-lg);
+  padding: 0; position: relative; overflow: hidden;
+  cursor: pointer; transition: border-color .25s, box-shadow .25s, transform .25s;
+  box-shadow: 0 0 20px rgba(255,226,62,.08), 0 0 40px rgba(255,226,62,.04);
+  animation: trialCardGlow 3s ease-in-out infinite;
+}
+@keyframes trialCardGlow {
+  0%,100% { box-shadow: 0 0 16px rgba(255,226,62,.06), 0 0 32px rgba(255,226,62,.03); border-color: rgba(255,226,62,.15); }
+  50% { box-shadow: 0 0 24px rgba(255,226,62,.14), 0 0 48px rgba(255,226,62,.06); border-color: rgba(255,226,62,.3); }
+}
+.trial-hero-card-inner::before {
+  content: ''; position: absolute; top: -50%; right: -30%; width: 140px; height: 140px;
+  background: radial-gradient(circle, rgba(255,226,62,.1), transparent 70%);
+  pointer-events: none;
+}
+.trial-hero-card-inner:hover { border-color: rgba(255,226,62,.4); box-shadow: 0 0 32px rgba(255,226,62,.18), 0 0 60px rgba(255,226,62,.08); transform: translateY(-1px); animation: none; }
+.trial-hero-card-badge {
+  position: absolute; top: 12px; right: 12px; background: rgba(255,226,62,.12); color: var(--tertiary-400);
+  font-size: 9px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+  text-transform: uppercase; letter-spacing: .06em; border: 1px solid rgba(255,226,62,.2);
+}
+.trial-hero-card-top {
+  display: flex; align-items: center; gap: 14px; padding: 16px 20px 12px;
+}
+.trial-hero-card-icon {
+  width: 56px; height: 56px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.trial-hero-card-text { flex: 1; min-width: 0; }
+.trial-hero-card-title { font-family: 'Montserrat',sans-serif; font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; }
+.trial-hero-card-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.trial-hero-card-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 20px 14px; border-top: 1px solid rgba(255,255,255,.04);
+}
+.trial-hero-card-dots { display: flex; gap: 6px; align-items: center; }
+.trial-hero-card-dots-label { font-size: 11px; color: var(--muted); margin-left: 8px; font-weight: 600; }
+.trial-hero-card-dot {
+  width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.15);
+  background: transparent; transition: all .3s; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.trial-hero-card-dot.done {
+  background: var(--success-100); border-color: var(--success-100);
+}
+.trial-hero-card-dot.done::after {
+  content: ''; width: 6px; height: 3px; border-left: 1.5px solid #fff; border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg); margin-top: -1px;
+}
+.trial-hero-card-cta {
+  padding: 8px 18px; border-radius: 8px; border: none;
+  background: var(--primary-400); color: #fff; font-family: 'Montserrat',sans-serif;
+  font-size: 11px; font-weight: 700; cursor: pointer; transition: all .2s; white-space: nowrap;
+  letter-spacing: .02em;
+}
+.trial-hero-card-cta:hover { background: var(--primary-300); }
+
+/* VIP Status Card */
+.vip-status-card { max-width: 480px; margin: 20px auto 0; }
+.vip-status-card-inner {
+  background: linear-gradient(135deg, rgba(255,226,62,.06), rgba(255,132,0,.04), rgba(255,226,62,.02));
+  border: 1px solid rgba(255,226,62,.2); border-radius: var(--radius-lg);
+  overflow: hidden;
+  animation: trialCardGlow 3s ease-in-out infinite;
+}
+.vip-status-top { display: flex; align-items: center; gap: 14px; padding: 16px 20px 12px; }
+.vip-status-icon { width: 56px; height: 56px; flex-shrink: 0; }
+.vip-status-icon img { width: 100%; height: 100%; object-fit: contain; }
+.vip-status-tier-name {
+  font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 800; text-transform: uppercase;
+}
+.vip-status-greeting { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.vip-status-benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 16px 12px; }
+.vip-status-stat {
+  padding: 10px 12px; border-radius: 12px;
+  background: rgba(255,255,255,.03); border: 1px solid var(--soft-line);
+}
+.vip-status-stat-label {
+  font-size: 9px; color: var(--muted); text-transform: uppercase;
+  letter-spacing: .04em; margin-bottom: 4px;
+}
+.vip-status-stat-value { font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 700; }
+.vip-status-stat-value.gold {
+  background: linear-gradient(135deg, var(--tertiary-400), var(--tertiary-500));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.vip-status-stat-value.green { color: var(--success-100); }
+.vip-status-stat-value.blue { color: var(--secondary-300); }
+.vip-status-stat-value.orange { color: var(--warning-100); }
+.vip-status-progress-area { padding: 12px 16px 16px; border-top: 1px solid rgba(255,255,255,.04); }
+.vip-status-progress-labels { display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; margin-bottom: 6px; }
+.vip-status-progress-track {
+  height: 4px; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden;
+}
+.vip-status-progress-fill {
+  height: 100%; border-radius: 2px; transition: width .6s ease;
+  background: linear-gradient(90deg, var(--tertiary-400), var(--tertiary-500));
+}
+.vip-status-progress-info { display: flex; justify-content: space-between; margin-top: 6px; font-size: 11px; }
+.vip-status-progress-remain { color: var(--tertiary-400); font-weight: 600; }
+.vip-status-progress-pct { color: var(--muted); }
+.vip-status-maintain {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 10px; font-size: 11px; font-weight: 600;
+}
+.vip-status-maintain.safe { color: var(--success-100); }
+.vip-status-maintain.warning { color: var(--warning-100); }
+.vip-status-maintain.danger { color: #e63946; }
+.vip-status-next-tease {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 10px; padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.04);
+  font-size: 11px; color: var(--muted);
+}
+.vip-status-detail-btn {
+  padding: 6px 14px; border-radius: 8px; border: 1px solid var(--line);
+  background: transparent; color: var(--tertiary-400);
+  font-size: 10px; font-weight: 600; cursor: pointer; transition: all .2s;
+  white-space: nowrap;
+}
+.vip-status-detail-btn:hover { border-color: var(--tertiary-400); background: rgba(255,226,62,.06); }
+.vip-status-detail-btn.vip-reward-btn {
+  background: linear-gradient(135deg, rgba(202,41,48,.15), rgba(202,41,48,.08));
+  border-color: rgba(202,41,48,.4); color: #ff6b6b;
+}
+.vip-status-detail-btn.vip-reward-btn:hover { background: rgba(202,41,48,.2); border-color: rgba(202,41,48,.6); }
+
+/* Trial Overlay */
+.trial-overlay {
+  position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,.65); backdrop-filter: blur(8px);
+  opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s;
+}
+.trial-overlay.open { opacity: 1; visibility: visible; }
+.trial-view {
+  position: fixed; z-index: 501; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(.95);
+  width: 92%; max-width: 560px; max-height: 90vh; background: var(--bg);
+  border-radius: var(--radius-lg); display: flex; flex-direction: column;
+  opacity: 0; visibility: hidden; transition: all .3s cubic-bezier(.4,0,.2,1);
+  border: 1px solid var(--line);
+}
+.trial-view.open { opacity: 1; visibility: visible; transform: translate(-50%,-50%) scale(1); }
+
+.trial-header {
+  display: flex; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--line);
+  position: relative; flex-shrink: 0;
+}
+.trial-close {
+  width: 32px; height: 32px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(255,255,255,.06); display: flex; align-items: center; justify-content: center;
+  color: var(--muted); transition: all .2s; margin-left: auto;
+}
+.trial-close:hover { background: rgba(255,255,255,.1); color: var(--text); }
+.trial-close svg { width: 16px; height: 16px; }
+.trial-header-title {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  font-family: 'Montserrat',sans-serif; font-size: 14px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .04em; color: var(--text);
+}
+.trial-body { flex: 1; overflow-y: auto; padding: 20px; }
+
+/* Trial Banner */
+.trial-banner {
+  background: linear-gradient(135deg, rgba(222,46,54,.08), rgba(255,226,62,.06));
+  border: 1px solid rgba(222,46,54,.15); border-radius: var(--radius-md);
+  padding: 20px; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 16px;
+}
+.trial-banner-text { flex: 1; }
+.trial-banner-icon { flex-shrink: 0; order: 1; }
+.trial-banner-icon img { width: 100px; height: 100px; object-fit: contain; }
+.trial-banner-title { font-family: 'Montserrat',sans-serif; font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.trial-banner-sub { font-size: 12px; color: var(--muted); }
+
+/* Trial Progress */
+.trial-progress { margin-bottom: 20px; }
+.trial-progress-bar { height: 4px; background: var(--panel-3); border-radius: 2px; overflow: hidden; }
+.trial-progress-fill { height: 100%; background: var(--primary-400); border-radius: 2px; transition: width .5s ease; }
+.trial-progress-label { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+/* Trial Conditions */
+.trial-conditions { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.trial-condition {
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: var(--radius-md);
+  padding: 16px; display: flex; align-items: center; gap: 12px; transition: all .3s;
+}
+.trial-condition.completed { border-color: rgba(5,161,88,.3); background: rgba(5,161,88,.04); }
+.trial-condition-icon {
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  background: rgba(255,255,255,.04); display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+.trial-condition.completed .trial-condition-icon { background: rgba(5,161,88,.1); }
+.trial-condition-info { flex: 1; min-width: 0; }
+.trial-condition-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.trial-condition-sub { font-size: 11px; color: var(--muted); }
+.trial-condition-status { flex-shrink: 0; display: flex; align-items: center; }
+.trial-condition-check {
+  width: 28px; height: 28px; border-radius: 50%; background: var(--success-100);
+  display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px;
+  animation: trialCheckIn .3s ease;
+}
+.trial-condition-btn {
+  padding: 8px 14px; border-radius: var(--radius-sm); border: none;
+  background: var(--primary-400); color: #fff; font-size: 11px; font-weight: 700;
+  cursor: pointer; transition: background .2s; white-space: nowrap;
+  font-family: 'Montserrat',sans-serif;
+}
+.trial-condition-btn:hover { background: var(--primary-300); }
+.trial-condition-progress {
+  font-family: 'Montserrat',sans-serif; font-size: 13px; font-weight: 700;
+  color: var(--tertiary-400);
+}
+
+/* Trial Success */
+.trial-success { text-align: center; padding: 32px 0; }
+.trial-success-icon {
+  width: 64px; height: 64px; border-radius: 50%; background: var(--success-100);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+  font-size: 28px; color: #fff; animation: trialCheckIn .4s ease;
+}
+.trial-success-title { font-family: 'Montserrat',sans-serif; font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.trial-success-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+.trial-success-btn {
+  width: 100%; padding: 14px; border-radius: var(--radius-md); border: none;
+  background: var(--primary-400); color: #fff; font-family: 'Montserrat',sans-serif;
+  font-size: 14px; font-weight: 700; cursor: pointer; transition: background .2s;
+}
+.trial-success-btn:hover { background: var(--primary-300); }
+
+/* Trial Active */
+.trial-active-status {
+  display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 16px;
+}
+.trial-active-badge {
+  padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700;
+  background: rgba(5,161,88,.12); color: var(--success-100); border: 1px solid rgba(5,161,88,.25);
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.trial-countdown {
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: var(--radius-md);
+  padding: 24px; text-align: center; margin-bottom: 20px;
+}
+.trial-countdown-label { font-size: 12px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .06em; }
+.trial-countdown-timer {
+  font-family: 'Montserrat',sans-serif; font-size: 28px; font-weight: 800;
+  color: var(--tertiary-400); letter-spacing: .02em;
+}
+.trial-countdown.ending .trial-countdown-timer { color: var(--primary-400); animation: trialPulse 1.5s ease infinite; }
+.trial-countdown-bar { height: 3px; background: var(--panel-3); border-radius: 2px; margin-top: 12px; overflow: hidden; }
+.trial-countdown-bar-fill { height: 100%; background: var(--tertiary-400); border-radius: 2px; transition: width 1s linear; }
+.trial-countdown.ending .trial-countdown-bar-fill { background: var(--primary-400); }
+
+/* Trial Benefits */
+.trial-benefits-title {
+  font-family: 'Montserrat',sans-serif; font-size: 13px; font-weight: 700;
+  color: var(--text); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .04em;
+}
+.trial-benefit-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--soft-line);
+}
+.trial-benefit-row:last-child { border-bottom: none; }
+.trial-benefit-label { font-size: 12px; color: var(--muted); }
+.trial-benefit-value { font-size: 12px; font-weight: 600; color: var(--text); }
+.trial-benefit-value.highlight { color: var(--tertiary-400); }
+
+/* Trial FAQ */
+.trial-faq-title {
+  font-family: 'Montserrat',sans-serif; font-size: 13px; font-weight: 700;
+  color: var(--text); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: .04em;
+}
+
+/* Trial ending notice */
+.trial-ending-notice {
+  background: rgba(222,46,54,.08); border: 1px solid rgba(222,46,54,.2); border-radius: var(--radius-md);
+  padding: 14px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+}
+.trial-ending-notice-icon { font-size: 18px; }
+.trial-ending-notice-text { font-size: 12px; color: var(--text); }
+.trial-ending-notice-text strong { color: var(--primary-400); }
+
+@keyframes trialPulse { 0%,100% { opacity: 1; } 50% { opacity: .65; } }
+@keyframes trialCheckIn { 0% { transform: scale(0); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.anim-in { animation: fadeInUp .5s ease both; }
+.anim-d1 { animation-delay: .1s; }
+.anim-d2 { animation-delay: .2s; }
+.anim-d3 { animation-delay: .3s; }
+
+/* Scroll-triggered animation for sections */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.reveal.visible {
+  opacity: 1; transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .benefits-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+
+  /* Header mobile - show login/register, hide hamburger replaced by category nav + bottom nav */
+  .header-nav { display: none; }
+  .mobile-menu-btn { display: none; }
+  .mobile-nav { display: none; }
+  .mobile-cat-nav { display: block; }
+  .bottom-nav { display: block; }
+  .header-actions .btn-login { display: inline-flex; padding: 7px 14px; font-size: 12px; }
+  .header-actions .btn-register { display: inline-flex; padding: 7px 14px; font-size: 12px; }
+  .header-inner { height: 54px; }
+  .logo img { height: 28px; }
+
+  /* Hero mobile */
+  .hero { padding: 0 0 32px; }
+  .hero h1 { font-size: 24px; }
+  .hero-title-area { min-height: 160px; padding-bottom: 16px; padding-top: 16px; }
+  .hero-bg-image { height: 180px; left: 20%; right: -20%; }
+  .hero-desc { margin: 12px auto 0; font-size: 13px; line-height: 1.6; }
+  .hero-stats { justify-content: center; gap: 12px; margin-top: 20px; }
+  .hero-stat { text-align: center; }
+  .hero-stat-value { font-size: 20px; }
+  .hero-stat-label { font-size: 9px; }
+  .hero-cta { padding: 14px 28px; font-size: 13px; margin-top: 20px; width: 100%; justify-content: center; border-radius: 12px; }
+  .hero-glow { width: 200px; height: 200px; top: -20px; right: -10px; }
+
+  /* Section titles */
+  .section-title { font-size: 20px; }
+  .section-sub { font-size: 12px; margin-top: 6px; }
+  .eyebrow { font-size: 10px; }
+
+  /* Estimator trigger mobile - handled in modal section above */
+
+  /* VIP selector mobile */
+  .tiers-section { padding: 0 0 32px; }
+  .tiers-header { margin-bottom: 16px; }
+  .vip-selector { padding: 12px 0 0; }
+  .vip-selector-scroll { gap: 0; padding: 0 8px 32px; justify-content: flex-start; }
+  .vip-selector-item { min-width: 56px; padding: 0 2px; }
+  .vip-selector-icon { width: 44px; height: 44px; }
+  .vip-selector-item.active .vip-selector-icon { width: 62px; height: 62px; }
+  .vip-selector-label { font-size: 11px; }
+  .vip-selector-item.active .vip-selector-label { font-size: 12px; }
+  .vip-detail-card { padding: 0 16px; }
+  .vip-detail-section { padding: 16px 18px; }
+  .vip-detail-section-title { font-size: 13px; }
+  .vip-detail-row-label { font-size: 12px; }
+  .vip-detail-row-value { font-size: 12px; }
+
+  /* Benefits mobile */
+  .benefits-section { padding: 0 0 32px; }
+  .benefits-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 20px; }
+  .benefit-card {
+    padding: 16px; display: flex; gap: 14px; align-items: flex-start;
+    border-radius: 14px;
+  }
+  .benefit-icon { flex-shrink: 0; margin-bottom: 0; width: 44px; height: 44px; border-radius: 12px; }
+  .benefit-card-content { flex: 1; }
+  .benefit-title { font-size: 14px; margin-bottom: 4px; }
+  .benefit-desc { font-size: 12px; line-height: 1.5; }
+
+  /* VIP Banner mobile */
+  .vip-banner-section { padding: 0 0 32px; }
+  .vip-banner { border-radius: 16px; min-height: 160px; }
+  .vip-banner-content { flex-direction: column; padding: 20px; text-align: center; gap: 16px; }
+  .vip-banner-text h3 { font-size: clamp(13px, 4vw, 20px); white-space: nowrap; }
+  .vip-banner-text p { margin: 0 auto; font-size: 12px; }
+  .vip-banner-cta {
+    width: 100%; text-align: center; display: block;
+    padding: 12px 24px; border-radius: 12px; font-size: 13px;
+  }
+
+  /* Table mobile */
+  .table-section { padding: 0 0 32px; }
+  .table-wrapper { border-radius: 14px; }
+  .table-tabs { overflow-x: auto; }
+  .table-tab { padding: 12px 16px; font-size: 12px; white-space: nowrap; }
+
+  /* Terms mobile */
+  .terms-section { padding: 0 0 32px; }
+  .terms-card { padding: 16px; border-radius: 14px; }
+  .terms-list li { font-size: 12px; padding: 8px 0; gap: 8px; }
+
+  /* FAQ mobile */
+  .faq-section { padding: 0 0 32px; }
+  .faq-item { border-radius: 12px; }
+  .faq-question { padding: 14px 16px; font-size: 13px; }
+  .faq-answer-inner { padding: 0 16px 14px; font-size: 12px; }
+
+  /* Footer mobile */
+  .footer { padding: 32px 0 20px; margin-bottom: 60px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .footer-col-title { font-size: 11px; margin-bottom: 8px; }
+  .footer-col a { font-size: 11px; padding: 3px 0; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; font-size: 11px; }
+
+  /* Sticky CTA + bottom nav spacing */
+  .sticky-cta { display: block; }
+  body { padding-bottom: 60px; }
+
+  /* Section spacing tighter on mobile */
+  .tiers-section + .benefits-section,
+  .benefits-section + .vip-banner-section { margin-top: -8px; }
+
+  /* Trial mobile */
+  .trial-view {
+    top: auto; left: 0; right: 0; bottom: 0; width: 100%; max-width: none;
+    transform: translateY(100%); border-radius: 24px 24px 0 0; max-height: 92vh;
+  }
+  .trial-view.open { transform: translateY(0); }
+  .vip-status-card { max-width: none; margin: 16px 0 0; }
+  .vip-status-top { padding: 14px 16px 10px; gap: 12px; }
+  .vip-status-icon { width: 40px; height: 40px; }
+  .vip-status-tier-name { font-size: 14px; }
+  .vip-status-benefits { gap: 6px; padding: 0 12px 10px; }
+  .vip-status-stat { padding: 8px 10px; }
+  .vip-status-stat-value { font-size: 12px; }
+  .vip-status-progress-area { padding: 10px 12px 14px; }
+  .trial-hero-card { max-width: none; margin: 16px 0 0; }
+  .trial-hero-card-top { padding: 14px 16px 10px; gap: 12px; }
+  .trial-hero-card-bottom { padding: 8px 16px 12px; }
+  .trial-hero-card-title { font-size: 13px; }
+  .trial-hero-card-icon { width: 36px; height: 36px; }
+  .trial-hero-card-cta { padding: 7px 14px; font-size: 10px; }
+  .trial-body { padding: 16px; }
+  .trial-banner { padding: 16px; }
+  .trial-banner-title { font-size: 14px; }
+  .trial-condition { padding: 12px; gap: 10px; }
+  .trial-condition-icon { width: 36px; height: 36px; font-size: 18px; }
+  .trial-condition-title { font-size: 12px; }
+  .trial-countdown-timer { font-size: 22px; }
+  .trial-countdown { padding: 18px; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 22px; }
+  .hero-stats { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+  .hero-stat { width: calc(50% - 6px); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .vip-selector-item { min-width: 50px; }
+  .vip-selector-icon { width: 40px; height: 40px; }
+  .vip-selector-item.active .vip-selector-icon { width: 56px; height: 56px; }
+  .vip-detail-section { padding: 14px 16px; }
+  .vip-detail-row-label { font-size: 11px; }
+  .vip-detail-row-value { font-size: 11px; }
+}
+
+@media (max-width: 360px) {
+  .container { padding: 0 12px; }
+  .hero h1 { font-size: 20px; }
+  .hero-stat-value { font-size: 18px; }
+  .vip-selector-item { min-width: 44px; }
+  .vip-selector-icon { width: 36px; height: 36px; }
+  .vip-selector-item.active .vip-selector-icon { width: 50px; height: 50px; }
+  .bottom-nav-item { font-size: 9px; }
+  .bottom-nav-center-circle { width: 46px; height: 46px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">
+      <img src="Assets/assets (1)/asset 0.svg" alt="Mubet"/>
+    </a>
+    <nav class="header-nav">
+      <a href="#">Thể Thao</a>
+      <a href="#">Live Casino</a>
+      <a href="#">Game Bài</a>
+      <a href="#">Table Games</a>
+      <a href="#" class="active">VIP Club</a>
+      <a href="#">Khuyến Mãi</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-login" id="btnLogin">Đăng Nhập</button>
+      <button class="btn-register" id="btnRegister">Đăng Ký</button>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Category Nav -->
+<nav class="mobile-cat-nav">
+  <div class="mobile-cat-nav-inner">
+    <a href="#">Thể Thao</a>
+    <a href="#">Live Casino <span class="cat-badge live">Live</span></a>
+    <a href="#">Game Bài <span class="cat-badge new">Mới</span></a>
+    <a href="#">Table Games</a>
+    <a href="#" class="active">VIP Club</a>
+    <a href="#">Khuyến Mãi</a>
+    <a href="#">Đá Gà</a>
+    <a href="#">Lô Đề</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg-image">
+    <img src="hero_layer_vip.png" alt="" loading="lazy"/>
+  </div>
+  <div class="hero-glow">
+    <img src="Assets/assets (1)/asset 3.webp" alt="" loading="lazy"/>
+  </div>
+  <div class="container hero-content">
+    <div class="hero-title-area">
+      <h1 class="anim-in">
+        Đẳng Cấp Hội Viên<br/><span class="gold">Đặc Quyền VIP</span>
+      </h1>
+    </div>
+    <div class="hero-below">
+    <p class="hero-desc anim-in anim-d1" style="margin-left:auto;margin-right:auto;">
+      Nạp càng nhiều, nhận càng lớn. Thưởng thăng hạng đến
+      <strong style="color:var(--tertiary-400)">120 triệu</strong>, hoàn trả hằng ngày
+      và đặc quyền riêng theo cấp bậc của bạn.
+    </p>
+    <div class="hero-stats anim-in anim-d2" style="justify-content:center; flex-wrap:nowrap;">
+      <div class="hero-stat" style="text-align:center; flex:1; min-width:0;">
+        <div class="hero-stat-value">1.4%</div>
+        <div class="hero-stat-label">Hoàn trả cao nhất</div>
+      </div>
+      <div class="hero-stat" style="text-align:center; flex:1; min-width:0;">
+        <div class="hero-stat-value">120M</div>
+        <div class="hero-stat-label">Thưởng thăng hạng</div>
+      </div>
+      <div class="hero-stat" style="text-align:center; flex:1; min-width:0;">
+        <div class="hero-stat-value">24/7</div>
+        <div class="hero-stat-label">Chăm sóc VIP</div>
+      </div>
+    </div>
+    <a href="#estimator" class="hero-cta anim-in anim-d3">
+      Ước tính quyền lợi của bạn
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+
+    <!-- Trial Hero Card -->
+    <div class="trial-hero-card anim-in anim-d3" id="trialHeroCard" style="display:none">
+      <div class="trial-hero-card-inner" id="trialHeroCardInner">
+        <div class="trial-hero-card-top">
+          <div class="trial-hero-card-icon"><img src="Assets/icon.crown.png" alt="VIP" style="width:56px;height:56px;object-fit:contain;"/></div>
+          <div class="trial-hero-card-text">
+            <div class="trial-hero-card-title">Trải nghiệm VIP1 trong 7 ngày</div>
+            <div class="trial-hero-card-sub" id="trialHeroSub">Hoàn thành 4 điều kiện đơn giản</div>
+          </div>
+        </div>
+        <div class="trial-hero-card-bottom">
+          <div class="trial-hero-card-dots" id="trialHeroDots">
+            <div class="trial-hero-card-dot"></div>
+            <div class="trial-hero-card-dot"></div>
+            <div class="trial-hero-card-dot"></div>
+            <div class="trial-hero-card-dot"></div>
+            <span class="trial-hero-card-dots-label" id="trialDotsLabel">0/4</span>
+          </div>
+          <button class="trial-hero-card-cta" id="trialHeroCta">Thực hiện ngay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="vip-status-card anim-in anim-d3" id="vipStatusCard" style="display:none">
+      <div class="vip-status-card-inner" id="vipStatusInner"></div>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== AUTH MODALS ===== -->
+<div class="auth-overlay" id="authOverlay"></div>
+
+<!-- Login Modal -->
+<div class="auth-modal" id="loginModal">
+  <div class="auth-modal-banner">
+    <button class="auth-modal-close" id="loginClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <img src="Assets/assets (1)/asset 0.svg" alt="Mubet" class="auth-modal-banner-logo"/>
+    <div class="auth-modal-banner-text">Nhận ngay ưu đãi</div>
+    <div class="auth-modal-banner-promos">
+      <span><svg viewBox="0 0 16 16" width="14" height="14" style="vertical-align:-2px;margin-right:3px" fill="none"><rect x="2" y="7" width="12" height="8" rx="1.5" fill="#ffe23e" opacity=".8"/><rect x="6.5" y="4" width="3" height="11" rx="1" fill="#ff8400" opacity=".7"/><path d="M8 7C6 7 4 5 5 3.5S8 3 8 3s1.5-.5 3 .5S10 7 8 7z" fill="#ff8400"/></svg> Thưởng 20,000,000đ</span>
+      <span><svg viewBox="0 0 16 16" width="14" height="14" style="vertical-align:-2px;margin-right:3px" fill="none"><path d="M8 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4l2-4z" fill="#ffe23e" opacity=".85"/></svg> Hoàn trả 1.4%</span>
+    </div>
+  </div>
+  <div class="auth-modal-form">
+    <div class="auth-modal-title">Đăng Nhập</div>
+    <div class="auth-field">
+      <label class="auth-field-label">Tên đăng nhập</label>
+      <div class="auth-field-wrap">
+        <input type="text" class="auth-field-input" id="loginUsername" placeholder="Tên đăng nhập" autocomplete="username"/>
+      </div>
+    </div>
+    <div class="auth-field">
+      <label class="auth-field-label">Mật khẩu</label>
+      <div class="auth-field-wrap">
+        <input type="password" class="auth-field-input" id="loginPassword" placeholder="Mật khẩu" autocomplete="current-password"/>
+        <button class="auth-field-toggle" type="button" data-target="loginPassword">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </div>
+    <a class="auth-forgot">Quên Mật Khẩu?</a>
+    <button class="auth-submit" id="loginSubmit">Đăng Nhập</button>
+    <div class="auth-switch">Bạn chưa có tài khoản? <a id="switchToRegister">Đăng Ký Ngay</a></div>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div class="auth-modal" id="registerModal">
+  <div class="auth-modal-banner">
+    <button class="auth-modal-close" id="registerClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <img src="Assets/assets (1)/asset 0.svg" alt="Mubet" class="auth-modal-banner-logo"/>
+    <div class="auth-modal-banner-text">Nhận ngay ưu đãi</div>
+    <div class="auth-modal-banner-promos">
+      <span><svg viewBox="0 0 16 16" width="14" height="14" style="vertical-align:-2px;margin-right:3px" fill="none"><rect x="2" y="7" width="12" height="8" rx="1.5" fill="#ffe23e" opacity=".8"/><rect x="6.5" y="4" width="3" height="11" rx="1" fill="#ff8400" opacity=".7"/><path d="M8 7C6 7 4 5 5 3.5S8 3 8 3s1.5-.5 3 .5S10 7 8 7z" fill="#ff8400"/></svg> Thưởng 20,000,000đ</span>
+      <span><svg viewBox="0 0 16 16" width="14" height="14" style="vertical-align:-2px;margin-right:3px" fill="none"><path d="M8 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4l2-4z" fill="#ffe23e" opacity=".85"/></svg> Hoàn trả 1.4%</span>
+    </div>
+  </div>
+  <div class="auth-modal-form">
+    <div class="auth-modal-title">Đăng Ký</div>
+    <div class="auth-field">
+      <label class="auth-field-label">Tên đăng nhập</label>
+      <div class="auth-field-wrap">
+        <input type="text" class="auth-field-input" id="regUsername" placeholder="Tên đăng nhập" autocomplete="username"/>
+      </div>
+    </div>
+    <div class="auth-field">
+      <label class="auth-field-label">Mật khẩu</label>
+      <div class="auth-field-wrap">
+        <input type="password" class="auth-field-input" id="regPassword" placeholder="Mật khẩu" autocomplete="new-password"/>
+        <button class="auth-field-toggle" type="button" data-target="regPassword">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="auth-field">
+      <label class="auth-field-label">Số điện thoại</label>
+      <div class="auth-field-wrap">
+        <input type="tel" class="auth-field-input" id="regPhone" placeholder="Số điện thoại" inputmode="tel"/>
+      </div>
+    </div>
+    <div class="auth-terms">
+      Bằng cách nhấn vào "Đăng Ký", bạn đồng ý với
+      <a href="#">Điều Khoản & Điều Kiện</a> của chúng tôi.
+    </div>
+    <button class="auth-submit" id="regSubmit">Đăng Ký</button>
+    <div class="auth-switch">Đã có tài khoản? <a id="switchToLogin">Đăng Nhập</a></div>
+  </div>
+</div>
+
+<!-- ===== ESTIMATOR MODAL ===== -->
+<div class="est-overlay" id="estOverlay"></div>
+<div class="est-modal" id="estModal">
+  <div class="est-modal-header">
+    <button class="est-modal-close" id="estClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="est-modal-title">Ước Tính Quyền Lợi VIP</div>
+    <div class="est-modal-sub">Nhập tổng tiền nạp để xem kết quả</div>
+  </div>
+  <div class="est-modal-body">
+    <div class="est-input-label">Tổng tiền nạp</div>
+    <div class="est-input-wrap">
+      <input type="text" class="est-input" id="depositInput" placeholder="Ví dụ: 500.000.000" value="500.000.000" inputmode="numeric"/>
+      <span class="est-input-suffix">đ</span>
+    </div>
+    <div class="est-quick-row">
+      <button class="est-quick-btn" data-amount="50000000">50M</button>
+      <button class="est-quick-btn" data-amount="150000000">150M</button>
+      <button class="est-quick-btn" data-amount="500000000">500M</button>
+      <button class="est-quick-btn" data-amount="1000000000">1B</button>
+      <button class="est-quick-btn" data-amount="2000000000">2B</button>
+      <button class="est-quick-btn" data-amount="5000000000">5B</button>
+      <button class="est-quick-btn" data-amount="10000000000">10B</button>
+    </div>
+    <div class="est-divider"></div>
+    <div id="estResult">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ===== VIP TIERS ===== -->
+<section class="tiers-section" id="tiers">
+  <div class="container">
+    <div class="tiers-header reveal">
+      <div class="eyebrow">Đặc quyền VIP</div>
+      <h2 class="section-title">Cấp Bậc Thành Viên</h2>
+    </div>
+    <div class="vip-selector reveal">
+      <div class="vip-selector-scroll" id="vipSelectorScroll">
+        <!-- Populated by JS -->
+        <div class="vip-selector-marker" id="vipMarker"></div>
+        <div class="vip-selector-diamond" id="vipDiamond"></div>
+      </div>
+    </div>
+    <div class="vip-selector-line"></div>
+    <div class="vip-detail-card reveal">
+      <div class="vip-detail-inner">
+        <div class="vip-detail-content" id="vipDetailContent">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY BENEFITS ===== -->
+
+<section class="benefits-section" id="benefits">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Đặc quyền nổi bật</div>
+      <h2 class="section-title">Vì sao VIP Club đáng để tham gia?</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-icon red">
+          <img src="Assets/assets (1)/asset 15.webp" alt="Hoàn trả"/>
+        </div>
+        <div class="benefit-card-content">
+          <div class="benefit-title">Hoàn Trả Hằng Ngày</div>
+          <div class="benefit-desc">Hoàn trả theo phần trăm cược hợp lệ mỗi ngày, áp dụng cho mọi nhóm game với tỷ lệ tăng theo VIP.</div>
+        </div>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon gold">
+          <img src="Assets/assets (1)/asset 19.webp" alt="Thưởng"/>
+        </div>
+        <div class="benefit-card-content">
+          <div class="benefit-title">Thưởng Thăng Hạng</div>
+          <div class="benefit-desc">Nhận thưởng ngay khi đạt hạng VIP mới, từ 150.000đ đến 120.000.000đ tùy cấp bậc.</div>
+        </div>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon blue">
+          <img src="Assets/assets (1)/asset 2.webp" alt="Lì xì"/>
+        </div>
+        <div class="benefit-card-content">
+          <div class="benefit-title">Lì Xì Năm Mới</div>
+          <div class="benefit-desc">Thưởng lì xì đặc biệt mỗi dịp Tết, từ 50.000đ đến 16.000.000đ theo cấp VIP.</div>
+        </div>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon red">
+          <img src="Assets/assets (1)/asset 2.webp" alt="Duy trì"/>
+        </div>
+        <div class="benefit-card-content">
+          <div class="benefit-title">Duy Trì Hạng Dễ Dàng</div>
+          <div class="benefit-desc">Chỉ cần đạt mức nạp và cược duy trì trong 3 tháng để giữ nguyên cấp VIP của bạn.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIP BANNER ===== -->
+<section class="vip-banner-section">
+  <div class="container">
+    <div class="vip-banner reveal">
+      <div class="vip-banner-content">
+        <div class="vip-banner-text">
+          <h3>Trở Thành VIP Ngay Hôm Nay</h3>
+          <p>Đăng ký và nạp tiền để bắt đầu hành trình VIP. Hàng loạt phần thưởng và đặc quyền đang chờ đón bạn.</p>
+        </div>
+        <a href="#" class="vip-banner-cta" id="vipBannerCta">Đăng Ký Ngay</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON TABLE ===== -->
+
+<!-- ===== TERMS ===== -->
+<section class="terms-section" id="terms">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Lưu ý</div>
+      <h2 class="section-title">Điều Khoản & Điều Kiện</h2>
+    </div>
+    <div class="terms-card reveal" style="margin-top:24px;">
+      <ol class="terms-list">
+        <li>Khách hàng cần phải đạt đủ 02 điều kiện Tổng nạp và Tổng cược để được thăng hạng VIP.</li>
+        <li>Khi đạt được tổng nạp và tổng cược theo yêu cầu, thành viên sẽ được xét duyệt thăng cấp VIP trong vòng 24h.</li>
+        <li>Khi đã đạt được một cấp VIP nhất định, thành viên sẽ được nhận đặc quyền của VIP đó trong vòng 3 tháng. Nếu không đáp ứng được yêu cầu tổng nạp duy trì và tổng cược duy trì trong vòng 3 tháng tiếp theo, vào ngày đầu tiên của tháng thứ 4 cấp VIP của thành viên sẽ được xét duyệt lại dựa trên Tổng nạp và Tổng cược của thành viên trong 3 tháng vừa qua và giảng 1 cấp.</li>
+        <li>Thành viên chỉ nhận được thưởng thăng hạng VIP khi có sự thay đổi hạng VIP.</li>
+        <li>VIP8 và VIP9 là 2 cấp VIP đặc biệt chỉ có thể nhận được theo lời mời từ bộ phận chăm sóc VIP của công ty.</li>
+        <li>Công ty có quyền tuyệt đối hạ hoặc huỷ đặc quyền VIP của thành viên vào bất kỳ thời điểm nào mà không cần báo trước nếu phát hiện bất kỳ hành vi gian lận, lạm dụng khuyến mãi nào từ thành viên.</li>
+        <li>Tất cả các tặng thưởng từ chương trình VIP như Thưởng thăng hạng, Quà sinh nhật, Lì xì đều phải thực hiện 1 vòng cược trước khi rút tiền.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Câu hỏi thường gặp</div>
+      <h2 class="section-title">FAQ</h2>
+    </div>
+    <div class="faq-list reveal" id="faqList">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-col-title">Games</div>
+        <a href="#">Live Casino</a><a href="#">Slots</a><a href="#">Table Games</a><a href="#">Game Nhanh</a><a href="#">Bắn Cá</a><a href="#">Lô Đề</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Thể Thao</div>
+        <a href="#">K-Sports</a><a href="#">T-Sports</a><a href="#">Saba Thể Thao</a><a href="#">Thể Thao Ảo</a><a href="#">E-Sports</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Sự Kiện</div>
+        <a href="#">VIP Club</a><a href="#">Khuyến Mãi</a><a href="#">Tin Tức</a><a href="#">Sự Kiện</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Hỗ Trợ</div>
+        <a href="#">Về Chúng Tôi</a><a href="#">Trung Tâm Hỗ Trợ</a><a href="#">Điều Khoản & Điều Kiện</a><a href="#">Chính Sách Bảo Mật</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Kết Nối</div>
+        <div class="footer-social">
+          <a href="#" aria-label="Live Chat"><img src="Assets/assets (1)/asset 30.svg" alt="Chat"/></a>
+          <a href="#" aria-label="Telegram"><img src="Assets/assets (1)/asset 31.svg" alt="Telegram"/></a>
+          <a href="#" aria-label="Email"><img src="Assets/assets (1)/asset 32.svg" alt="Email"/></a>
+          <a href="#" aria-label="Facebook"><img src="Assets/assets (1)/asset 33.svg" alt="Facebook"/></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-brand">
+        <img src="Assets/assets (1)/asset 0.svg" alt="Mubet" style="height:24px;width:auto;"/>
+      </div>
+      <div>&copy; 2026 MUBET. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== MOBILE STICKY CTA ===== -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="sticky-cta-inner">
+    <div class="sticky-cta-info">
+      <div class="sticky-cta-tier" id="stickyTier">
+        <img id="stickyTierIcon" src="Assets/assets (1)/asset 7.webp" alt=""/>
+        <span id="stickyTierName">VIP 2</span>
+      </div>
+      <div class="sticky-cta-cashback" id="stickyCashback">Hoàn trả ước tính: 17.500.000đ/tháng</div>
+    </div>
+    <a href="#estimator" class="sticky-cta-btn">Ước tính ngay</a>
+  </div>
+</div>
+
+<!-- ===== BOTTOM NAVIGATION ===== -->
+<nav class="bottom-nav" id="bottomNav">
+  <div class="bottom-nav-inner">
+    <a href="#" class="bottom-nav-item" id="navMenu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      <span>Danh Mục</span>
+    </a>
+    <a href="#" class="bottom-nav-item active" id="navHome">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Trang Chủ</span>
+    </a>
+    <a href="#" class="bottom-nav-item center-btn" id="navDeposit">
+      <div class="bottom-nav-center-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12"/></svg>
+      </div>
+      <span>Nạp Tiền</span>
+    </a>
+    <a href="#" class="bottom-nav-item" id="navAccount">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Tài Khoản</span>
+    </a>
+    <a href="#" class="bottom-nav-item" id="navChat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span class="bottom-nav-dot"></span>
+      <span>Live Chat</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ===== DEPOSIT VIEW ===== -->
+<div class="dep-overlay" id="depOverlay"></div>
+<div class="dep-view" id="depView">
+  <!-- Screen 1: Method Selection -->
+  <div class="dep-screen" id="depMethodsScreen">
+    <div class="dep-header">
+      <div class="dep-header-left">
+        <button class="dep-close" id="depClose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dep-balance">
+        <div class="dep-balance-plus">+</div>
+        <span class="dep-balance-amount" id="depBalanceAmt">0 Đ</span>
+        <div class="dep-balance-avatar" id="depAvatar">P</div>
+      </div>
+    </div>
+    <div class="dep-tabs">
+      <button class="dep-tab active" data-tab="deposit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12"/></svg>
+        Nạp Tiền
+      </button>
+      <button class="dep-tab" data-tab="withdraw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M2 10h20"/></svg>
+        Rút Tiền
+      </button>
+      <button class="dep-tab" data-tab="history">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Lịch Sử Giao Dịch
+      </button>
+    </div>
+    <div class="dep-banner">
+      <div class="dep-banner-title">Giao dịch hiệu quả, đa dạng phương thức</div>
+      <div class="dep-banner-sub">Xử lý nhanh chóng <em>trong 1 phút!</em></div>
+    </div>
+    <div class="dep-screen-body" style="padding:12px 16px 20px;" id="depMethodsList">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- Screen 2: Method Detail -->
+  <div class="dep-screen" id="depDetailScreen" style="display:none">
+    <div class="dep-detail-header">
+      <button class="dep-back" id="depBack">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <div class="dep-detail-title" id="depDetailTitle"></div>
+    </div>
+    <div class="dep-detail-subtitle" id="depDetailSubtitle"></div>
+    <div class="dep-detail-body" id="depDetailBody">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Deposit success toast -->
+<div class="dep-toast" id="depToast">Nạp tiền thành công!</div>
+
+<!-- ===== TRIAL VIP1 VIEW ===== -->
+<div class="trial-overlay" id="trialOverlay"></div>
+<div class="trial-view" id="trialView">
+  <div class="trial-header">
+    <div class="trial-header-title">Trải Nghiệm VIP1</div>
+    <button class="trial-close" id="trialClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="trial-body">
+    <!-- Banner -->
+    <div class="trial-banner">
+      <div class="trial-banner-text">
+        <div class="trial-banner-title">Mở khóa đặc quyền VIP1 miễn phí</div>
+        <div class="trial-banner-sub">Hoàn thành 4 điều kiện để kích hoạt 7 ngày trải nghiệm</div>
+      </div>
+      <div class="trial-banner-icon"><img src="Assets/girl.png" alt=""/></div>
+    </div>
+
+    <!-- Progress -->
+    <div class="trial-progress" id="trialProgressSection">
+      <div class="trial-progress-bar"><div class="trial-progress-fill" id="trialProgressFill" style="width:0%"></div></div>
+      <div class="trial-progress-label" id="trialProgressLabel">0/4 điều kiện hoàn thành</div>
+    </div>
+
+    <!-- Conditions -->
+    <div class="trial-conditions" id="trialConditions"></div>
+
+    <!-- Success State -->
+    <div class="trial-success" id="trialSuccess" style="display:none">
+      <div class="trial-success-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none"><path d="M6 12.5l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="trial-success-title">Đã đủ điều kiện!</div>
+      <div class="trial-success-sub">Bạn đã hoàn thành tất cả điều kiện. Kích hoạt ngay để trải nghiệm VIP1 trong 7 ngày.</div>
+      <button class="trial-success-btn" id="trialActivateBtn">Kích hoạt VIP1 ngay</button>
+    </div>
+
+    <!-- Active Trial State -->
+    <div id="trialActive" style="display:none">
+      <div class="trial-active-status">
+        <span class="trial-active-badge"><svg viewBox="0 0 8 8" width="8" height="8" style="margin-right:4px;vertical-align:middle"><circle cx="4" cy="4" r="3" fill="#05a158"/></svg>VIP1 Trial đang hoạt động</span>
+      </div>
+      <div class="trial-countdown" id="trialCountdown">
+        <div class="trial-countdown-label">Thời gian còn lại</div>
+        <div class="trial-countdown-timer" id="trialTimer">6N 23:59:59</div>
+        <div class="trial-countdown-bar"><div class="trial-countdown-bar-fill" id="trialCountdownFill" style="width:100%"></div></div>
+      </div>
+
+      <!-- Ending notice (hidden by default) -->
+      <div class="trial-ending-notice" id="trialEndingNotice" style="display:none">
+        <div class="trial-ending-notice-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M12 2L1 21h22L12 2z" fill="rgba(222,46,54,.15)" stroke="#ca2930" stroke-width="1.5" stroke-linejoin="round"/><line x1="12" y1="9" x2="12" y2="14" stroke="#ca2930" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="#ca2930"/></svg></div>
+        <div class="trial-ending-notice-text">Thời gian trải nghiệm sắp kết thúc. <strong>Nạp thêm để duy trì quyền lợi VIP!</strong></div>
+      </div>
+
+      <!-- Trial Benefits -->
+      <div class="trial-benefits-title">Quyền lợi đang hoạt động</div>
+      <div id="trialBenefits"></div>
+    </div>
+
+    <!-- Trial FAQ -->
+    <div class="trial-faq-title" id="trialFaqTitle">Câu hỏi thường gặp</div>
+    <div id="trialFaq"></div>
+  </div>
+</div>
+
+<script>
+// ===== AUTH STATE =====
+let isLoggedIn = false;
+let currentUser = null;
+let pendingAction = null; // callback after login
+
+const MOCK_USERS = {
+  'player01': {
+    username: 'player01', displayName: 'Player 01', tier: 2, balance: '12.500.000',
+    totalDeposit: 180000000, totalWager: 900000000,
+    depositThisPeriod: 120000000, wagerThisPeriod: 350000000, isTrial: false,
+    totalCashbackReceived: 5400000, totalBonusReceived: 750000,
+    tierSince: '2025-11-20'
+  },
+  'newuser': {
+    username: 'newuser', displayName: 'New User', tier: 0, balance: '0',
+    totalDeposit: 0, totalWager: 0,
+    depositThisPeriod: 0, wagerThisPeriod: 0, isTrial: false,
+    totalCashbackReceived: 0, totalBonusReceived: 0
+  },
+  'vip1': {
+    username: 'vip1', displayName: 'VIP1 Player', tier: 1, balance: '5.200.000',
+    totalDeposit: 65000000, totalWager: 320000000,
+    depositThisPeriod: 35000000, wagerThisPeriod: 120000000, isTrial: false,
+    totalCashbackReceived: 1920000, totalBonusReceived: 200000,
+    tierSince: '2026-02-15'
+  }
+};
+const MOCK_USER = MOCK_USERS['player01'];
+
+function openAuthModal(type) {
+  const overlay = document.getElementById('authOverlay');
+  const loginModal = document.getElementById('loginModal');
+  const registerModal = document.getElementById('registerModal');
+  overlay.classList.add('open');
+  if (type === 'register') {
+    registerModal.classList.add('open');
+    loginModal.classList.remove('open');
+  } else {
+    loginModal.classList.add('open');
+    registerModal.classList.remove('open');
+  }
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAuthModal() {
+  document.getElementById('authOverlay').classList.remove('open');
+  document.getElementById('loginModal').classList.remove('open');
+  document.getElementById('registerModal').classList.remove('open');
+  document.body.style.overflow = '';
+  if (!isLoggedIn) pendingAction = null;
+}
+
+function switchAuthModal(type) {
+  const loginModal = document.getElementById('loginModal');
+  const registerModal = document.getElementById('registerModal');
+  if (type === 'register') {
+    loginModal.classList.remove('open');
+    registerModal.classList.add('open');
+  } else {
+    registerModal.classList.remove('open');
+    loginModal.classList.add('open');
+  }
+}
+
+function performLogin() {
+  const username = (document.getElementById('loginUsername').value.trim() || 'player01').toLowerCase();
+  isLoggedIn = true;
+  currentUser = { ...(MOCK_USERS[username] || MOCK_USER) };
+  closeAuthModal();
+  updateUIForAuthState();
+  if (pendingAction) {
+    const action = pendingAction;
+    pendingAction = null;
+    setTimeout(action, 300);
+  }
+}
+
+function performRegister() {
+  const username = document.getElementById('regUsername').value.trim() || 'newplayer';
+  isLoggedIn = true;
+  currentUser = { ...MOCK_USER, username, displayName: username };
+  closeAuthModal();
+  updateUIForAuthState();
+  if (pendingAction) {
+    const action = pendingAction;
+    pendingAction = null;
+    setTimeout(action, 300);
+  }
+}
+
+function performLogout() {
+  isLoggedIn = false;
+  currentUser = null;
+  updateUIForAuthState();
+}
+
+function updateUIForAuthState() {
+  const headerActions = document.querySelector('.header-actions');
+  if (isLoggedIn && currentUser) {
+    headerActions.innerHTML = `
+      <div class="header-user">
+        <div class="header-user-avatar">${currentUser.displayName.charAt(0).toUpperCase()}</div>
+        <div class="header-user-info">
+          <div class="header-user-name">${currentUser.displayName}</div>
+          <div class="header-user-tier">VIP ${currentUser.tier}</div>
+        </div>
+        <button class="header-user-logout" id="logoutBtn">Đăng Xuất</button>
+      </div>
+    `;
+    document.getElementById('logoutBtn').addEventListener('click', performLogout);
+  } else {
+    headerActions.innerHTML = `
+      <button class="btn-login" id="btnLogin">Đăng Nhập</button>
+      <button class="btn-register" id="btnRegister">Đăng Ký</button>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    `;
+    document.getElementById('btnLogin').addEventListener('click', () => openAuthModal('login'));
+    document.getElementById('btnRegister').addEventListener('click', () => openAuthModal('register'));
+  }
+
+  // Update bottom nav deposit button behavior
+  const navDeposit = document.getElementById('navDeposit');
+  if (navDeposit) {
+    navDeposit.onclick = (e) => {
+      e.preventDefault();
+      if (!isLoggedIn) {
+        pendingAction = () => openDepositView();
+        openAuthModal('login');
+      } else {
+        openDepositView();
+      }
+    };
+  }
+
+  // Update account nav
+  const navAccount = document.getElementById('navAccount');
+  if (navAccount) {
+    navAccount.onclick = (e) => {
+      e.preventDefault();
+      if (!isLoggedIn) {
+        openAuthModal('login');
+      }
+    };
+  }
+
+  // Sync VIP selector to user's tier
+  if (isLoggedIn && currentUser && currentUser.tier >= 1) {
+    activeVipTier = currentUser.tier;
+  }
+
+  // Update trial hero card / VIP status card
+  updateTrialUI();
+}
+
+function requireAuth(callback) {
+  if (isLoggedIn) {
+    callback();
+  } else {
+    pendingAction = callback;
+    openAuthModal('login');
+  }
+}
+
+// ===== VIP DATA =====
+const ASSET_PATH = 'Assets/assets (1)/';
+
+// Tier badge image mapping
+const TIER_ICONS = {
+  1: ASSET_PATH + 'asset 6.webp',
+  2: ASSET_PATH + 'asset 7.webp',
+  3: ASSET_PATH + 'asset 8.webp',
+  4: ASSET_PATH + 'asset 9.webp',
+  5: ASSET_PATH + 'asset 10.webp',
+  6: ASSET_PATH + 'asset 11.webp',
+  7: ASSET_PATH + 'asset 12.webp',
+  8: ASSET_PATH + 'asset 13.webp',
+  9: ASSET_PATH + 'asset 14.webp',
+};
+
+const VIP_DATA = [
+  {
+    tier: 1, name: 'VIP 1', fullName: 'Đồng 1', label: 'V1',
+    depositReq: 50000000, wagerReq: 250000000,
+    depositMaintain: 30000000, wagerMaintain: 100000000,
+    upgradeReward: 150000, tetBonus: 50000,
+    cashback: { sports: 0.006, slots: 0.0055, keno: 0.0055, number: 0.0055, lode: 0.0055, daga: 0.0055, evoplay: 0.0055 },
+    color: '#7B7F8A'
+  },
+  {
+    tier: 2, name: 'VIP 2', fullName: 'Đồng 2', label: 'V2',
+    depositReq: 150000000, wagerReq: 750000000,
+    depositMaintain: 100000000, wagerMaintain: 300000000,
+    upgradeReward: 500000, tetBonus: 100000,
+    cashback: { sports: 0.007, slots: 0.006, keno: 0.006, number: 0.006, lode: 0.006, daga: 0.006, evoplay: 0.006 },
+    color: '#636775'
+  },
+  {
+    tier: 3, name: 'VIP 3', fullName: 'Bạc 1', label: 'V3',
+    depositReq: 700000000, wagerReq: 3500000000,
+    depositMaintain: 400000000, wagerMaintain: 1700000000,
+    upgradeReward: 2500000, tetBonus: 200000,
+    cashback: { sports: 0.008, slots: 0.0065, keno: 0.0065, number: 0.0065, lode: 0.0065, daga: 0.0065, evoplay: 0.0065 },
+    color: '#CD7F32'
+  },
+  {
+    tier: 4, name: 'VIP 4', fullName: 'Bạc 2', label: 'V4',
+    depositReq: 1800000000, wagerReq: 8000000000,
+    depositMaintain: 1000000000, wagerMaintain: 3000000000,
+    upgradeReward: 7500000, tetBonus: 500000,
+    cashback: { sports: 0.009, slots: 0.007, keno: 0.007, number: 0.007, lode: 0.007, daga: 0.007, evoplay: 0.007 },
+    color: '#C0C0C0'
+  },
+  {
+    tier: 5, name: 'VIP 5', fullName: 'Vàng 1', label: 'V5',
+    depositReq: 5000000000, wagerReq: 15000000000,
+    depositMaintain: 2000000000, wagerMaintain: 5000000000,
+    upgradeReward: 21000000, tetBonus: 1000000,
+    cashback: { sports: 0.01, slots: 0.0075, keno: 0.0075, number: 0.0075, lode: 0.0075, daga: 0.0075, evoplay: 0.0075 },
+    color: '#FFD700'
+  },
+  {
+    tier: 6, name: 'VIP 6', fullName: 'Vàng 2', label: 'V6',
+    depositReq: 9000000000, wagerReq: 45000000000,
+    depositMaintain: 3000000000, wagerMaintain: 15000000000,
+    upgradeReward: 50000000, tetBonus: 2000000,
+    cashback: { sports: 0.011, slots: 0.008, keno: 0.008, number: 0.008, lode: 0.008, daga: 0.008, evoplay: 0.008 },
+    color: '#E8B004'
+  },
+  {
+    tier: 7, name: 'VIP 7', fullName: 'Bạch Kim 1', label: 'V7',
+    depositReq: 15000000000, wagerReq: 75000000000,
+    depositMaintain: 5000000000, wagerMaintain: 25000000000,
+    upgradeReward: 86000000, tetBonus: 4000000,
+    cashback: { sports: 0.012, slots: 0.0085, keno: 0.0085, number: 0.0085, lode: 0.0085, daga: 0.0085, evoplay: 0.0085 },
+    color: '#FF6B35'
+  },
+  {
+    tier: 8, name: 'VIP 8', fullName: 'Bạch Kim 2', label: 'V8',
+    depositReq: null, wagerReq: null,
+    depositMaintain: null, wagerMaintain: null,
+    upgradeReward: 100000000, tetBonus: 8000000,
+    cashback: { sports: 0.013, slots: 0.009, keno: 0.009, number: 0.009, lode: 0.009, daga: 0.009, evoplay: 0.009 },
+    color: '#DE2E36', inviteOnly: true
+  },
+  {
+    tier: 9, name: 'VIP 9', fullName: 'Kim Cương', label: 'V9',
+    depositReq: null, wagerReq: null,
+    depositMaintain: null, wagerMaintain: null,
+    upgradeReward: 120000000, tetBonus: 16000000,
+    cashback: { sports: 0.014, slots: 0.0095, keno: 0.0095, number: 0.0095, lode: 0.0095, daga: 0.0095, evoplay: 0.0095 },
+    color: '#E7BB08', inviteOnly: true
+  }
+];
+
+const GAME_LABELS = {
+  sports: 'Thể Thao, Thể Thao Ảo, E-Sports',
+  slots: 'Slots',
+  keno: 'Keno siêu tốc, Keno Vietlott',
+  number: 'Number Game, Quay số',
+  lode: 'Lô Đề',
+  daga: 'Đá Gà',
+  evoplay: 'Evoplay / Qtech'
+};
+
+const FAQ_DATA = [
+  { q: 'Làm thế nào để thăng hạng VIP?', a: 'Bạn cần đạt đủ 2 điều kiện: Tổng nạp và Tổng cược theo mức yêu cầu của từng cấp VIP. Khi đạt đủ điều kiện, tài khoản sẽ được xét duyệt và thăng hạng trong vòng 24h.' },
+  { q: 'Hoàn trả (cashback) được tính như thế nào?', a: 'Hoàn trả được tính theo phần trăm trên tổng cược hợp lệ mỗi ngày, áp dụng riêng cho từng nhóm game. Tỷ lệ hoàn trả tăng dần theo cấp VIP của bạn.' },
+  { q: 'Tôi có thể bị giảng hạng VIP không?', a: 'Có. Nếu trong vòng 3 tháng bạn không đạt được mức nạp duy trì và cược duy trì, cấp VIP sẽ được xét duyệt lại vào đầu tháng thứ 4 và có thể giảng 1 cấp.' },
+  { q: 'VIP 8 và VIP 9 khác gì các cấp khác?', a: 'VIP 8 và VIP 9 là cấp VIP đặc biệt, chỉ nhận được theo lời mời trực tiếp từ bộ phận chăm sóc VIP của Mubet. Không có mức nạp/cược công khai để thăng hạng.' },
+  { q: 'Khi nào tôi nhận được thưởng thăng hạng?', a: 'Thưởng thăng hạng được cộng ngay khi tài khoản của bạn được xét duyệt lên cấp VIP mới. Tiền thưởng cần thực hiện 1 vòng cược trước khi rút.' },
+  { q: 'Lì xì năm mới áp dụng cho ai?', a: 'Tất cả thành viên VIP đều nhận lì xì vào dịp Tết Nguyên Đán, mức lì xì phụ thuộc vào cấp VIP tại thời điểm đó.' }
+];
+
+// ===== HELPERS =====
+function fmt(n) {
+  if (n === null || n === undefined) return 'Lời mời';
+  if (n >= 1e9) return (n / 1e9).toFixed(n % 1e9 === 0 ? 0 : 1) + 'B';
+  if (n >= 1e6) return (n / 1e6).toFixed(n % 1e6 === 0 ? 0 : 0) + 'M';
+  return n.toLocaleString('vi-VN');
+}
+
+function fmtFull(n) {
+  if (n === null) return 'Lời mời';
+  return n.toLocaleString('vi-VN');
+}
+
+function parseInput(str) {
+  return parseInt(str.replace(/[^0-9]/g, ''), 10) || 0;
+}
+
+function formatInput(n) {
+  return n.toLocaleString('vi-VN');
+}
+
+// ===== ESTIMATOR LOGIC =====
+let currentAmount = 500000000;
+
+function getTierForDeposit(deposit) {
+  let matched = null;
+  for (let i = VIP_DATA.length - 1; i >= 0; i--) {
+    const t = VIP_DATA[i];
+    if (t.inviteOnly) continue;
+    if (deposit >= t.depositReq) { matched = t; break; }
+  }
+  return matched;
+}
+
+function getNextTier(currentTier) {
+  if (!currentTier) return VIP_DATA[0];
+  const idx = VIP_DATA.findIndex(t => t.tier === currentTier.tier);
+  if (idx < VIP_DATA.length - 1) {
+    const next = VIP_DATA[idx + 1];
+    if (!next.inviteOnly) return next;
+  }
+  return null;
+}
+
+function estimateCashback(deposit, tier) {
+  if (!tier) return 0;
+  const estimatedWager = deposit * 10;
+  const rate = tier.cashback.sports || 0;
+  return Math.round(estimatedWager * rate);
+}
+
+function updateEstimator() {
+  const tier = getTierForDeposit(currentAmount);
+  const nextTier = tier ? getNextTier(tier) : VIP_DATA[0];
+  const cashback = estimateCashback(currentAmount, tier);
+  const estimatedBet = Math.round(currentAmount * 9.87);
+
+  let progress = 0;
+  let remaining = 0;
+  if (tier && nextTier) {
+    progress = Math.min(100, (currentAmount / nextTier.depositReq) * 100);
+    remaining = Math.max(0, nextTier.depositReq - currentAmount);
+  } else if (!tier && VIP_DATA[0]) {
+    progress = Math.min(100, (currentAmount / VIP_DATA[0].depositReq) * 100);
+    remaining = Math.max(0, VIP_DATA[0].depositReq - currentAmount);
+  } else {
+    progress = 100;
+  }
+
+  const resultEl = document.getElementById('estResult');
+  if (!resultEl) return;
+  const tierName = tier ? tier.name : 'Chưa đạt VIP';
+  const tierIcon = tier ? TIER_ICONS[tier.tier] : ASSET_PATH + 'asset 6.webp';
+  const rate = tier ? (tier.cashback.sports * 100).toFixed(2) + '%' : '0%';
+  const benefits = tier ? [
+    `Thưởng đạt hạng: ${fmtFull(tier.upgradeReward)}đ`,
+    `Hoàn trả Thể thao: ${(tier.cashback.sports * 100).toFixed(1)}%`,
+    `Hoàn trả Slots: ${(tier.cashback.slots * 100).toFixed(2)}%`,
+    `Lì xì năm mới: ${fmtFull(tier.tetBonus)}đ`,
+    tier.tier >= 8 ? 'Hạng VIP đặc biệt — chỉ theo lời mời' : `Duy trì: nạp ${fmtFull(tier.depositMaintain)}đ / 3 tháng`
+  ] : ['Nạp thêm để đạt VIP 1'];
+
+  resultEl.innerHTML = `
+    <div class="est-result-tier" style="border-color:${tier ? tier.color + '33' : 'var(--line)'}">
+      <div class="est-result-tier-icon"><img src="${tierIcon}" alt="${tierName}"/></div>
+      <div class="est-result-tier-info">
+        <div class="est-result-tier-name" style="color:${tier ? tier.color : 'var(--muted)'}">${tierName}</div>
+        <div class="est-result-tier-sub">Hạng VIP ước tính theo mức nạp của bạn</div>
+      </div>
+    </div>
+
+    <div class="est-stats-grid">
+      <div class="est-stat-card full-width hero">
+        <div class="est-stat-label">Hoàn trả ước tính / năm</div>
+        <div class="est-stat-value gold">${fmtFull(cashback * 12)}đ</div>
+      </div>
+      <div class="est-stat-card">
+        <div class="est-stat-label">Tỷ lệ hoàn trả</div>
+        <div class="est-stat-value blue">${rate}</div>
+      </div>
+      <div class="est-stat-card">
+        <div class="est-stat-label">Thưởng thăng hạng</div>
+        <div class="est-stat-value green">${tier ? fmtFull(tier.upgradeReward) + 'đ' : '--'}</div>
+      </div>
+      <div class="est-stat-card">
+        <div class="est-stat-label">Lì xì năm mới</div>
+        <div class="est-stat-value orange">${tier ? fmtFull(tier.tetBonus) + 'đ' : '--'}</div>
+      </div>
+      <div class="est-stat-card full-width muted">
+        <div class="est-stat-label">Tổng cược ước tính / tháng</div>
+        <div class="est-stat-value white">${fmtFull(estimatedBet)}đ</div>
+      </div>
+    </div>
+
+    <div class="est-progress">
+      <div class="est-progress-labels">
+        <span>${tier ? tier.name : 'Bắt đầu'}</span>
+        <span>${nextTier ? nextTier.name : (tier ? 'Max / Lời mời' : 'VIP 1')}</span>
+      </div>
+      <div class="est-progress-track">
+        <div class="est-progress-fill" style="width:${progress}%"></div>
+      </div>
+      <div class="est-progress-info">
+        ${nextTier ? `<span class="est-progress-remain">Còn thiếu ${fmtFull(remaining)}đ</span>` : '<span class="est-progress-remain">Đã đạt mức cao nhất (công khai)</span>'}
+        <span class="est-progress-pct">${progress.toFixed(0)}%</span>
+      </div>
+    </div>
+
+    <div class="est-benefits">
+      <div class="est-benefits-title">Quyền lợi nổi bật</div>
+      ${benefits.map(b => `<div class="est-benefit-row"><span class="est-benefit-check">&#10003;</span>${b}</div>`).join('')}
+    </div>
+
+    <div class="est-disclaimer">
+      * Kết quả chỉ mang tính ước tính minh họa. Tổng cược ước tính = tiền nạp x9.87.
+      Quyền lợi thực tế phụ thuộc điều kiện chương trình và quy định của Mubet.
+    </div>
+  `;
+
+  // Sync VIP selector to estimated tier
+  if (tier && tier.tier !== activeVipTier) {
+    activeVipTier = tier.tier;
+    const scroll = document.getElementById('vipSelectorScroll');
+    scroll.querySelectorAll('.vip-selector-item').forEach(i => {
+      i.classList.toggle('active', parseInt(i.dataset.tier) === tier.tier);
+    });
+    updateVipMarker();
+    updateVipDetail();
+  }
+
+  // Update mobile sticky CTA
+  const stickyTierName = document.getElementById('stickyTierName');
+  const stickyTierIcon = document.getElementById('stickyTierIcon');
+  const stickyCashback = document.getElementById('stickyCashback');
+  if (stickyTierName) stickyTierName.textContent = tierName;
+  if (stickyTierIcon) stickyTierIcon.src = tierIcon;
+  if (stickyCashback) stickyCashback.textContent = `Hoàn trả ước tính: ${fmtFull(cashback)}đ/tháng`;
+}
+
+// ===== MODAL OPEN/CLOSE =====
+function openEstimatorModal() {
+  // Pre-fill for VIP members
+  if (isLoggedIn && currentUser && currentUser.totalDeposit) {
+    currentAmount = currentUser.totalDeposit;
+    const input = document.getElementById('estAmount');
+    if (input) input.value = formatInput(currentAmount);
+  }
+  document.getElementById('estOverlay').classList.add('open');
+  document.getElementById('estModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  updateEstimator();
+}
+
+function closeEstimatorModal() {
+  document.getElementById('estOverlay').classList.remove('open');
+  document.getElementById('estModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ===== RENDER VIP SELECTOR + DETAIL =====
+let activeVipTier = 2; // default active
+
+function renderVipSelector() {
+  const scroll = document.getElementById('vipSelectorScroll');
+  scroll.innerHTML = VIP_DATA.map(t => `
+    <div class="vip-selector-item ${t.tier === activeVipTier ? 'active' : ''}" data-tier="${t.tier}">
+      <div class="vip-selector-icon"><img src="${TIER_ICONS[t.tier]}" alt="${t.name}"/></div>
+      <span class="vip-selector-label">${t.label}</span>
+    </div>
+  `).join('') + '<div class="vip-selector-marker" id="vipMarker"></div><div class="vip-selector-diamond" id="vipDiamond"></div>';
+
+  // Event listeners
+  scroll.querySelectorAll('.vip-selector-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const tier = parseInt(item.dataset.tier);
+      if (tier === activeVipTier) return;
+      activeVipTier = tier;
+      // Update active class
+      scroll.querySelectorAll('.vip-selector-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      updateVipMarker();
+      updateVipDetail();
+      // Scroll active into view
+      item.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    });
+  });
+
+  requestAnimationFrame(() => updateVipMarker());
+  updateVipDetail(false);
+}
+
+function updateVipMarker() {
+  const scroll = document.getElementById('vipSelectorScroll');
+  const marker = document.getElementById('vipMarker');
+  const diamond = document.getElementById('vipDiamond');
+  const activeItem = scroll.querySelector('.vip-selector-item.active');
+  if (!activeItem || !marker || !diamond) return;
+
+  const left = activeItem.offsetLeft;
+  const width = activeItem.offsetWidth;
+
+  marker.style.left = left + 'px';
+  marker.style.width = width + 'px';
+  diamond.style.left = (left + width / 2 - 6) + 'px';
+}
+
+function updateVipDetail(animate = true) {
+  const content = document.getElementById('vipDetailContent');
+  const t = VIP_DATA.find(v => v.tier === activeVipTier);
+  if (!t) return;
+
+  const inviteVal = '<span class="vip-detail-row-value invite">Lời mời</span>';
+
+  const html = `
+    <div class="vip-detail-section">
+      <div class="vip-detail-section-title">
+        <img src="${TIER_ICONS[t.tier]}" alt=""/>
+        Thăng hạng VIP
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Tổng Phí Nạp</span>
+        ${t.depositReq ? `<span class="vip-detail-row-value">${fmtFull(t.depositReq)}đ</span>` : inviteVal}
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Tổng Phí Cược</span>
+        ${t.wagerReq ? `<span class="vip-detail-row-value">${fmtFull(t.wagerReq)}đ</span>` : inviteVal}
+      </div>
+    </div>
+    <div class="vip-detail-section">
+      <div class="vip-detail-section-title">
+        <img src="${TIER_ICONS[t.tier]}" alt=""/>
+        Duy trì VIP (3 tháng)
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Tổng Phí Nạp</span>
+        ${t.depositMaintain ? `<span class="vip-detail-row-value">${fmtFull(t.depositMaintain)}đ</span>` : inviteVal}
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Tổng Phí Cược</span>
+        ${t.wagerMaintain ? `<span class="vip-detail-row-value">${fmtFull(t.wagerMaintain)}đ</span>` : inviteVal}
+      </div>
+    </div>
+    <div class="vip-detail-section">
+      <div class="vip-detail-section-title">
+        <img src="${TIER_ICONS[t.tier]}" alt=""/>
+        Quyền lợi VIP
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Thưởng Thăng Hạng</span>
+        <span class="vip-detail-row-value highlight">${fmtFull(t.upgradeReward)}đ</span>
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Lì Xì Năm Mới</span>
+        <span class="vip-detail-row-value highlight">${fmtFull(t.tetBonus)}đ</span>
+      </div>
+    </div>
+    <div class="vip-detail-section">
+      <div class="vip-detail-section-title">
+        <img src="${TIER_ICONS[t.tier]}" alt=""/>
+        Thưởng hoàn trả VIP
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Thể Thao, Thể Thao Ảo, E-Sports</span>
+        <span class="vip-detail-row-value green">${(t.cashback.sports * 100).toFixed(1)}%</span>
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Keno Siêu Tốc, Keno Vietlott</span>
+        <span class="vip-detail-row-value green">${(t.cashback.keno * 100).toFixed(2)}%</span>
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Number Game, Quay Số</span>
+        <span class="vip-detail-row-value green">${(t.cashback.number * 100).toFixed(2)}%</span>
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Lô Đề</span>
+        <span class="vip-detail-row-value green">${(t.cashback.lode * 100).toFixed(2)}%</span>
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Slots</span>
+        <span class="vip-detail-row-value green">${(t.cashback.slots * 100).toFixed(2)}%</span>
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Đá Gà</span>
+        <span class="vip-detail-row-value green">${(t.cashback.daga * 100).toFixed(2)}%</span>
+      </div>
+      <div class="vip-detail-row">
+        <span class="vip-detail-row-label">Các Game Của EVOPLAY-QTECH (Thuộc Game Nhanh)</span>
+        <span class="vip-detail-row-value green">${(t.cashback.evoplay * 100).toFixed(2)}%</span>
+      </div>
+    </div>
+  `;
+
+  if (animate) {
+    content.classList.add('fade-out');
+    setTimeout(() => {
+      content.innerHTML = html;
+      content.classList.remove('fade-out');
+    }, 250);
+  } else {
+    content.innerHTML = html;
+  }
+}
+
+
+// ===== RENDER FAQ =====
+function renderFAQ() {
+  const container = document.getElementById('faqList');
+  container.innerHTML = FAQ_DATA.map((item, i) => `
+    <div class="faq-item" data-faq="${i}">
+      <button class="faq-question" onclick="toggleFAQ(${i})">
+        ${item.q}
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">${item.a}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleFAQ(idx) {
+  const item = document.querySelector(`.faq-item[data-faq="${idx}"]`);
+  const answer = item.querySelector('.faq-answer');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.faq-answer').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+// ===== SCROLL REVEAL =====
+function initReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// ===== MOBILE STICKY CTA VISIBILITY =====
+function initStickyCta() {
+  const stickyCta = document.getElementById('stickyCta');
+  const hero = document.querySelector('.hero');
+  if (!stickyCta || !hero) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        stickyCta.classList.add('visible');
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0 });
+
+  observer.observe(hero);
+}
+
+// ===== BOTTOM NAV =====
+function initBottomNav() {
+  const items = document.querySelectorAll('.bottom-nav-item');
+  items.forEach(item => {
+    item.addEventListener('click', (e) => {
+      // Let center button and links work naturally
+      if (item.id === 'navDeposit') return;
+      // For demo, just toggle active state
+      items.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+}
+
+// ===== EVENT LISTENERS =====
+const depositInput = document.getElementById('depositInput');
+
+depositInput.addEventListener('input', function() {
+  const raw = parseInput(this.value);
+  currentAmount = raw;
+  this.value = raw > 0 ? formatInput(raw) : '';
+  document.querySelectorAll('.est-quick-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.amount) === raw);
+  });
+  updateEstimator();
+});
+
+document.querySelectorAll('.est-quick-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const amt = parseInt(this.dataset.amount);
+    currentAmount = amt;
+    depositInput.value = formatInput(amt);
+    document.querySelectorAll('.est-quick-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    updateEstimator();
+  });
+});
+
+// Modal open/close
+document.getElementById('estClose').addEventListener('click', closeEstimatorModal);
+document.getElementById('estOverlay').addEventListener('click', closeEstimatorModal);
+
+// Hero CTA - require login then open estimator
+document.querySelector('.hero-cta').addEventListener('click', (e) => {
+  e.preventDefault();
+  requireAuth(() => openEstimatorModal());
+});
+
+// Sticky CTA - require login then open estimator
+document.querySelector('.sticky-cta-btn')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  requireAuth(() => openEstimatorModal());
+});
+
+// ===== DEPOSIT VIEW =====
+const DEP_ICONS = {
+  bank: '<svg viewBox="0 0 32 32" width="28" height="28" fill="none"><defs><linearGradient id="gBank" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs><path d="M4 14h24v2H4z" fill="url(#gBank)" opacity=".3"/><path d="M16 4l13 8H3l13-8z" fill="url(#gBank)" opacity=".8"/><rect x="6" y="14" width="3" height="10" rx="1" fill="url(#gBank)" opacity=".6"/><rect x="14.5" y="14" width="3" height="10" rx="1" fill="url(#gBank)" opacity=".6"/><rect x="23" y="14" width="3" height="10" rx="1" fill="url(#gBank)" opacity=".6"/><rect x="3" y="24" width="26" height="3" rx="1" fill="url(#gBank)" opacity=".8"/></svg>',
+  flashpay: '<svg viewBox="0 0 32 32" width="28" height="28" fill="none"><defs><linearGradient id="gFlash" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><path d="M18 3l-8 14h6l-2 12 10-16h-7l3-10z" fill="url(#gFlash)" opacity=".85"/></svg>',
+  p2p: '<svg viewBox="0 0 32 32" width="28" height="28" fill="none"><defs><linearGradient id="gP2p" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#34d399"/><stop offset="100%" stop-color="#10b981"/></linearGradient></defs><path d="M8 12h12M20 12l-4-4M20 12l-4 4" stroke="url(#gP2p)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 20H12M12 20l4 4M12 20l4-4" stroke="url(#gP2p)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  crypto: '<svg viewBox="0 0 32 32" width="28" height="28" fill="none"><defs><linearGradient id="gCryp" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/></linearGradient></defs><circle cx="16" cy="16" r="11" stroke="url(#gCryp)" stroke-width="1.8" fill="rgba(245,158,11,.08)"/><text x="16" y="21" text-anchor="middle" fill="url(#gCryp)" font-size="14" font-weight="800" font-family="Montserrat">₿</text></svg>',
+  flexpay: '<svg viewBox="0 0 32 32" width="28" height="28" fill="none"><defs><linearGradient id="gFlex" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient></defs><path d="M16 4l-6 12h5l-2 12 9-15h-6l4-9z" fill="url(#gFlex)" opacity=".8"/><circle cx="16" cy="16" r="13" stroke="url(#gFlex)" stroke-width="1.2" stroke-dasharray="3 3" opacity=".4"/></svg>',
+  ewallet: '<svg viewBox="0 0 32 32" width="28" height="28" fill="none"><defs><linearGradient id="gWal" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fb7185"/><stop offset="100%" stop-color="#e11d48"/></linearGradient></defs><rect x="4" y="8" width="24" height="17" rx="3" stroke="url(#gWal)" stroke-width="1.8" fill="rgba(225,29,72,.08)"/><rect x="18" y="14" width="10" height="6" rx="2" fill="url(#gWal)" opacity=".25"/><circle cx="22" cy="17" r="1.5" fill="url(#gWal)"/><path d="M4 12h24" stroke="url(#gWal)" stroke-width="1.2" opacity=".3"/></svg>',
+  scratch: '<svg viewBox="0 0 32 32" width="28" height="28" fill="none"><defs><linearGradient id="gCard" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#0284c7"/></linearGradient></defs><rect x="4" y="6" width="24" height="20" rx="3" stroke="url(#gCard)" stroke-width="1.8" fill="rgba(2,132,199,.08)"/><rect x="8" y="10" width="10" height="2" rx="1" fill="url(#gCard)" opacity=".5"/><rect x="8" y="14" width="7" height="2" rx="1" fill="url(#gCard)" opacity=".3"/><circle cx="22" cy="20" r="3" stroke="url(#gCard)" stroke-width="1.5" fill="rgba(2,132,199,.1)"/><path d="M20.5 20l1 1 2-2.5" stroke="url(#gCard)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+const DEPOSIT_METHODS = [
+  { id: 'bank', name: 'Ngân Hàng', badge: 'Mới', sub: 'Ngập tràn ưu đãi', icon: DEP_ICONS.bank,
+    subtitle: 'An toàn, bảo mật, xử lý nhanh chóng 24/7 thông qua NAPAS',
+    range: 'Từ 50 Đ - 299,000 Đ', hint: '1 Đ = 1,000 VND',
+    amounts: [50,500,1000,5000,10000,50000,100000,299000] },
+  { id: 'flashpay', name: 'FlashPay', badge: 'Mới', sub: 'Thanh toán nhanh chóng', icon: DEP_ICONS.flashpay,
+    subtitle: 'Thanh toán tức thì qua cổng FlashPay',
+    range: 'Từ 100 Đ - 500,000 Đ', hint: '1 Đ = 1,000 VND',
+    amounts: [100,500,1000,5000,10000,50000,100000,500000] },
+  { id: 'p2p', name: 'P2P', badge: null, sub: 'Giao dịch chỉ 5 phút', icon: DEP_ICONS.p2p,
+    subtitle: 'Chuyển khoản trực tiếp giữa các thành viên',
+    range: 'Từ 100 Đ - 999,000 Đ', hint: '1 Đ = 1,000 VND',
+    amounts: [100,500,1000,5000,10000,50000,200000,999000] },
+  { id: 'crypto', name: 'Tiền Ảo', badge: 'Mới', sub: 'An toàn và bảo mật', icon: DEP_ICONS.crypto,
+    subtitle: 'Hỗ trợ USDT, BTC, ETH và nhiều loại tiền ảo khác',
+    range: 'Từ 50 Đ - 999,000 Đ', hint: '1 Đ = 1,000 VND',
+    amounts: [50,500,1000,5000,10000,100000,500000,999000] },
+  { id: 'flexpay', name: 'FlexPay', badge: null, sub: 'Thanh toán siêu tốc', icon: DEP_ICONS.flexpay,
+    subtitle: 'Xử lý giao dịch trong vòng 30 giây',
+    range: 'Từ 50 Đ - 299,000 Đ', hint: '1 Đ = 1,000 VND',
+    amounts: [50,500,1000,5000,10000,50000,100000,299000] },
+  { id: 'ewallet', name: 'Ví Điện Tử', badge: null, sub: 'Tiện lợi và dễ sử dụng', icon: DEP_ICONS.ewallet,
+    subtitle: 'Hỗ trợ MoMo, ZaloPay, VNPay và các ví phổ biến',
+    range: 'Từ 50 Đ - 500,000 Đ', hint: '1 Đ = 1,000 VND',
+    amounts: [50,500,1000,5000,10000,50000,100000,500000] },
+  { id: 'scratch', name: 'Thẻ Cào', badge: null, sub: 'Dễ dàng thanh toán', icon: DEP_ICONS.scratch,
+    subtitle: 'Nạp bằng thẻ cào Viettel, Mobifone, Vinaphone',
+    range: 'Từ 10 Đ - 1,000 Đ', hint: '1 Đ = 1,000 VND',
+    amounts: [10,20,50,100,200,500,1000] }
+];
+
+let depCurrentMethod = null;
+let depCurrentAmount = 0;
+
+function openDepositView() {
+  document.getElementById('depOverlay').classList.add('open');
+  document.getElementById('depView').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('depMethodsScreen').style.display = '';
+  document.getElementById('depDetailScreen').style.display = 'none';
+  if (currentUser) {
+    document.getElementById('depBalanceAmt').textContent = currentUser.balance + ' Đ';
+    document.getElementById('depAvatar').textContent = currentUser.displayName.charAt(0).toUpperCase();
+  }
+  renderDepositMethods();
+}
+
+function closeDepositView() {
+  document.getElementById('depOverlay').classList.remove('open');
+  document.getElementById('depView').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function renderDepositMethods() {
+  const list = document.getElementById('depMethodsList');
+  list.innerHTML = DEPOSIT_METHODS.map(m => `
+    <div class="dep-method-card" data-method="${m.id}">
+      <div class="dep-method-info">
+        <div class="dep-method-name">
+          ${m.name}
+          ${m.badge ? `<span class="dep-method-badge">${m.badge}</span>` : ''}
+        </div>
+        <div class="dep-method-sub">${m.sub}</div>
+      </div>
+      <div class="dep-method-icon">${m.icon}</div>
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.dep-method-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const method = DEPOSIT_METHODS.find(m => m.id === card.dataset.method);
+      if (method) openDepositDetail(method);
+    });
+  });
+}
+
+function openDepositDetail(method) {
+  depCurrentMethod = method;
+  depCurrentAmount = 0;
+  document.getElementById('depMethodsScreen').style.display = 'none';
+  document.getElementById('depDetailScreen').style.display = '';
+  document.getElementById('depDetailTitle').textContent = method.name.toUpperCase();
+  document.getElementById('depDetailSubtitle').textContent = method.subtitle;
+  renderDepositDetailBody(method);
+}
+
+function closeDepositDetail() {
+  document.getElementById('depDetailScreen').style.display = 'none';
+  document.getElementById('depMethodsScreen').style.display = '';
+  depCurrentMethod = null;
+}
+
+function renderDepositDetailBody(method) {
+  const body = document.getElementById('depDetailBody');
+  body.innerHTML = `
+    <div class="dep-amount-label">Số tiền nạp</div>
+    <div class="dep-amount-wrap">
+      <input type="text" class="dep-amount-input" id="depAmountInput" placeholder="${method.range}" inputmode="numeric"/>
+      <span class="dep-amount-hint">${method.hint}</span>
+    </div>
+    <div class="dep-quick-grid">
+      ${method.amounts.map(a => `<button class="dep-quick-btn" data-amt="${a}">${a >= 1000 ? fmtFull(a) : a} Đ</button>`).join('')}
+    </div>
+
+    <div class="dep-promo-label">Chọn khuyến mãi</div>
+    <div class="dep-promo-card">
+      <div class="dep-promo-check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <div class="dep-promo-text">Hoàn Trả <span>lên đến 1.4%</span></div>
+    </div>
+
+    <div class="dep-info-box">
+      <div class="dep-info-title">
+        <div class="dep-info-icon blue">?</div>
+        Hướng dẫn nạp tiền
+      </div>
+      <div class="dep-info-body">
+        Quý khách cần chuyển tối thiểu <strong>50.000đ</strong>.<br/>
+        Vui lòng nhập đúng nội dung chuyển tiền để được xử lý nhanh chóng.
+      </div>
+    </div>
+
+    <div class="dep-info-box dep-warning-box">
+      <div class="dep-info-title">
+        <div class="dep-info-icon red">!</div>
+        Lưu ý
+      </div>
+      <div class="dep-info-body">
+        <p>Quý khách vui lòng không lưu lại các tài khoản ngân hàng của MUBET, mỗi lần giao dịch Quý khách cần vào mục Nạp Tiền để lấy thông tin chuyển khoản.</p>
+        <p>Vui lòng nhập đúng nội dung và số tiền để được xử lý nhanh chóng, chuyển không đúng sẽ không nhận được tiền vào tài khoản.</p>
+        <p>Sau 1 phút nếu chưa nhận được tiền, vui lòng Liên hệ <a href="#">CSKH 24/7</a> để được hỗ trợ.</p>
+      </div>
+    </div>
+
+    <button class="dep-submit" id="depSubmitBtn" disabled>Nạp Tiền</button>
+  `;
+
+  // Quick amount buttons
+  body.querySelectorAll('.dep-quick-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      depCurrentAmount = parseInt(btn.dataset.amt);
+      const input = document.getElementById('depAmountInput');
+      input.value = fmtFull(depCurrentAmount) + ' Đ';
+      body.querySelectorAll('.dep-quick-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('depSubmitBtn').disabled = false;
+    });
+  });
+
+  // Amount input
+  const input = document.getElementById('depAmountInput');
+  input.addEventListener('input', function() {
+    const raw = parseInt(this.value.replace(/[^\d]/g, '')) || 0;
+    depCurrentAmount = raw;
+    if (raw > 0) {
+      this.value = fmtFull(raw) + ' Đ';
+      document.getElementById('depSubmitBtn').disabled = false;
+    } else {
+      this.value = '';
+      document.getElementById('depSubmitBtn').disabled = true;
+    }
+    body.querySelectorAll('.dep-quick-btn').forEach(b => {
+      b.classList.toggle('active', parseInt(b.dataset.amt) === raw);
+    });
+  });
+
+  // Submit
+  document.getElementById('depSubmitBtn').addEventListener('click', function() {
+    if (depCurrentAmount <= 0 || this.disabled) return;
+    this.disabled = true;
+    this.textContent = 'Đang xử lý...';
+    setTimeout(() => {
+      // Mock success
+      if (currentUser) {
+        const oldBal = parseInt(currentUser.balance.replace(/\./g, '')) || 0;
+        const newBal = oldBal + depCurrentAmount * 1000;
+        currentUser.balance = fmtFull(newBal);
+        document.getElementById('depBalanceAmt').textContent = fmtFull(depCurrentAmount) + ' Đ';
+      }
+      this.textContent = 'Nạp Tiền';
+      this.disabled = false;
+      closeDepositView();
+      // Show toast
+      const toast = document.getElementById('depToast');
+      toast.textContent = `Nạp thành công ${fmtFull(depCurrentAmount)} Đ!`;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }, 1500);
+  });
+}
+
+// ===== AUTH EVENT LISTENERS =====
+document.getElementById('loginClose').addEventListener('click', closeAuthModal);
+document.getElementById('registerClose').addEventListener('click', closeAuthModal);
+document.getElementById('authOverlay').addEventListener('click', closeAuthModal);
+document.getElementById('switchToRegister').addEventListener('click', () => switchAuthModal('register'));
+document.getElementById('switchToLogin').addEventListener('click', () => switchAuthModal('login'));
+document.getElementById('loginSubmit').addEventListener('click', performLogin);
+document.getElementById('regSubmit').addEventListener('click', performRegister);
+
+// Password visibility toggles
+document.querySelectorAll('.auth-field-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const input = document.getElementById(btn.dataset.target);
+    const isPassword = input.type === 'password';
+    input.type = isPassword ? 'text' : 'password';
+    btn.innerHTML = isPassword
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+  });
+});
+
+// Header auth buttons (initial state)
+document.getElementById('btnLogin')?.addEventListener('click', () => openAuthModal('login'));
+document.getElementById('btnRegister')?.addEventListener('click', () => openAuthModal('register'));
+
+// Enter key for login/register forms
+document.getElementById('loginPassword').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') performLogin();
+});
+document.getElementById('regPhone').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') performRegister();
+});
+
+// ===== DEPOSIT EVENT LISTENERS =====
+document.getElementById('depClose').addEventListener('click', closeDepositView);
+document.getElementById('depOverlay').addEventListener('click', closeDepositView);
+document.getElementById('depBack').addEventListener('click', closeDepositDetail);
+// Tab visual toggle (only deposit functional)
+document.querySelectorAll('.dep-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.dep-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+// Escape key closes overlays
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('trialView').classList.contains('open')) {
+      closeTrialView();
+    } else if (document.getElementById('depView').classList.contains('open')) {
+      if (document.getElementById('depDetailScreen').style.display !== 'none') {
+        closeDepositDetail();
+      } else {
+        closeDepositView();
+      }
+    }
+  }
+});
+
+// ===== TRIAL VIP1 =====
+const TRIAL_CONDITIONS = [
+  { id: 'phone', title: 'Xác minh số điện thoại', subtitle: 'Nhận mã OTP qua SMS để xác thực', icon: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="gPhone" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs><rect x="5" y="2" width="14" height="20" rx="3" stroke="url(#gPhone)" stroke-width="1.8" fill="rgba(59,130,246,.12)"/><circle cx="12" cy="18" r="1.2" fill="url(#gPhone)"/><line x1="9" y1="5" x2="15" y2="5" stroke="url(#gPhone)" stroke-width="1.5" stroke-linecap="round"/></svg>', ctaText: 'Xác minh' },
+  { id: 'telegram', title: 'Kết nối Telegram', subtitle: 'Liên kết tài khoản qua bot Telegram', icon: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="gTele" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#0ea5e9"/></linearGradient></defs><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="url(#gTele)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="rgba(14,165,233,.1)"/></svg>', ctaText: 'Kết nối' },
+  { id: 'deposit', title: 'Nạp lần đầu ≥ 1.000.000đ', subtitle: 'Hoàn thành giao dịch nạp đầu tiên', icon: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="gDepo" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><circle cx="12" cy="12" r="9" stroke="url(#gDepo)" stroke-width="1.8" fill="rgba(245,158,11,.1)"/><text x="12" y="16" text-anchor="middle" fill="url(#gDepo)" font-size="12" font-weight="700" font-family="Montserrat">₫</text></svg>', ctaText: 'Nạp ngay' },
+  { id: 'active', title: 'Hoạt động 3 ngày liên tiếp', subtitle: 'Đăng nhập và tham gia mỗi ngày', icon: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="gCal" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs><rect x="3" y="4" width="18" height="18" rx="3" stroke="url(#gCal)" stroke-width="1.8" fill="rgba(139,92,246,.1)"/><line x1="3" y1="10" x2="21" y2="10" stroke="url(#gCal)" stroke-width="1.5"/><line x1="8" y1="2" x2="8" y2="6" stroke="url(#gCal)" stroke-width="1.8" stroke-linecap="round"/><line x1="16" y1="2" x2="16" y2="6" stroke="url(#gCal)" stroke-width="1.8" stroke-linecap="round"/><path d="M8 14l2 2 4-4" stroke="url(#gCal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>', ctaText: null }
+];
+
+const TRIAL_BENEFITS = [
+  { label: 'Hoàn trả Thể thao', value: '0.60%', highlight: true },
+  { label: 'Hoàn trả Slots & Game nhanh', value: '0.55%', highlight: true },
+  { label: 'Thưởng đạt hạng VIP1', value: fmtFull(150000) + 'đ', highlight: true },
+  { label: 'Chăm sóc ưu tiên', value: 'Có', highlight: false },
+  { label: 'Tham gia nhiệm vụ VIP', value: 'Có', highlight: false },
+  { label: 'Hỗ trợ riêng qua Telegram', value: 'Có', highlight: false }
+];
+
+const TRIAL_FAQ_DATA = [
+  { q: 'Trải nghiệm VIP1 trong 7 ngày là gì?', a: 'Đây là chương trình cho phép thành viên mới trải nghiệm toàn bộ quyền lợi VIP1 miễn phí trong 7 ngày, bao gồm hoàn trả nâng cao, chăm sóc ưu tiên và nhiều đặc quyền khác.' },
+  { q: 'Tôi cần làm gì để mở khóa?', a: 'Hoàn thành 4 điều kiện: xác minh số điện thoại, kết nối Telegram, nạp đầu tối thiểu 1.000.000đ, và hoạt động 3 ngày liên tiếp.' },
+  { q: 'Sau khi đủ điều kiện thì kích hoạt như thế nào?', a: 'Khi đủ 4 điều kiện, nút "Kích hoạt VIP1 ngay" sẽ xuất hiện. Bấm vào để bắt đầu 7 ngày trải nghiệm.' },
+  { q: 'Trải nghiệm VIP1 kéo dài bao lâu?', a: 'Chính xác 7 ngày (168 giờ) kể từ thời điểm kích hoạt, tính liên tục 24/7.' },
+  { q: 'Nếu ngắt quãng hoạt động thì có ảnh hưởng không?', a: 'Điều kiện "hoạt động 3 ngày liên tiếp" yêu cầu đăng nhập 3 ngày liên tục. Nếu ngắt quãng, bộ đếm sẽ tính lại từ đầu.' },
+  { q: 'Mỗi tài khoản được trải nghiệm mấy lần?', a: 'Mỗi tài khoản chỉ được trải nghiệm VIP1 miễn phí 1 lần duy nhất.' },
+  { q: 'Sau khi hết 7 ngày thì chuyện gì xảy ra?', a: 'Quyền lợi VIP1 sẽ tự động hết hiệu lực. Bạn có thể tiếp tục nạp để đạt VIP1 chính thức và hưởng quyền lợi vĩnh viễn.' }
+];
+
+let trialState = {
+  phone: false,
+  telegram: false,
+  deposit: false,
+  activeDays: 0,
+  activated: false,
+  activatedAt: null,
+  expiresAt: null
+};
+let trialTimerInterval = null;
+
+function getCompletedCount() {
+  let c = 0;
+  if (trialState.phone) c++;
+  if (trialState.telegram) c++;
+  if (trialState.deposit) c++;
+  if (trialState.activeDays >= 3) c++;
+  return c;
+}
+
+function getTrialPhase() {
+  if (trialState.activated && trialState.expiresAt) {
+    const remaining = trialState.expiresAt - Date.now();
+    if (remaining <= 0) return 1; // expired, back to start
+    if (remaining <= 24 * 60 * 60 * 1000) return 5; // ending soon
+    return 4; // active
+  }
+  const count = getCompletedCount();
+  if (count === 4) return 3; // all done, ready to activate
+  if (count > 0) return 2; // partial
+  return 1; // fresh
+}
+
+function openTrialView() {
+  document.getElementById('trialOverlay').classList.add('open');
+  document.getElementById('trialView').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  updateTrialViewContent();
+}
+
+function closeTrialView() {
+  document.getElementById('trialOverlay').classList.remove('open');
+  document.getElementById('trialView').classList.remove('open');
+  if (!document.querySelector('.dep-overlay.open') && !document.querySelector('.auth-overlay.open') && !document.querySelector('.est-overlay.open')) {
+    document.body.style.overflow = '';
+  }
+}
+
+function updateTrialUI() {
+  updateTrialHeroCard();
+}
+
+function updateTrialHeroCard() {
+  const trialCard = document.getElementById('trialHeroCard');
+  const vipCard = document.getElementById('vipStatusCard');
+  const isVipMember = isLoggedIn && currentUser && currentUser.tier >= 1 && !currentUser.isTrial;
+
+  // Toggle hero CTA to secondary when logged in
+  const heroCta = document.querySelector('.hero-cta');
+  if (heroCta) heroCta.classList.toggle('secondary', isLoggedIn);
+
+  if (isVipMember) {
+    // VIP member: show status card, hide trial card
+    if (trialCard) trialCard.style.display = 'none';
+    updateVipStatusCard();
+    return;
+  }
+
+  // Non-VIP / trial: hide VIP card, show trial card
+  if (vipCard) vipCard.style.display = 'none';
+  if (!trialCard) return;
+
+  const phase = getTrialPhase();
+  const count = getCompletedCount();
+  trialCard.style.display = isLoggedIn ? '' : 'none';
+
+  // Update dots
+  const dots = document.querySelectorAll('.trial-hero-card-dot');
+  const conditions = [trialState.phone, trialState.telegram, trialState.deposit, trialState.activeDays >= 3];
+  dots.forEach((dot, i) => { dot.classList.toggle('done', conditions[i]); });
+  const dotsLabel = document.getElementById('trialDotsLabel');
+  if (dotsLabel) dotsLabel.textContent = `${count}/4`;
+
+  // Update sub text and CTA
+  const sub = document.getElementById('trialHeroSub');
+  const cta = document.getElementById('trialHeroCta');
+
+  if (phase <= 2) {
+    sub.textContent = count === 0 ? 'Hoàn thành 4 điều kiện đơn giản' : `Đã hoàn thành ${count}/4 điều kiện`;
+    cta.textContent = 'Thực hiện ngay';
+  } else if (phase === 3) {
+    sub.textContent = 'Đã đủ điều kiện — sẵn sàng kích hoạt!';
+    cta.textContent = 'Kích hoạt ngay';
+    cta.style.background = 'var(--success-100)';
+  } else {
+    sub.textContent = phase === 5 ? 'Trial sắp kết thúc!' : 'Đang trải nghiệm VIP1';
+    cta.textContent = 'Xem quyền lợi';
+    cta.style.background = '';
+  }
+}
+
+function updateVipStatusCard() {
+  const card = document.getElementById('vipStatusCard');
+  const inner = document.getElementById('vipStatusInner');
+  if (!card || !inner) return;
+
+  const showCard = isLoggedIn && currentUser && currentUser.tier >= 1 && !currentUser.isTrial;
+  card.style.display = showCard ? '' : 'none';
+  if (!showCard) return;
+
+  const tierData = VIP_DATA.find(v => v.tier === currentUser.tier);
+  if (!tierData) return;
+
+  // Find next tier
+  const nextTier = VIP_DATA.find(v => v.tier === currentUser.tier + 1);
+
+  // Progress to next tier
+  let progress = 100, remaining = 0;
+  if (nextTier && nextTier.depositReq) {
+    progress = Math.min(100, Math.round((currentUser.totalDeposit / nextTier.depositReq) * 100));
+    remaining = Math.max(0, nextTier.depositReq - currentUser.totalDeposit);
+  }
+
+  // Maintenance status
+  const maintainDep = tierData.depositMaintain;
+  let maintainClass = 'safe', maintainText = '';
+  if (maintainDep) {
+    const depPct = currentUser.depositThisPeriod / maintainDep;
+    if (depPct >= 1) {
+      maintainClass = 'safe';
+      maintainText = '✓ Đã đủ điều kiện duy trì';
+    } else if (depPct >= 0.5) {
+      maintainClass = 'warning';
+      maintainText = `⚠ Duy trì: ${fmtFull(currentUser.depositThisPeriod)}đ / ${fmtFull(maintainDep)}đ nạp`;
+    } else {
+      maintainClass = 'danger';
+      maintainText = `✗ Cần nạp thêm ${fmtFull(maintainDep - currentUser.depositThisPeriod)}đ để duy trì`;
+    }
+  }
+
+  // Next tier tease
+  let nextTeaseText = '';
+  let nextTeaseBtn = '';
+  if (nextTier && !nextTier.inviteOnly) {
+    const cashbackUp = (nextTier.cashback.sports * 100).toFixed(1);
+    nextTeaseText = `${nextTier.name}: hoàn trả ${cashbackUp}% + thưởng ${fmtFull(nextTier.upgradeReward)}đ`;
+    nextTeaseBtn = `<button class="vip-status-detail-btn" onclick="scrollToNextTier(${nextTier.tier})">Xem chi tiết</button>`;
+  } else if (nextTier && nextTier.inviteOnly) {
+    nextTeaseText = 'Đã đạt hạng VIP cao nhất (công khai)';
+    nextTeaseBtn = `<button class="vip-status-detail-btn" onclick="scrollToNextTier(${currentUser.tier})">Liên hệ CSKH</button>`;
+  } else {
+    nextTeaseText = 'Đã đạt hạng VIP cao nhất';
+  }
+
+  inner.innerHTML = `
+    <div class="vip-status-top">
+      <div class="vip-status-icon"><img src="${TIER_ICONS[tierData.tier]}" alt="${tierData.name}"/></div>
+      <div>
+        <div class="vip-status-tier-name" style="color:${tierData.color}">${tierData.name} — ${tierData.fullName}</div>
+        <div class="vip-status-greeting">Thành viên từ ${currentUser.tierSince ? new Date(currentUser.tierSince).toLocaleDateString('vi-VN') : '--'}</div>
+      </div>
+    </div>
+    <div class="vip-status-benefits">
+      <div class="vip-status-stat">
+        <div class="vip-status-stat-label">Hoàn trả đã nhận</div>
+        <div class="vip-status-stat-value gold">${fmtFull(currentUser.totalCashbackReceived || 0)}đ</div>
+      </div>
+      <div class="vip-status-stat">
+        <div class="vip-status-stat-label">Thưởng đã nhận</div>
+        <div class="vip-status-stat-value green">${fmtFull(currentUser.totalBonusReceived || 0)}đ</div>
+      </div>
+    </div>
+    <div style="padding:0 16px 12px;display:flex;gap:8px;">
+      <button class="vip-status-detail-btn" style="flex:1;" onclick="scrollToNextTier(${currentUser.tier})">↓ Quyền lợi ${tierData.name}</button>
+      <button class="vip-status-detail-btn vip-reward-btn" style="flex:1;" onclick="alert('Chuyển đến trang Đổi quà VIP')"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" style="vertical-align:-1px;margin-right:4px;"><path d="M8 1.5l1.5 3.2 3.5.5-2.5 2.4.6 3.4L8 9.5 4.9 11l.6-3.4L3 5.2l3.5-.5z" fill="#ff6b6b"/></svg>Đổi quà VIP</button>
+    </div>
+    <div class="vip-status-progress-area">
+      ${nextTier ? `
+      <div class="vip-status-progress-labels">
+        <span style="color:${tierData.color}">${tierData.name}</span>
+        <span style="color:${nextTier.color}">${nextTier.name}</span>
+      </div>
+      <div class="vip-status-progress-track">
+        <div class="vip-status-progress-fill" style="width:${progress}%"></div>
+      </div>
+      <div class="vip-status-progress-info">
+        <span class="vip-status-progress-remain">${remaining > 0 ? `Còn ${fmtFull(remaining)}đ nữa` : 'Đã đủ điều kiện thăng hạng!'}</span>
+        <span class="vip-status-progress-pct">${progress}%</span>
+      </div>` : ''}
+      <div class="vip-status-maintain ${maintainClass}">${maintainText}</div>
+      <div class="vip-status-next-tease">
+        <span>${nextTeaseText}</span>
+        ${nextTeaseBtn}
+      </div>
+    </div>
+  `;
+
+  // Update sticky bar with actual VIP status
+  const stickyTierName = document.getElementById('stickyTierName');
+  const stickyTierIcon = document.getElementById('stickyTierIcon');
+  const stickyCashback = document.getElementById('stickyCashback');
+  const stickyBtn = document.querySelector('.sticky-cta-btn');
+  if (stickyTierName) stickyTierName.textContent = tierData.name;
+  if (stickyTierIcon) stickyTierIcon.src = TIER_ICONS[tierData.tier];
+  if (stickyCashback) stickyCashback.textContent = `Hoàn trả: ${(tierData.cashback.sports * 100).toFixed(1)}% Thể thao`;
+  if (stickyBtn) stickyBtn.textContent = 'Xem quyền lợi';
+}
+
+function scrollToNextTier(tierNum) {
+  const items = document.querySelectorAll('.vip-selector-item');
+  items.forEach(item => {
+    const t = parseInt(item.dataset.tier);
+    item.classList.toggle('active', t === tierNum);
+  });
+  activeVipTier = tierNum;
+  updateVipMarker();
+  updateVipDetail();
+  document.querySelector('.tiers-section')?.scrollIntoView({ behavior: 'smooth' });
+}
+
+function updateTrialViewContent() {
+  const phase = getTrialPhase();
+  const count = getCompletedCount();
+
+  // Progress
+  const progressSection = document.getElementById('trialProgressSection');
+  const progressFill = document.getElementById('trialProgressFill');
+  const progressLabel = document.getElementById('trialProgressLabel');
+  const conditionsEl = document.getElementById('trialConditions');
+  const successEl = document.getElementById('trialSuccess');
+  const activeEl = document.getElementById('trialActive');
+  const bannerEl = document.querySelector('.trial-banner');
+
+  if (phase <= 2) {
+    // Show conditions, hide success/active
+    progressSection.style.display = '';
+    conditionsEl.style.display = '';
+    successEl.style.display = 'none';
+    activeEl.style.display = 'none';
+    bannerEl.style.display = '';
+
+    progressFill.style.width = (count / 4 * 100) + '%';
+    progressLabel.textContent = `${count}/4 điều kiện hoàn thành`;
+
+    renderTrialConditions();
+  } else if (phase === 3) {
+    progressSection.style.display = 'none';
+    conditionsEl.style.display = 'none';
+    successEl.style.display = '';
+    activeEl.style.display = 'none';
+    bannerEl.style.display = 'none';
+  } else {
+    progressSection.style.display = 'none';
+    conditionsEl.style.display = 'none';
+    successEl.style.display = 'none';
+    activeEl.style.display = '';
+    bannerEl.style.display = 'none';
+
+    const countdown = document.getElementById('trialCountdown');
+    const endingNotice = document.getElementById('trialEndingNotice');
+    if (phase === 5) {
+      countdown.classList.add('ending');
+      endingNotice.style.display = '';
+    } else {
+      countdown.classList.remove('ending');
+      endingNotice.style.display = 'none';
+    }
+
+    renderTrialBenefits();
+    startTrialCountdown();
+  }
+
+  renderTrialFaq();
+}
+
+function renderTrialConditions() {
+  const el = document.getElementById('trialConditions');
+  el.innerHTML = TRIAL_CONDITIONS.map(c => {
+    let completed = false;
+    let statusHTML = '';
+
+    if (c.id === 'active') {
+      completed = trialState.activeDays >= 3;
+      statusHTML = completed
+        ? '<div class="trial-condition-check">&#10003;</div>'
+        : `<div class="trial-condition-progress">${trialState.activeDays}/3 ngày</div>`;
+    } else {
+      completed = trialState[c.id];
+      statusHTML = completed
+        ? '<div class="trial-condition-check">&#10003;</div>'
+        : `<button class="trial-condition-btn" data-condition="${c.id}">${c.ctaText}</button>`;
+    }
+
+    return `
+      <div class="trial-condition${completed ? ' completed' : ''}">
+        <div class="trial-condition-icon">${c.icon}</div>
+        <div class="trial-condition-info">
+          <div class="trial-condition-title">${c.title}</div>
+          <div class="trial-condition-sub">${c.subtitle}</div>
+        </div>
+        <div class="trial-condition-status">${statusHTML}</div>
+      </div>
+    `;
+  }).join('');
+
+  // Condition CTA click handlers
+  el.querySelectorAll('.trial-condition-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const condId = btn.dataset.condition;
+      if (condId === 'deposit') {
+        openDepositView();
+        // Mock: auto-complete deposit after a delay
+        setTimeout(() => { completeTrialCondition('deposit'); }, 500);
+      } else {
+        completeTrialCondition(condId);
+      }
+    });
+  });
+}
+
+function completeTrialCondition(id) {
+  if (id === 'active') {
+    trialState.activeDays = Math.min(3, trialState.activeDays + 1);
+  } else {
+    trialState[id] = true;
+  }
+  saveTrialState();
+  updateTrialUI();
+  updateTrialViewContent();
+}
+
+function renderTrialBenefits() {
+  const el = document.getElementById('trialBenefits');
+  el.innerHTML = TRIAL_BENEFITS.map(b => `
+    <div class="trial-benefit-row">
+      <span class="trial-benefit-label">${b.label}</span>
+      <span class="trial-benefit-value${b.highlight ? ' highlight' : ''}">${b.value}</span>
+    </div>
+  `).join('');
+}
+
+function renderTrialFaq() {
+  const el = document.getElementById('trialFaq');
+  el.innerHTML = TRIAL_FAQ_DATA.map((item, i) => `
+    <div class="faq-item" data-trial-faq="${i}">
+      <button class="faq-question" onclick="toggleTrialFaq(${i})">
+        ${item.q}
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">${item.a}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleTrialFaq(idx) {
+  const item = document.querySelector(`.faq-item[data-trial-faq="${idx}"]`);
+  if (!item) return;
+  const answer = item.querySelector('.faq-answer');
+  const isOpen = item.classList.contains('open');
+  // Close others
+  document.querySelectorAll('.faq-item[data-trial-faq]').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.faq-answer').style.maxHeight = null;
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+function activateTrial() {
+  trialState.activated = true;
+  trialState.activatedAt = Date.now();
+  trialState.expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000;
+  saveTrialState();
+  updateTrialUI();
+  updateTrialViewContent();
+}
+
+function startTrialCountdown() {
+  if (trialTimerInterval) clearInterval(trialTimerInterval);
+  const timerEl = document.getElementById('trialTimer');
+  const fillEl = document.getElementById('trialCountdownFill');
+  const totalMs = 7 * 24 * 60 * 60 * 1000;
+
+  function tick() {
+    if (!trialState.expiresAt) return;
+    const remaining = Math.max(0, trialState.expiresAt - Date.now());
+    const days = Math.floor(remaining / (24*60*60*1000));
+    const hours = Math.floor((remaining % (24*60*60*1000)) / (60*60*1000));
+    const mins = Math.floor((remaining % (60*60*1000)) / (60*1000));
+    const secs = Math.floor((remaining % (60*1000)) / 1000);
+
+    timerEl.textContent = `${days}N ${String(hours).padStart(2,'0')}:${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+    fillEl.style.width = (remaining / totalMs * 100) + '%';
+
+    // Check phase transition
+    const phase = getTrialPhase();
+    const countdown = document.getElementById('trialCountdown');
+    const endingNotice = document.getElementById('trialEndingNotice');
+    if (phase === 5) {
+      countdown.classList.add('ending');
+      endingNotice.style.display = '';
+    }
+    if (remaining <= 0) {
+      clearInterval(trialTimerInterval);
+      timerEl.textContent = 'Đã hết hạn';
+    }
+  }
+  tick();
+  trialTimerInterval = setInterval(tick, 1000);
+}
+
+function saveTrialState() {
+  localStorage.setItem('mubet_trial_state', JSON.stringify(trialState));
+}
+
+function loadTrialState() {
+  try {
+    const saved = localStorage.getItem('mubet_trial_state');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      trialState = { ...trialState, ...parsed };
+    }
+  } catch(e) {}
+}
+
+// Trial event listeners
+document.getElementById('trialClose').addEventListener('click', closeTrialView);
+document.getElementById('trialOverlay').addEventListener('click', closeTrialView);
+document.getElementById('trialActivateBtn').addEventListener('click', activateTrial);
+document.getElementById('trialHeroCardInner').addEventListener('click', () => {
+  requireAuth(() => openTrialView());
+});
+document.getElementById('trialHeroCta').addEventListener('click', (e) => {
+  e.stopPropagation();
+  const phase = getTrialPhase();
+  if (phase === 3) {
+    requireAuth(() => { openTrialView(); });
+  } else {
+    requireAuth(() => openTrialView());
+  }
+});
+
+// Listen for devtools state changes
+window.addEventListener('storage', (e) => {
+  if (e.key === 'mubet_trial_state') {
+    loadTrialState();
+    updateTrialUI();
+    if (document.getElementById('trialView').classList.contains('open')) {
+      updateTrialViewContent();
+    }
+  }
+});
+
+// ===== INIT =====
+renderVipSelector();
+renderFAQ();
+updateEstimator();
+initReveal();
+initStickyCta();
+initBottomNav();
+loadTrialState();
+updateUIForAuthState();
+updateTrialUI();
+
+document.querySelector('.est-quick-btn[data-amount="500000000"]')?.classList.add('active');
+
+document.getElementById('vipBannerCta')?.addEventListener('click', function(e) {
+  e.preventDefault();
+  if (!isLoggedIn) {
+    pendingAction = () => openDepositView();
+    openAuthModal('login');
+  } else {
+    openDepositView();
+  }
+});
+</script>
+
+</body>
+</html>

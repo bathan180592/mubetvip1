@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3457/mubet-vip-prototype.html)",
+      "Bash(ls \"C:\\\\Users\\\\1\\\\Desktop\\\\Claude Code\\\\Mubet loyalty\\\\Assets\\\\assets \\(1\\)\")",
+      "Bash(where magick:*)",
+      "Bash(where convert:*)",
+      "Bash(where ffmpeg:*)",
+      "Bash(where node:*)",
+      "Bash(node -e \":*)",
+      "Bash(npx --yes sharp-cli resize 1800 -i Ref_1.png -o Ref_1_small.png)",
+      "Bash(npx --yes sharp-cli resize 900 -i Ref_1.png -o Ref_1_small.png)",
+      "Bash(npx --yes sharp-cli resize 500 -i Ref_1.png -o Ref_1_s.png)",
+      "Bash(npx --yes sharp-cli resize 500 --height 1900 --fit inside -i Ref_1.png -o Ref_1_s2.png)",
+      "Bash(file Ref_*ng*.png)",
+      "Bash(ls -1 Ref_*ng*.png)",
+      "Bash(while read:*)",
+      "Bash(do echo:*)",
+      "Bash(done)",
+      "Bash(for file:*)",
+      "Bash(identify \"$file\")",
+      "Bash(python3:*)",
+      "Bash(cp Ref_*ng*ký.png \"/tmp/ref_signup.png\")",
+      "Bash(cp Ref_*ng*p.png \"/tmp/ref_login.png\")",
+      "Bash(ls -lh /tmp/ref_*.png)",
+      "Bash(grep -E \"^Ref_.*\\\\.png$\")",
+      "Bash(xargs -I {} cp {} \"/tmp/ref_signup.png\")",
+      "Bash(xargs -I {} cp {} \"/tmp/ref_login.png\")",
+      "Bash(cmd /c 'cd \"\"C:\\\\Users\\\\1\\\\Desktop\\\\Claude Code\\\\Mubet loyalty\\\\Ref\"\" && dir /B | findstr \"\".png\"\"')",
+      "Bash(powershell -Command \"Get-ChildItem ''C:\\\\Users\\\\1\\\\Desktop\\\\Claude Code\\\\Mubet loyalty\\\\Ref'' -Filter ''*.png'' | Select-Object Name, Length\")",
+      "Bash(ls -lh *.png)",
+      "Bash(file \"Ref\"/*.png)",
+      "Bash(for f:*)",
+      "Bash(do cp:*)"
+    ]
+  }
+}

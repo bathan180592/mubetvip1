@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+npm-debug.log
+package-lock.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Development
+.claude/
+*.psd
+*.ai
+*.fig
+
+# Build output
+dist/
+build/
+out/
+.next/
+
+# Logs
+*.log
+logs/
