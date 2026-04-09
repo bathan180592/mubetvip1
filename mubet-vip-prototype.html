@@ -3468,7 +3468,7 @@ img { max-width: 100%; display: block; }
 }
 .acct-promo-mini-pct {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700;
+  font-size: 10px; font-weight: 700; line-height: 1;
 }
 
 /* Voucher mini */
@@ -3480,12 +3480,12 @@ img { max-width: 100%; display: block; }
   pointer-events: none; z-index: 1;
 }
 .acct-voucher-mini {
-  flex: 0 0 min(130px, calc(50% - 5px)); background: var(--panel-2); border-radius: 8px;
-  padding: 10px; text-align: center; position: relative;
+  flex: 0 0 min(130px, calc(50% - 5px)); background: url('Assets/voucher_backround_1.png') center/cover no-repeat; border-radius: 8px;
+  padding: 10px; text-align: center; position: relative; border: 1px solid rgba(180,140,60,.3);
 }
 .acct-voucher-mini-icon { font-size: 22px; margin-bottom: 4px; }
 .acct-voucher-mini-value { font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800; color: var(--tertiary-400); letter-spacing: -.02em; }
-.acct-voucher-mini-title { font-size: 11px; color: var(--muted); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.acct-voucher-mini-title { font-size: 11px; color: rgba(255,255,255,.7); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .acct-voucher-mini-expire { font-size: 10px; color: var(--primary-300); margin-top: 4px; }
 .acct-voucher-mini.locked { opacity: .5; }
 .acct-voucher-mini-lock {
