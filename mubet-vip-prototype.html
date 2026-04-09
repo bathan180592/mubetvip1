@@ -292,7 +292,9 @@ input, textarea { user-select: text; }
 .promo-overlay,
 .promo-detail-overlay,
 .vip1-intro-overlay {
+  width: 100%;
   max-width: 430px;
+  top: 0; bottom: 0;
   left: 50%;
   right: auto;
   transform: translateX(-50%);
@@ -466,7 +468,7 @@ img { max-width: 100%; display: block; }
 }
 .user-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
 .user-dropdown-backdrop {
-  position: fixed; inset: 0; z-index: 149;
+  position: fixed; top: 0; bottom: 0; z-index: 149;
   display: none;
 }
 .user-dropdown-backdrop.open { display: block; }
@@ -525,7 +527,7 @@ img { max-width: 100%; display: block; }
 /* Mobile nav drawer */
 /* ===== CATEGORY SIDEBAR MENU ===== */
 .cat-sidebar-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,.5);
+  position: fixed; top: 0; bottom: 0; background: rgba(0,0,0,.5);
   z-index: 199; opacity: 0; visibility: hidden;
   transition: opacity .3s ease, visibility .3s ease;
 }
@@ -541,11 +543,13 @@ img { max-width: 100%; display: block; }
   border-right: 1px solid var(--line-soft);
   z-index: 200; overflow-y: auto; overflow-x: hidden;
   transform: translateX(-100%);
-  transition: transform .35s cubic-bezier(.4,0,.2,1); will-change: transform;
+  transition: transform .35s cubic-bezier(.4,0,.2,1), visibility .35s;
+  will-change: transform;
   display: flex; flex-direction: column;
   -webkit-overflow-scrolling: touch;
+  visibility: hidden;
 }
-.cat-sidebar.open { transform: translateX(0); }
+.cat-sidebar.open { transform: translateX(0); visibility: visible; }
 .cat-sidebar::-webkit-scrollbar { width: 0; display: none; }
 
 /* Sidebar Header */
@@ -759,7 +763,7 @@ img { max-width: 100%; display: block; }
 /* ===== ESTIMATOR TRIGGER (inline CTA) ===== */
 /* ===== AUTH MODALS ===== */
 .auth-overlay {
-  position: fixed; inset: 0; z-index: 300;
+  position: fixed; top: 0; bottom: 0; z-index: 300;
   background: rgba(0,0,0,.65); backdrop-filter: blur(8px);
   opacity: 0; visibility: hidden;
   transition: opacity .3s, visibility .3s;
@@ -909,7 +913,7 @@ img { max-width: 100%; display: block; }
 
 /* ===== ESTIMATOR MODAL / BOTTOM SHEET ===== */
 .est-overlay {
-  position: fixed; inset: 0; z-index: 200;
+  position: fixed; top: 0; bottom: 0; z-index: 200;
   background: rgba(0,0,0,.6); backdrop-filter: blur(8px);
   opacity: 0; visibility: hidden;
   transition: opacity .3s, visibility .3s;
@@ -1119,7 +1123,7 @@ img { max-width: 100%; display: block; }
 
 /* ===== DEPOSIT VIEW ===== */
 .dep-overlay {
-  position: fixed; inset: 0; z-index: 400;
+  position: fixed; top: 0; bottom: 0; z-index: 400;
   background: rgba(0,0,0,.6); backdrop-filter: blur(8px);
   opacity: 0; visibility: hidden;
   transition: opacity .3s, visibility .3s;
@@ -2084,7 +2088,7 @@ img { max-width: 100%; display: block; }
 
 /* Trial Overlay */
 .trial-overlay {
-  position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,.65); backdrop-filter: blur(8px);
+  position: fixed; top: 0; bottom: 0; z-index: 500; background: rgba(0,0,0,.65); backdrop-filter: blur(8px);
   opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s;
 }
 .trial-overlay.open { opacity: 1; visibility: visible; }
@@ -2420,7 +2424,7 @@ img { max-width: 100%; display: block; }
 }
 /* ===== PROMOTIONS / VOUCHERS VIEW ===== */
 .promo-overlay {
-  position: fixed; inset: 0; z-index: 250; background: rgba(0,0,0,.65); backdrop-filter: blur(8px);
+  position: fixed; top: 0; bottom: 0; z-index: 250; background: rgba(0,0,0,.65); backdrop-filter: blur(8px);
   opacity: 0; visibility: hidden; transition: all .3s ease;
 }
 .promo-overlay.open { opacity: 1; visibility: visible; }
@@ -2504,7 +2508,7 @@ img { max-width: 100%; display: block; }
 
 /* Promo Detail Drawer */
 .promo-detail-overlay {
-  position: fixed; inset: 0; z-index: 252; background: rgba(0,0,0,.5);
+  position: fixed; top: 0; bottom: 0; z-index: 252; background: rgba(0,0,0,.5);
   opacity: 0; visibility: hidden; transition: all .3s ease;
 }
 .promo-detail-overlay.open { opacity: 1; visibility: visible; }
@@ -3838,7 +3842,7 @@ img { max-width: 100%; display: block; }
 
 /* ===== VIP1 INTRO POPUP ===== */
 .vip1-intro-overlay {
-  position: fixed; inset: 0; z-index: 510;
+  position: fixed; top: 0; bottom: 0; z-index: 510;
   background: rgba(0,0,0,.7); backdrop-filter: blur(6px);
   opacity: 0; visibility: hidden;
   transition: opacity .35s ease, visibility .35s ease;
