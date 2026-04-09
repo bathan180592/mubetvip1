@@ -244,6 +244,7 @@ html {
 }
 body {
   font-family: 'Be Vietnam Pro', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 13px;
   background: var(--grad-app);
   color: var(--text-0);
   line-height: 1.5;
@@ -267,6 +268,7 @@ body::before {
   background: var(--noise);
   background-size: 280px 280px, 360px 360px, 320px 320px, 420px 420px;
   opacity: .46; mix-blend-mode: soft-light; z-index: 9999;
+  max-width: 430px; left: 50%; transform: translateX(-50%);
 }
 /* V10 neon grid */
 body::after {
@@ -530,7 +532,7 @@ img { max-width: 100%; display: block; }
 .cat-sidebar-overlay.open { opacity: 1; visibility: visible; }
 
 .cat-sidebar {
-  position: fixed; top: 0; left: 0; bottom: 0;
+  position: fixed; top: 0; left: max(0px, calc(50vw - 215px)); bottom: 0;
   width: 280px; max-width: 80vw;
   background:
     linear-gradient(180deg, rgba(10,12,20,.96), rgba(5,7,13,.98)),
@@ -888,13 +890,13 @@ img { max-width: 100%; display: block; }
 /* Mobile bottom sheet for auth */
 /* Auth modal mobile-default (promoted from 768px) */
 .auth-modal {
-  top: auto; left: 0; right: 0; bottom: 0;
-  transform: translateY(100%);
-  width: 100%; max-width: 100%;
+  top: auto; left: 50%; right: auto; bottom: 0;
+  transform: translateX(-50%) translateY(100%);
+  width: 100%; max-width: 430px;
   max-height: 92vh;
   border-radius: 24px 24px 0 0;
 }
-.auth-modal.open { transform: translateY(0); }
+.auth-modal.open { transform: translateX(-50%) translateY(0); }
 .auth-modal-form { padding: 20px; }
 .auth-modal-form::before {
   content: ''; display: block;
@@ -1088,14 +1090,14 @@ img { max-width: 100%; display: block; }
 
 /* ===== MOBILE BOTTOM SHEET MODE (promoted from 768px) ===== */
 .est-modal {
-  top: auto; left: 0; right: 0; bottom: 0;
-  transform: translateY(100%);
-  width: 100%; max-width: 100%;
+  top: auto; left: 50%; right: auto; bottom: 0;
+  transform: translateX(-50%) translateY(100%);
+  width: 100%; max-width: 430px;
   max-height: 92vh;
   border-radius: 24px 24px 0 0;
 }
 .est-modal.open {
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 .est-modal-header { padding: 20px 20px 0; }
 .est-modal-header::before {
@@ -1403,12 +1405,12 @@ img { max-width: 100%; display: block; }
 
 /* Mobile full-screen (promoted from 768px) */
 .dep-view {
-  top: 0; left: 0; right: 0; bottom: 0;
-  transform: translateY(100%);
-  width: 100%; max-width: 100%; max-height: 100vh;
+  top: 0; left: 50%; right: auto; bottom: 0;
+  transform: translateX(-50%) translateY(100%);
+  width: 100%; max-width: 430px; max-height: 100vh;
   border-radius: 0; border: none;
 }
-.dep-view.open { transform: translateY(0); }
+.dep-view.open { transform: translateX(-50%) translateY(0); }
 .dep-method-card { padding: 16px; border-radius: 14px; }
 .dep-method-name { font-size: 15px; }
 .dep-method-icon { width: 48px; height: 48px; border-radius: 12px; font-size: 28px; }
@@ -1823,7 +1825,7 @@ img { max-width: 100%; display: block; }
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 2px; padding: 8px 0 6px;
   background: none; color: var(--text-4);
-  font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  font-size: 10px; font-weight: 500; letter-spacing: .01em; text-transform: none;
   transition: all .2s; flex: 1;
   text-decoration: none; position: relative;
   -webkit-tap-highlight-color: transparent;
@@ -2360,10 +2362,10 @@ img { max-width: 100%; display: block; }
 
 /* Trial mobile */
 .trial-view {
-  top: auto; left: 0; right: 0; bottom: 0; width: 100%; max-width: none;
-  transform: translateY(100%); border-radius: 24px 24px 0 0; max-height: 92vh;
+  top: auto; left: 50%; right: auto; bottom: 0; width: 100%; max-width: 430px;
+  transform: translateX(-50%) translateY(100%); border-radius: 24px 24px 0 0; max-height: 92vh;
 }
-.trial-view.open { transform: translateY(0); }
+.trial-view.open { transform: translateX(-50%) translateY(0); }
 .vip-status-card { max-width: none; margin: 16px 0 0; }
 .vip-status-top { padding: 14px 16px 10px; gap: 12px; }
 .vip-status-icon { width: 40px; height: 40px; }
@@ -2407,7 +2409,7 @@ img { max-width: 100%; display: block; }
   .vip-selector-item { min-width: 44px; }
   .vip-selector-icon { width: 32px; height: 32px; }
   .vip-selector-item.active .vip-selector-icon { width: 44px; height: 44px; }
-  .bottom-nav-item { font-size: 10px; }
+  .bottom-nav-item { font-size: 10px; text-transform: none; }
   .bottom-nav-center-circle { width: 44px; height: 44px; }
   .mission-tabs { gap: 2px; }
   .mission-tab { padding: 6px 8px; font-size: 11px; }
@@ -2520,6 +2522,7 @@ img { max-width: 100%; display: block; }
 .promo-detail-back {
   width: 44px; height: 44px; border-radius: 8px; border: none; cursor: pointer;
   background: rgba(255,255,255,.06); color: var(--text); display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
 }
 .promo-detail-back:hover { background: rgba(255,255,255,.1); }
 .promo-detail-title { font-family: Montserrat,sans-serif; font-size: 18px; font-weight: 700; }
@@ -2596,6 +2599,12 @@ img { max-width: 100%; display: block; }
 .promo-active-btn.primary:hover { background: var(--primary-300); }
 .promo-active-btn.danger { color: var(--error-100); border-color: rgba(255,39,78,.3); }
 .promo-active-btn.danger:hover { background: rgba(255,39,78,.08); }
+.promo-active-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.promo-active-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; margin-bottom: 10px; }
+.promo-active-progress-wrap { margin-bottom: 12px; }
+.promo-active-progress-bar { height: 6px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; margin-bottom: 6px; }
+.promo-active-progress-fill { height: 100%; border-radius: 3px; background: var(--success-100); transition: width .5s; }
+.promo-active-progress-label { font-size: 11px; color: var(--muted); }
 .promo-active-rate-pill, .promo-detail-stat-pill {
   display: inline-flex; align-items: center; gap: 4px;
   padding: 6px 12px; border-radius: 8px; font-size: 13px; color: var(--text-secondary);
@@ -2664,16 +2673,16 @@ img { max-width: 100%; display: block; }
 
 /* Promo view mobile-default (promoted from 768px) */
 .promo-view {
-  top: auto; left: 0; right: 0; bottom: 0; width: 100%; max-width: none; max-height: 92vh;
-  transform: translateY(100%); border-radius: 24px 24px 0 0;
+  top: auto; left: 50%; right: auto; bottom: 0; width: 100%; max-width: 430px; max-height: 92vh;
+  transform: translateX(-50%) translateY(100%); border-radius: 24px 24px 0 0;
 }
-.promo-view.open { transform: translateY(0); }
+.promo-view.open { transform: translateX(-50%) translateY(0); }
 .promo-detail-drawer {
-  right: auto; left: 0; top: auto; bottom: 0; width: 100%; max-height: 85vh;
+  right: auto; left: 50%; top: auto; bottom: 0; width: 100%; max-width: 430px; max-height: 85vh;
   border-radius: 24px 24px 0 0; border-left: none; border-top: 1px solid var(--line);
-  transform: translateY(100%);
+  transform: translateX(-50%) translateY(100%);
 }
-.promo-detail-drawer.open { transform: translateY(0); }
+.promo-detail-drawer.open { transform: translateX(-50%) translateY(0); }
 .promo-body { padding: 14px 16px 20px; }
 .promo-voucher-card { padding: 12px; gap: 10px; }
 .promo-voucher-icon { width: 36px; height: 36px; font-size: 15px; }
@@ -2786,14 +2795,16 @@ img { max-width: 100%; display: block; }
 .account-placeholder-sub { font-size: 13px; color: var(--muted); margin-top: 6px; }
 
 /* Deposit inline (inside account-content) */
-.account-content .dep-inline { }
+.account-content .dep-inline { padding: 0 16px; }
 .account-content .dep-inline .dep-tabs {
   position: static; border-radius: var(--radius-md); overflow: hidden;
   margin-bottom: 16px;
 }
 .account-content .dep-inline .dep-banner { border-radius: var(--radius-md); }
+.account-content .dep-inline .dep-method-card { border-radius: var(--radius-md); }
 
 /* Promo inline (inside account-content) */
+.account-content .promo-inline { padding: 0 16px; }
 .account-content .promo-inline .promo-section-title:first-child { margin-top: 0; }
 
 /* Promo detail drawer — keep as overlay even in account view */
@@ -3983,12 +3994,12 @@ img { max-width: 100%; display: block; }
 
 /* VIP intro popup mobile-default (promoted from 768px) */
 .vip1-intro-popup {
-  top: auto; bottom: 0; left: 0; right: 0;
-  transform: translateY(100%); width: 100%; max-width: none;
+  top: auto; bottom: 0; left: 50%; right: auto;
+  transform: translateX(-50%) translateY(100%); width: 100%; max-width: 430px;
   border-radius: 20px 20px 0 0;
   max-height: 92vh; overflow-y: auto;
 }
-.vip1-intro-popup.open { transform: translateY(0); }
+.vip1-intro-popup.open { transform: translateX(-50%) translateY(0); }
 
 /* Coin header */
 .mission-coin-icon {
