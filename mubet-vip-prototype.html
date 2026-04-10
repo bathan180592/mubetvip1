@@ -5840,6 +5840,326 @@ img { max-width: 100%; display: block; }
 .lobby-match-card { flex: 0 0 240px; }
 .lobby-casino-card { flex: 0 0 220px; }
 .lobby-nav-arrows { display: none; }
+
+/* ===== ONBOARDING PAGES ===== */
+.onb-view { display: none; min-height: 100vh; background: var(--bg); }
+.onb-page { padding-bottom: 100px; }
+.onb-back {
+  position: absolute; top: 12px; left: 12px; z-index: 10;
+  width: 32px; height: 32px; border-radius: 10px;
+  background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.1);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; cursor: pointer; transition: all .2s;
+}
+.onb-back:hover { background: rgba(0,0,0,.55); }
+.onb-hero {
+  position: relative; padding: 28px 20px 48px; text-align: center;
+}
+.onb-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background: url('Assets/onboarding-hero-bg.png') center top / cover no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 50%, transparent 100%);
+}
+.onb-hero > * { position: relative; z-index: 1; }
+.onb-hero-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; background: rgba(202,41,48,.12); border: 1px solid rgba(202,41,48,.25); color: var(--primary); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; }
+.onb-hero h1 {
+  font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 900;
+  line-height: 1.3; margin-bottom: 8px; color: #fff;
+}
+.onb-hero h1 .gold {
+  background: var(--metallic-gold); background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s ease-in-out infinite;
+}
+.onb-hero-sub { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+.onb-section { padding: 0 16px; margin-bottom: 16px; }
+.onb-section-title { font-size: 13px; font-weight: 700; color: var(--text-2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .04em; text-align: center; }
+
+/* Trust badges */
+.onb-trust-row { display: flex; gap: 6px; flex-wrap: nowrap; justify-content: center; margin-top: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.onb-methods-strip {
+  display: flex; gap: 8px; align-items: center; justify-content: center;
+  padding: 10px 16px; flex-wrap: wrap;
+}
+.onb-methods-strip::-webkit-scrollbar { display: none; }
+.onb-method-badge {
+  display: flex; align-items: center; gap: 0; flex-shrink: 0;
+  opacity: .7;
+}
+.onb-method-badge img { height: 18px; width: auto; object-fit: contain; filter: brightness(1.2); }
+.onb-method-sep { width: 1px; height: 14px; background: rgba(255,255,255,.1); flex-shrink: 0; }
+.onb-coin-icons { display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
+.onb-coin-icons img { width: 22px; height: 22px; border-radius: 50%; object-fit: contain; }
+.onb-trust-badge {
+  display: flex; align-items: center; gap: 4px; padding: 5px 10px; border-radius: 20px;
+  background: rgba(5,161,88,.08); border: 1px solid rgba(5,161,88,.2);
+  font-size: 10px; font-weight: 600; color: #6ce9a6; white-space: nowrap;
+}
+.onb-trust-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+/* Trust section */
+.onb-trust-section { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.onb-trust-item {
+  padding: 12px; border-radius: 12px;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+  text-align: center;
+}
+.onb-trust-item-icon { font-size: 20px; margin-bottom: 4px; }
+.onb-trust-item-text { font-size: 11px; color: var(--text-2); line-height: 1.4; }
+
+/* Offer cards */
+.onb-offer-cards { display: flex; flex-direction: column; gap: 10px; }
+.onb-offer-card {
+  padding: 16px; border-radius: 14px;
+  background: rgba(255,255,255,.04); border: 2px solid rgba(255,255,255,.08);
+  cursor: pointer; transition: all .3s cubic-bezier(0.175,0.885,0.32,1.275);
+  position: relative; overflow: hidden;
+}
+.onb-offer-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+}
+.onb-offer-card:hover { border-color: rgba(255,255,255,.2); transform: translateY(-2px); }
+.onb-offer-card.selected { border-color: rgba(255,226,62,.5); background: rgba(255,226,62,.06); box-shadow: 0 0 20px rgba(255,226,62,.1); }
+.onb-offer-card.selected::before { background: linear-gradient(90deg, transparent, rgba(255,226,62,.4), transparent); }
+.onb-offer-card .check-mark {
+  position: absolute; top: 12px; right: 12px; width: 22px; height: 22px;
+  border-radius: 50%; border: 2px solid rgba(255,255,255,.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; transition: all .2s;
+}
+.onb-offer-card.selected .check-mark { border-color: var(--tertiary-400); background: rgba(255,226,62,.15); color: var(--tertiary-400); }
+.onb-offer-tag {
+  display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px;
+}
+.onb-offer-tag.hot { background: rgba(202,41,48,.15); color: #ff6b6b; }
+.onb-offer-tag.steady { background: rgba(74,125,254,.15); color: #7eb8ff; }
+.onb-offer-title { font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+.onb-offer-desc { font-size: 12px; color: var(--text-2); line-height: 1.5; margin-bottom: 10px; }
+.onb-offer-tiers { display: flex; gap: 6px; }
+.onb-offer-tier {
+  flex: 1; padding: 8px 6px; border-radius: 8px; text-align: center;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
+}
+.onb-offer-tier-pct { font-family: Montserrat; font-size: 18px; font-weight: 900; color: var(--tertiary-400); }
+.onb-offer-tier-amt { font-size: 10px; color: var(--text-2); margin-top: 2px; }
+.onb-offer-bullets { list-style: none; padding: 0; }
+.onb-offer-bullets li { font-size: 12px; color: var(--text-2); padding: 4px 0; padding-left: 16px; position: relative; }
+.onb-offer-bullets li::before { content: '✓'; position: absolute; left: 0; color: #6ce9a6; font-weight: 700; font-size: 11px; }
+
+/* Compare strip */
+.onb-compare { padding: 12px; font-size: 11px; color: var(--text-2); line-height: 1.7; }
+.onb-compare strong { color: var(--tertiary-300); }
+.onb-countdown { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 0 0; font-size: 12px; color: var(--text-2); }
+.onb-countdown-label { opacity: .7; }
+.onb-countdown-timer { display: flex; align-items: center; gap: 3px; }
+.onb-countdown-unit { background: rgba(255,255,255,.08); border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 13px; color: #fff; font-variant-numeric: tabular-nums; min-width: 28px; text-align: center; }
+.onb-countdown-sep { color: var(--text-2); opacity: .5; font-weight: 700; }
+
+/* Post-deposit benefit cards */
+.onb-benefit-list { display: flex; flex-direction: column; gap: 6px; }
+.onb-benefit-item {
+  display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: 12px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
+}
+.onb-benefit-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.onb-benefit-icon svg { width: 20px; height: 20px; filter: drop-shadow(0 0 4px currentColor); }
+.onb-benefit-icon.red { background: rgba(202,41,48,.12); color: #ca2930; }
+.onb-benefit-icon.gold { background: rgba(231,187,8,.12); color: #e7bb08; }
+.onb-benefit-icon.blue { background: rgba(74,125,254,.12); color: #4a7dfe; }
+.onb-benefit-icon.green { background: rgba(5,161,88,.12); color: #05a158; }
+.onb-benefit-text { flex: 1; }
+.onb-benefit-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.onb-benefit-desc { font-size: 11px; color: var(--text-2); }
+
+/* CTA */
+.onb-cta-area {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 430px; z-index: 101;
+  padding: 12px 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, transparent 0%, var(--bg) 20%);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.onb-cta {
+  display: block; width: 100%; padding: 14px; border-radius: 12px; border: none;
+  font-size: 14px; font-weight: 800; cursor: pointer; transition: all .3s;
+  text-align: center; text-decoration: none;
+}
+.onb-cta.primary { background: var(--primary); color: #fff; }
+.onb-cta.primary:hover { background: #e63946; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(202,41,48,.3); }
+.onb-cta.gold { background: var(--metallic-gold); background-size: 200% auto; color: #1a0e00; animation: goldShimmer 5s ease-in-out infinite; }
+.onb-cta.gold:hover { transform: translateY(-1px); box-shadow: 0 4px 24px rgba(212,175,55,.35); }
+.onb-cta:disabled { opacity: .4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.onb-cta-secondary { display: block; text-align: center; padding: 10px; font-size: 12px; color: var(--text-2); cursor: pointer; text-decoration: underline; margin-top: 4px; }
+
+/* Onboarding tier table */
+.onb-tier-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); }
+.onb-tier-table th {
+  padding: 8px 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-2); background: rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.08);
+  text-align: center; white-space: nowrap;
+}
+.onb-tier-table th.col-highlight { color: var(--tertiary-300); background: rgba(255,226,62,.06); }
+.onb-tier-table td {
+  padding: 10px 6px; font-size: 12px; font-weight: 600; text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,.05); color: var(--text-1);
+  transition: all .2s; cursor: pointer;
+}
+.onb-tier-table td.col-highlight { background: rgba(255,226,62,.04); color: var(--tertiary-300); font-weight: 800; }
+.onb-tier-table tr:last-child td { border-bottom: none; }
+.onb-tier-table tr:hover td { background: rgba(255,255,255,.04); }
+.onb-tier-table tr.row-selected td { background: rgba(202,41,48,.08); }
+.onb-tier-table tr.row-selected td.col-highlight { background: rgba(255,226,62,.1); }
+.onb-tier-table tr.row-selected td:first-child { position: relative; }
+.onb-tier-table tr.row-selected td:first-child::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--primary); border-radius: 0 2px 2px 0;
+}
+.onb-tier-table .tier-check { display: inline-block; width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,.15); vertical-align: middle; margin-right: 4px; transition: all .2s; }
+.onb-tier-table tr.row-selected .tier-check { border-color: var(--primary); background: var(--primary); box-shadow: inset 0 0 0 2px #fff; }
+.onb-tier-table .bonus-pct { color: var(--tertiary-400); font-weight: 800; }
+.onb-tier-table .wagering { font-size: 10px; color: var(--muted); font-weight: 500; }
+
+/* Deposit page */
+.onb-deposit-summary {
+  margin: 0 16px 16px; padding: 14px; border-radius: 12px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
+  display: flex; align-items: center; gap: 10px;
+}
+.onb-deposit-summary-icon { font-size: 20px; color: var(--text-2); }
+.onb-deposit-summary-icon svg { width: 22px; height: 22px; }
+.onb-deposit-summary-text { flex: 1; }
+.onb-deposit-summary-label { font-size: 11px; color: var(--text-2); }
+.onb-deposit-summary-value { font-size: 13px; font-weight: 700; color: var(--text-1); }
+.onb-deposit-summary-change { font-size: 11px; color: var(--primary); cursor: pointer; font-weight: 600; white-space: nowrap; }
+.onb-amount-presets { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.onb-amount-btn {
+  padding: 12px 8px; border-radius: 10px; text-align: center;
+  background: rgba(255,255,255,.04); border: 2px solid rgba(255,255,255,.08);
+  cursor: pointer; transition: all .2s;
+}
+.onb-amount-btn:hover { border-color: rgba(255,255,255,.2); }
+.onb-amount-btn.selected { border-color: var(--tertiary-400); background: rgba(255,226,62,.06); }
+.onb-amount-value { font-family: Montserrat; font-size: 14px; font-weight: 800; }
+.onb-amount-bonus { font-size: 10px; color: var(--tertiary-400); margin-top: 2px; font-weight: 600; }
+.onb-calc-row { display: flex; gap: 8px; }
+.onb-calc-item { flex: 1; padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); min-height: 0; }
+.onb-calc-item.highlight { background: rgba(231,187,8,.08); border-color: rgba(231,187,8,.25); }
+.onb-calc-label { font-size: 11px; color: var(--text-2); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.onb-calc-value { font-family: Montserrat; font-size: 18px; font-weight: 800; color: #fff; }
+.onb-calc-item.highlight .onb-calc-value { color: var(--tertiary-300); }
+.onb-badge-mini { display: inline-block; padding: 1px 6px; border-radius: 4px; background: var(--tertiary-400); color: #000; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; vertical-align: middle; }
+.onb-methods { display: flex; flex-direction: column; gap: 8px; }
+.onb-method {
+  display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
+  cursor: pointer; transition: all .2s;
+}
+.onb-method:hover { border-color: rgba(255,255,255,.15); }
+.onb-method.selected { border-color: var(--primary); background: rgba(202,41,48,.06); }
+.onb-method-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,.06); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--text-2); }
+.onb-method-icon svg { width: 20px; height: 20px; filter: drop-shadow(0 0 3px currentColor); }
+.onb-method-name { font-size: 13px; font-weight: 600; }
+.onb-method-desc { font-size: 10px; color: var(--text-2); }
+.onb-method-limit { font-size: 10px; color: var(--text-2); white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; }
+.onb-crypto-warning { margin: 0 16px; padding: 8px 12px; border-radius: 8px; background: rgba(247,147,26,.08); border: 1px solid rgba(247,147,26,.2); font-size: 11px; color: #f7931a; display: none; align-items: center; gap: 6px; }
+.onb-confirm-details { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.06); }
+.onb-confirm-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(255,255,255,.03); border-bottom: 1px solid rgba(255,255,255,.05); font-size: 12px; }
+.onb-confirm-row:last-child { border-bottom: none; }
+.onb-confirm-row > span:first-child { color: var(--text-2); }
+.onb-confirm-val { font-weight: 600; color: #fff; font-variant-numeric: tabular-nums; }
+.onb-crypto-warning.show { display: flex; }
+.onb-crypto-warning svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* Success page */
+.onb-success-hero {
+  padding: 48px 20px 24px; text-align: center;
+  background: linear-gradient(180deg, rgba(5,161,88,.1) 0%, transparent 70%);
+}
+.onb-success-check {
+  width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 16px;
+  background: rgba(5,161,88,.15); border: 2px solid rgba(5,161,88,.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; animation: successPop .5s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+@keyframes successPop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+.onb-success-hero h1 { font-family: Montserrat; font-size: 22px; font-weight: 900; color: #6ce9a6; margin-bottom: 6px; }
+.onb-success-hero p { font-size: 13px; color: var(--text-2); }
+.onb-success-summary {
+  margin: 16px; padding: 16px; border-radius: 14px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+}
+.onb-success-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 12px; }
+.onb-success-row .label { color: var(--text-2); }
+.onb-success-row .value { font-weight: 700; color: var(--tertiary-300); }
+
+/* Hub page */
+.onb-hub-cards { display: flex; flex-direction: column; gap: 10px; }
+.onb-hub-card {
+  padding: 14px; border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  cursor: pointer; transition: all .25s ease;
+  position: relative; overflow: hidden;
+}
+.onb-hub-card:active { transform: scale(.98); }
+.onb-hub-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.onb-hub-card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.onb-hub-card-icon svg { width: 22px; height: 22px; filter: drop-shadow(0 0 6px currentColor); }
+.onb-hub-card-icon.red { background: linear-gradient(135deg, rgba(202,41,48,.2), rgba(202,41,48,.06)); color: #ff4d56; }
+.onb-hub-card-icon.blue { background: linear-gradient(135deg, rgba(74,125,254,.2), rgba(74,125,254,.06)); color: #6b9eff; }
+.onb-hub-card-icon.green { background: linear-gradient(135deg, rgba(5,161,88,.2), rgba(5,161,88,.06)); color: #2dd881; }
+.onb-hub-card-body { flex: 1; }
+.onb-hub-card-title { font-size: 14px; font-weight: 800; margin-bottom: 2px; }
+.onb-hub-card-desc { font-size: 11px; color: var(--text-2); line-height: 1.4; }
+.onb-hub-card-reward { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,.03); margin-top: 0; }
+.onb-hub-card-reward-tag { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; letter-spacing: .02em; }
+.onb-hub-card-reward-text { font-size: 11px; color: var(--text-2); flex: 1; }
+.onb-hub-card-cta { margin-left: auto; font-size: 11px; font-weight: 700; white-space: nowrap; display: flex; align-items: center; gap: 3px; }
+/* Card themes */
+.onb-hub-card[data-theme="red"] { background: linear-gradient(135deg, rgba(202,41,48,.08) 0%, rgba(202,41,48,.02) 100%); border-color: rgba(202,41,48,.18); }
+.onb-hub-card[data-theme="red"] .onb-hub-card-reward-tag { background: rgba(202,41,48,.15); color: #ff6b72; }
+.onb-hub-card[data-theme="red"] .onb-hub-card-cta { color: #ff6b72; }
+.onb-hub-card[data-theme="green"] { background: linear-gradient(135deg, rgba(5,161,88,.08) 0%, rgba(5,161,88,.02) 100%); border-color: rgba(5,161,88,.18); }
+.onb-hub-card[data-theme="green"] .onb-hub-card-reward-tag { background: rgba(5,161,88,.15); color: #2dd881; }
+.onb-hub-card[data-theme="green"] .onb-hub-card-cta { color: #2dd881; }
+.onb-hub-card[data-theme="blue"] { background: linear-gradient(135deg, rgba(74,125,254,.08) 0%, rgba(74,125,254,.02) 100%); border-color: rgba(74,125,254,.18); }
+.onb-hub-card[data-theme="blue"] .onb-hub-card-reward-tag { background: rgba(74,125,254,.15); color: #6b9eff; }
+.onb-hub-card[data-theme="blue"] .onb-hub-card-cta { color: #6b9eff; }
+.onb-hub-card[data-theme="gold"] { background: linear-gradient(135deg, rgba(231,187,8,.1) 0%, rgba(231,187,8,.02) 100%); border-color: rgba(231,187,8,.25); }
+.onb-hub-card[data-theme="gold"] .onb-hub-card-reward-tag { background: rgba(231,187,8,.15); color: #e7bb08; }
+.onb-hub-card[data-theme="gold"] .onb-hub-card-cta { color: #e7bb08; }
+.onb-hub-card-icon.gold { background: linear-gradient(135deg, rgba(231,187,8,.2), rgba(231,187,8,.06)); color: #e7bb08; }
+
+/* Login page */
+.onb-login-form { padding: 0 16px; }
+.onb-input-group { margin-bottom: 14px; }
+.onb-input-label { font-size: 12px; font-weight: 600; color: var(--text-2); margin-bottom: 6px; display: block; }
+.onb-input {
+  width: 100%; padding: 12px 14px; border-radius: 10px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  color: #fff; font-size: 14px; outline: none; transition: border-color .2s;
+}
+.onb-input:focus { border-color: var(--primary); }
+.onb-input::placeholder { color: var(--muted); }
+.onb-login-support { text-align: center; margin-top: 16px; font-size: 12px; color: var(--text-2); }
+.onb-login-support a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+/* Flow step indicator */
+.onb-steps { display: flex; align-items: center; justify-content: center; gap: 0; padding: 16px 20px 24px; margin-top: -32px; position: relative; z-index: 2; }
+.onb-step { display: flex; align-items: center; gap: 0; }
+.onb-step-dot {
+  width: 24px; height: 24px; border-radius: 50%; font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.06); border: 2px solid rgba(255,255,255,.1);
+  color: var(--muted); transition: all .3s;
+}
+.onb-step-dot.active { background: rgba(202,41,48,.15); border-color: var(--primary); color: var(--primary); }
+.onb-step-dot.done { background: rgba(5,161,88,.15); border-color: #6ce9a6; color: #6ce9a6; }
+.onb-step-line { width: 24px; height: 2px; background: rgba(255,255,255,.08); }
+.onb-step-line.done { background: rgba(5,161,88,.3); }
 </style>
 </head>
 <body>
@@ -6205,6 +6525,9 @@ img { max-width: 100%; display: block; }
   </div>
   <div id="missionContent"></div>
 </div>
+
+<!-- ===== ONBOARDING VIEW ===== -->
+<div id="onboardingView" class="onb-view"></div>
 
 <!-- ===== DEPOSIT VIEW ===== -->
 <div class="dep-overlay" id="depOverlay"></div>
@@ -6760,6 +7083,8 @@ function router() {
     showLiveChallengeFullPage();
   } else if (hash === '/mission/worldcup') {
     showWorldCupPage();
+  } else if (hash.startsWith('/onboarding/')) {
+    showOnboardingPage(hash.replace('/onboarding/', ''));
   } else if (hash === '/account' || hash.startsWith('/account/')) {
     if (!isLoggedIn) {
       pendingAction = () => navigateTo(hash);
@@ -6776,10 +7101,13 @@ function router() {
 function showHomeView() {
   document.getElementById('accountView').style.display = 'none';
   document.getElementById('missionView').style.display = 'none';
+  document.getElementById('onboardingView').style.display = 'none';
   document.getElementById('mainContent').style.display = '';
-  // Restore cat-nav-bar
+  // Restore cat-nav-bar & bottom-nav
   var catNav = document.querySelector('.cat-nav-bar');
   if (catNav) catNav.style.display = '';
+  var bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) bottomNav.style.display = '';
   // Reset to lobby view if VIP club is showing (unless navigating TO vip)
   if (_skipVipReset) {
     _skipVipReset = false;
@@ -6801,10 +7129,13 @@ function showAccountView(path) {
   homeScrollY = window.scrollY;
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('missionView').style.display = 'none';
+  document.getElementById('onboardingView').style.display = 'none';
   document.getElementById('accountView').style.display = '';
   // Hide cat-nav-bar on account pages
   var catNav = document.querySelector('.cat-nav-bar');
   if (catNav) catNav.style.display = 'none';
+  var bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) bottomNav.style.display = '';
   window.scrollTo(0, 0);
   document.body.style.overflow = '';
   renderAccountSidebar(path);
@@ -9728,9 +10059,12 @@ function showMissionView() {
   homeScrollY = window.scrollY;
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('accountView').style.display = 'none';
+  document.getElementById('onboardingView').style.display = 'none';
   document.getElementById('missionView').style.display = '';
   var catNav = document.querySelector('.cat-nav-bar');
   if (catNav) catNav.style.display = 'none';
+  var bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) bottomNav.style.display = '';
   missionScrollTop();
   document.body.style.overflow = '';
   var headerBar = document.querySelector('.mission-header-bar');
@@ -9768,9 +10102,12 @@ function showLiveChallengeFullPage() {
   homeScrollY = window.scrollY;
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('accountView').style.display = 'none';
+  document.getElementById('onboardingView').style.display = 'none';
   document.getElementById('missionView').style.display = '';
   var catNav = document.querySelector('.cat-nav-bar');
   if (catNav) catNav.style.display = 'none';
+  var bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) bottomNav.style.display = '';
   var headerBar = document.querySelector('.mission-header-bar');
   var missionNav = document.getElementById('missionNav');
   if (headerBar) headerBar.style.display = '';
@@ -9900,9 +10237,12 @@ function showWorldCupPage() {
   homeScrollY = window.scrollY;
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('accountView').style.display = 'none';
+  document.getElementById('onboardingView').style.display = 'none';
   document.getElementById('missionView').style.display = '';
   var catNav = document.querySelector('.cat-nav-bar');
   if (catNav) catNav.style.display = 'none';
+  var bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) bottomNav.style.display = '';
   var headerBar = document.querySelector('.mission-header-bar');
   var missionNav = document.getElementById('missionNav');
   if (headerBar) headerBar.style.display = '';
@@ -10966,9 +11306,12 @@ function lcSetupPage(title, backPath) {
   homeScrollY = window.scrollY;
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('accountView').style.display = 'none';
+  document.getElementById('onboardingView').style.display = 'none';
   document.getElementById('missionView').style.display = '';
   var catNav = document.querySelector('.cat-nav-bar');
   if (catNav) catNav.style.display = 'none';
+  var bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) bottomNav.style.display = '';
   var headerBar = document.querySelector('.mission-header-bar');
   var missionNav = document.getElementById('missionNav');
   if (headerBar) headerBar.style.display = '';
@@ -11879,9 +12222,857 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
+// ===== ONBOARDING STATE (must be before router) =====
+var onbState = {
+  flow: null,
+  selectedOffer: null,
+  preselectedOffer: null,
+  selectedTierIdx: 1,
+  depositAmount: '200K',
+  depositMethod: null,
+  gameInterest: 'sports'
+};
+
 // Router
 window.addEventListener('hashchange', router);
 router(); // handle initial hash on page load
+
+// ===== ONBOARDING PAGES =====
+
+function showOnboardingPage(page) {
+  homeScrollY = window.scrollY;
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('accountView').style.display = 'none';
+  document.getElementById('missionView').style.display = 'none';
+  var catNav = document.querySelector('.cat-nav-bar');
+  if (catNav) catNav.style.display = 'none';
+  var bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) bottomNav.style.display = 'none';
+  var onbView = document.getElementById('onboardingView');
+  onbView.style.display = 'block';
+  document.body.style.overflow = '';
+  window.scrollTo(0, 0);
+
+  switch (page) {
+    case 'welcome': renderOnbWelcome(); break;
+    case 'login': renderOnbLogin(); break;
+    case 'offer-confirm': renderOnbOfferConfirm(); break;
+    case 'offer-select': renderOnbOfferSelect(); break;
+    case 'deposit': renderOnbDeposit(); break;
+    case 'deposit-confirm': renderOnbDepositConfirm(); break;
+    case 'deposit-success': renderOnbDepositSuccess(); break;
+    default: renderOnbWelcome();
+  }
+}
+
+function onbBack() {
+  window.history.back();
+}
+
+function onbSteps(current, flow) {
+  var steps = [];
+  if (flow === 'C') steps = ['Welcome','Login','Chọn ưu đãi','Nạp','Hub'];
+  else if (flow === 'B') steps = ['Chọn ưu đãi','Nạp','Hub'];
+  else steps = ['Xác nhận','Nạp','Hub'];
+  var html = '<div class="onb-steps">';
+  for (var i = 0; i < steps.length; i++) {
+    var cls = i < current ? 'done' : (i === current ? 'active' : '');
+    html += '<div class="onb-step"><div class="onb-step-dot ' + cls + '">' + (i < current ? '✓' : (i+1)) + '</div></div>';
+    if (i < steps.length - 1) html += '<div class="onb-step-line ' + (i < current ? 'done' : '') + '"></div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function onbTrustBadges() {
+  return '<div class="onb-trust-row">' +
+    '<div class="onb-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>An toàn & uy tín</div>' +
+    '<div class="onb-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Xử lý nhanh</div>' +
+    '<div class="onb-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Hỗ trợ 24/7</div>' +
+  '</div>';
+}
+
+function onbMethodsStrip() {
+  return '<div class="onb-methods-strip">' +
+    '<div class="onb-method-badge"><img src="Assets/transfer.webp" alt="Ngân hàng"></div>' +
+    '<div class="onb-method-sep"></div>' +
+    '<div class="onb-method-badge"><img src="Assets/ewallet.webp" alt="Ví điện tử"></div>' +
+    '<div class="onb-method-sep"></div>' +
+    '<div class="onb-method-badge"><img src="Assets/crypto.webp" alt="Tiền điện tử"></div>' +
+    '<div class="onb-method-sep"></div>' +
+    '<div class="onb-method-badge"><img src="Assets/p2p.webp" alt="P2P"></div>' +
+    '<div class="onb-method-sep"></div>' +
+    '<div class="onb-method-badge"><img src="Assets/card.webp" alt="Thẻ cào"></div>' +
+    '<div class="onb-method-sep"></div>' +
+    '<div class="onb-coin-icons">' +
+      '<img src="Assets/icon-usdt-mb.webp" alt="USDT">' +
+      '<img src="Assets/icon-eth-mb.webp" alt="ETH">' +
+      '<img src="Assets/icon-bnb-mb.webp" alt="BNB">' +
+      '<img src="Assets/icon-tron-mb (1).webp" alt="TRON">' +
+    '</div>' +
+  '</div>';
+}
+
+function onbOfferCard(type, isSelected) {
+  var sel = isSelected ? ' selected' : '';
+  if (type === 'bonus_200') {
+    return '<div class="onb-offer-card' + sel + '" onclick="onbSelectOffer(\'bonus_200\')">' +
+      '<div class="check-mark">' + (isSelected ? '✓' : '') + '</div>' +
+      '<div class="onb-offer-tag hot">Phổ biến</div>' +
+      '<div class="onb-offer-title">Thưởng lên tới 200%</div>' +
+      '<div class="onb-offer-desc">Nạp càng cao, thưởng càng lớn — hợp để nhận thưởng ngay</div>' +
+      '<div class="onb-offer-tiers">' +
+        '<div class="onb-offer-tier"><div class="onb-offer-tier-pct">100%</div><div class="onb-offer-tier-amt">từ 200K</div></div>' +
+        '<div class="onb-offer-tier"><div class="onb-offer-tier-pct">150%</div><div class="onb-offer-tier-amt">từ 500K</div></div>' +
+        '<div class="onb-offer-tier"><div class="onb-offer-tier-pct">200%</div><div class="onb-offer-tier-amt">từ 3M</div></div>' +
+      '</div>' +
+    '</div>';
+  } else {
+    return '<div class="onb-offer-card' + sel + '" onclick="onbSelectOffer(\'cashback_1_4\')">' +
+      '<div class="check-mark">' + (isSelected ? '✓' : '') + '</div>' +
+      '<div class="onb-offer-tag steady">Ổn định</div>' +
+      '<div class="onb-offer-title">Hoàn trả 1.4% không giới hạn</div>' +
+      '<div class="onb-offer-desc">Lợi ích bền vững theo quá trình chơi</div>' +
+      '<ul class="onb-offer-bullets">' +
+        '<li>Phù hợp người chơi đều</li>' +
+        '<li>Không giới hạn trần hoàn trả</li>' +
+        '<li>Quyền lợi ổn định lâu dài</li>' +
+      '</ul>' +
+    '</div>';
+  }
+}
+
+function onbSelectOffer(type) {
+  onbState.selectedOffer = type;
+  var page = currentRoute.replace('/onboarding/', '');
+  if (page === 'offer-select') renderOnbOfferSelect();
+  else if (page === 'offer-confirm') renderOnbOfferConfirm();
+}
+
+var onbCdInterval = null;
+function startOnbCountdown() {
+  if (onbCdInterval) clearInterval(onbCdInterval);
+  var total = 0*3600 + 46*60 + 18;
+  function update() {
+    var h = Math.floor(total / 3600), m = Math.floor((total % 3600) / 60), s = total % 60;
+    var eH = document.getElementById('onbCdH'), eM = document.getElementById('onbCdM'), eS = document.getElementById('onbCdS');
+    if (eH) eH.textContent = (h < 10 ? '0' : '') + h;
+    if (eM) eM.textContent = (m < 10 ? '0' : '') + m;
+    if (eS) eS.textContent = (s < 10 ? '0' : '') + s;
+    if (total <= 0) { clearInterval(onbCdInterval); return; }
+    total--;
+  }
+  update();
+  onbCdInterval = setInterval(update, 1000);
+}
+
+function onbSelectTier(idx, rawAmount) {
+  onbState.selectedTierIdx = idx;
+  onbState.depositAmount = rawAmount;
+  // Update table rows without full re-render (smoother)
+  var rows = document.querySelectorAll('.onb-tier-table tbody tr');
+  rows.forEach(function(r, i) {
+    if (i === idx) r.classList.add('row-selected');
+    else r.classList.remove('row-selected');
+  });
+}
+
+// ── C1: Welcome / Trust Page ──
+function renderOnbWelcome() {
+  onbState.flow = 'C';
+  var el = document.getElementById('onboardingView');
+  el.innerHTML = '<div class="onb-page">' +
+    '<div class="onb-hero" style="padding-top:40px">' +
+      '<div class="onb-hero-badge">Chào mừng bạn đến với</div>' +
+      '<h1 style="font-size:28px;margin-bottom:4px">MUBET</h1>' +
+      '<p class="onb-hero-sub" style="font-size:14px;color:var(--text-2);margin-bottom:4px">Nền tảng cá cược uy tín hàng đầu</p>' +
+      '<p class="onb-hero-sub">Nạp / rút nhanh · Đa phương thức · Trải nghiệm mobile mượt</p>' +
+      onbTrustBadges() +
+    '</div>' +
+
+    '<div class="onb-section">' +
+      '<div class="onb-section-title">Phương thức nạp / rút</div>' +
+      '<div class="onb-trust-section">' +
+        '<div class="onb-trust-item"><div class="onb-trust-item-icon">🏦</div><div class="onb-trust-item-text">Ngân hàng<br>nội địa</div></div>' +
+        '<div class="onb-trust-item"><div class="onb-trust-item-icon">👥</div><div class="onb-trust-item-text">P2P<br>chuyển khoản</div></div>' +
+        '<div class="onb-trust-item"><div class="onb-trust-item-icon">💳</div><div class="onb-trust-item-text">Ví điện tử<br>& thẻ cào</div></div>' +
+        '<div class="onb-trust-item"><div class="onb-trust-item-icon">₿</div><div class="onb-trust-item-text">Tiền ảo<br>USDT / BTC</div></div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="onb-section">' +
+      '<div class="onb-section-title">Ưu đãi hot nhất hiện tại</div>' +
+      '<div class="onb-offer-cards">' +
+        onbOfferCard('bonus_200', false) +
+        onbOfferCard('cashback_1_4', false) +
+      '</div>' +
+    '</div>' +
+
+    '<div class="onb-cta-area">' +
+      '<button class="onb-cta gold" onclick="navigateTo(\'/onboarding/login\')">Nạp ngay</button>' +
+      '<div class="onb-cta-secondary" onclick="navigateTo(\'/onboarding/login\')">Xem ưu đãi chi tiết</div>' +
+    '</div>' +
+  '</div>';
+}
+
+// ── C2: Login Page ──
+function renderOnbLogin() {
+  onbState.flow = onbState.flow || 'C';
+  var el = document.getElementById('onboardingView');
+  el.innerHTML = '<div class="onb-page">' +
+    '<button class="onb-back" onclick="onbBack()" style="position:fixed">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>' +
+    '</button>' +
+
+    '<div class="onb-hero">' +
+      '<div class="onb-hero-badge">Bước tiếp theo</div>' +
+      '<h1>Đăng nhập để<br>nhận ưu đãi</h1>' +
+      '<p class="onb-hero-sub">Đăng nhập hoặc tạo tài khoản để tiếp tục</p>' +
+    '</div>' +
+
+    onbSteps(1, 'C') +
+
+    '<div class="onb-section" style="margin-top:20px">' +
+      '<div class="onb-login-form">' +
+        '<div class="onb-input-group">' +
+          '<label class="onb-input-label">Số điện thoại / Tên đăng nhập</label>' +
+          '<input type="text" class="onb-input" placeholder="Nhập số điện thoại hoặc username">' +
+        '</div>' +
+        '<div class="onb-input-group">' +
+          '<label class="onb-input-label">Mật khẩu</label>' +
+          '<input type="password" class="onb-input" placeholder="Nhập mật khẩu">' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="onb-cta-area">' +
+      '<button class="onb-cta primary" onclick="onbDoLogin()">Đăng nhập</button>' +
+      '<div class="onb-login-support">Chưa có tài khoản? <a href="javascript:void(0)" onclick="onbDoLogin()">Đăng ký ngay</a></div>' +
+    '</div>' +
+  '</div>';
+}
+
+function onbDoLogin() {
+  showToast('Đăng nhập thành công!');
+  navigateTo('/onboarding/offer-select');
+}
+
+// ── A1: Offer Confirm Page ──
+function renderOnbOfferConfirm() {
+  onbState.flow = 'A';
+  if (!onbState.selectedOffer) onbState.selectedOffer = 'bonus_200';
+  var el = document.getElementById('onboardingView');
+  var isBonus = onbState.selectedOffer === 'bonus_200';
+
+  var heroTitle = isBonus
+    ? 'Kích hoạt ngay<br><span class="gold">thưởng nạp lên tới 200%</span>'
+    : 'Bắt đầu với<br><span class="gold">hoàn trả 1.4% không giới hạn</span>';
+
+  var offerSection = '';
+  var selIdx = onbState.selectedTierIdx != null ? onbState.selectedTierIdx : 1;
+  if (isBonus) {
+    var tiers = [
+      { nap: '50K', pct: '50%', thuong: '25K', tong: '75K', roll: '12x', raw: '50K' },
+      { nap: '200K', pct: '100%', thuong: '200K', tong: '400K', roll: '14x', raw: '200K' },
+      { nap: '500K', pct: '150%', thuong: '750K', tong: '1.25M', roll: '16x', raw: '500K' },
+      { nap: '1M', pct: '180%', thuong: '1.8M', tong: '2.8M', roll: '18x', raw: '1M' },
+      { nap: '3M', pct: '200%', thuong: '6M', tong: '9M', roll: '20x', raw: '3M' }
+    ];
+    var rows = '';
+    for (var ti = 0; ti < tiers.length; ti++) {
+      var t = tiers[ti];
+      var rowSel = ti === selIdx ? ' row-selected' : '';
+      rows += '<tr class="' + rowSel + '" onclick="onbSelectTier(' + ti + ',\'' + t.raw + '\')">' +
+        '<td>' + t.nap + '</td>' +
+        '<td><span class="bonus-pct">' + t.pct + '</span></td>' +
+        '<td class="col-highlight">' + t.tong + '</td>' +
+        '<td class="wagering">' + t.roll + '</td>' +
+      '</tr>';
+    }
+    offerSection = '<div class="onb-section">' +
+      '<div class="onb-section-title">Mốc thưởng nạp đầu</div>' +
+      '<table class="onb-tier-table">' +
+        '<thead><tr>' +
+          '<th>Nạp</th>' +
+          '<th>Thưởng</th>' +
+          '<th class="col-highlight">Tổng nhận</th>' +
+          '<th>Cược</th>' +
+        '</tr></thead>' +
+        '<tbody>' + rows + '</tbody>' +
+      '</table>' +
+      '<div class="onb-compare" style="margin-top:10px;text-align:center">Nạp càng cao, thưởng càng lớn.<br><strong>Thưởng cộng ngay sau khi nạp thành công.</strong></div>' +
+      '<div class="onb-countdown"><span class="onb-countdown-label">Reset sau</span><div class="onb-countdown-timer" id="onbCountdown"><span class="onb-countdown-unit" id="onbCdH">00</span><span class="onb-countdown-sep">:</span><span class="onb-countdown-unit" id="onbCdM">46</span><span class="onb-countdown-sep">:</span><span class="onb-countdown-unit" id="onbCdS">18</span></div></div>' +
+    '</div>';
+  } else {
+    offerSection = '<div class="onb-section">' +
+      '<div class="onb-section-title">Quyền lợi hoàn trả</div>' +
+      '<div class="onb-offer-card selected" style="cursor:default">' +
+        '<div class="onb-offer-title">Hoàn trả 1.4% không giới hạn</div>' +
+        '<ul class="onb-offer-bullets">' +
+          '<li>Phù hợp người chơi đều</li>' +
+          '<li>Không giới hạn trần hoàn trả</li>' +
+          '<li>Quyền lợi ổn định lâu dài</li>' +
+        '</ul>' +
+      '</div>' +
+      '<div class="onb-cta-secondary" style="margin-top:8px;text-align:left" onclick="void(0)">Xem chi tiết điều kiện</div>' +
+    '</div>';
+  }
+
+  el.innerHTML = '<div class="onb-page">' +
+    '<button class="onb-back" onclick="onbBack()" style="position:fixed">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>' +
+    '</button>' +
+
+    '<div class="onb-hero">' +
+      '<h1>' + heroTitle + '</h1>' +
+      '<p class="onb-hero-sub">Ưu đãi dành riêng cho bạn</p>' +
+      onbTrustBadges() +
+    '</div>' +
+
+    onbSteps(0, 'A') +
+    offerSection +
+
+    '<div class="onb-section">' +
+      '<div class="onb-section-title">Gói quà tân thủ sau nạp</div>' +
+      '<div class="onb-benefit-list">' +
+        '<div class="onb-benefit-item"><div class="onb-benefit-icon gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5v2"/><path d="M15 11v2"/><path d="M15 17v2"/><path d="M5 5h14a2 2 0 012 2v3a2 2 0 010 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 010-4V7a2 2 0 012-2z"/></svg></div><div class="onb-benefit-text"><div class="onb-benefit-title">Voucher theo giá trị nạp</div><div class="onb-benefit-desc">Nhận voucher tương ứng mốc nạp</div></div></div>' +
+        '<div class="onb-benefit-item"><div class="onb-benefit-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="onb-benefit-text"><div class="onb-benefit-title">Live Challenge</div><div class="onb-benefit-desc">Tham gia sự kiện nhận thưởng thêm</div></div></div>' +
+        '<div class="onb-benefit-item"><div class="onb-benefit-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="onb-benefit-text"><div class="onb-benefit-title">Thử thách tân thủ</div><div class="onb-benefit-desc">Hoàn thành nhiệm vụ nhận coin</div></div></div>' +
+        '<div class="onb-benefit-item"><div class="onb-benefit-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l3 12h14l3-12-5.5 2L12 2 7.5 6 2 4z"/><path d="M5 16l-1 4h16l-1-4"/></svg></div><div class="onb-benefit-text"><div class="onb-benefit-title">VIP 7 ngày miễn phí</div><div class="onb-benefit-desc">Trải nghiệm quyền lợi VIP</div></div></div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="onb-section" style="margin-bottom:0">' +
+      '<div class="onb-section-title" style="text-align:center">Đa dạng phương thức nạp / rút</div>' +
+      onbMethodsStrip() +
+    '</div>' +
+
+    '<div class="onb-cta-area">' +
+      '<button class="onb-cta gold" onclick="navigateTo(\'/onboarding/deposit\')">Tiếp tục</button>' +
+    '</div>' +
+  '</div>';
+  startOnbCountdown();
+}
+
+// ── B1/C3: Offer Select Page ──
+function renderOnbOfferSelect() {
+  if (!onbState.flow) onbState.flow = 'B';
+  var el = document.getElementById('onboardingView');
+  var stepIdx = onbState.flow === 'C' ? 2 : 0;
+  var hasSelected = !!onbState.selectedOffer;
+
+  el.innerHTML = '<div class="onb-page">' +
+    '<button class="onb-back" onclick="onbBack()" style="position:fixed">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>' +
+    '</button>' +
+
+    '<div class="onb-hero">' +
+      '<h1>Chọn ưu đãi<br><span class="gold">phù hợp để bắt đầu</span></h1>' +
+      '<p class="onb-hero-sub">Chỉ chọn 1 ưu đãi cho lần bắt đầu</p>' +
+    '</div>' +
+
+    onbSteps(stepIdx, onbState.flow) +
+
+    '<div class="onb-section" style="margin-top:16px">' +
+      '<div class="onb-offer-cards">' +
+        onbOfferCard('bonus_200', onbState.selectedOffer === 'bonus_200') +
+        onbOfferCard('cashback_1_4', onbState.selectedOffer === 'cashback_1_4') +
+      '</div>' +
+    '</div>' +
+
+    '<div class="onb-section">' +
+      '<div class="onb-compare">' +
+        'Muốn <strong>thưởng lớn ngay</strong> → chọn 200%<br>' +
+        'Muốn <strong>lợi ích bền hơn</strong> → chọn hoàn trả 1.4%' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="onb-cta-area">' +
+      '<button class="onb-cta gold" id="onbSelectCta" onclick="navigateTo(\'/onboarding/deposit\')" ' + (hasSelected ? '' : 'disabled') + '>Tiếp tục</button>' +
+    '</div>' +
+  '</div>';
+}
+
+// ── A2/B2/C4: Deposit Page ──
+function renderOnbDeposit() {
+  if (!onbState.selectedOffer) onbState.selectedOffer = 'bonus_200';
+  var el = document.getElementById('onboardingView');
+  var flow = onbState.flow || 'A';
+  var stepIdx = flow === 'C' ? 3 : (flow === 'B' ? 1 : 1);
+  var isBonus = onbState.selectedOffer === 'bonus_200';
+  var offerLabel = isBonus ? 'Thưởng lên tới 200%' : 'Hoàn trả 1.4%';
+
+  var amounts = isBonus
+    ? [{v:'200K',raw:200000,pct:100},{v:'500K',raw:500000,pct:150},{v:'1M',raw:1000000,pct:180},{v:'2M',raw:2000000,pct:200},{v:'5M',raw:5000000,pct:200},{v:'10M',raw:10000000,pct:200}]
+    : [{v:'200K',raw:200000,pct:0},{v:'500K',raw:500000,pct:0},{v:'1M',raw:1000000,pct:0},{v:'2M',raw:2000000,pct:0},{v:'5M',raw:5000000,pct:0},{v:'10M',raw:10000000,pct:0}];
+
+  // Find default selection from tier table
+  var defaultIdx = 0;
+  var preselect = onbState.depositAmount || '';
+  if (preselect) {
+    for (var ai = 0; ai < amounts.length; ai++) {
+      if (amounts[ai].v === preselect) { defaultIdx = ai; break; }
+    }
+  }
+
+  var amountGrid = '';
+  for (var i = 0; i < amounts.length; i++) {
+    amountGrid += '<div class="onb-amount-btn" onclick="onbSelectAmount(this,' + i + ')" data-raw="' + amounts[i].raw + '" data-pct="' + amounts[i].pct + '">' +
+      '<div class="onb-amount-value">' + amounts[i].v + '</div>' +
+      (isBonus && amounts[i].pct ? '<div class="onb-amount-bonus">+' + amounts[i].pct + '%</div>' : '') +
+    '</div>';
+  }
+
+  // Reset deposit total and calculate default bonus
+  onbDepositTotal = 0;
+  var defAmt = amounts[defaultIdx];
+  var defBonus = 0;
+  var defTotal = 0;
+  var fmtBonus = '0';
+  var fmtTotal = '0';
+
+  el.innerHTML = '<div class="onb-page">' +
+    '<button class="onb-back" onclick="onbBack()" style="position:fixed">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>' +
+    '</button>' +
+
+    '<div class="onb-hero" style="padding-bottom:16px">' +
+      '<h1>Nạp tiền</h1>' +
+      '<p class="onb-hero-sub">Chọn phương thức và số tiền để nạp</p>' +
+    '</div>' +
+
+    '<div style="margin-top:16px">' + onbSteps(stepIdx, flow) + '</div>' +
+
+    '<div class="onb-deposit-summary" style="margin-top:16px">' +
+      '<div class="onb-deposit-summary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div>' +
+      '<div class="onb-deposit-summary-text">' +
+        '<div class="onb-deposit-summary-label">Ưu đãi đang áp dụng</div>' +
+        '<div class="onb-deposit-summary-value">' + offerLabel + '</div>' +
+      '</div>' +
+      '<div class="onb-deposit-summary-change" onclick="navigateTo(\'/onboarding/offer-select\')">Đổi</div>' +
+    '</div>' +
+
+    '<div class="onb-section">' +
+      '<div class="onb-section-title">Chọn số tiền</div>' +
+      '<div class="onb-amount-presets">' + amountGrid + '</div>' +
+      '<div class="onb-custom-input-wrap" style="margin-top:8px">' +
+        '<input id="onbCustomInput" class="onb-input" type="text" placeholder="Nhập số tiền khác (VNĐ)" oninput="onbCustomAmount()" style="text-align:center;font-weight:700;font-size:14px"/>' +
+      '</div>' +
+      (isBonus ? '<div class="onb-calc-row" style="margin-top:12px">' +
+        '<div class="onb-calc-item"><div class="onb-calc-label">Thưởng nạp</div><div class="onb-calc-value" id="onbCalcBonus">' + fmtBonus + '</div></div>' +
+        '<div class="onb-calc-item highlight"><div class="onb-calc-label">Tổng nhận <span class="onb-badge-mini">Nhận ngay</span></div><div class="onb-calc-value" id="onbCalcTotal">' + fmtTotal + '</div></div>' +
+      '</div>' : '') +
+    '</div>' +
+
+    '<div class="onb-section">' +
+      '<div class="onb-section-title">Phương thức nạp</div>' +
+      '<div class="onb-methods">' +
+        '<div class="onb-method selected" onclick="onbSelectMethod(this,false)">' +
+          '<div class="onb-method-icon" style="color:#4a7dfe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M3 10h18"/><path d="M5 6l7-3 7 3"/><path d="M4 10v11"/><path d="M20 10v11"/><path d="M8 14v4"/><path d="M12 14v4"/><path d="M16 14v4"/></svg></div>' +
+          '<div style="flex:1"><div class="onb-method-name">Ngân hàng nội địa</div><div class="onb-method-desc">Chuyển khoản trực tiếp</div></div>' +
+          '<div class="onb-method-limit">100K – 500M</div>' +
+        '</div>' +
+        '<div class="onb-method" onclick="onbSelectMethod(this,false)">' +
+          '<div class="onb-method-icon" style="color:#e7bb08"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><path d="M1 10h22"/></svg></div>' +
+          '<div style="flex:1"><div class="onb-method-name">Ví điện tử</div><div class="onb-method-desc">Momo, ZaloPay, VNPay</div></div>' +
+          '<div class="onb-method-limit">50K – 50M</div>' +
+        '</div>' +
+        '<div class="onb-method" onclick="onbSelectMethod(this,true)">' +
+          '<div class="onb-method-icon" style="color:#f7931a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h3.5a2.5 2.5 0 010 5H9.5V8z"/><path d="M9.5 13h4a2.5 2.5 0 010 5H9.5v-5z"/><path d="M12 6v2"/><path d="M12 18v-2"/></svg></div>' +
+          '<div style="flex:1"><div class="onb-method-name">Tiền ảo</div><div class="onb-method-desc">USDT, BTC, ETH</div></div>' +
+          '<div class="onb-method-limit">10 USDT – ∞</div>' +
+        '</div>' +
+        '<div class="onb-method" onclick="onbSelectMethod(this,false)">' +
+          '<div class="onb-method-icon" style="color:#05a158"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg></div>' +
+          '<div style="flex:1"><div class="onb-method-name">Thẻ cào</div><div class="onb-method-desc">Viettel, Mobi, Vina</div></div>' +
+          '<div class="onb-method-limit">10K – 5M</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="onb-crypto-warning" id="onbCryptoWarn">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>' +
+      'Nạp bằng tiền ảo không áp dụng ưu đãi thưởng nạp' +
+    '</div>' +
+
+    '<div class="onb-cta-area">' +
+      '<button class="onb-cta gold" onclick="onbDoDeposit()">Tiếp tục</button>' +
+    '</div>' +
+  '</div>';
+}
+
+function onbFmtVND(n) {
+  if (n >= 1000000) return (n / 1000000).toFixed(n % 1000000 === 0 ? 0 : 1) + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(0) + 'K';
+  return n.toString();
+}
+
+var onbDepositTotal = 0; // running total from chip clicks
+
+function onbSelectAmount(btn, idx) {
+  var chipRaw = parseInt(btn.getAttribute('data-raw')) || 0;
+  onbDepositTotal += chipRaw;
+  var ci = document.getElementById('onbCustomInput');
+  if (ci) {
+    ci.value = onbDepositTotal.toLocaleString('vi-VN');
+    ci.style.borderColor = 'var(--tertiary-400)';
+  }
+  // Flash effect via animation
+  btn.style.transform = 'scale(0.93)';
+  setTimeout(function(){ btn.style.transform = ''; }, 120);
+  onbUpdateCalc();
+}
+
+function onbCustomAmount() {
+  var ci = document.getElementById('onbCustomInput');
+  if (ci) {
+    ci.style.borderColor = 'var(--tertiary-400)';
+    onbDepositTotal = parseInt(ci.value.replace(/[^0-9]/g,'')) || 0;
+  }
+  onbUpdateCalc();
+}
+
+function onbResetDeposit() {
+  onbDepositTotal = 0;
+  var ci = document.getElementById('onbCustomInput');
+  if (ci) { ci.value = ''; ci.style.borderColor = 'rgba(255,255,255,.08)'; }
+  onbUpdateCalc();
+}
+
+function onbUpdateCalc() {
+  var raw = onbDepositTotal;
+  var pct = 0;
+  if (!onbIsCrypto) {
+    if (raw >= 3000000) pct = 200;
+    else if (raw >= 1000000) pct = 180;
+    else if (raw >= 500000) pct = 150;
+    else if (raw >= 200000) pct = 100;
+    else if (raw > 0) pct = 50;
+  }
+  var bonus = Math.floor(raw * pct / 100);
+  var total = raw + bonus;
+  var elB = document.getElementById('onbCalcBonus');
+  var elT = document.getElementById('onbCalcTotal');
+  if (elB) elB.textContent = raw > 0 ? onbFmtVND(bonus) : '0';
+  if (elT) elT.textContent = raw > 0 ? onbFmtVND(total) : '0';
+}
+
+var onbIsCrypto = false;
+function onbSelectMethod(btn, isCrypto) {
+  document.querySelectorAll('.onb-method').forEach(function(b){ b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  onbIsCrypto = !!isCrypto;
+  var warn = document.getElementById('onbCryptoWarn');
+  if (warn) warn.classList.toggle('show', onbIsCrypto);
+  onbUpdateCalc();
+}
+
+function onbDoDeposit() {
+  onbState.depositAmount = onbDepositTotal > 0 ? onbFmtVND(onbDepositTotal) : '200K';
+  onbState.depositRaw = onbDepositTotal > 0 ? onbDepositTotal : 200000;
+  navigateTo('/onboarding/deposit-confirm');
+}
+
+// ── Step 3: Deposit Confirm (Bank Transfer) ──
+var onbConfirmTimer = null;
+function renderOnbDepositConfirm() {
+  var el = document.getElementById('onboardingView');
+  var flow = onbState.flow || 'A';
+  var stepIdx = flow === 'C' ? 4 : (flow === 'B' ? 2 : 2);
+  var rawAmount = onbState.depositRaw || 200000;
+  var fmtAmount = rawAmount.toLocaleString('vi-VN');
+  var ticketId = '#' + (32950000 + Math.floor(Math.random() * 9999));
+  var acctNo = '815307028800001';
+  var acctName = 'Hoàng Việt Trường';
+  var txCode = onbGenCode();
+
+  // Copy icon SVG
+  var copyIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:middle;opacity:.4;cursor:pointer"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+
+  el.innerHTML = '<div class="onb-page">' +
+    '<button class="onb-back" onclick="onbBack()" style="position:fixed">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>' +
+    '</button>' +
+
+    // Hero
+    '<div class="onb-hero" style="padding-bottom:16px">' +
+      '<h1>Xác nhận chuyển khoản</h1>' +
+      '<p class="onb-hero-sub">Chuyển khoản theo thông tin bên dưới</p>' +
+    '</div>' +
+
+    '<div style="margin-top:16px">' + onbSteps(stepIdx, flow) + '</div>' +
+
+    // Amount + Timer highlight card
+    '<div class="onb-section">' +
+      '<div style="display:flex;gap:8px;margin-bottom:10px">' +
+        '<div class="onb-calc-item highlight" style="flex:2">' +
+          '<div class="onb-calc-label">Số tiền cần chuyển</div>' +
+          '<div class="onb-calc-value" style="font-size:20px">' + fmtAmount + ' <span style="font-size:12px;font-weight:600;opacity:.7">VND</span></div>' +
+        '</div>' +
+        '<div class="onb-calc-item" style="flex:1;text-align:center">' +
+          '<div class="onb-calc-label" style="justify-content:center">Hết hạn</div>' +
+          '<div class="onb-calc-value" style="color:var(--primary)" id="onbConfirmTimer">29:50</div>' +
+        '</div>' +
+      '</div>' +
+
+      // QR + Bank info
+      '<div style="display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);margin-bottom:10px">' +
+        '<div style="width:72px;height:72px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden">' +
+          '<img src="Assets/qr-deposit.svg" alt="QR" style="width:64px;height:64px">' +
+        '</div>' +
+        '<div style="flex:1">' +
+          '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">' +
+            '<div class="onb-benefit-icon blue" style="width:24px;height:24px;border-radius:6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M3 21h18"/><path d="M3 10h18"/><path d="M5 6l7-3 7 3"/><path d="M4 10v11"/><path d="M20 10v11"/><path d="M8 14v4"/><path d="M12 14v4"/><path d="M16 14v4"/></svg></div>' +
+            '<span style="font-size:13px;font-weight:700;color:#4a7dfe">NAM A BANK</span>' +
+          '</div>' +
+          '<div style="font-size:11px;color:var(--text-2);margin-bottom:2px">Mã phiếu: ' + ticketId + '</div>' +
+          '<div style="font-size:11px;color:var(--tertiary-400);cursor:pointer;display:flex;align-items:center;gap:4px">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
+            'Tải QR' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+
+      // Detail rows
+      '<div class="onb-confirm-details">' +
+        '<div class="onb-confirm-row"><span>Số tài khoản</span><span class="onb-confirm-val" onclick="onbCopy(\'' + acctNo + '\')">' + acctNo + ' ' + copyIcon + '</span></div>' +
+        '<div class="onb-confirm-row"><span>Chủ tài khoản</span><span class="onb-confirm-val" onclick="onbCopy(\'' + acctName + '\')">' + acctName + ' ' + copyIcon + '</span></div>' +
+        '<div class="onb-confirm-row" style="background:rgba(202,41,48,.04)"><span>Nội dung CK</span><span class="onb-confirm-val" style="color:var(--primary);font-weight:800;font-size:14px" onclick="onbCopy(\'' + txCode + '\')">' + txCode + ' ' + copyIcon + '</span></div>' +
+      '</div>' +
+    '</div>' +
+
+    // Guide card
+    '<div class="onb-section">' +
+      '<div class="onb-benefit-list">' +
+        '<div class="onb-benefit-item" style="background:rgba(74,125,254,.05);border-color:rgba(74,125,254,.12)">' +
+          '<div class="onb-benefit-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>' +
+          '<div class="onb-benefit-text">' +
+            '<div class="onb-benefit-title" style="color:#4a7dfe">Hướng dẫn</div>' +
+            '<div class="onb-benefit-desc" style="line-height:1.5">Chuyển đúng <strong style="color:#fff">' + fmtAmount + ' VND</strong> với nội dung <strong style="color:#fff">' + txCode + '</strong></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="onb-benefit-item" style="background:rgba(202,41,48,.05);border-color:rgba(202,41,48,.12)">' +
+          '<div class="onb-benefit-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></div>' +
+          '<div class="onb-benefit-text">' +
+            '<div class="onb-benefit-title" style="color:var(--primary)">Lưu ý</div>' +
+            '<div class="onb-benefit-desc" style="line-height:1.5">Không lưu lại tài khoản NH. Mỗi giao dịch cần vào mục <strong style="color:#fff">Nạp Tiền</strong> để lấy thông tin mới. Chuyển sai nội dung / số tiền sẽ không nhận được tiền.</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="onb-benefit-item">' +
+          '<div class="onb-benefit-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>' +
+          '<div class="onb-benefit-text">' +
+            '<div class="onb-benefit-title">Cần hỗ trợ?</div>' +
+            '<div class="onb-benefit-desc">Sau 1 phút nếu chưa nhận tiền, liên hệ <span style="color:#4a7dfe;cursor:pointer">CSKH 24/7</span></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="onb-cta-area">' +
+      '<button class="onb-cta gold" onclick="onbConfirmDeposit()">Đã chuyển khoản</button>' +
+    '</div>' +
+  '</div>';
+
+  // Start countdown timer
+  if (onbConfirmTimer) clearInterval(onbConfirmTimer);
+  var totalSec = 29 * 60 + 50;
+  onbConfirmTimer = setInterval(function() {
+    totalSec--;
+    if (totalSec <= 0) { clearInterval(onbConfirmTimer); return; }
+    var m = Math.floor(totalSec / 60), s = totalSec % 60;
+    var el = document.getElementById('onbConfirmTimer');
+    if (el) el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  }, 1000);
+}
+
+function onbGenCode() {
+  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  var code = '';
+  for (var i = 0; i < 7; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+  return code;
+}
+
+function onbCopy(text) {
+  if (navigator.clipboard) navigator.clipboard.writeText(text);
+  showToast('Đã sao chép: ' + text);
+}
+
+function onbConfirmDeposit() {
+  showToast('Đang xác nhận giao dịch...');
+  setTimeout(function() {
+    navigateTo('/onboarding/deposit-success');
+  }, 1200);
+}
+
+// ── Deposit Success ──
+function renderOnbDepositSuccess() {
+  var el = document.getElementById('onboardingView');
+  var flow = onbState.flow || 'A';
+  var isBonus = onbState.selectedOffer === 'bonus_200';
+  var offerLabel = isBonus ? 'Thưởng lên tới 200%' : 'Hoàn trả 1.4%';
+  var amount = onbState.depositAmount || '200K';
+
+  // Hub cards
+  var numAmount = parseInt(amount.replace(/[^\d]/g, ''));
+  if (amount.indexOf('M') > -1) numAmount *= 1000;
+  var isHighValue = numAmount >= 1000;
+
+  var cards = [
+    {
+      id: 'vip7', theme: 'gold', iconCls: 'gold', title: 'Trải nghiệm VIP 7 ngày',
+      desc: 'Miễn phí trải nghiệm toàn bộ quyền lợi VIP: hoàn trả cao, quà sinh nhật, ưu tiên rút tiền',
+      iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l3 12h14l3-12-5.5 2L12 2 7.5 6 2 4z"/><path d="M5 16l-1 4h16l-1-4"/></svg>',
+      tag: 'FREE', reward: 'Miễn phí — cần hoàn thành điều kiện', cta: 'Xem điều kiện',
+      priority: -1
+    },
+    {
+      id: 'lc', theme: 'red', iconCls: 'red', title: 'Live Challenge',
+      desc: 'Sự kiện đang diễn ra — hoàn thành nhiệm vụ nhận thưởng lớn',
+      iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+      tag: 'HOT', reward: 'Thưởng lên đến 500K', cta: 'Tham gia ngay',
+      priority: isHighValue ? 1 : 0
+    },
+    {
+      id: 'newbie', theme: 'green', iconCls: 'green', title: 'Thử thách tân thủ',
+      desc: '3 nhiệm vụ đơn giản — nhận coin & voucher giá trị',
+      iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5v2"/><path d="M15 11v2"/><path d="M15 17v2"/><path d="M5 5h14a2 2 0 012 2v3a2 2 0 010 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 010-4V7a2 2 0 012-2z"/></svg>',
+      tag: 'MỚI', reward: 'Nhận 50 coin + voucher 100K', cta: 'Bắt đầu',
+      priority: isHighValue ? 3 : 1
+    },
+    {
+      id: 'game', theme: 'blue', iconCls: 'blue', title: 'Game hot dành cho bạn',
+      desc: 'Khám phá game phù hợp với phong cách của bạn',
+      iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+      tag: 'TOP', reward: 'RTP lên đến 97%', cta: 'Chơi ngay',
+      priority: 2
+    }
+  ];
+  cards.sort(function(a,b) { return a.priority - b.priority; });
+
+  var cardsHtml = '';
+  for (var i = 0; i < cards.length; i++) {
+    var c = cards[i];
+    cardsHtml += '<div class="onb-hub-card" data-theme="' + c.theme + '" onclick="onbHubAction(\'' + c.id + '\')">' +
+      '<div class="onb-hub-card-top">' +
+        '<div class="onb-hub-card-icon ' + c.iconCls + '">' + c.iconSvg + '</div>' +
+        '<div class="onb-hub-card-body">' +
+          '<div class="onb-hub-card-title">' + c.title + '</div>' +
+          '<div class="onb-hub-card-desc">' + c.desc + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="onb-hub-card-reward">' +
+        '<span class="onb-hub-card-reward-tag">' + c.tag + '</span>' +
+        '<span class="onb-hub-card-reward-text">' + c.reward + '</span>' +
+        '<span class="onb-hub-card-cta">' + c.cta + ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:12px;height:12px"><path d="M9 18l6-6-6-6"/></svg></span>' +
+      '</div>' +
+    '</div>';
+  }
+
+  el.innerHTML = '<div class="onb-page">' +
+    '<div class="onb-success-hero">' +
+      '<div class="onb-success-check">✓</div>' +
+      '<h1>Nạp thành công!</h1>' +
+      '<p>Quyền lợi đầu tiên đã được kích hoạt</p>' +
+    '</div>' +
+
+    '<div class="onb-success-summary">' +
+      '<div class="onb-success-row"><span class="label">Số tiền nạp</span><span class="value">' + amount + '</span></div>' +
+      '<div class="onb-success-row"><span class="label">Ưu đãi</span><span class="value">' + offerLabel + '</span></div>' +
+      (isBonus ? '<div class="onb-success-row"><span class="label">Thưởng nhận</span><span class="value" style="color:#6ce9a6">+200K</span></div>' : '') +
+    '</div>' +
+
+    '<div class="onb-section">' +
+      '<div class="onb-section-title">Quyền lợi đã mở</div>' +
+      '<div class="onb-benefit-list">' +
+        '<div class="onb-benefit-item"><div class="onb-benefit-icon gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div><div class="onb-benefit-text"><div class="onb-benefit-title">' + offerLabel + '</div><div class="onb-benefit-desc">Đã kích hoạt thành công</div></div></div>' +
+        '<div class="onb-benefit-item"><div class="onb-benefit-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5v2"/><path d="M15 11v2"/><path d="M15 17v2"/><path d="M5 5h14a2 2 0 012 2v3a2 2 0 010 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 010-4V7a2 2 0 012-2z"/></svg></div><div class="onb-benefit-text"><div class="onb-benefit-title">Voucher tân thủ</div><div class="onb-benefit-desc">Đã cộng vào tài khoản</div></div></div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="onb-section">' +
+      '<div class="onb-section-title">Khám phá thêm</div>' +
+      '<div class="onb-hub-cards">' + cardsHtml + '</div>' +
+    '</div>' +
+
+    '<div class="onb-cta-area">' +
+      '<button class="onb-cta gold" onclick="goToLobby()">Về trang chủ</button>' +
+    '</div>' +
+  '</div>';
+}
+
+function onbHubAction(id) {
+  switch(id) {
+    case 'vip7':
+      goToVipClub();
+      setTimeout(function() { openVip1Intro(); }, 600);
+      break;
+    case 'lc': navigateTo('/mission/live-challenge'); break;
+    case 'game': goToLobby(); break;
+    case 'newbie': navigateTo('/mission'); break;
+  }
+}
+
+// ── DevTools Navigation Listener ──
+(function() {
+  try {
+    var bc = new BroadcastChannel('mubet_devtools');
+    bc.onmessage = function(e) {
+      var route = e.data && e.data.route;
+      if (route) handleDevToolsNav(route);
+    };
+  } catch(ex) {}
+
+  // localStorage fallback polling
+  var lastNavTs = 0;
+  setInterval(function() {
+    try {
+      var raw = localStorage.getItem('mubet_devtools_nav');
+      if (!raw) return;
+      var cmd = JSON.parse(raw);
+      if (!cmd.ts || cmd.ts <= lastNavTs) return;
+      lastNavTs = cmd.ts;
+      handleDevToolsNav(cmd.route);
+    } catch(ex) {}
+  }, 400);
+
+  function handleDevToolsNav(route) {
+    if (!route) return;
+    // Hash routes
+    if (route.charAt(0) === '#') {
+      location.hash = route;
+      return;
+    }
+    // JS-based navigation
+    switch(route) {
+      case 'lobby':
+        if (typeof goToLobby === 'function') goToLobby();
+        break;
+      case 'vipclub':
+        if (typeof goToVipClub === 'function') goToVipClub();
+        break;
+      case 'mission-tab-missions':
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('missions'); }
+        break;
+      case 'mission-tab-redeem':
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
+        break;
+      case 'mission-tab-leaderboard':
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('leaderboard'); }
+        break;
+      case 'redeem-hub':
+      case 'redeem-shop':
+      case 'redeem-spin':
+      case 'redeem-collect':
+      case 'redeem-vip':
+        var subView = route.replace('redeem-', '');
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
+        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView(subView); }, 100);
+        break;
+      default:
+        console.log('[DevTools] Unknown route:', route);
+    }
+  }
+})();
 </script>
 
 </body>

@@ -47,11 +47,198 @@ section { background: #11131c; border: 1px solid rgba(255,255,255,.08); border-r
 .btn-reset:hover { border-color: #ca2930; color: #f5f7fb; }
 .status { margin-top: 16px; padding: 12px; border-radius: 10px; background: rgba(255,255,255,.03); font-size: 11px; color: #9aa3b2; }
 .status strong { color: #ffe23e; }
+
+/* Sitemap */
+.sitemap-group { margin-bottom: 14px; }
+.sitemap-group-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #636e80; margin-bottom: 6px; padding-left: 2px; }
+.sitemap-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.sitemap-link {
+  padding: 7px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03); color: #c8cdd6; font-size: 11px; font-weight: 600;
+  cursor: pointer; transition: all .2s; white-space: nowrap; text-decoration: none; display: inline-block;
+}
+.sitemap-link:hover { border-color: #ca2930; background: rgba(222,46,54,.06); color: #f5f7fb; }
+.sitemap-link .sl-icon { margin-right: 4px; }
+.sitemap-link.sl-hash { color: #7eb8ff; }
+.sitemap-link.sl-js { color: #ffe23e; }
+.sitemap-link.sl-sub { color: #80e8a8; }
+.sitemap-divider { height: 1px; background: rgba(255,255,255,.06); margin: 12px 0; }
+
+/* Onboarding Journey */
+.journey-group { margin-bottom: 16px; }
+.journey-label {
+  font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px;
+  display: inline-block; margin-bottom: 8px; letter-spacing: .04em;
+}
+.journey-label.flow-a { background: rgba(255,226,62,.12); color: #ffe23e; }
+.journey-label.flow-b { background: rgba(74,125,254,.12); color: #7eb8ff; }
+.journey-label.flow-c { background: rgba(5,161,88,.12); color: #80e8a8; }
+.journey-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+.journey-step {
+  padding: 6px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03); font-size: 11px; font-weight: 600;
+  cursor: pointer; transition: all .2s; white-space: nowrap; color: #c8cdd6;
+}
+.journey-step:hover { border-color: #ca2930; background: rgba(222,46,54,.06); color: #f5f7fb; }
+.journey-step .step-num { display: inline-block; width: 16px; height: 16px; border-radius: 50%; background: rgba(255,255,255,.08); text-align: center; line-height: 16px; font-size: 9px; font-weight: 800; margin-right: 4px; }
+.journey-arrow { color: #636e80; font-size: 12px; font-weight: 300; }
+.journey-desc { font-size: 10px; color: #636e80; margin-top: 4px; }
 </style>
 </head>
 <body>
 
-<h1>&#9881; VIP1 Trial DevTools</h1>
+<h1>&#9881; Mubet Loyalty DevTools</h1>
+
+<section>
+  <h2>&#128506; Sitemap — All Routes</h2>
+
+  <div class="sitemap-group">
+    <div class="sitemap-group-title">Main Views</div>
+    <div class="sitemap-links">
+      <a class="sitemap-link sl-js" onclick="navTo('lobby')"><span class="sl-icon">🏠</span>Lobby</a>
+      <a class="sitemap-link sl-js" onclick="navTo('vipclub')"><span class="sl-icon">👑</span>VIP Club</a>
+    </div>
+  </div>
+
+  <div class="sitemap-divider"></div>
+
+  <div class="sitemap-group">
+    <div class="sitemap-group-title">Mission</div>
+    <div class="sitemap-links">
+      <a class="sitemap-link sl-hash" onclick="navTo('#/mission')"><span class="sl-icon">🎯</span>Mission Hub</a>
+      <a class="sitemap-link sl-js" onclick="navTo('mission-tab-missions')"><span class="sl-icon">📋</span>Tab: Missions</a>
+      <a class="sitemap-link sl-js" onclick="navTo('mission-tab-redeem')"><span class="sl-icon">🎁</span>Tab: Redeem</a>
+      <a class="sitemap-link sl-js" onclick="navTo('mission-tab-leaderboard')"><span class="sl-icon">🏆</span>Tab: Leaderboard</a>
+    </div>
+  </div>
+
+  <div class="sitemap-divider"></div>
+
+  <div class="sitemap-group">
+    <div class="sitemap-group-title">Redeem Sub-Views</div>
+    <div class="sitemap-links">
+      <a class="sitemap-link sl-sub" onclick="navTo('redeem-hub')"><span class="sl-icon">🏪</span>Hub</a>
+      <a class="sitemap-link sl-sub" onclick="navTo('redeem-shop')"><span class="sl-icon">🛍️</span>Shop</a>
+      <a class="sitemap-link sl-sub" onclick="navTo('redeem-spin')"><span class="sl-icon">🎰</span>Spin</a>
+      <a class="sitemap-link sl-sub" onclick="navTo('redeem-collect')"><span class="sl-icon">📦</span>Collect</a>
+      <a class="sitemap-link sl-sub" onclick="navTo('redeem-vip')"><span class="sl-icon">💎</span>VIP Shop</a>
+    </div>
+  </div>
+
+  <div class="sitemap-divider"></div>
+
+  <div class="sitemap-group">
+    <div class="sitemap-group-title">Live Challenge</div>
+    <div class="sitemap-links">
+      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge')"><span class="sl-icon">⚡</span>Live Challenge</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/missions')"><span class="sl-icon">📋</span>LC Missions</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/mission/1')"><span class="sl-icon">📝</span>LC Mission Detail</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rewards')"><span class="sl-icon">🎁</span>LC Rewards</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/milestones')"><span class="sl-icon">🏅</span>LC Milestones</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/leaderboard')"><span class="sl-icon">🏆</span>LC Leaderboard</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rules')"><span class="sl-icon">📖</span>LC Rules</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/history')"><span class="sl-icon">📜</span>LC History</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/end-season')"><span class="sl-icon">🏁</span>LC End Season</a>
+    </div>
+  </div>
+
+  <div class="sitemap-divider"></div>
+
+  <div class="sitemap-group">
+    <div class="sitemap-group-title">World Cup</div>
+    <div class="sitemap-links">
+      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/worldcup')"><span class="sl-icon">⚽</span>World Cup</a>
+    </div>
+  </div>
+
+  <div class="sitemap-divider"></div>
+
+  <div class="sitemap-group">
+    <div class="sitemap-group-title">Onboarding</div>
+    <div class="sitemap-links">
+      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/welcome')"><span class="sl-icon">👋</span>Welcome</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/login')"><span class="sl-icon">🔑</span>Login</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/offer-confirm')"><span class="sl-icon">✅</span>Offer Confirm</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/offer-select')"><span class="sl-icon">🎯</span>Offer Select</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit')"><span class="sl-icon">💰</span>Deposit</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit-confirm')"><span class="sl-icon">🏦</span>Deposit Confirm</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit-success')"><span class="sl-icon">🎉</span>Success</a>
+    </div>
+  </div>
+
+  <div class="sitemap-divider"></div>
+
+  <div class="sitemap-group">
+    <div class="sitemap-group-title">Account</div>
+    <div class="sitemap-links">
+      <a class="sitemap-link sl-hash" onclick="navTo('#/account')"><span class="sl-icon">👤</span>Account</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/account/my-promotions')"><span class="sl-icon">🎫</span>My Promotions</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/account/deposit')"><span class="sl-icon">💰</span>Deposit</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/account/withdraw')"><span class="sl-icon">💸</span>Withdraw</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/account/transaction-history')"><span class="sl-icon">📊</span>Transaction History</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/account/bet-history')"><span class="sl-icon">🎲</span>Bet History</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/account/gift-code')"><span class="sl-icon">🎟️</span>Gift Code</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/account/bank-info')"><span class="sl-icon">🏦</span>Bank Info</a>
+      <a class="sitemap-link sl-hash" onclick="navTo('#/account/my-profile')"><span class="sl-icon">✏️</span>My Profile</a>
+    </div>
+  </div>
+
+  <div class="status" id="navStatus" style="margin-top:12px">Click a route to navigate the prototype in another tab.</div>
+</section>
+
+<section>
+  <h2>🚀 Onboarding Journeys</h2>
+
+  <div class="journey-group">
+    <div class="journey-label flow-a">Luồng A — Đã biết ưu đãi + Đã đăng nhập</div>
+    <div class="journey-flow">
+      <a class="journey-step" onclick="navTo('#/onboarding/offer-confirm')"><span class="step-num">1</span>Offer Confirm</a>
+      <span class="journey-arrow">→</span>
+      <a class="journey-step" onclick="navTo('#/onboarding/deposit')"><span class="step-num">2</span>Deposit</a>
+      <span class="journey-arrow">→</span>
+      <a class="journey-step" onclick="navTo('#/onboarding/deposit-confirm')"><span class="step-num">3</span>Bank Confirm</a>
+      <span class="journey-arrow">→</span>
+      <a class="journey-step" onclick="navTo('#/onboarding/deposit-success')"><span class="step-num">4</span>Success</a>
+    </div>
+    <div class="journey-desc">Xác nhận ưu đãi → Nạp → Xác nhận CK → Thành công</div>
+  </div>
+
+  <div class="sitemap-divider"></div>
+
+  <div class="journey-group">
+    <div class="journey-label flow-b">Luồng B — Chưa biết ưu đãi + Đã đăng nhập</div>
+    <div class="journey-flow">
+      <a class="journey-step" onclick="navTo('#/onboarding/offer-select')"><span class="step-num">1</span>Offer Select</a>
+      <span class="journey-arrow">→</span>
+      <a class="journey-step" onclick="navTo('#/onboarding/deposit')"><span class="step-num">2</span>Deposit</a>
+      <span class="journey-arrow">→</span>
+      <a class="journey-step" onclick="navTo('#/onboarding/deposit-confirm')"><span class="step-num">3</span>Bank Confirm</a>
+      <span class="journey-arrow">→</span>
+      <a class="journey-step" onclick="navTo('#/onboarding/deposit-success')"><span class="step-num">4</span>Success</a>
+    </div>
+    <div class="journey-desc">Chọn ưu đãi → Nạp → Xác nhận CK → Thành công</div>
+  </div>
+
+  <div class="sitemap-divider"></div>
+
+  <div class="journey-group">
+    <div class="journey-label flow-c">Luồng C — Chưa biết ưu đãi + Chưa đăng nhập</div>
+    <div class="journey-flow">
+      <a class="journey-step" onclick="navTo('#/onboarding/welcome')"><span class="step-num">1</span>Welcome</a>
+      <span class="journey-arrow">→</span>
+      <a class="journey-step" onclick="navTo('#/onboarding/login')"><span class="step-num">2</span>Login</a>
+      <span class="journey-arrow">→</span>
+      <a class="journey-step" onclick="navTo('#/onboarding/offer-select')"><span class="step-num">3</span>Offer Select</a>
+      <span class="journey-arrow">→</span>
+      <a class="journey-step" onclick="navTo('#/onboarding/deposit')"><span class="step-num">4</span>Deposit</a>
+      <span class="journey-arrow">→</span>
+      <a class="journey-step" onclick="navTo('#/onboarding/deposit-confirm')"><span class="step-num">5</span>Bank Confirm</a>
+      <span class="journey-arrow">→</span>
+      <a class="journey-step" onclick="navTo('#/onboarding/deposit-success')"><span class="step-num">6</span>Success</a>
+    </div>
+    <div class="journey-desc">Welcome/Trust → Đăng nhập → Chọn ưu đãi → Nạp → Xác nhận CK → Thành công</div>
+  </div>
+</section>
 
 <section>
   <h2>Quick States</h2>
@@ -251,6 +438,109 @@ try {
     updateStatus(state);
   }
 } catch(e) {}
+
+// ── Sitemap Navigation ──
+function navTo(route) {
+  const navStatusEl = document.getElementById('navStatus');
+
+  // Store the navigation command
+  const cmd = { route: route, ts: Date.now() };
+  localStorage.setItem('mubet_devtools_nav', JSON.stringify(cmd));
+
+  // Try to send via BroadcastChannel
+  try {
+    const bc = new BroadcastChannel('mubet_devtools');
+    bc.postMessage(cmd);
+    bc.close();
+  } catch(e) {}
+
+  // Visual feedback
+  navStatusEl.style.transition = 'background .15s';
+  navStatusEl.style.background = 'rgba(5,161,88,.15)';
+  navStatusEl.innerHTML = `Navigating to: <strong>${route}</strong>`;
+  setTimeout(() => { navStatusEl.style.background = ''; }, 800);
+}
+</script>
+
+<script>
+// ── Inject navigation listener into prototype via shared JS ──
+// The prototype should include this listener. We also store a small
+// helper that the prototype can pick up on load.
+const NAV_LISTENER_CODE = `
+// DevTools navigation listener
+(function() {
+  try {
+    var bc = new BroadcastChannel('mubet_devtools');
+    bc.onmessage = function(e) {
+      var route = e.data.route;
+      if (!route) return;
+      handleDevToolsNav(route);
+    };
+  } catch(ex) {}
+
+  // Also poll localStorage fallback
+  setInterval(function() {
+    try {
+      var raw = localStorage.getItem('mubet_devtools_nav');
+      if (!raw) return;
+      var cmd = JSON.parse(raw);
+      if (cmd._handled) return;
+      cmd._handled = true;
+      localStorage.setItem('mubet_devtools_nav', JSON.stringify(cmd));
+      handleDevToolsNav(cmd.route);
+    } catch(ex) {}
+  }, 500);
+
+  function handleDevToolsNav(route) {
+    // Hash routes
+    if (route.startsWith('#')) {
+      location.hash = route;
+      return;
+    }
+    // JS-based navigation
+    switch(route) {
+      case 'lobby':
+        if (typeof goToLobby === 'function') goToLobby();
+        break;
+      case 'vipclub':
+        if (typeof goToVipClub === 'function') goToVipClub();
+        break;
+      case 'mission-tab-missions':
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('missions'); }
+        break;
+      case 'mission-tab-redeem':
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
+        break;
+      case 'mission-tab-leaderboard':
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('leaderboard'); }
+        break;
+      case 'redeem-hub':
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
+        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView('hub'); }, 100);
+        break;
+      case 'redeem-shop':
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
+        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView('shop'); }, 100);
+        break;
+      case 'redeem-spin':
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
+        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView('spin'); }, 100);
+        break;
+      case 'redeem-collect':
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
+        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView('collect'); }, 100);
+        break;
+      case 'redeem-vip':
+        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
+        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView('vip'); }, 100);
+        break;
+      default:
+        console.log('Unknown devtools route:', route);
+    }
+  }
+})();
+`;
+localStorage.setItem('mubet_devtools_listener', NAV_LISTENER_CODE);
 </script>
 </body>
 </html>

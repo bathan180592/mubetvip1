@@ -32,7 +32,11 @@
       "Bash(ls -lh *.png)",
       "Bash(file \"Ref\"/*.png)",
       "Bash(for f:*)",
-      "Bash(do cp:*)"
+      "Bash(do cp:*)",
+      "Bash(for i:*)",
+      "Bash(do mv:*)",
+      "Bash(mv \"Assets/assets \\(1\\)/asset 34.svg\" \"Assets/assets \\(1\\)/asset 36.webp\" \"Assets/assets \\(1\\)/asset 37.webp\" \"Assets/assets \\(1\\)/asset 38.webp\" \"Assets/assets \\(1\\)/asset 39.webp\" \"Assets/assets \\(1\\)/asset 40.webp\" Ref/)",
+      "Bash(mv \"Mubet layout.png\" Ref/)"
     ]
   }
 }
