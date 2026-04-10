@@ -10187,8 +10187,13 @@ function showLiveChallengeFullPage() {
   html += '<div class="lc-quick-action" style="flex:1" onclick="navigateTo(\'/mission/live-challenge/rules\')"><div class="lc-quick-action-icon">' + lcIcon('clipboard','neon-blue') + '</div>Thể lệ</div>';
   html += '</div>';
 
+  // Mission list CTA
+  html += '<div style="padding:0 16px 12px;">';
+  html += '<button class="mission-btn mission-btn-claim" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px;" onclick="navigateTo(\'/mission/live-challenge/missions\')">Danh sách nhiệm vụ</button>';
+  html += '</div>';
+
   // Recommended missions
-  html += '<div style="padding:0 16px 140px;">';
+  html += '<div style="padding:0 16px 80px;">';
   html += '<div class="lc-section-title" style="justify-content:space-between;">' + lcIcon('star','neon-gold') + ' Đề xuất cho bạn <span style="font-size:11px;font-weight:600;color:var(--tertiary-300);cursor:pointer;" onclick="navigateTo(\'/mission/live-challenge/missions\')">Xem tất cả →</span></div>';
   var recommended = MOCK_LC_MISSIONS.filter(function(m) { return m.group === 'recommended'; });
   html += '<div class="mission-cards">';
@@ -10265,10 +10270,6 @@ function showLiveChallengeFullPage() {
 
   html += '</div>'; // padding wrapper
 
-  // Sticky CTA at bottom
-  html += '<div style="position:fixed;bottom:68px;left:0;right:0;padding:12px 16px;background:linear-gradient(to top,var(--bg) 80%,transparent);z-index:10;max-width:430px;margin:0 auto;">';
-  html += '<button class="mission-btn mission-btn-claim" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px;" onclick="event.stopPropagation();navigateTo(\'/mission/live-challenge/missions\')">Làm nhiệm vụ ngay</button>';
-  html += '</div>';
 
   container.innerHTML = html;
   missionScrollTop();
