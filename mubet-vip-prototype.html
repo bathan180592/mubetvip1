@@ -2161,7 +2161,7 @@ img { max-width: 100%; display: block; }
   background:
     linear-gradient(160deg, rgba(255,226,62,.08) 0%, rgba(255,226,62,.03) 30%, transparent 60%),
     linear-gradient(180deg, rgba(30,28,38,1) 0%, rgba(22,20,30,.98) 100%);
-  border: 1px solid rgba(255,226,62,.15); border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,226,62,.15); border-radius: 0;
   overflow: hidden; position: relative;
   box-shadow: 0 4px 24px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.03) inset;
 }
@@ -2322,6 +2322,239 @@ img { max-width: 100%; display: block; }
 .vip-status-action-btn.primary:hover {
   transform: translateY(-1px); box-shadow: 0 4px 16px rgba(202,41,48,.35);
 }
+
+/* ===== Hologram Dashboard ===== */
+.holo-dash {
+  position: relative; padding: 20px 0 0; overflow: hidden;
+}
+.holo-scan-line {
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(100,200,255,.15), transparent);
+  animation: holoScan 4s linear infinite;
+  z-index: 1;
+}
+@keyframes holoScan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+.holo-grid-bg {
+  position: absolute; inset: 0; opacity: .03;
+  background-image:
+    linear-gradient(rgba(100,200,255,.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100,200,255,.3) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+/* Ambassador + floating stats composite */
+.holo-ambassador-wrap {
+  position: relative; z-index: 1; margin-bottom: 6px;
+  margin-left: -16px; margin-right: -16px; margin-top: -20px;
+  padding: 0 16px 0;
+  background: url('Assets/vip-holo-bg.png') center top / cover no-repeat;
+  border-radius: 14px 14px 0 0;
+  overflow: hidden;
+}
+.holo-hero-text {
+  position: relative; z-index: 3;
+  text-align: center;
+  padding: 24px 8px 26px;
+}
+.holo-hero-text .hero-badge {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+.holo-hero-text h1 {
+  font-size: 28px; font-weight: 900; line-height: 1.1;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.holo-hero-text .hero-desc {
+  font-size: 12.5px; line-height: 1.5;
+  color: rgba(255,255,255,.75);
+  margin: 0 auto 12px;
+  max-width: none;
+  text-align: center;
+}
+.holo-hero-text .hero-vip-cards {
+  display: flex; gap: 10px; justify-content: center;
+}
+.holo-ambassador-img {
+  width: 100%; height: auto; object-fit: contain; display: block;
+  position: relative; z-index: 2; margin-top: 20px;
+  filter: drop-shadow(0 0 24px rgba(232,212,139,.2)) drop-shadow(0 6px 20px rgba(0,0,0,.5));
+}
+.holo-ambassador-glow {
+  position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
+  width: 60%; height: 20px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(232,212,139,.15) 0%, transparent 70%);
+  filter: blur(10px); z-index: 1;
+}
+
+/* Tier badge — bottom-left of ambassador */
+.holo-tier-badge-float {
+  position: absolute; bottom: 8px; left: 10px;
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 10px;
+  background: rgba(0,0,0,.6); backdrop-filter: blur(8px);
+  border: 1px solid rgba(232,212,139,.2);
+  box-shadow: 0 0 12px rgba(232,212,139,.1);
+  z-index: 5;
+}
+.holo-tier-badge-float img { width: 24px; height: 24px; object-fit: contain; }
+.holo-tier-badge-float .holo-tier-name {
+  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .05em;
+  background: var(--metallic-gold); background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: goldShimmer 4s ease-in-out infinite;
+}
+
+/* CSS hologram stat cards — pixel-perfect text */
+.holo-stats-css {
+  position: absolute; z-index: 4;
+  left: 0; right: 0; top: 50%;
+  transform: translateY(calc(-50% - 65px));
+  display: flex; justify-content: center; gap: 6px;
+  padding: 0 8px;
+  pointer-events: none;
+  perspective: 800px;
+}
+.holo-stat-card {
+  flex: 1; max-width: 90px;
+  padding: 10px 4px 8px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(5,12,25,0.55) 50%, rgba(212,175,55,0.03) 100%);
+  border: 1px solid rgba(212,175,55,0.25);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  transform: rotateY(var(--card-rotate, 0deg));
+  animation: holoCardFloat 6s ease-in-out infinite;
+  animation-delay: var(--card-delay, 0s);
+}
+.holo-stat-card::before {
+  content: '';
+  position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,226,62,0.6), transparent);
+}
+.holo-stat-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 40%, transparent 80%, rgba(212,175,55,0.03) 100%);
+  pointer-events: none;
+}
+@keyframes holoCardFloat {
+  0%, 100% { transform: rotateY(var(--card-rotate, 0deg)) translateY(0); }
+  50% { transform: rotateY(var(--card-rotate, 0deg)) translateY(-2px); }
+}
+.holo-stat-val {
+  font-family: Montserrat, sans-serif;
+  font-size: 18px; font-weight: 900;
+  line-height: 1.1;
+  background: var(--metallic-gold);
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 4s ease-in-out infinite;
+  margin-bottom: 3px;
+  letter-spacing: -0.5px;
+}
+.holo-stat-label {
+  font-family: Arial, sans-serif;
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(230,220,190,0.8);
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+}
+/* Corner accents */
+.holo-stat-card .corner-tl,
+.holo-stat-card .corner-br {
+  position: absolute; width: 10px; height: 10px;
+  pointer-events: none;
+}
+.holo-stat-card .corner-tl {
+  top: 3px; left: 3px;
+  border-top: 1.5px solid rgba(240,216,101,0.4);
+  border-left: 1.5px solid rgba(240,216,101,0.4);
+}
+.holo-stat-card .corner-br {
+  bottom: 3px; right: 3px;
+  border-bottom: 1.5px solid rgba(240,216,101,0.4);
+  border-right: 1.5px solid rgba(240,216,101,0.4);
+}
+/* Scan line across card */
+.holo-stat-card .holo-card-scan {
+  position: absolute; left: 0; right: 0; height: 1px;
+  background: rgba(212,175,55,0.12);
+  animation: holoCardScan 5s linear infinite;
+  animation-delay: var(--card-delay, 0s);
+}
+@keyframes holoCardScan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Legacy support */
+.holo-stats-3d-wrap { display: none; }
+.holo-center { display: none; }
+.holo-stats { display: none; }
+
+/* Progress section */
+.holo-progress { position: relative; z-index: 1; margin-bottom: 4px; padding: 0 16px; }
+.holo-progress-header {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-bottom: 10px;
+}
+.holo-progress-from {
+  font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 700;
+  color: var(--tertiary-400); padding: 3px 10px; border-radius: 6px;
+  background: rgba(232,212,139,.08); border: 1px solid rgba(232,212,139,.15);
+  display: flex; align-items: center; gap: 5px;
+}
+.holo-progress-to {
+  font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 700;
+  color: var(--primary-300); padding: 3px 10px; border-radius: 6px;
+  background: rgba(202,41,48,.08); border: 1px solid rgba(202,41,48,.15);
+  display: flex; align-items: center; gap: 5px;
+}
+.holo-progress-icon {
+  width: 20px; height: 20px; object-fit: contain;
+}
+.holo-progress-arrow { opacity: .5; }
+.holo-progress-track {
+  height: 6px; border-radius: 3px; background: rgba(255,255,255,.06);
+  position: relative; overflow: visible; margin-bottom: 6px;
+}
+.holo-progress-fill {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, rgba(232,212,139,.4), #e8d48b);
+  box-shadow: 0 0 8px rgba(232,212,139,.3);
+  position: relative;
+}
+.holo-progress-glow {
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #e8d48b;
+  box-shadow: 0 0 8px #e8d48b, 0 0 16px rgba(232,212,139,.4);
+  animation: holoGlowPulse 2s ease-in-out infinite;
+}
+@keyframes holoGlowPulse {
+  0%,100% { box-shadow: 0 0 8px #e8d48b, 0 0 16px rgba(232,212,139,.4); }
+  50% { box-shadow: 0 0 12px #e8d48b, 0 0 24px rgba(232,212,139,.5); }
+}
+.holo-progress-info {
+  display: flex; justify-content: space-between; font-size: 11px;
+  color: var(--tertiary-400); font-weight: 600;
+}
+.holo-progress-pct { color: var(--muted); }
 
 /* Trial Overlay */
 .trial-overlay {
@@ -2604,7 +2837,7 @@ img { max-width: 100%; display: block; }
   transform: translateX(-50%) translateY(100%); border-radius: 24px 24px 0 0; max-height: 92vh;
 }
 .trial-view.open { transform: translateX(-50%) translateY(0); }
-.vip-status-card { max-width: none; margin: -20px 0 0; position: relative; z-index: 3; }
+.vip-status-card { max-width: none; margin: -20px -16px 0; position: relative; z-index: 3; }
 .vip-status-top { padding: 14px 16px 10px; gap: 12px; }
 .vip-status-icon { width: 40px; height: 40px; }
 .vip-status-tier-name { font-size: 15px; }
@@ -3781,8 +4014,8 @@ img { max-width: 100%; display: block; }
   pointer-events: none; z-index: 1;
 }
 .acct-voucher-mini {
-  flex: 0 0 min(130px, calc(50% - 5px)); background: url('Assets/voucher_backround_1.png') center/cover no-repeat; border-radius: 8px;
-  padding: 10px; text-align: center; position: relative; border: 1px solid rgba(180,140,60,.3);
+  flex: 0 0 min(130px, calc(50% - 5px)); background: linear-gradient(135deg, rgba(40,30,15,.9) 0%, rgba(55,40,20,.85) 50%, rgba(40,30,15,.9) 100%); border-radius: 8px;
+  padding: 10px; text-align: center; position: relative; border: 1px solid rgba(180,140,60,.25);
 }
 .acct-voucher-mini-icon { font-size: 22px; margin-bottom: 4px; }
 .acct-voucher-mini-value { font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800; color: var(--tertiary-400); letter-spacing: -.02em; }
@@ -4289,7 +4522,7 @@ img { max-width: 100%; display: block; }
 }
 .mission-back-btn:hover { background: rgba(255,255,255,.08); color: var(--text); }
 .mission-back-btn svg { width: 16px; height: 16px; }
-.mission-header-title { font-size: 14px; font-weight: 700; }
+.mission-header-title { font-size: 14px; font-weight: 700; flex: 1; text-align: center; margin-right: 28px; }
 
 /* Redeem page */
 .redeem-page { padding: 0; }
@@ -5110,20 +5343,37 @@ img { max-width: 100%; display: block; }
 
 /* LC Quick Actions */
 .lc-quick-actions {
-  display: flex; gap: 8px; margin-bottom: 16px;
-  overflow-x: auto; -webkit-overflow-scrolling: touch;
-  padding-bottom: 2px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  margin-bottom: 16px;
 }
-.lc-quick-actions::-webkit-scrollbar { display: none; }
 .lc-quick-action {
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  padding: 6px 8px; min-width: 0; border-radius: 10px;
-  background: var(--panel); border: 1px solid var(--line);
-  font-size: 9px; color: var(--muted); cursor: pointer;
-  transition: all .2s; flex-shrink: 0; white-space: nowrap;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 12px 4px 10px; border-radius: 14px;
+  background: linear-gradient(145deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.01) 100%);
+  border: 1px solid rgba(255,255,255,.06);
+  font-size: 10px; font-weight: 600; color: rgba(255,255,255,.55); cursor: pointer;
+  transition: all .25s ease; white-space: nowrap; position: relative; overflow: hidden;
 }
-.lc-quick-action:hover { background: var(--panel-2); border-color: rgba(255,160,40,.3); color: var(--tertiary-300); }
-.lc-quick-action-icon { font-size: 16px; }
+.lc-quick-action::before {
+  content: ''; position: absolute; inset: 0; border-radius: 14px; opacity: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(245,158,11,.1) 0%, transparent 70%);
+  transition: opacity .25s;
+}
+.lc-quick-action:hover { border-color: rgba(245,158,11,.25); color: var(--tertiary-300); transform: translateY(-1px); }
+.lc-quick-action:hover::before { opacity: 1; }
+.lc-quick-action:active { transform: scale(.96); }
+.lc-quick-action-icon {
+  width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  font-size: 19px; position: relative;
+  background: linear-gradient(135deg, rgba(245,158,11,.15) 0%, rgba(245,158,11,.05) 100%);
+  border: 1px solid rgba(245,158,11,.18);
+  box-shadow: 0 4px 12px rgba(245,158,11,.1), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.lc-quick-action:nth-child(4) .lc-quick-action-icon {
+  background: linear-gradient(135deg, rgba(96,165,250,.12) 0%, rgba(96,165,250,.04) 100%);
+  border-color: rgba(96,165,250,.15);
+  box-shadow: 0 2px 8px rgba(96,165,250,.08);
+}
 
 /* LC Mission Cards */
 .lc-card { border-left: 3px solid rgba(255,160,40,.3); }
@@ -5372,21 +5622,53 @@ img { max-width: 100%; display: block; }
 }
 
 /* Leaderboard */
+.lc-lb-hero-banner {
+  position: relative; border-radius: 16px; overflow: hidden; margin: 12px 0;
+  min-height: 160px;
+}
+.lc-lb-hero-banner-img {
+  width: 100%; height: 160px; object-fit: cover; display: block;
+}
+.lc-lb-hero-banner-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.6) 100%);
+}
+.lc-hero-breadcrumb {
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
+  padding: 5px 12px 5px 8px; border-radius: 20px;
+  background: rgba(0,0,0,.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  font-size: 11px; font-weight: 600; color: rgba(255,255,255,.8);
+  transition: all .2s;
+  border: 1px solid rgba(255,255,255,.1);
+}
+.lc-hero-breadcrumb:hover { background: rgba(0,0,0,.6); color: #fff; }
+.lc-hero-breadcrumb svg { opacity: .7; }
+.lc-lb-hero-banner-content {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; text-align: left;
+}
 .lc-lb-hero {
-  padding: 24px 16px; border-radius: 16px; margin: 16px 0; text-align: center;
+  padding: 20px 16px; border-radius: 16px; margin: 16px 0; text-align: center;
   background: linear-gradient(135deg, rgba(180,83,9,.15), rgba(251,191,36,.08));
   border: 1px solid rgba(255,160,40,.2);
 }
 .lc-lb-hero-title {
-  font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800; color: var(--tertiary-400);
+  font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 900;
+  letter-spacing: -.02em;
+  background: var(--metallic-gold); background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(255,226,62,.2));
 }
-.lc-lb-hero-pool {
-  font-family: Montserrat, sans-serif; font-size: 28px; font-weight: 800;
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  margin: 6px 0;
+.lc-lb-hero-sub {
+  font-size: 12px; color: var(--text-2); margin-top: 4px;
+  text-shadow: 0 1px 4px rgba(0,0,0,.5);
 }
-.lc-lb-hero-countdown { font-size: 12px; color: var(--muted); }
+.lc-lb-hero-countdown {
+  font-size: 11px; color: rgba(255,255,255,.5); margin-top: 4px;
+  text-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
 
 .lc-lb-myrank {
   display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 14px;
@@ -5437,7 +5719,133 @@ img { max-width: 100%; display: block; }
   background: var(--panel); border: 1px solid var(--line);
 }
 .lc-lb-dist-rank { color: var(--muted); font-weight: 600; }
-.lc-lb-dist-reward { color: var(--tertiary-300); font-weight: 700; }
+.lc-lb-dist-reward { color: var(--tertiary-300); font-weight: 700; font-size: 11px; }
+
+/* Race Finish (top 3) */
+.lb-race {
+  position: relative; padding: 16px 0 8px; margin-bottom: 8px;
+}
+.lb-race-finish { display: none; }
+.lb-race-track::after {
+  content: ''; position: absolute; right: 10px; top: 2px; bottom: 2px; width: 3px; z-index: 3;
+  background: repeating-linear-gradient(180deg,
+    #fff 0px, #fff 4px,
+    #ef4444 4px, #ef4444 8px);
+  border-radius: 1px;
+  box-shadow: 0 0 6px rgba(255,255,255,.2);
+  opacity: .7;
+}
+.lb-race-lane {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+  position: relative;
+}
+.lb-race-rank {
+  font-size: 18px; width: 24px; text-align: center; flex-shrink: 0;
+}
+.lb-race-track {
+  flex: 1; height: 44px; background: rgba(255,255,255,.03); border-radius: 12px;
+  position: relative; overflow: visible;
+  border: 1px solid rgba(255,255,255,.05);
+}
+.lb-race-track::before {
+  content: ''; position: absolute; top: 50%; left: 8px; right: 16px; height: 2px;
+  transform: translateY(-50%); z-index: 0; border-radius: 1px;
+  background: repeating-linear-gradient(90deg,
+    rgba(255,255,255,.1) 0px, rgba(255,255,255,.1) 12px,
+    transparent 12px, transparent 24px);
+  background-size: 24px 2px;
+  animation: roadMove 1s linear infinite;
+}
+@keyframes roadMove {
+  0% { background-position: 0 0; }
+  100% { background-position: -24px 0; }
+}
+.lb-race-bar {
+  height: 100%; border-radius: 12px; position: relative;
+  transition: width 1s cubic-bezier(.25,.8,.25,1);
+  min-width: 50px; max-width: 80%; overflow: visible;
+}
+.lb-race-bar::after {
+  content: ''; position: absolute; inset: 0; border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+.lb-race-car {
+  position: absolute; right: -12px; top: 50%; transform: translateY(-50%);
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+  z-index: 2; filter: drop-shadow(2px 2px 4px rgba(0,0,0,.6));
+}
+.lb-race-car-img {
+  width: 100%; height: 100%; object-fit: contain;
+}
+/* Gold car = bigger */
+.lb-race-bar.gold .lb-race-car {
+  width: 72px; height: 72px; right: -16px;
+  filter: drop-shadow(2px 2px 8px rgba(245,158,11,.5)) drop-shadow(0 0 12px rgba(245,158,11,.3));
+}
+/* Speed lines behind cars */
+.lb-race-bar::before {
+  content: ''; position: absolute; right: 30px; top: 50%; transform: translateY(-50%);
+  width: 50px; height: 2px; z-index: 1; border-radius: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.15));
+  animation: speedPulse 1.5s ease-in-out infinite;
+}
+.lb-race-bar.gold::before {
+  width: 70px; height: 3px; right: 50px;
+  background: linear-gradient(90deg, transparent, rgba(245,158,11,.25));
+}
+@keyframes speedPulse {
+  0%, 100% { opacity: .3; transform: translateY(-50%) scaleX(.7); }
+  50% { opacity: 1; transform: translateY(-50%) scaleX(1); }
+}
+/* Speed streak lines */
+.lb-race-lane::after {
+  content: ''; position: absolute; left: 40px; top: 50%; width: 30px; height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,.08), transparent);
+  transform: translateY(-50%); pointer-events: none;
+}
+.lb-race-info {
+  position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+  z-index: 2; display: flex; align-items: center; gap: 6px;
+}
+.lb-race-name {
+  font-size: 11px; font-weight: 700; color: rgba(255,255,255,.9);
+  white-space: nowrap; text-shadow: 0 1px 3px rgba(0,0,0,.6);
+}
+.lb-race-missions {
+  font-family: Montserrat, sans-serif; font-size: 11px; font-weight: 800;
+  color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.6);
+}
+
+/* Staircase list (4-10+) */
+.lb-stair-row {
+  display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+  border-radius: 10px; margin-bottom: 4px; background: var(--panel); border: 1px solid var(--line);
+}
+.lb-stair-rank {
+  width: 24px; text-align: center; font-family: Montserrat, sans-serif;
+  font-size: 13px; font-weight: 800; color: var(--muted); flex-shrink: 0;
+}
+.lb-stair-avatar {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  background: var(--panel-2); display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--muted);
+}
+.lb-stair-info { flex: 1; min-width: 0; }
+.lb-stair-name { font-size: 12px; font-weight: 600; color: var(--text-1); margin-bottom: 4px; }
+.lb-stair-bar-wrap {
+  width: 100%; height: 4px; border-radius: 2px; background: rgba(255,255,255,.06);
+}
+.lb-stair-bar {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, var(--tertiary-400), rgba(245,158,11,.4));
+  transition: width .6s ease;
+}
+.lb-stair-stat { text-align: right; flex-shrink: 0; }
+.lb-stair-missions {
+  font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 700; color: var(--tertiary-300);
+}
+.lb-stair-score { font-size: 10px; color: var(--muted); margin-top: 1px; }
 
 /* Rules / Accordion */
 .lc-rules-section {
@@ -6228,6 +6636,7 @@ img { max-width: 100%; display: block; }
 .onb-step-line { width: 24px; height: 2px; background: rgba(255,255,255,.08); }
 .onb-step-line.done { background: rgba(5,161,88,.3); }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
@@ -8713,9 +9122,9 @@ function updateTrialHeroCard() {
   const heroStatsWrap = document.getElementById('heroStatsWrap');
 
   if (isVipMember) {
-    // VIP member: show VIP cards, hide stats + CTA + trial card
-    if (heroVipCards) { heroVipCards.style.display = ''; heroVipCards.querySelector('#heroVipTier').textContent = 'VIP' + currentUser.tier; }
-    if (heroStatsWrap) heroStatsWrap.style.display = 'none';
+    // VIP member: hide hero banner, keep hero-below for VIP status card
+    var heroBanner = document.querySelector('.hero-banner');
+    if (heroBanner) heroBanner.style.display = 'none';
     if (heroCta) heroCta.style.display = 'none';
     if (trialCard) trialCard.style.display = 'none';
     updateVipStatusCard();
@@ -8815,43 +9224,99 @@ function updateVipStatusCard() {
 
   const tierSinceStr = currentUser.tierSince ? new Date(currentUser.tierSince).toLocaleDateString('vi-VN') : '--';
 
+  // Hologram dashboard
+  var nextBadgeIcon = nextTier ? (TIER_ICONS[nextTier.tier] || '') : '';
+  var curBadgeIcon = TIER_ICONS[tierData.tier] || '';
+
+  // SVG curved screen border — left-curved, right-curved, both-curved
   inner.innerHTML = `
-    <div class="vip-status-top-v2">
-      <div class="vip-status-icon"><img src="${TIER_ICONS[tierData.tier]}" alt="${tierData.name}"/></div>
-      <div class="vip-status-info">
-        <div class="vip-status-tier-name-v2">${tierData.name}</div>
-        <div class="vip-status-greeting-v2">${tierData.fullName} · Từ ${tierSinceStr}</div>
-      </div>
-      <div class="vip-status-stats-inline">
-        <div class="vip-status-stat-pill">
-          <span class="vip-status-stat-val">${fmtShort(currentUser.totalCashbackReceived || 0)}</span>
-          <span class="vip-status-stat-label">Hoàn trả</span>
+    <div class="holo-dash">
+      <div class="holo-scan-line"></div>
+      <div class="holo-grid-bg"></div>
+
+      <!-- CSS hologram stat cards — pixel-perfect text -->
+      <div class="holo-stats-css">
+        <div class="holo-stat-card" style="--card-rotate:-4deg;--card-delay:0s">
+          <span class="corner-tl"></span><span class="corner-br"></span>
+          <div class="holo-card-scan"></div>
+          <div class="holo-stat-val">${fmtShort(currentUser.totalCashbackReceived || 0)}</div>
+          <div class="holo-stat-label">Hoàn trả</div>
         </div>
-        <div class="vip-status-stat-pill">
-          <span class="vip-status-stat-val green">${fmtShort(currentUser.totalBonusReceived || 0)}</span>
-          <span class="vip-status-stat-label">Thưởng</span>
+        <div class="holo-stat-card" style="--card-rotate:-1.5deg;--card-delay:0.4s">
+          <span class="corner-tl"></span><span class="corner-br"></span>
+          <div class="holo-card-scan"></div>
+          <div class="holo-stat-val">${fmtShort(currentUser.totalBonusReceived || 0)}</div>
+          <div class="holo-stat-label">Thưởng</div>
         </div>
+        <div class="holo-stat-card" style="--card-rotate:1.5deg;--card-delay:0.8s">
+          <span class="corner-tl"></span><span class="corner-br"></span>
+          <div class="holo-card-scan"></div>
+          <div class="holo-stat-val">#${currentUser.xp || 150}</div>
+          <div class="holo-stat-label">Xếp hạng</div>
+        </div>
+        ${nextTier && remaining > 0 ? `
+        <div class="holo-stat-card" style="--card-rotate:4deg;--card-delay:1.2s">
+          <span class="corner-tl"></span><span class="corner-br"></span>
+          <div class="holo-card-scan"></div>
+          <div class="holo-stat-val">${fmtShort(remaining)}</div>
+          <div class="holo-stat-label">Cần nạp thêm</div>
+        </div>` : ''}
       </div>
-    </div>
-    ${nextTier ? `
-    <div class="vip-status-progress-section">
-      <div class="vip-status-progress-header">
-        <span class="vip-status-progress-title">Tiến độ thăng hạng</span>
-        <span class="vip-status-progress-next" style="color:${nextTier.color}">${nextTier.name}</span>
+
+      <!-- Ambassador with hero content + badge -->
+      <div class="holo-ambassador-wrap">
+        <!-- Hero text overlay (top, centered) -->
+        <div class="holo-hero-text">
+          <div class="hero-badge">Đẳng cấp hội viên</div>
+          <h1>Đặc Quyền<br/><span class="gold">VIP</span></h1>
+          <p class="hero-desc">
+            Nạp càng nhiều, nhận càng lớn. Thưởng thăng hạng đến
+            <strong style="color:var(--tertiary-400)">120 triệu</strong>, hoàn trả hằng ngày
+            và đặc quyền riêng theo cấp bậc của bạn.
+          </p>
+        </div>
+        <!-- Ambassador image -->
+        <img src="Assets/vip-ambassador-holo.png" alt="VIP Ambassador" class="holo-ambassador-img"/>
+        <!-- VIP badge bottom-left -->
+        <div class="holo-tier-badge-float">
+          <img src="${curBadgeIcon}" alt="${tierData.name}"/>
+          <span class="holo-tier-name">${tierData.name}</span>
+        </div>
+        <div class="holo-ambassador-glow"></div>
       </div>
-      <div class="vip-status-row" style="border:none;padding-bottom:4px;">
-        <span class="vip-status-row-label">${remaining > 0 ? `Còn ${fmtFull(remaining)}đ` : 'Đã đủ điều kiện!'}</span>
-        <span class="vip-status-row-value" style="color:var(--primary-300)">${progress}%</span>
+
+      ${nextTier ? `
+      <!-- Progress arc -->
+      <div class="holo-progress">
+        <div class="holo-progress-header">
+          <div class="holo-progress-from"><img src="${curBadgeIcon}" alt="" class="holo-progress-icon"/>${tierData.name}</div>
+          <div class="holo-progress-arrow">
+            <svg viewBox="0 0 40 12" width="40" height="12" fill="none">
+              <path d="M0 6h36M30 1l6 5-6 5" stroke="rgba(232,212,139,.4)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="holo-progress-to"><img src="${nextBadgeIcon}" alt="" class="holo-progress-icon"/>${nextTier.name}</div>
+        </div>
+        <div class="holo-progress-track">
+          <div class="holo-progress-fill" style="width:${progress}%"></div>
+          <div class="holo-progress-glow" style="left:${progress}%"></div>
+        </div>
+        <div class="holo-progress-info">
+          <span class="holo-progress-pct">${progress}%</span>
+          <span>${remaining > 0 ? 'Còn ' + fmtFull(remaining) + 'đ' : 'Đã đủ điều kiện!'}</span>
+        </div>
+        <div class="vip-status-maintain ${maintainClass}">${maintainText}</div>
+      </div>` : `
+      <div class="holo-progress">
+        <div class="vip-status-maintain ${maintainClass}">${maintainText}</div>
+      </div>`}
+
+      <!-- Actions -->
+      <div class="vip-status-actions-v2">
+        <button class="vip-status-action-btn" onclick="scrollToNextTier(${currentUser.tier})">Quyền lợi</button>
+        <button class="vip-status-action-btn primary" onclick="openPromoView()">Đổi quà VIP</button>
+        ${nextTier ? `<button class="vip-status-action-btn" onclick="scrollToNextTier(${nextTier.tier})">Xem ${nextTier.name}</button>` : ''}
       </div>
-      <div class="vip-status-maintain ${maintainClass}">${maintainText}</div>
-    </div>` : `
-    <div class="vip-status-progress-section">
-      <div class="vip-status-maintain ${maintainClass}">${maintainText}</div>
-    </div>`}
-    <div class="vip-status-actions-v2">
-      <button class="vip-status-action-btn" onclick="scrollToNextTier(${currentUser.tier})">Quyền lợi</button>
-      <button class="vip-status-action-btn primary" onclick="openPromoView()">Đổi quà VIP</button>
-      ${nextTier ? `<button class="vip-status-action-btn" onclick="scrollToNextTier(${nextTier.tier})">Xem ${nextTier.name}</button>` : ''}
     </div>
   `;
 
@@ -8864,6 +9329,279 @@ function updateVipStatusCard() {
   if (stickyTierIcon) stickyTierIcon.src = TIER_ICONS[tierData.tier];
   if (stickyCashback) stickyCashback.textContent = `Hoàn trả: ${(tierData.cashback.sports * 100).toFixed(1)}% Thể thao`;
   if (stickyBtn) stickyBtn.textContent = 'Xem quyền lợi';
+
+  // CSS hologram stat cards — no Three.js needed
+}
+
+// Three.js curved hologram stat panels
+var _holoStatsAnim = null;
+function initHoloStats3D() {
+  var wrap = document.getElementById('holoStats3D');
+  if (!wrap || typeof THREE === 'undefined') return;
+
+  if (_holoStatsAnim) { cancelAnimationFrame(_holoStatsAnim); _holoStatsAnim = null; }
+  wrap.innerHTML = '';
+
+  var stats = JSON.parse(wrap.dataset.stats || '[]');
+  var cardCount = stats.length;
+  if (cardCount === 0) return;
+
+  var w = wrap.offsetWidth || wrap.clientWidth || 396;
+  var h = wrap.offsetHeight || wrap.clientHeight || 320;
+
+  // --- Scene ---
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(68, w / h, 0.1, 100);
+  camera.position.set(0, 0.3, 4.2);
+  camera.lookAt(0, 0.3, 0);
+
+  var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(window.devicePixelRatio || 2);
+  renderer.setSize(w, h);
+  renderer.setClearColor(0x000000, 0);
+  wrap.appendChild(renderer.domElement);
+
+  scene.add(new THREE.AmbientLight(0x78dfff, 0.8));
+
+  // --- Helpers ---
+  function drawRoundedRect(ctx, x, y, rw, rh, r) {
+    var rr = Math.min(r, rw / 6, rh / 6);
+    ctx.beginPath();
+    ctx.moveTo(x + rr, y);
+    ctx.lineTo(x + rw - rr, y);
+    ctx.quadraticCurveTo(x + rw, y, x + rw, y + rr);
+    ctx.lineTo(x + rw, y + rh - rr);
+    ctx.quadraticCurveTo(x + rw, y + rh, x + rw - rr, y + rh);
+    ctx.lineTo(x + rr, y + rh);
+    ctx.quadraticCurveTo(x, y + rh, x, y + rh - rr);
+    ctx.lineTo(x, y + rr);
+    ctx.quadraticCurveTo(x, y, x + rr, y);
+    ctx.closePath();
+  }
+
+  // --- HUD texture per stat (metallic gold style matching .hero-vip-card) ---
+  function makeHUDTexture(stat, index) {
+    var tw = 2048, th = 2048;
+    var canvas = document.createElement('canvas');
+    canvas.width = tw; canvas.height = th;
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, tw, th);
+
+    // Card background — dark with subtle gold tint (like .hero-vip-card)
+    var bg = ctx.createLinearGradient(0, 0, tw, th);
+    bg.addColorStop(0, 'rgba(212,175,55,0.08)');
+    bg.addColorStop(0.5, 'rgba(5,12,25,0.5)');
+    bg.addColorStop(1, 'rgba(212,175,55,0.04)');
+    ctx.fillStyle = bg;
+    drawRoundedRect(ctx, 32, 32, tw - 64, th - 64, 72);
+    ctx.fill();
+
+    // Outer border — gold gradient (like .hero-vip-card border)
+    ctx.strokeStyle = 'rgba(212,175,55,0.35)';
+    ctx.lineWidth = 10;
+    drawRoundedRect(ctx, 36, 36, tw - 72, th - 72, 72);
+    ctx.stroke();
+
+    // Top edge highlight (like .hero-vip-card::before)
+    var topLine = ctx.createLinearGradient(0, 0, tw, 0);
+    topLine.addColorStop(0, 'transparent');
+    topLine.addColorStop(0.3, 'rgba(255,226,62,0.5)');
+    topLine.addColorStop(0.5, 'rgba(255,226,62,0.8)');
+    topLine.addColorStop(0.7, 'rgba(255,226,62,0.5)');
+    topLine.addColorStop(1, 'transparent');
+    ctx.strokeStyle = topLine;
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.moveTo(120, 40);
+    ctx.lineTo(tw - 120, 40);
+    ctx.stroke();
+
+    // Subtle grid
+    ctx.strokeStyle = 'rgba(212,175,55,0.04)';
+    ctx.lineWidth = 1;
+    for (var gx = 96; gx < tw - 96; gx += 96) {
+      ctx.beginPath(); ctx.moveTo(gx, 96); ctx.lineTo(gx, th - 96); ctx.stroke();
+    }
+    for (var gy = 96; gy < th - 96; gy += 96) {
+      ctx.beginPath(); ctx.moveTo(96, gy); ctx.lineTo(tw - 96, gy); ctx.stroke();
+    }
+
+    // --- Stat value — metallic gold gradient text ---
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = '900 560px Montserrat, Arial, sans-serif';
+
+    var valY = th / 2 - 140;
+
+    // Metallic gold gradient fill (matching --metallic-gold)
+    var goldGrad = ctx.createLinearGradient(tw * 0.15, valY - 280, tw * 0.85, valY + 280);
+    goldGrad.addColorStop(0, '#8b6914');
+    goldGrad.addColorStop(0.15, '#c9a227');
+    goldGrad.addColorStop(0.3, '#f0d865');
+    goldGrad.addColorStop(0.5, '#fffbe0');
+    goldGrad.addColorStop(0.7, '#f0d865');
+    goldGrad.addColorStop(0.85, '#c9a227');
+    goldGrad.addColorStop(1, '#8b6914');
+
+    // Subtle glow behind text
+    ctx.shadowColor = 'rgba(240,216,101,0.2)';
+    ctx.shadowBlur = 12;
+    ctx.fillStyle = goldGrad;
+    ctx.fillText(stat.val, tw / 2, valY);
+    // Sharp crisp layers on top (no blur, triple pass for boldness)
+    ctx.shadowBlur = 0;
+    ctx.fillText(stat.val, tw / 2, valY);
+    ctx.fillText(stat.val, tw / 2, valY);
+    ctx.fillText(stat.val, tw / 2, valY);
+    // White highlight pass for contrast
+    ctx.globalAlpha = 0.3;
+    ctx.fillStyle = '#fffbe0';
+    ctx.fillText(stat.val, tw / 2, valY);
+    ctx.globalAlpha = 1;
+
+    // --- Label — uppercase, small, dimmer (like .hero-vip-card-label) ---
+    var labelY = th / 2 + 280;
+    ctx.font = '800 160px Arial, sans-serif';
+    ctx.fillStyle = 'rgba(230,220,190,1)';
+    ctx.shadowBlur = 0;
+    ctx.fillText(stat.label.toUpperCase(), tw / 2, labelY);
+    ctx.fillText(stat.label.toUpperCase(), tw / 2, labelY);
+
+    // Corner accents — gold
+    ctx.strokeStyle = 'rgba(240,216,101,0.5)';
+    ctx.lineWidth = 14;
+    var cs = 110;
+    ctx.beginPath(); ctx.moveTo(40, 40 + cs); ctx.lineTo(40, 40); ctx.lineTo(40 + cs, 40); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(tw - 40, 40 + cs); ctx.lineTo(tw - 40, 40); ctx.lineTo(tw - 40 - cs, 40); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(40, th - 40 - cs); ctx.lineTo(40, th - 40); ctx.lineTo(40 + cs, th - 40); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(tw - 40, th - 40 - cs); ctx.lineTo(tw - 40, th - 40); ctx.lineTo(tw - 40 - cs, th - 40); ctx.stroke();
+
+    // Waveform at bottom — gold tinted
+    ctx.beginPath();
+    ctx.moveTo(140, 1680);
+    for (var wi = 0; wi <= 1768; wi += 12) {
+      var amp = 50 + index * 8;
+      var wy = 1680 + Math.sin(wi * 0.009 + index * 0.8) * amp * Math.sin(wi * 0.002);
+      ctx.lineTo(140 + wi, wy);
+    }
+    ctx.strokeStyle = 'rgba(212,175,55,0.4)';
+    ctx.lineWidth = 5;
+    ctx.stroke();
+
+    // Shine overlay
+    var shine = ctx.createLinearGradient(0, 0, tw, th);
+    shine.addColorStop(0, 'rgba(255,255,255,0.08)');
+    shine.addColorStop(0.3, 'rgba(255,255,255,0.01)');
+    shine.addColorStop(0.7, 'rgba(255,255,255,0)');
+    shine.addColorStop(1, 'rgba(255,255,255,0.03)');
+    ctx.fillStyle = shine;
+    drawRoundedRect(ctx, 32, 32, tw - 64, th - 64, 72);
+    ctx.fill();
+
+    return new THREE.CanvasTexture(canvas);
+  }
+
+  // --- Glow texture (gold tinted) ---
+  function makeGlowTexture() {
+    var sz = 512;
+    var canvas = document.createElement('canvas');
+    canvas.width = sz; canvas.height = sz;
+    var ctx = canvas.getContext('2d');
+    var g = ctx.createRadialGradient(sz/2, sz/2, 0, sz/2, sz/2, sz/2);
+    g.addColorStop(0, 'rgba(240, 216, 101, 0.5)');
+    g.addColorStop(0.4, 'rgba(212, 175, 55, 0.15)');
+    g.addColorStop(1, 'rgba(212, 175, 55, 0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, sz, sz);
+    return new THREE.CanvasTexture(canvas);
+  }
+
+  var glowTex = makeGlowTexture();
+
+  // --- Create flat panel (PlaneGeometry for sharp text) ---
+  function createFlatPanel(stat, index) {
+    var hudTexture = makeHUDTexture(stat, index);
+    hudTexture.generateMipmaps = false;
+    hudTexture.minFilter = THREE.LinearFilter;
+    hudTexture.magFilter = THREE.LinearFilter;
+
+    var panelW = 0.9;
+    var panelH = 0.58;
+    var geometry = new THREE.PlaneGeometry(panelW, panelH);
+    var material = new THREE.MeshBasicMaterial({
+      map: hudTexture,
+      transparent: true,
+      opacity: 1.0,
+      side: THREE.DoubleSide,
+      blending: THREE.NormalBlending,
+      depthWrite: false
+    });
+    var mesh = new THREE.Mesh(geometry, material);
+
+    var glow = new THREE.Mesh(
+      new THREE.PlaneGeometry(panelW * 1.06, panelH * 1.06),
+      new THREE.MeshBasicMaterial({
+        map: glowTex,
+        transparent: true,
+        opacity: 0.08,
+        side: THREE.DoubleSide,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    glow.position.z = -0.01;
+
+    var group = new THREE.Group();
+    group.add(mesh);
+    group.add(glow);
+    group.userData = { mesh: mesh, glow: glow };
+    return group;
+  }
+
+  // --- Layout: flat panels arranged in a subtle arc ---
+  var rig = new THREE.Group();
+  scene.add(rig);
+
+  var arcRadius = 4.0;
+  var panelSpacingDeg = 14;
+  var totalSpanDeg = (cardCount - 1) * panelSpacingDeg;
+  var startAngleDeg = -totalSpanDeg / 2;
+
+  var panels = [];
+  for (var i = 0; i < cardCount; i++) {
+    var angleDeg = startAngleDeg + i * panelSpacingDeg;
+    var angleRad = THREE.Math.degToRad(angleDeg);
+    var panel = createFlatPanel(stats[i], i);
+    // Position on arc
+    panel.position.x = Math.sin(angleRad) * arcRadius;
+    panel.position.z = -(arcRadius - Math.cos(angleRad) * arcRadius);
+    // Rotate to face center
+    panel.rotation.y = -angleRad;
+    panels.push(panel);
+    rig.add(panel);
+  }
+
+  // Panels at theta≈0 are already at +Z facing camera — no rig rotation needed
+  rig.position.y = 0.6;
+
+  // --- Animation ---
+  var clock = new THREE.Clock();
+  function animate() {
+    _holoStatsAnim = requestAnimationFrame(animate);
+    var t = clock.getElapsedTime();
+
+    rig.rotation.y = Math.sin(t * 0.15) * 0.012;
+
+    for (var i = 0; i < panels.length; i++) {
+      var p = panels[i];
+      p.position.y = Math.sin(t * 0.4 + i * 0.5) * 0.008;
+      p.userData.glow.material.opacity = 0.06;
+      p.userData.mesh.material.opacity = 1.0;
+    }
+
+    renderer.render(scene, camera);
+  }
+  animate();
 }
 
 function scrollToNextTier(tierNum) {
@@ -10249,10 +10987,10 @@ function showLiveChallengeFullPage() {
 
   // Quick actions (full version)
   html += '<div class="lc-quick-actions" style="padding:0 16px;margin-bottom:20px;">';
-  html += '<div class="lc-quick-action" style="flex:1" onclick="navigateTo(\'/mission/live-challenge/rewards\')"><div class="lc-quick-action-icon">' + lcIcon('gift','neon-gold') + '</div>Thưởng</div>';
-  html += '<div class="lc-quick-action" style="flex:1" onclick="navigateTo(\'/mission/live-challenge/milestones\')"><div class="lc-quick-action-icon">' + lcIcon('medal','neon-gold') + '</div>Mốc thưởng</div>';
-  html += '<div class="lc-quick-action" style="flex:1" onclick="navigateTo(\'/mission/live-challenge/leaderboard\')"><div class="lc-quick-action-icon">' + lcIcon('trophy','neon-gold') + '</div>BXH VIP</div>';
-  html += '<div class="lc-quick-action" style="flex:1" onclick="navigateTo(\'/mission/live-challenge/rules\')"><div class="lc-quick-action-icon">' + lcIcon('clipboard','neon-blue') + '</div>Thể lệ</div>';
+  html += '<div class="lc-quick-action" onclick="navigateTo(\'/mission/live-challenge/rewards\')"><div class="lc-quick-action-icon">' + lcIcon('gift','neon-gold') + '</div>Thưởng</div>';
+  html += '<div class="lc-quick-action" onclick="navigateTo(\'/mission/live-challenge/milestones\')"><div class="lc-quick-action-icon">' + lcIcon('medal','neon-gold') + '</div>Mốc thưởng</div>';
+  html += '<div class="lc-quick-action" onclick="navigateTo(\'/mission/live-challenge/leaderboard\')"><div class="lc-quick-action-icon">' + lcIcon('trophy','neon-gold') + '</div>Xếp hạng</div>';
+  html += '<div class="lc-quick-action" onclick="navigateTo(\'/mission/live-challenge/rules\')"><div class="lc-quick-action-icon">' + lcIcon('clipboard','neon-blue') + '</div>Thể lệ</div>';
   html += '</div>';
 
   // Mission list CTA
@@ -11319,7 +12057,7 @@ function renderLiveChallengeMissions() {
   html += '<div class="lc-quick-actions">';
   html += '<div class="lc-quick-action" onclick="navigateTo(\'/mission/live-challenge/rewards\')"><div class="lc-quick-action-icon">' + lcIcon('gift','neon-gold') + '</div>Thưởng</div>';
   html += '<div class="lc-quick-action" onclick="navigateTo(\'/mission/live-challenge/milestones\')"><div class="lc-quick-action-icon">' + lcIcon('medal','neon-gold') + '</div>Mốc thưởng</div>';
-  html += '<div class="lc-quick-action" onclick="navigateTo(\'/mission/live-challenge/leaderboard\')"><div class="lc-quick-action-icon">' + lcIcon('trophy','neon-gold') + '</div>BXH VIP</div>';
+  html += '<div class="lc-quick-action" onclick="navigateTo(\'/mission/live-challenge/leaderboard\')"><div class="lc-quick-action-icon">' + lcIcon('trophy','neon-gold') + '</div>Xếp hạng</div>';
   html += '<div class="lc-quick-action" onclick="navigateTo(\'/mission/live-challenge/rules\')"><div class="lc-quick-action-icon">' + lcIcon('clipboard','neon-blue') + '</div>Thể lệ</div>';
   html += '</div>';
 
@@ -11414,7 +12152,7 @@ function renderLiveChallengeMissions() {
 
 var lcFilterActive = 'all';
 
-function lcSetupPage(title, backPath) {
+function lcSetupPage(title, backPath, opts) {
   homeScrollY = window.scrollY;
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('accountView').style.display = 'none';
@@ -11426,9 +12164,10 @@ function lcSetupPage(title, backPath) {
   if (bottomNav) bottomNav.style.display = '';
   var headerBar = document.querySelector('.mission-header-bar');
   var missionNav = document.getElementById('missionNav');
-  if (headerBar) headerBar.style.display = '';
+  var hideHeader = opts && opts.hideHeader;
+  if (headerBar) headerBar.style.display = hideHeader ? 'none' : '';
   if (missionNav) missionNav.style.display = '';
-  if (headerBar) {
+  if (headerBar && !hideHeader) {
     var titleEl = headerBar.querySelector('.mission-header-title');
     if (titleEl) titleEl.textContent = title;
     var backBtn = headerBar.querySelector('.mission-back-btn');
@@ -11733,65 +12472,111 @@ function showLcMilestones() {
   missionScrollTop();
 }
 
-/* ===== Screen 5: VIP Leaderboard ===== */
+/* ===== Screen 5: Top Chiến Binh (Pyramid Leaderboard) ===== */
 function showLcLeaderboard() {
-  var container = lcSetupPage('BXH VIP');
+  var container = lcSetupPage('', '/mission/live-challenge', {hideHeader: true});
   var html = '<div class="lc-page">';
 
-  // Hero
-  html += '<div class="lc-lb-hero">';
-  html += '<div class="lc-lb-hero-title">' + lcIcon('trophy','neon-gold') + ' B\u1EA3ng X\u1EBFp H\u1EA1ng VIP</div>';
-  html += '<div class="lc-lb-hero-pool">50.000.000\u0111</div>';
-  html += '<div class="lc-lb-hero-countdown">K\u1EBFt th\u00FAc sau: 19d 12h 30m</div>';
+  // Hero banner with image + breadcrumb
+  html += '<div class="lc-lb-hero-banner">';
+  html += '<img src="Assets/hero-top-chien-binh.png" alt="" class="lc-lb-hero-banner-img"/>';
+  html += '<div class="lc-lb-hero-banner-overlay"></div>';
+  html += '<div class="lc-hero-breadcrumb" onclick="navigateTo(\'/mission/live-challenge\')">';
+  html += '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="14" height="14"><path d="M15 18l-6-6 6-6"/></svg>';
+  html += '<span>Live Challenge</span>';
+  html += '</div>';
+  html += '<div class="lc-lb-hero-banner-content">';
+  html += '<div class="lc-lb-hero-title">' + lcIcon('trophy','neon-gold') + ' Top Chiến Binh</div>';
+  html += '<div class="lc-lb-hero-sub">Xếp hạng theo số nhiệm vụ hoàn thành</div>';
+  html += '<div class="lc-lb-hero-countdown">Kỳ hiện tại: Tuần 15 • Còn 4 ngày</div>';
+  html += '</div>';
   html += '</div>';
 
-  // My rank
+  // My rank card
   html += '<div class="lc-lb-myrank">';
   html += '<div class="lc-lb-myrank-pos">#15</div>';
   html += '<div class="lc-lb-myrank-info">';
-  html += '<div class="lc-lb-myrank-name">B\u1EA1n (VIP 3 \u2014 x1.5)</div>';
-  html += '<div class="lc-lb-myrank-stats">320 \u0111i\u1EC3m \u2022 5 nhi\u1EC7m v\u1EE5 xong</div>';
+  html += '<div class="lc-lb-myrank-name">Bạn</div>';
+  html += '<div class="lc-lb-myrank-stats">12 nhiệm vụ • 320 điểm</div>';
   html += '</div>';
-  html += '<div class="lc-lb-myrank-gap">\u2191 80 \u0111\u1EC3 top 10</div>';
+  html += '<div class="lc-lb-myrank-gap">↑ 5 NV để top 10</div>';
   html += '</div>';
 
-  // Top 10
-  html += '<div class="lc-lb-list">';
-  html += '<div class="lc-section-title">' + lcIcon('medal','neon-gold') + ' Top 10</div>';
-  var players = [
-    {name:'ProBet_VN', score:1250, vip:5},
-    {name:'KingSlayer', score:1180, vip:5},
-    {name:'LuckyDragon', score:1050, vip:4},
-    {name:'Phoenix99', score:980, vip:4},
-    {name:'SaigonBet', score:920, vip:4},
-    {name:'GoldenEagle', score:870, vip:3},
-    {name:'ThunderBolt', score:810, vip:3},
-    {name:'DiamondKing', score:780, vip:3},
-    {name:'NightHawk', score:720, vip:3},
-    {name:'StormRider', score:680, vip:2}
+  // === RACE FINISH (top 3) ===
+  var top3 = [
+    {name:'ProBet_VN', missions:48, score:1250, car:'Assets/1st-car.png'},
+    {name:'KingSlayer', missions:45, score:1180, car:'Assets/2nd-car.png'},
+    {name:'LuckyDragon', missions:41, score:1050, car:'Assets/3rd-car.png'}
   ];
-  var medals = [lcIcon('medal_gold','neon-gold'), lcIcon('medal_silver','neon-blue'), lcIcon('medal_bronze','neon-orange')];
-  players.forEach(function(p, idx) {
-    var isTop3 = idx < 3;
-    html += '<div class="lc-lb-row' + (isTop3 ? ' top3' : '') + '">';
-    html += '<div class="lc-lb-rank">' + (isTop3 ? '<span class="lc-lb-medal">' + medals[idx] + '</span>' : (idx + 1)) + '</div>';
-    html += '<div class="lc-lb-avatar">' + p.name.charAt(0) + '</div>';
-    html += '<div class="lc-lb-name">' + p.name + ' <span style="font-size:10px;color:var(--muted);">VIP' + p.vip + '</span></div>';
-    html += '<div class="lc-lb-score">' + p.score + '</div>';
+  var maxMissions = top3[0].missions;
+
+  html += '<div class="lb-race">';
+  html += '<div class="lb-race-finish"></div>';
+  top3.forEach(function(p, idx) {
+    var rawPct = p.missions / maxMissions;
+    var pct = idx === 0 ? 80 : (idx === 1 ? 65 : 50);
+    var colors = ['gold','silver','bronze'];
+    var medals = ['🥇','🥈','🥉'];
+    var barColors = [
+      'linear-gradient(90deg, rgba(245,158,11,.05) 0%, rgba(245,158,11,.3) 50%, rgba(245,158,11,.6) 100%)',
+      'linear-gradient(90deg, rgba(156,163,175,.04) 0%, rgba(156,163,175,.25) 50%, rgba(156,163,175,.45) 100%)',
+      'linear-gradient(90deg, rgba(217,119,6,.04) 0%, rgba(217,119,6,.25) 50%, rgba(217,119,6,.45) 100%)'
+    ];
+    html += '<div class="lb-race-lane">';
+    html += '<div class="lb-race-rank">' + medals[idx] + '</div>';
+    html += '<div class="lb-race-track">';
+    html += '<div class="lb-race-info">';
+    html += '<div class="lb-race-name">' + p.name + '</div>';
+    html += '<div class="lb-race-missions">' + p.missions + ' NV</div>';
+    html += '</div>';
+    html += '<div class="lb-race-bar ' + colors[idx] + '" style="width:' + pct + '%;background:' + barColors[idx] + ';">';
+    html += '<div class="lb-race-car"><img src="' + p.car + '" class="lb-race-car-img"/></div>';
+    html += '</div>';
+    html += '</div>';
     html += '</div>';
   });
   html += '</div>';
 
-  // Distribution table
+  // === STAIRCASE LIST (4-10) ===
+  html += '<div class="lc-lb-list">';
+  html += '<div class="lc-section-title" style="margin:16px 0 8px;">' + lcIcon('medal','neon-gold') + ' Bảng xếp hạng</div>';
+  var rest = [
+    {name:'Phoenix99', missions:38, score:980},
+    {name:'SaigonBet', missions:35, score:920},
+    {name:'GoldenEagle', missions:32, score:870},
+    {name:'ThunderBolt', missions:29, score:810},
+    {name:'DiamondKing', missions:27, score:780},
+    {name:'NightHawk', missions:24, score:720},
+    {name:'StormRider', missions:21, score:680}
+  ];
+  rest.forEach(function(p, idx) {
+    var rank = idx + 4;
+    var barPct = Math.round((p.missions / top3[0].missions) * 100);
+    html += '<div class="lb-stair-row">';
+    html += '<div class="lb-stair-rank">' + rank + '</div>';
+    html += '<div class="lb-stair-avatar">' + p.name.charAt(0) + '</div>';
+    html += '<div class="lb-stair-info">';
+    html += '<div class="lb-stair-name">' + p.name + '</div>';
+    html += '<div class="lb-stair-bar-wrap"><div class="lb-stair-bar" style="width:' + barPct + '%"></div></div>';
+    html += '</div>';
+    html += '<div class="lb-stair-stat">';
+    html += '<div class="lb-stair-missions">' + p.missions + ' NV</div>';
+    html += '<div class="lb-stair-score">' + p.score + ' đ</div>';
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Reward tiers
   html += '<div class="lc-lb-dist">';
-  html += '<div class="lc-lb-dist-title">' + lcIcon('gift','neon-gold') + ' Ph\u00E2n ph\u1ED1i th\u01B0\u1EDFng</div>';
+  html += '<div class="lc-lb-dist-title">' + lcIcon('gift','neon-gold') + ' Phần thưởng theo hạng</div>';
   var dist = [
-    {rank:'Top 1', reward:'10.000.000\u0111'},
-    {rank:'Top 2', reward:'5.000.000\u0111'},
-    {rank:'Top 3', reward:'3.000.000\u0111'},
-    {rank:'Top 4-10', reward:'1.000.000\u0111'},
-    {rank:'Top 11-50', reward:'500.000\u0111'},
-    {rank:'Top 51-100', reward:'200.000\u0111'}
+    {rank:'🥇 Top 1', reward:'10.000.000đ + Badge Vàng'},
+    {rank:'🥈 Top 2', reward:'5.000.000đ + Badge Bạc'},
+    {rank:'🥉 Top 3', reward:'3.000.000đ + Badge Đồng'},
+    {rank:'Top 4-10', reward:'1.000.000đ mỗi người'},
+    {rank:'Top 11-50', reward:'500.000đ mỗi người'},
+    {rank:'Top 51-100', reward:'200.000đ mỗi người'}
   ];
   dist.forEach(function(d) {
     html += '<div class="lc-lb-dist-row"><span class="lc-lb-dist-rank">' + d.rank + '</span><span class="lc-lb-dist-reward">' + d.reward + '</span></div>';
@@ -11799,11 +12584,6 @@ function showLcLeaderboard() {
   html += '</div>';
 
   html += '</div>'; // lc-page
-
-  // CTA
-  html += '<div class="lc-sticky-cta">';
-  html += '<button class="mission-btn mission-btn-claim" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px;" onclick="navigateTo(\'/mission/live-challenge/missions\')">Tham gia BXH</button>';
-  html += '</div>';
 
   container.innerHTML = html;
   missionScrollTop();
