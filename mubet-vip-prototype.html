@@ -5023,14 +5023,57 @@ img { max-width: 100%; display: block; }
 /* ===== LIVE CHALLENGE (in Mission Hub tab) ===== */
 .lc-hero {
   background: linear-gradient(135deg, #1a0e06 0%, #2d1a0e 30%, #3d2010 60%, #1a0e06 100%);
-  border: 1px solid rgba(255,160,40,.2);
-  border-radius: 16px; padding: 24px; text-align: center;
+  border: 1px solid rgba(255,160,40,.15); border-radius: 16px; padding: 24px; text-align: center;
   margin-bottom: 16px; position: relative; overflow: hidden;
 }
 .lc-hero::before {
   content: ''; position: absolute; inset: 0;
   background: radial-gradient(ellipse at 50% 20%, rgba(255,160,40,.12) 0%, transparent 60%);
   pointer-events: none;
+}
+.lc-hero-border-glow {
+  position: absolute; inset: -1px; border-radius: 17px; pointer-events: none; z-index: 0; overflow: hidden;
+}
+.lc-hero-border-glow::before {
+  content: ''; position: absolute;
+  width: 80px; height: 80px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,1) 0%, rgba(255,200,60,.8) 20%, rgba(245,158,11,.4) 40%, transparent 65%);
+  filter: blur(6px);
+  animation: lcGlowRun 3s linear infinite;
+}
+@keyframes lcGlowRun {
+  0%   { top: -40px; left: -40px; }
+  12%  { top: -40px; left: 50%; }
+  25%  { top: -40px; left: calc(100% - 40px); }
+  37%  { top: 30%; left: calc(100% - 40px); }
+  50%  { top: calc(100% - 40px); left: calc(100% - 40px); }
+  62%  { top: calc(100% - 40px); left: 50%; }
+  75%  { top: calc(100% - 40px); left: -40px; }
+  87%  { top: 30%; left: -40px; }
+  100% { top: -40px; left: -40px; }
+}
+.lc-hero-border-glow::after {
+  content: ''; position: absolute; inset: 3px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1a0e06 0%, #2d1a0e 30%, #3d2010 60%, #1a0e06 100%);
+}
+.lc-hero-live-dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: #ef4444; margin-right: 6px; vertical-align: middle;
+  box-shadow: 0 0 8px #ef4444, 0 0 16px rgba(239,68,68,.4);
+  animation: lcLivePulse 1.5s ease-in-out infinite;
+}
+@keyframes lcLivePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(.8); }
+}
+.lc-hero-live-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  padding: 3px 10px; border-radius: 6px;
+  background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3);
+  font-size: 10px; font-weight: 800; color: #ef4444; text-transform: uppercase;
+  letter-spacing: .5px;
 }
 .lc-hero-badge {
   display: inline-block; padding: 4px 12px; border-radius: 20px;
@@ -5073,14 +5116,14 @@ img { max-width: 100%; display: block; }
 }
 .lc-quick-actions::-webkit-scrollbar { display: none; }
 .lc-quick-action {
-  display: flex; flex-direction: column; align-items: center; gap: 4px;
-  padding: 10px 12px; min-width: 72px; border-radius: 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 6px 8px; min-width: 0; border-radius: 10px;
   background: var(--panel); border: 1px solid var(--line);
-  font-size: 10px; color: var(--muted); cursor: pointer;
-  transition: all .2s; flex-shrink: 0;
+  font-size: 9px; color: var(--muted); cursor: pointer;
+  transition: all .2s; flex-shrink: 0; white-space: nowrap;
 }
 .lc-quick-action:hover { background: var(--panel-2); border-color: rgba(255,160,40,.3); color: var(--tertiary-300); }
-.lc-quick-action-icon { font-size: 20px; }
+.lc-quick-action-icon { font-size: 16px; }
 
 /* LC Mission Cards */
 .lc-card { border-left: 3px solid rgba(255,160,40,.3); }
@@ -10190,6 +10233,8 @@ function showLiveChallengeFullPage() {
 
   // Season hero (full version)
   html += '<div class="lc-hero" style="margin:16px;border-radius:20px;padding:28px;">';
+  html += '<div class="lc-hero-border-glow"></div>';
+  html += '<div class="lc-hero-live-tag"><span class="lc-hero-live-dot"></span>LIVE</div>';
   html += '<div class="lc-hero-badge">' + lcIcon('fire','neon-red') + ' MÙA 4 — ĐANG DIỄN RA</div>';
   html += '<div class="lc-hero-title" style="font-size:24px;">LIVE CHALLENGE</div>';
   html += '<div class="lc-hero-sub">Sự kiện 28 ngày • Tháng 4/2026</div>';
