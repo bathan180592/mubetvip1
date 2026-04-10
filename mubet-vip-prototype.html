@@ -4815,19 +4815,19 @@ img { max-width: 100%; display: block; }
 
 /* Warrior card with progress */
 .mission-w-card {
-  display: flex; align-items: center; gap: 14px;
-  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
-  padding: 14px 16px; transition: all .2s; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 12px; transition: all .2s; margin-bottom: 6px;
 }
 .mission-w-card:hover { border-color: var(--line-strong); }
 .mission-w-card-icon {
-  width: 48px; height: 48px; border-radius: 12px;
+  width: 36px; height: 36px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 28px; flex-shrink: 0;
+  font-size: 20px; flex-shrink: 0;
   background: linear-gradient(135deg, var(--panel-3), rgba(202,41,48,.15));
 }
 .mission-w-card-body { flex: 1; min-width: 0; }
-.mission-w-card-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.mission-w-card-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
 .mission-w-progress-wrap { position: relative; }
 .mission-w-progress-bar {
   height: 20px; background: rgba(17,21,32,.5); border-radius: 12px;
@@ -5848,7 +5848,7 @@ img { max-width: 100%; display: block; }
 .mission-section { padding: 16px 16px 0; }
 .mission-card { padding: 12px; gap: 10px; flex-wrap: wrap; overflow: visible; }
 .mission-card-right { width: 100%; justify-content: space-between; margin-top: 4px; }
-.mission-w-card { padding: 12px; gap: 10px; }
+.mission-w-card { padding: 10px 12px; gap: 8px; }
 .mission-w-card-action { width: 100%; text-align: right; margin-left: 0; margin-top: 4px; }
 .mission-newbie-hero { flex-direction: column; text-align: center; }
 .mission-reward-badge { top: -6px; right: 8px; }
@@ -10045,16 +10045,39 @@ var MOCK_NEWBIE_MISSIONS = [
 ];
 
 var MOCK_WARRIOR_MISSIONS = [
-  { id:'w1', title:'Đăng nhập hôm nay', icon:'key', current:1, target:1, unit:'lần', milestones:[], rewards:['5K'], status:'in-progress', period:'daily' },
-  { id:'w2', title:'Cược hôm nay 500K', icon:'swords', current:300000, target:500000, unit:'đ', milestones:[25,50,75], rewards:['10K','25K','50K','100K'], status:'in-progress', period:'daily' },
-  { id:'w3', title:'Chat 3 Game', icon:'chat', current:0, target:3, unit:'Game', milestones:[33,66], rewards:['5K','10K','20K'], status:'in-progress', period:'daily' },
-  { id:'w4', title:'Nạp 50đ', icon:'money', current:0, target:50000, unit:'đ', milestones:[50], rewards:['10K','30K'], status:'in-progress', period:'daily' },
-  { id:'w5', title:'Nạp 100đ', icon:'money', current:0, target:100000, unit:'đ', milestones:[50], rewards:['20K','50K'], status:'in-progress', period:'daily' },
-  { id:'w6', title:'Tổng cược 10 triệu/tuần', icon:'chart_bar', current:4500000, target:10000000, unit:'đ', milestones:[25,50,75], rewards:['100K','250K','500K','1M'], status:'in-progress', period:'weekly' },
-  { id:'w7', title:'Hoàn thành 5 nhiệm vụ', icon:'check', current:3, target:5, unit:'NV', milestones:[20,40,60,80], rewards:['10K','20K','40K','80K','150K'], status:'in-progress', period:'weekly' },
-  { id:'w8', title:'Mời 3 bạn bè nạp tiền', icon:'handshake', current:1, target:3, unit:'bạn', milestones:[33,66], rewards:['100K','300K','1M'], status:'in-progress', period:'weekly' },
-  { id:'w9', title:'Nạp tích lũy 5 triệu', icon:'trophy', current:1750000, target:5000000, unit:'đ', milestones:[20,40,60,80], rewards:['50K','100K','200K','500K','1M'], status:'in-progress', period:'monthly' },
-  { id:'w10', title:'Đạt VIP 3', icon:'crown', current:2, target:3, unit:'VIP', milestones:[33,66], rewards:['200K','500K','2M'], status:'in-progress', period:'monthly' }
+  // Tích lũy Nạp (10 mốc)
+  { id:'w1', title:'Nạp lần đầu 200K', icon:'money', current:0, target:200000, unit:'đ', milestones:[50], rewards:['50K','200K'], status:'in-progress', period:'deposit' },
+  { id:'w2', title:'Nạp tích lũy 500K', icon:'money', current:350000, target:500000, unit:'đ', milestones:[50], rewards:['30K','100K'], status:'in-progress', period:'deposit' },
+  { id:'w3', title:'Nạp tích lũy 1 triệu', icon:'money', current:350000, target:1000000, unit:'đ', milestones:[25,50,75], rewards:['20K','50K','100K','300K'], status:'in-progress', period:'deposit' },
+  { id:'w4', title:'Nạp tích lũy 3 triệu', icon:'chart_bar', current:350000, target:3000000, unit:'đ', milestones:[25,50,75], rewards:['50K','150K','300K','500K'], status:'in-progress', period:'deposit' },
+  { id:'w5', title:'Nạp tích lũy 5 triệu', icon:'trophy', current:1750000, target:5000000, unit:'đ', milestones:[20,40,60,80], rewards:['50K','100K','200K','500K','1M'], status:'in-progress', period:'deposit' },
+  { id:'w6', title:'Nạp tích lũy 10 triệu', icon:'diamond', current:1750000, target:10000000, unit:'đ', milestones:[20,40,60,80], rewards:['100K','300K','500K','1M','3M'], status:'in-progress', period:'deposit' },
+  { id:'w7', title:'Nạp tích lũy 20 triệu', icon:'crown', current:1750000, target:20000000, unit:'đ', milestones:[25,50,75], rewards:['500K','1M','3M','5M'], status:'in-progress', period:'deposit' },
+  { id:'w8', title:'Nạp 5 lần', icon:'check', current:4, target:5, unit:'lần', milestones:[40,80], rewards:['20K','50K','100K'], status:'in-progress', period:'deposit' },
+  { id:'w9', title:'Nạp 10 lần', icon:'check', current:4, target:10, unit:'lần', milestones:[30,60], rewards:['30K','80K','200K'], status:'in-progress', period:'deposit' },
+  { id:'w10', title:'Nạp 20 lần', icon:'medal', current:4, target:20, unit:'lần', milestones:[25,50,75], rewards:['50K','150K','300K','500K'], status:'in-progress', period:'deposit' },
+  // Tích lũy Cược (10 mốc)
+  { id:'w11', title:'Cược tích lũy 200K', icon:'swords', current:150000, target:200000, unit:'đ', milestones:[50], rewards:['10K','30K'], status:'in-progress', period:'bet' },
+  { id:'w12', title:'Cược tích lũy 500K', icon:'swords', current:300000, target:500000, unit:'đ', milestones:[25,50,75], rewards:['10K','25K','50K','100K'], status:'in-progress', period:'bet' },
+  { id:'w13', title:'Cược tích lũy 2 triệu', icon:'chart_bar', current:800000, target:2000000, unit:'đ', milestones:[25,50,75], rewards:['30K','80K','200K','500K'], status:'in-progress', period:'bet' },
+  { id:'w14', title:'Cược tích lũy 5 triệu', icon:'chart_bar', current:2200000, target:5000000, unit:'đ', milestones:[20,40,60,80], rewards:['50K','100K','250K','500K','1M'], status:'in-progress', period:'bet' },
+  { id:'w15', title:'Cược tích lũy 10 triệu', icon:'trophy', current:2200000, target:10000000, unit:'đ', milestones:[20,40,60,80], rewards:['100K','300K','500K','1M','3M'], status:'in-progress', period:'bet' },
+  { id:'w16', title:'Cược tích lũy 30 triệu', icon:'diamond', current:2200000, target:30000000, unit:'đ', milestones:[25,50,75], rewards:['500K','1M','3M','5M'], status:'in-progress', period:'bet' },
+  { id:'w17', title:'Cược 3 môn khác nhau', icon:'dice', current:1, target:3, unit:'môn', milestones:[33,66], rewards:['20K','50K','100K'], status:'in-progress', period:'bet' },
+  { id:'w18', title:'Cược 5 môn khác nhau', icon:'dice', current:1, target:5, unit:'môn', milestones:[20,40,60,80], rewards:['30K','80K','150K','300K','500K'], status:'in-progress', period:'bet' },
+  { id:'w19', title:'Thắng 5 cược liên tiếp', icon:'fire', current:2, target:5, unit:'cược', milestones:[20,40,60,80], rewards:['30K','80K','150K','300K','500K'], status:'in-progress', period:'bet' },
+  { id:'w20', title:'Thắng 10 cược liên tiếp', icon:'fire', current:2, target:10, unit:'cược', milestones:[20,40,60,80], rewards:['100K','300K','500K','1M','3M'], status:'in-progress', period:'bet' },
+  // Tích lũy Coin (10 mốc)
+  { id:'w21', title:'Tích lũy 10 Coin', icon:'star', current:7, target:10, unit:'Coin', milestones:[50], rewards:['20K','50K'], status:'in-progress', period:'coin' },
+  { id:'w22', title:'Tích lũy 30 Coin', icon:'star', current:20, target:30, unit:'Coin', milestones:[33,66], rewards:['30K','80K','200K'], status:'in-progress', period:'coin' },
+  { id:'w23', title:'Tích lũy 50 Coin', icon:'diamond', current:20, target:50, unit:'Coin', milestones:[20,40,60,80], rewards:['50K','100K','200K','400K','1M'], status:'in-progress', period:'coin' },
+  { id:'w24', title:'Tích lũy 100 Coin', icon:'diamond', current:20, target:100, unit:'Coin', milestones:[25,50,75], rewards:['100K','300K','500K','2M'], status:'in-progress', period:'coin' },
+  { id:'w25', title:'Tích lũy 200 Coin', icon:'crown', current:20, target:200, unit:'Coin', milestones:[25,50,75], rewards:['200K','500K','1M','3M'], status:'in-progress', period:'coin' },
+  { id:'w26', title:'Tích lũy 500 Coin', icon:'crown', current:20, target:500, unit:'Coin', milestones:[20,40,60,80], rewards:['500K','1M','2M','5M','10M'], status:'in-progress', period:'coin' },
+  { id:'w27', title:'Đổi quà 1 lần', icon:'gift', current:0, target:1, unit:'lần', milestones:[], rewards:['20K'], status:'in-progress', period:'coin' },
+  { id:'w28', title:'Đổi quà 3 lần', icon:'gift', current:1, target:3, unit:'lần', milestones:[33,66], rewards:['30K','80K','200K'], status:'in-progress', period:'coin' },
+  { id:'w29', title:'Đổi quà 10 lần', icon:'gift', current:1, target:10, unit:'lần', milestones:[30,60], rewards:['50K','150K','500K'], status:'in-progress', period:'coin' },
+  { id:'w30', title:'Mời 3 bạn tham gia', icon:'handshake', current:0, target:3, unit:'bạn', milestones:[33,66], rewards:['100K','300K','1M'], status:'in-progress', period:'coin' }
 ];
 
 var MOCK_WORLDCUP_MISSIONS = [
@@ -10086,7 +10109,7 @@ var MOCK_LC_MISSIONS = [
 ];
 
 var missionActiveTab = 'newbie';
-var warriorSubTab = 'daily';
+var warriorSubTab = 'deposit';
 var lcSubTab = 'recommended';
 var wcSubTab = 'predict';
 
@@ -10925,7 +10948,7 @@ function renderMissionOverview() {
   html += '<div class="mhub-card warrior" onclick="showWarriorFullPage()">';
   html += '<div class="mhub-card-top">';
   html += '<div class="mhub-card-icon"><img src="Assets/warrior-swords.png" alt="Warrior" style="width:36px;height:36px;object-fit:contain"></div>';
-  html += '<div class="mhub-card-info"><div class="mhub-card-title">Chiến Binh</div><div class="mhub-card-sub">Hằng ngày</div></div>';
+  html += '<div class="mhub-card-info"><div class="mhub-card-title">Chiến Binh</div><div class="mhub-card-sub">Tích lũy</div></div>';
   html += '</div>';
   html += '<div class="mhub-card-stats">';
   html += '<div class="mhub-card-stat"><div class="mhub-card-stat-value">3 <span style="font-size:10px;color:var(--muted)">NV hôm nay</span></div></div>';
@@ -11127,9 +11150,9 @@ function renderWarriorMissions() {
 
   // Sub-tabs
   html += '<div class="mission-warrior-subtabs">';
-  html += '<div class="mission-warrior-subtab ' + (warriorSubTab === 'daily' ? 'active' : '') + '" onclick="switchWarriorSubTab(\'daily\')">Ngày</div>';
-  html += '<div class="mission-warrior-subtab ' + (warriorSubTab === 'weekly' ? 'active' : '') + '" onclick="switchWarriorSubTab(\'weekly\')">Tuần</div>';
-  html += '<div class="mission-warrior-subtab ' + (warriorSubTab === 'monthly' ? 'active' : '') + '" onclick="switchWarriorSubTab(\'monthly\')">Tháng</div>';
+  html += '<div class="mission-warrior-subtab ' + (warriorSubTab === 'deposit' ? 'active' : '') + '" onclick="switchWarriorSubTab(\'deposit\')">Tích lũy Nạp</div>';
+  html += '<div class="mission-warrior-subtab ' + (warriorSubTab === 'bet' ? 'active' : '') + '" onclick="switchWarriorSubTab(\'bet\')">Tích lũy Cược</div>';
+  html += '<div class="mission-warrior-subtab ' + (warriorSubTab === 'coin' ? 'active' : '') + '" onclick="switchWarriorSubTab(\'coin\')">Tích lũy Coin</div>';
   html += '</div>';
 
   // Header stats
@@ -11192,8 +11215,8 @@ function renderWarriorMissions() {
   html += '</div>';
 
   // Refresh note
-  var noteMap = { daily: 'Nhiệm vụ sẽ làm mới mỗi ngày', weekly: 'Nhiệm vụ sẽ làm mới mỗi tuần', monthly: 'Nhiệm vụ sẽ làm mới mỗi tháng' };
-  html += '<div class="mission-refresh-note">' + lcIcon('timer','neon-orange') + ' ' + noteMap[warriorSubTab] + '</div>';
+  var noteMap = { deposit: 'Tích lũy nạp để mở thưởng lớn hơn', bet: 'Cược càng nhiều, thưởng càng hấp dẫn', coin: 'Tích lũy Coin từ nhiệm vụ để đổi quà' };
+  html += '<div class="mission-refresh-note">' + lcIcon('star','neon-gold') + ' ' + noteMap[warriorSubTab] + '</div>';
 
   // CTA row
   html += '<div class="mission-cta-row">';
