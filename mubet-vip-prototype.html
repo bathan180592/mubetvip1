@@ -683,74 +683,95 @@ img { max-width: 100%; display: block; }
 /* ===== HERO ===== */
 .hero {
   position: relative; overflow: hidden;
-  padding: 0 0 60px;
-  background:
-    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(222,46,54,.14), transparent),
-    radial-gradient(ellipse 50% 60% at 10% 80%, rgba(74,125,254,.10), transparent),
-    radial-gradient(ellipse 40% 40% at 50% 0%, rgba(231,187,8,.06), transparent);
+  padding: 0;
+  background: var(--bg);
+}
+.hero-banner {
+  position: relative; overflow: hidden;
+  padding-bottom: 16px;
 }
 .hero-bg-image {
-  position: absolute; top: 0; left: 0; right: 0; height: 220px;
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
   z-index: 0; overflow: hidden;
 }
 .hero-bg-image img {
-  width: 100%; height: 100%; object-fit: cover; object-position: right top;
-  opacity: .75;
+  width: 100%; height: 100%; object-fit: cover; object-position: 75% center;
+  opacity: .9;
 }
-.hero-bg-image::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
-  background: linear-gradient(to bottom, transparent, var(--bg));
+.hero-bg-image-overlay {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;
+  background:
+    linear-gradient(to right, rgba(13,17,23,.88) 0%, rgba(13,17,23,.55) 45%, rgba(13,17,23,.1) 80%, transparent 100%),
+    linear-gradient(to top, var(--bg) 0%, var(--bg) 2%, transparent 25%);
 }
-.hero-glow {
-  position: absolute; top: -60px; right: -20px;
-  width: 400px; height: 400px;
-  pointer-events: none; z-index: 0; opacity: .7;
+.hero-content { position: relative; z-index: 2; max-width: 55%; }
+.hero-title-area {
+  text-align: left; min-height: auto;
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding: 24px 0 0;
 }
-.hero-glow img { width: 100%; height: 100%; object-fit: contain; }
-.hero::before {
-  content: ''; position: absolute; top: -80px; right: -40px;
-  width: 420px; height: 420px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(222,46,54,.12), transparent 65%);
-  pointer-events: none;
-}
-.hero-content { position: relative; z-index: 1; }
-.hero-title-area { text-align: left; min-height: 140px; display: flex; align-items: flex-end; padding-bottom: 20px; }
-.hero-below { text-align: center; }
+.hero-below { text-align: center; padding-bottom: 24px; }
 .hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 8px 18px; border-radius: var(--radius-pill);
-  background: rgba(222,46,54,.12); border: 1px solid rgba(222,46,54,.25);
-  font-size: 13px; font-weight: 600; color: var(--primary-300);
-  margin-bottom: 24px;
+  display: inline-block;
+  padding: 0; border: none; border-radius: 0;
+  font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase;
+  background: var(--metallic-gold); background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s ease-in-out infinite;
+  margin-bottom: 6px;
 }
-.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary-400); animation: pulse-dot 2s infinite; }
+.hero-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--tertiary-400); animation: pulse-dot 2s infinite; flex-shrink: 0; }
 @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
 .hero h1 {
-  font-family: Montserrat, sans-serif; font-size: clamp(24px, 4vw, 40px);
+  font-family: Montserrat, sans-serif; font-size: 32px;
   font-weight: 900; line-height: 1.05; letter-spacing: -.02em;
   text-transform: uppercase;
 }
 .hero h1 .gold { background: var(--gift-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .hero-desc {
-  color: var(--text-2); font-size: 13px;
-  margin: 18px auto 0; line-height: 1.7;
+  color: var(--text-2); font-size: 12px;
+  margin: 10px 0 0; line-height: 1.6; max-width: 280px;
 }
+.hero-stats-wrap { position: relative; z-index: 2; }
 .hero-stats {
-  display: flex; justify-content: center; gap: 36px; margin-top: 36px;
-  flex-wrap: wrap;
+  display: flex; justify-content: flex-start; gap: 8px; margin-top: 0;
+  flex-wrap: nowrap;
+}
+.hero-vip-cards {
+  display: flex; gap: 6px; margin-top: 10px; margin-bottom: 16px; justify-content: flex-start;
+}
+.hero-vip-card {
+  padding: 8px 18px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(212,175,55,.1), rgba(212,175,55,.03));
+  border: 1px solid rgba(212,175,55,.2);
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero-vip-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,226,62,.4), transparent);
+}
+.hero-vip-card-value {
+  font-family: Montserrat, sans-serif; font-size: 20px; font-weight: 900;
+  background: var(--metallic-gold); background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s ease-in-out infinite;
+}
+.hero-vip-card-label {
+  font-size: 9px; color: var(--tertiary-300); margin-top: 1px;
+  text-transform: uppercase; letter-spacing: .04em; opacity: .8;
 }
 .hero-stat { text-align: center; }
 #vipClubContent .hero-stat {
-  padding: 14px 18px; border-radius: 12px;
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.1);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  padding: 10px 14px; border-radius: 10px; flex: 1; min-width: 0;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   position: relative; overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 8px 20px rgba(0,0,0,.2);
 }
 #vipClubContent .hero-stat::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
 }
 .hero-stat-value {
   font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 800;
@@ -763,9 +784,9 @@ img { max-width: 100%; display: block; }
   animation: goldShimmer 4s ease-in-out infinite;
   filter: drop-shadow(0 0 8px rgba(255,226,62,.2));
 }
-.hero-stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; }
+.hero-stat-label { font-size: 9px; color: var(--muted); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .04em; }
 .hero-cta {
-  margin-top: 36px;
+  margin-top: 16px;
   display: inline-flex; align-items: center; gap: 10px;
   padding: 12px 28px; border-radius: var(--radius-sm);
   background: linear-gradient(180deg, #FF4047 0%, var(--primary-500) 100%); color: #fff;
@@ -2138,26 +2159,11 @@ img { max-width: 100%; display: block; }
 .vip-status-card { max-width: 480px; margin: 20px auto 0; }
 .vip-status-card-inner {
   background:
-    var(--luxury-grain),
-    radial-gradient(circle at 84% 14%, rgba(255,255,255,.12), transparent 14%),
-    radial-gradient(circle at 86% 26%, rgba(255,226,62,.22), transparent 18%),
-    repeating-linear-gradient(120deg, rgba(255,226,62,.06) 0 1px, transparent 1px 12px),
-    var(--grad-gold);
-  background-size: 200px 200px, auto, auto, auto, auto;
-  border: 1px solid rgba(255,226,62,.24); border-radius: var(--radius-lg);
+    linear-gradient(160deg, rgba(255,226,62,.08) 0%, rgba(255,226,62,.03) 30%, transparent 60%),
+    linear-gradient(180deg, rgba(30,28,38,1) 0%, rgba(22,20,30,.98) 100%);
+  border: 1px solid rgba(255,226,62,.15); border-radius: var(--radius-lg);
   overflow: hidden; position: relative;
-  box-shadow: var(--shadow-card), 0 0 42px rgba(255,198,77,.2);
-}
-.vip-status-card-inner::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.08) 45%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.08) 55%, transparent 65%);
-  animation: sheenFlow 5s ease-in-out infinite;
-  pointer-events: none; border-radius: inherit;
-}
-.vip-status-card-inner::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; z-index: 1;
-  background: linear-gradient(90deg, transparent 10%, rgba(255,240,170,.5) 50%, transparent 90%);
-  filter: blur(1px);
+  box-shadow: 0 4px 24px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.03) inset;
 }
 .vip-status-top { display: flex; align-items: center; gap: 14px; padding: 16px 20px 12px; }
 .vip-status-icon { width: 56px; height: 56px; flex-shrink: 0; }
@@ -2227,6 +2233,74 @@ img { max-width: 100%; display: block; }
   border-color: rgba(202,41,48,.4); color: #ff6b6b;
 }
 .vip-status-detail-btn.vip-reward-btn:hover { background: rgba(202,41,48,.2); border-color: rgba(202,41,48,.6); }
+
+/* VIP Status Card v2 — centered layout */
+.vip-status-top-v2 {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 20px 20px 14px; gap: 4px;
+}
+.vip-status-top-v2 .vip-status-icon { width: 64px; height: 64px; margin-bottom: 4px; }
+.vip-status-tier-name-v2 {
+  font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .02em;
+  color: #e8d48b;
+}
+.vip-status-greeting-v2 {
+  font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px;
+}
+.vip-status-rows {
+  padding: 0 20px;
+}
+.vip-status-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.vip-status-row:last-child { border-bottom: none; }
+.vip-status-row-label {
+  font-size: 12px; color: var(--muted); font-weight: 500;
+}
+.vip-status-row-value {
+  font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 700;
+}
+.vip-status-row-value.gold { color: #e8d48b; }
+.vip-status-row-value.green { color: var(--success-100); }
+.vip-status-progress-section {
+  padding: 12px 20px 8px; margin-top: 4px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.vip-status-progress-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px;
+}
+.vip-status-progress-title {
+  font-family: Montserrat, sans-serif; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: var(--text-2);
+}
+.vip-status-progress-next {
+  font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 800;
+  text-transform: uppercase;
+}
+.vip-status-actions-v2 {
+  display: flex; gap: 8px; padding: 12px 20px 16px;
+}
+.vip-status-action-btn {
+  flex: 1; padding: 8px 6px; border-radius: 8px; border: 1px solid rgba(255,226,62,.25);
+  background: rgba(255,226,62,.06); color: var(--tertiary-400);
+  font-family: Montserrat, sans-serif; font-size: 11px; font-weight: 700;
+  cursor: pointer; text-align: center; white-space: nowrap;
+  transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.vip-status-action-btn:hover {
+  border-color: rgba(255,226,62,.5); background: rgba(255,226,62,.12);
+  transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,226,62,.15);
+}
+.vip-status-action-btn.primary {
+  background: var(--grad-red-button); border-color: rgba(202,41,48,.4);
+  color: #fff; box-shadow: var(--glow-red-sm);
+}
+.vip-status-action-btn.primary:hover {
+  transform: translateY(-1px); box-shadow: 0 4px 16px rgba(202,41,48,.35);
+}
 
 /* Trial Overlay */
 .trial-overlay {
@@ -2420,17 +2494,14 @@ img { max-width: 100%; display: block; }
 .user-dropdown-nav a { padding: 9px 14px; font-size: 13px; }
 
 /* Hero mobile */
-.hero { padding: 0 0 32px; }
-.hero h1 { font-size: 28px; }
-.hero-title-area { min-height: 160px; padding-bottom: 16px; padding-top: 16px; }
-.hero-bg-image { height: 180px; left: 20%; right: -20%; }
-.hero-desc { margin: 12px auto 0; font-size: 13px; line-height: 1.6; }
-.hero-stats { justify-content: center; gap: 12px; margin-top: 20px; }
-.hero-stat { text-align: center; }
-.hero-stat-value { font-size: 18px; }
-.hero-stat-label { font-size: 11px; }
-.hero-cta { padding: 14px 28px; font-size: 13px; margin-top: 20px; width: 100%; justify-content: center; border-radius: 12px; }
-.hero-glow { width: 200px; height: 200px; top: -20px; right: -10px; }
+.hero { padding: 0; }
+.hero h1 { font-size: 30px; }
+.hero-title-area { padding: 20px 0 0; }
+.hero-desc { margin: 8px 0 0; font-size: 12px; line-height: 1.5; }
+.hero-stats { gap: 6px; margin-top: 14px; }
+.hero-stat-value { font-size: 16px; }
+.hero-stat-label { font-size: 9px; }
+.hero-cta { padding: 12px 24px; font-size: 12px; margin-top: 16px; width: 100%; justify-content: center; border-radius: 12px; }
 
 /* Section titles */
 .section-title { font-size: 18px; }
@@ -2512,7 +2583,7 @@ img { max-width: 100%; display: block; }
   transform: translateX(-50%) translateY(100%); border-radius: 24px 24px 0 0; max-height: 92vh;
 }
 .trial-view.open { transform: translateX(-50%) translateY(0); }
-.vip-status-card { max-width: none; margin: 16px 0 0; }
+.vip-status-card { max-width: none; margin: -20px 0 0; position: relative; z-index: 3; }
 .vip-status-top { padding: 14px 16px 10px; gap: 12px; }
 .vip-status-icon { width: 40px; height: 40px; }
 .vip-status-tier-name { font-size: 15px; }
@@ -2537,8 +2608,8 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 480px) {
   .hero h1 { font-size: 22px; }
-  .hero-stats { flex-direction: row; flex-wrap: wrap; gap: 8px; }
-  .hero-stat { width: calc(50% - 5px); }
+  .hero-stats { gap: 6px; }
+  .hero-stat { min-width: 0; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .vip-selector-item { min-width: 50px; }
   .vip-selector-icon { width: 36px; height: 36px; }
@@ -2557,12 +2628,12 @@ img { max-width: 100%; display: block; }
   .vip-selector-item.active .vip-selector-icon { width: 44px; height: 44px; }
   .bottom-nav-item { font-size: 10px; text-transform: none; }
   .bottom-nav-center-circle { width: 44px; height: 44px; }
-  .mission-tabs { gap: 2px; }
-  .mission-tab { padding: 6px 8px; font-size: 11px; }
+  .mission-tabs { gap: 6px; }
+  .mission-tab { padding: 6px 10px; font-size: 10px; }
   .mission-warrior-summary { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
-  .mission-tab { padding: 8px 12px; font-size: 13px; }
+  .mission-tab { padding: 7px 14px; font-size: 12px; }
 }
 /* ===== PROMOTIONS / VOUCHERS VIEW ===== */
 .promo-overlay {
@@ -2596,50 +2667,87 @@ img { max-width: 100%; display: block; }
 .promo-section:last-child { margin-bottom: 0; }
 .promo-section-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
 .promo-section-title {
-  font-family: Montserrat,sans-serif; font-size: 15px; font-weight: 700;
-  padding-left: 10px; border-left: 3px solid var(--primary-400);
-  margin-bottom: 8px; margin-top: 16px;
+  font-family: Montserrat,sans-serif; font-size: 15px; font-weight: 800;
+  font-style: italic; text-transform: uppercase; letter-spacing: -.02em;
+  color: var(--text-0);
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 14px; margin-top: 24px;
+  padding: 0;
 }
+.promo-section-title .lc-icon-svg { font-size: 18px; }
 .promo-section-title:first-child { margin-top: 0; }
+.promo-summary-bar {
+  display: flex; align-items: center; gap: 0;
+  background: var(--surface-texture), var(--grad-surface);
+  border: 1px solid var(--line); border-radius: var(--radius-stage-1);
+  padding: 14px 0; margin-bottom: 16px;
+  box-shadow: var(--shadow-soft);
+}
+.promo-summary-stat {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+.promo-summary-num {
+  font-family: Montserrat,sans-serif; font-size: 18px; font-weight: 800;
+  color: var(--primary-300);
+}
+.promo-summary-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .03em; }
+.promo-summary-divider { width: 1px; height: 28px; background: var(--line); flex-shrink: 0; }
 .promo-section-badge {
   font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px;
   background: rgba(255,226,62,.12); color: var(--tertiary-400); text-transform: uppercase;
 }
 .promo-voucher-list { display: flex; flex-direction: column; gap: 10px; }
 .promo-voucher-card {
-  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
-  background: var(--surface-texture), linear-gradient(180deg,#131c2a 0%,#0f1621 100%);
+  display: flex; align-items: stretch; gap: 0; padding: 0;
+  background: var(--surface-texture), var(--grad-surface);
   border: 1px solid var(--line); border-radius: var(--radius-stage-1);
-  cursor: pointer; transition: all .2s; margin-bottom: 8px; box-shadow: var(--shadow-card);
-  position: relative;
+  cursor: pointer; transition: all .2s; margin-bottom: 8px;
+  box-shadow: var(--shadow-soft);
+  position: relative; overflow: hidden;
 }
 .promo-voucher-card:last-of-type { margin-bottom: 0; }
 .promo-voucher-card:hover { border-color: var(--line-strong); transform: translateY(-1px); }
-.promo-voucher-card.urgent { border-left: 3px solid var(--error-100); }
-.promo-voucher-card.locked { opacity: .6; }
+.promo-voucher-card.urgent { border-color: rgba(222,46,54,.25); }
+.promo-voucher-card.locked { opacity: .55; filter: saturate(.6); }
+.promo-voucher-card.locked:hover { opacity: .7; }
+.promo-voucher-left {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+  flex: 1; min-width: 0;
+}
 .promo-voucher-icon {
   width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800;
   font-family: Montserrat,sans-serif;
+  background: rgba(255,255,255,.05);
 }
-.promo-voucher-icon.percent { background: rgba(222,46,54,.12); color: var(--primary-300); }
-.promo-voucher-icon.fixed { background: rgba(255,226,62,.12); color: var(--tertiary-400); }
+.promo-voucher-icon.percent { background: rgba(222,46,54,.1); color: var(--primary-300); }
+.promo-voucher-icon.fixed { background: rgba(255,226,62,.1); color: var(--tertiary-400); }
 .promo-voucher-info { flex: 1; min-width: 0; }
-.promo-voucher-title { font-weight: 700; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.promo-voucher-desc { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.promo-voucher-title { font-weight: 700; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
+.promo-voucher-desc { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 3px; line-height: 1.4; }
 .promo-voucher-meta { display: flex; align-items: center; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
-.promo-voucher-expiry { font-size: 11px; color: var(--muted); }
+.promo-voucher-expiry { font-size: 11px; color: var(--muted); margin-top: 5px; display: flex; align-items: center; gap: 4px; }
 .promo-voucher-expiry.countdown { color: var(--error-100); font-weight: 600; }
+.promo-voucher-divider {
+  width: 1px; align-self: stretch; position: relative;
+  background: repeating-linear-gradient(to bottom, var(--line) 0 4px, transparent 4px 8px);
+  margin: 10px 0;
+}
+.promo-voucher-right {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; flex-shrink: 0; padding: 14px 16px; min-width: 80px;
+}
 .promo-voucher-value {
-  font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px;
-  background: rgba(222,46,54,.12); color: var(--primary-300);
+  font-family: Montserrat,sans-serif; font-size: 16px; font-weight: 800;
+  color: var(--primary-300);
+  line-height: 1.2;
 }
 .promo-voucher-status {
-  font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 6px;
+  font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 6px;
+  white-space: nowrap;
 }
 .promo-voucher-status.available { background: rgba(5,161,88,.12); color: var(--success-100); }
-.promo-voucher-status.locked { background: rgba(255,255,255,.06); color: var(--muted); }
-.promo-voucher-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+.promo-voucher-status.locked { background: rgba(255,255,255,.04); color: var(--muted); }
 .promo-voucher-cta {
   font-size: 11px; font-weight: 600; padding: 6px 14px; border-radius: 8px;
   background: var(--primary-400); color: #fff; border: none; cursor: pointer; white-space: nowrap;
@@ -2710,8 +2818,11 @@ img { max-width: 100%; display: block; }
 /* Active Promo Cards (Section B) */
 .promo-active-list { display: flex; flex-direction: column; gap: 12px; }
 .promo-active-card {
-  background: var(--card-surface); border: 1px solid var(--line); border-radius: var(--radius-md);
-  padding: 12px; transition: all .2s; margin-bottom: 8px; box-shadow: var(--shadow-card);
+  background: var(--surface-texture), var(--grad-surface);
+  border: 1px solid var(--line); border-radius: var(--radius-stage-1);
+  padding: 14px 16px; transition: all .2s; margin-bottom: 8px;
+  box-shadow: var(--shadow-soft);
+  position: relative; overflow: hidden;
 }
 .promo-active-card:last-of-type { margin-bottom: 0; }
 .promo-active-card:hover { border-color: var(--line-strong); }
@@ -2726,6 +2837,11 @@ img { max-width: 100%; display: block; }
 .promo-active-status {
   font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 6px;
   background: rgba(5,161,88,.12); color: var(--success-100);
+  display: flex; align-items: center; gap: 4px; white-space: nowrap;
+}
+.promo-active-status::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--success-100); flex-shrink: 0;
 }
 .promo-active-highlights { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
 .promo-active-progress { margin-bottom: 10px; }
@@ -2735,72 +2851,91 @@ img { max-width: 100%; display: block; }
 .promo-active-progress-track { height: 6px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; }
 .promo-active-progress-fill { height: 100%; border-radius: 3px; background: var(--success-100); transition: width .5s; }
 .promo-active-rate { display: inline-flex; align-items: center; gap: 4px; background: rgba(255,226,62,.08); border-radius: 8px; padding: 6px 12px; font-size: 13px; font-weight: 600; color: var(--tertiary-400); margin-bottom: 10px; }
-.promo-active-actions { display: flex; gap: 8px; }
+.promo-active-actions { display: flex; gap: 8px; margin-top: 4px; }
 .promo-active-btn {
-  font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 8px;
-  border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; transition: all .2s;
+  font-size: 11px; font-weight: 700; padding: 8px 16px; border-radius: var(--radius-stage-3);
+  font-family: Montserrat,sans-serif; text-transform: uppercase; letter-spacing: .04em;
+  border: 1px solid var(--line); background: var(--panel-2); color: var(--text);
+  cursor: pointer; transition: all .2s;
 }
-.promo-active-btn:hover { border-color: rgba(255,255,255,.2); }
-.promo-active-btn.primary { background: var(--primary-400); border-color: var(--primary-400); color: #fff; }
-.promo-active-btn.primary:hover { background: var(--primary-300); }
-.promo-active-btn.danger { color: var(--error-100); border-color: rgba(255,39,78,.3); }
-.promo-active-btn.danger:hover { background: rgba(255,39,78,.08); }
+.promo-active-btn:hover { opacity: .85; }
+.promo-active-btn.primary {
+  background: var(--grad-red-button); border-color: transparent; color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), var(--glow-red-sm);
+}
+.promo-active-btn.primary:hover { opacity: .85; }
+.promo-active-btn.danger { color: var(--error-100); border-color: rgba(255,39,78,.25); background: transparent; }
+.promo-active-btn.danger:hover { background: rgba(255,39,78,.06); }
 .promo-active-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
 .promo-active-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; margin-bottom: 10px; }
 .promo-active-progress-wrap { margin-bottom: 12px; }
-.promo-active-progress-bar { height: 6px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; margin-bottom: 6px; }
-.promo-active-progress-fill { height: 100%; border-radius: 3px; background: var(--success-100); transition: width .5s; }
+.promo-active-progress-bar {
+  height: 6px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden;
+  margin-bottom: 6px;
+}
+.promo-active-progress-fill {
+  height: 100%; border-radius: 3px;
+  background: var(--success-100);
+  transition: width .5s;
+}
 .promo-active-progress-label { font-size: 11px; color: var(--muted); }
 .promo-active-rate-pill, .promo-detail-stat-pill {
   display: inline-flex; align-items: center; gap: 4px;
-  padding: 6px 12px; border-radius: 8px; font-size: 13px; color: var(--text-secondary);
-  background: rgba(255,255,255,.05); border: 1px solid var(--line);
+  padding: 6px 12px; border-radius: var(--radius-stage-3); font-size: 13px; color: var(--text-2);
+  background: var(--panel-2); border: 1px solid var(--line);
 }
 .promo-active-rate-pill strong, .promo-detail-stat-pill strong {
-  color: var(--tertiary-400); font-size: 13px;
+  color: var(--tertiary-400); font-size: 13px; font-family: Montserrat,sans-serif; font-weight: 700;
 }
 
 /* Featured Promos (Section C) */
 .promo-featured-hero {
-  position: relative; border-radius: var(--radius-md); overflow: hidden;
-  min-height: 160px; cursor: pointer; margin-bottom: 12px; transition: transform .2s;
+  position: relative; border-radius: var(--radius-stage-1); overflow: hidden;
+  min-height: 140px; cursor: pointer; margin-bottom: 12px;
+  transition: all .2s; border: 1px solid var(--line);
 }
-.promo-featured-hero:hover { transform: translateY(-2px); }
+.promo-featured-hero:hover { transform: translateY(-1px); border-color: var(--line-strong); }
 .promo-featured-hero-bg {
-  position: absolute; inset: 0; opacity: .6;
-  background: linear-gradient(135deg, rgba(222,46,54,.3), rgba(255,132,0,.2), rgba(255,226,62,.1));
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(222,46,54,.35), rgba(255,132,0,.2), rgba(255,226,62,.08));
+}
+.promo-featured-hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.6) 0%, transparent 60%);
 }
 .promo-featured-hero-content {
   position: relative; z-index: 1; padding: 20px;
-  display: flex; flex-direction: column; justify-content: flex-end; min-height: 160px;
+  display: flex; flex-direction: column; justify-content: flex-end; min-height: 140px;
 }
 .promo-featured-hero-badge {
   position: absolute; top: 12px; left: 12px; font-size: 10px; font-weight: 700;
   padding: 3px 10px; border-radius: 6px; background: var(--primary-400); color: #fff; z-index: 2;
+  letter-spacing: .04em;
 }
 .promo-featured-hero-title { font-family: Montserrat,sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; }
 .promo-featured-hero-benefit { font-size: 13px; color: var(--tertiary-400); font-weight: 600; margin-top: 4px; }
-.promo-featured-hero-time { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.promo-featured-hero-time { font-size: 11px; color: var(--muted); margin-top: 6px; display: flex; align-items: center; gap: 4px; }
 .promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .promo-grid-card {
-  background: var(--panel-2); border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--surface-texture), var(--grad-surface);
+  border: 1px solid var(--line); border-radius: var(--radius-stage-1);
   overflow: hidden; cursor: pointer; transition: all .2s;
 }
-.promo-grid-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.promo-grid-card:hover { border-color: var(--line-strong); transform: translateY(-1px); }
 .promo-grid-card-img {
   width: 100%; aspect-ratio: 21/9; overflow: hidden;
-  background: linear-gradient(135deg, var(--panel-3), var(--panel-2));
+  background: linear-gradient(135deg, rgba(222,46,54,.12), rgba(74,125,254,.08));
   display: flex; align-items: center; justify-content: center; font-size: 28px;
 }
-.promo-grid-card-body { padding: 10px 12px 12px; }
+.promo-grid-card-body { padding: 12px 14px 14px; }
 .promo-grid-card-badge {
   font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: inline-block;
 }
 .promo-grid-card-badge.hot { background: rgba(222,46,54,.15); color: var(--primary-300); }
 .promo-grid-card-badge.event { background: rgba(74,125,254,.15); color: var(--secondary-300); }
-.promo-grid-card-title { font-family: Montserrat,sans-serif; font-size: 13px; font-weight: 700; margin-top: 6px; }
-.promo-grid-card-benefit { font-size: 11px; color: var(--tertiary-400); margin-top: 3px; }
-.promo-grid-card-time { font-size: 10px; color: var(--muted); margin-top: 3px; }
+.promo-grid-card-title { font-family: Montserrat,sans-serif; font-size: 13px; font-weight: 700; margin-top: 8px; line-height: 1.3; }
+.promo-grid-card-benefit { font-size: 11px; color: var(--tertiary-400); margin-top: 4px; font-weight: 600; }
+.promo-grid-card-time { font-size: 10px; color: var(--muted); margin-top: 4px; }
 
 /* Promo Detail Steps */
 .promo-detail-steps { counter-reset: step; margin-top: 8px; }
@@ -2830,13 +2965,16 @@ img { max-width: 100%; display: block; }
 }
 .promo-detail-drawer.open { transform: translateX(-50%) translateY(0); }
 .promo-body { padding: 14px 16px 20px; }
-.promo-voucher-card { padding: 12px; gap: 10px; }
-.promo-voucher-icon { width: 36px; height: 36px; font-size: 15px; }
+.promo-voucher-card { gap: 0; }
+.promo-voucher-left { padding: 12px 14px; gap: 10px; }
+.promo-voucher-icon { width: 40px; height: 40px; font-size: 15px; }
 .promo-voucher-title { font-size: 13px; }
+.promo-voucher-right { padding: 12px 14px; min-width: 72px; }
+.promo-voucher-value { font-size: 16px; }
 .promo-grid { grid-template-columns: 1fr; }
-.promo-featured-hero { min-height: 140px; }
-.promo-featured-hero-content { min-height: 140px; padding: 16px; }
-.promo-featured-hero-title { font-size: 18px; }
+.promo-featured-hero { min-height: 130px; }
+.promo-featured-hero-content { min-height: 130px; padding: 16px; }
+.promo-featured-hero-title { font-size: 16px; }
 
 /* ===== ACCOUNT VIEW ===== */
 .account-view {
@@ -2950,7 +3088,7 @@ img { max-width: 100%; display: block; }
 .account-content .dep-inline .dep-method-card { border-radius: var(--radius-md); }
 
 /* Promo inline (inside account-content) */
-.account-content .promo-inline { padding: 0 16px; }
+.account-content .promo-inline { padding: 16px 16px 0; }
 .account-content .promo-inline .promo-section-title:first-child { margin-top: 0; }
 
 /* Promo detail drawer — keep as overlay even in account view */
@@ -3662,23 +3800,20 @@ img { max-width: 100%; display: block; }
 }
 /* Mission nav */
 .mission-nav {
-  display: flex; gap: 0; overflow-x: auto;
-  padding: 6px 16px;
+  display: flex; gap: 0;
+  padding: 4px 10px;
   border-bottom: 1px solid var(--line);
   background: var(--bg);
   position: sticky; top: 0; z-index: 20;
-  -webkit-overflow-scrolling: touch;
-  white-space: nowrap;
 }
-.mission-nav::-webkit-scrollbar { display: none; }
 .mission-nav-item {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 6px 12px; border-radius: 6px;
-  font-size: 12px; font-weight: 600; color: var(--muted);
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  flex: 1; padding: 7px 4px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; color: var(--muted);
   text-decoration: none; cursor: pointer;
-  transition: all .2s; flex-shrink: 0;
+  transition: all .2s; white-space: nowrap; text-align: center;
 }
-.mission-nav-item svg { width: 14px; height: 14px; flex-shrink: 0; }
+.mission-nav-item svg { width: 13px; height: 13px; flex-shrink: 0; }
 .mission-nav-item:hover { background: rgba(255,255,255,.04); color: var(--text); }
 .mission-nav-item.active {
   background: rgba(222,46,54,.12); color: var(--primary-300);
@@ -3693,13 +3828,199 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(90deg, rgba(202,41,48,.12), rgba(255,226,62,.08));
   border: 1px solid rgba(255,226,62,.15);
   font-size: 13px; font-weight: 600; color: var(--tertiary-400);
+  cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+  transition: all .2s;
 }
-.mhub-cards { padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 12px; }
-.mhub-cards-row { display: flex; gap: 10px; }
+.mhub-reward-strip:hover { background: linear-gradient(90deg, rgba(202,41,48,.18), rgba(255,226,62,.12)); }
+.mhub-reward-strip-left { display: flex; align-items: center; gap: 6px; }
+.mhub-reward-strip-chevron {
+  width: 16px; height: 16px; color: var(--tertiary-400); opacity: .6;
+  transition: transform .3s;
+}
+.mhub-reward-strip.open .mhub-reward-strip-chevron { transform: rotate(180deg); }
+.mhub-reward-list {
+  margin: 0 16px; overflow: hidden;
+  max-height: 0; opacity: 0;
+  transition: max-height .3s ease, opacity .2s ease, margin .3s ease;
+}
+.mhub-reward-list.open {
+  max-height: 300px; opacity: 1; margin-bottom: 4px;
+}
+.mhub-reward-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; border-radius: 10px;
+  background: rgba(255,255,255,.03); border: 1px solid var(--line);
+  margin-top: 6px;
+}
+.mhub-reward-item-left { display: flex; align-items: center; gap: 10px; }
+.mhub-reward-item-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.mhub-reward-item-name { font-size: 12px; font-weight: 600; }
+.mhub-reward-item-source { font-size: 10px; color: var(--muted); margin-top: 1px; }
+.mhub-reward-claim {
+  padding: 5px 14px; border-radius: 8px; border: none;
+  background: linear-gradient(135deg, var(--success-400), var(--success-500));
+  color: #fff; font-size: 11px; font-weight: 700; cursor: pointer;
+  transition: all .2s;
+}
+.mhub-reward-claim:hover { transform: scale(1.05); box-shadow: 0 2px 8px rgba(5,161,88,.3); }
+/* Leaderboard page */
+.lb-page { padding: 0 0 32px; }
+.lb-tabs {
+  display: flex; gap: 4px; padding: 12px 16px; position: sticky; top: 0; z-index: 5;
+  background: var(--bg);
+}
+.lb-tab {
+  flex: 1; padding: 10px 0; border-radius: 10px; border: 1px solid var(--line);
+  background: transparent; color: var(--muted); font-size: 13px; font-weight: 700;
+  font-family: Montserrat, sans-serif; cursor: pointer; transition: all .2s ease;
+}
+.lb-tab.active {
+  background: linear-gradient(135deg, rgba(212,175,55,.12), rgba(212,175,55,.04));
+  border-color: rgba(212,175,55,.3); color: var(--tertiary-300);
+}
+.lb-banner {
+  position: relative; overflow: hidden; height: 160px;
+}
+.lb-banner-img {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 65% center; opacity: .9;
+}
+.lb-banner-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(13,17,23,.9) 0%, rgba(13,17,23,.55) 40%, rgba(13,17,23,.15) 70%, transparent 100%),
+    linear-gradient(to top, var(--bg) 0%, var(--bg) 2%, transparent 30%);
+}
+.lb-hero {
+  position: relative; z-index: 1; padding: 0 16px; text-align: left; max-width: 40%;
+  display: flex; flex-direction: column; justify-content: center; height: 100%;
+  position: absolute; top: 0; bottom: 0; left: 0;
+}
+.lb-hero-icon { margin-bottom: 4px; }
+.lb-hero-icon svg { width: 28px; height: 28px; }
+.lb-hero-title {
+  font-family: Montserrat, sans-serif; font-size: 20px; font-weight: 900; margin-bottom: 4px;
+  background: var(--metallic-gold); background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s ease-in-out infinite;
+}
+.lb-hero-sub { font-size: 11px; color: var(--text-2); line-height: 1.5; }
+.lb-vip-info {
+  display: flex; align-items: center; gap: 12px; justify-content: center;
+  padding: 12px 16px;
+}
+.lb-hero-pool {
+  margin-top: 12px; display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 10px;
+  background: rgba(255,226,62,.06); border: 1px solid rgba(255,226,62,.15);
+  font-size: 13px; color: var(--tertiary-300);
+}
+.lb-hero-pool strong { font-family: Montserrat, sans-serif; font-weight: 800; }
+.lb-hero-countdown {
+  margin-top: 8px; font-size: 11px; color: var(--muted);
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.lb-list { padding: 0 16px; }
+.lb-item {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px;
+  background: transparent; border-bottom: 1px solid var(--white-06); margin-bottom: 2px;
+  transition: background .2s ease;
+}
+.lb-item.me {
+  background: rgba(222,46,54,.06); border: 1px solid rgba(222,46,54,.15); border-bottom: 1px solid rgba(222,46,54,.15);
+}
+.lb-item.top3 { background: rgba(255,226,62,.03); }
+.lb-rank {
+  width: 32px; text-align: center; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.lb-rank-img { width: 32px; height: 32px; object-fit: contain; }
+.lb-rank-num {
+  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 800; color: var(--muted);
+}
+.lb-info { flex: 1; text-align: left; }
+.lb-name { font-size: 13px; font-weight: 600; }
+.lb-name.me { color: var(--primary-300); }
+.lb-tier { font-size: 10px; color: var(--muted); margin-top: 1px; }
+.lb-mult { color: var(--tertiary-400); font-weight: 700; }
+.lb-coins {
+  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 700;
+  color: var(--tertiary-400); display: flex; align-items: center; gap: 4px;
+}
+.lb-lock-card {
+  margin: 0 16px 20px; padding: 24px 20px; border-radius: 14px; text-align: center;
+  background: var(--grad-glass); border: 1px solid var(--line);
+}
+.lb-lock-icon svg { width: 32px; height: 32px; opacity: .5; }
+.lb-lock-title { font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 700; margin: 10px 0 6px; }
+.lb-lock-sub { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; }
+.lb-lock-cta {
+  padding: 10px 24px; border-radius: 10px; border: 1px solid rgba(212,175,55,.3);
+  background: rgba(212,175,55,.08); color: var(--tertiary-300);
+  font-size: 13px; font-weight: 700; cursor: pointer; transition: all .2s ease;
+}
+.lb-lock-cta:hover { background: rgba(212,175,55,.15); }
+.lb-reward-dist {
+  margin: 20px 16px 0; padding: 16px; border-radius: 14px;
+  background: var(--grad-glass); border: 1px solid var(--line);
+}
+.lb-section-title {
+  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 700;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+}
+.lb-section-title svg { width: 18px; height: 18px; }
+.lb-dist-list { display: flex; flex-direction: column; gap: 6px; }
+.lb-dist-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px; border-radius: 10px; background: rgba(255,255,255,.03);
+  border: 1px solid var(--white-06);
+}
+.lb-dist-item.gold { border-color: rgba(255,226,62,.2); background: rgba(255,226,62,.05); }
+.lb-dist-item.silver { border-color: rgba(192,192,192,.15); background: rgba(192,192,192,.03); }
+.lb-dist-item.bronze { border-color: rgba(205,127,50,.15); background: rgba(205,127,50,.03); }
+.lb-dist-rank { font-size: 13px; font-weight: 700; }
+.lb-dist-prize { font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 800; color: var(--tertiary-400); }
+.lb-tnc-section { margin: 24px 16px 0; }
+.lb-tnc-list {
+  margin-bottom: 16px; padding: 14px 16px; border-radius: 12px;
+  background: var(--grad-glass); border: 1px solid var(--line);
+}
+.lb-tnc-item {
+  font-size: 11px; color: var(--muted); line-height: 1.6;
+  padding: 4px 0 4px 14px; position: relative;
+}
+.lb-tnc-item::before { content: '•'; position: absolute; left: 0; color: var(--tertiary-400); }
+.lb-faq-list { display: flex; flex-direction: column; gap: 6px; }
+.lb-faq-item {
+  border-radius: 12px; border: 1px solid var(--line); background: var(--grad-glass);
+  overflow: hidden; cursor: pointer; transition: border-color .2s ease;
+}
+.lb-faq-item.open { border-color: rgba(255,226,62,.2); }
+.lb-faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 14px; font-size: 13px; font-weight: 600;
+}
+.lb-faq-chevron {
+  width: 16px; height: 16px; color: var(--muted); flex-shrink: 0;
+  transition: transform .2s ease;
+}
+.lb-faq-item.open .lb-faq-chevron { transform: rotate(180deg); color: var(--tertiary-400); }
+.lb-faq-a {
+  max-height: 0; overflow: hidden; font-size: 12px; color: var(--muted);
+  line-height: 1.6; padding: 0 14px; transition: max-height .3s ease, padding .3s ease;
+}
+.lb-faq-item.open .lb-faq-a { max-height: 200px; padding: 0 14px 14px; }
+
+.mhub-cards { padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+.mhub-cards-row { display: flex; gap: 8px; align-items: stretch; }
 
 /* Base card */
 .mhub-card {
-  border-radius: 16px; padding: 20px;
+  border-radius: 12px; padding: 14px;
   border: 1px solid rgba(255,255,255,.08); position: relative; overflow: hidden;
   cursor: pointer; transition: all .2s;
   background: linear-gradient(135deg, rgba(20,20,30,.95), rgba(12,12,18,.98));
@@ -3709,30 +4030,68 @@ img { max-width: 100%; display: block; }
 /* LC featured card */
 .mhub-card.lc {
   background:
+    radial-gradient(ellipse at 20% 50%, rgba(255,140,0,.1), transparent 60%),
     radial-gradient(ellipse at 85% 15%, rgba(255,140,0,.12), transparent 50%),
-    linear-gradient(135deg, #1a1008 0%, #141018 50%, #0c0c14 100%);
-  border-color: rgba(255,160,60,.2);
-  padding: 24px 20px 20px;
+    linear-gradient(160deg, #1a1008 0%, #141018 50%, #0c0c14 100%);
+  border: 2px solid transparent;
+  padding: 14px 16px;
+  box-shadow: 0 4px 24px rgba(255,120,0,.12), 0 0 0 1px rgba(255,140,0,.08) inset;
 }
-.mhub-card-top { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
+.mhub-card.lc::before {
+  content: ''; position: absolute; inset: -2px; z-index: -1;
+  background: conic-gradient(from var(--border-angle, 0deg), rgba(255,140,0,.7), rgba(255,80,0,.3) 25%, transparent 40%, transparent 60%, rgba(255,80,0,.3) 75%, rgba(255,140,0,.7));
+  border-radius: inherit;
+  animation: rotateBorder 4s linear infinite;
+  filter: blur(1px);
+}
+.mhub-card.lc::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgba(255,180,60,.4) 50%, transparent 95%);
+}
+.mhub-card-top { display: flex; align-items: center; gap: 10px; position: relative; z-index: 1; }
 .mhub-card-icon { font-size: 36px; flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
 .mhub-card-icon img { border-radius: 6px; }
-.mhub-card-icon.lc-icon { width: 68px; height: 68px; }
-.mhub-card-icon.lc-icon img { width: 68px; height: 68px; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,.6)); }
+.mhub-card-icon.lc-icon { width: 44px; height: 44px; overflow: visible; position: relative; z-index: 2; }
+.mhub-card-icon.lc-icon::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  width: 46px; height: 46px;
+  margin-top: -23px; margin-left: -23px;
+  border-radius: 50%; border: 1.5px solid rgba(255,140,0,.4);
+  animation: lcPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(255,140,0,.15);
+}
+.mhub-card-icon.lc-icon::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  width: 56px; height: 56px;
+  margin-top: -28px; margin-left: -28px;
+  border-radius: 50%; border: 1px solid rgba(255,140,0,.12);
+  animation: lcPulse 2s ease-in-out infinite .5s;
+}
+@keyframes lcPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: .4; }
+}
+.mhub-card-icon.lc-icon img {
+  width: 57px; height: 57px; object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(255,140,0,.3));
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  z-index: 1;
+}
 .mhub-card-info { flex: 1; min-width: 0; }
-.mhub-card-title { font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; }
+.mhub-card-title { font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; }
 .mhub-card-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 .mhub-card-badge {
-  font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 6px;
-  white-space: nowrap; display: inline-flex; align-items: center; gap: 5px;
+  font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 6px;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;
   background: rgba(67,160,71,.15); color: #66bb6a;
+  position: absolute; top: 0; right: 0;
 }
 .mhub-card-badge::before {
   content: ''; width: 5px; height: 5px; border-radius: 50%;
   background: #66bb6a; flex-shrink: 0;
 }
 .mhub-card-stats {
-  display: flex; gap: 16px; margin-top: 14px; position: relative; z-index: 1;
+  display: flex; gap: 12px; margin-top: 10px; position: relative; z-index: 1;
 }
 .mhub-card-stat { text-align: center; flex: 1; }
 .mhub-card-stat-value { font-family: Montserrat, sans-serif; font-size: 15px; font-weight: 800; color: var(--tertiary-400); }
@@ -3744,9 +4103,9 @@ img { max-width: 100%; display: block; }
 .mhub-stat-divider { width: 1px; height: 28px; flex-shrink: 0; background: linear-gradient(180deg, transparent, rgba(255,160,60,.25), transparent); }
 .mhub-card-stat-label { font-size: 10px; color: var(--muted); margin-top: 2px; }
 .mhub-card-cta {
-  margin-top: 14px; position: relative; z-index: 1;
-  display: inline-block; padding: 8px 20px; border-radius: 8px;
-  font-size: 13px; font-weight: 700; border: none; cursor: pointer;
+  margin-top: 10px; position: relative; z-index: 1;
+  display: inline-block; padding: 6px 16px; border-radius: 8px;
+  font-size: 12px; font-weight: 700; border: none; cursor: pointer;
   transition: all .2s; text-transform: uppercase;
 }
 .mhub-card.lc .mhub-card-cta {
@@ -3756,17 +4115,18 @@ img { max-width: 100%; display: block; }
 .mhub-card-arrow { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 24px; color: rgba(255,255,255,.2); z-index: 1; }
 
 /* Two-column small cards */
-.mhub-cards-row .mhub-card { flex: 1; min-width: 0; padding: 14px; }
-.mhub-cards-row .mhub-card-top { gap: 10px; }
+.mhub-cards-row .mhub-card { flex: 1; min-width: 0; padding: 8px 10px; display: flex; flex-direction: column; gap: 0; }
+.mhub-cards-row .mhub-card-cta { margin-top: auto; }
+.mhub-cards-row .mhub-card-top { gap: 8px; }
 .mhub-cards-row .mhub-card-icon { width: 36px; height: 36px; }
 .mhub-cards-row .mhub-card-icon img { width: 36px; height: 36px; }
-.mhub-cards-row .mhub-card-title { font-size: 15px; }
+.mhub-cards-row .mhub-card-title { font-size: 12px; }
 .mhub-cards-row .mhub-card-sub { font-size: 10px; }
-.mhub-cards-row .mhub-card-stats { flex-direction: column; gap: 4px; margin-top: 10px; }
+.mhub-cards-row .mhub-card-stats { flex-direction: column; gap: 0; margin-top: 2px; }
 .mhub-cards-row .mhub-card-stat { text-align: left; }
-.mhub-cards-row .mhub-card-stat-value { font-size: 13px; }
+.mhub-cards-row .mhub-card-stat-value { font-size: 12px; }
 .mhub-cards-row .mhub-card-cta {
-  padding: 6px 14px; font-size: 11px; width: 100%; text-align: center;
+  padding: 5px 12px; font-size: 10px; width: 100%; text-align: center; margin-top: auto;
   background: linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.05));
   color: var(--text-2); border: 1px solid rgba(255,255,255,.1); border-radius: 8px;
 }
@@ -3776,6 +4136,76 @@ img { max-width: 100%; display: block; }
 /* Progress bar for rookie card */
 .mhub-progress { height: 5px; border-radius: 3px; background: rgba(255,255,255,.08); margin: 8px 0 0; overflow: hidden; }
 .mhub-progress-fill { height: 100%; border-radius: 3px; }
+
+/* Daily check-in */
+.checkin-section {
+  padding: 0 16px 20px;
+}
+.checkin-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px;
+}
+.checkin-title {
+  font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .02em;
+  display: flex; align-items: center; gap: 6px;
+}
+.checkin-streak {
+  font-size: 11px; font-weight: 700; color: var(--tertiary-400);
+  display: flex; align-items: center; gap: 4px;
+}
+.checkin-days {
+  display: flex; gap: 4px; justify-content: space-between;
+  padding: 12px; border-radius: 12px;
+  background: rgba(255,255,255,.03); border: 1px solid var(--line);
+}
+.checkin-day {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  flex: 1; opacity: .4;
+}
+.checkin-day.done { opacity: 1; }
+.checkin-day.today { opacity: 1; }
+.checkin-day-icon {
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+}
+.checkin-day-icon img { width: 32px; height: 32px; object-fit: contain; }
+.checkin-day.done .checkin-day-icon img { filter: saturate(.7) brightness(.8); }
+.checkin-day.today .checkin-day-icon img {
+  filter: drop-shadow(0 0 6px rgba(255,140,0,.4));
+  animation: lcPulse 2s ease-in-out infinite;
+}
+.checkin-day-label {
+  font-size: 10px; font-weight: 600; color: var(--muted);
+  text-transform: uppercase;
+}
+.checkin-day.done .checkin-day-label { color: var(--success-100); }
+.checkin-day.today .checkin-day-label { color: var(--tertiary-400); font-weight: 800; }
+.checkin-day-reward {
+  font-size: 9px; font-weight: 700; color: var(--tertiary-400);
+  display: flex; align-items: center; gap: 2px; margin-top: -1px;
+}
+.checkin-day-reward .mcoin { width: 12px; height: 12px; vertical-align: -1px; }
+.checkin-day.done .checkin-day-reward { color: var(--success-100); opacity: .7; }
+.checkin-day-reward.bonus {
+  color: #ff8c00; font-weight: 800;
+}
+.checkin-claim-btn {
+  width: 100%; margin-top: 10px; padding: 9px; border-radius: 10px; border: none;
+  font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 800;
+  text-transform: uppercase; cursor: pointer;
+  background: linear-gradient(180deg, #de2e36, #b71c1c); color: #fff;
+  box-shadow: 0 4px 16px rgba(202,41,48,.25);
+  transition: all .2s;
+}
+.checkin-claim-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(202,41,48,.35); }
+
+/* Mission coin inline image */
+.mcoin {
+  display: inline-block; width: 16px; height: 16px; vertical-align: -2px;
+  background: url('Assets/mission.webp') center/contain no-repeat;
+}
+.mcoin.lg { width: 20px; height: 20px; vertical-align: -3px; }
+.mcoin.sm { width: 14px; height: 14px; vertical-align: -2px; }
 
 /* Featured missions section */
 .mhub-featured { padding: 0 16px 24px; }
@@ -3824,51 +4254,76 @@ img { max-width: 100%; display: block; }
 
 .mission-header-bar {
   display: none;
-  align-items: center; gap: 12px;
-  padding: 14px 16px;
+  align-items: center; gap: 8px;
+  padding: 8px 12px;
   border-bottom: 1px solid var(--line);
   background: var(--panel);
 }
 .mission-back-btn {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: rgba(255,255,255,.06); border: none;
+  width: 28px; height: 28px; border-radius: 8px;
+  background: transparent; border: none;
   display: flex; align-items: center; justify-content: center;
   color: var(--muted); cursor: pointer; transition: all .2s;
 }
-.mission-back-btn:hover { background: rgba(255,255,255,.12); color: var(--text); }
-.mission-back-btn svg { width: 18px; height: 18px; }
-.mission-header-title { font-size: 18px; font-weight: 700; }
+.mission-back-btn:hover { background: rgba(255,255,255,.08); color: var(--text); }
+.mission-back-btn svg { width: 16px; height: 16px; }
+.mission-header-title { font-size: 14px; font-weight: 700; }
 
 /* Redeem page */
-.redeem-page { padding: 16px; }
+.redeem-page { padding: 0; }
+.redeem-banner {
+  position: relative; overflow: hidden; border-radius: 0 0 16px 16px;
+  height: 160px; margin-bottom: 16px;
+}
+.redeem-banner-img {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 70% center; opacity: .9;
+}
+.redeem-banner-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(13,17,23,.92) 0%, rgba(13,17,23,.6) 40%, rgba(13,17,23,.15) 70%, transparent 100%),
+    linear-gradient(to top, var(--bg) 0%, var(--bg) 2%, transparent 30%);
+}
+.redeem-banner-content {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;
+  height: 100%; padding: 20px 16px 0; text-align: left; max-width: 60%;
+}
 .redeem-header { text-align: center; padding: 8px 0 16px; }
 .redeem-coin-balance {
+  position: absolute; bottom: 12px; left: 14px; z-index: 2;
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 16px; border-radius: 999px;
-  background: linear-gradient(180deg, rgba(25,18,11,.94), rgba(14,10,8,.98));
-  border: 1px solid rgba(255,203,46,.12);
-  font-family: Montserrat, sans-serif; font-size: 15px; font-weight: 800;
-  color: #ffd36a; margin-bottom: 12px;
+  padding: 7px 14px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(25,18,11,.88), rgba(14,10,8,.95));
+  border: 1px solid rgba(255,203,46,.2);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.06);
+  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 800;
+  color: #ffd36a;
 }
+.redeem-coin-balance .mcoin { width: 20px; height: 20px; }
 .redeem-title {
-  font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800;
-  margin-bottom: 4px;
+  font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 900;
+  margin-bottom: 4px; letter-spacing: -.02em;
+  background: var(--metallic-gold); background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(255,226,62,.15));
 }
-.redeem-sub { font-size: 12px; color: var(--muted); line-height: 1.5; max-width: 280px; margin: 0 auto; }
+.redeem-sub { font-size: 12px; color: var(--text-2); line-height: 1.5; max-width: 280px; }
 .redeem-filters {
-  display: flex; gap: 6px; overflow-x: auto; padding: 12px 0 4px;
-  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  display: flex; gap: 6px; flex-wrap: wrap; padding: 12px 0 4px;
 }
-.redeem-filters::-webkit-scrollbar { display: none; }
 .redeem-filter {
-  border: 1px solid rgba(255,203,46,.1); background: rgba(19,15,10,.92);
-  color: rgba(255,241,204,.65); padding: 7px 14px; border-radius: 999px;
-  font-size: 12px; font-weight: 700; white-space: nowrap; cursor: pointer;
-  transition: all .2s;
+  border: 1px solid var(--line); background: rgba(255,255,255,.04);
+  color: var(--muted); padding: 6px 14px; border-radius: 8px;
+  font-size: 12px; font-weight: 600; white-space: nowrap; cursor: pointer;
+  transition: all .2s; flex: 1; text-align: center; min-width: 0;
 }
 .redeem-filter.active {
-  color: #1a0e00; background: linear-gradient(180deg, #ffd36a, #ffb92e);
-  border-color: transparent;
+  color: var(--tertiary-300); background: rgba(212,175,55,.1);
+  border-color: rgba(212,175,55,.3);
 }
 .redeem-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px;
@@ -3890,10 +4345,14 @@ img { max-width: 100%; display: block; }
   pointer-events: none;
 }
 .redeem-thumb {
-  position: relative; width: 60px; height: 60px;
+  position: relative; width: 72px; height: 72px;
   margin: 0 auto 10px; border-radius: 16px;
   display: flex; align-items: center; justify-content: center;
   font-size: 28px;
+}
+.redeem-thumb-img {
+  width: 100%; height: 100%; object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.3));
 }
 .redeem-thumb.coin {
   border-radius: 999px;
@@ -3931,6 +4390,238 @@ img { max-width: 100%; display: block; }
   background: rgba(222,46,54,.85); color: #fff;
 }
 
+/* Redeem hub */
+.redeem-hub-grid { display: flex; flex-direction: column; gap: 8px; padding: 0 16px; }
+.redeem-hub-card {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px; border-radius: 14px;
+  background: rgba(255,255,255,.03); border: 1px solid var(--line);
+  cursor: pointer; transition: all .2s;
+}
+.redeem-hub-card:active { transform: scale(.98); }
+.redeem-hub-card:hover { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.1); }
+.redeem-hub-vip { border-color: rgba(255,226,62,.15); background: linear-gradient(135deg,rgba(255,226,62,.04),transparent); }
+.redeem-hub-icon {
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+  overflow: hidden; padding: 0; background: transparent !important;
+}
+.redeem-hub-icon img {
+  width: 100%; height: 100%; object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.3));
+}
+.redeem-hub-info { flex: 1; min-width: 0; }
+.redeem-hub-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.redeem-hub-desc { font-size: 10px; color: var(--muted); line-height: 1.4; }
+.redeem-hub-badge {
+  padding: 3px 8px; border-radius: 6px; font-size: 9px; font-weight: 700;
+  background: rgba(255,255,255,.06); color: var(--text-2); white-space: nowrap;
+}
+.redeem-hub-arrow { font-size: 18px; color: var(--muted); font-weight: 300; }
+/* Sub-page banner */
+.redeem-sub-banner {
+  position: relative; overflow: hidden; height: 140px;
+}
+.redeem-sub-banner-img {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 70% center; opacity: .9;
+}
+.redeem-sub-banner-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(13,17,23,.92) 0%, rgba(13,17,23,.55) 40%, rgba(13,17,23,.15) 70%, transparent 100%),
+    linear-gradient(to top, var(--bg) 0%, var(--bg) 2%, transparent 30%);
+}
+.redeem-sub-banner-content {
+  position: absolute; top: 0; bottom: 0; left: 0; max-width: 50%; z-index: 1;
+  display: flex; flex-direction: column; justify-content: center; padding: 0 16px 0 46px;
+}
+.redeem-sub-banner-title {
+  font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 900; margin-bottom: 4px;
+  background: var(--metallic-gold); background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s ease-in-out infinite;
+}
+.redeem-sub-banner-desc { font-size: 11px; color: var(--text-2); line-height: 1.4; }
+.redeem-sub-banner-back {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(0,0,0,.3); border: 1px solid rgba(255,255,255,.1);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; cursor: pointer; transition: all .2s;
+}
+.redeem-sub-banner-back:hover { background: rgba(0,0,0,.5); }
+
+.redeem-sub-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px 0;
+  margin-bottom: 4px;
+}
+.redeem-back-arrow {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: transparent; border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); cursor: pointer; transition: all .2s;
+  flex-shrink: 0;
+}
+.redeem-back-arrow:hover { background: rgba(255,255,255,.08); color: var(--text); }
+.redeem-back-arrow svg { width: 16px; height: 16px; }
+.redeem-sub-title {
+  font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800;
+}
+.redeem-sub-desc {
+  font-size: 12px; color: var(--muted); padding: 0 16px 0 54px; margin-bottom: 14px;
+}
+
+/* Spin wheel */
+.spin-wheel-container {
+  position: relative; width: 280px; height: 280px; margin: 0 auto 20px;
+}
+/* Outer decorative ring */
+.spin-wheel-outer {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #c9a227 0deg 15deg, #1a1a2e 15deg 30deg,
+    #c9a227 30deg 45deg, #1a1a2e 45deg 60deg,
+    #c9a227 60deg 75deg, #1a1a2e 75deg 90deg,
+    #c9a227 90deg 105deg, #1a1a2e 105deg 120deg,
+    #c9a227 120deg 135deg, #1a1a2e 135deg 150deg,
+    #c9a227 150deg 165deg, #1a1a2e 165deg 180deg,
+    #c9a227 180deg 195deg, #1a1a2e 195deg 210deg,
+    #c9a227 210deg 225deg, #1a1a2e 225deg 240deg,
+    #c9a227 240deg 255deg, #1a1a2e 255deg 270deg,
+    #c9a227 270deg 285deg, #1a1a2e 285deg 300deg,
+    #c9a227 300deg 315deg, #1a1a2e 315deg 330deg,
+    #c9a227 330deg 345deg, #1a1a2e 345deg 360deg
+  );
+  box-shadow: 0 0 40px rgba(212,175,55,.25), 0 8px 32px rgba(0,0,0,.5);
+}
+/* Light bulbs on ring */
+.spin-wheel-outer::after {
+  content: ''; position: absolute; inset: 4px; border-radius: 50%;
+  border: 2px solid rgba(255,226,62,.3);
+  box-shadow: inset 0 0 8px rgba(212,175,55,.15);
+}
+/* Inner wheel with segments */
+.spin-wheel {
+  position: absolute; inset: 14px; border-radius: 50%;
+  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+}
+.spin-wheel.spinning { pointer-events: none; }
+.spin-wheel-face {
+  width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0,0,0,.4);
+}
+.spin-seg {
+  position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+  clip-path: polygon(50% 50%, 50% 0%, 73% 0%);
+  display: flex; align-items: flex-start; justify-content: center;
+  transform-origin: 50% 50%;
+}
+.spin-seg-inner {
+  margin-top: 14px; margin-left: 4px;
+  font-size: 10px; font-weight: 800; color: #fff; letter-spacing: .02em;
+  text-shadow: 0 1px 3px rgba(0,0,0,.6);
+  transform: rotate(22.5deg);
+  white-space: nowrap;
+}
+/* Separator lines */
+.spin-wheel-face::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      transparent 0deg 44.5deg, rgba(255,255,255,.15) 44.5deg 45.5deg, transparent 45.5deg 90deg
+    );
+  pointer-events: none;
+}
+/* Center button */
+.spin-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 60px; height: 60px; border-radius: 50%; z-index: 2; cursor: pointer;
+  background: linear-gradient(145deg, #ffd700, #c9a227);
+  border: 3px solid rgba(255,255,255,.3);
+  box-shadow: 0 4px 20px rgba(212,175,55,.4), inset 0 2px 0 rgba(255,255,255,.4);
+  color: #1a0e00; font-family: Montserrat,sans-serif; font-size: 12px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  letter-spacing: .05em;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.spin-center:hover {
+  transform: translate(-50%,-50%) scale(1.08);
+  box-shadow: 0 6px 28px rgba(212,175,55,.5), inset 0 2px 0 rgba(255,255,255,.5);
+}
+.spin-center:active { transform: translate(-50%,-50%) scale(0.95); }
+/* Pointer */
+.spin-pointer {
+  position: absolute; top: 4px; left: 50%; transform: translateX(-50%); z-index: 4;
+  width: 0; height: 0;
+  border-left: 12px solid transparent; border-right: 12px solid transparent;
+  border-top: 22px solid #de2e36;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,.5));
+}
+.spin-pointer::after {
+  content: ''; position: absolute; top: -24px; left: -8px;
+  width: 0; height: 0;
+  border-left: 8px solid transparent; border-right: 8px solid transparent;
+  border-top: 8px solid #ff4444;
+}
+.spin-options { display: flex; flex-direction: column; gap: 8px; }
+.spin-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.04); color: var(--text); font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: all .2s;
+}
+.spin-btn:hover { background: rgba(255,255,255,.08); }
+.spin-btn-premium {
+  background: linear-gradient(180deg, rgba(255,226,62,.12), rgba(255,226,62,.04));
+  border-color: rgba(255,226,62,.2); color: var(--tertiary-300);
+}
+
+/* Collect formation */
+.collect-formation {
+  background: linear-gradient(180deg, #0a3d0a 0%, #1a5c1a 30%, #2d7d2d 60%, #1a5c1a 100%);
+  border-radius: 16px; padding: 20px 8px; position: relative; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.1);
+}
+.collect-formation::before {
+  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 80px; height: 80px; border-radius: 50%; border: 1px solid rgba(255,255,255,.1);
+}
+.collect-formation::after {
+  content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px;
+  background: rgba(255,255,255,.08);
+}
+.collect-row { display: flex; justify-content: center; gap: 6px; margin-bottom: 10px; }
+.collect-row:last-child { margin-bottom: 0; }
+.collect-player {
+  width: 72px; text-align: center; padding: 6px 4px; border-radius: 10px;
+  background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.1);
+  backdrop-filter: blur(4px); transition: all .2s; cursor: pointer;
+}
+.collect-player.owned {
+  background: rgba(255,226,62,.1); border-color: rgba(255,226,62,.3);
+  box-shadow: 0 0 12px rgba(255,226,62,.1);
+}
+.collect-player-pos {
+  font-size: 9px; font-weight: 800; color: rgba(255,255,255,.5);
+  font-family: Montserrat,sans-serif; margin-bottom: 2px;
+}
+.collect-player.owned .collect-player-pos { color: var(--tertiary-400); }
+.collect-player-name {
+  font-size: 8px; font-weight: 600; color: var(--text-2);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.collect-player.owned .collect-player-name { color: #fff; font-weight: 700; }
+.collect-player-cost { font-size: 8px; color: var(--muted); margin-top: 2px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+
+/* VIP card */
+.redeem-card-vip { border-color: rgba(255,226,62,.15); }
+
 /* Summary card */
 .mission-summary {
   padding: 24px 16px 0;
@@ -3964,39 +4655,46 @@ img { max-width: 100%; display: block; }
 
 /* Tabs */
 .mission-tabs {
-  display: flex; gap: 4px;
-  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)), #0c121c;
-  border: 1px solid var(--line); border-radius: var(--radius-stage-1);
-  padding: 4px; margin: 16px 16px 0;
-  box-shadow: var(--shadow-soft);
+  display: flex; gap: 0;
+  padding: 0 16px;
+  position: relative;
+}
+.mission-tabs::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px; background: var(--line); z-index: 0;
 }
 .mission-tab {
-  padding: 8px 14px; border-radius: var(--radius-stage-2);
-  font-size: 13px; font-weight: 800; cursor: pointer;
+  flex: 1; padding: 10px 8px 9px;
+  border-radius: 10px 10px 0 0;
+  font-family: Montserrat, sans-serif;
+  font-size: 11px; font-weight: 700; cursor: pointer;
   background: transparent; color: var(--text-3);
-  border: 1px solid transparent;
+  border: 1px solid transparent; border-bottom: none;
   transition: all .2s;
-  text-transform: uppercase; letter-spacing: .06em;
-  flex: 1; text-align: center;
+  text-transform: uppercase; letter-spacing: .01em;
+  white-space: nowrap; text-align: center;
+  position: relative; z-index: 1;
+  margin-bottom: -1px;
 }
 .mission-tab.active {
-  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,.10), transparent 34%), linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  background: var(--panel-2);
   color: var(--text-0);
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), var(--glow-red-sm);
-  border-color: var(--line-strong);
+  border-color: var(--line);
+  font-weight: 800;
 }
 .mission-tab:hover:not(.active) { color: var(--text); }
 
 /* Section container */
 .mission-section-wrap {
-  padding: 0 16px 24px;
+  padding: 0; margin: 0 16px 24px;
   box-sizing: border-box; overflow: hidden;
+  border: 1px solid var(--line); border-top: none;
+  border-radius: 0 0 12px 12px;
 }
 .mission-section {
-  background: var(--panel-2); border: 1px solid var(--line); border-top: none;
-  border-radius: 0 16px 16px 16px; padding: 20px; min-height: 300px;
+  padding: 16px 16px 0; min-height: 300px;
   box-sizing: border-box; overflow: hidden;
+  background: var(--panel-2);
 }
 
 /* Newbie section */
@@ -4146,14 +4844,12 @@ img { max-width: 100%; display: block; }
 
 /* Live Challenge tab */
 .mission-tab-lc {
-  background: linear-gradient(135deg, #2d1a0e, #1a0e06) !important;
-  border-color: rgba(255,160,40,.3) !important;
-  color: var(--tertiary-300) !important;
+  color: var(--tertiary-300);
 }
 .mission-tab-lc.active {
-  background: linear-gradient(135deg, #b45309, #d97706) !important;
-  color: #fff !important;
-  border-color: rgba(255,160,40,.5) !important;
+  background: linear-gradient(180deg, rgba(217,119,6,.15), var(--panel-2));
+  color: var(--tertiary-300);
+  border-color: var(--line);
 }
 .mission-section-lc {
   background: linear-gradient(180deg, var(--panel-2) 0%, rgba(217,119,6,.06) 100%) !important;
@@ -4161,14 +4857,13 @@ img { max-width: 100%; display: block; }
 
 /* World Cup tab (separate page) */
 .mission-tab-wc {
-  background: linear-gradient(135deg, #1a3a1a, #0d2818) !important;
-  border-color: rgba(0,180,80,.3) !important;
-  color: var(--success-100) !important;
+  border-color: rgba(0,180,80,.2);
+  color: var(--success-100);
 }
 .mission-tab-wc.active {
-  background: linear-gradient(135deg, #166534, #15803d) !important;
-  color: #fff !important;
-  border-color: rgba(0,180,80,.5) !important;
+  background: linear-gradient(135deg, rgba(22,101,52,.6), rgba(21,128,61,.5));
+  color: #fff;
+  border-color: rgba(0,180,80,.4);
 }
 .mission-section-wc {
   background: linear-gradient(180deg, var(--panel-2) 0%, rgba(22,101,52,.08) 100%) !important;
@@ -4254,7 +4949,7 @@ img { max-width: 100%; display: block; }
 
 /* ===== LC NEON ICONS ===== */
 .lc-icon-svg {
-  display: inline-block; vertical-align: middle;
+  display: inline-flex; vertical-align: -0.125em;
   width: 1em; height: 1em;
 }
 .lc-icon-svg svg {
@@ -5124,10 +5819,10 @@ img { max-width: 100%; display: block; }
 .mission-summary { padding: 16px 16px 0; }
 .mission-summary-card { flex-direction: column; text-align: center; padding: 20px; }
 .mission-summary-stats { justify-content: center; }
-.mission-tabs { padding: 16px 16px 0; }
-.mission-tab { padding: 8px 16px; font-size: 13px; }
-.mission-section-wrap { padding: 0 16px 16px; }
-.mission-section { padding: 14px; }
+.mission-tabs { padding: 0 16px; }
+.mission-tab { padding: 10px 8px 9px; font-size: 11px; }
+.mission-section-wrap { padding: 0 0 16px; }
+.mission-section { padding: 16px 16px 0; }
 .mission-card { padding: 12px; gap: 10px; flex-wrap: wrap; overflow: visible; }
 .mission-card-right { width: 100%; justify-content: space-between; margin-top: 4px; }
 .mission-w-card { padding: 12px; gap: 10px; }
@@ -5206,39 +5901,53 @@ img { max-width: 100%; display: block; }
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-bg-image">
-    <img src="Assets/hero_layer_vip.png" alt="" loading="lazy"/>
-  </div>
-  <div class="hero-glow">
-    <img src="Assets/assets (1)/asset 3.webp" alt="" loading="lazy"/>
-  </div>
-  <div class="container hero-content">
-    <div class="hero-title-area">
-      <h1 class="anim-in">
-        Đẳng Cấp Hội Viên<br/><span class="gold">Đặc Quyền VIP</span>
-      </h1>
+  <div class="hero-banner">
+    <div class="hero-bg-image">
+      <img src="Assets/hero-vip-banner.png" alt="" loading="lazy"/>
     </div>
-    <div class="hero-below">
-    <p class="hero-desc anim-in anim-d1" style="margin-left:auto;margin-right:auto;">
-      Nạp càng nhiều, nhận càng lớn. Thưởng thăng hạng đến
-      <strong style="color:var(--tertiary-400)">120 triệu</strong>, hoàn trả hằng ngày
-      và đặc quyền riêng theo cấp bậc của bạn.
-    </p>
-    <div class="hero-stats anim-in anim-d2" style="justify-content:center; flex-wrap:nowrap;">
-      <div class="hero-stat" style="text-align:center; flex:1; min-width:0;">
-        <div class="hero-stat-value">1.4%</div>
-        <div class="hero-stat-label">Hoàn trả cao nhất</div>
+    <div class="hero-bg-image-overlay"></div>
+    <div class="container hero-content">
+      <div class="hero-title-area">
+        <div class="hero-badge anim-in">Đẳng cấp hội viên</div>
+        <h1 class="anim-in">
+          Đặc Quyền<br/><span class="gold">VIP</span>
+        </h1>
       </div>
-      <div class="hero-stat" style="text-align:center; flex:1; min-width:0;">
-        <div class="hero-stat-value">120M</div>
-        <div class="hero-stat-label">Thưởng thăng hạng</div>
-      </div>
-      <div class="hero-stat" style="text-align:center; flex:1; min-width:0;">
-        <div class="hero-stat-value">24/7</div>
-        <div class="hero-stat-label">Chăm sóc VIP</div>
+      <p class="hero-desc anim-in anim-d1">
+        Nạp càng nhiều, nhận càng lớn. Thưởng thăng hạng đến
+        <strong style="color:var(--tertiary-400)">120 triệu</strong>, hoàn trả hằng ngày
+        và đặc quyền riêng theo cấp bậc của bạn.
+      </p>
+      <div class="hero-vip-cards anim-in anim-d1" id="heroVipCards" style="display:none">
+        <div class="hero-vip-card">
+          <div class="hero-vip-card-value" id="heroVipTier">VIP1</div>
+          <div class="hero-vip-card-label">Hạng hiện tại</div>
+        </div>
+        <div class="hero-vip-card">
+          <div class="hero-vip-card-value" id="heroVipRank">150</div>
+          <div class="hero-vip-card-label">Xếp hạng VIP</div>
+        </div>
       </div>
     </div>
-    <a href="#estimator" class="hero-cta anim-in anim-d3">
+    <div class="container hero-stats-wrap" id="heroStatsWrap">
+      <div class="hero-stats anim-in anim-d2">
+        <div class="hero-stat">
+          <div class="hero-stat-label">Hoàn trả</div>
+          <div class="hero-stat-value">1.4%</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-label">Thưởng</div>
+          <div class="hero-stat-value">120M</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-label">Chăm sóc</div>
+          <div class="hero-stat-value">24/7</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container hero-below">
+    <a href="#estimator" class="hero-cta anim-in anim-d3" id="heroEstimatorCta">
       Ước tính quyền lợi của bạn
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
@@ -5270,7 +5979,6 @@ img { max-width: 100%; display: block; }
       <div class="vip-status-card-inner" id="vipStatusInner"></div>
     </div>
 
-    </div>
   </div>
 </section>
 
@@ -5479,16 +6187,12 @@ img { max-width: 100%; display: block; }
     <button class="mission-back-btn" onclick="goToLobby()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
     </button>
-    <div class="mission-header-title"><span class="mission-coin-icon"><span class="neon-gold"><span class="lc-icon-svg"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v12"/><path d="M9 9h4.5a1.5 1.5 0 010 3H9"/><path d="M9 12h5a1.5 1.5 0 010 3H9"/></svg></span></span></span> Coin tích lũy: <strong id="missionCoinTotal">7</strong></div>
+    <div class="mission-header-title"><span class="mcoin lg"></span> Coin tích lũy: <strong id="missionCoinTotal">7</strong></div>
   </div>
   <div class="mission-nav" id="missionNav">
     <a href="javascript:void(0)" class="mission-nav-item active" data-tab="overview" onclick="switchMissionNav('overview', this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
       <span>Tổng quan</span>
-    </a>
-    <a href="javascript:void(0)" class="mission-nav-item" data-tab="missions" onclick="switchMissionNav('missions', this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
-      <span>Nhiệm vụ</span>
     </a>
     <a href="javascript:void(0)" class="mission-nav-item" data-tab="redeem" onclick="switchMissionNav('redeem', this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18"/><path d="M12 8c-2-3-6-3-6 0s4 4 6 0"/><path d="M12 8c2-3 6-3 6 0s-4 4-6 0"/></svg>
@@ -5496,7 +6200,7 @@ img { max-width: 100%; display: block; }
     </a>
     <a href="javascript:void(0)" class="mission-nav-item" data-tab="leaderboard" onclick="switchMissionNav('leaderboard', this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 15l-2 5-1.5-3.5L5 15l3.5-1.5L10 10z"/><path d="M18 4l-1 2-2 1 2 1 1 2 1-2 2-1-2-1z"/><path d="M6 2l-.5 1-1 .5 1 .5L6 5l.5-1 1-.5-1-.5z"/></svg>
-      <span>Bảng xếp hạng</span>
+      <span>Xếp hạng</span>
     </a>
   </div>
   <div id="missionContent"></div>
@@ -5995,7 +6699,8 @@ var LC_ICONS = {
   send: '<span class="lc-icon-svg"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4z"/></svg></span>',
   wheel: '<span class="lc-icon-svg"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v7M12 15v7M2 12h7M15 12h7M5 5l5 5M14 14l5 5M5 19l5-5M14 10l5-5"/></svg></span>',
   warning: '<span class="lc-icon-svg"><svg viewBox="0 0 24 24"><path d="M12 2L1 21h22z"/><path d="M12 9v5"/><circle cx="12" cy="17" r=".5" fill="currentColor" stroke="none"/></svg></span>',
-  social: '<span class="lc-icon-svg"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></span>'
+  social: '<span class="lc-icon-svg"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></span>',
+  info: '<span class="lc-icon-svg"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>'
 };
 function lcIcon(name, neonClass) {
   neonClass = neonClass || 'neon-red';
@@ -6363,10 +7068,20 @@ function openDepositDetailInline(methodId) {
 }
 
 function renderPromoPage(container) {
+  const availCount = MOCK_VOUCHERS.filter(v => v.status === 'available').length;
+  const activeCount = MOCK_ACTIVE_PROMOS.length;
   let html = '<div class="promo-inline">';
   html += '<div class="account-page-header">';
   html += '<div class="account-page-title">Ưu đãi của tôi</div>';
   html += '<div class="account-page-sub">Quản lý voucher, khuyến mãi và sự kiện</div>';
+  html += '</div>';
+  // Summary stats bar
+  html += '<div class="promo-summary-bar">';
+  html += '<div class="promo-summary-stat"><span class="promo-summary-num">' + availCount + '</span><span class="promo-summary-label">Voucher khả dụng</span></div>';
+  html += '<div class="promo-summary-divider"></div>';
+  html += '<div class="promo-summary-stat"><span class="promo-summary-num">' + activeCount + '</span><span class="promo-summary-label">KM đang tham gia</span></div>';
+  html += '<div class="promo-summary-divider"></div>';
+  html += '<div class="promo-summary-stat"><span class="promo-summary-num">' + MOCK_FEATURED_PROMOS.length + '</span><span class="promo-summary-label">Ưu đãi nổi bật</span></div>';
   html += '</div>';
   html += '<div id="promoInlineBody"></div>';
   html += '</div>';
@@ -7579,16 +8294,25 @@ function updateTrialHeroCard() {
   const vipCard = document.getElementById('vipStatusCard');
   const isVipMember = isLoggedIn && currentUser && currentUser.tier >= 1 && !currentUser.isTrial;
 
-  // Toggle hero CTA to secondary when logged in
-  const heroCta = document.querySelector('.hero-cta');
-  if (heroCta) heroCta.classList.toggle('secondary', isLoggedIn);
+  // Toggle hero elements based on VIP status
+  const heroCta = document.getElementById('heroEstimatorCta');
+  const heroVipCards = document.getElementById('heroVipCards');
+  const heroStatsWrap = document.getElementById('heroStatsWrap');
 
   if (isVipMember) {
-    // VIP member: show status card, hide trial card
+    // VIP member: show VIP cards, hide stats + CTA + trial card
+    if (heroVipCards) { heroVipCards.style.display = ''; heroVipCards.querySelector('#heroVipTier').textContent = 'VIP' + currentUser.tier; }
+    if (heroStatsWrap) heroStatsWrap.style.display = 'none';
+    if (heroCta) heroCta.style.display = 'none';
     if (trialCard) trialCard.style.display = 'none';
     updateVipStatusCard();
     return;
   }
+
+  // Non-VIP: show stats + CTA, hide VIP cards
+  if (heroVipCards) heroVipCards.style.display = 'none';
+  if (heroStatsWrap) heroStatsWrap.style.display = '';
+  if (heroCta) { heroCta.style.display = ''; heroCta.classList.toggle('secondary', isLoggedIn); }
 
   // Non-VIP / trial: hide VIP card, show trial card
   if (vipCard) vipCard.style.display = 'none';
@@ -7676,46 +8400,43 @@ function updateVipStatusCard() {
     nextTeaseText = 'Đã đạt hạng VIP cao nhất';
   }
 
+  const tierSinceStr = currentUser.tierSince ? new Date(currentUser.tierSince).toLocaleDateString('vi-VN') : '--';
+
   inner.innerHTML = `
-    <div class="vip-status-top">
+    <div class="vip-status-top-v2">
       <div class="vip-status-icon"><img src="${TIER_ICONS[tierData.tier]}" alt="${tierData.name}"/></div>
-      <div>
-        <div class="vip-status-tier-name" style="color:${tierData.color}">${tierData.name} — ${tierData.fullName}</div>
-        <div class="vip-status-greeting">Thành viên từ ${currentUser.tierSince ? new Date(currentUser.tierSince).toLocaleDateString('vi-VN') : '--'}</div>
+      <div class="vip-status-tier-name-v2">${tierData.name}</div>
+      <div class="vip-status-greeting-v2">${tierData.fullName} · Từ ${tierSinceStr}</div>
+    </div>
+    <div class="vip-status-rows">
+      <div class="vip-status-row">
+        <span class="vip-status-row-label">Hoàn trả đã nhận</span>
+        <span class="vip-status-row-value gold">${fmtFull(currentUser.totalCashbackReceived || 0)}đ</span>
+      </div>
+      <div class="vip-status-row">
+        <span class="vip-status-row-label">Thưởng đã nhận</span>
+        <span class="vip-status-row-value green">${fmtFull(currentUser.totalBonusReceived || 0)}đ</span>
       </div>
     </div>
-    <div class="vip-status-benefits">
-      <div class="vip-status-stat">
-        <div class="vip-status-stat-label">Hoàn trả đã nhận</div>
-        <div class="vip-status-stat-value gold">${fmtFull(currentUser.totalCashbackReceived || 0)}đ</div>
+    ${nextTier ? `
+    <div class="vip-status-progress-section">
+      <div class="vip-status-progress-header">
+        <span class="vip-status-progress-title">Tiến độ thăng hạng</span>
+        <span class="vip-status-progress-next" style="color:${nextTier.color}">${nextTier.name}</span>
       </div>
-      <div class="vip-status-stat">
-        <div class="vip-status-stat-label">Thưởng đã nhận</div>
-        <div class="vip-status-stat-value green">${fmtFull(currentUser.totalBonusReceived || 0)}đ</div>
+      <div class="vip-status-row" style="border:none;padding-bottom:4px;">
+        <span class="vip-status-row-label">${remaining > 0 ? `Còn ${fmtFull(remaining)}đ` : 'Đã đủ điều kiện!'}</span>
+        <span class="vip-status-row-value" style="color:var(--primary-300)">${progress}%</span>
       </div>
-    </div>
-    <div style="padding:0 16px 12px;display:flex;gap:8px;">
-      <button class="vip-status-detail-btn" style="flex:1;" onclick="scrollToNextTier(${currentUser.tier})">↓ Quyền lợi ${tierData.name}</button>
-      <button class="vip-status-detail-btn vip-reward-btn" style="flex:1;" onclick="openPromoView()"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" style="vertical-align:-1px;margin-right:4px;"><path d="M8 1.5l1.5 3.2 3.5.5-2.5 2.4.6 3.4L8 9.5 4.9 11l.6-3.4L3 5.2l3.5-.5z" fill="#ff6b6b"/></svg>Đổi quà VIP</button>
-    </div>
-    <div class="vip-status-progress-area">
-      ${nextTier ? `
-      <div class="vip-status-progress-labels">
-        <span style="color:${tierData.color}">${tierData.name}</span>
-        <span style="color:${nextTier.color}">${nextTier.name}</span>
-      </div>
-      <div class="vip-status-progress-track">
-        <div class="vip-status-progress-fill" style="width:${progress}%"></div>
-      </div>
-      <div class="vip-status-progress-info">
-        <span class="vip-status-progress-remain">${remaining > 0 ? `Còn ${fmtFull(remaining)}đ nữa` : 'Đã đủ điều kiện thăng hạng!'}</span>
-        <span class="vip-status-progress-pct">${progress}%</span>
-      </div>` : ''}
       <div class="vip-status-maintain ${maintainClass}">${maintainText}</div>
-      <div class="vip-status-next-tease">
-        <span>${nextTeaseText}</span>
-        ${nextTeaseBtn}
-      </div>
+    </div>` : `
+    <div class="vip-status-progress-section">
+      <div class="vip-status-maintain ${maintainClass}">${maintainText}</div>
+    </div>`}
+    <div class="vip-status-actions-v2">
+      <button class="vip-status-action-btn" onclick="scrollToNextTier(${currentUser.tier})">Quyền lợi</button>
+      <button class="vip-status-action-btn primary" onclick="openPromoView()">Đổi quà VIP</button>
+      ${nextTier ? `<button class="vip-status-action-btn" onclick="scrollToNextTier(${nextTier.tier})">Xem ${nextTier.name}</button>` : ''}
     </div>
   `;
 
@@ -8153,7 +8874,7 @@ function renderVoucherSection() {
     if (a.status !== 'locked' && b.status === 'locked') return -1;
     return a.expiresAt - b.expiresAt;
   });
-  let html = '<div class="promo-section-title">Voucher của tôi</div>';
+  let html = '<div class="promo-section-title">' + lcIcon('ticket','neon-red') + ' Voucher của tôi</div>';
   if (vouchers.length === 0) {
     html += '<div style="text-align:center;color:var(--text-muted);padding:24px 0;">Chưa có voucher nào</div>';
     return html;
@@ -8163,12 +8884,15 @@ function renderVoucherSection() {
     const isUrgent = v.status === 'available' && daysLeft < 7;
     const isLocked = v.status === 'locked';
     html += '<div class="promo-voucher-card' + (isUrgent ? ' urgent' : '') + (isLocked ? ' locked' : '') + '" onclick="openVoucherDetail(\'' + v.id + '\')">';
+    html += '<div class="promo-voucher-left">';
     html += '<div class="promo-voucher-icon">' + v.icon + '</div>';
     html += '<div class="promo-voucher-info">';
     html += '<div class="promo-voucher-title">' + v.title + '</div>';
     html += '<div class="promo-voucher-desc">' + v.desc + '</div>';
-    html += '<div class="promo-voucher-expiry">' + formatVoucherExpiry(v.expiresAt) + '</div>';
+    html += '<div class="promo-voucher-expiry">' + (isUrgent ? lcIcon('timer','neon-red') + ' ' : '') + formatVoucherExpiry(v.expiresAt) + '</div>';
     html += '</div>';
+    html += '</div>';
+    html += '<div class="promo-voucher-divider"></div>';
     html += '<div class="promo-voucher-right">';
     html += '<div class="promo-voucher-value">' + v.value + '</div>';
     if (isLocked) {
@@ -8184,7 +8908,7 @@ function renderVoucherSection() {
 
 function renderActivePromoSection() {
   if (MOCK_ACTIVE_PROMOS.length === 0) return '';
-  let html = '<div class="promo-section-title">Khuyến mãi đang áp dụng</div>';
+  let html = '<div class="promo-section-title">' + lcIcon('shield','neon-green') + ' Khuyến mãi đang áp dụng</div>';
   MOCK_ACTIVE_PROMOS.forEach(p => {
     if (p.type === 'welcome') {
       html += renderWelcomePromoCard(p);
@@ -8234,7 +8958,7 @@ function renderCashbackPromoCard(p) {
 }
 
 function renderFeaturedPromoSection() {
-  let html = '<div class="promo-section-title">Ưu đãi & sự kiện nổi bật</div>';
+  let html = '<div class="promo-section-title">' + lcIcon('sparkle','neon-gold') + ' Ưu đãi & sự kiện nổi bật</div>';
   const hero = MOCK_FEATURED_PROMOS.find(p => p.featured);
   const grid = MOCK_FEATURED_PROMOS.filter(p => !p.featured);
   if (hero) {
@@ -8835,38 +9559,29 @@ function goToLobby() {
 
 // Navigate directly to VIP Club view (from anywhere)
 var _skipVipReset = false;
-function goToVipClub() {
-  // Set VIP state
-  showingVipClub = true;
-  document.getElementById('vipClubContent').style.display = '';
-  document.getElementById('lobbyContent').style.display = 'none';
-  var navLink = document.getElementById('navVipClub');
-  if (navLink) navLink.classList.add('active');
-  // Navigate to home if on another route
-  if (currentRoute) {
-    document.getElementById('accountView').style.display = 'none';
-    document.getElementById('missionView').style.display = 'none';
-    document.getElementById('mainContent').style.display = '';
-    var catNav = document.querySelector('.cat-nav-bar');
-    if (catNav) catNav.style.display = '';
-    _skipVipReset = true;
-    location.hash = '';
-    currentRoute = '';
-    updateBottomNavActive();
-  }
-  window.scrollTo(0, 0);
-}
 
 // Toggle between Lobby and VIP Club views
 var showingVipClub = false;
 var vip1IntroShown = false; // track per session
 
 function goToVipClub() {
-  // Navigate to lobby first, then show VIP
-  goToLobby();
-  showingVipClub = false;
-  toggleVipClub();
-  // Show VIP1 intro popup for non-VIP users (first time per session)
+  // Hide mission/account views if showing
+  document.getElementById('missionView').style.display = 'none';
+  document.getElementById('accountView').style.display = 'none';
+  document.getElementById('mainContent').style.display = '';
+  var catNav = document.querySelector('.cat-nav-bar');
+  if (catNav) catNav.style.display = '';
+  // Show VIP Club
+  showingVipClub = true;
+  document.getElementById('vipClubContent').style.display = '';
+  document.getElementById('lobbyContent').style.display = 'none';
+  var navLink = document.getElementById('navVipClub');
+  if (navLink) navLink.classList.add('active');
+  // Clear route
+  _skipVipReset = true;
+  if (currentRoute) { location.hash = ''; currentRoute = ''; }
+  updateBottomNavActive();
+  window.scrollTo(0, 0);
   maybeShowVip1Intro();
 }
 
@@ -9036,6 +9751,7 @@ function goToMission() {
 var missionNavActive = 'overview';
 function switchMissionNav(tab, el) {
   missionNavActive = tab;
+  if (tab === 'redeem') redeemActiveView = 'hub';
   document.querySelectorAll('.mission-nav-item').forEach(function(a){ a.classList.remove('active'); });
   if(el) el.classList.add('active');
   var container = document.getElementById('missionContent');
@@ -9064,7 +9780,7 @@ function showLiveChallengeFullPage() {
   if (headerBar) {
     var titleEl = headerBar.querySelector('.mission-header-title');
     if (titleEl) titleEl.textContent = 'Live Challenge';
-    var backBtn = headerBar.querySelector('.mission-header-back');
+    var backBtn = headerBar.querySelector('.mission-back-btn');
     if (backBtn) backBtn.setAttribute('onclick', "navigateTo('/mission')");
   }
 
@@ -9103,7 +9819,7 @@ function showLiveChallengeFullPage() {
     var pct = hasProgress ? Math.min(100, Math.round((m.current / m.target) * 100)) : 0;
     var isClaimable = m.status === 'claimable' || (hasProgress && pct >= 100);
     html += '<div class="mission-card lc-card' + (isClaimable ? ' claimable' : '') + '" style="cursor:pointer" onclick="navigateTo(\'/mission/live-challenge/mission/' + m.id + '\')">';
-    html += '<div class="mission-reward-badge" style="background:linear-gradient(135deg,#b45309,#f59e0b)">+' + m.points + ' điểm</div>';
+    html += '<div class="mission-reward-badge" style="background:linear-gradient(135deg,#b45309,#f59e0b)">+' + m.points + ' <span class="mcoin sm"></span></div>';
     html += '<div class="mission-card-icon" style="font-size:24px;">' + lcMissionIcon(m) + '</div>';
     html += '<div class="mission-card-info">';
     html += '<div class="mission-card-title">' + m.title + '</div>';
@@ -9166,7 +9882,7 @@ function showLiveChallengeFullPage() {
   html += '<div class="lc-milestone-labels">';
   for (var j=0; j<milestones.length; j++) html += '<div class="lc-milestone-label' + (milestones[j].reached ? ' reached' : '') + '">' + milestones[j].label.split('\\n')[0] + '</div>';
   html += '</div>';
-  html += '<div style="text-align:center;margin-top:10px;font-size:12px;color:var(--muted)">Tiến độ: <strong style="color:var(--tertiary-300)">' + earnedPoints + ' / 400 điểm</strong></div>';
+  html += '<div style="text-align:center;margin-top:10px;font-size:12px;color:var(--muted)">Tiến độ: <strong style="color:var(--tertiary-300)">' + earnedPoints + ' / 400 <span class="mcoin sm"></span></strong></div>';
   html += '</div>';
 
   html += '</div>'; // padding wrapper
@@ -9196,7 +9912,7 @@ function showWorldCupPage() {
   if (headerBar) {
     var titleEl = headerBar.querySelector('.mission-header-title');
     if (titleEl) titleEl.textContent = 'World Cup 2026';
-    var backBtn = headerBar.querySelector('.mission-header-back');
+    var backBtn = headerBar.querySelector('.mission-back-btn');
     if (backBtn) backBtn.setAttribute('onclick', "navigateTo('/mission')");
   }
 
@@ -9206,6 +9922,403 @@ function showWorldCupPage() {
   html += '</div></div>';
   container.innerHTML = html;
   missionScrollTop();
+}
+
+function showMissionFullPage(title, renderFn) {
+  homeScrollY = window.scrollY;
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('accountView').style.display = 'none';
+  document.getElementById('missionView').style.display = '';
+  var catNav = document.querySelector('.cat-nav-bar');
+  if (catNav) catNav.style.display = 'none';
+  var headerBar = document.querySelector('.mission-header-bar');
+  var missionNav = document.getElementById('missionNav');
+  if (headerBar) headerBar.style.display = '';
+  if (missionNav) missionNav.style.display = 'none';
+  if (headerBar) {
+    var titleEl = headerBar.querySelector('.mission-header-title');
+    if (titleEl) titleEl.textContent = title;
+    var backBtn = headerBar.querySelector('.mission-back-btn');
+    if (backBtn) backBtn.setAttribute('onclick', "navigateTo('/mission')");
+  }
+  var container = document.getElementById('missionContent');
+  container.innerHTML = '<div style="padding:16px;">' + renderFn() + '</div>';
+  missionScrollTop();
+}
+
+function showNewbieFullPage() {
+  showMissionFullPage('Nhiệm Vụ Tân Thủ', renderNewbieMissions);
+}
+
+function showWarriorFullPage() {
+  showMissionFullPage('Chiến Binh', renderWarriorMissions);
+}
+
+// ===== REDEEM HUB =====
+var redeemActiveView = 'hub'; // hub, shop, spin, collect, vip
+
+function renderRedeemHub() {
+  if (redeemActiveView === 'shop') return renderRedeemShop();
+  if (redeemActiveView === 'spin') return renderRedeemSpin();
+  if (redeemActiveView === 'collect') return renderRedeemCollect();
+  if (redeemActiveView === 'vip') return renderRedeemVip();
+
+  var html = '<div class="redeem-page">';
+
+  // Hero banner
+  html += '<div class="redeem-banner">';
+  html += '<img src="Assets/hero-redeem-banner.png" alt="" class="redeem-banner-img"/>';
+  html += '<div class="redeem-banner-overlay"></div>';
+  html += '<div class="redeem-coin-balance"><span class="mcoin"></span> 20 Coins</div>';
+  html += '<div class="redeem-banner-content">';
+  html += '<div class="redeem-title">Đổi Quà</div>';
+  html += '<div class="redeem-sub">Sử dụng Coin để đổi phần thưởng hấp dẫn</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Hub cards
+  html += '<div class="redeem-hub-grid">';
+
+  // 1. Cửa hàng Loyalty
+  html += '<div class="redeem-hub-card" onclick="switchRedeemView(\'shop\')">';
+  html += '<div class="redeem-hub-icon"><img src="Assets/hub-shop.png" alt=""/></div>';
+  html += '<div class="redeem-hub-info">';
+  html += '<div class="redeem-hub-name">Cửa Hàng Loyalty</div>';
+  html += '<div class="redeem-hub-desc">Đổi Coin lấy tiền thưởng, free spin, voucher</div>';
+  html += '</div>';
+  html += '<div class="redeem-hub-badge">8 quà</div>';
+  html += '<div class="redeem-hub-arrow">›</div>';
+  html += '</div>';
+
+  // 2. Vòng quay may mắn
+  html += '<div class="redeem-hub-card" onclick="switchRedeemView(\'spin\')">';
+  html += '<div class="redeem-hub-icon"><img src="Assets/hub-spin.png" alt=""/></div>';
+  html += '<div class="redeem-hub-info">';
+  html += '<div class="redeem-hub-name">Vòng Quay May Mắn</div>';
+  html += '<div class="redeem-hub-desc">Quay thưởng ngẫu nhiên với Coin</div>';
+  html += '</div>';
+  html += '<div class="redeem-hub-badge" style="background:rgba(222,46,54,.12);color:var(--primary-300)">Hot</div>';
+  html += '<div class="redeem-hub-arrow">›</div>';
+  html += '</div>';
+
+  // 3. Sưu tầm World Cup
+  html += '<div class="redeem-hub-card" onclick="switchRedeemView(\'collect\')">';
+  html += '<div class="redeem-hub-icon"><img src="Assets/hub-collect.png" alt=""/></div>';
+  html += '<div class="redeem-hub-info">';
+  html += '<div class="redeem-hub-name">Sưu Tầm Đội Hình</div>';
+  html += '<div class="redeem-hub-desc">Ghép đủ 11 cầu thủ nhận thưởng lớn</div>';
+  html += '</div>';
+  html += '<div class="redeem-hub-badge" style="background:rgba(5,161,88,.12);color:var(--success-100)">Mùa</div>';
+  html += '<div class="redeem-hub-arrow">›</div>';
+  html += '</div>';
+
+  // 4. Kho quà VIP
+  html += '<div class="redeem-hub-card redeem-hub-vip" onclick="switchRedeemView(\'vip\')">';
+  html += '<div class="redeem-hub-icon"><img src="Assets/hub-vip.png" alt=""/></div>';
+  html += '<div class="redeem-hub-info">';
+  html += '<div class="redeem-hub-name" style="color:var(--tertiary-300)">Kho Quà VIP</div>';
+  html += '<div class="redeem-hub-desc">Phần thưởng giá trị cao dành riêng cho VIP</div>';
+  html += '</div>';
+  html += '<div class="redeem-hub-badge" style="background:rgba(255,226,62,.12);color:var(--tertiary-400)">VIP 3+</div>';
+  html += '<div class="redeem-hub-arrow" style="color:var(--tertiary-400)">›</div>';
+  html += '</div>';
+
+  html += '</div>'; // .redeem-hub-grid
+
+  // Quick preview — popular items
+  html += '<div style="margin-top:20px;padding:0 16px;">';
+  html += '<div style="font-family:Montserrat,sans-serif;font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px;">' + lcIcon('fire','neon-red') + ' Phổ biến nhất</div>';
+  html += '<div class="redeem-grid">';
+  var popular = [
+    {name:'Freebet 50K', cost:60, img:'Assets/icon-freebet.png'},
+    {name:'50 Free Spin', cost:100, img:'Assets/icon-freespin.png'},
+    {name:'Voucher 200K', cost:200, img:'Assets/icon-giftbox.png'},
+    {name:'Quay 1 lượt', cost:10, img:'Assets/icon-freespin.png'}
+  ];
+  for (var i=0; i<popular.length; i++) {
+    var p = popular[i];
+    html += '<div class="redeem-card">';
+    html += '<div class="redeem-thumb"><img src="'+p.img+'" alt="" class="redeem-thumb-img"/></div>';
+    html += '<div class="redeem-card-name">'+p.name+'</div>';
+    html += '<div class="redeem-card-price"><span class="mcoin sm"></span> '+p.cost+'</div>';
+    html += '</div>';
+  }
+  html += '</div></div>';
+
+  html += '</div>'; // .redeem-page
+  return html;
+}
+
+function renderRedeemShop() {
+  var html = '<div class="redeem-page">';
+  html += '<div class="redeem-sub-banner">';
+  html += '<img src="Assets/hero-shop-banner.png" alt="" class="redeem-sub-banner-img"/>';
+  html += '<div class="redeem-sub-banner-overlay"></div>';
+  html += '<div class="redeem-sub-banner-content">';
+  html += '<div class="redeem-sub-banner-title">Cửa Hàng Loyalty</div>';
+  html += '<div class="redeem-sub-banner-desc">Đổi Coin theo tỉ lệ cố định</div>';
+  html += '</div>';
+  html += '<button class="redeem-sub-banner-back" onclick="switchRedeemView(\'hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
+  html += '</div>';
+  html += '<div style="padding:0 16px;">';
+
+  var filters = [{key:'all',label:'Tất cả'},{key:'bonus',label:'Tiền'},{key:'freespin',label:'Free Spin'},{key:'voucher',label:'Voucher'}];
+  html += '<div class="redeem-filters" id="redeemFilters">';
+  for (var f=0; f<filters.length; f++) {
+    html += '<button class="redeem-filter'+(f===0?' active':'')+'" data-filter="'+filters[f].key+'" onclick="filterRedeem(this,\''+filters[f].key+'\')">'+filters[f].label+'</button>';
+  }
+  html += '</div>';
+
+  var rewards = [
+    {name:'Freebet 10K',cost:15,cat:'bonus',img:'Assets/icon-freebet.png'},
+    {name:'Freebet 50K',cost:60,cat:'bonus',img:'Assets/icon-freebet.png'},
+    {name:'Freebet 100K',cost:110,cat:'bonus',img:'Assets/icon-freebet.png',tag:'Hot'},
+    {name:'Voucher 200K',cost:200,cat:'voucher',img:'Assets/icon-giftbox.png'},
+    {name:'20 Free Spin',cost:45,cat:'freespin',img:'Assets/icon-freespin.png'},
+    {name:'50 Free Spin',cost:100,cat:'freespin',img:'Assets/icon-freespin.png'},
+    {name:'Hoàn trả x2',cost:80,cat:'bonus',img:'Assets/icon-x2.png'},
+    {name:'Hộp quà bí ẩn',cost:500,cat:'voucher',img:'Assets/icon-giftbox.png',tag:'Hiếm'}
+  ];
+  html += '<div class="redeem-grid" id="redeemGrid">';
+  for (var i=0; i<rewards.length; i++) {
+    var r = rewards[i];
+    html += '<div class="redeem-card" data-cat="'+r.cat+'">';
+    if (r.tag) html += '<div class="redeem-card-tag">'+r.tag+'</div>';
+    html += '<div class="redeem-thumb"><img src="'+r.img+'" alt="" class="redeem-thumb-img"/></div>';
+    html += '<div class="redeem-card-name">'+r.name+'</div>';
+    html += '<div class="redeem-card-price"><span class="mcoin sm"></span> '+r.cost+'</div>';
+    html += '</div>';
+  }
+  html += '</div></div></div>';
+  return html;
+}
+
+function renderRedeemSpin() {
+  var html = '<div class="redeem-page">';
+  html += '<div class="redeem-sub-banner">';
+  html += '<img src="Assets/hero-spin-banner.png" alt="" class="redeem-sub-banner-img"/>';
+  html += '<div class="redeem-sub-banner-overlay"></div>';
+  html += '<div class="redeem-sub-banner-content">';
+  html += '<div class="redeem-sub-banner-title">Vòng Quay May Mắn</div>';
+  html += '<div class="redeem-sub-banner-desc">Dùng Coin để quay, nhận thưởng ngẫu nhiên</div>';
+  html += '</div>';
+  html += '<button class="redeem-sub-banner-back" onclick="switchRedeemView(\'hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
+  html += '</div>';
+  html += '<div style="padding:0 16px;">';
+
+  // Wheel visual
+  html += '<div class="spin-wheel-container">';
+  html += '<div class="spin-wheel-outer"></div>';
+  html += '<div class="spin-wheel" id="spinWheel">';
+  html += '<div class="spin-wheel-face">';
+  var prizes = ['50K','Free Spin','100K','Voucher','200K','10 Spin','500K','Jackpot'];
+  var segColors = ['#b91c25','#c9a227','#2d5cc4','#05844a','#cc6a00','#7b3fa0','#b91c25','#c9a227'];
+  for (var s=0; s<prizes.length; s++) {
+    var rot = (s * 45);
+    html += '<div class="spin-seg" style="transform:rotate('+rot+'deg);background:'+segColors[s]+'">';
+    html += '<div class="spin-seg-inner">'+prizes[s]+'</div></div>';
+  }
+  html += '</div>';
+  html += '<div class="spin-center" onclick="doSpin()">QUAY</div>';
+  html += '</div>';
+  html += '<div class="spin-pointer"></div>';
+  html += '</div>';
+
+  // Spin options
+  html += '<div class="spin-options">';
+  html += '<button class="spin-btn" onclick="doSpin()"><span class="mcoin"></span> 10 — Quay 1 lượt</button>';
+  html += '<button class="spin-btn spin-btn-premium" onclick="doSpin()"><span class="mcoin"></span> 45 — Quay 5 lượt</button>';
+  html += '</div>';
+
+  // Prize table
+  html += '<div style="margin-top:20px;">';
+  html += '<div style="font-family:Montserrat,sans-serif;font-size:13px;font-weight:700;margin-bottom:10px;">Bảng phần thưởng</div>';
+  var prizeTable = [
+    {name:'Jackpot 2M',pct:'0.5%',color:'var(--tertiary-400)'},
+    {name:'Freebet 500K',pct:'2%',color:'var(--primary-300)'},
+    {name:'Freebet 200K',pct:'5%',color:'#ff8400'},
+    {name:'Freebet 100K',pct:'10%',color:'var(--success-100)'},
+    {name:'Freebet 50K',pct:'15%',color:'var(--text-2)'},
+    {name:'Voucher 100K',pct:'8%',color:'#9b59b6'},
+    {name:'10 Free Spin',pct:'20%',color:'#4a7dfe'},
+    {name:'Free Spin',pct:'39.5%',color:'var(--muted)'}
+  ];
+  for (var t=0; t<prizeTable.length; t++) {
+    var pr = prizeTable[t];
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--line);font-size:12px;">';
+    html += '<span style="font-weight:600;color:'+pr.color+'">'+pr.name+'</span>';
+    html += '<span style="color:var(--muted);font-weight:700">'+pr.pct+'</span>';
+    html += '</div>';
+  }
+  html += '</div></div></div>';
+  return html;
+}
+
+function renderRedeemCollect() {
+  var html = '<div class="redeem-page">';
+  html += '<div class="redeem-sub-banner">';
+  html += '<img src="Assets/hero-collect-banner.png" alt="" class="redeem-sub-banner-img"/>';
+  html += '<div class="redeem-sub-banner-overlay"></div>';
+  html += '<div class="redeem-sub-banner-content">';
+  html += '<div class="redeem-sub-banner-title">Sưu Tầm Đội Hình</div>';
+  html += '<div class="redeem-sub-banner-desc">World Cup 2026 — Ghép đủ 11 vị trí</div>';
+  html += '</div>';
+  html += '<button class="redeem-sub-banner-back" onclick="switchRedeemView(\'hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
+  html += '</div>';
+  html += '<div style="padding:0 16px;">';
+  html += '<div style="font-size:12px;color:var(--muted);margin-bottom:6px;margin-top:12px;">Ghép đủ 11 vị trí nhận <strong style="color:var(--tertiary-400)">5.000.000đ</strong></div>';
+
+  // Progress
+  var collected = 4;
+  html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">';
+  html += '<div style="flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;">';
+  html += '<div style="width:'+Math.round(collected/11*100)+'%;height:100%;background:linear-gradient(90deg,#05a158,#4a7dfe);border-radius:3px;"></div>';
+  html += '</div>';
+  html += '<span style="font-size:11px;font-weight:700;color:var(--success-100)">'+collected+'/11</span>';
+  html += '</div>';
+
+  // Formation grid (4-3-3)
+  var players = [
+    {pos:'GK', name:'—', cost:30, owned:false, row:0},
+    {pos:'LB', name:'Alphonso Davies', cost:25, owned:true, row:1},
+    {pos:'CB', name:'—', cost:20, owned:false, row:1},
+    {pos:'CB', name:'Virgil van Dijk', cost:35, owned:true, row:1},
+    {pos:'RB', name:'—', cost:20, owned:false, row:1},
+    {pos:'CM', name:'Pedri', cost:30, owned:true, row:2},
+    {pos:'CM', name:'—', cost:25, owned:false, row:2},
+    {pos:'CM', name:'—', cost:25, owned:false, row:2},
+    {pos:'LW', name:'Vinícius Jr', cost:50, owned:true, row:3},
+    {pos:'ST', name:'—', cost:40, owned:false, row:3},
+    {pos:'RW', name:'—', cost:45, owned:false, row:3}
+  ];
+
+  html += '<div class="collect-formation">';
+  // Row 3 - Forwards (3)
+  html += '<div class="collect-row">';
+  players.filter(function(p){return p.row===3}).forEach(function(p){
+    html += '<div class="collect-player'+(p.owned?' owned':'')+'">';
+    html += '<div class="collect-player-pos">'+p.pos+'</div>';
+    html += '<div class="collect-player-name">'+(p.owned?p.name.split(' ').pop():'?')+'</div>';
+    if (!p.owned) html += '<div class="collect-player-cost"><span class="mcoin sm"></span> '+p.cost+'</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  // Row 2 - Midfield (3)
+  html += '<div class="collect-row">';
+  players.filter(function(p){return p.row===2}).forEach(function(p){
+    html += '<div class="collect-player'+(p.owned?' owned':'')+'">';
+    html += '<div class="collect-player-pos">'+p.pos+'</div>';
+    html += '<div class="collect-player-name">'+(p.owned?p.name.split(' ').pop():'?')+'</div>';
+    if (!p.owned) html += '<div class="collect-player-cost"><span class="mcoin sm"></span> '+p.cost+'</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  // Row 1 - Defense (4)
+  html += '<div class="collect-row">';
+  players.filter(function(p){return p.row===1}).forEach(function(p){
+    html += '<div class="collect-player'+(p.owned?' owned':'')+'">';
+    html += '<div class="collect-player-pos">'+p.pos+'</div>';
+    html += '<div class="collect-player-name">'+(p.owned?p.name.split(' ').pop():'?')+'</div>';
+    if (!p.owned) html += '<div class="collect-player-cost"><span class="mcoin sm"></span> '+p.cost+'</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  // Row 0 - GK (1)
+  html += '<div class="collect-row">';
+  players.filter(function(p){return p.row===0}).forEach(function(p){
+    html += '<div class="collect-player'+(p.owned?' owned':'')+'">';
+    html += '<div class="collect-player-pos">'+p.pos+'</div>';
+    html += '<div class="collect-player-name">'+(p.owned?p.name:'?')+'</div>';
+    if (!p.owned) html += '<div class="collect-player-cost"><span class="mcoin sm"></span> '+p.cost+'</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</div>'; // .collect-formation
+
+  // Rewards
+  html += '<div style="margin-top:16px;padding:12px;border-radius:12px;background:rgba(255,226,62,.04);border:1px solid rgba(255,226,62,.12);">';
+  html += '<div style="font-size:12px;font-weight:700;color:var(--tertiary-400);margin-bottom:8px;">🏆 Phần thưởng mốc</div>';
+  html += '<div style="display:flex;flex-direction:column;gap:6px;font-size:11px;">';
+  html += '<div style="display:flex;justify-content:space-between;"><span>Ghép 5 cầu thủ</span><strong style="color:var(--success-100)">500K Freebet</strong></div>';
+  html += '<div style="display:flex;justify-content:space-between;"><span>Ghép 8 cầu thủ</span><strong style="color:#ff8400">2M Freebet</strong></div>';
+  html += '<div style="display:flex;justify-content:space-between;"><span style="font-weight:700">Ghép đủ 11</span><strong style="color:var(--tertiary-400)">5.000.000đ 🎉</strong></div>';
+  html += '</div></div>';
+
+  html += '</div></div>';
+  return html;
+}
+
+function renderRedeemVip() {
+  var html = '<div class="redeem-page">';
+  html += '<div class="redeem-sub-banner">';
+  html += '<img src="Assets/hero-vip-shop-banner.png" alt="" class="redeem-sub-banner-img"/>';
+  html += '<div class="redeem-sub-banner-overlay"></div>';
+  html += '<div class="redeem-sub-banner-content">';
+  html += '<div class="redeem-sub-banner-title">Kho Quà VIP</div>';
+  html += '<div class="redeem-sub-banner-desc">Phần thưởng giá trị cao — Yêu cầu VIP 3+</div>';
+  html += '</div>';
+  html += '<button class="redeem-sub-banner-back" onclick="switchRedeemView(\'hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
+  html += '</div>';
+  html += '<div style="padding:0 16px;">';
+
+  // VIP Shop items
+  var vipRewards = [
+    {name:'Freebet 500K',cost:400,img:'Assets/icon-freebet.png',tag:'VIP 3'},
+    {name:'Freebet 1M',cost:750,img:'Assets/icon-freebet.png',tag:'VIP 4'},
+    {name:'iPhone 16 Pro',cost:5000,img:'Assets/icon-giftbox.png',tag:'VIP 5'},
+    {name:'Hoàn trả x3',cost:300,img:'Assets/icon-x3.png',tag:'VIP 3'}
+  ];
+  html += '<div class="redeem-grid">';
+  for (var i=0; i<vipRewards.length; i++) {
+    var r = vipRewards[i];
+    html += '<div class="redeem-card redeem-card-vip">';
+    if (r.tag) html += '<div class="redeem-card-tag" style="background:linear-gradient(135deg,#e7bb08,#c9a227)">'+r.tag+'</div>';
+    html += '<div class="redeem-thumb"><img src="'+r.img+'" alt="" class="redeem-thumb-img"/></div>';
+    html += '<div class="redeem-card-name">'+r.name+'</div>';
+    html += '<div class="redeem-card-price"><span class="mcoin sm"></span> '+r.cost+'</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // VIP Spin
+  html += '<div style="margin-top:20px;padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(255,226,62,.06),rgba(212,175,55,.03));border:1px solid rgba(255,226,62,.15);">';
+  html += '<div style="font-family:Montserrat,sans-serif;font-size:14px;font-weight:700;color:var(--tertiary-300);margin-bottom:6px;">🎡 Vòng Quay VIP</div>';
+  html += '<div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Tỉ lệ trúng cao hơn • Phần thưởng từ 200K</div>';
+  html += '<button class="spin-btn spin-btn-premium" style="width:100%" onclick="event.stopPropagation()"><span class="mcoin"></span> 50 — Quay VIP</button>';
+  html += '</div>';
+
+  html += '</div></div>';
+  return html;
+}
+
+function switchRedeemView(view) {
+  redeemActiveView = view;
+  renderMissionContent();
+  missionScrollTop();
+}
+
+var spinAngle = 0;
+var isSpinning = false;
+function doSpin() {
+  if (isSpinning) return;
+  var wheel = document.getElementById('spinWheel');
+  if (!wheel) return;
+  isSpinning = true;
+  wheel.classList.add('spinning');
+  // Random result: 3-5 full rotations + random segment
+  var extraRotations = (3 + Math.floor(Math.random() * 3)) * 360;
+  var randomSegment = Math.floor(Math.random() * 8) * 45 + Math.random() * 40;
+  spinAngle += extraRotations + randomSegment;
+  wheel.style.transform = 'rotate(' + spinAngle + 'deg)';
+  setTimeout(function() {
+    isSpinning = false;
+    wheel.classList.remove('spinning');
+    // Determine which prize
+    var finalAngle = spinAngle % 360;
+    var segIdx = Math.floor((360 - finalAngle + 22.5) % 360 / 45);
+    var prizes = ['50K','Free Spin','100K','Voucher','200K','10 Spin','500K','Jackpot'];
+    showToast('Chúc mừng! Bạn nhận được: ' + prizes[segIdx % 8]);
+  }, 4200);
 }
 
 function filterRedeem(btn, cat) {
@@ -9225,79 +10338,145 @@ function renderMissionContent() {
   var html = '';
 
   if (missionNavActive === 'redeem') {
-    var rewards = [
-      {name:'Freebet 10K', cost:15, thumb:'coin', cat:'bonus', icon:'\uD83D\uDCB0'},
-      {name:'Freebet 50K', cost:60, thumb:'coin', cat:'bonus', icon:'\uD83D\uDCB0'},
-      {name:'Freebet 100K', cost:110, thumb:'coin', cat:'bonus', icon:'\uD83D\uDCB0', tag:'Hot'},
-      {name:'Voucher 200K', cost:200, thumb:'chest', cat:'voucher', icon:'\uD83C\uDF81'},
-      {name:'20 Free Spin', cost:45, thumb:'spin', cat:'freespin', icon:'\uD83C\uDFB0'},
-      {name:'50 Free Spin', cost:100, thumb:'spin', cat:'freespin', icon:'\uD83C\uDFB0'},
-      {name:'Ho\u00E0n tr\u1EA3 x2', cost:80, thumb:'gift', cat:'bonus', icon:'\uD83D\uDD25'},
-      {name:'H\u1ED9p qu\u00E0 b\u00ED \u1EA9n', cost:500, thumb:'chest', cat:'voucher', icon:'\u2728', tag:'Hi\u1EBFm'}
-    ];
-    var filters = [
-      {key:'all', label:'T\u1EA5t c\u1EA3'},
-      {key:'bonus', label:'Ti\u1EC1n th\u01B0\u1EDFng'},
-      {key:'freespin', label:'Free Spin'},
-      {key:'voucher', label:'Voucher'}
-    ];
-    html += '<div class="redeem-page">';
-    html += '<div class="redeem-header">';
-    html += '<div class="redeem-coin-balance">\u26A1 20 COIN</div>';
-    html += '<div class="redeem-title">\u0110\u1ED5i Qu\u00E0 COIN</div>';
-    html += '<div class="redeem-sub">D\u00F9ng COIN t\u00EDch l\u0169y t\u1EEB nhi\u1EC7m v\u1EE5 \u0111\u1EC3 \u0111\u1ED5i ph\u1EA7n th\u01B0\u1EDFng h\u1EA5p d\u1EABn.</div>';
-    html += '</div>';
-    html += '<div class="redeem-filters" id="redeemFilters">';
-    for (var f=0; f<filters.length; f++) {
-      html += '<button class="redeem-filter'+(f===0?' active':'')+'" data-filter="'+filters[f].key+'" onclick="filterRedeem(this,\''+filters[f].key+'\')">'+filters[f].label+'</button>';
-    }
-    html += '</div>';
-    html += '<div class="redeem-grid" id="redeemGrid">';
-    for (var i=0; i<rewards.length; i++) {
-      var r = rewards[i];
-      html += '<div class="redeem-card" data-cat="'+r.cat+'">';
-      if (r.tag) html += '<div class="redeem-card-tag">'+r.tag+'</div>';
-      html += '<div class="redeem-thumb '+r.thumb+'">'+r.icon+'</div>';
-      html += '<div class="redeem-card-name">'+r.name+'</div>';
-      html += '<div class="redeem-card-price">\u26A1 '+r.cost+' COIN</div>';
-      html += '</div>';
-    }
-    html += '</div></div>';
+    html += renderRedeemHub();
     container.innerHTML = html;
     return;
   }
 
   if (missionNavActive === 'leaderboard') {
-    html += '<div style="padding:40px 16px;text-align:center;">';
-    html += '<div style="font-size:48px;margin-bottom:16px;">\uD83C\uDFC6</div>';
-    html += '<div style="font-family:Montserrat,sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;">B\u1EA3ng X\u1EBFp H\u1EA1ng</div>';
-    html += '<div style="font-size:13px;color:var(--muted);line-height:1.5;max-width:280px;margin:0 auto 24px;">Top ng\u01B0\u1EDDi ch\u01A1i t\u00EDch COIN nhi\u1EC1u nh\u1EA5t tu\u1EA7n n\u00E0y.</div>';
-    var leaders = [
-      {name:'VuongGia***', coins:285, tier:'VIP 5'},
-      {name:'HoangLong***', coins:210, tier:'VIP 4'},
-      {name:'MinhTuan***', coins:178, tier:'VIP 3'},
-      {name:'Player 01', coins:7, tier:'VIP 2', isMe:true}
+    if (!window.lbTab) window.lbTab = 'normal';
+    html += '<div class="lb-page">';
+
+    // Banner with image
+    html += '<div class="lb-banner">';
+    html += '<img src="Assets/hero-leaderboard-banner.png" alt="" class="lb-banner-img"/>';
+    html += '<div class="lb-banner-overlay"></div>';
+    html += '<div class="lb-hero">';
+    if (window.lbTab === 'normal') {
+      html += '<div class="lb-hero-title">Bảng Xếp Hạng</div>';
+      html += '<div class="lb-hero-sub">Top người chơi tích Coin nhiều nhất tuần này</div>';
+    } else {
+      html += '<div class="lb-hero-title">BXH VIP</div>';
+      html += '<div class="lb-hero-sub">Cuộc đua dành riêng cho hội viên VIP 3+</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+
+    // Tab switcher
+    html += '<div class="lb-tabs">';
+    html += '<button class="lb-tab'+(window.lbTab==='normal'?' active':'')+'" onclick="window.lbTab=\'normal\';renderMissionContent()">BXH Thường</button>';
+    html += '<button class="lb-tab'+(window.lbTab==='vip'?' active':'')+'" onclick="window.lbTab=\'vip\';renderMissionContent()">BXH VIP</button>';
+    html += '</div>';
+
+    if (window.lbTab === 'normal') {
+      var leaders = [
+        {name:'VuongGia***', coins:285, tier:'VIP 5'},
+        {name:'HoangLong***', coins:210, tier:'VIP 4'},
+        {name:'MinhTuan***', coins:178, tier:'VIP 3'},
+        {name:'NgocAnh***', coins:145, tier:'VIP 3'},
+        {name:'TrungKien***', coins:120, tier:'VIP 2'},
+        {name:'Player 01', coins:7, tier:'VIP 2', isMe:true}
+      ];
+      html += renderLeaderboardList(leaders);
+    } else {
+      // BXH VIP
+      html += '<div class="lb-vip-info">';
+      html += '<div class="lb-hero-pool"><span class="mcoin"></span> <strong>50.000.000đ</strong> hũ thưởng</div>';
+      html += '<div class="lb-hero-countdown">Còn 19 ngày</div>';
+      html += '</div>';
+
+      var isVipEligible = currentUser && currentUser.tier >= 3;
+      if (!isVipEligible) {
+        html += '<div class="lb-lock-card">';
+        html += '<div class="lb-lock-icon">' + lcIcon('lock','muted') + '</div>';
+        html += '<div class="lb-lock-title">Yêu cầu VIP 3 trở lên</div>';
+        html += '<div class="lb-lock-sub">Nâng hạng VIP để tham gia BXH và tranh giải thưởng lớn</div>';
+        html += '<button class="lb-lock-cta" onclick="goToVipClub()">Xem Đặc Quyền VIP</button>';
+        html += '</div>';
+      }
+
+      var vipLeaders = [
+        {name:'VuongGia***', coins:1850, tier:'VIP 5', mult:'x2.0'},
+        {name:'HoangLong***', coins:1420, tier:'VIP 4', mult:'x1.5'},
+        {name:'MinhTuan***', coins:980, tier:'VIP 3', mult:'x1.2'},
+        {name:'DuyAn***', coins:760, tier:'VIP 4', mult:'x1.5'},
+        {name:'QuocBao***', coins:640, tier:'VIP 3', mult:'x1.2'}
+      ];
+      html += renderLeaderboardList(vipLeaders, true);
+
+      // Reward distribution
+      html += '<div class="lb-reward-dist">';
+      html += '<div class="lb-section-title">' + lcIcon('gift','neon-gold') + ' Cơ cấu giải thưởng</div>';
+      html += '<div class="lb-dist-list">';
+      html += '<div class="lb-dist-item gold"><span class="lb-dist-rank">Top 1</span><span class="lb-dist-prize">20.000.000đ</span></div>';
+      html += '<div class="lb-dist-item silver"><span class="lb-dist-rank">Top 2</span><span class="lb-dist-prize">10.000.000đ</span></div>';
+      html += '<div class="lb-dist-item bronze"><span class="lb-dist-rank">Top 3</span><span class="lb-dist-prize">5.000.000đ</span></div>';
+      html += '<div class="lb-dist-item"><span class="lb-dist-rank">Top 4-10</span><span class="lb-dist-prize">Chia 15.000.000đ</span></div>';
+      html += '</div></div>';
+    }
+
+    // TnC & FAQ
+    html += '<div class="lb-tnc-section">';
+    html += '<div class="lb-section-title">' + lcIcon('info','muted') + ' Điều Khoản & FAQ</div>';
+
+    // TnC items
+    html += '<div class="lb-tnc-list">';
+    html += '<div class="lb-tnc-item">Bảng xếp hạng được cập nhật mỗi 15 phút</div>';
+    html += '<div class="lb-tnc-item">Coin tích lũy từ nhiệm vụ, nạp tiền và cược hợp lệ</div>';
+    html += '<div class="lb-tnc-item">BXH VIP yêu cầu hạng VIP 3 trở lên để tham gia</div>';
+    html += '<div class="lb-tnc-item">Giải thưởng được cộng trực tiếp vào tài khoản trong 24h sau khi kết thúc</div>';
+    html += '<div class="lb-tnc-item">Mubet có quyền điều chỉnh giải thưởng và điều khoản BXH</div>';
+    html += '</div>';
+
+    // FAQ
+    html += '<div class="lb-faq-list">';
+    var faqs = [
+      {q:'Coin được tính như thế nào?', a:'Coin được tích lũy từ hoàn thành nhiệm vụ, nạp tiền và cược hợp lệ. VIP member có hệ số nhân Coin cao hơn.'},
+      {q:'BXH Thường và BXH VIP khác gì?', a:'BXH Thường mở cho tất cả, xếp hạng theo Coin tuần. BXH VIP chỉ dành cho VIP 3+, có hũ thưởng riêng và hệ số nhân VIP.'},
+      {q:'Khi nào nhận được giải thưởng?', a:'Giải thưởng được cộng tự động vào tài khoản trong vòng 24h sau khi kỳ BXH kết thúc.'},
+      {q:'Hệ số nhân VIP là gì?', a:'VIP 3: x1.2, VIP 4: x1.5, VIP 5: x2.0. Hệ số nhân giúp tăng điểm xếp hạng trong BXH VIP.'}
     ];
-    html += '<div style="padding:0 8px;">';
-    for(var j=0;j<leaders.length;j++){
-      var l = leaders[j];
-      var rank = j+1;
-      var rankColor = rank===1?'var(--tertiary-400)':rank===2?'#C0C0C0':rank===3?'#CD7F32':'var(--muted)';
-      var bg = l.isMe ? 'rgba(222,46,54,.06)' : 'transparent';
-      var border = l.isMe ? '1px solid rgba(222,46,54,.15)' : '1px solid var(--white-06)';
-      html += '<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:'+bg+';border-bottom:'+border+';margin-bottom:4px;">';
-      html += '<div style="font-family:Montserrat,sans-serif;font-size:16px;font-weight:800;color:'+rankColor+';width:24px;text-align:center;">'+(rank<=3?['\uD83E\uDD47','\uD83E\uDD48','\uD83E\uDD49'][rank-1]:rank)+'</div>';
-      html += '<div style="flex:1;text-align:left;"><div style="font-size:13px;font-weight:600;'+(l.isMe?'color:var(--primary-300)':'')+'">'+(l.isMe?'B\u1EA1n':l.name)+'</div><div style="font-size:10px;color:var(--muted)">'+l.tier+'</div></div>';
-      html += '<div style="font-family:Montserrat,sans-serif;font-size:14px;font-weight:700;color:var(--tertiary-400)">\u26A1 '+l.coins+'</div>';
+    for (var f=0; f<faqs.length; f++) {
+      html += '<div class="lb-faq-item" onclick="this.classList.toggle(\'open\')">';
+      html += '<div class="lb-faq-q"><span>'+faqs[f].q+'</span><svg class="lb-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>';
+      html += '<div class="lb-faq-a">'+faqs[f].a+'</div>';
       html += '</div>';
     }
     html += '</div></div>';
+
+    html += '</div>'; // .lb-page
     container.innerHTML = html;
     return;
   }
 
   // missions tab - render mission hub content
   renderMissionHub();
+}
+
+function toggleRewardStrip() {
+  var strip = document.getElementById('rewardStrip');
+  var list = document.getElementById('rewardList');
+  if (strip && list) {
+    strip.classList.toggle('open');
+    list.classList.toggle('open');
+  }
+}
+
+function renderLeaderboardList(leaders, showMult) {
+  var h = '<div class="lb-list">';
+  for (var j=0; j<leaders.length; j++) {
+    var l = leaders[j];
+    var rank = j+1;
+    var rankImgs = ['Assets/rank-1.webp','Assets/rank-2.webp','Assets/rank-3.webp'];
+    var isTop3 = rank <= 3;
+    h += '<div class="lb-item'+(l.isMe?' me':'')+(isTop3?' top3':'')+'">';
+    h += '<div class="lb-rank">'+(isTop3?'<img src="'+rankImgs[rank-1]+'" class="lb-rank-img"/>':'<span class="lb-rank-num">'+rank+'</span>')+'</div>';
+    h += '<div class="lb-info"><div class="lb-name'+(l.isMe?' me':'')+'">'+(l.isMe?'Bạn':l.name)+'</div><div class="lb-tier">'+l.tier+(showMult&&l.mult?' • <span class="lb-mult">'+l.mult+'</span>':'')+'</div></div>';
+    h += '<div class="lb-coins"><span class="mcoin sm"></span> '+l.coins+'</div>';
+    h += '</div>';
+  }
+  h += '</div>';
+  return h;
 }
 
 function renderMissionOverview() {
@@ -9311,17 +10490,30 @@ function renderMissionOverview() {
   html += '</div>';
 
   // Reward strip
-  html += '<div class="mhub-reward-strip">' + lcIcon('gift','neon-gold') + ' Bạn có 2 phần thưởng chưa nhận</div>';
+  html += '<div class="mhub-reward-strip" id="rewardStrip" onclick="toggleRewardStrip()">';
+  html += '<span class="mhub-reward-strip-left">' + lcIcon('gift','neon-gold') + ' Bạn có 2 phần thưởng chưa nhận</span>';
+  html += '<svg class="mhub-reward-strip-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>';
+  html += '</div>';
+  html += '<div class="mhub-reward-list" id="rewardList">';
+  html += '<div class="mhub-reward-item">';
+  html += '<div class="mhub-reward-item-left"><div class="mhub-reward-item-icon" style="background:rgba(255,140,0,.12)">🎁</div><div><div class="mhub-reward-item-name">Hộp quà + 20 Coin</div><div class="mhub-reward-item-source">Cuối tuần bùng nổ</div></div></div>';
+  html += '<button class="mhub-reward-claim" onclick="event.stopPropagation()">Nhận</button>';
+  html += '</div>';
+  html += '<div class="mhub-reward-item">';
+  html += '<div class="mhub-reward-item-left"><div class="mhub-reward-item-icon" style="background:rgba(74,125,254,.12)">🏆</div><div><div class="mhub-reward-item-name">10 Coin</div><div class="mhub-reward-item-source">Xác minh tài khoản</div></div></div>';
+  html += '<button class="mhub-reward-claim" onclick="event.stopPropagation()">Nhận</button>';
+  html += '</div>';
+  html += '</div>';
 
   html += '<div class="mhub-cards">';
 
   // Live Challenge card
   html += '<div class="mhub-card lc" onclick="navigateTo(\'/mission/live-challenge\')">';
   html += '<div class="mhub-card-top">';
-  html += '<div class="mhub-card-icon lc-icon"><img src="Assets/live-challenge-trophy.png" alt="LC"></div>';
+  html += '<div class="mhub-card-icon lc-icon"><img src="Assets/lc-trophy-v2.png" alt="LC"></div>';
   html += '<div class="mhub-card-info">';
   html += '<div class="mhub-card-title">Live Challenge</div>';
-  html += '<div class="mhub-card-sub">Sự kiện 28 ngày hàng tháng</div>';
+  html += '<div class="mhub-card-sub">Mùa 4 • Tháng 4/2026</div>';
   html += '</div>';
   html += '<div class="mhub-card-badge">Còn 19 ngày</div>';
   html += '</div>';
@@ -9330,35 +10522,31 @@ function renderMissionOverview() {
   html += '<div class="mhub-stat-divider"></div>';
   html += '<div class="mhub-card-stat"><div class="mhub-card-stat-value">5/12</div><div class="mhub-card-stat-label">Thử thách</div></div>';
   html += '<div class="mhub-stat-divider"></div>';
-  html += '<div class="mhub-card-stat"><div class="mhub-card-stat-value">2450</div><div class="mhub-card-stat-label">Điểm</div></div>';
+  html += '<div class="mhub-card-stat"><div class="mhub-card-stat-value">2450</div><div class="mhub-card-stat-label"><span class="mcoin sm"></span></div></div>';
   html += '</div>';
-  html += '<button class="mhub-card-cta" onclick="event.stopPropagation();navigateTo(\'/mission/live-challenge\')">Vào ngay</button>';
-  html += '<div class="mhub-card-arrow">›</div>';
   html += '</div>';
 
   // Row: Tân Thủ + Chiến Binh
   html += '<div class="mhub-cards-row">';
 
   // Tân Thủ
-  html += '<div class="mhub-card rookie">';
+  html += '<div class="mhub-card rookie" onclick="showNewbieFullPage()">';
   html += '<div class="mhub-card-top">';
-  html += '<div class="mhub-card-icon"><img src="Assets/rookie-star.png" alt="Rookie" style="width:44px;height:44px;object-fit:contain"></div>';
+  html += '<div class="mhub-card-icon"><img src="Assets/rookie-star.png" alt="Rookie" style="width:36px;height:36px;object-fit:contain"></div>';
   html += '<div class="mhub-card-info"><div class="mhub-card-title">Tân Thủ</div><div class="mhub-card-sub">Onboarding</div></div>';
   html += '</div>';
-  html += '<div class="mhub-card-stats"><div class="mhub-card-stat"><div class="mhub-card-stat-value">2/5 <span style="font-size:10px;color:var(--muted)">xong</span></div></div></div>';
-  html += '<div class="mhub-progress"><div class="mhub-progress-fill" style="width:40%;background:linear-gradient(90deg,#1565c0,#42a5f5)"></div></div>';
+  html += '<div style="display:flex;align-items:center;gap:6px;margin-top:2px;"><div class="mhub-card-stat-value" style="white-space:nowrap">2/5 <span style="font-size:10px;color:var(--muted)">xong</span></div><div class="mhub-progress" style="flex:1;margin:0"><div class="mhub-progress-fill" style="width:40%;background:linear-gradient(90deg,#1565c0,#42a5f5)"></div></div></div>';
   html += '<button class="mhub-card-cta">Tiếp tục</button>';
   html += '</div>';
 
   // Chiến Binh
-  html += '<div class="mhub-card warrior">';
+  html += '<div class="mhub-card warrior" onclick="showWarriorFullPage()">';
   html += '<div class="mhub-card-top">';
-  html += '<div class="mhub-card-icon"><img src="Assets/warrior-swords.png" alt="Warrior" style="width:44px;height:44px;object-fit:contain"></div>';
+  html += '<div class="mhub-card-icon"><img src="Assets/warrior-swords.png" alt="Warrior" style="width:36px;height:36px;object-fit:contain"></div>';
   html += '<div class="mhub-card-info"><div class="mhub-card-title">Chiến Binh</div><div class="mhub-card-sub">Hằng ngày</div></div>';
   html += '</div>';
   html += '<div class="mhub-card-stats">';
   html += '<div class="mhub-card-stat"><div class="mhub-card-stat-value">3 <span style="font-size:10px;color:var(--muted)">NV hôm nay</span></div></div>';
-  html += '<div class="mhub-card-stat"><div class="mhub-card-stat-value">' + lcIcon('coin','neon-gold') + ' 7 <span style="font-size:10px;color:var(--muted)">COIN</span></div></div>';
   html += '</div>';
   html += '<button class="mhub-card-cta">Xem tất cả</button>';
   html += '</div>';
@@ -9366,16 +10554,57 @@ function renderMissionOverview() {
   html += '</div>'; // .mhub-cards-row
   html += '</div>'; // .mhub-cards
 
+  // Daily check-in
+  var today = new Date().getDay(); // 0=Sun
+  var checkedDays = 3; // mock: user checked in 3 days this week
+  var dayLabels = ['T2','T3','T4','T5','T6','T7','CN'];
+  var dayRewards = [1,1,1,1,1,1,1]; // base: 1 coin per day
+  var milestones = {6: 3}; // day index 6 (CN = 7th day) => +3 bonus
+  html += '<div class="checkin-section">';
+  html += '<div class="checkin-header">';
+  html += '<div class="checkin-title">' + lcIcon('calendar','neon-gold') + ' Điểm danh hằng ngày</div>';
+  html += '<div class="checkin-streak">' + lcIcon('fire','neon-red') + ' ' + checkedDays + ' ngày liên tiếp</div>';
+  html += '</div>';
+  html += '<div class="checkin-days">';
+  for (var d = 0; d < 7; d++) {
+    var isDone = d < checkedDays;
+    var isToday = d === checkedDays;
+    var cls = 'checkin-day' + (isDone ? ' done' : '') + (isToday ? ' today' : '');
+    var reward = dayRewards[d];
+    var bonus = milestones[d] || 0;
+    html += '<div class="' + cls + '">';
+    html += '<div class="checkin-day-icon">';
+    if (isDone) {
+      html += '<img src="Assets/chest-open.png" alt="Claimed">';
+    } else if (isToday) {
+      html += '<img src="Assets/chest-locked.png" alt="Today" class="checkin-today-chest">';
+    } else {
+      html += '<img src="Assets/chest-locked.png" alt="Locked">';
+    }
+    html += '</div>';
+    html += '<div class="checkin-day-label">' + dayLabels[d] + '</div>';
+    if (bonus > 0) {
+      html += '<div class="checkin-day-reward bonus">+' + (reward + bonus) + ' <span class="mcoin"></span></div>';
+    } else {
+      html += '<div class="checkin-day-reward">+' + reward + ' <span class="mcoin"></span></div>';
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+  html += '<button class="checkin-claim-btn" onclick="event.stopPropagation()">Điểm danh hôm nay</button>';
+  html += '</div>';
+
   // Featured missions
   html += '<div class="mhub-featured">';
   html += '<div class="mhub-featured-title">' + lcIcon('fire','neon-red') + ' Nhiệm vụ nổi bật</div>';
   html += '<div class="mhub-featured-list">';
 
+  var mcoinImg = '<span class="mcoin sm"></span>';
   var feats = [
-    {name:'Cuối tuần bùng nổ', source:'Live Challenge', reward:'Hộp quà + 20 điểm', iconKey:'lightning', neon:'neon-red', claimable:true},
+    {name:'Cuối tuần bùng nổ', source:'Live Challenge', reward:'Hộp quà + 20 ' + mcoinImg, iconKey:'lightning', neon:'neon-red', claimable:true},
     {name:'Chuỗi 3 ngày', source:'Live Challenge', reward:'Hộp quà nhỏ', iconKey:'fire', neon:'neon-red', time:'Còn 1 ngày', urgent:true, pct:66},
-    {name:'Vượt hôm qua', source:'Live Challenge', reward:'25 điểm + Badge', iconKey:'chart_up', neon:'neon-teal', time:'Hôm nay', urgent:true, pct:75},
-    {name:'Đặt cược đầu tiên', source:'Tân thủ', reward:'+10 COIN', iconKey:'target', neon:'neon-blue'},
+    {name:'Vượt hôm qua', source:'Live Challenge', reward:'25 ' + mcoinImg + ' + Badge', iconKey:'chart_up', neon:'neon-teal', time:'Hôm nay', urgent:true, pct:75},
+    {name:'Đặt cược đầu tiên', source:'Tân thủ', reward:'+10 ' + mcoinImg, iconKey:'target', neon:'neon-blue'},
     {name:'Cược hôm nay 500K', source:'Chiến binh • Ngày', reward:'100K', iconKey:'swords', neon:'neon-red', pct:60}
   ];
 
@@ -9420,10 +10649,10 @@ function renderMissionHub() {
   html += '<div class="mission-summary-icon">' + lcIcon('badge','neon-gold') + '</div>';
   html += '<div class="mission-summary-info">';
   html += '<div class="mission-summary-title">Trung Tâm Nhiệm Vụ</div>';
-  html += '<div class="mission-summary-sub">Hoàn thành nhiệm vụ để nhận COIN và xếp hạng mỗi tuần</div>';
+  html += '<div class="mission-summary-sub">Hoàn thành nhiệm vụ để nhận Coin và xếp hạng mỗi tuần</div>';
   html += '<div class="mission-summary-stats">';
   html += '<div class="mission-stat"><div class="mission-stat-value">' + completedCount + '/' + totalMissions + '</div><div class="mission-stat-label">Hoàn thành</div></div>';
-  html += '<div class="mission-stat"><div class="mission-stat-value">' + lcIcon('lightning','neon-red') + ' ' + earnedCoins + '</div><div class="mission-stat-label">COIN nhận</div></div>';
+  html += '<div class="mission-stat"><div class="mission-stat-value">' + lcIcon('lightning','neon-red') + ' ' + earnedCoins + '</div><div class="mission-stat-label">Coin nhận</div></div>';
   html += '<div class="mission-stat"><div class="mission-stat-value">2</div><div class="mission-stat-label">Ngày streak</div></div>';
   html += '</div></div></div></div>';
 
@@ -9431,23 +10660,12 @@ function renderMissionHub() {
   var coinEl = document.getElementById('missionCoinTotal');
   if (coinEl) coinEl.textContent = earnedCoins;
 
-  // Tabs
+  // Tabs — each navigates to its own full page
   html += '<div class="mission-tabs">';
-  html += '<div class="mission-tab ' + (missionActiveTab === 'newbie' ? 'active' : '') + '" onclick="switchMissionTab(\'newbie\')">' + lcIcon('sparkle','neon-gold') + ' Tân Thủ</div>';
-  html += '<div class="mission-tab ' + (missionActiveTab === 'warrior' ? 'active' : '') + '" onclick="switchMissionTab(\'warrior\')">' + lcIcon('swords','neon-red') + ' Chiến Binh</div>';
-  html += '<div class="mission-tab mission-tab-lc ' + (missionActiveTab === 'livechallenge' ? 'active' : '') + '" onclick="switchMissionTab(\'livechallenge\')">' + lcIcon('fire','neon-red') + ' Live Challenge</div>';
+  html += '<div class="mission-tab" onclick="showNewbieFullPage()">Tân Thủ</div>';
+  html += '<div class="mission-tab mission-tab-lc" onclick="navigateTo(\'/mission/live-challenge\')">Live Challenge</div>';
+  html += '<div class="mission-tab" onclick="showWarriorFullPage()">Chiến Binh</div>';
   html += '</div>';
-
-  // Section content
-  html += '<div class="mission-section-wrap"><div class="mission-section ' + (missionActiveTab === 'livechallenge' ? 'mission-section-lc' : '') + '">';
-  if (missionActiveTab === 'newbie') {
-    html += renderNewbieMissions();
-  } else if (missionActiveTab === 'livechallenge') {
-    html += renderLiveChallengeMissions();
-  } else {
-    html += renderWarriorMissions();
-  }
-  html += '</div></div>';
 
   // Footer Terms & FAQ
   html += '<div class="mission-section-wrap" style="padding-top:0;">';
@@ -9462,6 +10680,14 @@ function switchMissionTab(tab) {
   renderMissionHub();
 }
 
+function goToMissionTab(tab) {
+  missionNavActive = 'missions';
+  missionActiveTab = tab;
+  document.querySelectorAll('.mission-nav-item').forEach(function(a){ a.classList.remove('active'); });
+  renderMissionHub();
+  missionScrollTop();
+}
+
 function renderNewbieMissions() {
   var html = '';
   var completed = MOCK_NEWBIE_MISSIONS.filter(function(m) { return m.status === 'completed'; }).length;
@@ -9474,9 +10700,9 @@ function renderNewbieMissions() {
   html += '<div class="mission-newbie-hero-icon">' + lcIcon('star','neon-gold') + '</div>';
   html += '<div class="mission-newbie-hero-text">';
   html += '<div class="mission-newbie-hero-title">Nhiệm Vụ Tân Binh</div>';
-  html += '<div class="mission-newbie-hero-sub">Hoàn thành tất cả để nhận COIN đặc biệt + mở khóa Nhiệm Vụ Chiến Binh</div>';
+  html += '<div class="mission-newbie-hero-sub">Hoàn thành tất cả để nhận Coin đặc biệt + mở khóa Nhiệm Vụ Chiến Binh</div>';
   html += '<div class="mission-warrior-header" style="margin-bottom:0;margin-top:8px;">';
-  html += '<span>' + lcIcon('coin','neon-gold') + ' COIN đã nhận: ' + earnedCoins + '</span>';
+  html += '<span>Coin đã nhận: ' + earnedCoins + '</span>';
   html += '<span>Nhiệm vụ hoàn thành: ' + completed + '/' + total + '</span>';
   html += '</div>';
   html += '<div class="mission-newbie-progress">';
@@ -9492,7 +10718,7 @@ function renderNewbieMissions() {
   MOCK_NEWBIE_MISSIONS.forEach(function(m) {
     var statusClass = m.status === 'completed' ? 'completed' : (m.status === 'locked' ? 'locked' : '');
     html += '<div class="mission-card ' + statusClass + '">';
-    html += '<div class="mission-reward-badge">+' + m.coin + ' COIN</div>';
+    html += '<div class="mission-reward-badge">+' + m.coin + ' <span class="mcoin sm"></span></div>';
     html += '<div class="mission-card-icon ' + m.iconColor + '">' + (LC_ICONS[m.icon] ? lcIcon(m.icon, lcNeonClass(m.iconColor)) : m.icon) + '</div>';
     html += '<div class="mission-card-info">';
     html += '<div class="mission-card-title">' + m.title + '</div>';
@@ -9526,7 +10752,7 @@ function renderWarriorMissions() {
 
   // Header stats
   html += '<div class="mission-warrior-header">';
-  html += '<div>' + lcIcon('coin','neon-gold') + ' COIN đã nhận: <span>0</span></div>';
+  html += '<div>Coin đã nhận: <span>0</span></div>';
   html += '<div>Nhiệm vụ hoàn thành: <span>' + completedW + '/' + filtered.length + '</span></div>';
   html += '</div>';
 
@@ -9631,7 +10857,7 @@ function renderLiveChallengeMissions() {
   html += '<div class="lc-hero-phase"><span class="lc-hero-phase-dot"></span> Phase 2 — Engagement</div>';
   html += '<div class="lc-hero-stats">';
   html += '<div class="lc-hero-stat"><div class="lc-hero-stat-value">19</div><div class="lc-hero-stat-label">Ngày còn lại</div></div>';
-  html += '<div class="lc-hero-stat"><div class="lc-hero-stat-value">' + earnedPoints + '/' + totalPoints + '</div><div class="lc-hero-stat-label">Điểm</div></div>';
+  html += '<div class="lc-hero-stat"><div class="lc-hero-stat-value">' + earnedPoints + '/' + totalPoints + '</div><div class="lc-hero-stat-label"><span class="mcoin sm"></span></div></div>';
   html += '<div class="lc-hero-stat"><div class="lc-hero-stat-value">' + MOCK_LC_MISSIONS.length + '</div><div class="lc-hero-stat-label">Nhiệm vụ</div></div>';
   html += '</div>';
   html += '<div class="lc-hero-countdown"><span class="lc-countdown-label">Kết thúc sau:</span> <span class="lc-countdown-timer">19d 12h 30m</span></div>';
@@ -9669,7 +10895,7 @@ function renderLiveChallengeMissions() {
     if (m.tag) {
       html += '<div class="mission-reward-badge" style="background:linear-gradient(135deg,#b45309,#f59e0b)">' + m.tag + '</div>';
     } else {
-      html += '<div class="mission-reward-badge" style="background:linear-gradient(135deg,#b45309,#f59e0b)">+' + m.points + ' điểm</div>';
+      html += '<div class="mission-reward-badge" style="background:linear-gradient(135deg,#b45309,#f59e0b)">+' + m.points + ' <span class="mcoin sm"></span></div>';
     }
     html += '<div class="mission-card-icon" style="font-size:24px;">' + lcMissionIcon(m) + '</div>';
     html += '<div class="mission-card-info">';
@@ -9723,7 +10949,7 @@ function renderLiveChallengeMissions() {
     html += '<div class="lc-milestone-label' + (milestones[j].reached ? ' reached' : '') + '">' + milestones[j].label + '</div>';
   }
   html += '</div>';
-  html += '<div style="text-align:center;margin-top:10px;font-size:11px;color:var(--muted)">Bạn đang ở: <strong style="color:var(--tertiary-300)">' + earnedPoints + ' điểm</strong></div>';
+  html += '<div style="text-align:center;margin-top:10px;font-size:11px;color:var(--muted)">Bạn đang ở: <strong style="color:var(--tertiary-300)">' + earnedPoints + ' <span class="mcoin sm"></span></strong></div>';
   html += '</div>';
 
   // CTA to full LC page
@@ -9750,7 +10976,7 @@ function lcSetupPage(title, backPath) {
   if (headerBar) {
     var titleEl = headerBar.querySelector('.mission-header-title');
     if (titleEl) titleEl.textContent = title;
-    var backBtn = headerBar.querySelector('.mission-header-back');
+    var backBtn = headerBar.querySelector('.mission-back-btn');
     if (backBtn) backBtn.setAttribute('onclick', "navigateTo('" + (backPath || '/mission/live-challenge') + "')");
   }
   return document.getElementById('missionContent');
@@ -9771,7 +10997,7 @@ function lcRenderCard(m, clickable) {
   if (m.tag) {
     h += '<div class="mission-reward-badge" style="background:linear-gradient(135deg,#b45309,#f59e0b)">' + m.tag + '</div>';
   } else {
-    h += '<div class="mission-reward-badge" style="background:linear-gradient(135deg,#b45309,#f59e0b)">+' + m.points + ' pts</div>';
+    h += '<div class="mission-reward-badge" style="background:linear-gradient(135deg,#b45309,#f59e0b)">+' + m.points + ' <span class="mcoin sm"></span></div>';
   }
   h += '<div class="mission-card-icon" style="font-size:24px;">' + lcMissionIcon(m) + '</div>';
   h += '<div class="mission-card-info"><div class="mission-card-title">' + m.title + '</div>';
@@ -9872,8 +11098,8 @@ function showLcMissionDetail(missionId) {
   html += '<div class="lc-detail-desc">' + m.desc + '</div>';
   html += '<div class="lc-detail-meta">';
   html += '<div class="lc-detail-meta-item">' + lcIcon('timer','neon-orange') + ' <strong>C\u00F2n 2 ng\u00E0y</strong></div>';
-  html += '<div class="lc-detail-meta-item">' + lcIcon('star','neon-gold') + ' <strong>+' + m.points + ' \u0111i\u1EC3m</strong></div>';
-  html += '<div class="lc-detail-meta-item">' + lcIcon('coin','neon-green') + ' <strong>' + m.coin + ' COIN</strong></div>';
+  html += '<div class="lc-detail-meta-item">' + lcIcon('star','neon-gold') + ' <strong>+' + m.points + ' <span class="mcoin sm"></span></strong></div>';
+  html += '<div class="lc-detail-meta-item"><span class="mcoin"></span> <strong>' + m.coin + '</strong></div>';
   html += '</div></div>';
 
   // Progress card
@@ -9898,8 +11124,8 @@ function showLcMissionDetail(missionId) {
   html += '<div class="lc-detail-block-title">' + lcIcon('gift','neon-gold') + ' Ph\u1EA7n th\u01B0\u1EDFng</div>';
   html += '<div class="lc-detail-reward-grid">';
   html += '<div class="lc-detail-reward-item"><div class="lc-detail-reward-icon">' + lcIcon('gift','neon-gold') + '</div><div class="lc-detail-reward-name">' + m.reward + '</div><div class="lc-detail-reward-val">Ph\u1EA7n th\u01B0\u1EDFng ch\u00EDnh</div></div>';
-  html += '<div class="lc-detail-reward-item"><div class="lc-detail-reward-icon">' + lcIcon('lightning','neon-red') + '</div><div class="lc-detail-reward-name">' + m.coin + ' COIN</div><div class="lc-detail-reward-val">COIN t\u00EDch l\u0169y</div></div>';
-  html += '<div class="lc-detail-reward-item"><div class="lc-detail-reward-icon">' + lcIcon('star','neon-gold') + '</div><div class="lc-detail-reward-name">+' + m.points + ' \u0111i\u1EC3m</div><div class="lc-detail-reward-val">\u0110i\u1EC3m m\u00F9a</div></div>';
+  html += '<div class="lc-detail-reward-item"><div class="lc-detail-reward-icon"><span class="mcoin lg"></span></div><div class="lc-detail-reward-name">' + m.coin + ' <span class="mcoin"></span></div><div class="lc-detail-reward-val">Coin tích lũy</div></div>';
+  html += '<div class="lc-detail-reward-item"><div class="lc-detail-reward-icon">' + lcIcon('star','neon-gold') + '</div><div class="lc-detail-reward-name">+' + m.points + ' <span class="mcoin sm"></span></div><div class="lc-detail-reward-val">Coin mùa</div></div>';
   html += '<div class="lc-detail-reward-item"><div class="lc-detail-reward-icon">' + lcIcon('medal','neon-gold') + '</div><div class="lc-detail-reward-name">Badge</div><div class="lc-detail-reward-val">Huy hi\u1EC7u m\u00F9a</div></div>';
   html += '</div></div>';
 
@@ -9946,7 +11172,7 @@ function showLcRewards() {
   var claimable = [
     {iconKey:'gift', neon:'neon-gold', name:'H\u1ED9p qu\u00E0 + 20 \u0111i\u1EC3m', source:'Cu\u1ED1i tu\u1EA7n b\u00F9ng n\u1ED5'},
     {iconKey:'money', neon:'neon-green', name:'Freebet 50K', source:'M\u1ED1c th\u01B0\u1EDFng 50 \u0111i\u1EC3m'},
-    {iconKey:'lightning', neon:'neon-red', name:'20 COIN', source:'Ho\u00E0n th\u00E0nh NV ng\u00E0y'}
+    {iconKey:'lightning', neon:'neon-red', name:'20 <span class="mcoin sm"></span>', source:'Hoàn thành NV ngày'}
   ];
   claimable.forEach(function(r) {
     html += '<div class="lc-reward-item"><div class="lc-reward-item-icon">' + lcIcon(r.iconKey, r.neon) + '</div>';
@@ -9977,7 +11203,7 @@ function showLcRewards() {
   var claimed = [
     {iconKey:'gift', neon:'neon-gold', name:'H\u1ED9p qu\u00E0 nh\u1ECF', source:'Chu\u1ED7i 3 ng\u00E0y', time:'08/04'},
     {iconKey:'money', neon:'neon-green', name:'100K Freebet', source:'C\u01B0\u1EE3c 500K h\u00F4m nay', time:'07/04'},
-    {iconKey:'lightning', neon:'neon-red', name:'15 COIN', source:'N\u1EA1p 100K', time:'06/04'},
+    {iconKey:'lightning', neon:'neon-red', name:'15 <span class="mcoin sm"></span>', source:'Nạp 100K', time:'06/04'},
     {iconKey:'slot', neon:'neon-purple', name:'Spin mi\u1EC5n ph\u00ED', source:'Ch\u01A1i 3 m\u00F4n', time:'05/04'}
   ];
   claimed.forEach(function(r) {
@@ -10233,11 +11459,11 @@ function showLcHistory() {
   var history = [
     {iconKey:'gift', neon:'neon-gold', name:'H\u1ED9p qu\u00E0 + 20 \u0111i\u1EC3m', source:'Cu\u1ED1i tu\u1EA7n b\u00F9ng n\u1ED5', value:'+20 \u0111i\u1EC3m', time:'10/04 14:30', status:'done'},
     {iconKey:'money', neon:'neon-green', name:'Freebet 50K', source:'M\u1ED1c 50 \u0111i\u1EC3m', value:'+50.000\u0111', time:'09/04 20:15', status:'done'},
-    {iconKey:'lightning', neon:'neon-red', name:'20 COIN', source:'C\u01B0\u1EE3c 500K h\u00F4m nay', value:'+20 COIN', time:'09/04 18:00', status:'done'},
+    {iconKey:'lightning', neon:'neon-red', name:'20 <span class="mcoin sm"></span>', source:'Cược 500K hôm nay', value:'+20 <span class="mcoin sm"></span>', time:'09/04 18:00', status:'done'},
     {iconKey:'slot', neon:'neon-purple', name:'Spin mi\u1EC5n ph\u00ED', source:'Ch\u01A1i 3 m\u00F4n', value:'+5 Spin', time:'08/04 22:10', status:'done'},
     {iconKey:'gift', neon:'neon-gold', name:'H\u1ED9p qu\u00E0 nh\u1ECF', source:'Chu\u1ED7i 3 ng\u00E0y', value:'+15 \u0111i\u1EC3m', time:'08/04 10:30', status:'done'},
     {iconKey:'money', neon:'neon-green', name:'100K Freebet', source:'C\u01B0\u1EE3c 500K', value:'+100.000\u0111', time:'07/04 19:45', status:'done'},
-    {iconKey:'lightning', neon:'neon-red', name:'15 COIN', source:'N\u1EA1p 100K', value:'+15 COIN', time:'06/04 09:20', status:'done'},
+    {iconKey:'lightning', neon:'neon-red', name:'15 <span class="mcoin sm"></span>', source:'Nạp 100K', value:'+15 <span class="mcoin sm"></span>', time:'06/04 09:20', status:'done'},
     {iconKey:'slot', neon:'neon-purple', name:'10 Free Spin', source:'Top 50 ng\u00E0y', value:'+10 Spin', time:'05/04 23:59', status:'done'},
     {iconKey:'money', neon:'neon-green', name:'Freebet 25K', source:'M\u1ED1c 25 \u0111i\u1EC3m', value:'+25.000\u0111', time:'04/04 16:00', status:'done'},
     {iconKey:'gift', neon:'neon-gold', name:'Welcome gift', source:'Tham gia LC M\u00F9a 4', value:'+10 \u0111i\u1EC3m', time:'01/04 00:01', status:'done'}
@@ -10342,7 +11568,7 @@ function showLcEndSeason() {
   html += '<div class="lc-detail-block-title">' + lcIcon('gift','neon-gold') + ' T\u1ED5ng k\u1EBFt th\u01B0\u1EDFng</div>';
   var rewards = [
     {iconKey:'money', neon:'neon-green', name:'T\u1ED5ng Freebet', value:'1.250.000\u0111'},
-    {iconKey:'lightning', neon:'neon-red', name:'T\u1ED5ng COIN', value:'185 COIN'},
+    {iconKey:'lightning', neon:'neon-red', name:'Tổng <span class="mcoin sm"></span>', value:'185 <span class="mcoin sm"></span>'},
     {iconKey:'slot', neon:'neon-purple', name:'Free Spin', value:'25 l\u01B0\u1EE3t'},
     {iconKey:'trophy', neon:'neon-gold', name:'Th\u01B0\u1EDFng BXH Top 15', value:'500.000\u0111'},
     {iconKey:'medal', neon:'neon-gold', name:'Badge', value:'Chi\u1EBFn binh M\u00F9a 4'}
@@ -10388,7 +11614,7 @@ function renderWorldCupMissions() {
   html += '<div class="wc-hero-sub">United States \u2022 Mexico \u2022 Canada</div>';
   html += '<div class="wc-hero-stats">';
   html += '<div class="wc-hero-stat"><div class="wc-hero-stat-value">' + MOCK_WORLDCUP_MISSIONS.length + '</div><div class="wc-hero-stat-label">Nhiệm vụ</div></div>';
-  html += '<div class="wc-hero-stat"><div class="wc-hero-stat-value">' + lcIcon('coin','neon-gold') + totalCoins + '</div><div class="wc-hero-stat-label">Tổng COIN</div></div>';
+  html += '<div class="wc-hero-stat"><div class="wc-hero-stat-value"><span class="mcoin"></span> ' + totalCoins + '</div><div class="wc-hero-stat-label">Tổng <span class="mcoin sm"></span></div></div>';
   html += '<div class="wc-hero-stat"><div class="wc-hero-stat-value">' + allCompleted + '/' + MOCK_WORLDCUP_MISSIONS.length + '</div><div class="wc-hero-stat-label">Hoàn thành</div></div>';
   html += '</div>';
   html += '<div class="wc-hero-countdown"><span class="wc-countdown-label">Khai mạc sau:</span> <span class="wc-countdown-timer" id="wcCountdown">--</span></div>';
@@ -10409,7 +11635,7 @@ function renderWorldCupMissions() {
     var statusClass = m.status === 'completed' ? 'completed' : '';
 
     html += '<div class="mission-card wc-card ' + statusClass + '">';
-    html += '<div class="mission-reward-badge">+' + m.coin + ' COIN</div>';
+    html += '<div class="mission-reward-badge">+' + m.coin + ' <span class="mcoin sm"></span></div>';
     html += '<div class="mission-card-icon ' + m.iconColor + '">' + (LC_ICONS[m.icon] ? lcIcon(m.icon, lcNeonClass(m.iconColor)) : m.icon) + '</div>';
     html += '<div class="mission-card-info">';
     html += '<div class="mission-card-title">' + m.title + '</div>';
@@ -10480,10 +11706,10 @@ function renderMissionFooter() {
   html += '<span class="mission-footer-chevron">▼</span>';
   html += '</div>';
   html += '<div class="mission-footer-content" id="missionFAQContent" style="display:none">';
-  html += '<p><strong>Coin tích lũy là gì?</strong><br>Coin là phần thưởng nhận được khi hoàn thành nhiệm vụ. Coin dùng để xếp hạng tuần và đổi thưởng hấp dẫn.</p>';
+  html += '<p><strong><span class="mcoin sm"></span> tích lũy là gì?</strong><br><span class="mcoin sm"></span> là phần thưởng nhận được khi hoàn thành nhiệm vụ. <span class="mcoin sm"></span> dùng để xếp hạng tuần và đổi thưởng hấp dẫn.</p>';
   html += '<p><strong>Khi nào nhiệm vụ reset?</strong><br>Nhiệm vụ ngày reset lúc 00:00 mỗi ngày. Nhiệm vụ tuần reset vào Thứ Hai. Nhiệm vụ tháng reset ngày 1 hàng tháng.</p>';
-  html += '<p><strong>Làm sao nhận thưởng?</strong><br>Khi hoàn thành nhiệm vụ, nhấn nút "Nhận thưởng" trên card nhiệm vụ. Coin sẽ được cộng tự động vào tài khoản.</p>';
-  html += '<p><strong>Bảng xếp hạng tính như nào?</strong><br>Dựa trên tổng COIN tích lũy trong tuần. Top 3 nhận thưởng tiền thật vào cuối tuần.</p>';
+  html += '<p><strong>Làm sao nhận thưởng?</strong><br>Khi hoàn thành nhiệm vụ, nhấn nút "Nhận thưởng" trên card nhiệm vụ. <span class="mcoin sm"></span> sẽ được cộng tự động vào tài khoản.</p>';
+  html += '<p><strong>Bảng xếp hạng tính như nào?</strong><br>Dựa trên tổng <span class="mcoin sm"></span> tích lũy trong tuần. Top 3 nhận thưởng tiền thật vào cuối tuần.</p>';
   html += '</div>';
 
   html += '</div>';
