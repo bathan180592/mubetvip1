@@ -11205,7 +11205,8 @@ function renderWarriorMissions() {
 
 function switchWarriorSubTab(tab) {
   warriorSubTab = tab;
-  renderMissionHub();
+  var container = document.getElementById('missionContent');
+  container.innerHTML = '<div style="padding:16px;">' + renderWarriorMissions() + '</div>';
 }
 
 function toggleMissionAccordion(id) {
@@ -11215,12 +11216,13 @@ function toggleMissionAccordion(id) {
 
 function switchLcSubTab(tab) {
   lcSubTab = tab;
-  renderMissionHub();
+  showLcMissionCenter();
 }
 
 function switchWcSubTab(tab) {
   wcSubTab = tab;
-  renderMissionHub();
+  var container = document.getElementById('missionContent');
+  container.innerHTML = '<div style="padding:16px;">' + renderWorldCupMissions() + '</div>';
 }
 
 function renderLiveChallengeMissions() {
