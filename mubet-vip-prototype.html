@@ -2234,19 +2234,40 @@ img { max-width: 100%; display: block; }
 }
 .vip-status-detail-btn.vip-reward-btn:hover { background: rgba(202,41,48,.2); border-color: rgba(202,41,48,.6); }
 
-/* VIP Status Card v2 — centered layout */
+/* VIP Status Card v2 — compact inline layout */
 .vip-status-top-v2 {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 20px 20px 14px; gap: 4px;
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 20px 12px;
 }
-.vip-status-top-v2 .vip-status-icon { width: 64px; height: 64px; margin-bottom: 4px; }
+.vip-status-top-v2 .vip-status-icon {
+  width: 48px; height: 48px; flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(232,212,139,.4));
+}
+.vip-status-top-v2 .vip-status-info { flex: 1; min-width: 0; }
 .vip-status-tier-name-v2 {
-  font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 800;
+  font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800;
   text-transform: uppercase; letter-spacing: .02em;
-  color: #e8d48b;
+  color: #e8d48b; line-height: 1.2;
 }
 .vip-status-greeting-v2 {
   font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px;
+}
+.vip-status-stats-inline {
+  display: flex; gap: 6px; margin-left: auto; flex-shrink: 0;
+}
+.vip-status-stat-pill {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px; padding: 6px 10px; min-width: 68px;
+}
+.vip-status-stat-val {
+  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 800;
+  color: #e8d48b; line-height: 1.2;
+}
+.vip-status-stat-val.green { color: #4ade80; }
+.vip-status-stat-label {
+  font-size: 9px; color: var(--muted); font-weight: 500; margin-top: 1px;
+  text-transform: uppercase; letter-spacing: .03em;
 }
 .vip-status-rows {
   padding: 0 20px;
@@ -3804,7 +3825,7 @@ img { max-width: 100%; display: block; }
   padding: 4px 10px;
   border-bottom: 1px solid var(--line);
   background: var(--bg);
-  position: sticky; top: 0; z-index: 20;
+  position: sticky; top: 0; z-index: 21;
 }
 .mission-nav-item {
   display: flex; align-items: center; justify-content: center; gap: 4px;
@@ -4258,6 +4279,7 @@ img { max-width: 100%; display: block; }
   padding: 8px 12px;
   border-bottom: 1px solid var(--line);
   background: var(--panel);
+  position: sticky; top: 36px; z-index: 20;
 }
 .mission-back-btn {
   width: 28px; height: 28px; border-radius: 8px;
@@ -5114,7 +5136,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ===== LC SUB-PAGES ===== */
-.lc-page { padding: 0 16px 80px; }
+.lc-page { padding: 0 16px 140px; }
 .lc-page-title {
   font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800;
   color: var(--text-1); margin: 16px 0 12px;
@@ -5210,8 +5232,9 @@ img { max-width: 100%; display: block; }
 }
 
 .lc-sticky-cta {
-  position: sticky; bottom: 0; padding: 12px 16px;
+  position: fixed; bottom: 68px; left: 0; right: 0; padding: 12px 16px;
   background: linear-gradient(to top, var(--bg) 80%, transparent); z-index: 10;
+  max-width: 430px; margin: 0 auto;
 }
 .lc-sticky-cta .mission-btn { width: 100%; padding: 14px; font-size: 15px; font-weight: 700; border-radius: 12px; }
 
@@ -5946,6 +5969,7 @@ img { max-width: 100%; display: block; }
 }
 .onb-offer-tier-pct { font-family: Montserrat; font-size: 18px; font-weight: 900; color: var(--tertiary-400); }
 .onb-offer-tier-amt { font-size: 10px; color: var(--text-2); margin-top: 2px; }
+.onb-offer-tier-roll { font-size: 9px; color: var(--muted); margin-top: 2px; opacity: .7; }
 .onb-offer-bullets { list-style: none; padding: 0; }
 .onb-offer-bullets li { font-size: 12px; color: var(--text-2); padding: 4px 0; padding-left: 16px; position: relative; }
 .onb-offer-bullets li::before { content: '✓'; position: absolute; left: 0; color: #6ce9a6; font-weight: 700; font-size: 11px; }
@@ -6223,7 +6247,7 @@ img { max-width: 100%; display: block; }
 <section class="hero">
   <div class="hero-banner">
     <div class="hero-bg-image">
-      <img src="Assets/hero-vip-banner.png" alt="" loading="lazy"/>
+      <img src="Assets/vip-hero-bg.png" alt="" loading="lazy"/>
     </div>
     <div class="hero-bg-image-overlay"></div>
     <div class="container hero-content">
@@ -6503,12 +6527,6 @@ img { max-width: 100%; display: block; }
 
 <!-- ===== MISSION VIEW ===== -->
 <div id="missionView" class="mission-view" style="display:none">
-  <div class="mission-header-bar">
-    <button class="mission-back-btn" onclick="goToLobby()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    </button>
-    <div class="mission-header-title"><span class="mcoin lg"></span> Coin tích lũy: <strong id="missionCoinTotal">7</strong></div>
-  </div>
   <div class="mission-nav" id="missionNav">
     <a href="javascript:void(0)" class="mission-nav-item active" data-tab="overview" onclick="switchMissionNav('overview', this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
@@ -6522,6 +6540,12 @@ img { max-width: 100%; display: block; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 15l-2 5-1.5-3.5L5 15l3.5-1.5L10 10z"/><path d="M18 4l-1 2-2 1 2 1 1 2 1-2 2-1-2-1z"/><path d="M6 2l-.5 1-1 .5 1 .5L6 5l.5-1 1-.5-1-.5z"/></svg>
       <span>Xếp hạng</span>
     </a>
+  </div>
+  <div class="mission-header-bar">
+    <button class="mission-back-btn" onclick="goToLobby()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    </button>
+    <div class="mission-header-title"><span class="mcoin lg"></span> Coin tích lũy: <strong id="missionCoinTotal">7</strong></div>
   </div>
   <div id="missionContent"></div>
 </div>
@@ -7849,6 +7873,12 @@ function fmtFull(n) {
   if (n === null) return 'Lời mời';
   return n.toLocaleString('vi-VN');
 }
+function fmtShort(n) {
+  if (n >= 1000000000) return (n / 1000000000).toFixed(n % 1000000000 ? 1 : 0) + 'B';
+  if (n >= 1000000) return (n / 1000000).toFixed(n % 1000000 ? 1 : 0) + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(0) + 'K';
+  return n.toString();
+}
 
 function parseInput(str) {
   return parseInt(str.replace(/[^0-9]/g, ''), 10) || 0;
@@ -8745,17 +8775,19 @@ function updateVipStatusCard() {
   inner.innerHTML = `
     <div class="vip-status-top-v2">
       <div class="vip-status-icon"><img src="${TIER_ICONS[tierData.tier]}" alt="${tierData.name}"/></div>
-      <div class="vip-status-tier-name-v2">${tierData.name}</div>
-      <div class="vip-status-greeting-v2">${tierData.fullName} · Từ ${tierSinceStr}</div>
-    </div>
-    <div class="vip-status-rows">
-      <div class="vip-status-row">
-        <span class="vip-status-row-label">Hoàn trả đã nhận</span>
-        <span class="vip-status-row-value gold">${fmtFull(currentUser.totalCashbackReceived || 0)}đ</span>
+      <div class="vip-status-info">
+        <div class="vip-status-tier-name-v2">${tierData.name}</div>
+        <div class="vip-status-greeting-v2">${tierData.fullName} · Từ ${tierSinceStr}</div>
       </div>
-      <div class="vip-status-row">
-        <span class="vip-status-row-label">Thưởng đã nhận</span>
-        <span class="vip-status-row-value green">${fmtFull(currentUser.totalBonusReceived || 0)}đ</span>
+      <div class="vip-status-stats-inline">
+        <div class="vip-status-stat-pill">
+          <span class="vip-status-stat-val">${fmtShort(currentUser.totalCashbackReceived || 0)}</span>
+          <span class="vip-status-stat-label">Hoàn trả</span>
+        </div>
+        <div class="vip-status-stat-pill">
+          <span class="vip-status-stat-val green">${fmtShort(currentUser.totalBonusReceived || 0)}</span>
+          <span class="vip-status-stat-label">Thưởng</span>
+        </div>
       </div>
     </div>
     ${nextTier ? `
@@ -10120,7 +10152,7 @@ function showLiveChallengeFullPage() {
   var headerBar = document.querySelector('.mission-header-bar');
   var missionNav = document.getElementById('missionNav');
   if (headerBar) headerBar.style.display = '';
-  if (missionNav) missionNav.style.display = 'none';
+  if (missionNav) missionNav.style.display = '';
 
   // Update header
   if (headerBar) {
@@ -10156,7 +10188,7 @@ function showLiveChallengeFullPage() {
   html += '</div>';
 
   // Recommended missions
-  html += '<div style="padding:0 16px;">';
+  html += '<div style="padding:0 16px 140px;">';
   html += '<div class="lc-section-title" style="justify-content:space-between;">' + lcIcon('star','neon-gold') + ' Đề xuất cho bạn <span style="font-size:11px;font-weight:600;color:var(--tertiary-300);cursor:pointer;" onclick="navigateTo(\'/mission/live-challenge/missions\')">Xem tất cả →</span></div>';
   var recommended = MOCK_LC_MISSIONS.filter(function(m) { return m.group === 'recommended'; });
   html += '<div class="mission-cards">';
@@ -10234,7 +10266,7 @@ function showLiveChallengeFullPage() {
   html += '</div>'; // padding wrapper
 
   // Sticky CTA at bottom
-  html += '<div style="position:sticky;bottom:0;padding:12px 16px;background:linear-gradient(to top,var(--bg) 80%,transparent);z-index:10;">';
+  html += '<div style="position:fixed;bottom:68px;left:0;right:0;padding:12px 16px;background:linear-gradient(to top,var(--bg) 80%,transparent);z-index:10;max-width:430px;margin:0 auto;">';
   html += '<button class="mission-btn mission-btn-claim" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px;" onclick="event.stopPropagation();navigateTo(\'/mission/live-challenge/missions\')">Làm nhiệm vụ ngay</button>';
   html += '</div>';
 
@@ -10255,7 +10287,7 @@ function showWorldCupPage() {
   var headerBar = document.querySelector('.mission-header-bar');
   var missionNav = document.getElementById('missionNav');
   if (headerBar) headerBar.style.display = '';
-  if (missionNav) missionNav.style.display = 'none';
+  if (missionNav) missionNav.style.display = '';
 
   // Update header
   if (headerBar) {
@@ -10283,7 +10315,7 @@ function showMissionFullPage(title, renderFn) {
   var headerBar = document.querySelector('.mission-header-bar');
   var missionNav = document.getElementById('missionNav');
   if (headerBar) headerBar.style.display = '';
-  if (missionNav) missionNav.style.display = 'none';
+  if (missionNav) missionNav.style.display = '';
   if (headerBar) {
     var titleEl = headerBar.querySelector('.mission-header-title');
     if (titleEl) titleEl.textContent = title;
@@ -11324,7 +11356,7 @@ function lcSetupPage(title, backPath) {
   var headerBar = document.querySelector('.mission-header-bar');
   var missionNav = document.getElementById('missionNav');
   if (headerBar) headerBar.style.display = '';
-  if (missionNav) missionNav.style.display = 'none';
+  if (missionNav) missionNav.style.display = '';
   if (headerBar) {
     var titleEl = headerBar.querySelector('.mission-header-title');
     if (titleEl) titleEl.textContent = title;
@@ -12331,9 +12363,9 @@ function onbOfferCard(type, isSelected) {
       '<div class="onb-offer-title">Thưởng lên tới 200%</div>' +
       '<div class="onb-offer-desc">Nạp càng cao, thưởng càng lớn — hợp để nhận thưởng ngay</div>' +
       '<div class="onb-offer-tiers">' +
-        '<div class="onb-offer-tier"><div class="onb-offer-tier-pct">100%</div><div class="onb-offer-tier-amt">từ 200K</div></div>' +
-        '<div class="onb-offer-tier"><div class="onb-offer-tier-pct">150%</div><div class="onb-offer-tier-amt">từ 500K</div></div>' +
-        '<div class="onb-offer-tier"><div class="onb-offer-tier-pct">200%</div><div class="onb-offer-tier-amt">từ 3M</div></div>' +
+        '<div class="onb-offer-tier"><div class="onb-offer-tier-pct">100%</div><div class="onb-offer-tier-amt">từ 200K</div><div class="onb-offer-tier-roll">x5 rolling</div></div>' +
+        '<div class="onb-offer-tier"><div class="onb-offer-tier-pct">150%</div><div class="onb-offer-tier-amt">từ 500K</div><div class="onb-offer-tier-roll">x8 rolling</div></div>' +
+        '<div class="onb-offer-tier"><div class="onb-offer-tier-pct">200%</div><div class="onb-offer-tier-amt">từ 3M</div><div class="onb-offer-tier-roll">x12 rolling</div></div>' +
       '</div>' +
     '</div>';
   } else {
@@ -12586,13 +12618,6 @@ function renderOnbOfferSelect() {
       '<div class="onb-offer-cards">' +
         onbOfferCard('bonus_200', onbState.selectedOffer === 'bonus_200') +
         onbOfferCard('cashback_1_4', onbState.selectedOffer === 'cashback_1_4') +
-      '</div>' +
-    '</div>' +
-
-    '<div class="onb-section">' +
-      '<div class="onb-compare">' +
-        'Muốn <strong>thưởng lớn ngay</strong> → chọn 200%<br>' +
-        'Muốn <strong>lợi ích bền hơn</strong> → chọn hoàn trả 1.4%' +
       '</div>' +
     '</div>' +
 
