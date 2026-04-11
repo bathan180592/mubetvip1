@@ -153,13 +153,12 @@ section { background: #11131c; border: 1px solid rgba(255,255,255,.08); border-r
         <div class="sitemap-nest">
           <div class="sitemap-branch-label br-lc">Live Challenge — #/mission/live-challenge/*</div>
           <div class="sitemap-children">
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge')"><span class="sl-icon">⚡</span>Live Challenge</a>
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/missions')"><span class="sl-icon">📋</span>Missions</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge')"><span class="sl-icon">⚡</span>Live Challenge (Tab: Thử thách)</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rewards')"><span class="sl-icon">🎁</span>Tab: Thưởng (inline)</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/leaderboard')"><span class="sl-icon">🏆</span>Tab: Xếp hạng (inline)</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rules')"><span class="sl-icon">📖</span>Tab: Thể lệ (inline)</a>
             <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/mission/1')"><span class="sl-icon">📝</span>Mission Detail</a>
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rewards')"><span class="sl-icon">🎁</span>Rewards</a>
             <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/milestones')"><span class="sl-icon">🏅</span>Milestones</a>
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/leaderboard')"><span class="sl-icon">🏆</span>Leaderboard</a>
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rules')"><span class="sl-icon">📖</span>Rules</a>
             <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/history')"><span class="sl-icon">📜</span>History</a>
             <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/end-season')"><span class="sl-icon">🏁</span>End Season</a>
           </div>
@@ -334,7 +333,7 @@ section { background: #11131c; border: 1px solid rgba(255,255,255,.08); border-r
     <button class="btn-apply" onclick="applyState()">Apply State</button>
     <button class="btn-reset" onclick="resetState()">Reset</button>
   </div>
-  <div class="status" id="statusText">Ready. Open mubet-vip-prototype.html in another tab.</div>
+  <div class="status" id="statusText">Ready. Open mubet-prototype.html in another tab.</div>
 </section>
 
 <script>
@@ -531,7 +530,7 @@ const NAV_LISTENER_CODE = `
         if (typeof goToLobby === 'function') goToLobby();
         break;
       case 'vipclub':
-        if (typeof goToVipClub === 'function') goToVipClub();
+        handleDevToolsNav('#/vip');
         break;
       case 'mission-tab-missions':
         if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('missions'); }
