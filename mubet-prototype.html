@@ -3808,8 +3808,8 @@ img { max-width: 100%; display: block; }
 /* --- Floating Promo Icon --- */
 .floating-promo {
   position: fixed; bottom: 80px; z-index: 200;
-  left: 50%; margin-left: calc(min(430px, 100vw) / 2 - 68px - 10px);
-  width: 68px; height: 68px; cursor: pointer;
+  left: 50%; margin-left: calc(min(430px, 100vw) / 2 - 82px - 8px);
+  width: 82px; height: 82px; cursor: pointer;
   animation: floatBounce 3s ease-in-out infinite;
   transition: opacity .3s, transform .3s;
   touch-action: none; user-select: none;
@@ -3820,14 +3820,14 @@ img { max-width: 100%; display: block; }
   50% { transform: translateY(-6px); }
 }
 .floating-promo-img {
-  width: 68px; height: 68px; border-radius: 50%; object-fit: cover;
-  border: 2px solid rgba(255,80,50,.6);
+  width: 82px; height: 82px; border-radius: 50%; object-fit: cover;
+  border: none;
   box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 14px rgba(255,50,50,.3), 0 0 28px rgba(255,50,50,.15);
   animation: promoGlow 2.5s ease-in-out infinite;
 }
 @keyframes promoGlow {
-  0%, 100% { box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 14px rgba(255,50,50,.3), 0 0 28px rgba(255,50,50,.15); border-color: rgba(255,80,50,.6); }
-  50% { box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 20px rgba(255,50,50,.5), 0 0 40px rgba(255,50,50,.25); border-color: rgba(255,100,60,.8); }
+  0%, 100% { box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 14px rgba(255,50,50,.3), 0 0 28px rgba(255,50,50,.15); }
+  50% { box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 20px rgba(255,50,50,.5), 0 0 40px rgba(255,50,50,.25); }
 }
 .floating-promo-badge {
   position: absolute; top: -5px; right: -5px;
