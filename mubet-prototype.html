@@ -295,7 +295,8 @@ input, textarea { user-select: text; }
 .trial-overlay,
 .promo-overlay,
 .promo-detail-overlay,
-.vip1-intro-overlay {
+.vip1-intro-overlay,
+.mission-popup-overlay {
   width: 100%;
   max-width: 430px;
   top: 0; bottom: 0;
@@ -823,6 +824,117 @@ img { max-width: 100%; display: block; }
   transition: opacity .3s, visibility .3s;
 }
 .auth-overlay.open { opacity: 1; visibility: visible; }
+
+/* ===== MISSION POPUP ===== */
+.mission-popup-overlay {
+  position: fixed; top: 0; bottom: 0; z-index: 400;
+  background: rgba(0,0,0,.7); backdrop-filter: blur(12px);
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+  display: flex; align-items: center; justify-content: center;
+}
+.mission-popup-overlay.open { opacity: 1; visibility: visible; }
+.mission-popup {
+  width: 88%; max-width: 360px;
+  background: linear-gradient(170deg, #1a1a1e 0%, #101012 50%, #0c0c0e 100%);
+  border: 1px solid rgba(255,50,50,.2);
+  border-radius: 20px;
+  overflow: hidden; position: relative;
+  transform: scale(.9) translateY(20px);
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 20px 60px rgba(0,0,0,.7), 0 0 1px rgba(255,50,50,.6), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.mission-popup::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  background: linear-gradient(180deg, rgba(255,50,50,.15) 0%, transparent 40%) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none;
+}
+.mission-popup-overlay.open .mission-popup { transform: scale(1) translateY(0); }
+.mission-popup-header {
+  padding: 147px 20px 10px; text-align: center; position: relative;
+  border-bottom: 1px solid rgba(255,50,50,.1);
+  background: url('Assets/lc-hero-bg-homepage.png') center top / 100% auto no-repeat;
+}
+.mission-popup-header::after { display: none; }
+.mission-popup-header-icon {
+  width: 48px; height: 48px; margin: 0 auto 8px; position: relative; z-index: 1;
+  background: rgba(255,50,50,.08);
+  border: 1px solid rgba(255,50,50,.2); border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; font-size: 24px;
+  box-shadow: 0 0 20px rgba(255,50,50,.1);
+}
+.mission-popup-header-title {
+  font-size: 20px; font-weight: 900; font-style: italic; letter-spacing: -.5px;
+  color: #fff; position: relative; z-index: 1;
+}
+.mission-popup-header-sub { font-size: 11px; color: rgba(255,255,255,.45); margin-top: -1px; position: relative; z-index: 1; }
+.mission-popup-live-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 9px; font-weight: 800; color: #ff3232; letter-spacing: 1.5px;
+  margin-bottom: 6px; text-shadow: 0 0 8px rgba(255,50,50,.5);
+  position: relative; z-index: 1;
+}
+.mission-popup-live-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #ff3232;
+  box-shadow: 0 0 6px #ff3232;
+  animation: lcLivePulse 1.5s infinite;
+}
+.mission-popup-list { padding: 8px 14px; display: flex; flex-direction: column; gap: 6px; }
+.mission-popup-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 12px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.06);
+  cursor: pointer; transition: all .2s; position: relative;
+}
+.mission-popup-item:hover {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,50,50,.2);
+  box-shadow: 0 0 12px rgba(255,50,50,.06);
+}
+.mission-popup-item-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,50,50,.12);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.mission-popup-item-info { flex: 1; min-width: 0; }
+.mission-popup-item-title { font-size: 13px; font-weight: 700; color: #fff; }
+.mission-popup-item-desc { font-size: 10px; color: rgba(255,255,255,.35); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mission-popup-item-reward {
+  flex-shrink: 0; font-size: 12px; font-weight: 800;
+  color: #ff4040; display: flex; align-items: center; gap: 4px;
+  text-shadow: 0 0 8px rgba(255,50,50,.3);
+}
+.mission-popup-item-tag {
+  font-size: 8px; font-weight: 800; padding: 2px 5px; border-radius: 4px; letter-spacing: .5px;
+  background: rgba(255,50,50,.12);
+  color: #ff4040; border: 1px solid rgba(255,50,50,.2);
+  margin-left: 6px; flex-shrink: 0;
+}
+.mission-popup-actions {
+  padding: 10px 14px 20px; display: flex; gap: 8px;
+}
+.mission-popup-btn {
+  flex: 1; padding: 12px; border-radius: 12px; border: none;
+  font-size: 13px; font-weight: 700; cursor: pointer; transition: all .2s;
+}
+.mission-popup-btn.primary {
+  background: linear-gradient(135deg, #d42a2a, #8b1a1e);
+  color: #fff; box-shadow: 0 0 20px rgba(255,50,50,.3), 0 4px 16px rgba(0,0,0,.4);
+  text-shadow: 0 1px 2px rgba(0,0,0,.3);
+  border: 1px solid rgba(255,80,80,.2);
+}
+.mission-popup-btn.primary:hover { box-shadow: 0 0 30px rgba(255,50,50,.5), 0 6px 24px rgba(0,0,0,.5); }
+.mission-popup-btn.secondary {
+  background: rgba(255,255,255,.03); color: rgba(255,255,255,.35);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.mission-popup-btn.secondary:hover { background: rgba(255,255,255,.06); color: rgba(255,255,255,.5); }
 
 .auth-modal {
   position: fixed; z-index: 301;
@@ -3660,6 +3772,15 @@ img { max-width: 100%; display: block; }
   font-family: Montserrat, sans-serif; text-transform: uppercase; letter-spacing: .07em;
   white-space: nowrap; position: relative; z-index: 1;
   text-shadow: 0 1px 6px rgba(0,0,0,.7);
+}
+.lobby-quicklink.ql-img {
+  background: none; border: none; box-shadow: none; padding: 0; min-height: 0;
+}
+.lobby-quicklink.ql-img::before, .lobby-quicklink.ql-img::after { display: none; }
+.lobby-quicklink.ql-img:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.3); }
+.lobby-quicklink-full {
+  width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-stage-1);
+  display: block;
 }
 .lobby-quicklink-badge {
   position: absolute; top: 5px; right: 5px;
@@ -6978,6 +7099,7 @@ img { max-width: 100%; display: block; }
 <div class="user-dropdown-backdrop" id="userDropdownBackdrop"></div>
 
 <!-- ===== MAIN CONTENT (Home) ===== -->
+<div id="missionPopupOverlay" class="mission-popup-overlay" onclick="if(event.target===this)closeMissionPopup()"></div>
 <div id="mainContent">
 
 <!-- ===== LOBBY CONTENT ===== -->
@@ -10714,14 +10836,10 @@ function renderLobbyContent() {
   // === BANNER SLIDER ===
   var BANNERS = [
     {
-      img: 'Assets/home-page-banner/asset 5.webp', alt: 'Mubet Dragon',
-      tag: 'HUYỀN THOẠI RỒNG', sub: 'Chinh phục thử thách — Nhận thưởng khổng lồ',
-      badge: 'HOT', badgeColor: 'red', endsInHours: 22
-    },
-    {
-      img: 'Assets/home-page-banner/asset 9.webp', alt: 'Live Casino',
-      tag: 'CASINO ĐẲNG CẤP', sub: 'Sòng bài trực tiếp — Dealer thật, thưởng thật',
-      badge: 'LIVE', badgeColor: 'red', endsInHours: null
+      img: 'Assets/lc-hero-bg-homepage.png', alt: 'Live Challenge',
+      tag: 'LIVE CHALLENGE', sub: 'Hoàn thành nhiệm vụ — Tích coin đổi thưởng lớn',
+      badge: 'LIVE', badgeColor: 'red', endsInHours: 456,
+      onclick: "navigateTo('/mission/live-challenge')"
     },
     {
       img: 'Assets/home-page-banner/asset 7.webp', alt: 'Fire Warrior',
@@ -10742,7 +10860,7 @@ function renderLobbyContent() {
   html += '<div class="lobby-banner-slider" id="bannerSlider">';
   html += '<div class="lobby-banner-track" id="bannerTrack">';
   BANNERS.forEach(function(b) {
-    html += '<div class="lobby-banner-slide">';
+    html += '<div class="lobby-banner-slide"' + (b.onclick ? ' onclick="' + b.onclick + '"' : '') + '>';
     html += '<img src="' + b.img + '" alt="' + b.alt + '" loading="eager"/>';
     html += '<div class="lobby-banner-overlay">';
     html += '<div class="lobby-banner-left">';
@@ -10772,9 +10890,9 @@ function renderLobbyContent() {
   // === HERO WIDGET ROW ===
   html += '<section class="lobby-hero">';
   html += '<div class="lobby-hero-widgets">';
-  html += '<div class="lobby-quicklink" onclick="goToMission()"><img class="lobby-quicklink-art" src="Assets/mission.webp"/><span class="lobby-quicklink-text">Nhiệm vụ</span></div>';
-  html += '<div class="lobby-quicklink ql-gold" onclick="toggleVipClub()"><img class="lobby-quicklink-art" src="Assets/trust-verified-shield.png"/><span class="lobby-quicklink-text">VIP Club</span></div>';
-  html += '<div class="lobby-quicklink ql-blue" onclick="showPage(\'promo\')"><img class="lobby-quicklink-art" src="Assets/cashback.webp"/><span class="lobby-quicklink-text">Khuyến mãi</span></div>';
+  html += '<div class="lobby-quicklink ql-img" onclick="goToMission()"><img class="lobby-quicklink-full" src="Assets/button-nhiem-vu.png"/></div>';
+  html += '<div class="lobby-quicklink ql-img" onclick="toggleVipClub()"><img class="lobby-quicklink-full" src="Assets/button-vip-club.png"/></div>';
+  html += '<div class="lobby-quicklink ql-img" onclick="showPage(\'promo\')"><img class="lobby-quicklink-full" src="Assets/button-khuyen-mai.png"/></div>';
   html += '</div>';
   html += '</section>';
 
@@ -11027,6 +11145,56 @@ function goToLobby() {
     document.getElementById('mainContent').style.display = '';
     window.scrollTo(0, 0);
   }
+}
+
+// ===== MISSION POPUP =====
+function showMissionPopup() {
+  var overlay = document.getElementById('missionPopupOverlay');
+  if (!overlay) return;
+  // Pick 3 hot missions: claimable first, then active with highest rewards
+  var missions = MOCK_LC_MISSIONS.filter(function(m) { return m.status === 'claimable'; });
+  var active = MOCK_LC_MISSIONS.filter(function(m) { return !m.status || m.status === 'active'; });
+  active.sort(function(a, b) { return (b.points || 0) - (a.points || 0); });
+  while (missions.length < 3 && active.length) { missions.push(active.shift()); }
+  missions = missions.slice(0, 3);
+
+  var html = '<div class="mission-popup">';
+  html += '<div class="mission-popup-header">';
+  html += '<div class="mission-popup-header-title">Nhiệm Vụ Hôm Nay</div>';
+  html += '<div class="mission-popup-header-sub">Hoàn thành ngay để nhận Coin & thưởng lớn</div>';
+  html += '</div>';
+  html += '<div class="mission-popup-list">';
+  missions.forEach(function(m) {
+    var rewardText = '';
+    if (m.rewards && m.rewards.length) {
+      var parts = [];
+      m.rewards.forEach(function(r) { parts.push(r.label); });
+      rewardText = parts.join(' + ');
+    }
+    html += '<div class="mission-popup-item" onclick="closeMissionPopup();navigateTo(\'/mission/live-challenge\')">';
+    html += '<div class="mission-popup-item-icon">' + lcIcon(m.icon, m.iconColor || 'neon-gold') + '</div>';
+    html += '<div class="mission-popup-item-info">';
+    html += '<div class="mission-popup-item-title">' + m.title;
+    if (m.status === 'claimable') html += '<span class="mission-popup-item-tag">NHẬN</span>';
+    else if (m.tag) html += '<span class="mission-popup-item-tag">' + m.tag + '</span>';
+    html += '</div>';
+    html += '<div class="mission-popup-item-desc">' + m.desc + '</div>';
+    html += '</div>';
+    html += '<div class="mission-popup-item-reward"><span class="mcoin sm"></span> ' + rewardText + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '<div class="mission-popup-actions">';
+  html += '<button class="mission-popup-btn secondary" onclick="closeMissionPopup()">Để sau</button>';
+  html += '<button class="mission-popup-btn primary" onclick="closeMissionPopup();navigateTo(\'/mission/live-challenge\')">Xem Nhiệm Vụ</button>';
+  html += '</div>';
+  html += '</div>';
+  overlay.innerHTML = html;
+  overlay.classList.add('open');
+}
+function closeMissionPopup() {
+  var overlay = document.getElementById('missionPopupOverlay');
+  if (overlay) overlay.classList.remove('open');
 }
 
 // Navigate directly to VIP Club view (from anywhere)
@@ -12263,26 +12431,6 @@ function renderMissionHub() {
   var container = document.getElementById('missionContent');
   var html = '';
 
-  // Summary card
-  var completedCount = MOCK_NEWBIE_MISSIONS.filter(function(m) { return m.status === 'completed'; }).length;
-  var totalMissions = MOCK_NEWBIE_MISSIONS.length + MOCK_WARRIOR_MISSIONS.length + MOCK_LC_MISSIONS.length;
-  var earnedCoins = MOCK_NEWBIE_MISSIONS.filter(function(m) { return m.status === 'completed'; }).reduce(function(s,m) { return s + m.coin; }, 0);
-
-  html += '<div class="mission-summary"><div class="mission-summary-card">';
-  html += '<div class="mission-summary-icon">' + lcIcon('badge','neon-gold') + '</div>';
-  html += '<div class="mission-summary-info">';
-  html += '<div class="mission-summary-title">Trung Tâm Nhiệm Vụ</div>';
-  html += '<div class="mission-summary-sub">Hoàn thành nhiệm vụ để nhận Coin và xếp hạng mỗi tuần</div>';
-  html += '<div class="mission-summary-stats">';
-  html += '<div class="mission-stat"><div class="mission-stat-value">' + completedCount + '/' + totalMissions + '</div><div class="mission-stat-label">Hoàn thành</div></div>';
-  html += '<div class="mission-stat"><div class="mission-stat-value">' + lcIcon('lightning','neon-red') + ' ' + earnedCoins + '</div><div class="mission-stat-label">Coin nhận</div></div>';
-  html += '<div class="mission-stat"><div class="mission-stat-value">2</div><div class="mission-stat-label">Ngày streak</div></div>';
-  html += '</div></div></div></div>';
-
-  // Update header coin total
-  var coinEl = document.getElementById('missionCoinTotal');
-  if (coinEl) coinEl.textContent = earnedCoins;
-
   // Tabs — each navigates to its own full page
   html += '<div class="mission-tabs">';
   html += '<div class="mission-tab" onclick="showNewbieFullPage()">Tân Thủ</div>';
@@ -13265,7 +13413,7 @@ function toggleMissionFAQ(el) {
 // ===== BANNER SLIDER =====
 var bannerCurrentIdx = 0;
 var bannerAutoplay = null;
-var bannerTotal = 5;
+var bannerTotal = 4;
 
 function initBannerSlider() {
   var track = document.getElementById('bannerTrack');
@@ -13306,6 +13454,11 @@ function initBannerSlider() {
 // ===== INIT =====
 restoreLoginState();
 renderLobbyContent();
+// Mission popup — show once per session on homepage load
+if (!window.missionPopupShown) {
+  window.missionPopupShown = true;
+  setTimeout(showMissionPopup, 1500);
+}
 renderVipSelector();
 renderFAQ();
 updateEstimator();
