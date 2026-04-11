@@ -710,7 +710,7 @@ img { max-width: 100%; display: block; }
   display: flex; flex-direction: column; align-items: flex-start;
   padding: 24px 0 0;
 }
-.hero-below { text-align: center; padding-bottom: 24px; }
+.hero-below { text-align: center; padding-bottom: 0; }
 .hero-badge {
   display: inline-block;
   padding: 0; border: none; border-radius: 0;
@@ -1496,8 +1496,13 @@ img { max-width: 100%; display: block; }
 }
 
 /* ===== VIP SELECTOR + DETAIL CARD ===== */
-.tiers-section { padding: 0 0 60px; }
+.tiers-section { padding: 36px 0 60px; }
 .tiers-header { margin-bottom: 28px; }
+.tiers-header .eyebrow {
+  color: transparent;
+  background: linear-gradient(90deg, #e8d48b, #c9a227, #f0d865);
+  -webkit-background-clip: text; background-clip: text;
+}
 
 /* VIP icon selector bar */
 .vip-selector {
@@ -2161,7 +2166,7 @@ img { max-width: 100%; display: block; }
   background:
     linear-gradient(160deg, rgba(255,226,62,.08) 0%, rgba(255,226,62,.03) 30%, transparent 60%),
     linear-gradient(180deg, rgba(30,28,38,1) 0%, rgba(22,20,30,.98) 100%);
-  border: 1px solid rgba(255,226,62,.15); border-radius: 0;
+  border: none; border-radius: 0;
   overflow: hidden; position: relative;
   box-shadow: 0 4px 24px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.03) inset;
 }
@@ -2208,7 +2213,7 @@ img { max-width: 100%; display: block; }
   display: flex; align-items: center; gap: 6px;
   margin-top: 10px; font-size: 11px; font-weight: 600;
 }
-.vip-status-maintain.safe { color: var(--success-100); }
+.vip-status-maintain.safe { display: none; }
 .vip-status-maintain.warning { color: var(--warning-100); }
 .vip-status-maintain.danger { color: #e63946; }
 .vip-status-next-tease {
@@ -2360,11 +2365,17 @@ img { max-width: 100%; display: block; }
 .holo-hero-text {
   position: relative; z-index: 3;
   text-align: center;
-  padding: 24px 8px 26px;
+  padding: 39px 8px 26px;
 }
 .holo-hero-text .hero-badge {
   display: inline-block;
   margin-bottom: 4px;
+  padding: 4px 14px;
+  background: rgba(232,212,139,0.12);
+  border: 1px solid rgba(232,212,139,0.2);
+  border-radius: 20px;
+  -webkit-text-fill-color: #e8d48b;
+  color: #e8d48b;
 }
 .holo-hero-text h1 {
   font-size: 28px; font-weight: 900; line-height: 1.1;
@@ -2398,7 +2409,7 @@ img { max-width: 100%; display: block; }
 .holo-tier-badge-float {
   position: absolute; bottom: 8px; left: 10px;
   display: flex; align-items: center; gap: 6px;
-  padding: 6px 14px; border-radius: 10px;
+  padding: 6px 12px; border-radius: 10px;
   background: rgba(0,0,0,.6); backdrop-filter: blur(8px);
   border: 1px solid rgba(232,212,139,.2);
   box-shadow: 0 0 12px rgba(232,212,139,.1);
@@ -2412,12 +2423,21 @@ img { max-width: 100%; display: block; }
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   animation: goldShimmer 4s ease-in-out infinite;
 }
+.holo-tier-info {
+  display: flex; flex-direction: column;
+}
+.holo-tier-since {
+  font-size: 10px; font-weight: 600;
+  color: rgba(255,255,255,.45);
+  letter-spacing: .02em;
+  margin-top: 1px;
+}
 
 /* CSS hologram stat cards — pixel-perfect text */
 .holo-stats-css {
   position: absolute; z-index: 4;
   left: 0; right: 0; top: 50%;
-  transform: translateY(calc(-50% - 65px));
+  transform: translateY(calc(-50% - 50px));
   display: flex; justify-content: center; gap: 6px;
   padding: 0 8px;
   pointer-events: none;
@@ -2507,31 +2527,40 @@ img { max-width: 100%; display: block; }
 .holo-center { display: none; }
 .holo-stats { display: none; }
 
-/* Progress section */
+/* Progress section — new layout */
 .holo-progress { position: relative; z-index: 1; margin-bottom: 4px; padding: 0 16px; }
 .holo-progress-header {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  margin-bottom: 12px;
 }
-.holo-progress-from {
-  font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 700;
-  color: var(--tertiary-400); padding: 3px 10px; border-radius: 6px;
-  background: rgba(232,212,139,.08); border: 1px solid rgba(232,212,139,.15);
-  display: flex; align-items: center; gap: 5px;
-}
+.holo-progress-from,
 .holo-progress-to {
-  font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 700;
-  color: var(--primary-300); padding: 3px 10px; border-radius: 6px;
-  background: rgba(202,41,48,.08); border: 1px solid rgba(202,41,48,.15);
-  display: flex; align-items: center; gap: 5px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  flex-shrink: 0;
 }
 .holo-progress-icon {
-  width: 20px; height: 20px; object-fit: contain;
+  width: 36px; height: 36px; object-fit: contain;
 }
-.holo-progress-arrow { opacity: .5; }
+.holo-progress-tier-label {
+  font-family: Montserrat, sans-serif; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.03em;
+}
+.holo-progress-from .holo-progress-tier-label { color: var(--tertiary-400); }
+.holo-progress-to .holo-progress-tier-label { color: var(--primary-300); }
+.holo-progress-center {
+  flex: 1; text-align: center;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.holo-progress-remaining-line {
+  font-size: 12px; font-weight: 600; color: rgba(255,255,255,.7);
+  line-height: 1.4;
+}
+.holo-progress-remaining-line strong {
+  color: var(--tertiary-400); font-weight: 700;
+}
 .holo-progress-track {
   height: 6px; border-radius: 3px; background: rgba(255,255,255,.06);
-  position: relative; overflow: visible; margin-bottom: 6px;
+  position: relative; overflow: visible; margin-bottom: 0;
 }
 .holo-progress-fill {
   height: 100%; border-radius: 3px;
@@ -2550,11 +2579,9 @@ img { max-width: 100%; display: block; }
   0%,100% { box-shadow: 0 0 8px #e8d48b, 0 0 16px rgba(232,212,139,.4); }
   50% { box-shadow: 0 0 12px #e8d48b, 0 0 24px rgba(232,212,139,.5); }
 }
-.holo-progress-info {
-  display: flex; justify-content: space-between; font-size: 11px;
-  color: var(--tertiary-400); font-weight: 600;
-}
-.holo-progress-pct { color: var(--muted); }
+.holo-progress-info { display: none; }
+.holo-progress-pct { display: none; }
+.holo-progress-arrow { display: none; }
 
 /* Trial Overlay */
 .trial-overlay {
@@ -2763,7 +2790,7 @@ img { max-width: 100%; display: block; }
 .eyebrow { font-size: 10px; }
 
 /* VIP selector mobile */
-.tiers-section { padding: 0 0 32px; }
+.tiers-section { padding: 36px 0 32px; }
 .tiers-header { margin-bottom: 16px; }
 .vip-selector { padding: 12px 0 0; }
 .vip-selector-scroll { gap: 0; padding: 0 8px 32px; justify-content: flex-start; }
@@ -9280,30 +9307,34 @@ function updateVipStatusCard() {
         <!-- VIP badge bottom-left -->
         <div class="holo-tier-badge-float">
           <img src="${curBadgeIcon}" alt="${tierData.name}"/>
-          <span class="holo-tier-name">${tierData.name}</span>
+          <div class="holo-tier-info">
+            <span class="holo-tier-name">${tierData.name}</span>
+            <span class="holo-tier-since">từ ${tierSinceStr}</span>
+          </div>
         </div>
         <div class="holo-ambassador-glow"></div>
       </div>
 
       ${nextTier ? `
-      <!-- Progress arc -->
+      <!-- Progress section -->
       <div class="holo-progress">
         <div class="holo-progress-header">
-          <div class="holo-progress-from"><img src="${curBadgeIcon}" alt="" class="holo-progress-icon"/>${tierData.name}</div>
-          <div class="holo-progress-arrow">
-            <svg viewBox="0 0 40 12" width="40" height="12" fill="none">
-              <path d="M0 6h36M30 1l6 5-6 5" stroke="rgba(232,212,139,.4)" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+          <div class="holo-progress-from">
+            <img src="${curBadgeIcon}" alt="" class="holo-progress-icon"/>
+            <span class="holo-progress-tier-label">${tierData.name}</span>
           </div>
-          <div class="holo-progress-to"><img src="${nextBadgeIcon}" alt="" class="holo-progress-icon"/>${nextTier.name}</div>
+          <div class="holo-progress-center">
+            <div class="holo-progress-remaining-line">Nạp thêm: <strong>${fmtFull(remaining)}đ</strong></div>
+            <div class="holo-progress-remaining-line">Cược thêm: <strong>${fmtFull(Math.max(0, (nextTier.wagerReq || 0) - (currentUser.totalWager || 0)))}đ</strong></div>
+          </div>
+          <div class="holo-progress-to">
+            <img src="${nextBadgeIcon}" alt="" class="holo-progress-icon"/>
+            <span class="holo-progress-tier-label">${nextTier.name}</span>
+          </div>
         </div>
         <div class="holo-progress-track">
           <div class="holo-progress-fill" style="width:${progress}%"></div>
           <div class="holo-progress-glow" style="left:${progress}%"></div>
-        </div>
-        <div class="holo-progress-info">
-          <span class="holo-progress-pct">${progress}%</span>
-          <span>${remaining > 0 ? 'Còn ' + fmtFull(remaining) + 'đ' : 'Đã đủ điều kiện!'}</span>
         </div>
         <div class="vip-status-maintain ${maintainClass}">${maintainText}</div>
       </div>` : `
