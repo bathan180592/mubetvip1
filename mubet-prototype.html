@@ -903,18 +903,20 @@ img { max-width: 100%; display: block; }
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .mission-popup-item-info { flex: 1; min-width: 0; }
-.mission-popup-item-title { font-size: 13px; font-weight: 700; color: #fff; }
+.mission-popup-item-title { font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; }
 .mission-popup-item-desc { font-size: 10px; color: rgba(255,255,255,.35); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mission-popup-item-reward {
   flex-shrink: 0; font-size: 12px; font-weight: 800;
   color: #ff4040; display: flex; align-items: center; gap: 4px;
   text-shadow: 0 0 8px rgba(255,50,50,.3);
 }
+.mission-popup-item-right {
+  flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+}
 .mission-popup-item-tag {
   font-size: 8px; font-weight: 800; padding: 2px 5px; border-radius: 4px; letter-spacing: .5px;
   background: rgba(255,50,50,.12);
   color: #ff4040; border: 1px solid rgba(255,50,50,.2);
-  margin-left: 6px; flex-shrink: 0;
 }
 .mission-popup-actions {
   padding: 10px 14px 20px; display: flex; gap: 8px;
@@ -3775,8 +3777,22 @@ img { max-width: 100%; display: block; }
 }
 .lobby-quicklink.ql-img {
   background: none; border: none; box-shadow: none; padding: 0; min-height: 0;
+  overflow: hidden;
 }
-.lobby-quicklink.ql-img::before, .lobby-quicklink.ql-img::after { display: none; }
+.lobby-quicklink.ql-img::before { display: none; }
+.lobby-quicklink.ql-img::after {
+  content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.15) 50%, transparent 70%);
+  animation: qlShine 3s ease-in-out infinite;
+  z-index: 2; pointer-events: none; border-radius: inherit;
+}
+@keyframes qlShine {
+  0% { left: -100%; }
+  50% { left: 150%; }
+  100% { left: 150%; }
+}
+.lobby-quicklink.ql-img:nth-child(2)::after { animation-delay: .4s; }
+.lobby-quicklink.ql-img:nth-child(3)::after { animation-delay: .8s; }
 .lobby-quicklink.ql-img:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.3); }
 .lobby-quicklink-full {
   width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-stage-1);
@@ -3788,6 +3804,41 @@ img { max-width: 100%; display: block; }
   border-radius: 3px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
   box-shadow: var(--glow-red-sm); z-index: 2;
 }
+
+/* --- Floating Promo Icon --- */
+.floating-promo {
+  position: fixed; bottom: 80px; z-index: 200;
+  left: 50%; margin-left: calc(min(430px, 100vw) / 2 - 56px - 12px);
+  width: 56px; height: 56px; cursor: pointer;
+  animation: floatBounce 3s ease-in-out infinite;
+  transition: opacity .3s, transform .3s;
+}
+.floating-promo.hidden { opacity: 0; pointer-events: none; transform: scale(.5); }
+@keyframes floatBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.floating-promo-img {
+  width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+  border: 2px solid rgba(255,50,50,.5);
+  box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 12px rgba(255,50,50,.2);
+}
+.floating-promo-badge {
+  position: absolute; top: -2px; right: -2px;
+  min-width: 18px; height: 18px; border-radius: 9px;
+  background: #e53935; color: #fff; font-size: 10px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 4px; box-shadow: 0 2px 6px rgba(229,57,53,.5);
+  border: 2px solid #0c0c0e;
+}
+.floating-promo-close {
+  position: absolute; top: -4px; left: -4px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(30,30,35,.9); border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.5); font-size: 10px; line-height: 16px; text-align: center;
+  cursor: pointer; z-index: 1; transition: all .2s;
+}
+.floating-promo-close:hover { background: rgba(60,60,65,.9); color: #fff; }
 
 /* --- Sports Section --- */
 .lobby-match-card {
@@ -7349,6 +7400,13 @@ img { max-width: 100%; display: block; }
     </div>
     <a href="#estimator" class="sticky-cta-btn">Ước tính ngay</a>
   </div>
+</div>
+
+<!-- ===== FLOATING PROMO ICON ===== -->
+<div class="floating-promo" id="floatingPromo" onclick="navigateTo('/mission/live-challenge')">
+  <button class="floating-promo-close" onclick="event.stopPropagation();closeFloatingPromo();">&times;</button>
+  <img class="floating-promo-img" src="Assets/floating-promo-icon.png" alt="Promo"/>
+  <span class="floating-promo-badge" id="floatingPromoBadge">3</span>
 </div>
 
 <!-- ===== BOTTOM NAVIGATION ===== -->
@@ -11174,13 +11232,14 @@ function showMissionPopup() {
     html += '<div class="mission-popup-item" onclick="closeMissionPopup();navigateTo(\'/mission/live-challenge\')">';
     html += '<div class="mission-popup-item-icon">' + lcIcon(m.icon, m.iconColor || 'neon-gold') + '</div>';
     html += '<div class="mission-popup-item-info">';
-    html += '<div class="mission-popup-item-title">' + m.title;
-    if (m.status === 'claimable') html += '<span class="mission-popup-item-tag">NHẬN</span>';
-    else if (m.tag) html += '<span class="mission-popup-item-tag">' + m.tag + '</span>';
-    html += '</div>';
+    html += '<div class="mission-popup-item-title">' + m.title + '</div>';
     html += '<div class="mission-popup-item-desc">' + m.desc + '</div>';
     html += '</div>';
+    html += '<div class="mission-popup-item-right">';
+    if (m.status === 'claimable') html += '<span class="mission-popup-item-tag">NHẬN</span>';
+    else if (m.tag) html += '<span class="mission-popup-item-tag">' + m.tag + '</span>';
     html += '<div class="mission-popup-item-reward"><span class="mcoin sm"></span> ' + rewardText + '</div>';
+    html += '</div>';
     html += '</div>';
   });
   html += '</div>';
@@ -11195,6 +11254,36 @@ function showMissionPopup() {
 function closeMissionPopup() {
   var overlay = document.getElementById('missionPopupOverlay');
   if (overlay) overlay.classList.remove('open');
+}
+
+// ===== FLOATING PROMO ICON =====
+function closeFloatingPromo() {
+  var el = document.getElementById('floatingPromo');
+  if (el) el.classList.add('hidden');
+  window.floatingPromoClosed = true;
+}
+
+function updateFloatingPromoBadge() {
+  var count = 0;
+  if (typeof MOCK_LC_MISSIONS !== 'undefined') {
+    MOCK_LC_MISSIONS.forEach(function(m) {
+      if (m.status === 'active' || m.status === 'claimable') count++;
+    });
+  }
+  var badge = document.getElementById('floatingPromoBadge');
+  if (badge) {
+    badge.textContent = count;
+    badge.style.display = count > 0 ? '' : 'none';
+  }
+}
+
+function showFloatingPromo() {
+  if (window.floatingPromoClosed) return;
+  var el = document.getElementById('floatingPromo');
+  if (el) {
+    el.classList.remove('hidden');
+    updateFloatingPromoBadge();
+  }
 }
 
 // Navigate directly to VIP Club view (from anywhere)
@@ -13459,6 +13548,7 @@ if (!window.missionPopupShown) {
   window.missionPopupShown = true;
   setTimeout(showMissionPopup, 1500);
 }
+showFloatingPromo();
 renderVipSelector();
 renderFAQ();
 updateEstimator();
