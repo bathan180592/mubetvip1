@@ -3808,10 +3808,11 @@ img { max-width: 100%; display: block; }
 /* --- Floating Promo Icon --- */
 .floating-promo {
   position: fixed; bottom: 80px; z-index: 200;
-  left: 50%; margin-left: calc(min(430px, 100vw) / 2 - 56px - 12px);
-  width: 56px; height: 56px; cursor: pointer;
+  left: 50%; margin-left: calc(min(430px, 100vw) / 2 - 68px - 10px);
+  width: 68px; height: 68px; cursor: pointer;
   animation: floatBounce 3s ease-in-out infinite;
   transition: opacity .3s, transform .3s;
+  touch-action: none; user-select: none;
 }
 .floating-promo.hidden { opacity: 0; pointer-events: none; transform: scale(.5); }
 @keyframes floatBounce {
@@ -3819,16 +3820,21 @@ img { max-width: 100%; display: block; }
   50% { transform: translateY(-6px); }
 }
 .floating-promo-img {
-  width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
-  border: 2px solid rgba(255,50,50,.5);
-  box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 12px rgba(255,50,50,.2);
+  width: 68px; height: 68px; border-radius: 50%; object-fit: cover;
+  border: 2px solid rgba(255,80,50,.6);
+  box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 14px rgba(255,50,50,.3), 0 0 28px rgba(255,50,50,.15);
+  animation: promoGlow 2.5s ease-in-out infinite;
+}
+@keyframes promoGlow {
+  0%, 100% { box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 14px rgba(255,50,50,.3), 0 0 28px rgba(255,50,50,.15); border-color: rgba(255,80,50,.6); }
+  50% { box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 20px rgba(255,50,50,.5), 0 0 40px rgba(255,50,50,.25); border-color: rgba(255,100,60,.8); }
 }
 .floating-promo-badge {
-  position: absolute; top: -2px; right: -2px;
-  min-width: 18px; height: 18px; border-radius: 9px;
-  background: #e53935; color: #fff; font-size: 10px; font-weight: 800;
+  position: absolute; top: -5px; right: -5px;
+  min-width: 24px; height: 24px; border-radius: 12px;
+  background: #e53935; color: #fff; font-size: 14px; font-weight: 800;
   display: flex; align-items: center; justify-content: center;
-  padding: 0 4px; box-shadow: 0 2px 6px rgba(229,57,53,.5);
+  padding: 0 5px; box-shadow: 0 2px 8px rgba(229,57,53,.6);
   border: 2px solid #0c0c0e;
 }
 .floating-promo-close {
@@ -11283,7 +11289,63 @@ function showFloatingPromo() {
   if (el) {
     el.classList.remove('hidden');
     updateFloatingPromoBadge();
+    initFloatingPromoDrag(el);
   }
+}
+
+function initFloatingPromoDrag(el) {
+  if (el._dragInited) return;
+  el._dragInited = true;
+  var isDragging = false, wasDragged = false;
+  var startX, startY, origX, origY;
+
+  function onStart(e) {
+    var t = e.touches ? e.touches[0] : e;
+    isDragging = true; wasDragged = false;
+    startX = t.clientX; startY = t.clientY;
+    var r = el.getBoundingClientRect();
+    origX = r.left; origY = r.top;
+    el.style.animation = 'none';
+    el.style.transition = 'none';
+  }
+  function onMove(e) {
+    if (!isDragging) return;
+    var t = e.touches ? e.touches[0] : e;
+    var dx = t.clientX - startX, dy = t.clientY - startY;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) wasDragged = true;
+    if (!wasDragged) return;
+    e.preventDefault();
+    el.style.position = 'fixed';
+    el.style.left = (origX + dx) + 'px';
+    el.style.top = (origY + dy) + 'px';
+    el.style.bottom = 'auto';
+    el.style.marginLeft = '0';
+    el.style.transform = 'none';
+  }
+  function onEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    el.style.transition = 'opacity .3s, transform .3s';
+    if (!wasDragged) return;
+    // Snap within viewport
+    var r = el.getBoundingClientRect();
+    var x = Math.max(0, Math.min(r.left, window.innerWidth - r.width));
+    var y = Math.max(0, Math.min(r.top, window.innerHeight - r.height));
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+  }
+
+  el.addEventListener('touchstart', onStart, {passive: true});
+  el.addEventListener('touchmove', onMove, {passive: false});
+  el.addEventListener('touchend', onEnd);
+  el.addEventListener('mousedown', onStart);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
+
+  // Prevent click navigation after drag
+  el.addEventListener('click', function(e) {
+    if (wasDragged) { e.stopPropagation(); e.preventDefault(); wasDragged = false; }
+  }, true);
 }
 
 // Navigate directly to VIP Club view (from anywhere)
