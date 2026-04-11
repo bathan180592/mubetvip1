@@ -4172,13 +4172,38 @@ img { max-width: 100%; display: block; }
 .mhub-reward-claim:hover { transform: scale(1.05); box-shadow: 0 2px 8px rgba(5,161,88,.3); }
 /* Leaderboard page */
 .lb-page { padding: 0 0 32px; }
+.lb-week-switcher {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 8px 16px; background: rgba(255,255,255,.02);
+  border-bottom: 1px solid var(--white-06);
+}
+.lb-week-btn {
+  background: none; border: none; color: var(--muted); font-size: 10px; font-weight: 600;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 2px; padding: 6px 6px;
+  border-radius: 8px; transition: all .2s; white-space: nowrap; flex-shrink: 0;
+}
+.lb-week-btn svg { flex-shrink: 0; }
+.lb-week-btn.active { color: var(--tertiary-300); }
+.lb-week-btn:hover { background: rgba(255,255,255,.04); }
+.lb-week-label {
+  font-size: 10px; font-weight: 600; color: var(--text-2);
+  display: flex; align-items: center; gap: 4px; white-space: nowrap;
+  min-width: 0; justify-content: center;
+}
+.lb-week-badge {
+  font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px;
+  background: rgba(5,161,88,.15); color: var(--success-100);
+}
+.lb-week-badge.settled {
+  background: rgba(245,158,11,.12); color: var(--tertiary-300);
+}
 .lb-tabs {
   display: flex; gap: 4px; padding: 12px 16px; position: sticky; top: 0; z-index: 5;
   background: var(--bg);
 }
 .lb-tab {
   flex: 1; padding: 10px 0; border-radius: 10px; border: 1px solid var(--line);
-  background: transparent; color: var(--muted); font-size: 13px; font-weight: 700;
+  background: transparent; color: var(--muted); font-size: 12px; font-weight: 700;
   font-family: Montserrat, sans-serif; cursor: pointer; transition: all .2s ease;
 }
 .lb-tab.active {
@@ -4211,7 +4236,7 @@ img { max-width: 100%; display: block; }
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   animation: goldShimmer 4s ease-in-out infinite;
 }
-.lb-hero-sub { font-size: 11px; color: var(--text-2); line-height: 1.5; }
+.lb-hero-sub { font-size: 12px; color: var(--text-2); line-height: 1.5; }
 .lb-vip-info {
   display: flex; align-items: center; gap: 12px; justify-content: center;
   padding: 12px 16px;
@@ -4220,11 +4245,11 @@ img { max-width: 100%; display: block; }
   margin-top: 12px; display: inline-flex; align-items: center; gap: 6px;
   padding: 8px 16px; border-radius: 10px;
   background: rgba(255,226,62,.06); border: 1px solid rgba(255,226,62,.15);
-  font-size: 13px; color: var(--tertiary-300);
+  font-size: 12px; color: var(--tertiary-300);
 }
 .lb-hero-pool strong { font-family: Montserrat, sans-serif; font-weight: 800; }
 .lb-hero-countdown {
-  margin-top: 8px; font-size: 11px; color: var(--muted);
+  margin-top: 8px; font-size: 10px; color: var(--muted);
   display: inline-flex; align-items: center; gap: 4px;
 }
 .lb-list { padding: 0 16px; }
@@ -4260,15 +4285,15 @@ img { max-width: 100%; display: block; }
 }
 .lb-rank-img { width: 32px; height: 32px; object-fit: contain; }
 .lb-rank-num {
-  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 800; color: var(--muted);
+  font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 800; color: var(--muted);
 }
 .lb-info { flex: 1; text-align: left; }
-.lb-name { font-size: 13px; font-weight: 600; }
+.lb-name { font-size: 12px; font-weight: 600; }
 .lb-name.me { color: var(--primary-300); }
 .lb-tier { font-size: 10px; color: var(--muted); margin-top: 1px; }
 .lb-mult { color: var(--tertiary-400); font-weight: 700; }
 .lb-coins {
-  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 700;
+  font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 700;
   color: var(--tertiary-400); display: flex; align-items: center; gap: 4px;
 }
 .lb-lock-card {
@@ -4276,12 +4301,12 @@ img { max-width: 100%; display: block; }
   background: var(--grad-glass); border: 1px solid var(--line);
 }
 .lb-lock-icon svg { width: 32px; height: 32px; opacity: .5; }
-.lb-lock-title { font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 700; margin: 10px 0 6px; }
+.lb-lock-title { font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 700; margin: 10px 0 6px; }
 .lb-lock-sub { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; }
 .lb-lock-cta {
   padding: 10px 24px; border-radius: 10px; border: 1px solid rgba(212,175,55,.3);
   background: rgba(212,175,55,.08); color: var(--tertiary-300);
-  font-size: 13px; font-weight: 700; cursor: pointer; transition: all .2s ease;
+  font-size: 12px; font-weight: 700; cursor: pointer; transition: all .2s ease;
 }
 .lb-lock-cta:hover { background: rgba(212,175,55,.15); }
 .lb-reward-dist {
@@ -4289,7 +4314,7 @@ img { max-width: 100%; display: block; }
   background: var(--grad-glass); border: 1px solid var(--line);
 }
 .lb-section-title {
-  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 700;
+  font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 700;
   margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
 }
 .lb-section-title svg { width: 18px; height: 18px; }
@@ -4302,15 +4327,15 @@ img { max-width: 100%; display: block; }
 .lb-dist-item.gold { border-color: rgba(255,226,62,.2); background: rgba(255,226,62,.05); }
 .lb-dist-item.silver { border-color: rgba(192,192,192,.15); background: rgba(192,192,192,.03); }
 .lb-dist-item.bronze { border-color: rgba(205,127,50,.15); background: rgba(205,127,50,.03); }
-.lb-dist-rank { font-size: 13px; font-weight: 700; }
-.lb-dist-prize { font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 800; color: var(--tertiary-400); }
+.lb-dist-rank { font-size: 12px; font-weight: 700; }
+.lb-dist-prize { font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 800; color: var(--tertiary-400); }
 .lb-tnc-section { margin: 24px 16px 0; }
 .lb-tnc-list {
   margin-bottom: 16px; padding: 14px 16px; border-radius: 12px;
   background: var(--grad-glass); border: 1px solid var(--line);
 }
 .lb-tnc-item {
-  font-size: 11px; color: var(--muted); line-height: 1.6;
+  font-size: 10px; color: var(--muted); line-height: 1.6;
   padding: 4px 0 4px 14px; position: relative;
 }
 .lb-tnc-item::before { content: '•'; position: absolute; left: 0; color: var(--tertiary-400); }
@@ -4322,7 +4347,7 @@ img { max-width: 100%; display: block; }
 .lb-faq-item.open { border-color: rgba(255,226,62,.2); }
 .lb-faq-q {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 14px; font-size: 13px; font-weight: 600;
+  padding: 12px 14px; font-size: 12px; font-weight: 600;
 }
 .lb-faq-chevron {
   width: 16px; height: 16px; color: var(--muted); flex-shrink: 0;
@@ -11848,6 +11873,7 @@ function renderMissionContent() {
 
   if (missionNavActive === 'leaderboard') {
     if (!window.lbTab) window.lbTab = 'vip';
+    if (!window.lbWeek) window.lbWeek = 'current';
     html += '<div class="lb-page">';
 
     // Banner with image
@@ -11857,12 +11883,11 @@ function renderMissionContent() {
     html += '<div class="lb-hero">';
     if (window.lbTab === 'normal') {
       html += '<div class="lb-hero-title">Bảng Xếp Hạng</div>';
-      html += '<div class="lb-hero-sub">Top người chơi tích Coin nhiều nhất tuần này</div>';
+      html += '<div class="lb-hero-sub">Top người chơi tích Coin nhiều nhất tuần</div>';
     } else {
       html += '<div class="lb-hero-title">BXH VIP</div>';
       html += '<div class="lb-hero-sub">Cuộc đua dành riêng cho hội viên VIP 3+</div>';
       html += '<div style="margin-top:8px;font-size:12px;color:var(--tertiary-300);display:flex;align-items:center;gap:4px;"><img src="Assets/promotion-free-cash.webp" style="width:16px;height:16px;"/> <strong>100tr</strong> hũ thưởng</div>';
-      html += '<div class="lb-hero-countdown" style="margin-top:4px;">Còn 19 ngày</div>';
     }
     html += '</div>';
     html += '</div>';
@@ -11873,21 +11898,79 @@ function renderMissionContent() {
     html += '<button class="lb-tab'+(window.lbTab==='vip'?' active':'')+'" onclick="window.lbTab=\'vip\';renderMissionContent()">BXH VIP</button>';
     html += '</div>';
 
+    // Week switcher
+    var weekStart = new Date(); weekStart.setDate(weekStart.getDate() - weekStart.getDay() + 1);
+    var weekEnd = new Date(weekStart); weekEnd.setDate(weekEnd.getDate() + 6);
+    var prevStart = new Date(weekStart); prevStart.setDate(prevStart.getDate() - 7);
+    var prevEnd = new Date(weekStart); prevEnd.setDate(prevEnd.getDate() - 1);
+    function fmtD(d) { return (d.getDate() < 10 ? '0' : '') + d.getDate() + '/' + ((d.getMonth()+1) < 10 ? '0' : '') + (d.getMonth()+1); }
+    var curLabel = fmtD(weekStart) + ' - ' + fmtD(weekEnd);
+    var prevLabel = fmtD(prevStart) + ' - ' + fmtD(prevEnd);
+
+    html += '<div class="lb-week-switcher">';
+    html += '<button class="lb-week-btn' + (window.lbWeek === 'prev' ? ' active' : '') + '" onclick="window.lbWeek=\'prev\';renderMissionContent()">';
+    html += '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="12" height="12"><path d="M15 18l-6-6 6-6"/></svg>';
+    html += ' Tuần trước';
+    html += '</button>';
+    html += '<div class="lb-week-label">';
+    if (window.lbWeek === 'current') {
+      html += '<span class="lb-week-badge">Đang diễn ra</span> ' + curLabel;
+    } else {
+      html += '<span class="lb-week-badge settled">Đã chốt</span> ' + prevLabel;
+    }
+    html += '</div>';
+    html += '<button class="lb-week-btn' + (window.lbWeek === 'current' ? ' active' : '') + '" onclick="window.lbWeek=\'current\';renderMissionContent()">';
+    html += 'Tuần này ';
+    html += '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="12" height="12"><path d="M9 18l6-6-6-6"/></svg>';
+    html += '</button>';
+    html += '</div>';
+
     if (window.lbTab === 'normal') {
-      var leaders = [
-        {name:'VuongGia***', coins:285, tier:'VIP 5'},
-        {name:'HoangLong***', coins:210, tier:'VIP 4'},
-        {name:'MinhTuan***', coins:178, tier:'VIP 3'},
-        {name:'NgocAnh***', coins:145, tier:'VIP 3'},
-        {name:'TrungKien***', coins:120, tier:'VIP 2'},
-        {name:'Player 01', coins:7, tier:'VIP 2', isMe:true}
-      ];
+      // VIP 3+ users are in BXH VIP, not BXH Thường
+      var isVip3Plus = currentUser && currentUser.tier >= 3;
+      if (isVip3Plus && window.lbWeek === 'current') {
+        html += '<div class="lb-lock-card">';
+        html += '<div class="lb-lock-icon">' + lcIcon('trophy','neon-gold') + '</div>';
+        html += '<div class="lb-lock-title">Bạn đang ở BXH VIP</div>';
+        html += '<div class="lb-lock-sub">VIP 3 trở lên tham gia BXH VIP với giải thưởng lớn hơn</div>';
+        html += '<button class="lb-lock-cta" onclick="window.lbTab=\'vip\';renderMissionContent()">Xem BXH VIP</button>';
+        html += '</div>';
+      }
+
+      var leaders;
+      if (window.lbWeek === 'prev') {
+        leaders = [
+          {name:'AnhKhoa***', coins:310, tier:'VIP 2'},
+          {name:'ThanhSon***', coins:260, tier:'VIP 1'},
+          {name:'NgocAnh***', coins:245, tier:'VIP 2'},
+          {name:'TrungKien***', coins:190, tier:'VIP 1'},
+          {name:'HaiNam***', coins:155, tier:'VIP 2'},
+          {name:'DucMinh***', coins:130, tier:'VIP 1'},
+          {name:'QuangHuy***', coins:105, tier:'VIP 2'},
+          {name:'VanThanh***', coins:88, tier:'VIP 1'},
+          {name:'HoangVu***', coins:72, tier:'VIP 2'},
+          {name:'Player 01', coins:12, tier:'VIP 2', isMe:true}
+        ];
+      } else {
+        leaders = [
+          {name:'ThanhSon***', coins:285, tier:'VIP 2'},
+          {name:'AnhKhoa***', coins:210, tier:'VIP 1'},
+          {name:'NgocAnh***', coins:178, tier:'VIP 2'},
+          {name:'HaiNam***', coins:145, tier:'VIP 1'},
+          {name:'TrungKien***', coins:120, tier:'VIP 2'},
+          {name:'PhuongNam***', coins:98, tier:'VIP 1'},
+          {name:'BaoLong***', coins:82, tier:'VIP 2'},
+          {name:'MinhKhang***', coins:65, tier:'VIP 1'},
+          {name:'TienDat***', coins:51, tier:'VIP 2'},
+          {name:'Player 01', coins:7, tier:'VIP 2', isMe:true}
+        ];
+      }
       html += renderLeaderboardList(leaders);
     } else {
       // BXH VIP
 
       var isVipEligible = currentUser && currentUser.tier >= 3;
-      if (!isVipEligible) {
+      if (!isVipEligible && window.lbWeek === 'current') {
         html += '<div class="lb-lock-card">';
         html += '<div class="lb-lock-icon">' + lcIcon('lock','muted') + '</div>';
         html += '<div class="lb-lock-title">Yêu cầu VIP 3 trở lên</div>';
@@ -11896,18 +11979,34 @@ function renderMissionContent() {
         html += '</div>';
       }
 
-      var vipLeaders = [
-        {name:'VuongGia***', coins:1850, tier:'VIP 5', mult:'x2.0'},
-        {name:'HoangLong***', coins:1420, tier:'VIP 4', mult:'x1.5'},
-        {name:'MinhTuan***', coins:980, tier:'VIP 3', mult:'x1.2'},
-        {name:'DuyAn***', coins:760, tier:'VIP 4', mult:'x1.5'},
-        {name:'QuocBao***', coins:640, tier:'VIP 3', mult:'x1.2'},
-        {name:'ThanhHa***', coins:520, tier:'VIP 3', mult:'x1.2'},
-        {name:'BaoKhanh***', coins:450, tier:'VIP 4', mult:'x1.5'},
-        {name:'HaiDang***', coins:380, tier:'VIP 3', mult:'x1.2'},
-        {name:'MinhDuc***', coins:310, tier:'VIP 5', mult:'x2.0'},
-        {name:'TuanAnh***', coins:270, tier:'VIP 3', mult:'x1.2'}
-      ];
+      var vipLeaders;
+      if (window.lbWeek === 'prev') {
+        vipLeaders = [
+          {name:'PhucLong***', coins:2100, tier:'VIP 5', mult:'x2.0'},
+          {name:'VuongGia***', coins:1780, tier:'VIP 5', mult:'x2.0'},
+          {name:'HoangLong***', coins:1350, tier:'VIP 4', mult:'x1.5'},
+          {name:'DuyAn***', coins:890, tier:'VIP 4', mult:'x1.5'},
+          {name:'MinhTuan***', coins:720, tier:'VIP 3', mult:'x1.2'},
+          {name:'QuocBao***', coins:580, tier:'VIP 3', mult:'x1.2'},
+          {name:'ThanhHa***', coins:490, tier:'VIP 3', mult:'x1.2'},
+          {name:'BaoKhanh***', coins:410, tier:'VIP 4', mult:'x1.5'},
+          {name:'HaiDang***', coins:340, tier:'VIP 3', mult:'x1.2'},
+          {name:'MinhDuc***', coins:280, tier:'VIP 5', mult:'x2.0'}
+        ];
+      } else {
+        vipLeaders = [
+          {name:'VuongGia***', coins:1850, tier:'VIP 5', mult:'x2.0'},
+          {name:'HoangLong***', coins:1420, tier:'VIP 4', mult:'x1.5'},
+          {name:'MinhTuan***', coins:980, tier:'VIP 3', mult:'x1.2'},
+          {name:'DuyAn***', coins:760, tier:'VIP 4', mult:'x1.5'},
+          {name:'QuocBao***', coins:640, tier:'VIP 3', mult:'x1.2'},
+          {name:'ThanhHa***', coins:520, tier:'VIP 3', mult:'x1.2'},
+          {name:'BaoKhanh***', coins:450, tier:'VIP 4', mult:'x1.5'},
+          {name:'HaiDang***', coins:380, tier:'VIP 3', mult:'x1.2'},
+          {name:'MinhDuc***', coins:310, tier:'VIP 5', mult:'x2.0'},
+          {name:'TuanAnh***', coins:270, tier:'VIP 3', mult:'x1.2'}
+        ];
+      }
       html += renderLeaderboardList(vipLeaders, true);
 
       // Reward distribution
@@ -11927,20 +12026,22 @@ function renderMissionContent() {
 
     // TnC items
     html += '<div class="lb-tnc-list">';
+    html += '<div class="lb-tnc-item">BXH được chốt và chi thưởng hằng tuần (Thứ 2 - Chủ nhật)</div>';
     html += '<div class="lb-tnc-item">Bảng xếp hạng được cập nhật mỗi 15 phút</div>';
     html += '<div class="lb-tnc-item">Coin tích lũy từ nhiệm vụ, nạp tiền và cược hợp lệ</div>';
-    html += '<div class="lb-tnc-item">BXH VIP yêu cầu hạng VIP 3 trở lên để tham gia</div>';
-    html += '<div class="lb-tnc-item">Giải thưởng được cộng trực tiếp vào tài khoản trong 24h sau khi kết thúc</div>';
+    html += '<div class="lb-tnc-item">VIP 3 trở lên chỉ tham gia BXH VIP, không tham gia BXH Thường</div>';
+    html += '<div class="lb-tnc-item">BXH Thường không áp dụng hệ số nhân VIP</div>';
+    html += '<div class="lb-tnc-item">Giải thưởng được cộng trực tiếp vào tài khoản trong 24h sau khi kết thúc tuần</div>';
     html += '<div class="lb-tnc-item">Mubet có quyền điều chỉnh giải thưởng và điều khoản BXH</div>';
     html += '</div>';
 
     // FAQ
     html += '<div class="lb-faq-list">';
     var faqs = [
-      {q:'Coin được tính như thế nào?', a:'Coin được tích lũy từ hoàn thành nhiệm vụ, nạp tiền và cược hợp lệ. VIP member có hệ số nhân Coin cao hơn.'},
-      {q:'BXH Thường và BXH VIP khác gì?', a:'BXH Thường mở cho tất cả, xếp hạng theo Coin tuần. BXH VIP chỉ dành cho VIP 3+, có hũ thưởng riêng và hệ số nhân VIP.'},
-      {q:'Khi nào nhận được giải thưởng?', a:'Giải thưởng được cộng tự động vào tài khoản trong vòng 24h sau khi kỳ BXH kết thúc.'},
-      {q:'Hệ số nhân VIP là gì?', a:'VIP 3: x1.2, VIP 4: x1.5, VIP 5: x2.0. Hệ số nhân giúp tăng điểm xếp hạng trong BXH VIP.'}
+      {q:'Coin được tính như thế nào?', a:'Coin được tích lũy từ hoàn thành nhiệm vụ, nạp tiền và cược hợp lệ. Trong BXH VIP, Coin được nhân hệ số theo hạng VIP.'},
+      {q:'BXH Thường và BXH VIP khác gì?', a:'BXH Thường dành cho VIP 1-2, xếp hạng theo Coin tuần, không có hệ số nhân. BXH VIP chỉ dành cho VIP 3+, có hũ thưởng riêng và hệ số nhân VIP.'},
+      {q:'Khi nào nhận được giải thưởng?', a:'BXH được chốt mỗi Chủ nhật. Giải thưởng được cộng tự động vào tài khoản trong vòng 24h sau khi kỳ BXH kết thúc.'},
+      {q:'Hệ số nhân VIP là gì?', a:'VIP 3: x1.2, VIP 4: x1.5, VIP 5: x2.0. Hệ số nhân chỉ áp dụng trong BXH VIP, giúp tăng Coin xếp hạng.'}
     ];
     for (var f=0; f<faqs.length; f++) {
       html += '<div class="lb-faq-item" onclick="this.classList.toggle(\'open\')">';
