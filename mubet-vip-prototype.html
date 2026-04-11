@@ -4101,9 +4101,17 @@ img { max-width: 100%; display: block; }
 }
 
 /* Mission Overview */
-.mhub-header { padding: 16px 16px 8px; }
-.mhub-title { font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
-.mhub-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.mhub-header {
+  position: relative; padding: 28px 20px 18px; overflow: hidden; border-radius: 0 0 16px 16px;
+  background: url('Assets/mission-hero-banner.png') center/cover no-repeat;
+}
+.mhub-header::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.6) 100%);
+}
+.mhub-header > * { position: relative; z-index: 1; }
+.mhub-title { font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; text-shadow: 0 2px 8px rgba(0,0,0,.6); }
+.mhub-sub { font-size: 11px; color: rgba(255,255,255,.75); margin-top: 4px; text-shadow: 0 1px 4px rgba(0,0,0,.5); }
 .mhub-reward-strip {
   margin: 8px 16px; padding: 10px 16px; border-radius: 10px;
   background: linear-gradient(90deg, rgba(202,41,48,.12), rgba(255,226,62,.08));
@@ -4489,48 +4497,135 @@ img { max-width: 100%; display: block; }
 .mcoin.sm { width: 14px; height: 14px; vertical-align: -2px; }
 
 /* Featured missions section */
-.mhub-featured { padding: 0 16px 24px; }
+.mhub-featured {
+  padding: 14px 16px 16px; position: relative;
+}
 .mhub-featured-title {
   font-family: Montserrat, sans-serif; font-size: 15px; font-weight: 800;
-  text-transform: uppercase; letter-spacing: .04em; margin-bottom: 10px;
+  text-transform: uppercase; letter-spacing: .04em; margin-bottom: 12px;
   display: flex; align-items: center; gap: 8px;
+  position: relative;
 }
-.mhub-featured-list { display: flex; flex-direction: column; gap: 6px; }
+.mhub-featured-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(202,41,48,.4), transparent);
+}
+.mhub-featured-list { display: flex; flex-direction: column; gap: 8px; }
+.mhub-feat-card.mhub-feat-hidden { display: none; }
+.mhub-featured-list.expanded .mhub-feat-card.mhub-feat-hidden { display: flex; }
+.mhub-feat-expand {
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  width: 100%; padding: 8px; margin-top: 6px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);
+  color: #9aa3b2; font-size: 11px; font-weight: 600; cursor: pointer; transition: all .2s;
+}
+.mhub-feat-expand:hover { border-color: rgba(202,41,48,.3); color: #f5f7fb; }
+.mhub-feat-expand svg { transition: transform .2s; }
+.mhub-featured-list.expanded + .mhub-feat-expand svg,
+.mhub-feat-expand.expanded svg { transform: rotate(180deg); }
+
+/* Card base */
 .mhub-feat-card {
   display: flex; align-items: center; gap: 12px;
-  padding: 10px 12px; border-radius: 12px;
+  padding: 12px 14px; border-radius: 14px;
   background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
-  cursor: pointer; transition: all .2s;
+  cursor: pointer; transition: all .25s ease; position: relative; overflow: hidden;
+  border-left: 3px solid rgba(255,255,255,.1);
 }
-.mhub-feat-card:hover { border-color: rgba(255,255,255,.12); background: rgba(255,255,255,.05); }
+.mhub-feat-card:hover { border-color: rgba(255,255,255,.12); background: rgba(255,255,255,.06); transform: translateX(4px); }
+
+/* Claimable card — hot style */
 .mhub-feat-card.claimable {
-  background: linear-gradient(135deg, rgba(255,68,68,.06), rgba(255,140,0,.04));
-  border-color: rgba(255,68,68,.25);
+  background: linear-gradient(135deg, rgba(255,68,68,.08), rgba(255,140,0,.05));
+  border-color: rgba(255,68,68,.2);
+  border-left: 3px solid #ff4444;
 }
+.mhub-feat-card.claimable::before {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(255,68,68,.08), transparent 30%);
+  animation: featScanRotate 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes featScanRotate {
+  to { transform: rotate(360deg); }
+}
+
+/* Urgent card accent */
+.mhub-feat-card.feat-urgent { border-left: 3px solid #ff8c00; }
+
+/* Icon */
 .mhub-feat-icon {
-  width: 40px; height: 40px; flex-shrink: 0;
+  width: 42px; height: 42px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(255,255,255,.04); border-radius: 10px;
-  border: 1px solid rgba(255,255,255,.05); font-size: 18px;
+  background: rgba(255,255,255,.05); border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.08); font-size: 18px;
+  animation: featIconPulse 2.5s ease-in-out infinite;
+  position: relative; z-index: 1;
 }
-.mhub-feat-card.claimable .mhub-feat-icon { background: rgba(255,68,68,.08); border-color: rgba(255,68,68,.15); }
-.mhub-feat-info { flex: 1; min-width: 0; }
+.mhub-feat-card:nth-child(2) .mhub-feat-icon { animation-delay: .5s; }
+.mhub-feat-card:nth-child(3) .mhub-feat-icon { animation-delay: 1s; }
+.mhub-feat-card:nth-child(4) .mhub-feat-icon { animation-delay: 1.5s; }
+.mhub-feat-card:nth-child(5) .mhub-feat-icon { animation-delay: 2s; }
+@keyframes featIconPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(202,41,48,0); transform: scale(1); }
+  50% { box-shadow: 0 0 12px 2px rgba(202,41,48,.3); transform: scale(1.05); }
+}
+.mhub-feat-card.claimable .mhub-feat-icon {
+  background: rgba(255,68,68,.12); border-color: rgba(255,68,68,.25);
+  animation-name: featIconPulseHot;
+}
+@keyframes featIconPulseHot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,68,68,0); transform: scale(1); }
+  50% { box-shadow: 0 0 14px 4px rgba(255,68,68,.4); transform: scale(1.08); }
+}
+
+/* Info */
+.mhub-feat-info { flex: 1; min-width: 0; position: relative; z-index: 1; }
 .mhub-feat-name { font-size: 13px; font-weight: 700; }
 .mhub-feat-meta { font-size: 10px; color: var(--muted); margin-top: 3px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .mhub-feat-source {
-  display: inline-flex; padding: 1px 6px; border-radius: 3px; font-size: 9px; font-weight: 600;
-  background: rgba(255,255,255,.06); color: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.05);
+  display: inline-flex; padding: 2px 7px; border-radius: 4px; font-size: 9px; font-weight: 700;
+  background: rgba(255,255,255,.06); color: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.06);
+  letter-spacing: .02em;
 }
-.mhub-feat-time { color: var(--primary-300); font-weight: 600; }
-.mhub-feat-time.urgent { color: #ff6b6b; }
-.mhub-feat-progress { margin-top: 5px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden; }
-.mhub-feat-progress-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #ff8c00, #ffc844); }
-.mhub-feat-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.mhub-feat-time { color: var(--primary-300); font-weight: 600; display: inline-flex; align-items: center; gap: 2px; }
+.mhub-feat-time.urgent { color: #ff6b6b; animation: featUrgentBlink 1.5s ease-in-out infinite; }
+@keyframes featUrgentBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+/* Progress bar */
+.mhub-feat-progress { margin-top: 6px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden; position: relative; }
+.mhub-feat-progress-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, #ff8c00, #ffc844);
+  position: relative;
+}
+.mhub-feat-progress-fill::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent);
+  animation: featProgressShimmer 2s ease-in-out infinite;
+}
+@keyframes featProgressShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+/* Right / reward */
+.mhub-feat-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; position: relative; z-index: 1; }
 .mhub-feat-reward { font-size: 11px; font-weight: 700; color: var(--tertiary-400); white-space: nowrap; }
 .mhub-feat-claim-reward { font-size: 10px; color: var(--text-3); margin-bottom: 2px; }
 .mhub-feat-claim-btn {
-  padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700;
+  padding: 5px 14px; border-radius: 8px; font-size: 11px; font-weight: 700;
   background: linear-gradient(180deg, #de2e36, #b71c1c); color: #fff; border: none; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(202,41,48,.35); transition: all .2s;
+  animation: featClaimPulse 2s ease-in-out infinite;
+}
+.mhub-feat-claim-btn:hover { transform: scale(1.05); box-shadow: 0 3px 12px rgba(202,41,48,.5); }
+@keyframes featClaimPulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(202,41,48,.35); }
+  50% { box-shadow: 0 2px 14px rgba(202,41,48,.55); }
 }
 
 .mission-header-bar {
@@ -5327,6 +5422,15 @@ img { max-width: 100%; display: block; }
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: .5; transform: scale(.8); }
 }
+.lc-hero-back {
+  position: absolute; top: 12px; left: 12px; z-index: 5;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(0,0,0,.45); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; cursor: pointer; transition: all .2s;
+}
+.lc-hero-back:hover { background: rgba(0,0,0,.65); border-color: rgba(255,255,255,.25); }
 .lc-hero-live-tag {
   display: inline-flex; align-items: center; gap: 4px;
   position: absolute; top: 12px; right: 12px; z-index: 2;
@@ -7595,6 +7699,13 @@ function router() {
     showLiveChallengeFullPage();
   } else if (hash === '/mission/worldcup') {
     showWorldCupPage();
+  } else if (hash === '/redeem' || hash.startsWith('/redeem/')) {
+    var redeemSub = hash.replace('/redeem/', '') || 'hub';
+    if (redeemSub === '/redeem') redeemSub = 'hub';
+    showMissionView();
+    switchMissionNav('redeem');
+    redeemActiveView = redeemSub;
+    renderMissionContent();
   } else if (hash.startsWith('/onboarding/')) {
     showOnboardingPage(hash.replace('/onboarding/', ''));
   } else if (hash === '/account' || hash.startsWith('/account/')) {
@@ -10989,28 +11100,24 @@ function showLiveChallengeFullPage() {
   if (headerBar) headerBar.style.display = '';
   if (missionNav) missionNav.style.display = '';
 
-  // Update header
-  if (headerBar) {
-    var titleEl = headerBar.querySelector('.mission-header-title');
-    if (titleEl) titleEl.textContent = 'Live Challenge';
-    var backBtn = headerBar.querySelector('.mission-back-btn');
-    if (backBtn) backBtn.setAttribute('onclick', "navigateTo('/mission')");
-  }
+  // Hide header bar for LC — back button goes inside hero
+  if (headerBar) headerBar.style.display = 'none';
 
   var container = document.getElementById('missionContent');
   var html = '';
 
+  var lcEarnedCoins = MOCK_LC_MISSIONS.filter(function(m) { return m.status === 'completed' || m.status === 'claimable'; }).reduce(function(s,m) { return s + (m.points || m.coin || 0); }, 0);
+  var lcTotalCoins = MOCK_LC_MISSIONS.reduce(function(s,m) { return s + (m.points || m.coin || 0); }, 0);
+
   // Season hero (full version)
-  html += '<div class="lc-hero" style="margin:16px;border-radius:20px;padding:28px;">';
+  html += '<div class="lc-hero" style="margin:16px;border-radius:20px;padding:28px;position:relative;">';
   html += '<div class="lc-hero-border-glow"></div>';
+  html += '<button class="lc-hero-back" onclick="navigateTo(\'/mission\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="20" height="20"><path d="M15 18l-6-6 6-6"/></svg></button>';
   html += '<div class="lc-hero-live-tag"><span class="lc-hero-live-dot"></span>LIVE</div>';
-  html += '<div class="lc-hero-badge">' + lcIcon('fire','neon-red') + ' MÙA 4 — ĐANG DIỄN RA</div>';
   html += '<div class="lc-hero-title" style="font-size:24px;">LIVE CHALLENGE</div>';
-  html += '<div class="lc-hero-sub">Sự kiện 28 ngày • Tháng 4/2026</div>';
-  html += '<div class="lc-hero-phase"><span class="lc-hero-phase-dot"></span> Phase 2 — Engagement (Ngày 9-20)</div>';
-  html += '<div class="lc-hero-stats" style="gap:28px;">';
-  html += '<div class="lc-hero-stat"><div class="lc-hero-stat-value" style="font-size:20px;">19</div><div class="lc-hero-stat-label">Ngày còn lại</div></div>';
+  html += '<div class="lc-hero-stats" style="gap:24px;">';
   html += '<div class="lc-hero-stat"><div class="lc-hero-stat-value" style="font-size:20px;">5/12</div><div class="lc-hero-stat-label">Thử thách</div></div>';
+  html += '<div class="lc-hero-stat"><div class="lc-hero-stat-value" style="font-size:20px;">' + lcEarnedCoins + '/' + lcTotalCoins + ' <span class="mcoin sm"></span></div><div class="lc-hero-stat-label">Coin</div></div>';
   html += '<div class="lc-hero-stat"><div class="lc-hero-stat-value" style="font-size:20px;">2</div><div class="lc-hero-stat-label">Thưởng chờ nhận</div></div>';
   html += '</div>';
   html += '<div class="lc-hero-countdown"><span class="lc-countdown-label">Kết thúc sau:</span> <span class="lc-countdown-timer">19d 12h 30m</span></div>';
@@ -11199,7 +11306,7 @@ function renderRedeemHub() {
   html += '<div class="redeem-hub-grid">';
 
   // 1. Cửa hàng Loyalty
-  html += '<div class="redeem-hub-card" onclick="switchRedeemView(\'shop\')">';
+  html += '<div class="redeem-hub-card" onclick="navigateTo(\'/redeem/shop\')">';
   html += '<div class="redeem-hub-icon"><img src="Assets/hub-shop.png" alt=""/></div>';
   html += '<div class="redeem-hub-info">';
   html += '<div class="redeem-hub-name">Cửa Hàng Loyalty</div>';
@@ -11210,7 +11317,7 @@ function renderRedeemHub() {
   html += '</div>';
 
   // 2. Vòng quay may mắn
-  html += '<div class="redeem-hub-card" onclick="switchRedeemView(\'spin\')">';
+  html += '<div class="redeem-hub-card" onclick="navigateTo(\'/redeem/spin\')">';
   html += '<div class="redeem-hub-icon"><img src="Assets/hub-spin.png" alt=""/></div>';
   html += '<div class="redeem-hub-info">';
   html += '<div class="redeem-hub-name">Vòng Quay May Mắn</div>';
@@ -11221,7 +11328,7 @@ function renderRedeemHub() {
   html += '</div>';
 
   // 3. Sưu tầm World Cup
-  html += '<div class="redeem-hub-card" onclick="switchRedeemView(\'collect\')">';
+  html += '<div class="redeem-hub-card" onclick="navigateTo(\'/redeem/collect\')">';
   html += '<div class="redeem-hub-icon"><img src="Assets/hub-collect.png" alt=""/></div>';
   html += '<div class="redeem-hub-info">';
   html += '<div class="redeem-hub-name">Sưu Tầm Đội Hình</div>';
@@ -11232,7 +11339,7 @@ function renderRedeemHub() {
   html += '</div>';
 
   // 4. Kho quà VIP
-  html += '<div class="redeem-hub-card redeem-hub-vip" onclick="switchRedeemView(\'vip\')">';
+  html += '<div class="redeem-hub-card redeem-hub-vip" onclick="navigateTo(\'/redeem/vip\')">';
   html += '<div class="redeem-hub-icon"><img src="Assets/hub-vip.png" alt=""/></div>';
   html += '<div class="redeem-hub-info">';
   html += '<div class="redeem-hub-name" style="color:var(--tertiary-300)">Kho Quà VIP</div>';
@@ -11277,7 +11384,7 @@ function renderRedeemShop() {
   html += '<div class="redeem-sub-banner-title">Cửa Hàng Loyalty</div>';
   html += '<div class="redeem-sub-banner-desc">Đổi Coin theo tỉ lệ cố định</div>';
   html += '</div>';
-  html += '<button class="redeem-sub-banner-back" onclick="switchRedeemView(\'hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
+  html += '<button class="redeem-sub-banner-back" onclick="navigateTo(\'/redeem/hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
   html += '</div>';
   html += '<div style="padding:0 16px;">';
 
@@ -11321,7 +11428,7 @@ function renderRedeemSpin() {
   html += '<div class="redeem-sub-banner-title">Vòng Quay May Mắn</div>';
   html += '<div class="redeem-sub-banner-desc">Dùng Coin để quay, nhận thưởng ngẫu nhiên</div>';
   html += '</div>';
-  html += '<button class="redeem-sub-banner-back" onclick="switchRedeemView(\'hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
+  html += '<button class="redeem-sub-banner-back" onclick="navigateTo(\'/redeem/hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
   html += '</div>';
   html += '<div style="padding:0 16px;">';
 
@@ -11382,7 +11489,7 @@ function renderRedeemCollect() {
   html += '<div class="redeem-sub-banner-title">Sưu Tầm Đội Hình</div>';
   html += '<div class="redeem-sub-banner-desc">World Cup 2026 — Ghép đủ 11 vị trí</div>';
   html += '</div>';
-  html += '<button class="redeem-sub-banner-back" onclick="switchRedeemView(\'hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
+  html += '<button class="redeem-sub-banner-back" onclick="navigateTo(\'/redeem/hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
   html += '</div>';
   html += '<div style="padding:0 16px;">';
   html += '<div style="font-size:12px;color:var(--muted);margin-bottom:6px;margin-top:12px;">Ghép đủ 11 vị trí nhận <strong style="color:var(--tertiary-400)">5.000.000đ</strong></div>';
@@ -11476,7 +11583,7 @@ function renderRedeemVip() {
   html += '<div class="redeem-sub-banner-title">Kho Quà VIP</div>';
   html += '<div class="redeem-sub-banner-desc">Phần thưởng giá trị cao — Yêu cầu VIP 3+</div>';
   html += '</div>';
-  html += '<button class="redeem-sub-banner-back" onclick="switchRedeemView(\'hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
+  html += '<button class="redeem-sub-banner-back" onclick="navigateTo(\'/redeem/hub\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>';
   html += '</div>';
   html += '<div style="padding:0 16px;">';
 
@@ -11681,6 +11788,16 @@ function toggleRewardStrip() {
   }
 }
 
+function toggleFeaturedMissions(btn) {
+  var list = btn.previousElementSibling;
+  if (!list) return;
+  var expanded = list.classList.toggle('expanded');
+  btn.classList.toggle('expanded', expanded);
+  btn.innerHTML = expanded
+    ? 'Thu gọn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="14" height="14"><path d="M6 9l6 6 6-6"/></svg>'
+    : 'Xem thêm (2) <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="14" height="14"><path d="M6 9l6 6 6-6"/></svg>';
+}
+
 function renderLeaderboardList(leaders, showMult) {
   var h = '<div class="lb-list">';
   for (var j=0; j<leaders.length; j++) {
@@ -11715,14 +11832,59 @@ function renderMissionOverview() {
   html += '</div>';
   html += '<div class="mhub-reward-list" id="rewardList">';
   html += '<div class="mhub-reward-item">';
-  html += '<div class="mhub-reward-item-left"><div class="mhub-reward-item-icon" style="background:rgba(255,140,0,.12)">🎁</div><div><div class="mhub-reward-item-name">Hộp quà + 20 Coin</div><div class="mhub-reward-item-source">Cuối tuần bùng nổ</div></div></div>';
+  html += '<div class="mhub-reward-item-left"><div class="mhub-reward-item-icon" style="background:rgba(255,140,0,.12)">' + lcIcon('gift','neon-gold') + '</div><div><div class="mhub-reward-item-name">Hộp quà + 20 Coin</div><div class="mhub-reward-item-source">Cuối tuần bùng nổ</div></div></div>';
   html += '<button class="mhub-reward-claim" onclick="event.stopPropagation()">Nhận</button>';
   html += '</div>';
   html += '<div class="mhub-reward-item">';
-  html += '<div class="mhub-reward-item-left"><div class="mhub-reward-item-icon" style="background:rgba(74,125,254,.12)">🏆</div><div><div class="mhub-reward-item-name">10 Coin</div><div class="mhub-reward-item-source">Xác minh tài khoản</div></div></div>';
+  html += '<div class="mhub-reward-item-left"><div class="mhub-reward-item-icon" style="background:rgba(74,125,254,.12)">' + lcIcon('trophy','neon-blue') + '</div><div><div class="mhub-reward-item-name">10 Coin</div><div class="mhub-reward-item-source">Xác minh tài khoản</div></div></div>';
   html += '<button class="mhub-reward-claim" onclick="event.stopPropagation()">Nhận</button>';
   html += '</div>';
   html += '</div>';
+
+  // Featured missions
+  html += '<div class="mhub-featured">';
+  html += '<div class="mhub-featured-title">' + lcIcon('fire','neon-red') + ' Nhiệm vụ nổi bật</div>';
+  html += '<div class="mhub-featured-list">';
+
+  var mcoinImg = '<span class="mcoin sm"></span>';
+  var feats = [
+    {name:'Cuối tuần bùng nổ', source:'Live Challenge', reward:'Hộp quà + 20 ' + mcoinImg, iconKey:'lightning', neon:'neon-red', claimable:true},
+    {name:'Chuỗi 3 ngày', source:'Live Challenge', reward:'Hộp quà nhỏ', iconKey:'fire', neon:'neon-red', time:'Còn 1 ngày', urgent:true, pct:66},
+    {name:'Vượt hôm qua', source:'Live Challenge', reward:'25 ' + mcoinImg + ' + Badge', iconKey:'chart_up', neon:'neon-teal', time:'Hôm nay', urgent:true, pct:75},
+    {name:'Đặt cược đầu tiên', source:'Tân thủ', reward:'+10 ' + mcoinImg, iconKey:'target', neon:'neon-blue'},
+    {name:'Cược hôm nay 500K', source:'Chiến binh • Ngày', reward:'100K', iconKey:'swords', neon:'neon-red', pct:60}
+  ];
+
+  var visibleCount = 3;
+  for (var i = 0; i < feats.length; i++) {
+    var f = feats[i];
+    var hiddenClass = i >= visibleCount ? ' mhub-feat-hidden' : '';
+    var urgentClass = f.urgent ? ' feat-urgent' : '';
+    html += '<div class="mhub-feat-card' + (f.claimable ? ' claimable' : '') + urgentClass + hiddenClass + '">';
+    html += '<div class="mhub-feat-icon">' + (f.iconKey ? lcIcon(f.iconKey, f.neon) : f.icon) + '</div>';
+    html += '<div class="mhub-feat-info">';
+    html += '<div class="mhub-feat-name">' + f.name + '</div>';
+    html += '<div class="mhub-feat-meta">';
+    html += '<span class="mhub-feat-source">' + f.source + '</span>';
+    if (f.time) html += '<span class="mhub-feat-time' + (f.urgent ? ' urgent' : '') + '">' + lcIcon('timer','neon-orange') + ' ' + f.time + '</span>';
+    html += '</div>';
+    if (f.pct) html += '<div class="mhub-feat-progress"><div class="mhub-feat-progress-fill" style="width:' + f.pct + '%"></div></div>';
+    html += '</div>';
+    html += '<div class="mhub-feat-right">';
+    if (f.claimable) {
+      html += '<div class="mhub-feat-claim-reward">' + lcIcon('gift','neon-gold') + ' ' + f.reward + '</div>';
+      html += '<button class="mhub-feat-claim-btn" onclick="event.stopPropagation()">Nhận</button>';
+    } else {
+      html += '<div class="mhub-feat-reward">' + lcIcon('gift','neon-gold') + ' ' + f.reward + '</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+  }
+  html += '</div>'; // close .mhub-featured-list
+  if (feats.length > visibleCount) {
+    html += '<button class="mhub-feat-expand" onclick="toggleFeaturedMissions(this)">Xem thêm (' + (feats.length - visibleCount) + ') <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="14" height="14"><path d="M6 9l6 6 6-6"/></svg></button>';
+  }
+  html += '</div>'; // close .mhub-featured
 
   html += '<div class="mhub-cards">';
 
@@ -11812,45 +11974,6 @@ function renderMissionOverview() {
   html += '</div>';
   html += '<button class="checkin-claim-btn" onclick="event.stopPropagation()">Điểm danh hôm nay</button>';
   html += '</div>';
-
-  // Featured missions
-  html += '<div class="mhub-featured">';
-  html += '<div class="mhub-featured-title">' + lcIcon('fire','neon-red') + ' Nhiệm vụ nổi bật</div>';
-  html += '<div class="mhub-featured-list">';
-
-  var mcoinImg = '<span class="mcoin sm"></span>';
-  var feats = [
-    {name:'Cuối tuần bùng nổ', source:'Live Challenge', reward:'Hộp quà + 20 ' + mcoinImg, iconKey:'lightning', neon:'neon-red', claimable:true},
-    {name:'Chuỗi 3 ngày', source:'Live Challenge', reward:'Hộp quà nhỏ', iconKey:'fire', neon:'neon-red', time:'Còn 1 ngày', urgent:true, pct:66},
-    {name:'Vượt hôm qua', source:'Live Challenge', reward:'25 ' + mcoinImg + ' + Badge', iconKey:'chart_up', neon:'neon-teal', time:'Hôm nay', urgent:true, pct:75},
-    {name:'Đặt cược đầu tiên', source:'Tân thủ', reward:'+10 ' + mcoinImg, iconKey:'target', neon:'neon-blue'},
-    {name:'Cược hôm nay 500K', source:'Chiến binh • Ngày', reward:'100K', iconKey:'swords', neon:'neon-red', pct:60}
-  ];
-
-  for (var i = 0; i < feats.length; i++) {
-    var f = feats[i];
-    html += '<div class="mhub-feat-card' + (f.claimable ? ' claimable' : '') + '">';
-    html += '<div class="mhub-feat-icon">' + (f.iconKey ? lcIcon(f.iconKey, f.neon) : f.icon) + '</div>';
-    html += '<div class="mhub-feat-info">';
-    html += '<div class="mhub-feat-name">' + f.name + '</div>';
-    html += '<div class="mhub-feat-meta">';
-    html += '<span class="mhub-feat-source">' + f.source + '</span>';
-    if (f.time) html += '<span class="mhub-feat-time' + (f.urgent ? ' urgent' : '') + '">' + lcIcon('timer','neon-orange') + ' ' + f.time + '</span>';
-    html += '</div>';
-    if (f.pct) html += '<div class="mhub-feat-progress"><div class="mhub-feat-progress-fill" style="width:' + f.pct + '%"></div></div>';
-    html += '</div>';
-    html += '<div class="mhub-feat-right">';
-    if (f.claimable) {
-      html += '<div class="mhub-feat-claim-reward">' + lcIcon('gift','neon-gold') + ' ' + f.reward + '</div>';
-      html += '<button class="mhub-feat-claim-btn" onclick="event.stopPropagation()">Nhận</button>';
-    } else {
-      html += '<div class="mhub-feat-reward">' + lcIcon('gift','neon-gold') + ' ' + f.reward + '</div>';
-    }
-    html += '</div>';
-    html += '</div>';
-  }
-
-  html += '</div></div>'; // .mhub-featured
 
   container.innerHTML = html;
 }
@@ -13981,8 +14104,7 @@ function onbHubAction(id) {
       case 'redeem-collect':
       case 'redeem-vip':
         var subView = route.replace('redeem-', '');
-        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
-        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView(subView); }, 100);
+        navigateTo('/redeem/' + subView);
         break;
       default:
         console.log('[DevTools] Unknown route:', route);

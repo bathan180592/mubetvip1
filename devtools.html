@@ -64,6 +64,29 @@ section { background: #11131c; border: 1px solid rgba(255,255,255,.08); border-r
 .sitemap-link.sl-sub { color: #80e8a8; }
 .sitemap-divider { height: 1px; background: rgba(255,255,255,.06); margin: 12px 0; }
 
+/* Sitemap tree */
+.sitemap-tree { padding-left: 0; }
+.sitemap-branch { margin-bottom: 10px; }
+.sitemap-branch-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  color: #636e80; margin-bottom: 6px; padding-left: 2px; display: flex; align-items: center; gap: 6px;
+}
+.sitemap-branch-label::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.sitemap-branch-label.br-main::before { background: #ffe23e; }
+.sitemap-branch-label.br-mission::before { background: #7eb8ff; }
+.sitemap-branch-label.br-redeem::before { background: #80e8a8; }
+.sitemap-branch-label.br-lc::before { background: #ff6b6b; }
+.sitemap-branch-label.br-wc::before { background: #4ecdc4; }
+.sitemap-branch-label.br-onb::before { background: #c084fc; }
+.sitemap-branch-label.br-account::before { background: #fb923c; }
+.sitemap-children { padding-left: 16px; border-left: 2px solid rgba(255,255,255,.06); margin-left: 5px; display: flex; flex-direction: column; gap: 4px; }
+.sitemap-children .sitemap-link { display: block; width: fit-content; position: relative; }
+.sitemap-children .sitemap-link::before {
+  content: ''; position: absolute; left: -16px; top: 50%;
+  width: 12px; height: 0; border-top: 1px solid rgba(255,255,255,.1);
+}
+.sitemap-nest { margin-top: 6px; margin-bottom: 6px; }
+
 /* Onboarding Journey */
 .journey-group { margin-bottom: 16px; }
 .journey-label {
@@ -92,95 +115,100 @@ section { background: #11131c; border: 1px solid rgba(255,255,255,.08); border-r
 <section>
   <h2>&#128506; Sitemap — All Routes</h2>
 
-  <div class="sitemap-group">
-    <div class="sitemap-group-title">Main Views</div>
-    <div class="sitemap-links">
-      <a class="sitemap-link sl-js" onclick="navTo('lobby')"><span class="sl-icon">🏠</span>Lobby</a>
-      <a class="sitemap-link sl-js" onclick="navTo('vipclub')"><span class="sl-icon">👑</span>VIP Club</a>
+  <div class="sitemap-tree">
+
+    <!-- Main Views -->
+    <div class="sitemap-branch">
+      <div class="sitemap-branch-label br-main">Main Views</div>
+      <div class="sitemap-children">
+        <a class="sitemap-link sl-js" onclick="navTo('lobby')"><span class="sl-icon">🏠</span>Lobby</a>
+        <a class="sitemap-link sl-js" onclick="navTo('vipclub')"><span class="sl-icon">👑</span>VIP Club</a>
+      </div>
     </div>
-  </div>
 
-  <div class="sitemap-divider"></div>
+    <div class="sitemap-divider"></div>
 
-  <div class="sitemap-group">
-    <div class="sitemap-group-title">Mission</div>
-    <div class="sitemap-links">
-      <a class="sitemap-link sl-hash" onclick="navTo('#/mission')"><span class="sl-icon">🎯</span>Mission Hub</a>
-      <a class="sitemap-link sl-js" onclick="navTo('mission-tab-missions')"><span class="sl-icon">📋</span>Tab: Missions</a>
-      <a class="sitemap-link sl-js" onclick="navTo('mission-tab-redeem')"><span class="sl-icon">🎁</span>Tab: Redeem</a>
-      <a class="sitemap-link sl-js" onclick="navTo('mission-tab-leaderboard')"><span class="sl-icon">🏆</span>Tab: Leaderboard</a>
+    <!-- Mission -->
+    <div class="sitemap-branch">
+      <div class="sitemap-branch-label br-mission">Mission — #/mission</div>
+      <div class="sitemap-children">
+        <a class="sitemap-link sl-hash" onclick="navTo('#/mission')"><span class="sl-icon">🎯</span>Mission Hub</a>
+        <a class="sitemap-link sl-js" onclick="navTo('mission-tab-missions')"><span class="sl-icon">📋</span>Tab: Missions</a>
+        <a class="sitemap-link sl-js" onclick="navTo('mission-tab-redeem')"><span class="sl-icon">🎁</span>Tab: Redeem</a>
+        <a class="sitemap-link sl-js" onclick="navTo('mission-tab-leaderboard')"><span class="sl-icon">🏆</span>Tab: Leaderboard</a>
+
+        <!-- Redeem nested -->
+        <div class="sitemap-nest">
+          <div class="sitemap-branch-label br-redeem">Redeem — #/redeem/*</div>
+          <div class="sitemap-children">
+            <a class="sitemap-link sl-sub" onclick="navTo('#/redeem/hub')"><span class="sl-icon">🏪</span>Hub</a>
+            <a class="sitemap-link sl-sub" onclick="navTo('#/redeem/shop')"><span class="sl-icon">🛍️</span>Shop</a>
+            <a class="sitemap-link sl-sub" onclick="navTo('#/redeem/spin')"><span class="sl-icon">🎰</span>Spin</a>
+            <a class="sitemap-link sl-sub" onclick="navTo('#/redeem/collect')"><span class="sl-icon">📦</span>Collect</a>
+            <a class="sitemap-link sl-sub" onclick="navTo('#/redeem/vip')"><span class="sl-icon">💎</span>VIP Shop</a>
+          </div>
+        </div>
+
+        <!-- Live Challenge nested -->
+        <div class="sitemap-nest">
+          <div class="sitemap-branch-label br-lc">Live Challenge — #/mission/live-challenge/*</div>
+          <div class="sitemap-children">
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge')"><span class="sl-icon">⚡</span>Live Challenge</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/missions')"><span class="sl-icon">📋</span>Missions</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/mission/1')"><span class="sl-icon">📝</span>Mission Detail</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rewards')"><span class="sl-icon">🎁</span>Rewards</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/milestones')"><span class="sl-icon">🏅</span>Milestones</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/leaderboard')"><span class="sl-icon">🏆</span>Leaderboard</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rules')"><span class="sl-icon">📖</span>Rules</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/history')"><span class="sl-icon">📜</span>History</a>
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/end-season')"><span class="sl-icon">🏁</span>End Season</a>
+          </div>
+        </div>
+
+        <!-- World Cup nested -->
+        <div class="sitemap-nest">
+          <div class="sitemap-branch-label br-wc">World Cup — #/mission/worldcup</div>
+          <div class="sitemap-children">
+            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/worldcup')"><span class="sl-icon">⚽</span>World Cup</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="sitemap-divider"></div>
+    <div class="sitemap-divider"></div>
 
-  <div class="sitemap-group">
-    <div class="sitemap-group-title">Redeem Sub-Views</div>
-    <div class="sitemap-links">
-      <a class="sitemap-link sl-sub" onclick="navTo('redeem-hub')"><span class="sl-icon">🏪</span>Hub</a>
-      <a class="sitemap-link sl-sub" onclick="navTo('redeem-shop')"><span class="sl-icon">🛍️</span>Shop</a>
-      <a class="sitemap-link sl-sub" onclick="navTo('redeem-spin')"><span class="sl-icon">🎰</span>Spin</a>
-      <a class="sitemap-link sl-sub" onclick="navTo('redeem-collect')"><span class="sl-icon">📦</span>Collect</a>
-      <a class="sitemap-link sl-sub" onclick="navTo('redeem-vip')"><span class="sl-icon">💎</span>VIP Shop</a>
+    <!-- Onboarding -->
+    <div class="sitemap-branch">
+      <div class="sitemap-branch-label br-onb">Onboarding — #/onboarding/*</div>
+      <div class="sitemap-children">
+        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/welcome')"><span class="sl-icon">👋</span>Welcome</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/login')"><span class="sl-icon">🔑</span>Login</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/offer-confirm')"><span class="sl-icon">✅</span>Offer Confirm</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/offer-select')"><span class="sl-icon">🎯</span>Offer Select</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit')"><span class="sl-icon">💰</span>Deposit</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit-confirm')"><span class="sl-icon">🏦</span>Deposit Confirm</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit-success')"><span class="sl-icon">🎉</span>Success</a>
+      </div>
     </div>
-  </div>
 
-  <div class="sitemap-divider"></div>
+    <div class="sitemap-divider"></div>
 
-  <div class="sitemap-group">
-    <div class="sitemap-group-title">Live Challenge</div>
-    <div class="sitemap-links">
-      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge')"><span class="sl-icon">⚡</span>Live Challenge</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/missions')"><span class="sl-icon">📋</span>LC Missions</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/mission/1')"><span class="sl-icon">📝</span>LC Mission Detail</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rewards')"><span class="sl-icon">🎁</span>LC Rewards</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/milestones')"><span class="sl-icon">🏅</span>LC Milestones</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/leaderboard')"><span class="sl-icon">🏆</span>LC Leaderboard</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rules')"><span class="sl-icon">📖</span>LC Rules</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/history')"><span class="sl-icon">📜</span>LC History</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/end-season')"><span class="sl-icon">🏁</span>LC End Season</a>
+    <!-- Account -->
+    <div class="sitemap-branch">
+      <div class="sitemap-branch-label br-account">Account — #/account/*</div>
+      <div class="sitemap-children">
+        <a class="sitemap-link sl-hash" onclick="navTo('#/account')"><span class="sl-icon">👤</span>Account</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/account/my-promotions')"><span class="sl-icon">🎫</span>My Promotions</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/account/deposit')"><span class="sl-icon">💰</span>Deposit</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/account/withdraw')"><span class="sl-icon">💸</span>Withdraw</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/account/transaction-history')"><span class="sl-icon">📊</span>Transaction History</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/account/bet-history')"><span class="sl-icon">🎲</span>Bet History</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/account/gift-code')"><span class="sl-icon">🎟️</span>Gift Code</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/account/bank-info')"><span class="sl-icon">🏦</span>Bank Info</a>
+        <a class="sitemap-link sl-hash" onclick="navTo('#/account/my-profile')"><span class="sl-icon">✏️</span>My Profile</a>
+      </div>
     </div>
-  </div>
 
-  <div class="sitemap-divider"></div>
-
-  <div class="sitemap-group">
-    <div class="sitemap-group-title">World Cup</div>
-    <div class="sitemap-links">
-      <a class="sitemap-link sl-hash" onclick="navTo('#/mission/worldcup')"><span class="sl-icon">⚽</span>World Cup</a>
-    </div>
-  </div>
-
-  <div class="sitemap-divider"></div>
-
-  <div class="sitemap-group">
-    <div class="sitemap-group-title">Onboarding</div>
-    <div class="sitemap-links">
-      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/welcome')"><span class="sl-icon">👋</span>Welcome</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/login')"><span class="sl-icon">🔑</span>Login</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/offer-confirm')"><span class="sl-icon">✅</span>Offer Confirm</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/offer-select')"><span class="sl-icon">🎯</span>Offer Select</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit')"><span class="sl-icon">💰</span>Deposit</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit-confirm')"><span class="sl-icon">🏦</span>Deposit Confirm</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit-success')"><span class="sl-icon">🎉</span>Success</a>
-    </div>
-  </div>
-
-  <div class="sitemap-divider"></div>
-
-  <div class="sitemap-group">
-    <div class="sitemap-group-title">Account</div>
-    <div class="sitemap-links">
-      <a class="sitemap-link sl-hash" onclick="navTo('#/account')"><span class="sl-icon">👤</span>Account</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/account/my-promotions')"><span class="sl-icon">🎫</span>My Promotions</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/account/deposit')"><span class="sl-icon">💰</span>Deposit</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/account/withdraw')"><span class="sl-icon">💸</span>Withdraw</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/account/transaction-history')"><span class="sl-icon">📊</span>Transaction History</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/account/bet-history')"><span class="sl-icon">🎲</span>Bet History</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/account/gift-code')"><span class="sl-icon">🎟️</span>Gift Code</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/account/bank-info')"><span class="sl-icon">🏦</span>Bank Info</a>
-      <a class="sitemap-link sl-hash" onclick="navTo('#/account/my-profile')"><span class="sl-icon">✏️</span>My Profile</a>
-    </div>
   </div>
 
   <div class="status" id="navStatus" style="margin-top:12px">Click a route to navigate the prototype in another tab.</div>
@@ -515,24 +543,12 @@ const NAV_LISTENER_CODE = `
         if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('leaderboard'); }
         break;
       case 'redeem-hub':
-        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
-        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView('hub'); }, 100);
-        break;
       case 'redeem-shop':
-        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
-        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView('shop'); }, 100);
-        break;
       case 'redeem-spin':
-        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
-        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView('spin'); }, 100);
-        break;
       case 'redeem-collect':
-        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
-        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView('collect'); }, 100);
-        break;
       case 'redeem-vip':
-        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
-        if (typeof switchRedeemView === 'function') setTimeout(function(){ switchRedeemView('vip'); }, 100);
+        var subView = route.replace('redeem-', '');
+        if (typeof navigateTo === 'function') navigateTo('/redeem/' + subView);
         break;
       default:
         console.log('Unknown devtools route:', route);
