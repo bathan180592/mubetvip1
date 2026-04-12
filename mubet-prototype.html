@@ -1698,12 +1698,12 @@ img { max-width: 100%; display: block; }
 /* Success toast */
 .dep-toast {
   position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
-  z-index: 500; padding: 14px 24px; border-radius: 12px;
+  z-index: 500; padding: 10px 18px; border-radius: 10px;
   background: var(--success-100); color: #fff;
-  font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 700;
+  font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 600;
   box-shadow: 0 4px 20px rgba(5,161,88,.4);
   transition: transform .4s cubic-bezier(.4,0,.2,1);
-  white-space: nowrap;
+  max-width: min(380px, calc(100vw - 40px)); text-align: center; line-height: 1.5;
 }
 .dep-toast.show { transform: translateX(-50%) translateY(0); }
 
@@ -9715,7 +9715,7 @@ function showTransferConfirmation(amount, method) {
       if (window._selectedVoucherId) {
         var v = findVoucherById(window._selectedVoucherId);
         applyVoucherAfterDeposit(window._selectedVoucherId);
-        bonusMsg = v ? ' + Voucher "' + v.title + '" đã áp dụng!' : '';
+        bonusMsg = v ? 'Voucher đã áp dụng thành công!' : '';
         window._selectedVoucherId = null;
       }
       clearInterval(timerInterval);
@@ -9725,7 +9725,7 @@ function showTransferConfirmation(amount, method) {
       // Update floating voucher badge (voucher used → count changes)
       updateFloatingVoucher();
       var toast = document.getElementById('depToast');
-      toast.textContent = 'Nạp thành công ' + formatMoney(amount, false) + '!' + bonusMsg;
+      toast.innerHTML = 'Nạp thành công ' + formatMoney(amount, false) + '!' + (bonusMsg ? '<br>' + bonusMsg.trim() : '');
       toast.classList.add('show');
       setTimeout(function() { toast.classList.remove('show'); }, 4000);
       navigateTo('/account/deposit');
@@ -11316,7 +11316,7 @@ function renderDepositDetailBody(method) {
       if (window._selectedVoucherId) {
         applyVoucherAfterDeposit(window._selectedVoucherId);
         var v = findVoucherById(window._selectedVoucherId);
-        bonusMsg = v ? ' + Voucher "' + v.title + '" đã áp dụng!' : '';
+        bonusMsg = v ? 'Voucher đã áp dụng thành công!' : '';
         window._selectedVoucherId = null;
       }
       this.textContent = 'Nạp Tiền';
@@ -11324,7 +11324,7 @@ function renderDepositDetailBody(method) {
       closeDepositView();
       // Show toast
       const toast = document.getElementById('depToast');
-      toast.textContent = 'Nạp thành công ' + fmtFull(depCurrentAmount) + ' Đ!' + bonusMsg;
+      toast.innerHTML = 'Nạp thành công ' + fmtFull(depCurrentAmount) + ' Đ!' + (bonusMsg ? '<br>' + bonusMsg.trim() : '');
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 4000);
     }, 1500);
