@@ -1498,17 +1498,43 @@ img { max-width: 100%; display: block; }
 }
 .dep-quick-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
+.dep-quick-grid-3 { grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .dep-quick-btn {
-  padding: 10px 4px; border-radius: 10px; font-size: 13px; font-weight: 700;
+  padding: 12px 4px 10px; border-radius: 10px; font-weight: 700;
   font-family: Montserrat, sans-serif;
   background: rgba(255,255,255,.04); border: 1px solid var(--line);
   color: var(--gray-70); cursor: pointer; transition: all .2s;
-  text-align: center;
+  text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px;
 }
+.dep-quick-amt { font-size: 15px; }
+.dep-quick-bonus { font-size: 11px; color: var(--tertiary-400); font-weight: 600; }
 .dep-quick-btn:hover { border-color: var(--primary-400); color: var(--primary-300); }
 .dep-quick-btn.active { border-color: var(--primary-400); color: var(--primary-400); background: rgba(222,46,54,.08); }
+.dep-quick-btn.active .dep-quick-bonus { color: var(--primary-300); }
+
+/* Summary */
+.dep-summary {
+  padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line);
+  background: rgba(255,255,255,.02); margin-top: 12px;
+}
+.dep-summary-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.dep-summary-row + .dep-summary-row { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+.dep-summary-label { font-size: 13px; color: var(--muted); }
+.dep-summary-val { font-size: 15px; font-weight: 700; font-family: Montserrat, sans-serif; color: var(--text); }
+.dep-summary-val.highlight { color: var(--tertiary-400); }
+.dep-submit-inline {
+  padding: 6px 14px; border-radius: 8px; border: none; cursor: pointer;
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+  font-family: Montserrat, sans-serif;
+  background: linear-gradient(135deg, var(--tertiary-400), #c5a200); color: var(--bg);
+  transition: all .2s; margin-left: 8px; flex-shrink: 0;
+}
+.dep-submit-inline:hover { filter: brightness(1.1); }
+.dep-submit-inline:disabled { opacity: .4; cursor: not-allowed; }
 
 /* Promo */
 .dep-promo-label {
@@ -1564,6 +1590,98 @@ img { max-width: 100%; display: block; }
 }
 .dep-info-body p { margin: 0 0 8px; }
 .dep-info-body p:last-child { margin-bottom: 0; }
+.dep-steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+.dep-step {
+  display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--gray-70); line-height: 1.5;
+}
+.dep-step strong { color: var(--tertiary-400); }
+.dep-step-num {
+  width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%;
+  background: rgba(255,255,255,.08); color: var(--text); font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  font-family: Montserrat, sans-serif;
+}
+.dep-info-note {
+  font-size: 12px; color: var(--muted); line-height: 1.5;
+  padding-top: 10px; border-top: 1px solid var(--line);
+}
+.dep-info-note strong { color: var(--tertiary-400); }
+
+/* Transfer Confirmation */
+.dep-confirm-header { text-align: center; margin-bottom: 16px; }
+.dep-confirm-title {
+  font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800;
+  color: var(--text); margin-bottom: 4px;
+}
+.dep-confirm-sub { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+.dep-confirm-steps { display: flex; align-items: center; justify-content: center; gap: 0; }
+.dep-confirm-step {
+  width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; font-family: Montserrat, sans-serif;
+  border: 2px solid var(--line); color: var(--muted); background: transparent;
+}
+.dep-confirm-step.done { background: var(--success-100); border-color: var(--success-100); color: #fff; }
+.dep-confirm-step.active { background: var(--tertiary-400); border-color: var(--tertiary-400); color: var(--bg); }
+.dep-confirm-step-line { width: 32px; height: 2px; background: var(--line); }
+
+.dep-confirm-amounts {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px;
+}
+.dep-confirm-amount-box {
+  padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line);
+  background: rgba(255,255,255,.02);
+}
+.dep-confirm-amount-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .03em; }
+.dep-confirm-amount-val {
+  font-family: Montserrat, sans-serif; font-size: 20px; font-weight: 800; color: var(--tertiary-400);
+}
+
+.dep-confirm-bank {
+  padding: 14px; border-radius: 12px; border: 1px solid var(--line);
+  background: rgba(255,255,255,.02); margin-bottom: 10px;
+}
+.dep-confirm-bank-header { display: flex; align-items: center; gap: 14px; }
+.dep-confirm-bank-info { flex: 1; }
+.dep-confirm-bank-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.dep-confirm-bank-code { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.dep-confirm-bank-dl { cursor: pointer; }
+
+.dep-confirm-details {
+  border-radius: 12px; border: 1px solid var(--line);
+  background: rgba(255,255,255,.02); margin-bottom: 10px; overflow: hidden;
+}
+.dep-confirm-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 12px 14px; border-bottom: 1px solid var(--line);
+}
+.dep-confirm-row:last-child { border-bottom: none; }
+.dep-confirm-row-label { font-size: 13px; color: var(--muted); }
+.dep-confirm-row-val { font-size: 13px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
+.dep-confirm-row-val.highlight { color: var(--tertiary-400); font-size: 16px; font-weight: 800; letter-spacing: .05em; }
+.dep-copy-btn {
+  cursor: pointer; color: var(--muted); font-size: 14px; opacity: .6; transition: opacity .2s;
+}
+.dep-copy-btn:hover { opacity: 1; }
+
+.dep-confirm-info {
+  display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px;
+  border-radius: 10px; margin-bottom: 8px; font-size: 12px; color: var(--gray-70); line-height: 1.5;
+}
+.dep-confirm-info strong { color: var(--text); font-weight: 700; }
+.dep-confirm-info-icon { flex-shrink: 0; margin-top: 1px; }
+.dep-confirm-info.guide { background: rgba(59,130,246,.06); border: 1px solid rgba(59,130,246,.15); }
+.dep-confirm-info.warning { background: rgba(255,39,78,.04); border: 1px solid rgba(255,39,78,.12); }
+.dep-confirm-info.support { background: rgba(5,161,88,.04); border: 1px solid rgba(5,161,88,.12); }
+
+.dep-confirm-cta {
+  width: 100%; padding: 14px; border-radius: 12px; border: none; cursor: pointer;
+  font-family: Montserrat, sans-serif; font-size: 15px; font-weight: 700;
+  background: linear-gradient(135deg, var(--secondary-400), #1a6fc4); color: #fff;
+  margin-top: 8px; transition: all .2s;
+  box-shadow: 0 4px 16px rgba(59,130,246,.2);
+}
+.dep-confirm-cta:hover { filter: brightness(1.1); }
+.dep-confirm-cta:disabled { opacity: .6; cursor: not-allowed; }
 
 /* Submit */
 .dep-submit {
@@ -3109,54 +3227,128 @@ img { max-width: 100%; display: block; }
 .promo-voucher-card {
   display: flex; align-items: stretch; gap: 0; padding: 0;
   background: var(--surface-texture), var(--grad-surface);
-  border: 1px solid var(--line); border-radius: var(--radius-stage-1);
-  cursor: pointer; transition: all .2s; margin-bottom: 8px;
+  border: 1px solid var(--line); border-left: none;
+  border-radius: var(--radius-stage-1);
+  cursor: pointer; transition: all .2s; margin-bottom: 10px;
   box-shadow: var(--shadow-soft);
   position: relative; overflow: hidden;
 }
 .promo-voucher-card:last-of-type { margin-bottom: 0; }
 .promo-voucher-card:hover { border-color: var(--line-strong); transform: translateY(-1px); }
-.promo-voucher-card.urgent { border-color: rgba(222,46,54,.25); }
+.promo-voucher-card.urgent { border-color: rgba(222,46,54,.35); }
 .promo-voucher-card.locked { opacity: .55; filter: saturate(.6); }
 .promo-voucher-card.locked:hover { opacity: .7; }
-.promo-voucher-left {
-  display: flex; align-items: center; gap: 12px; padding: 14px 16px;
-  flex: 1; min-width: 0;
+
+/* Ticket Stub (left) */
+.promo-voucher-stub {
+  width: 98px; flex-shrink: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px;
+  padding: 8px 22px 8px 14px; position: relative;
+  margin-right: -10px; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 25% 20%, rgba(255,180,80,.2), transparent),
+    radial-gradient(ellipse 50% 60% at 65% 80%, rgba(255,50,50,.15), transparent),
+    linear-gradient(160deg, #c0392b 0%, #8b1a1e 40%, #5a0f12 100%);
+  box-shadow: inset 0 0 24px rgba(255,50,50,.12), inset 0 1px 0 rgba(255,255,255,.08);
+  overflow: hidden;
 }
-.promo-voucher-icon {
-  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800;
-  font-family: Montserrat,sans-serif;
-  background: rgba(255,255,255,.05);
+/* Scalloped semicircle left edge of card */
+.promo-voucher-card::before {
+  content: ''; position: absolute; left: -5px; top: 0; bottom: 0; width: 10px;
+  z-index: 3;
+  background: radial-gradient(circle 5px, var(--bg) 99%, transparent 100%) 0 0 / 10px 10px repeat-y;
 }
-.promo-voucher-icon.percent { background: rgba(222,46,54,.1); color: var(--primary-300); }
-.promo-voucher-icon.fixed { background: rgba(255,226,62,.1); color: var(--tertiary-400); }
-.promo-voucher-info { flex: 1; min-width: 0; }
-.promo-voucher-title { font-weight: 700; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
-.promo-voucher-desc { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 3px; line-height: 1.4; }
-.promo-voucher-meta { display: flex; align-items: center; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
-.promo-voucher-expiry { font-size: 11px; color: var(--muted); margin-top: 5px; display: flex; align-items: center; gap: 4px; }
-.promo-voucher-expiry.countdown { color: var(--error-100); font-weight: 600; }
-.promo-voucher-divider {
-  width: 1px; align-self: stretch; position: relative;
-  background: repeating-linear-gradient(to bottom, var(--line) 0 4px, transparent 4px 8px);
-  margin: 10px 0;
+.promo-voucher-stub.type-cash {
+  background:
+    radial-gradient(ellipse 60% 50% at 25% 20%, rgba(16,255,160,.15), transparent),
+    radial-gradient(ellipse 50% 60% at 65% 80%, rgba(0,180,100,.12), transparent),
+    linear-gradient(160deg, #1a8a5a 0%, #0d5e3a 40%, #073d25 100%);
+  box-shadow: inset 0 0 24px rgba(16,185,129,.12), inset 0 1px 0 rgba(255,255,255,.08);
 }
-.promo-voucher-right {
+.promo-voucher-stub-icon {
+  width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.promo-voucher-stub-icon img {
+  width: 56px; height: 56px; object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255,200,100,.4)) drop-shadow(0 2px 4px rgba(0,0,0,.3));
+}
+.promo-voucher-stub-value {
+  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 800;
+  color: #fff; text-align: center; line-height: 1.2;
+  text-shadow: 0 1px 3px rgba(0,0,0,.4); position: relative; z-index: 1;
+}
+
+/* Perforated ticket divider */
+.promo-voucher-zigzag {
+  width: 20px; flex-shrink: 0; position: relative; align-self: stretch;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 4px; flex-shrink: 0; padding: 14px 16px; min-width: 80px;
+  z-index: 1;
 }
-.promo-voucher-value {
-  font-family: Montserrat,sans-serif; font-size: 16px; font-weight: 800;
-  color: var(--primary-300);
-  line-height: 1.2;
+/* Dashed perforation line */
+.promo-voucher-zigzag::before {
+  content: ''; position: absolute; left: 50%; top: 10px; bottom: 10px; width: 0;
+  border-left: 2px dashed rgba(255,255,255,.15);
+  transform: translateX(-1px);
 }
+/* Top + bottom semicircle notches */
+.promo-voucher-zigzag::after {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 14px; transform: translateX(-50%);
+  background:
+    radial-gradient(circle 7px at 50% 0, var(--bg) 6px, transparent 6.5px),
+    radial-gradient(circle 7px at 50% 100%, var(--bg) 6px, transparent 6.5px);
+  background-size: 14px 100%;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Content area */
+.promo-voucher-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 10px 14px; flex: 1; min-width: 0; gap: 0;
+}
+.promo-voucher-icon { display: none; }
+.promo-voucher-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0; }
+.promo-voucher-title {
+  font-weight: 700; font-size: 13.5px; line-height: 1.3;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--text);
+}
+.promo-voucher-value { display: none; }
+.promo-voucher-desc {
+  font-size: 11px; color: var(--text-2); opacity: .7;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-top: 2px; line-height: 1.4;
+}
+.promo-voucher-meta { display: flex; align-items: center; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.promo-voucher-bottom-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 8px; gap: 8px;
+}
+.promo-voucher-expiry {
+  font-size: 10.5px; color: var(--muted); display: flex; align-items: center; gap: 4px;
+  flex-shrink: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.promo-voucher-expiry.countdown { color: var(--error-100); font-weight: 600; }
+.promo-voucher-divider { display: none; }
+.promo-voucher-right { display: none; }
 .promo-voucher-status {
-  font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 6px;
-  white-space: nowrap;
+  font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;
+  flex-shrink: 0; letter-spacing: .02em; text-transform: uppercase;
 }
-.promo-voucher-status.available { background: rgba(5,161,88,.12); color: var(--success-100); }
-.promo-voucher-status.locked { background: rgba(255,255,255,.04); color: var(--muted); }
+.promo-voucher-status.available {
+  background: linear-gradient(135deg, rgba(5,161,88,.15), rgba(5,161,88,.08));
+  color: var(--success-100); border: 1px solid rgba(5,161,88,.2);
+}
+.promo-voucher-status.locked {
+  background: rgba(255,255,255,.03); color: var(--muted);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.promo-voucher-status.used { background: rgba(255,255,255,.03); color: var(--muted); border: 1px solid rgba(255,255,255,.06); }
+.promo-voucher-status.expired { background: rgba(255,255,255,.03); color: var(--muted); border: 1px solid rgba(255,255,255,.06); }
+.promo-voucher-status.ineligible { background: rgba(255,39,78,.08); color: var(--error-100); border: 1px solid rgba(255,39,78,.15); }
 .promo-voucher-cta {
   font-size: 11px; font-weight: 600; padding: 6px 14px; border-radius: 8px;
   background: var(--primary-400); color: #fff; border: none; cursor: pointer; white-space: nowrap;
@@ -3167,10 +3359,13 @@ img { max-width: 100%; display: block; }
 
 /* Promo Detail Drawer */
 .promo-detail-overlay {
-  position: fixed; top: 0; bottom: 0; z-index: 252; background: rgba(0,0,0,.5);
+  position: fixed; top: 0; left: 0 !important; right: 0 !important; bottom: 0; z-index: 252;
+  background: rgba(0,0,0,.6); width: 100% !important; max-width: none !important;
+  transform: none !important;
   opacity: 0; visibility: hidden; transition: all .3s ease;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
 }
-.promo-detail-overlay.open { opacity: 1; visibility: visible; }
+.promo-detail-overlay.active { opacity: 1; visibility: visible; }
 .promo-detail-drawer {
   position: fixed; z-index: 253; right: 0; top: 0; bottom: 0; width: 380px;
   background: var(--bg); border-left: 1px solid var(--line);
@@ -3179,39 +3374,195 @@ img { max-width: 100%; display: block; }
 }
 .promo-detail-drawer.open { transform: translateX(0); }
 .promo-detail-header {
-  display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px;
   border-bottom: 1px solid var(--line); flex-shrink: 0;
 }
 .promo-detail-back {
-  width: 44px; height: 44px; border-radius: 8px; border: none; cursor: pointer;
+  width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer;
   background: rgba(255,255,255,.06); color: var(--text); display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
+  font-size: 16px; transition: background .2s;
 }
-.promo-detail-back:hover { background: rgba(255,255,255,.1); }
-.promo-detail-title { font-family: Montserrat,sans-serif; font-size: 18px; font-weight: 700; }
-.promo-detail-body { flex: 1; overflow-y: auto; padding: 14px; }
-.promo-detail-value {
-  text-align: center; font-size: 28px; font-family: Montserrat,sans-serif; font-weight: 800;
-  background: var(--gift-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  margin-bottom: 4px;
+.promo-detail-back:hover { background: rgba(255,255,255,.12); }
+.promo-detail-title { font-family: Montserrat,sans-serif; font-size: 15px; font-weight: 700; }
+.promo-detail-body { flex: 1; overflow-y: auto; padding: 0; }
+
+/* Hero — reuse ticket card style */
+.pd-hero {
+  margin: 16px 16px 0; display: flex; align-items: stretch;
+  background: var(--surface-texture), var(--grad-surface);
+  border: 1px solid var(--line); border-left: none;
+  border-radius: var(--radius-stage-1); overflow: hidden; position: relative;
 }
-.promo-detail-name { font-family: Montserrat,sans-serif; font-size: 18px; font-weight: 700; text-align: center; }
-.promo-detail-desc { font-size: 13px; color: var(--muted); text-align: center; margin-top: 4px; }
-.promo-detail-expiry { text-align: center; font-size: 13px; margin-top: 8px; padding: 6px 12px; border-radius: 8px; background: rgba(255,255,255,.04); display: inline-block; }
-.promo-detail-expiry-wrap { text-align: center; margin-top: 8px; }
-.promo-detail-section { margin-top: 20px; }
-.promo-detail-section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--muted); letter-spacing: .04em; margin-bottom: 8px; }
-.promo-detail-row {
-  display: flex; justify-content: space-between; padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,.04); font-size: 13px;
+/* Scalloped left edge on hero */
+.pd-hero::before {
+  content: ''; position: absolute; left: -5px; top: 0; bottom: 0; width: 10px;
+  z-index: 3;
+  background: radial-gradient(circle 5px, var(--bg) 99%, transparent 100%) 0 0 / 10px 10px repeat-y;
 }
-.promo-detail-label { color: var(--muted); }
-.promo-detail-val { font-weight: 600; }
+.pd-hero-stub {
+  width: 100px; flex-shrink: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4px;
+  padding: 16px 10px; position: relative;
+  background: linear-gradient(160deg, #c0392b 0%, #8b1a1e 40%, #5a0f12 100%);
+  box-shadow: inset 0 0 24px rgba(255,50,50,.12), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.pd-hero.type-cash .pd-hero-stub {
+  background: linear-gradient(160deg, #1a8a5a 0%, #0d5e3a 40%, #073d25 100%);
+  box-shadow: inset 0 0 24px rgba(16,185,129,.12), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.pd-hero-stub img {
+  width: 56px !important; height: 56px !important; object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255,200,100,.4)) drop-shadow(0 2px 4px rgba(0,0,0,.3));
+}
+.pd-hero-stub-value {
+  font-family: Montserrat,sans-serif; font-size: 15px; font-weight: 800;
+  color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.4);
+}
+.pd-hero-zigzag {
+  width: 20px; flex-shrink: 0; position: relative; align-self: stretch;
+}
+.pd-hero-zigzag::before {
+  content: ''; position: absolute; left: 50%; top: 10px; bottom: 10px; width: 0;
+  border-left: 2px dashed rgba(255,255,255,.15); transform: translateX(-1px);
+}
+.pd-hero-zigzag::after {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 14px; transform: translateX(-50%);
+  background:
+    radial-gradient(circle 7px at 50% 0, var(--bg) 6px, transparent 6.5px),
+    radial-gradient(circle 7px at 50% 100%, var(--bg) 6px, transparent 6.5px);
+  background-size: 14px 100%; background-repeat: no-repeat; z-index: 1;
+}
+.pd-hero-info {
+  flex: 1; min-width: 0; padding: 14px 14px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.pd-hero-value { display: none; }
+.pd-hero-icon { display: none; }
+.pd-hero-title {
+  font-family: Montserrat,sans-serif; font-size: 14px; font-weight: 700;
+  color: var(--text); line-height: 1.35;
+}
+.pd-hero-desc {
+  font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.5;
+}
+.pd-hero-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.pd-hero-tag {
+  display: inline-block; margin-top: 8px; padding: 3px 10px; border-radius: 20px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+  position: relative; z-index: 1;
+}
+.pd-hero-tag.welcome { background: rgba(5,161,88,.12); color: var(--success-100); }
+.pd-hero-tag.first-deposit { background: rgba(255,166,2,.1); color: var(--warning-100); }
+
+/* Info rows */
+.pd-info { padding: 0 16px; }
+.pd-info-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,.04); font-size: 13px;
+}
+.pd-info-row:last-child { border-bottom: none; }
+.pd-info-label { color: var(--muted); }
+.pd-info-val { font-weight: 600; color: var(--text); }
+
+/* Sections */
+.pd-section { padding: 12px 16px; }
+.pd-section-title {
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--muted); margin-bottom: 8px;
+}
+.pd-section-divider { height: 6px; background: rgba(255,255,255,.02); }
+
+.pd-products { display: flex; flex-wrap: wrap; gap: 6px; }
+.pd-product-tag {
+  font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 20px;
+  background: rgba(255,255,255,.05); color: var(--text); border: 1px solid rgba(255,255,255,.06);
+}
+.pd-terms { margin: 0 0 0 16px; padding: 0; font-size: 13px; color: var(--text-2); line-height: 1.8; }
+.pd-terms li { padding: 1px 0; }
+.pd-terms-text { font-size: 13px; color: var(--text-2); line-height: 1.7; }
+.pd-terms-text p { margin: 0 0 8px; }
+.pd-terms-text p:last-child { margin-bottom: 0; }
+.pd-terms-text em { color: var(--warning-100); font-style: normal; font-weight: 600; }
+.pd-rate-table { display: flex; flex-direction: column; gap: 6px; }
+.pd-rate-row {
+  display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: var(--text-2); line-height: 1.5;
+}
+.pd-rate-pct {
+  flex-shrink: 0; width: 42px; text-align: center; font-weight: 700; font-size: 11px;
+  padding: 2px 0; border-radius: 4px;
+}
+.pd-rate-pct.high { background: rgba(5,161,88,.12); color: var(--success-100); }
+.pd-rate-pct.mid { background: rgba(255,226,62,.1); color: var(--tertiary-400); }
+.pd-rate-pct.low { background: rgba(255,166,2,.1); color: var(--warning-100); }
+.pd-rate-pct.zero { background: rgba(255,39,78,.08); color: var(--error-100); }
+
+/* Accordion group for rolling terms */
+.pd-accordion-group { margin: 12px 16px 0; display: flex; flex-direction: column; }
+.pd-accordion-group .pd-accordion { border: 1px solid var(--line); overflow: hidden; }
+.pd-accordion-group .pd-accordion:first-child { border-radius: 10px 10px 0 0; }
+.pd-accordion-group .pd-accordion:last-child { border-radius: 0 0 10px 10px; }
+.pd-accordion-group .pd-accordion:only-child { border-radius: 10px; }
+.pd-accordion-group .pd-accordion + .pd-accordion { border-top: none; }
+.pd-accordion-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 12px 14px; cursor: pointer; user-select: none;
+  background: rgba(255,255,255,.03); transition: background .2s;
+}
+.pd-accordion-header:hover { background: rgba(255,255,255,.06); }
+.pd-accordion-header-title {
+  font-size: 12px; font-weight: 700; color: var(--text); letter-spacing: .02em;
+  text-transform: uppercase; opacity: .7;
+}
+.pd-accordion-arrow {
+  width: 18px; height: 18px; flex-shrink: 0; transition: transform .3s ease;
+  color: var(--muted); display: flex; align-items: center; justify-content: center;
+}
+.pd-accordion.open .pd-accordion-arrow { transform: rotate(180deg); }
+.pd-accordion.open .pd-accordion-header { border-bottom: 1px solid var(--line); }
+.pd-accordion-body {
+  max-height: 0; overflow: hidden; transition: max-height .35s ease;
+}
+.pd-accordion.open .pd-accordion-body { max-height: 3000px; }
+.pd-accordion-body-inner { padding: 12px 14px 14px; }
+
+/* Alert boxes */
+.pd-alert {
+  margin: 0 16px 12px; padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
+}
+.pd-alert.warning { background: rgba(255,166,2,.06); border: 1px solid rgba(255,166,2,.12); color: var(--warning-100); }
+.pd-alert.locked { background: rgba(255,39,78,.06); border: 1px solid rgba(255,39,78,.12); color: var(--error-100); }
+
+/* CTA sticky bottom */
+.pd-cta-wrap {
+  padding: 12px 16px; border-top: 1px solid var(--line);
+  background: var(--bg); flex-shrink: 0;
+}
+.pd-cta {
+  width: 100%; padding: 13px; border-radius: 10px; border: none;
+  font-family: Montserrat,sans-serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: all .2s; text-transform: uppercase; letter-spacing: .03em;
+}
+.pd-cta.primary {
+  background: linear-gradient(135deg, #d42a2a, #8b1a1e); color: #fff;
+  box-shadow: 0 0 16px rgba(255,50,50,.2), 0 4px 12px rgba(0,0,0,.3);
+}
+.pd-cta.primary:hover { box-shadow: 0 0 24px rgba(255,50,50,.35), 0 6px 16px rgba(0,0,0,.4); }
+.pd-cta.secondary {
+  background: var(--panel-2); color: var(--text); border: 1px solid var(--line);
+}
+.pd-cta.secondary:hover { border-color: var(--line-strong); }
+
+/* Legacy compat */
 .promo-detail-lock {
   background: rgba(255,166,2,.08); border: 1px solid rgba(255,166,2,.2);
   border-radius: 10px; padding: 12px; font-size: 13px; color: var(--warning-100); margin-top: 16px;
 }
-.promo-detail-products { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.promo-detail-products {
+  margin-top: 14px; font-size: 12px; color: var(--muted); line-height: 1.6;
+}
+.promo-detail-products strong { color: var(--text); font-size: 13px; }
 .promo-detail-product-tag {
   font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
   background: rgba(255,255,255,.06); color: var(--text);
@@ -3229,9 +3580,9 @@ img { max-width: 100%; display: block; }
 .promo-active-card {
   background: var(--surface-texture), var(--grad-surface);
   border: 1px solid var(--line); border-radius: var(--radius-stage-1);
-  padding: 14px 16px; transition: all .2s; margin-bottom: 8px;
+  padding: 0; transition: all .2s; margin-bottom: 8px;
   box-shadow: var(--shadow-soft);
-  position: relative; overflow: hidden;
+  position: relative; overflow: hidden; cursor: pointer;
 }
 .promo-active-card:last-of-type { margin-bottom: 0; }
 .promo-active-card:hover { border-color: var(--line-strong); }
@@ -3275,7 +3626,15 @@ img { max-width: 100%; display: block; }
 .promo-active-btn.primary:hover { opacity: .85; }
 .promo-active-btn.danger { color: var(--error-100); border-color: rgba(255,39,78,.25); background: transparent; }
 .promo-active-btn.danger:hover { background: rgba(255,39,78,.06); }
-.promo-active-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.promo-active-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid var(--line);
+  margin: 0;
+}
+.promo-active-card .promo-active-title { color: var(--text); opacity: .85; }
+.promo-active-body { padding: 12px 16px 14px; }
 .promo-active-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; margin-bottom: 10px; }
 .promo-active-progress-wrap { margin-bottom: 12px; }
 .promo-active-progress-bar {
@@ -3361,6 +3720,77 @@ img { max-width: 100%; display: block; }
   content: '✓'; background: rgba(5,161,88,.15); color: var(--success-100);
 }
 
+/* Promo Detail Content — Active Promo & Cashback */
+.promo-detail-value {
+  font-family: Montserrat,sans-serif; font-size: 15px; font-weight: 700;
+  color: var(--tertiary-400); margin-bottom: 2px;
+  display: flex; align-items: center; gap: 6px;
+}
+.promo-detail-name {
+  font-family: Montserrat,sans-serif; font-size: 15px; font-weight: 700;
+  color: var(--text); line-height: 1.3;
+}
+.promo-detail-desc {
+  font-size: 13px; color: var(--muted); line-height: 1.6; margin-top: 6px;
+}
+.promo-detail-rows {
+  background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: 10px; overflow: hidden; margin-top: 12px;
+}
+.promo-detail-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px; font-size: 13px;
+}
+.promo-detail-row + .promo-detail-row { border-top: 1px solid var(--line); }
+.promo-detail-row span:first-child { color: var(--muted); }
+.promo-detail-row span:last-child { font-weight: 600; color: var(--text); }
+.promo-detail-terms {
+  margin-top: 14px; font-size: 12px; color: var(--muted); line-height: 1.6;
+}
+.promo-detail-terms strong { color: var(--text); font-size: 13px; display: block; margin-bottom: 6px; }
+.promo-detail-terms ul { padding-left: 18px; margin: 0; }
+.promo-detail-terms li { margin-bottom: 4px; }
+.promo-detail-terms li::marker { color: var(--line-strong); }
+
+/* Cancel promo confirmation dialog */
+.cancel-promo-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0); display: flex; align-items: center; justify-content: center;
+  transition: background .25s ease;
+}
+.cancel-promo-overlay.open { background: rgba(0,0,0,.65); }
+.cancel-promo-dialog {
+  width: 90%; max-width: 360px; background: var(--panel-2); border-radius: 16px;
+  padding: 28px 22px 22px; text-align: center;
+  transform: scale(.92) translateY(12px); opacity: 0;
+  transition: transform .25s ease, opacity .25s ease;
+  border: 1px solid var(--line);
+}
+.cancel-promo-overlay.open .cancel-promo-dialog { transform: scale(1) translateY(0); opacity: 1; }
+.cancel-promo-icon { font-size: 36px; margin-bottom: 10px; }
+.cancel-promo-title { font-family: Montserrat,sans-serif; font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.cancel-promo-name { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+.cancel-promo-warnings {
+  background: var(--panel); border-radius: 10px; padding: 12px 14px;
+  text-align: left; margin-bottom: 12px; border: 1px solid var(--line);
+}
+.cancel-promo-warn-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 13px; color: var(--text); line-height: 1.5; padding: 4px 0;
+}
+.cancel-promo-warn-item strong { color: var(--tertiary-400); }
+.cancel-warn-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.cancel-promo-note { font-size: 11px; color: var(--muted); margin-bottom: 16px; }
+.cancel-promo-actions { display: flex; gap: 10px; }
+.cancel-promo-btn {
+  flex: 1; padding: 12px 0; border-radius: 10px; font-size: 14px; font-weight: 600;
+  border: none; cursor: pointer; font-family: Montserrat,sans-serif;
+  transition: opacity .15s;
+}
+.cancel-promo-btn:active { opacity: .7; }
+.cancel-promo-btn-back { background: var(--panel); color: var(--text); border: 1px solid var(--line); }
+.cancel-promo-btn-confirm { background: var(--error-100); color: #fff; }
+
 /* Promo view mobile-default (promoted from 768px) */
 .promo-view {
   top: auto; left: 50%; right: auto; bottom: 0; width: 100%; max-width: 430px; max-height: 92vh;
@@ -3384,6 +3814,218 @@ img { max-width: 100%; display: block; }
 .promo-featured-hero { min-height: 130px; }
 .promo-featured-hero-content { min-height: 130px; padding: 16px; }
 .promo-featured-hero-title { font-size: 16px; }
+
+/* Voucher Filter Chips */
+.voucher-filter-bar {
+  display: flex; gap: 6px; overflow-x: auto; padding: 0 0 12px;
+  -webkit-overflow-scrolling: touch; margin-top: 8px;
+}
+.voucher-filter-bar::-webkit-scrollbar { display: none; }
+.voucher-filter-chip {
+  padding: 5px 12px; border-radius: 16px; font-size: 11px; font-weight: 600;
+  white-space: nowrap; cursor: pointer; border: 1px solid var(--line);
+  background: var(--panel); color: var(--muted); transition: all .2s; flex-shrink: 0;
+}
+.voucher-filter-chip.active {
+  background: linear-gradient(135deg, #b45309, #f59e0b);
+  border-color: #fbbf24; color: #fff;
+}
+.voucher-filter-chip .chip-count {
+  display: inline-block; min-width: 14px; height: 14px; line-height: 14px;
+  text-align: center; border-radius: 7px; font-size: 9px; font-weight: 700;
+  margin-left: 4px; background: rgba(255,255,255,.15); padding: 0 3px;
+}
+.voucher-filter-chip.active .chip-count { background: rgba(0,0,0,.2); }
+
+/* Welcome voucher tag */
+.voucher-welcome-tag {
+  display: inline-block; padding: 2px 6px; border-radius: 4px;
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+  background: linear-gradient(135deg, rgba(5,161,88,.15), rgba(52,211,153,.1));
+  color: var(--success-100); margin-right: 6px; vertical-align: middle;
+}
+.voucher-first-deposit-note {
+  font-size: 10px; color: var(--warning-100); margin-top: 3px;
+  display: flex; align-items: center; gap: 3px;
+}
+
+/* Voucher status chips — extended (moved to main block) */
+.promo-voucher-card.used, .promo-voucher-card.expired, .promo-voucher-card.ineligible {
+  opacity: .45; filter: saturate(.5) brightness(.85);
+}
+
+/* Countdown pulse for welcome voucher */
+.voucher-countdown-urgent {
+  color: var(--error-100); font-weight: 700; font-size: 11px;
+  display: flex; align-items: center; gap: 4px;
+  animation: voucherPulse 2s ease-in-out infinite;
+}
+@keyframes voucherPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .6; }
+}
+
+/* Max bonus label */
+.voucher-max-bonus {
+  font-size: 11px; color: var(--muted); font-weight: 400; margin-top: 2px;
+}
+
+/* Welcome countdown in header summary */
+.promo-summary-welcome-countdown {
+  text-align: center; padding: 8px 16px; margin-bottom: 12px;
+  background: linear-gradient(135deg, rgba(5,161,88,.08), rgba(52,211,153,.04));
+  border: 1px solid rgba(5,161,88,.2); border-radius: 10px;
+  font-size: 12px; color: var(--success-100); font-weight: 600;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.promo-summary-welcome-countdown .countdown-time {
+  font-family: Montserrat, sans-serif; font-weight: 800; font-size: 14px;
+}
+
+/* Cashback conflict note in voucher card */
+.voucher-cashback-note {
+  font-size: 10px; color: var(--warning-100); display: flex; align-items: center; gap: 3px; margin-top: 2px;
+}
+
+/* Gift Code Page */
+.gc-page { padding: 0 16px 40px; }
+.gc-input-wrap {
+  position: relative; margin: 16px 0;
+}
+.gc-input {
+  width: 100%; padding: 14px 16px; border-radius: 12px; font-size: 16px; font-weight: 600;
+  font-family: 'Courier New', monospace; letter-spacing: 2px; text-transform: uppercase;
+  background: var(--panel-2); border: 1px solid var(--line); color: var(--text-1);
+  outline: none; transition: border-color .2s;
+  box-sizing: border-box;
+}
+.gc-input:focus { border-color: var(--primary-400); }
+.gc-input::placeholder { color: var(--muted); font-weight: 400; letter-spacing: 0; text-transform: none; font-family: inherit; font-size: 14px; }
+.gc-cta {
+  width: 100%; padding: 14px; border-radius: 12px; border: none;
+  background: var(--grad-red-button); color: #fff; font-family: Montserrat, sans-serif;
+  font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 8px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), var(--glow-red-sm);
+  transition: opacity .2s;
+}
+.gc-cta:hover { opacity: .9; }
+.gc-cta:disabled { opacity: .4; cursor: not-allowed; }
+.gc-rules {
+  margin-top: 16px; padding: 14px; border-radius: 10px;
+  background: rgba(255,255,255,.03); border: 1px solid var(--line);
+}
+.gc-rules-title { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+.gc-rules ul { margin: 0; padding: 0 0 0 16px; font-size: 12px; color: var(--text-2); line-height: 1.8; }
+.gc-result {
+  margin-top: 16px; padding: 16px; border-radius: 12px; text-align: center;
+  animation: fadeInUp .3s ease;
+}
+.gc-result.success { background: rgba(5,161,88,.08); border: 1px solid rgba(5,161,88,.2); }
+.gc-result.error { background: rgba(255,39,78,.08); border: 1px solid rgba(255,39,78,.2); }
+.gc-result-icon { font-size: 32px; margin-bottom: 8px; }
+.gc-result-title { font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 700; }
+.gc-result-desc { font-size: 13px; color: var(--text-2); margin-top: 4px; }
+.gc-result-voucher {
+  margin-top: 12px; padding: 12px; border-radius: 10px;
+  background: rgba(255,255,255,.04); border: 1px solid var(--line);
+  display: flex; align-items: center; gap: 12px; text-align: left;
+}
+.gc-result-actions { display: flex; gap: 8px; margin-top: 12px; justify-content: center; }
+.gc-result-btn {
+  padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 700;
+  font-family: Montserrat, sans-serif; cursor: pointer; transition: all .2s;
+}
+.gc-result-btn.primary { background: var(--grad-red-button); border: none; color: #fff; }
+.gc-result-btn.secondary { background: var(--panel-2); border: 1px solid var(--line); color: var(--text); }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Voucher Picker Modal (on deposit screen) */
+.vp-overlay {
+  position: fixed; inset: 0; z-index: 260; background: rgba(0,0,0,.55);
+  opacity: 0; visibility: hidden; transition: all .3s;
+}
+.vp-overlay.open { opacity: 1; visibility: visible; }
+.vp-sheet {
+  position: fixed; z-index: 261; left: 50%; bottom: 0;
+  width: 100%; max-width: 430px; max-height: 75vh;
+  background: var(--bg); border-radius: 24px 24px 0 0;
+  border-top: 1px solid var(--line);
+  transform: translateX(-50%) translateY(100%); transition: transform .3s ease;
+  display: flex; flex-direction: column;
+}
+.vp-sheet.open { transform: translateX(-50%) translateY(0); }
+.vp-handle {
+  width: 36px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.15);
+  margin: 10px auto 0;
+}
+.vp-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px 8px; flex-shrink: 0;
+}
+.vp-title { font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 700; }
+.vp-close {
+  width: 32px; height: 32px; border-radius: 8px; border: none;
+  background: rgba(255,255,255,.06); color: var(--text); font-size: 16px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.vp-close:hover { background: rgba(255,255,255,.1); }
+.vp-body { flex: 1; overflow-y: auto; padding: 8px 16px 20px; }
+.vp-option {
+  display: flex; align-items: center; gap: 10px; padding: 12px;
+  border-radius: 10px; border: 1px solid var(--line); margin-bottom: 8px;
+  cursor: pointer; transition: all .2s; background: var(--panel);
+}
+.vp-option:hover { border-color: var(--line-strong); }
+.vp-option.selected { border-color: var(--success-100); background: rgba(5,161,88,.06); }
+.vp-option.disabled { opacity: .4; cursor: not-allowed; }
+.vp-option-icon { flex-shrink: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
+.vp-option-info { flex: 1; min-width: 0; }
+.vp-option-title { font-weight: 700; font-size: 13px; }
+.vp-option-desc { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.vp-option-warn { font-size: 10px; color: var(--warning-100); margin-top: 2px; }
+.vp-option-value {
+  font-family: Montserrat, sans-serif; font-weight: 800; font-size: 14px;
+  color: var(--primary-300); flex-shrink: 0;
+}
+.vp-option-check {
+  width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--line);
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.vp-option.selected .vp-option-check {
+  border-color: var(--success-100); background: var(--success-100);
+}
+.vp-option.selected .vp-option-check::after {
+  content: '✓'; color: #fff; font-size: 11px; font-weight: 700;
+}
+.vp-none-option {
+  display: flex; align-items: center; gap: 10px; padding: 12px;
+  border-radius: 10px; border: 1px solid var(--line); margin-bottom: 8px;
+  cursor: pointer; transition: all .2s; background: var(--panel);
+}
+.vp-none-option:hover { border-color: var(--line-strong); }
+.vp-none-option.selected { border-color: var(--success-100); background: rgba(5,161,88,.06); }
+
+/* Deposit promo selector card (replaces old static card) */
+.dep-promo-selector {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  border-radius: 10px; border: 1px solid var(--line); cursor: pointer;
+  transition: all .2s; background: var(--panel);
+}
+.dep-promo-selector:hover { border-color: var(--line-strong); }
+.dep-promo-selector.has-voucher { border-color: rgba(5,161,88,.3); background: rgba(5,161,88,.04); }
+.dep-promo-selector-info { flex: 1; min-width: 0; }
+.dep-promo-selector-title { font-weight: 700; font-size: 13px; }
+.dep-promo-selector-desc { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.dep-promo-selector-arrow { color: var(--muted); font-size: 14px; flex-shrink: 0; }
+.dep-voucher-card { margin-bottom: 0 !important; }
+.dep-voucher-change {
+  font-size: 11px; font-weight: 600; color: var(--primary-300); white-space: nowrap;
+  flex-shrink: 0; opacity: .8;
+}
 
 /* ===== ACCOUNT VIEW ===== */
 .account-view {
@@ -3808,8 +4450,8 @@ img { max-width: 100%; display: block; }
 /* --- Floating Promo Icon --- */
 .floating-promo {
   position: fixed; bottom: 80px; z-index: 200;
-  left: 50%; margin-left: calc(min(430px, 100vw) / 2 - 82px - 8px);
-  width: 82px; height: 82px; cursor: pointer;
+  left: 50%; margin-left: calc(min(430px, 100vw) / 2 - 64px - 8px);
+  width: 64px; height: 64px; cursor: pointer;
   animation: floatBounce 3s ease-in-out infinite;
   transition: opacity .3s, transform .3s;
   touch-action: none; user-select: none;
@@ -3820,7 +4462,7 @@ img { max-width: 100%; display: block; }
   50% { transform: translateY(-6px); }
 }
 .floating-promo-img {
-  width: 82px; height: 82px; border-radius: 50%; object-fit: cover;
+  width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
   border: none;
   box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 14px rgba(255,50,50,.3), 0 0 28px rgba(255,50,50,.15);
   animation: promoGlow 2.5s ease-in-out infinite;
@@ -3830,21 +4472,51 @@ img { max-width: 100%; display: block; }
   50% { box-shadow: 0 4px 16px rgba(0,0,0,.4), 0 0 20px rgba(255,50,50,.5), 0 0 40px rgba(255,50,50,.25); }
 }
 .floating-promo-badge {
-  position: absolute; top: -5px; right: -5px;
-  min-width: 24px; height: 24px; border-radius: 12px;
-  background: #e53935; color: #fff; font-size: 14px; font-weight: 800;
+  position: absolute; top: -4px; right: -4px;
+  min-width: 20px; height: 20px; border-radius: 10px;
+  background: #e53935; color: #fff; font-size: 11px; font-weight: 800;
   display: flex; align-items: center; justify-content: center;
-  padding: 0 5px; box-shadow: 0 2px 8px rgba(229,57,53,.6);
+  padding: 0 4px; box-shadow: 0 2px 8px rgba(229,57,53,.6);
   border: 2px solid #0c0c0e;
 }
 .floating-promo-close {
-  position: absolute; top: -4px; left: -4px;
-  width: 18px; height: 18px; border-radius: 50%;
+  position: absolute; top: -3px; left: -3px;
+  width: 16px; height: 16px; border-radius: 50%;
   background: rgba(30,30,35,.9); border: 1px solid rgba(255,255,255,.15);
   color: rgba(255,255,255,.5); font-size: 10px; line-height: 16px; text-align: center;
   cursor: pointer; z-index: 1; transition: all .2s;
 }
 .floating-promo-close:hover { background: rgba(60,60,65,.9); color: #fff; }
+
+/* Floating Voucher Icon */
+.floating-voucher {
+  position: fixed; bottom: 155px; z-index: 200;
+  left: 50%; margin-left: calc(min(430px, 100vw) / 2 - 64px - 8px);
+  width: 64px; height: 64px; cursor: pointer;
+  animation: floatBounce 3s ease-in-out infinite;
+  animation-delay: .5s;
+  transition: opacity .3s, transform .3s;
+  touch-action: none; user-select: none;
+}
+.floating-voucher.hidden { opacity: 0; pointer-events: none; transform: scale(.5); }
+.floating-voucher-img {
+  width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
+  border: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,.4), 0 0 12px rgba(255,180,0,.3), 0 0 24px rgba(255,180,0,.12);
+  animation: voucherGlow 2.5s ease-in-out infinite;
+}
+@keyframes voucherGlow {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,.4), 0 0 12px rgba(255,180,0,.3), 0 0 24px rgba(255,180,0,.12); }
+  50% { box-shadow: 0 4px 14px rgba(0,0,0,.4), 0 0 18px rgba(255,180,0,.5), 0 0 36px rgba(255,180,0,.2); }
+}
+.floating-voucher-badge {
+  position: absolute; top: -4px; right: -4px;
+  min-width: 20px; height: 20px; border-radius: 10px;
+  background: #e53935; color: #fff; font-size: 11px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 4px; box-shadow: 0 2px 8px rgba(229,57,53,.6);
+  border: 2px solid #0c0c0e;
+}
 
 /* --- Sports Section --- */
 .lobby-match-card {
@@ -4115,19 +4787,42 @@ img { max-width: 100%; display: block; }
 /* --- Account Dashboard --- */
 .acct-dash { padding: 0; }
 .acct-dash-header {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 0;
-  padding: 16px 16px;
+  display: flex; flex-direction: column; gap: 0; margin-bottom: 0;
+  padding: 0 16px 16px;
 }
-.acct-dash-avatar {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-400), var(--primary-700));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; font-weight: 700; color: #fff; flex-shrink: 0;
+.acct-dash-profile {
+  display: flex; align-items: center; gap: 14px; padding: 16px 0 12px;
 }
-.acct-dash-user-info { flex: 1; }
-.acct-dash-name { font-family: Montserrat, sans-serif; font-size: 15px; font-weight: 800; letter-spacing: -.02em; }
-.acct-dash-balance { font-size: 11px; color: var(--muted); margin-top: 1px; }
-.acct-dash-balance span { color: var(--tertiary-400); font-weight: 700; }
+.acct-dash-badge-wrap {
+  position: relative; flex-shrink: 0; cursor: pointer;
+}
+.acct-dash-badge-wrap .level-badge img {
+  filter: drop-shadow(0 2px 8px rgba(255,150,50,.3));
+}
+.acct-dash-user-info { flex: 1; min-width: 0; }
+.acct-dash-name {
+  font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 800;
+  letter-spacing: -.02em; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.acct-dash-balance {
+  font-size: 14px; color: var(--text); font-weight: 700; font-family: Montserrat, sans-serif;
+  margin-bottom: 6px;
+}
+.acct-dash-balance span { color: var(--tertiary-400); }
+.acct-dash-xp-row {
+  display: flex; align-items: center; gap: 8px; cursor: pointer;
+}
+.acct-dash-xp-row:hover .acct-dash-xp-bar-wrap { border-color: rgba(255,80,50,.3); }
+.acct-dash-xp-lv {
+  font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em;
+  white-space: nowrap;
+}
+.acct-dash-xp-bar-wrap {
+  flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,.06);
+  overflow: hidden; border: 1px solid rgba(255,255,255,.04); transition: border-color .2s;
+}
+.acct-dash-xp-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #d42a2a, #ff6b35); }
+.acct-dash-xp-text { font-size: 10px; color: var(--muted); font-weight: 600; white-space: nowrap; }
 .acct-dash-actions { display: flex; gap: 6px; }
 .acct-dash-action-btn {
   padding: 8px 14px; border-radius: var(--radius-stage-3); font-size: 11px; font-weight: 700;
@@ -4196,9 +4891,10 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(90deg, var(--primary-400), var(--tertiary-500));
 }
 .acct-vip-progress-label {
-  display: flex; justify-content: space-between; margin-top: 4px;
+  display: flex; align-items: center; justify-content: space-between; margin-top: 4px;
   font-size: 10px; color: var(--muted);
 }
+.acct-vip-progress-label span { display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
 
 /* Active promo mini */
 .acct-promo-list { display: flex; flex-direction: column; gap: 10px; }
@@ -4225,6 +4921,14 @@ img { max-width: 100%; display: block; }
 }
 
 /* Voucher mini */
+.acct-voucher-scroll {
+  display: flex; gap: 10px; overflow-x: auto; padding: 0 16px 4px; margin: 0 -16px;
+  scrollbar-width: none; scroll-snap-type: x mandatory;
+}
+.acct-voucher-scroll::-webkit-scrollbar { display: none; }
+.acct-voucher-ticket {
+  flex-shrink: 0; width: 280px; scroll-snap-align: start; margin-bottom: 0 !important;
+}
 .acct-voucher-list { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; position: relative; scrollbar-width: none; }
 .acct-voucher-list::-webkit-scrollbar { display: none; }
 .acct-voucher-list::after {
@@ -7736,6 +8440,12 @@ img { max-width: 100%; display: block; }
 </div>
 
 <!-- ===== FLOATING PROMO ICON ===== -->
+<div class="floating-voucher hidden" id="floatingVoucher" onclick="navigateTo('/account/my-promotions')">
+  <button class="floating-promo-close" onclick="event.stopPropagation();closeFloatingVoucher();">&times;</button>
+  <img class="floating-voucher-img" src="Assets/voucher-float-icon.png" alt="Voucher"/>
+  <span class="floating-voucher-badge" id="floatingVoucherBadge">0</span>
+</div>
+
 <div class="floating-promo" id="floatingPromo" onclick="navigateTo('/mission/live-challenge')">
   <button class="floating-promo-close" onclick="event.stopPropagation();closeFloatingPromo();">&times;</button>
   <img class="floating-promo-img" src="Assets/floating-promo-icon.png" alt="Promo"/>
@@ -7867,6 +8577,17 @@ img { max-width: 100%; display: block; }
 <!-- Deposit success toast -->
 <div class="dep-toast" id="depToast">Nạp tiền thành công!</div>
 
+<!-- Voucher Picker Modal -->
+<div class="vp-overlay" id="vpOverlay" onclick="closeVoucherPicker()"></div>
+<div class="vp-sheet" id="vpSheet">
+  <div class="vp-handle"></div>
+  <div class="vp-header">
+    <div class="vp-title">Chọn ưu đãi</div>
+    <button class="vp-close" onclick="closeVoucherPicker()">✕</button>
+  </div>
+  <div class="vp-body" id="vpBody"></div>
+</div>
+
 <!-- ===== PROMOTIONS VIEW ===== -->
 <div class="promo-overlay" id="promoOverlay"></div>
 <div class="promo-view" id="promoView" role="dialog" aria-modal="true">
@@ -7962,21 +8683,21 @@ img { max-width: 100%; display: block; }
 
   <div class="vip1-intro-benefits">
     <div class="vip1-intro-benefit">
-      <div class="vip1-intro-benefit-icon support" style="background:none;"><img src="Assets/telegram-verify.webp" alt="" style="width:36px;height:36px;object-fit:contain;"></div>
+      <div class="vip1-intro-benefit-icon support" style="background:none;"><img src="Assets/telegram-verify.webp" alt="" style="width:56px;height:56px;object-fit:contain;"></div>
       <div class="vip1-intro-benefit-text">
         <div class="vip1-intro-benefit-title">CSKH VIP riêng 24/7</div>
         <div class="vip1-intro-benefit-desc">Kênh hỗ trợ <span class="vip1-intro-benefit-highlight">ưu tiên</span>, phản hồi nhanh mọi lúc</div>
       </div>
     </div>
     <div class="vip1-intro-benefit">
-      <div class="vip1-intro-benefit-icon cashback" style="background:none;"><img src="Assets/cashback.webp" alt="" style="width:36px;height:36px;object-fit:contain;"></div>
+      <div class="vip1-intro-benefit-icon cashback" style="background:none;"><img src="Assets/cashback.webp" alt="" style="width:56px;height:56px;object-fit:contain;"></div>
       <div class="vip1-intro-benefit-text">
         <div class="vip1-intro-benefit-title">Hoàn trả <span class="vip1-intro-benefit-highlight">+27%</span> &amp; Quà tặng</div>
         <div class="vip1-intro-benefit-desc">Tổng giá trị lên đến <span class="vip1-intro-benefit-highlight">30 triệu/năm</span></div>
       </div>
     </div>
     <div class="vip1-intro-benefit">
-      <div class="vip1-intro-benefit-icon easy" style="background:none;"><img src="Assets/mission.webp" alt="" style="width:36px;height:36px;object-fit:contain;"></div>
+      <div class="vip1-intro-benefit-icon easy" style="background:none;"><img src="Assets/mission.webp" alt="" style="width:56px;height:56px;object-fit:contain;"></div>
       <div class="vip1-intro-benefit-text">
         <div class="vip1-intro-benefit-title">4 bước đơn giản, miễn phí</div>
         <div class="vip1-intro-benefit-desc">Không cần nạp 50 triệu như thông thường</div>
@@ -8434,8 +9155,15 @@ function showAccountView(path) {
   renderAccountSidebar(path);
   renderAccountPage(path);
   // Update mobile header title
-  const navItem = ACCOUNT_NAV.find(n => n.path === path);
-  const title = navItem ? navItem.label : 'Tài khoản';
+  var navItem = ACCOUNT_NAV.find(function(n) { return n.path === path; });
+  var title = navItem ? navItem.label : 'Tài khoản';
+  // Handle deposit sub-routes (including /account/deposit/bank/voucherId)
+  if (path.startsWith('/account/deposit/')) {
+    var depParts = path.replace('/account/deposit/', '').split('/');
+    var mId = depParts[0];
+    var dm = (typeof DEPOSIT_METHODS !== 'undefined') ? DEPOSIT_METHODS.find(function(m) { return m.id === mId; }) : null;
+    title = dm ? dm.name : 'Nạp tiền';
+  }
   document.getElementById('accountHeaderTitle').textContent = title;
 }
 
@@ -8454,7 +9182,7 @@ function renderAccountSidebar(activePath) {
     if (item.divider) {
       html += '<div class="nav-divider"></div>';
     } else {
-      const isActive = activePath === item.path;
+      var isActive = activePath === item.path || (item.path === '/account/deposit' && activePath.startsWith('/account/deposit/'));
       html += '<a href="#' + item.path + '" class="' + (isActive ? 'active' : '') + '">' + item.icon + '<span>' + item.label + '</span></a>';
     }
   });
@@ -8464,9 +9192,26 @@ function renderAccountSidebar(activePath) {
 
 function renderAccountPage(path) {
   const content = document.getElementById('accountContent');
+  // Handle /account/deposit/{method}/{voucherId} pattern
+  if (path.match(/^\/account\/deposit\/\w+\/\w+/)) {
+    var depParts2 = path.replace('/account/deposit/', '').split('/');
+    window._selectedVoucherId = depParts2[1];
+    renderDepositDetailInline(content, depParts2[0]);
+    return;
+  }
   switch (path) {
     case '/account/deposit':
       renderDepositPage(content);
+      break;
+    case '/account/deposit/bank':
+    case '/account/deposit/flashpay':
+    case '/account/deposit/p2p':
+    case '/account/deposit/crypto':
+    case '/account/deposit/flexpay':
+    case '/account/deposit/ewallet':
+    case '/account/deposit/scratch':
+      var methodId = path.replace('/account/deposit/', '');
+      renderDepositDetailInline(content, methodId);
       break;
     case '/account/my-promotions':
       renderPromoPage(content);
@@ -8481,7 +9226,7 @@ function renderAccountPage(path) {
       content.innerHTML = renderPlaceholder('Lịch sử cược', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>');
       break;
     case '/account/gift-code':
-      content.innerHTML = renderPlaceholder('Mã quà tặng', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18"/></svg>');
+      renderGiftCodePage(content);
       break;
     case '/account/bank-info':
       content.innerHTML = renderPlaceholder('Thông tin ngân hàng', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M3 10h18"/><path d="M12 3l9 7H3z"/></svg>');
@@ -8506,14 +9251,15 @@ function renderPlaceholder(title, icon) {
 }
 
 function renderAccountDashboard(container) {
-  const tierNames = ['Thành viên', 'VIP 1 — Đồng', 'VIP 2 — Bạc', 'VIP 3 — Vàng', 'VIP 4 — Bạch Kim', 'VIP 5 — Kim Cương', 'VIP 6 — Ruby', 'VIP 7 — Sapphire'];
-  const tierIcons = [lcIcon('user','neon-blue'), lcIcon('medal_bronze','neon-orange'), lcIcon('medal_silver','neon-blue'), lcIcon('medal_gold','neon-gold'), lcIcon('diamond_shape','neon-purple'), lcIcon('diamond','neon-purple'), lcIcon('heart_fire','neon-red'), lcIcon('heart_blue','neon-blue')];
-  const tier = currentUser ? currentUser.tier : 0;
-  const nextTier = Math.min(tier + 1, 7);
+  const tierNames = ['Thành viên', 'VIP 1 — Đồng 1', 'VIP 2 — Đồng 2', 'VIP 3 — Bạc 1', 'VIP 4 — Bạc 2', 'VIP 5 — Vàng 1', 'VIP 6 — Vàng 2', 'VIP 7 — Bạch Kim 1', 'VIP 8 — Bạch Kim 2', 'VIP 9 — Kim Cương'];
+  var vipBadgeImg = function(n, s) { s = s || 16; return '<img src="Assets/assets (1)/vip' + Math.min(n, 9) + '-badge.webp" alt="VIP ' + n + '" style="width:' + s + 'px;height:' + s + 'px;object-fit:contain;vertical-align:middle;">'; };
+  const tierIcons = [lcIcon('user','neon-blue'), vipBadgeImg(1), vipBadgeImg(2), vipBadgeImg(3), vipBadgeImg(4), vipBadgeImg(5), vipBadgeImg(6), vipBadgeImg(7), vipBadgeImg(8), vipBadgeImg(9)];
+  const tier = currentUser ? (currentUser.tier || 0) : 0;
+  const nextTier = Math.min(tier + 1, 9);
   // Mock progress to next tier
-  const tierThresholds = [0, 50000000, 150000000, 500000000, 1500000000, 5000000000, 15000000000, 50000000000];
-  const currentDep = currentUser ? currentUser.totalDeposit : 0;
-  const progress = tier >= 7 ? 100 : Math.min(100, Math.round((currentDep / tierThresholds[nextTier]) * 100));
+  const tierThresholds = [0, 50000000, 150000000, 500000000, 1500000000, 5000000000, 15000000000, 50000000000, 100000000000, 200000000000];
+  const currentDep = currentUser ? (currentUser.totalDeposit || 0) : 0;
+  const progress = tier >= 9 ? 100 : Math.min(100, Math.round((currentDep / tierThresholds[nextTier]) * 100));
 
   let html = '<div class="acct-dash">';
 
@@ -8522,18 +9268,20 @@ function renderAccountDashboard(container) {
   var _hXpIn = getXpIntoCurrentLevel();
   var _hXpNeed = getXpNeededForNextLevel();
   html += '<div class="acct-dash-header">';
-  html += '<div class="acct-header-xp" onclick="openXpSheet()">';
-  html += '<div class="acct-header-xp-badge" style="background:transparent;box-shadow:none;">' + renderLevelBadgeImg(USER_XP.currentLevel, 36) + '</div>';
-  html += '<div class="acct-header-xp-info">';
-  html += '<div class="acct-header-xp-lv">Level ' + USER_XP.currentLevel + '</div>';
-  html += '<div class="acct-header-xp-bar"><div class="acct-header-xp-fill" style="width:' + _hPct + '%"></div></div>';
-  html += '<div class="acct-header-xp-text">' + _hXpIn + '/' + _hXpNeed + ' XP</div>';
-  html += '</div>';
-  html += '</div>';
+  // Profile row: badge + name/balance
+  html += '<div class="acct-dash-profile">';
+  html += '<div class="acct-dash-badge-wrap" onclick="openXpSheet()">' + renderLevelBadgeImg(USER_XP.currentLevel, 52) + '</div>';
   html += '<div class="acct-dash-user-info">';
   html += '<div class="acct-dash-name">' + (currentUser ? currentUser.displayName : 'Guest') + '</div>';
-  html += '<div class="acct-dash-balance">Số dư: <span>' + (currentUser ? currentUser.balance : '0') + ' Đ</span></div>';
+  html += '<div class="acct-dash-balance"><span>' + (currentUser ? currentUser.balance : '0') + ' Đ</span></div>';
+  html += '<div class="acct-dash-xp-row" onclick="openXpSheet()">';
+  html += '<span class="acct-dash-xp-lv">Lv.' + USER_XP.currentLevel + '</span>';
+  html += '<div class="acct-dash-xp-bar-wrap"><div class="acct-dash-xp-bar-fill" style="width:' + _hPct + '%"></div></div>';
+  html += '<span class="acct-dash-xp-text">' + _hXpIn + '/' + _hXpNeed + '</span>';
   html += '</div>';
+  html += '</div>';
+  html += '</div>';
+  // Action buttons
   html += '<div class="acct-dash-actions">';
   html += '<button class="acct-dash-action-btn primary" onclick="navigateTo(\'/account/deposit\')">' + lcIcon('credit_card','neon-gold') + ' Nạp Tiền</button>';
   html += '<button class="acct-dash-action-btn secondary" onclick="navigateTo(\'/account/withdraw\')">' + lcIcon('cash_out','neon-green') + ' Rút Tiền</button>';
@@ -8552,11 +9300,11 @@ function renderAccountDashboard(container) {
   html += '<div class="acct-vip-badge tier-' + tier + '"><img src="' + (TIER_ICONS[tier] || TIER_ICONS[1]) + '" alt="VIP ' + tier + '" style="width:52px;height:52px;object-fit:contain;"></div>';
   html += '<div class="acct-vip-info">';
   html += '<div class="acct-vip-tier-name">' + tierNames[tier] + '</div>';
-  if (tier < 7) {
+  if (tier < 9) {
     html += '<div class="acct-vip-tier-sub">Nạp thêm để lên ' + tierNames[nextTier] + '</div>';
     html += '<div class="acct-vip-progress-wrap">';
     html += '<div class="acct-vip-progress-bar"><div class="acct-vip-progress-fill" style="width:' + progress + '%"></div></div>';
-    html += '<div class="acct-vip-progress-label"><span>' + progress + '%</span><span>' + tierNames[nextTier] + '</span></div>';
+    html += '<div class="acct-vip-progress-label"><span>' + progress + '%</span><span>' + tierIcons[nextTier] + ' ' + tierNames[nextTier] + '</span></div>';
     html += '</div>';
   } else {
     html += '<div class="acct-vip-tier-sub">Bạn đã đạt cấp VIP cao nhất! ' + lcIcon('party','neon-gold') + '</div>';
@@ -8569,11 +9317,12 @@ function renderAccountDashboard(container) {
   html += '<div class="acct-dash-card-title"><span class="card-icon" style="display:inline-flex;align-items:center;"><img src="Assets/nav-icon/promotion.png" alt="Promotion" style="width:40px;height:40px;object-fit:contain;"></span> Khuyến mãi đang áp dụng</div>';
   html += '<span class="acct-dash-card-arrow">→</span>';
   html += '</div>';
-  if (MOCK_ACTIVE_PROMOS.length > 0) {
+  var userPromos = getPromosForCurrentUser();
+  if (userPromos.length > 0) {
     html += '<div class="acct-promo-list">';
-    MOCK_ACTIVE_PROMOS.forEach(function(p) {
+    userPromos.forEach(function(p) {
       html += '<div class="acct-promo-mini">';
-      html += '<div class="acct-promo-mini-icon ' + p.type + '" style="background:none;"><img src="' + (p.type === 'welcome' ? 'Assets/cashback.webp' : 'Assets/promotion-daily-cashback.webp') + '" alt="' + p.type + '" style="width:36px;height:36px;object-fit:contain;"></div>';
+      html += '<div class="acct-promo-mini-icon ' + p.type + '" style="background:none;"><img src="' + (p.type === 'welcome' ? 'Assets/cashback.webp' : 'Assets/promotion-daily-cashback.webp') + '" alt="' + p.type + '" style="width:56px;height:56px;object-fit:contain;"></div>';
       html += '<div class="acct-promo-mini-info">';
       html += '<div class="acct-promo-mini-title">' + p.title + '</div>';
       if (p.type === 'welcome') {
@@ -8607,20 +9356,39 @@ function renderAccountDashboard(container) {
   html += '<div class="acct-dash-card-title"><span class="card-icon" style="display:inline-flex;align-items:center;"><img src="Assets/nav-icon/voucher.png" alt="Voucher" style="width:40px;height:40px;object-fit:contain;"></span> Voucher của tôi</div>';
   html += '<span class="acct-dash-card-arrow">→</span>';
   html += '</div>';
-  var availableVouchers = MOCK_VOUCHERS.filter(function(v) { return v.status === 'available'; });
-  if (MOCK_VOUCHERS.length > 0) {
-    html += '<div class="acct-voucher-list">';
-    MOCK_VOUCHERS.forEach(function(v) {
+  var userVouchers = getVouchersForCurrentUser();
+  if (userVouchers.length > 0) {
+    html += '<div class="acct-voucher-scroll">';
+    userVouchers.forEach(function(v) {
       var isLocked = v.status === 'locked';
-      html += '<div class="acct-voucher-mini ' + (isLocked ? 'locked' : '') + '">';
-      if (isLocked) html += '<div class="acct-voucher-mini-lock">' + lcIcon('lock','neon-red') + '</div>';
-      html += '<div class="acct-voucher-mini-icon">' + v.icon + '</div>';
-      html += '<div class="acct-voucher-mini-value">' + v.value + '</div>';
-      html += '<div class="acct-voucher-mini-title">' + v.title + '</div>';
+      var isUrgent = !isLocked && v.expiresAt && (v.expiresAt - Date.now()) < 3 * 24 * 60 * 60 * 1000;
+      var cardClass = 'promo-voucher-card acct-voucher-ticket';
+      if (isLocked) cardClass += ' locked';
+      if (isUrgent) cardClass += ' urgent';
+      html += '<div class="' + cardClass + '" onclick="navigateTo(\'/account/my-promotions\')">';
+      // Stub
+      var stubClass = 'promo-voucher-stub';
+      if (v.type === 'cash') stubClass += ' type-cash';
+      html += '<div class="' + stubClass + '">';
+      html += '<div class="promo-voucher-stub-icon">' + v.icon + '</div>';
+      html += '<div class="promo-voucher-stub-value">' + v.value + '</div>';
+      html += '</div>';
+      // Zigzag
+      html += '<div class="promo-voucher-zigzag"></div>';
+      // Content
+      html += '<div class="promo-voucher-left">';
+      html += '<div class="promo-voucher-info">';
+      html += '<div class="promo-voucher-title">' + v.title + '</div>';
+      if (v.maxBonus) html += '<div class="voucher-max-bonus">Tối đa ' + formatMoney(v.maxBonus) + '</div>';
+      html += '</div>';
+      html += '<div class="promo-voucher-bottom-row">';
       if (!isLocked) {
-        var days = Math.ceil((v.expiresAt - Date.now()) / (24*60*60*1000));
-        html += '<div class="acct-voucher-mini-expire">' + (days <= 3 ? lcIcon('timer','neon-orange') + ' ' : '') + 'Còn ' + days + ' ngày</div>';
+        html += '<span class="promo-voucher-expiry">' + formatVoucherExpiry(v.expiresAt) + '</span>';
+      } else {
+        html += '<span class="promo-voucher-status locked">' + lcIcon('lock','','10') + ' Khóa</span>';
       }
+      html += '</div>';
+      html += '</div>';
       html += '</div>';
     });
     html += '</div>';
@@ -8670,11 +9438,11 @@ function renderDepositPage(container) {
   html += '<div id="depInlineMethods" style="margin-top:16px;"></div>';
   html += '</div>';
   container.innerHTML = html;
-  // Render methods
+  // Render methods — navigate to sub-route
   const list = document.getElementById('depInlineMethods');
   if (list && typeof DEPOSIT_METHODS !== 'undefined') {
     list.innerHTML = DEPOSIT_METHODS.map(function(m) {
-      return '<div class="dep-method-card" data-method="' + m.id + '" onclick="openDepositDetailInline(\'' + m.id + '\')">' +
+      return '<div class="dep-method-card" data-method="' + m.id + '" onclick="navigateTo(\'/account/deposit/' + m.id + '\')">' +
         '<div class="dep-method-info">' +
           '<div class="dep-method-name">' + m.name + (m.badge ? ' <span class="dep-method-badge">' + m.badge + '</span>' : '') + '</div>' +
           '<div class="dep-method-sub">' + m.sub + '</div>' +
@@ -8683,6 +9451,31 @@ function renderDepositPage(container) {
       '</div>';
     }).join('');
   }
+}
+
+function renderDepositDetailInline(container, methodId) {
+  var method = DEPOSIT_METHODS.find(function(m) { return m.id === methodId; });
+  if (!method) {
+    container.innerHTML = renderPlaceholder('Phương thức không tồn tại', lcIcon('question','neon-red'));
+    return;
+  }
+  depCurrentMethod = method;
+  depCurrentAmount = 0;
+  var html = '<div class="dep-inline">';
+  // Back button + title
+  html += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">';
+  html += '<button onclick="navigateTo(\'/account/deposit\')" style="width:40px;height:40px;border-radius:10px;border:none;background:rgba(255,255,255,.06);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">←</button>';
+  html += '<div>';
+  html += '<div style="font-family:Montserrat,sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;">' + method.name + '</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">' + method.subtitle + '</div>';
+  // Balance removed per design
+  html += '<div id="depInlineDetailBody"></div>';
+  html += '</div>';
+  container.innerHTML = html;
+  // Render deposit form into the body
+  renderDepositFormInline(method);
 }
 
 function openDepositDetailInline(methodId) {
@@ -8701,14 +9494,420 @@ function openDepositDetailInline(methodId) {
   openDepositDetail(method);
 }
 
+// --- Inline deposit form (for sub-route /account/deposit/{method}) ---
+function renderDepositFormInline(method) {
+  var body = document.getElementById('depInlineDetailBody');
+  if (!body) return;
+
+  // Voucher block
+  var voucherBlock = renderDepositVoucherSelector();
+
+  // Parse bonus percent from selected voucher
+  var bonusPct = 0;
+  var selV = window._selectedVoucherId ? findVoucherById(window._selectedVoucherId) : null;
+  if (selV && selV.value) {
+    var pctMatch = selV.value.match(/(\d+)/);
+    if (pctMatch) bonusPct = parseInt(pctMatch[1]);
+  }
+
+  // Quick amounts with bonus labels
+  var quickAmounts = [200000, 500000, 1000000, 2000000, 5000000, 10000000];
+  var quickHtml = quickAmounts.map(function(a) {
+    var bonusAmt = bonusPct > 0 ? Math.min(a * bonusPct / 100, selV ? selV.maxBonus : Infinity) : 0;
+    var bonusLabel = bonusPct > 0 ? '<div class="dep-quick-bonus">+' + formatMoney(bonusAmt) + '</div>' : '';
+    return '<button class="dep-quick-btn" data-amt="' + a + '"><div class="dep-quick-amt">' + formatMoney(a) + '</div>' + bonusLabel + '</button>';
+  }).join('');
+
+  body.innerHTML = voucherBlock +
+    '<div class="dep-amount-label">Chọn số tiền</div>' +
+    '<div class="dep-quick-grid dep-quick-grid-3">' + quickHtml + '</div>' +
+    '<div class="dep-amount-wrap">' +
+    '<input type="text" class="dep-amount-input" id="depInlineAmountInput" placeholder="Nhập số tiền khác (VNĐ)" inputmode="numeric"/>' +
+    '</div>' +
+    '<div class="dep-summary" id="depSummary">' +
+    '<div class="dep-summary-row"><span class="dep-summary-label">Thưởng nạp</span><span class="dep-summary-val" id="depBonusVal">0</span></div>' +
+    '<div class="dep-summary-row"><span class="dep-summary-label">Tổng nhận</span><span class="dep-summary-val highlight" id="depTotalVal">0</span>' +
+    '<button class="dep-submit-inline" id="depInlineSubmitBtn" disabled>Nhận ngay</button></div>' +
+    '</div>' +
+    '<div class="dep-info-box">' +
+    '<div class="dep-info-title"><div class="dep-info-icon blue">?</div>Hướng dẫn nạp tiền</div>' +
+    '<div class="dep-info-body">' +
+    '<div class="dep-steps">' +
+    '<div class="dep-step"><span class="dep-step-num">1</span><span>Chọn số tiền hoặc nhập số tiền muốn nạp</span></div>' +
+    '<div class="dep-step"><span class="dep-step-num">2</span><span>Bấm <strong>Nhận ngay</strong> để tạo lệnh nạp</span></div>' +
+    '<div class="dep-step"><span class="dep-step-num">3</span><span>Chuyển khoản đúng <strong>nội dung</strong> và <strong>số tiền</strong> hiển thị</span></div>' +
+    '<div class="dep-step"><span class="dep-step-num">4</span><span>Hệ thống xử lý tự động trong <strong>1-3 phút</strong></span></div>' +
+    '</div>' +
+    '<div class="dep-info-note">Quý khách cần chuyển tối thiểu <strong>50.000đ</strong>. Vui lòng nhập đúng nội dung chuyển tiền để được xử lý nhanh chóng.</div>' +
+    '</div></div>';
+
+  function updateDepSummary() {
+    var bonus = 0;
+    if (bonusPct > 0 && depCurrentAmount > 0 && selV) {
+      bonus = Math.min(depCurrentAmount * bonusPct / 100, selV.maxBonus);
+    }
+    var total = depCurrentAmount + bonus;
+    var bonusEl = document.getElementById('depBonusVal');
+    var totalEl = document.getElementById('depTotalVal');
+    if (bonusEl) bonusEl.textContent = bonus > 0 ? formatMoney(bonus, false) : '0';
+    if (totalEl) totalEl.textContent = total > 0 ? formatMoney(total, false) : '0';
+    document.getElementById('depInlineSubmitBtn').disabled = depCurrentAmount <= 0;
+  }
+
+  // Quick amount buttons
+  body.querySelectorAll('.dep-quick-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      depCurrentAmount = parseInt(btn.dataset.amt);
+      var input = document.getElementById('depInlineAmountInput');
+      input.value = '';
+      body.querySelectorAll('.dep-quick-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      updateDepSummary();
+      updateDepositVoucherWarnings();
+    });
+  });
+
+  // Amount input
+  var input = document.getElementById('depInlineAmountInput');
+  input.addEventListener('input', function() {
+    var raw = parseInt(this.value.replace(/[^\d]/g, '')) || 0;
+    depCurrentAmount = raw;
+    if (raw > 0) {
+      this.value = fmtFull(raw);
+      document.getElementById('depInlineSubmitBtn').disabled = false;
+    } else {
+      this.value = '';
+      document.getElementById('depInlineSubmitBtn').disabled = true;
+    }
+    body.querySelectorAll('.dep-quick-btn').forEach(function(b) {
+      b.classList.toggle('active', parseInt(b.dataset.amt) === raw);
+    });
+    updateDepSummary();
+    updateDepositVoucherWarnings();
+  });
+
+  // Submit — show transfer confirmation screen
+  document.getElementById('depInlineSubmitBtn').addEventListener('click', function() {
+    if (depCurrentAmount <= 0 || this.disabled) return;
+    // Validate voucher
+    if (window._selectedVoucherId) {
+      var val = validateVoucherForDeposit(window._selectedVoucherId, depCurrentAmount);
+      if (!val.valid) {
+        var warnEl = document.getElementById('depVoucherWarning');
+        if (warnEl) warnEl.innerHTML = '<div class="dep-confirm-info warning" style="margin-top:8px;">' + lcIcon('alert-triangle','neon-red','14') + '<span>' + val.error + '</span></div>';
+        return;
+      }
+    }
+    showTransferConfirmation(depCurrentAmount, method);
+  });
+}
+
+// --- Voucher Selector for Deposit ---
+function showTransferConfirmation(amount, method) {
+  var body = document.getElementById('depInlineDetailBody');
+  if (!body) return;
+  var amountVND = formatMoney(amount, false);
+  // Generate mock data
+  var txCode = 'H' + Math.random().toString(36).substring(2, 8).toUpperCase();
+  var acctNum = '815307028800001';
+  var acctName = 'Hoàng Việt Trường';
+  var bankName = 'NAM A BANK';
+
+  // Start 30-min countdown
+  var deadline = Date.now() + 30 * 60 * 1000;
+
+  var html = '';
+  // Header
+  html += '<div class="dep-confirm-header">';
+  html += '<div class="dep-confirm-title">Xác nhận chuyển khoản</div>';
+  html += '<div class="dep-confirm-sub">Chuyển khoản theo thông tin bên dưới</div>';
+  // Steps indicator
+  html += '<div class="dep-confirm-steps">';
+  html += '<span class="dep-confirm-step done">✓</span>';
+  html += '<span class="dep-confirm-step-line"></span>';
+  html += '<span class="dep-confirm-step done">✓</span>';
+  html += '<span class="dep-confirm-step-line"></span>';
+  html += '<span class="dep-confirm-step active">3</span>';
+  html += '</div>';
+  html += '</div>';
+
+  // Amount + countdown
+  html += '<div class="dep-confirm-amounts">';
+  html += '<div class="dep-confirm-amount-box">';
+  html += '<div class="dep-confirm-amount-label">Số tiền cần chuyển</div>';
+  html += '<div class="dep-confirm-amount-val">' + amountVND + '</div>';
+  html += '</div>';
+  html += '<div class="dep-confirm-amount-box">';
+  html += '<div class="dep-confirm-amount-label">Hết hạn</div>';
+  html += '<div class="dep-confirm-amount-val" id="depConfirmTimer">29:59</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Bank info card
+  html += '<div class="dep-confirm-bank">';
+  html += '<div class="dep-confirm-bank-header">';
+  html += '<div class="dep-confirm-qr"><div style="width:60px;height:60px;background:var(--panel);border-radius:8px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/><rect x="14" y="18" width="3" height="3"/><rect x="18" y="14" width="3" height="3"/></svg></div></div>';
+  html += '<div class="dep-confirm-bank-info">';
+  html += '<div class="dep-confirm-bank-name">' + lcIcon('building','neon-blue','14') + ' ' + bankName + '</div>';
+  html += '<div class="dep-confirm-bank-code">Mã phiếu: #' + Math.floor(10000000 + Math.random() * 90000000) + '</div>';
+  html += '<div class="dep-confirm-bank-dl">' + lcIcon('download','neon-green','12') + ' <span style="color:var(--success-100);font-size:12px;">Tải QR</span></div>';
+  html += '</div></div></div>';
+
+  // Account details
+  html += '<div class="dep-confirm-details">';
+  html += '<div class="dep-confirm-row">';
+  html += '<span class="dep-confirm-row-label">Số tài khoản</span>';
+  html += '<span class="dep-confirm-row-val">' + acctNum + ' <span class="dep-copy-btn" onclick="copyToClipboard(\'' + acctNum + '\',this)">⊡</span></span>';
+  html += '</div>';
+  html += '<div class="dep-confirm-row">';
+  html += '<span class="dep-confirm-row-label">Chủ tài khoản</span>';
+  html += '<span class="dep-confirm-row-val">' + acctName + ' <span class="dep-copy-btn" onclick="copyToClipboard(\'' + acctName + '\',this)">⊡</span></span>';
+  html += '</div>';
+  html += '<div class="dep-confirm-row">';
+  html += '<span class="dep-confirm-row-label">Nội dung CK</span>';
+  html += '<span class="dep-confirm-row-val highlight">' + txCode + ' <span class="dep-copy-btn" onclick="copyToClipboard(\'' + txCode + '\',this)">⊡</span></span>';
+  html += '</div>';
+  html += '</div>';
+
+  // Info boxes
+  html += '<div class="dep-confirm-info guide">';
+  html += '<div class="dep-confirm-info-icon">' + lcIcon('info','neon-blue','16') + '</div>';
+  html += '<div><strong>Hướng dẫn</strong><br>Chuyển đúng <strong>' + amountVND + '</strong> với nội dung <strong>' + txCode + '</strong></div>';
+  html += '</div>';
+
+  html += '<div class="dep-confirm-info warning">';
+  html += '<div class="dep-confirm-info-icon">' + lcIcon('alert-triangle','neon-red','16') + '</div>';
+  html += '<div><strong>Lưu ý</strong><br>Không lưu lại tài khoản NH. Mỗi giao dịch cần vào mục <strong>Nạp Tiền</strong> để lấy thông tin mới. Chuyển sai nội dung / số tiền sẽ không nhận được tiền.</div>';
+  html += '</div>';
+
+  html += '<div class="dep-confirm-info support">';
+  html += '<div class="dep-confirm-info-icon">' + lcIcon('phone','neon-green','16') + '</div>';
+  html += '<div><strong>Cần hỗ trợ?</strong><br>Sau 1 phút nếu chưa nhận tiền, liên hệ <a style="color:var(--secondary-300);font-weight:700;">CSKH 24/7</a></div>';
+  html += '</div>';
+
+  // CTA
+  html += '<button class="dep-confirm-cta" id="depConfirmBtn">Đã chuyển khoản</button>';
+
+  body.innerHTML = html;
+
+  // Countdown timer
+  var timerEl = document.getElementById('depConfirmTimer');
+  var timerInterval = setInterval(function() {
+    var remaining = Math.max(0, deadline - Date.now());
+    var mins = Math.floor(remaining / 60000);
+    var secs = Math.floor((remaining % 60000) / 1000);
+    timerEl.textContent = (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+    if (remaining <= 0) clearInterval(timerInterval);
+  }, 1000);
+
+  // Confirm button
+  document.getElementById('depConfirmBtn').addEventListener('click', function() {
+    this.disabled = true;
+    this.textContent = 'Đang xác nhận...';
+    setTimeout(function() {
+      if (currentUser) {
+        var oldBal = parseInt(currentUser.balance.replace(/\./g, '')) || 0;
+        var newBal = oldBal + amount * 1000;
+        currentUser.balance = fmtFull(newBal);
+        currentUser.totalDeposit = (currentUser.totalDeposit || 0) + amount;
+      }
+      var bonusMsg = '';
+      if (window._selectedVoucherId) {
+        var v = findVoucherById(window._selectedVoucherId);
+        applyVoucherAfterDeposit(window._selectedVoucherId);
+        bonusMsg = v ? ' + Voucher "' + v.title + '" đã áp dụng!' : '';
+        window._selectedVoucherId = null;
+      }
+      clearInterval(timerInterval);
+      // Update header balance display
+      var hdrBal = document.querySelector('.header-balance-amount');
+      if (hdrBal && currentUser) hdrBal.textContent = currentUser.balance + ' Đ';
+      // Update floating voucher badge (voucher used → count changes)
+      updateFloatingVoucher();
+      var toast = document.getElementById('depToast');
+      toast.textContent = 'Nạp thành công ' + formatMoney(amount, false) + '!' + bonusMsg;
+      toast.classList.add('show');
+      setTimeout(function() { toast.classList.remove('show'); }, 4000);
+      navigateTo('/account/deposit');
+    }, 2000);
+  });
+}
+
+function copyToClipboard(text, el) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text);
+  }
+  if (el) {
+    var orig = el.textContent;
+    el.textContent = '✓';
+    setTimeout(function() { el.textContent = orig; }, 1500);
+  }
+}
+
+function renderDepositVoucherSelector() {
+  var html = '<div class="dep-promo-label">Chọn ưu đãi</div>';
+  if (window._selectedVoucherId) {
+    var v = findVoucherById(window._selectedVoucherId);
+    if (v) {
+      var maxLabel = formatMoney(v.maxBonus);
+      // Ticket-style voucher card (reuse promo card design)
+      var stubClass = 'promo-voucher-stub';
+      if (v.type === 'cash') stubClass += ' type-cash';
+      html += '<div class="promo-voucher-card dep-voucher-card" onclick="openVoucherPicker()">';
+      html += '<div class="' + stubClass + '">';
+      html += '<div class="promo-voucher-stub-icon">' + v.icon + '</div>';
+      html += '<div class="promo-voucher-stub-value">' + v.value + '</div>';
+      html += '</div>';
+      html += '<div class="promo-voucher-zigzag"></div>';
+      html += '<div class="promo-voucher-left">';
+      html += '<div class="promo-voucher-info">';
+      html += '<div class="promo-voucher-title">' + v.title + '</div>';
+      html += '<div class="voucher-max-bonus">Tối đa ' + maxLabel + ' · Turnover ' + (v.rolling || 'N/A') + '</div>';
+      html += '</div>';
+      html += '<div class="promo-voucher-bottom-row">';
+      html += '<span class="promo-voucher-expiry">' + formatVoucherExpiry(v.expiresAt) + '</span>';
+      html += '<span class="dep-voucher-change">Đổi ▸</span>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
+      // Inline warning
+      html += '<div id="depVoucherWarning"></div>';
+      return html;
+    }
+  }
+  // No voucher selected
+  html += '<div class="dep-promo-selector" onclick="openVoucherPicker()">';
+  html += '<div style="flex-shrink:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center;">' + lcIcon('ticket','neon-gold') + '</div>';
+  html += '<div class="dep-promo-selector-info">';
+  html += '<div class="dep-promo-selector-title">Chọn voucher hoặc ưu đãi</div>';
+  html += '<div class="dep-promo-selector-desc">Bấm để xem các voucher khả dụng</div>';
+  html += '</div>';
+  html += '<div class="dep-promo-selector-arrow">▸</div>';
+  html += '</div>';
+  html += '<div id="depVoucherWarning"></div>';
+  return html;
+}
+
+function updateDepositVoucherWarnings() {
+  var el = document.getElementById('depVoucherWarning');
+  if (!el || !window._selectedVoucherId) return;
+  var val = validateVoucherForDeposit(window._selectedVoucherId, depCurrentAmount);
+  if (!val.valid) {
+    el.innerHTML = '<div style="margin-top:8px;padding:8px 10px;border-radius:8px;background:rgba(255,39,78,.08);border:1px solid rgba(255,39,78,.15);font-size:11px;color:var(--error-100);display:flex;align-items:flex-start;gap:6px;">' + lcIcon('alert-triangle','neon-red','14') + '<span>' + val.error + '</span></div>';
+  } else if (val.warning) {
+    el.innerHTML = '<div style="margin-top:8px;padding:8px 10px;border-radius:8px;background:rgba(255,166,2,.06);border:1px solid rgba(255,166,2,.12);font-size:11px;color:var(--warning-100);display:flex;align-items:flex-start;gap:6px;">' + lcIcon('alert-triangle','neon-gold','14') + '<span>' + val.warning + '</span></div>';
+  } else {
+    el.innerHTML = '';
+  }
+}
+
+// --- Voucher Picker Modal ---
+function openVoucherPicker() {
+  var vouchers = getVouchersForCurrentUser().filter(function(v) {
+    return v.status === 'available';
+  });
+  var body = document.getElementById('vpBody');
+  var html = '';
+
+  // "Không chọn" option
+  var noneSelected = !window._selectedVoucherId;
+  html += '<div class="vp-none-option' + (noneSelected ? ' selected' : '') + '" onclick="selectVoucherForDeposit(null)">';
+  html += '<div class="vp-option-check"></div>';
+  html += '<div style="flex:1;font-size:13px;color:var(--muted);">Nạp thường — không dùng voucher</div>';
+  html += '</div>';
+
+  if (vouchers.length === 0) {
+    html += '<div style="text-align:center;padding:24px 0;color:var(--muted);font-size:13px;">';
+    html += lcIcon('ticket','','20') + '<div style="margin-top:8px;">Không có voucher khả dụng</div>';
+    html += '<div style="font-size:11px;margin-top:4px;">Kiểm tra mục Gift Code hoặc Ưu đãi nổi bật</div>';
+    html += '</div>';
+  } else {
+    vouchers.forEach(function(v) {
+      var isSelected = window._selectedVoucherId === v.id;
+      var validation = validateVoucherForDeposit(v.id, depCurrentAmount);
+      var isDisabled = !validation.valid;
+      var maxLabel = formatMoney(v.maxBonus);
+
+      html += '<div class="vp-option' + (isSelected ? ' selected' : '') + (isDisabled ? ' disabled' : '') + '" onclick="' + (isDisabled ? '' : 'selectVoucherForDeposit(\'' + v.id + '\')') + '">';
+      html += '<div class="vp-option-check"></div>';
+      html += '<div class="vp-option-icon">' + v.icon + '</div>';
+      html += '<div class="vp-option-info">';
+      html += '<div class="vp-option-title">';
+      if (v.isWelcome) html += '<span class="voucher-welcome-tag">Welcome</span>';
+      html += v.title + '</div>';
+      html += '<div class="vp-option-desc">Tối đa ' + maxLabel + ' · Turnover ' + (v.rolling || 'N/A');
+      if (v.minDeposit && v.minDeposit !== '0đ' && v.minDeposit !== 'Không yêu cầu') {
+        html += ' · Nạp tối thiểu ' + v.minDeposit;
+      }
+      html += '</div>';
+      if (isDisabled) {
+        html += '<div class="vp-option-warn">' + validation.error + '</div>';
+      } else if (validation.warning) {
+        html += '<div class="vp-option-warn">' + validation.warning + '</div>';
+      }
+      html += '</div>';
+      html += '<div class="vp-option-value">' + v.value + '</div>';
+      html += '</div>';
+    });
+  }
+
+  body.innerHTML = html;
+  document.getElementById('vpOverlay').classList.add('open');
+  document.getElementById('vpSheet').classList.add('open');
+}
+
+function closeVoucherPicker() {
+  document.getElementById('vpOverlay').classList.remove('open');
+  document.getElementById('vpSheet').classList.remove('open');
+}
+
+function selectVoucherForDeposit(id) {
+  window._selectedVoucherId = id;
+  closeVoucherPicker();
+  // Re-render the voucher selector on the deposit form
+  var selectorWrap = document.querySelector('.dep-promo-selector');
+  if (selectorWrap) {
+    // Re-render the whole form to update the selector
+    if (depCurrentMethod && document.getElementById('depInlineDetailBody')) {
+      renderDepositFormInline(depCurrentMethod);
+    } else if (depCurrentMethod && document.getElementById('depDetailBody')) {
+      renderDepositDetailBody(depCurrentMethod);
+    }
+  } else {
+    // Fallback: re-render
+    if (depCurrentMethod && document.getElementById('depInlineDetailBody')) {
+      renderDepositFormInline(depCurrentMethod);
+    } else if (depCurrentMethod && document.getElementById('depDetailBody')) {
+      renderDepositDetailBody(depCurrentMethod);
+    }
+  }
+}
+
 function renderPromoPage(container) {
-  const availCount = MOCK_VOUCHERS.filter(v => v.status === 'available').length;
-  const activeCount = MOCK_ACTIVE_PROMOS.length;
+  const userVouchers = getVouchersForCurrentUser();
+  const userPromos = getPromosForCurrentUser();
+  const availCount = userVouchers.filter(v => v.status === 'available').length;
+  const activeCount = userPromos.length;
   let html = '<div class="promo-inline">';
   html += '<div class="account-page-header">';
   html += '<div class="account-page-title">Ưu đãi của tôi</div>';
   html += '<div class="account-page-sub">Quản lý voucher, khuyến mãi và sự kiện</div>';
   html += '</div>';
+
+  // Welcome countdown banner (if user has unused welcome vouchers)
+  var welcomeVouchers = userVouchers.filter(function(v) { return v.isWelcome && v.status === 'available'; });
+  if (welcomeVouchers.length > 0) {
+    var earliestExpiry = Math.min.apply(null, welcomeVouchers.map(function(v) { return v.expiresAt; }));
+    var diff = earliestExpiry - Date.now();
+    if (diff > 0) {
+      var h = Math.floor(diff / (60*60*1000));
+      var m = Math.floor((diff % (60*60*1000)) / (60*1000));
+      html += '<div class="promo-summary-welcome-countdown">';
+      html += lcIcon('gift','neon-green') + ' Welcome Voucher hết hạn trong <span class="countdown-time">' + h + 'h ' + m + 'p</span>';
+      html += '</div>';
+    }
+  }
+
   // Summary stats bar
   html += '<div class="promo-summary-bar">';
   html += '<div class="promo-summary-stat"><span class="promo-summary-num">' + availCount + '</span><span class="promo-summary-label">Voucher khả dụng</span></div>';
@@ -8789,6 +9988,28 @@ const MOCK_USERS = {
     depositThisPeriod: 250000000, wagerThisPeriod: 900000000, isTrial: false,
     totalCashbackReceived: 21000000, totalBonusReceived: 2100000,
     tierSince: '2025-09-10'
+  },
+  // === 3 MOCK ACCOUNTS THEO SPEC ===
+  'userwelcomepackage': {
+    username: 'userwelcomepackage', displayName: 'Welcome Pkg User', tier: 0, balance: '3.500.000',
+    totalDeposit: 1000000, totalWager: 2500000,
+    depositThisPeriod: 1000000, wagerThisPeriod: 2500000, isTrial: false,
+    totalCashbackReceived: 0, totalBonusReceived: 1000000,
+    tierSince: ''
+  },
+  'usercommisionpackage': {
+    username: 'usercommisionpackage', displayName: 'Cashback User', tier: 2, balance: '18.200.000',
+    totalDeposit: 200000000, totalWager: 1000000000,
+    depositThisPeriod: 80000000, wagerThisPeriod: 400000000, isTrial: false,
+    totalCashbackReceived: 6000000, totalBonusReceived: 0,
+    tierSince: '2025-10-01'
+  },
+  'usernonpackage': {
+    username: 'usernonpackage', displayName: 'Brand New User', tier: 0, balance: '0',
+    totalDeposit: 0, totalWager: 0,
+    depositThisPeriod: 0, wagerThisPeriod: 0, isTrial: false,
+    totalCashbackReceived: 0, totalBonusReceived: 0,
+    tierSince: ''
   }
 };
 const MOCK_USER = MOCK_USERS['player01'];
@@ -8819,12 +10040,19 @@ var USER_XP = {
 
 // Level badge image: 5 tiers mapped to 30 levels
 function getLevelBadgeImg(level) {
-  var tier = Math.min(5, Math.max(1, Math.ceil(level / 6)));
-  return 'Assets/level/lv-' + tier + '.png';
+  if (level >= 30) return 'Assets/level/diamond-badge.png';
+  if (level >= 20) return 'Assets/level/gold-badge.png';
+  if (level >= 10) return 'Assets/level/silver-badge.png';
+  return 'Assets/level/bronze-badge.png';
 }
 function renderLevelBadgeImg(level, size) {
   size = size || 40;
-  return '<img src="' + getLevelBadgeImg(level) + '" alt="Level ' + level + '" style="width:' + size + 'px;height:' + size + 'px;object-fit:contain;">';
+  var fontSize = Math.max(10, Math.round(size * 0.35));
+  if (level >= 10) fontSize = Math.max(9, Math.round(size * 0.3));
+  return '<div class="level-badge" style="width:' + size + 'px;height:' + size + 'px;position:relative;display:inline-flex;align-items:center;justify-content:center;">' +
+    '<img src="' + getLevelBadgeImg(level) + '" alt="Level ' + level + '" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;">' +
+    '<span class="level-badge-num" style="position:relative;z-index:1;font-family:Montserrat,sans-serif;font-size:' + fontSize + 'px;font-weight:900;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5),0 0 6px rgba(0,0,0,.3);line-height:1;margin-top:' + Math.round(size * 0.05) + 'px;">' + level + '</span>' +
+    '</div>';
 }
 
 function getXpForLevel(level) {
@@ -9950,6 +11178,48 @@ function closeDepositDetail() {
 
 function renderDepositDetailBody(method) {
   const body = document.getElementById('depDetailBody');
+
+  // Check for pre-selected voucher
+  var voucherBlock = '';
+  var selectedVoucher = null;
+  var voucherWarnings = [];
+  if (window._selectedVoucherId) {
+    selectedVoucher = findVoucherById(window._selectedVoucherId);
+    if (selectedVoucher) {
+      var validation = validateVoucherForDeposit(window._selectedVoucherId, 0);
+      var maxLabel = formatMoney(selectedVoucher.maxBonus);
+      voucherBlock = '<div class="dep-voucher-block" style="margin-bottom:16px;padding:14px;border-radius:12px;background:rgba(5,161,88,.06);border:1px solid rgba(5,161,88,.2);">';
+      voucherBlock += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">';
+      voucherBlock += '<div style="flex-shrink:0;">' + selectedVoucher.icon + '</div>';
+      voucherBlock += '<div style="flex:1;min-width:0;">';
+      voucherBlock += '<div style="font-weight:700;font-size:14px;">' + selectedVoucher.title + '</div>';
+      voucherBlock += '<div style="font-size:11px;color:var(--muted);margin-top:2px;">Thưởng tối đa ' + maxLabel + ' VND · Turnover ' + (selectedVoucher.rolling || 'N/A') + '</div>';
+      voucherBlock += '</div>';
+      voucherBlock += '<div style="font-family:Montserrat,sans-serif;font-weight:800;font-size:16px;color:var(--success-100);">' + selectedVoucher.value + '</div>';
+      voucherBlock += '</div>';
+      // Min deposit note
+      if (selectedVoucher.minDeposit && selectedVoucher.minDeposit !== '0đ' && selectedVoucher.minDeposit !== 'Không yêu cầu') {
+        voucherBlock += '<div style="font-size:11px;color:var(--text-2);margin-bottom:4px;">Nạp tối thiểu: <strong>' + selectedVoucher.minDeposit + '</strong></div>';
+      }
+      // Warnings
+      if (!validation.valid) {
+        voucherBlock += '<div style="margin-top:8px;padding:8px 10px;border-radius:8px;background:rgba(255,39,78,.08);border:1px solid rgba(255,39,78,.15);font-size:11px;color:var(--error-100);display:flex;align-items:flex-start;gap:6px;">';
+        voucherBlock += lcIcon('alert-triangle','neon-red','14') + '<span>' + validation.error + '</span></div>';
+      } else if (validation.warning) {
+        voucherBlock += '<div style="margin-top:8px;padding:8px 10px;border-radius:8px;background:rgba(255,166,2,.06);border:1px solid rgba(255,166,2,.12);font-size:11px;color:var(--warning-100);display:flex;align-items:flex-start;gap:6px;">';
+        voucherBlock += lcIcon('alert-triangle','neon-gold','14') + '<span>' + validation.warning + '</span></div>';
+      }
+      // Remove button
+      voucherBlock += '<div style="display:flex;gap:8px;margin-top:8px;">';
+      voucherBlock += '<button onclick="window._selectedVoucherId=null;renderDepositDetailBody(depCurrentMethod);" style="font-size:11px;padding:5px 12px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;">Bỏ chọn voucher</button>';
+      voucherBlock += '<button onclick="window._selectedVoucherId=null;navigateTo(\'/account/my-promotions\');" style="font-size:11px;padding:5px 12px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--text-2);cursor:pointer;">Đổi voucher</button>';
+      voucherBlock += '</div>';
+      voucherBlock += '</div>';
+    }
+  }
+
+  var voucherSelector = renderDepositVoucherSelector();
+
   body.innerHTML = `
     <div class="dep-amount-label">Số tiền nạp</div>
     <div class="dep-amount-wrap">
@@ -9960,13 +11230,7 @@ function renderDepositDetailBody(method) {
       ${method.amounts.map(a => `<button class="dep-quick-btn" data-amt="${a}">${a >= 1000 ? fmtFull(a) : a} Đ</button>`).join('')}
     </div>
 
-    <div class="dep-promo-label">Chọn khuyến mãi</div>
-    <div class="dep-promo-card">
-      <div class="dep-promo-check">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-      </div>
-      <div class="dep-promo-text">Hoàn Trả <span>lên đến 1.4%</span></div>
-    </div>
+    ${voucherSelector}
 
     <div class="dep-info-box">
       <div class="dep-info-title">
@@ -10026,6 +11290,16 @@ function renderDepositDetailBody(method) {
   // Submit
   document.getElementById('depSubmitBtn').addEventListener('click', function() {
     if (depCurrentAmount <= 0 || this.disabled) return;
+
+    // Validate voucher before deposit if selected
+    if (window._selectedVoucherId) {
+      var val = validateVoucherForDeposit(window._selectedVoucherId, depCurrentAmount);
+      if (!val.valid) {
+        alert('Không thể áp dụng voucher: ' + val.error);
+        return;
+      }
+    }
+
     this.disabled = true;
     this.textContent = 'Đang xử lý...';
     setTimeout(() => {
@@ -10034,16 +11308,25 @@ function renderDepositDetailBody(method) {
         const oldBal = parseInt(currentUser.balance.replace(/\./g, '')) || 0;
         const newBal = oldBal + depCurrentAmount * 1000;
         currentUser.balance = fmtFull(newBal);
+        currentUser.totalDeposit = (currentUser.totalDeposit || 0) + depCurrentAmount;
         document.getElementById('depBalanceAmt').textContent = fmtFull(depCurrentAmount) + ' Đ';
+      }
+      // Apply voucher if selected
+      var bonusMsg = '';
+      if (window._selectedVoucherId) {
+        applyVoucherAfterDeposit(window._selectedVoucherId);
+        var v = findVoucherById(window._selectedVoucherId);
+        bonusMsg = v ? ' + Voucher "' + v.title + '" đã áp dụng!' : '';
+        window._selectedVoucherId = null;
       }
       this.textContent = 'Nạp Tiền';
       this.disabled = false;
       closeDepositView();
       // Show toast
       const toast = document.getElementById('depToast');
-      toast.textContent = `Nạp thành công ${fmtFull(depCurrentAmount)} Đ!`;
+      toast.textContent = 'Nạp thành công ' + fmtFull(depCurrentAmount) + ' Đ!' + bonusMsg;
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
+      setTimeout(() => toast.classList.remove('show'), 4000);
     }, 1500);
   });
 }
@@ -10934,93 +12217,246 @@ window.addEventListener('storage', (e) => {
 
 // ===== PROMOTIONS / VOUCHER MODULE =====
 
-const MOCK_VOUCHERS = [
-  {
-    id: 'v1',
-    title: 'Thưởng 50% lần nạp tiếp',
-    desc: 'Áp dụng cho lần nạp tiếp theo, tối đa 2.000.000đ',
-    value: '+50%',
-    valueLabel: 'Tối đa 2.000.000đ',
-    icon: '<img src="Assets/promotion-voucher-percent.webp" alt="voucher" style="width:24px;height:24px;object-fit:contain;">',
-    status: 'available', // available | locked | used | expired
-    expiresAt: Date.now() + 3 * 24 * 60 * 60 * 1000, // 3 days
-    minDeposit: '500.000đ',
-    turnover: '8x',
-    products: ['Slots', 'Bắn cá'],
-    terms: ['Áp dụng 1 lần duy nhất', 'Cược tối thiểu 10.000đ/lượt', 'Không áp dụng cùng KM khác']
-  },
-  {
-    id: 'v2',
-    title: 'Tặng 200.000đ',
-    desc: 'Voucher tặng tiền miễn phí cho thành viên VIP',
-    value: '200K',
-    valueLabel: '200.000đ tiền thưởng',
-    icon: '<img src="Assets/promotion-free-cash.webp" alt="cash" style="width:24px;height:24px;object-fit:contain;">',
-    status: 'available',
-    expiresAt: Date.now() + 15 * 24 * 60 * 60 * 1000, // 15 days
-    minDeposit: 'Không yêu cầu',
-    turnover: '5x',
-    products: ['Tất cả sản phẩm'],
-    terms: ['Tự động cộng vào tài khoản', 'Cần hoàn thành turnover trước khi rút', 'Áp dụng cho VIP 1 trở lên']
-  },
-  {
-    id: 'v3',
-    title: 'Thưởng nạp VIP +30%',
-    desc: 'Thưởng thêm 30% giá trị nạp, tối đa 5.000.000đ',
-    value: '+30%',
-    valueLabel: 'Tối đa 5.000.000đ',
-    icon: lcIcon('star','neon-gold'),
-    status: 'locked',
-    lockReason: 'Bạn đang tham gia chương trình "Thưởng Chào Mừng 100%". Hoàn thành hoặc hủy chương trình hiện tại để mở khóa voucher này.',
-    expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
-    minDeposit: '1.000.000đ',
-    turnover: '10x',
-    products: ['Thể thao', 'Casino'],
-    terms: ['Không áp dụng cùng KM khác', 'Yêu cầu nạp tối thiểu 1.000.000đ', 'Thời hạn hoàn thành turnover: 30 ngày']
-  }
-];
+// ===== VOUCHER & PROMO — PER-ACCOUNT DATA =====
+// Voucher Definition: template cho voucher
+// Voucher Instance: voucher cụ thể trong ví user
 
-const MOCK_ACTIVE_PROMOS = [
-  {
-    id: 'ap1',
-    title: 'Thưởng Chào Mừng 100%',
-    type: 'welcome',
-    status: 'active',
-    desc: 'Nhận thưởng 100% giá trị nạp lần đầu, tối đa 10.000.000đ',
-    bonusReceived: 2500000,
-    turnoverRequired: 10000000,
-    turnoverCompleted: 2500000,
-    startDate: '2026-03-20',
-    endDate: '2026-04-20',
-    steps: [
-      { label: 'Nạp tiền lần đầu', done: true },
-      { label: 'Nhận thưởng 100%', done: true },
-      { label: 'Hoàn thành turnover 8x', done: false },
-      { label: 'Rút tiền thưởng', done: false }
-    ],
-    products: ['Slots', 'Bắn cá', 'Thể thao'],
-    terms: ['Turnover 8x số tiền thưởng', 'Hoàn thành trong 30 ngày', 'Cược tối thiểu 10.000đ/lượt']
+// --- VOUCHER DEFINITIONS (master templates) ---
+var VOUCHER_DEFS = {
+  welcome50: {
+    type: 'bonus', isWelcome: true, firstDepositOnly: true, cashbackCompatible: false,
+    title: 'Welcome 50%', desc: 'Thưởng 50% giá trị nạp lần đầu',
+    value: '+50%', maxBonus: 1000000, minDeposit: '0đ', rolling: '10x',
+    icon: '<img src="Assets/voucher-icon-bonus.png" alt="voucher" style="width:56px;height:56px;object-fit:contain;">',
+    products: ['Tất cả sản phẩm'],
+    terms: ['Chỉ áp dụng cho lần nạp đầu tiên', 'Turnover 10x số tiền thưởng', 'Không áp dụng cùng hoàn trả', 'Hết hạn sau 24 giờ']
   },
-  {
-    id: 'ap2',
-    title: 'Hoàn Trả VIP Hằng Ngày',
-    type: 'cashback',
-    status: 'active',
-    desc: 'Hoàn trả không giới hạn mỗi ngày dựa trên tổng cược',
-    rate: 1.4,
-    todayCashback: 168000,
-    totalCashback: 1920000,
-    cycle: 'Hằng ngày, 00:00 - 23:59',
-    nextPayout: '06/04/2026 lúc 02:00',
-    products: [
-      { name: 'Slots', rate: '1.4%' },
-      { name: 'Thể thao', rate: '1.0%' },
-      { name: 'Casino', rate: '0.8%' },
-      { name: 'Bắn cá', rate: '1.2%' }
-    ],
-    terms: ['Không yêu cầu turnover', 'Tự động cộng vào tài khoản chính', 'Tỷ lệ hoàn trả theo cấp VIP']
+  welcome100: {
+    type: 'bonus', isWelcome: true, firstDepositOnly: true, cashbackCompatible: false,
+    title: 'Welcome 100%', desc: 'Thưởng 100% giá trị nạp lần đầu',
+    value: '+100%', maxBonus: 2000000, minDeposit: '500.000đ', rolling: '15x',
+    icon: '<img src="Assets/voucher-icon-bonus.png" alt="voucher" style="width:56px;height:56px;object-fit:contain;">',
+    products: ['Slots', 'Bắn cá', 'Thể thao'],
+    terms: ['Nạp tối thiểu 500.000đ', 'Chỉ áp dụng cho lần nạp đầu tiên', 'Turnover 15x số tiền thưởng', 'Không áp dụng cùng hoàn trả', 'Hết hạn sau 24 giờ']
+  },
+  welcome200: {
+    type: 'bonus', isWelcome: true, firstDepositOnly: true, cashbackCompatible: false,
+    title: 'Welcome 200%', desc: 'Thưởng 200% giá trị nạp lần đầu',
+    value: '+200%', maxBonus: 3000000, minDeposit: '1.000.000đ', rolling: '20x',
+    icon: '<img src="Assets/voucher-icon-bonus.png" alt="voucher" style="width:56px;height:56px;object-fit:contain;">',
+    products: ['Slots', 'Bắn cá'],
+    terms: ['Nạp tối thiểu 1.000.000đ', 'Chỉ áp dụng cho lần nạp đầu tiên', 'Turnover 20x số tiền thưởng', 'Không áp dụng cùng hoàn trả', 'Hết hạn sau 24 giờ']
   }
-];
+};
+
+// --- PER-ACCOUNT DATA ---
+var ACCOUNT_DATA = {
+  // === Account 1: userwelcomepackage ===
+  // Đã apply welcome 100%, rolling 500K/1M, 2 welcome còn lại bị ineligible
+  'userwelcomepackage': {
+    vouchers: [
+      { id: 'wv1', ...VOUCHER_DEFS.welcome50, status: 'ineligible', expiresAt: Date.now() - 1*60*60*1000 },
+      { id: 'wv2', ...VOUCHER_DEFS.welcome100, status: 'used', expiresAt: Date.now() - 2*60*60*1000 },
+      { id: 'wv3', ...VOUCHER_DEFS.welcome200, status: 'ineligible', expiresAt: Date.now() - 1*60*60*1000 },
+      {
+        id: 'v4', type: 'bonus', isWelcome: false, firstDepositOnly: false, cashbackCompatible: true,
+        title: 'Thưởng nạp VIP +30%', desc: 'Thưởng thêm 30% giá trị nạp, tối đa 5.000.000đ',
+        value: '+30%', maxBonus: 5000000, minDeposit: '1.000.000đ', rolling: '10x',
+        icon: '<img src="Assets/voucher-icon-bonus.png" alt="voucher" style="width:56px;height:56px;object-fit:contain;">',
+        status: 'available',
+        lockReason: '',
+        expiresAt: Date.now() + 30*24*60*60*1000,
+        products: ['Thể thao', 'Casino'],
+        terms: ['Không áp dụng cùng KM khác', 'Yêu cầu nạp tối thiểu 1.000.000đ', 'Hoàn thành turnover trong 30 ngày']
+      }
+    ],
+    activePromos: [
+      {
+        id: 'ap1', title: 'Thưởng Chào Mừng 100%', type: 'welcome', status: 'active',
+        desc: 'Nhận thưởng 100% giá trị nạp lần đầu, tối đa 2.000.000đ',
+        bonusReceived: 1000000, turnoverRequired: 15000000, turnoverCompleted: 7500000,
+        startDate: '2026-04-05', endDate: '2026-05-05',
+        steps: [
+          { label: 'Nạp tiền lần đầu', done: true },
+          { label: 'Nhận thưởng 100%', done: true },
+          { label: 'Hoàn thành turnover 15x', done: false },
+          { label: 'Rút tiền thưởng', done: false }
+        ],
+        products: ['Slots', 'Bắn cá', 'Thể thao'],
+        terms: ['Turnover 15x số tiền thưởng', 'Hoàn thành trong 30 ngày', 'Cược tối thiểu 10.000đ/lượt']
+      }
+    ]
+  },
+  // === Account 2: usercommisionpackage ===
+  // Cashback active, 2 voucher (1 compatible + 1 conflict)
+  'usercommisionpackage': {
+    vouchers: [
+      {
+        id: 'cv1', type: 'bonus', isWelcome: false, firstDepositOnly: false, cashbackCompatible: true,
+        title: 'Nạp lại +20%', desc: 'Thưởng 20% cho mỗi lần nạp, không giới hạn',
+        value: '+20%', maxBonus: 1000000, minDeposit: '200.000đ', rolling: '5x',
+        icon: '<img src="Assets/voucher-icon-bonus.png" alt="voucher" style="width:56px;height:56px;object-fit:contain;">',
+        status: 'available', expiresAt: Date.now() + 10*24*60*60*1000,
+        products: ['Tất cả sản phẩm'],
+        terms: ['Áp dụng cùng hoàn trả', 'Turnover 5x', 'Không giới hạn số lần nạp']
+      },
+      {
+        id: 'cv2', type: 'cash', isWelcome: false, firstDepositOnly: false, cashbackCompatible: false,
+        title: 'Tặng 500K Free Credit', desc: 'Tặng 500.000đ miễn phí, turnover 8x',
+        value: '500K', maxBonus: 500000, minDeposit: '1.000.000đ', rolling: '8x',
+        icon: '<img src="Assets/voucher-icon-cash.png" alt="cash" style="width:56px;height:56px;object-fit:contain;">',
+        status: 'available', expiresAt: Date.now() + 5*24*60*60*1000,
+        products: ['Slots', 'Bắn cá'],
+        terms: ['Không áp dụng cùng hoàn trả', 'Turnover 8x', 'Nạp tối thiểu 1.000.000đ']
+      }
+    ],
+    activePromos: [
+      {
+        id: 'ap2', title: 'Hoàn Trả VIP Hằng Ngày', type: 'cashback', status: 'active',
+        desc: 'Hoàn trả không giới hạn mỗi ngày dựa trên tổng cược',
+        rate: 1.4, todayCashback: 168000, totalCashback: 6000000,
+        cycle: 'Hằng ngày, 00:00 - 23:59', nextPayout: '13/04/2026 lúc 02:00',
+        products: [
+          { name: 'Slots', rate: '1.4%' },
+          { name: 'Thể thao', rate: '1.0%' },
+          { name: 'Casino', rate: '0.8%' },
+          { name: 'Bắn cá', rate: '1.2%' }
+        ],
+        terms: ['Không yêu cầu turnover', 'Tự động cộng vào tài khoản chính', 'Tỷ lệ hoàn trả theo cấp VIP']
+      }
+    ]
+  },
+  // === Account 3: usernonpackage ===
+  // Vừa đăng ký, 3 welcome voucher chưa dùng
+  'usernonpackage': {
+    vouchers: [
+      { id: 'nv1', ...VOUCHER_DEFS.welcome50, status: 'available', expiresAt: Date.now() + 24*60*60*1000 },
+      { id: 'nv2', ...VOUCHER_DEFS.welcome100, status: 'available', expiresAt: Date.now() + 24*60*60*1000 },
+      { id: 'nv3', ...VOUCHER_DEFS.welcome200, status: 'available', expiresAt: Date.now() + 24*60*60*1000 }
+    ],
+    activePromos: []
+  },
+  // === Default account (player01, vip1, etc.) ===
+  '_default': {
+    vouchers: [
+      {
+        id: 'v1', type: 'bonus', isWelcome: false, firstDepositOnly: false, cashbackCompatible: true,
+        title: 'Thưởng 50% lần nạp tiếp', desc: 'Áp dụng cho lần nạp tiếp theo, tối đa 2.000.000đ',
+        value: '+50%', maxBonus: 2000000, minDeposit: '500.000đ', rolling: '8x',
+        icon: '<img src="Assets/voucher-icon-bonus.png" alt="voucher" style="width:56px;height:56px;object-fit:contain;">',
+        status: 'available', expiresAt: Date.now() + 3*24*60*60*1000,
+        products: ['Slots', 'Bắn cá'],
+        terms: ['Áp dụng 1 lần duy nhất', 'Cược tối thiểu 10.000đ/lượt', 'Turnover 8x']
+      },
+      {
+        id: 'v2', type: 'cash', isWelcome: false, firstDepositOnly: false, cashbackCompatible: true,
+        title: 'Tặng 200.000đ', desc: 'Voucher tặng tiền miễn phí cho thành viên VIP',
+        value: '200K', maxBonus: 200000, minDeposit: 'Không yêu cầu', rolling: '5x',
+        icon: '<img src="Assets/voucher-icon-cash.png" alt="cash" style="width:56px;height:56px;object-fit:contain;">',
+        status: 'available', expiresAt: Date.now() + 15*24*60*60*1000,
+        products: ['Tất cả sản phẩm'],
+        terms: ['Tự động cộng vào tài khoản', 'Cần hoàn thành turnover trước khi rút', 'Áp dụng cho VIP 1 trở lên']
+      },
+      {
+        id: 'v3', type: 'bonus', isWelcome: false, firstDepositOnly: false, cashbackCompatible: false,
+        title: 'Thưởng nạp VIP +30%', desc: 'Thưởng thêm 30% giá trị nạp, tối đa 5.000.000đ',
+        value: '+30%', maxBonus: 5000000, minDeposit: '1.000.000đ', rolling: '10x',
+        icon: '<img src="Assets/voucher-icon-bonus.png" alt="voucher" style="width:56px;height:56px;object-fit:contain;">',
+        status: 'available',
+        lockReason: '',
+        expiresAt: Date.now() + 30*24*60*60*1000,
+        products: ['Thể thao', 'Casino'],
+        terms: ['Không áp dụng cùng KM khác', 'Yêu cầu nạp tối thiểu 1.000.000đ', 'Hoàn thành turnover trong 30 ngày']
+      }
+    ],
+    activePromos: [
+      {
+        id: 'ap1', title: 'Thưởng Chào Mừng 100%', type: 'welcome', status: 'active',
+        desc: 'Nhận thưởng 100% giá trị nạp lần đầu, tối đa 2.000.000đ',
+        bonusReceived: 2500000, turnoverRequired: 10000000, turnoverCompleted: 2500000,
+        startDate: '2026-03-20', endDate: '2026-04-20',
+        steps: [
+          { label: 'Nạp tiền lần đầu', done: true },
+          { label: 'Nhận thưởng 100%', done: true },
+          { label: 'Hoàn thành turnover', done: false },
+          { label: 'Rút tiền thưởng', done: false }
+        ],
+        products: ['Slots', 'Bắn cá', 'Thể thao'],
+        terms: ['Turnover 8x số tiền thưởng', 'Hoàn thành trong 30 ngày', 'Cược tối thiểu 10.000đ/lượt']
+      },
+      {
+        id: 'ap2', title: 'Hoàn Trả VIP Hằng Ngày', type: 'cashback', status: 'active',
+        desc: 'Hoàn trả không giới hạn mỗi ngày dựa trên tổng cược',
+        rate: 1.4, todayCashback: 168000, totalCashback: 1920000,
+        cycle: 'Hằng ngày, 00:00 - 23:59', nextPayout: '13/04/2026 lúc 02:00',
+        products: [
+          { name: 'Slots', rate: '1.4%' },
+          { name: 'Thể thao', rate: '1.0%' },
+          { name: 'Casino', rate: '0.8%' },
+          { name: 'Bắn cá', rate: '1.2%' }
+        ],
+        terms: ['Không yêu cầu turnover', 'Tự động cộng vào tài khoản chính', 'Tỷ lệ hoàn trả theo cấp VIP']
+      }
+    ]
+  }
+};
+
+// --- HELPER FUNCTIONS: Per-account data access ---
+function getRawVouchersForCurrentUser() {
+  var username = currentUser ? currentUser.username : '';
+  var acct = ACCOUNT_DATA[username] || ACCOUNT_DATA['_default'];
+  return acct.vouchers || [];
+}
+
+function getPromosForCurrentUser() {
+  var username = currentUser ? currentUser.username : '';
+  var acct = ACCOUNT_DATA[username] || ACCOUNT_DATA['_default'];
+  return acct.activePromos || [];
+}
+
+// Dynamic status computation: locked/available depends entirely on active rolling promo
+function getVouchersForCurrentUser() {
+  var vouchers = getRawVouchersForCurrentUser();
+  var promos = getPromosForCurrentUser();
+  var activeRollingPromo = promos.find(function(p) {
+    return p.status === 'active' && (p.type === 'welcome' || p.turnoverRequired > 0);
+  });
+  vouchers.forEach(function(v) {
+    // Skip terminal statuses — these never change dynamically
+    if (v.status === 'used' || v.status === 'expired' || v.status === 'ineligible') return;
+    // Auto-expire check
+    if (v.expiresAt && v.expiresAt < Date.now() && v.status !== 'used' && v.status !== 'ineligible') {
+      v.status = 'expired';
+      v.lockReason = '';
+      return;
+    }
+    // Rolling conflict: voucher has rolling + there's an active rolling promo → locked
+    var hasRolling = v.rolling && v.rolling !== 'N/A' && v.rolling !== '0x';
+    if (hasRolling && activeRollingPromo) {
+      v.status = 'locked';
+      v.lockReason = 'Bạn đang tham gia "' + activeRollingPromo.title + '". Hoàn thành hoặc hủy để mở khóa.';
+    } else {
+      // No conflict → available (unlock if was previously locked)
+      if (v.status === 'locked') {
+        v.status = 'available';
+        v.lockReason = '';
+      }
+    }
+  });
+  return vouchers;
+}
+
+function findVoucherById(id) {
+  return getVouchersForCurrentUser().find(function(v) { return v.id === id; });
+}
+
+function findPromoById(id) {
+  return getPromosForCurrentUser().find(function(p) { return p.id === id; });
+}
+
+// Backward-compat aliases (read-only references)
+var MOCK_VOUCHERS = ACCOUNT_DATA['_default'].vouchers;
+var MOCK_ACTIVE_PROMOS = ACCOUNT_DATA['_default'].activePromos;
 
 const MOCK_FEATURED_PROMOS = [
   {
@@ -11069,6 +12505,141 @@ const MOCK_FEATURED_PROMOS = [
   }
 ];
 
+// ===== GIFT CODE MODULE =====
+var MOCK_GIFT_CODES = {
+  'WELCOME2026': {
+    voucher: {
+      type: 'bonus', isWelcome: false, firstDepositOnly: false, cashbackCompatible: true,
+      title: 'Thưởng Gift Code 50%', desc: 'Thưởng 50% giá trị nạp từ mã quà tặng',
+      value: '+50%', maxBonus: 500000, minDeposit: '100.000đ', rolling: '5x',
+      icon: '<img src="Assets/voucher-icon-bonus.png" alt="voucher" style="width:56px;height:56px;object-fit:contain;">',
+      products: ['Tất cả sản phẩm'],
+      terms: ['Từ mã quà tặng', 'Turnover 5x', 'Áp dụng cùng hoàn trả']
+    },
+    maxUses: 100, used: 42
+  },
+  'FREECASH500': {
+    voucher: {
+      type: 'cash', isWelcome: false, firstDepositOnly: false, cashbackCompatible: false,
+      title: 'Tặng 500K Free Credit', desc: 'Mã quà tặng 500K miễn phí',
+      value: '500K', maxBonus: 500000, minDeposit: 'Không yêu cầu', rolling: '10x',
+      icon: '<img src="Assets/voucher-icon-cash.png" alt="cash" style="width:56px;height:56px;object-fit:contain;">',
+      products: ['Slots', 'Bắn cá'],
+      terms: ['Từ mã quà tặng', 'Turnover 10x', 'Không áp dụng cùng hoàn trả']
+    },
+    maxUses: 50, used: 50 // exhausted
+  },
+  'VIP100K': {
+    voucher: {
+      type: 'cash', isWelcome: false, firstDepositOnly: false, cashbackCompatible: true,
+      title: 'Tặng 100K VIP', desc: 'Quà tặng 100K dành cho thành viên VIP',
+      value: '100K', maxBonus: 100000, minDeposit: 'Không yêu cầu', rolling: '3x',
+      icon: '<img src="Assets/voucher-icon-cash.png" alt="cash" style="width:56px;height:56px;object-fit:contain;">',
+      products: ['Tất cả sản phẩm'],
+      terms: ['Từ mã quà tặng VIP', 'Turnover 3x']
+    },
+    maxUses: 200, used: 88
+  }
+};
+
+function renderGiftCodePage(container) {
+  var html = '<div class="gc-page">';
+  html += '<div class="account-page-header">';
+  html += '<div class="account-page-title">Mã quà tặng</div>';
+  html += '<div class="account-page-sub">Nhập mã Gift Code để nhận voucher ưu đãi</div>';
+  html += '</div>';
+  // Input
+  html += '<div class="gc-input-wrap">';
+  html += '<input type="text" id="gcInput" class="gc-input" placeholder="Nhập mã Gift Code..." maxlength="20" autocomplete="off">';
+  html += '</div>';
+  html += '<button class="gc-cta" id="gcSubmitBtn" onclick="redeemGiftCode()">Đổi mã</button>';
+  // Result area
+  html += '<div id="gcResult"></div>';
+  // Rules
+  html += '<div class="gc-rules">';
+  html += '<div class="gc-rules-title">Quy định sử dụng</div>';
+  html += '<ul>';
+  html += '<li>Mã không phân biệt hoa thường</li>';
+  html += '<li>Mỗi mã chỉ sử dụng được 1 lần / tài khoản</li>';
+  html += '<li>Voucher nhận được sẽ nằm trong ví voucher</li>';
+  html += '<li>Mã có thể bị giới hạn số lượng hoặc thời gian</li>';
+  html += '<li>Nếu đang có KM rolling, voucher mới có thể bị tạm khóa</li>';
+  html += '</ul>';
+  html += '</div>';
+  html += '</div>';
+  container.innerHTML = html;
+  // Focus input
+  setTimeout(function() {
+    var inp = document.getElementById('gcInput');
+    if (inp) inp.focus();
+  }, 100);
+}
+
+function redeemGiftCode() {
+  var input = document.getElementById('gcInput');
+  var resultEl = document.getElementById('gcResult');
+  if (!input || !resultEl) return;
+  var code = input.value.trim().toUpperCase();
+  if (!code) {
+    resultEl.innerHTML = '<div class="gc-result error"><div class="gc-result-icon">⚠️</div><div class="gc-result-title">Vui lòng nhập mã</div><div class="gc-result-desc">Nhập mã Gift Code vào ô phía trên</div></div>';
+    return;
+  }
+  var gc = MOCK_GIFT_CODES[code];
+  if (!gc) {
+    resultEl.innerHTML = '<div class="gc-result error"><div class="gc-result-icon">❌</div><div class="gc-result-title">Mã không hợp lệ</div><div class="gc-result-desc">Mã "' + code + '" không tồn tại hoặc đã hết hiệu lực</div></div>';
+    return;
+  }
+  if (gc.used >= gc.maxUses) {
+    resultEl.innerHTML = '<div class="gc-result error"><div class="gc-result-icon">⏰</div><div class="gc-result-title">Mã đã hết lượt</div><div class="gc-result-desc">Mã "' + code + '" đã được sử dụng hết ' + gc.maxUses + ' lượt</div></div>';
+    return;
+  }
+  // Check if user already redeemed this code
+  var vouchers = getVouchersForCurrentUser();
+  var alreadyHas = vouchers.some(function(v) { return v._giftCode === code; });
+  if (alreadyHas) {
+    resultEl.innerHTML = '<div class="gc-result error"><div class="gc-result-icon">🔁</div><div class="gc-result-title">Đã sử dụng</div><div class="gc-result-desc">Bạn đã đổi mã "' + code + '" trước đó</div></div>';
+    return;
+  }
+  // Grant voucher — always grant as 'available'; status auto-computed by getVouchersForCurrentUser()
+  var newVoucher = Object.assign({}, gc.voucher, {
+    id: 'gc_' + Date.now(),
+    status: 'available',
+    lockReason: '',
+    expiresAt: Date.now() + 7*24*60*60*1000,
+    _giftCode: code
+  });
+  vouchers.push(newVoucher);
+  gc.used++;
+  // Re-read to get computed status (locked if rolling conflict)
+  var computedVouchers = getVouchersForCurrentUser();
+  var computedV = computedVouchers.find(function(cv) { return cv.id === newVoucher.id; });
+  var isLocked = computedV ? computedV.status === 'locked' : false;
+  var html = '<div class="gc-result success">';
+  html += '<div class="gc-result-icon">🎉</div>';
+  html += '<div class="gc-result-title">Đổi mã thành công!</div>';
+  html += '<div class="gc-result-desc">Voucher đã được thêm vào ví của bạn</div>';
+  html += '<div class="gc-result-voucher">';
+  html += '<div style="flex-shrink:0;">' + newVoucher.icon + '</div>';
+  html += '<div style="flex:1;min-width:0;">';
+  html += '<div style="font-weight:700;font-size:14px;">' + newVoucher.title + '</div>';
+  html += '<div style="font-size:11px;color:var(--muted);margin-top:2px;">' + newVoucher.desc + '</div>';
+  if (isLocked) {
+    html += '<div style="font-size:11px;color:var(--warning-100);margin-top:4px;">' + lcIcon('lock','neon-red','12') + ' Tạm khóa — đang có KM rolling active</div>';
+  }
+  html += '</div>';
+  html += '<div style="font-family:Montserrat,sans-serif;font-weight:800;font-size:16px;color:var(--primary-300);">' + newVoucher.value + '</div>';
+  html += '</div>';
+  html += '<div class="gc-result-actions">';
+  if (!isLocked) {
+    html += '<button class="gc-result-btn primary" onclick="useVoucher(\'' + newVoucher.id + '\')">Dùng ngay</button>';
+  }
+  html += '<button class="gc-result-btn secondary" onclick="navigateTo(\'/account/my-promotions\')">Về ví voucher</button>';
+  html += '</div>';
+  html += '</div>';
+  resultEl.innerHTML = html;
+  input.value = '';
+}
+
 function openPromoView() {
   if (!isLoggedIn) {
     pendingAction = () => navigateTo('/account/my-promotions');
@@ -11084,8 +12655,24 @@ function closePromoView() {
 }
 
 function renderPromoSections() {
-  const body = document.getElementById('promoBody');
-  body.innerHTML = renderVoucherSection() + renderActivePromoSection() + renderFeaturedPromoSection();
+  var content = renderVoucherSection() + renderActivePromoSection() + renderFeaturedPromoSection();
+  // Update both overlay and inline body if they exist
+  var body = document.getElementById('promoBody');
+  if (body) body.innerHTML = content;
+  var inlineBody = document.getElementById('promoInlineBody');
+  if (inlineBody) inlineBody.innerHTML = content;
+}
+
+// Format money: short=true → 100K, 2M, 1.5B; short=false → 1.000.000đ
+function formatMoney(amount, short) {
+  if (short === undefined) short = true;
+  if (!short) {
+    return amount.toLocaleString('vi-VN') + 'đ';
+  }
+  if (amount >= 1000000000) return (amount / 1000000000) + 'B';
+  if (amount >= 1000000) return (amount / 1000000) + 'M';
+  if (amount >= 1000) return (amount / 1000) + 'K';
+  return amount + '';
 }
 
 function formatVoucherExpiry(ts) {
@@ -11100,52 +12687,217 @@ function formatVoucherExpiry(ts) {
   return 'HSD: ' + d.getDate().toString().padStart(2,'0') + '/' + (d.getMonth()+1).toString().padStart(2,'0') + '/' + d.getFullYear();
 }
 
-function renderVoucherSection() {
-  const vouchers = [...MOCK_VOUCHERS].sort((a,b) => {
-    if (a.status === 'locked' && b.status !== 'locked') return 1;
-    if (a.status !== 'locked' && b.status === 'locked') return -1;
+// --- Voucher filter state ---
+var currentVoucherFilter = 'all';
+
+function setVoucherFilter(f) {
+  currentVoucherFilter = f;
+  renderPromoSections();
+}
+
+function getVoucherFilterCounts(vouchers) {
+  var counts = { all: 0, welcome: 0, reload: 0, available: 0, locked: 0, expiring: 0, history: 0 };
+  var now = Date.now();
+  vouchers.forEach(function(v) {
+    // Auto-expire check
+    if (v.status === 'available' && v.expiresAt < now) { v.status = 'expired'; }
+    counts.all++;
+    if (v.isWelcome) counts.welcome++;
+    if (!v.isWelcome && v.type === 'bonus') counts.reload++;
+    if (v.status === 'available') counts.available++;
+    if (v.status === 'locked') counts.locked++;
+    if (v.status === 'available' && (v.expiresAt - now) < 7*24*60*60*1000) counts.expiring++;
+    if (v.status === 'used' || v.status === 'expired' || v.status === 'ineligible') counts.history++;
+  });
+  return counts;
+}
+
+function filterVouchers(vouchers, filter) {
+  var now = Date.now();
+  var activeStatuses = ['available', 'locked'];
+  switch (filter) {
+    case 'welcome': return vouchers.filter(function(v) { return v.isWelcome && activeStatuses.indexOf(v.status) > -1; });
+    case 'reload': return vouchers.filter(function(v) { return !v.isWelcome && v.type === 'bonus' && activeStatuses.indexOf(v.status) > -1; });
+    case 'available': return vouchers.filter(function(v) { return v.status === 'available'; });
+    case 'locked': return vouchers.filter(function(v) { return v.status === 'locked'; });
+    case 'expiring': return vouchers.filter(function(v) { return v.status === 'available' && (v.expiresAt - now) < 7*24*60*60*1000; });
+    case 'history': return vouchers.filter(function(v) { return v.status === 'used' || v.status === 'expired' || v.status === 'ineligible'; });
+    default: return vouchers.filter(function(v) { return activeStatuses.indexOf(v.status) > -1; }); // 'all' = active only
+  }
+}
+
+function sortVouchers(vouchers) {
+  return [...vouchers].sort(function(a, b) {
+    // Welcome vouchers first, sorted by bonus % ascending (50→100→200)
+    if (a.isWelcome && !b.isWelcome) return -1;
+    if (!a.isWelcome && b.isWelcome) return 1;
+    if (a.isWelcome && b.isWelcome) {
+      var aNum = parseInt(a.value.replace(/[^0-9]/g, '')) || 0;
+      var bNum = parseInt(b.value.replace(/[^0-9]/g, '')) || 0;
+      return aNum - bNum;
+    }
+    // Then by status: available first, locked next
+    if (a.status === 'available' && b.status !== 'available') return -1;
+    if (a.status !== 'available' && b.status === 'available') return 1;
+    // Then by expiry (soonest first)
     return a.expiresAt - b.expiresAt;
   });
-  let html = '<div class="promo-section-title">' + lcIcon('ticket','neon-red') + ' Voucher của tôi</div>';
+}
+
+function formatWelcomeCountdown(ts) {
+  var diff = ts - Date.now();
+  if (diff <= 0) return '<span style="color:var(--error-100)">Đã hết hạn</span>';
+  var hours = Math.floor(diff / (60*60*1000));
+  var mins = Math.floor((diff % (60*60*1000)) / (60*1000));
+  return '<span class="voucher-countdown-urgent">' + lcIcon('timer','neon-red') + ' Còn ' + hours + 'h ' + mins + 'p</span>';
+}
+
+function renderVoucherSection() {
+  var allVouchers = getVouchersForCurrentUser();
+  var now = Date.now();
+  // Auto-expire
+  allVouchers.forEach(function(v) {
+    if (v.status === 'available' && v.expiresAt < now) v.status = 'expired';
+  });
+  var counts = getVoucherFilterCounts(allVouchers);
+  var filtered = filterVouchers(allVouchers, currentVoucherFilter);
+  var vouchers = sortVouchers(filtered);
+  var isHistory = currentVoucherFilter === 'history';
+
+  var html = '<div class="promo-section-title">' + lcIcon('ticket','neon-red') + ' Voucher của tôi <span class="promo-section-badge">Cá nhân</span></div>';
+
+  // Filter chips
+  html += '<div class="voucher-filter-bar">';
+  var filters = [
+    { key: 'all', label: 'Tất cả', count: counts.all - counts.history },
+    { key: 'welcome', label: 'Welcome', count: counts.welcome },
+    { key: 'reload', label: 'Nạp lại', count: counts.reload },
+    { key: 'available', label: 'Khả dụng', count: counts.available },
+    { key: 'locked', label: 'Bị khóa', count: counts.locked },
+    { key: 'expiring', label: 'Sắp hết hạn', count: counts.expiring },
+    { key: 'history', label: 'Lịch sử', count: counts.history }
+  ];
+  filters.forEach(function(f) {
+    var active = currentVoucherFilter === f.key ? ' active' : '';
+    html += '<div class="voucher-filter-chip' + active + '" onclick="setVoucherFilter(\'' + f.key + '\')">';
+    html += f.label;
+    if (f.count > 0) html += '<span class="chip-count">' + f.count + '</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Empty state
   if (vouchers.length === 0) {
-    html += '<div style="text-align:center;color:var(--text-muted);padding:24px 0;">Chưa có voucher nào</div>';
+    if (isHistory) {
+      html += '<div style="text-align:center;color:var(--muted);padding:28px 0;">';
+      html += lcIcon('history','','24') + '<div style="margin-top:8px;font-size:13px;">Chưa có voucher nào trong lịch sử</div>';
+      html += '</div>';
+    } else {
+      html += '<div style="text-align:center;color:var(--muted);padding:28px 0;">';
+      html += lcIcon('ticket','','24') + '<div style="margin-top:8px;font-size:13px;">Không có voucher nào phù hợp</div>';
+      html += '<div style="font-size:11px;color:var(--muted);margin-top:4px;">Kiểm tra mục Ưu đãi nổi bật hoặc nhập Gift Code</div>';
+      html += '</div>';
+    }
     return html;
   }
-  vouchers.forEach(v => {
-    const daysLeft = Math.floor((v.expiresAt - Date.now()) / (24*60*60*1000));
-    const isUrgent = v.status === 'available' && daysLeft < 7;
-    const isLocked = v.status === 'locked';
-    html += '<div class="promo-voucher-card' + (isUrgent ? ' urgent' : '') + (isLocked ? ' locked' : '') + '" onclick="openVoucherDetail(\'' + v.id + '\')">';
+
+  // Render voucher cards
+  vouchers.forEach(function(v) {
+    var diff = v.expiresAt - now;
+    var daysLeft = Math.floor(diff / (24*60*60*1000));
+    var hoursLeft = Math.floor(diff / (60*60*1000));
+    var isUrgent = v.status === 'available' && daysLeft < 7 && diff > 0;
+    var isLocked = v.status === 'locked';
+    var isUsed = v.status === 'used';
+    var isExpired = v.status === 'expired';
+    var isIneligible = v.status === 'ineligible';
+    var isHistoryItem = isUsed || isExpired || isIneligible;
+
+    var cardClass = 'promo-voucher-card';
+    if (isUrgent) cardClass += ' urgent';
+    if (isLocked) cardClass += ' locked';
+    if (isUsed) cardClass += ' used';
+    if (isExpired) cardClass += ' expired';
+    if (isIneligible) cardClass += ' ineligible';
+
+    html += '<div class="' + cardClass + '" onclick="openVoucherDetail(\'' + v.id + '\')">';
+
+    // Ticket stub (left colored area)
+    var stubClass = 'promo-voucher-stub';
+    if (v.type === 'cash') stubClass += ' type-cash';
+    html += '<div class="' + stubClass + '">';
+    html += '<div class="promo-voucher-stub-icon">' + v.icon + '</div>';
+    html += '<div class="promo-voucher-stub-value">' + v.value + '</div>';
+    html += '</div>';
+
+    // Zigzag divider
+    html += '<div class="promo-voucher-zigzag"></div>';
+
+    // Content area
     html += '<div class="promo-voucher-left">';
-    html += '<div class="promo-voucher-icon">' + v.icon + '</div>';
     html += '<div class="promo-voucher-info">';
-    html += '<div class="promo-voucher-title">' + v.title + '</div>';
-    html += '<div class="promo-voucher-desc">' + v.desc + '</div>';
-    html += '<div class="promo-voucher-expiry">' + (isUrgent ? lcIcon('timer','neon-red') + ' ' : '') + formatVoucherExpiry(v.expiresAt) + '</div>';
-    html += '</div>';
-    html += '</div>';
-    html += '<div class="promo-voucher-divider"></div>';
-    html += '<div class="promo-voucher-right">';
-    html += '<div class="promo-voucher-value">' + v.value + '</div>';
-    if (isLocked) {
-      html += '<div class="promo-voucher-status locked">' + lcIcon('lock','neon-red') + ' Tạm khóa</div>';
-    } else {
-      html += '<div class="promo-voucher-status available">Có thể dùng</div>';
+
+    // Title with welcome tag
+    html += '<div class="promo-voucher-title">';
+    if (v.isWelcome) html += '<span class="voucher-welcome-tag">Welcome</span>';
+    html += v.title + '</div>';
+
+    // Max bonus inline with desc
+    if (v.maxBonus) {
+      html += '<div class="voucher-max-bonus">Tối đa ' + formatMoney(v.maxBonus) + '</div>';
     }
-    html += '</div>';
-    html += '</div>';
+
+    // First deposit note for welcome voucher
+    if (v.isWelcome && v.firstDepositOnly && v.status === 'available') {
+      html += '<div class="voucher-first-deposit-note">' + lcIcon('info','neon-gold','12') + ' Chỉ lần nạp đầu</div>';
+    }
+
+    // Bottom row: expiry left, status right
+    html += '<div class="promo-voucher-bottom-row">';
+
+    // Expiry / countdown
+    if (v.isWelcome && v.status === 'available' && diff > 0) {
+      html += '<div class="promo-voucher-expiry">' + formatWelcomeCountdown(v.expiresAt) + '</div>';
+    } else if (isHistoryItem) {
+      if (isUsed) html += '<div class="promo-voucher-expiry" style="color:var(--muted)">Đã sử dụng</div>';
+      else if (isExpired) html += '<div class="promo-voucher-expiry" style="color:var(--muted)">Đã hết hạn</div>';
+      else if (isIneligible) html += '<div class="promo-voucher-expiry" style="color:var(--error-100)">Không đủ điều kiện</div>';
+    } else {
+      html += '<div class="promo-voucher-expiry">' + (isUrgent ? lcIcon('timer','neon-red') + ' ' : '') + formatVoucherExpiry(v.expiresAt) + '</div>';
+    }
+
+    // Status chip
+    if (isLocked) {
+      html += '<div class="promo-voucher-status locked">' + lcIcon('lock','','10') + ' Khóa</div>';
+    } else if (isUsed) {
+      html += '<div class="promo-voucher-status used">Đã dùng</div>';
+    } else if (isExpired) {
+      html += '<div class="promo-voucher-status expired">Hết hạn</div>';
+    } else if (isIneligible) {
+      html += '<div class="promo-voucher-status ineligible">Không đủ ĐK</div>';
+    } else {
+      html += '<div class="promo-voucher-status available">Dùng ngay</div>';
+    }
+
+    html += '</div>'; // bottom-row
+
+    html += '</div>'; // info
+    html += '</div>'; // left
+    html += '</div>'; // card
   });
   return html;
 }
 
 function renderActivePromoSection() {
-  if (MOCK_ACTIVE_PROMOS.length === 0) return '';
+  var activePromos = getPromosForCurrentUser();
+  if (activePromos.length === 0) return '';
   let html = '<div class="promo-section-title">' + lcIcon('shield','neon-green') + ' Khuyến mãi đang áp dụng</div>';
-  MOCK_ACTIVE_PROMOS.forEach(p => {
-    if (p.type === 'welcome') {
-      html += renderWelcomePromoCard(p);
-    } else if (p.type === 'cashback') {
+  activePromos.forEach(p => {
+    if (p.type === 'cashback') {
       html += renderCashbackPromoCard(p);
+    } else {
+      // welcome, deposit, event — all use the same turnover progress card
+      html += renderWelcomePromoCard(p);
     }
   });
   return html;
@@ -11153,37 +12905,34 @@ function renderActivePromoSection() {
 
 function renderWelcomePromoCard(p) {
   const pct = Math.round((p.turnoverCompleted / p.turnoverRequired) * 100);
-  let html = '<div class="promo-active-card">';
+  let html = '<div class="promo-active-card" onclick="openPromoDetail(\'' + p.id + '\')">';
   html += '<div class="promo-active-header">';
   html += '<div class="promo-active-title">' + p.title + '</div>';
   html += '<div class="promo-active-status">Đang tham gia</div>';
   html += '</div>';
+  html += '<div class="promo-active-body">';
   html += '<div class="promo-active-desc">' + p.desc + '</div>';
   html += '<div class="promo-active-progress-wrap">';
   html += '<div class="promo-active-progress-bar"><div class="promo-active-progress-fill" style="width:' + pct + '%"></div></div>';
   html += '<div class="promo-active-progress-label">' + (p.turnoverCompleted/1000000).toFixed(1) + 'M / ' + (p.turnoverRequired/1000000).toFixed(0) + 'M turnover (' + pct + '%)</div>';
   html += '</div>';
-  html += '<div class="promo-active-actions">';
-  html += '<button class="promo-active-btn primary" onclick="event.stopPropagation();openPromoDetail(\'' + p.id + '\')">Chi tiết</button>';
-  html += '<button class="promo-active-btn danger" onclick="event.stopPropagation();cancelActivePromo(\'' + p.id + '\')">Hủy</button>';
   html += '</div>';
   html += '</div>';
   return html;
 }
 
 function renderCashbackPromoCard(p) {
-  let html = '<div class="promo-active-card">';
+  let html = '<div class="promo-active-card" onclick="openPromoDetail(\'' + p.id + '\')">';
   html += '<div class="promo-active-header">';
   html += '<div class="promo-active-title">' + p.title + '</div>';
   html += '<div class="promo-active-status">Đang hoạt động</div>';
   html += '</div>';
+  html += '<div class="promo-active-body">';
   html += '<div class="promo-active-desc">' + p.desc + '</div>';
   html += '<div style="display:flex;gap:12px;margin:8px 0;">';
   html += '<div class="promo-active-rate-pill">Tỷ lệ: <strong>' + p.rate + '%</strong></div>';
   html += '<div class="promo-active-rate-pill">Hôm nay: <strong>' + (p.todayCashback/1000).toFixed(0) + 'K</strong></div>';
   html += '</div>';
-  html += '<div class="promo-active-actions">';
-  html += '<button class="promo-active-btn primary" onclick="event.stopPropagation();openPromoDetail(\'' + p.id + '\')">Chi tiết</button>';
   html += '</div>';
   html += '</div>';
   return html;
@@ -11227,73 +12976,201 @@ function renderFeaturedPromoSection() {
 }
 
 function openVoucherDetail(id) {
-  const v = MOCK_VOUCHERS.find(x => x.id === id);
+  const v = findVoucherById(id);
   if (!v) return;
   document.getElementById('promoDetailTitle').textContent = 'Chi tiết voucher';
   const isLocked = v.status === 'locked';
-  let html = '<div class="promo-detail-value">' + v.icon + ' ' + v.value + '</div>';
-  html += '<div class="promo-detail-name">' + v.title + '</div>';
-  html += '<div class="promo-detail-desc">' + v.desc + '</div>';
-  html += '<div class="promo-detail-rows">';
-  html += '<div class="promo-detail-row"><span>Giá trị</span><span>' + v.valueLabel + '</span></div>';
-  html += '<div class="promo-detail-row"><span>Nạp tối thiểu</span><span>' + v.minDeposit + '</span></div>';
-  html += '<div class="promo-detail-row"><span>Turnover</span><span>' + v.turnover + '</span></div>';
-  html += '<div class="promo-detail-row"><span>Hạn sử dụng</span><span>' + formatVoucherExpiry(v.expiresAt) + '</span></div>';
-  html += '</div>';
-  // Products
-  html += '<div class="promo-detail-products"><strong>Áp dụng:</strong> ' + v.products.join(', ') + '</div>';
-  // Lock reason
+  const isUsed = v.status === 'used';
+  const isExpired = v.status === 'expired';
+  const isIneligible = v.status === 'ineligible';
+  const isHistoryItem = isUsed || isExpired || isIneligible;
+  const heroClass = v.type === 'cash' ? 'pd-hero type-cash' : 'pd-hero';
+
+  let html = '';
+
+  // Hero banner
+  html += '<div class="' + heroClass + '">';
+  // Stub
+  html += '<div class="pd-hero-stub">' + v.icon + '<div class="pd-hero-stub-value">' + v.value + '</div></div>';
+  // Zigzag
+  html += '<div class="pd-hero-zigzag"></div>';
+  // Info
+  html += '<div class="pd-hero-info">';
+  html += '<div class="pd-hero-title">' + v.title + '</div>';
+  html += '<div class="pd-hero-desc">' + v.desc + '</div>';
+  var hasTags = v.isWelcome || (v.maxBonus);
+  if (hasTags) {
+    html += '<div class="pd-hero-tags">';
+    if (v.isWelcome) html += '<span class="pd-hero-tag welcome">Welcome</span>';
+    if (v.isWelcome && v.firstDepositOnly) html += '<span class="pd-hero-tag first-deposit">Lần nạp đầu</span>';
+    if (v.maxBonus) html += '<span class="pd-hero-tag" style="background:rgba(255,226,62,.08);color:var(--tertiary-400);">Tối đa ' + formatMoney(v.maxBonus) + '</span>';
+    html += '</div>';
+  }
+  html += '</div></div>';
+
+  // Alerts
   if (isLocked && v.lockReason) {
-    html += '<div class="promo-detail-lock-reason">' + lcIcon('lock','neon-red') + ' ' + v.lockReason + '</div>';
+    html += '<div class="pd-alert locked">' + lcIcon('lock','neon-red','14') + '<span>' + v.lockReason + '</span></div>';
   }
-  // Terms
-  html += '<div class="promo-detail-terms"><strong>Điều kiện:</strong><ul>';
-  v.terms.forEach(t => { html += '<li>' + t + '</li>'; });
-  html += '</ul></div>';
-  // CTA
-  if (isLocked) {
-    html += '<button class="promo-detail-cta disabled" disabled>Tạm khóa</button>';
-  } else {
-    html += '<button class="promo-detail-cta" onclick="useVoucher(\'' + v.id + '\')">Dùng ngay</button>';
+  if (!v.cashbackCompatible && v.status === 'available') {
+    html += '<div class="pd-alert warning">' + lcIcon('alert-triangle','neon-gold','14') + '<span>Không áp dụng đồng thời với chương trình hoàn trả.</span></div>';
   }
+
+  // Info rows
+  html += '<div class="pd-section-divider"></div>';
+  html += '<div class="pd-info">';
+  html += '<div class="pd-info-row"><span class="pd-info-label">Giá trị</span><span class="pd-info-val">' + v.value + '</span></div>';
+  if (v.maxBonus) {
+    html += '<div class="pd-info-row"><span class="pd-info-label">Thưởng tối đa</span><span class="pd-info-val">' + formatMoney(v.maxBonus, false) + '</span></div>';
+  }
+  html += '<div class="pd-info-row"><span class="pd-info-label">Nạp tối thiểu</span><span class="pd-info-val">' + v.minDeposit + '</span></div>';
+  html += '<div class="pd-info-row"><span class="pd-info-label">Turnover</span><span class="pd-info-val">' + (v.rolling || 'Không') + '</span></div>';
+  html += '<div class="pd-info-row"><span class="pd-info-label">Hạn sử dụng</span><span class="pd-info-val">' + formatVoucherExpiry(v.expiresAt) + '</span></div>';
+  if (typeof v.cashbackCompatible !== 'undefined') {
+    html += '<div class="pd-info-row"><span class="pd-info-label">Hoàn trả</span><span class="pd-info-val" style="color:' + (v.cashbackCompatible ? 'var(--success-100)' : 'var(--warning-100)') + '">' + (v.cashbackCompatible ? 'Áp dụng cùng' : 'Không áp dụng') + '</span></div>';
+  }
+  html += '</div>';
+
+  // (Products and basic Terms sections removed — info merged into rolling terms below)
+
+  // Rolling terms — individual accordions for each section
+  if (v.rolling && v.rolling !== 'N/A' && v.rolling !== 'Không') {
+    var arrSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+    html += '<div class="pd-accordion-group">';
+
+    // Accordion 1: Điều kiện tính doanh số
+    html += '<div class="pd-accordion" id="pdAcc1">';
+    html += '<div class="pd-accordion-header" onclick="togglePdAccordion(\'pdAcc1\')">';
+    html += '<span class="pd-accordion-header-title">Điều kiện tính doanh số cược</span>';
+    html += '<span class="pd-accordion-arrow">' + arrSvg + '</span>';
+    html += '</div>';
+    html += '<div class="pd-accordion-body"><div class="pd-accordion-body-inner">';
+    html += '<div class="pd-terms-text">';
+    html += '<p>Chỉ các vé cược thành công và đã trả kết quả mới được tính vào doanh số. Các vé hòa, hủy, vô hiệu, cược hai bên, cược có dấu hiệu gian lận/lạm dụng khuyến mãi, hoặc không đạt tỷ lệ tối thiểu sẽ không được tính.</p>';
+    html += '<p><strong>Tỷ lệ tối thiểu:</strong> CN dưới 0.5 · Malay dưới 0.5 · Indo dưới -2.00 · US dưới -200 · Decimal dưới 1.5</p>';
+    html += '</div>';
+    html += '</div></div></div>';
+
+    // Accordion 2: Tỷ lệ quy đổi
+    html += '<div class="pd-accordion" id="pdAcc2">';
+    html += '<div class="pd-accordion-header" onclick="togglePdAccordion(\'pdAcc2\')">';
+    html += '<span class="pd-accordion-header-title">Tỷ lệ quy đổi doanh số</span>';
+    html += '<span class="pd-accordion-arrow">' + arrSvg + '</span>';
+    html += '</div>';
+    html += '<div class="pd-accordion-body"><div class="pd-accordion-body-inner">';
+    html += '<div class="pd-rate-table">';
+    html += '<div class="pd-rate-row"><span class="pd-rate-pct high">100%</span><span>Thể thao (trừ Saba Sports, K-Sports, Pragmatic, IM, BTI)</span></div>';
+    html += '<div class="pd-rate-row"><span class="pd-rate-pct mid">70%</span><span>Thể thao (Saba, K-Sports trừ Volta, IM, BTI), E-Sports, Thể thao ảo (trừ Pragmatic), Đá Gà GA28</span></div>';
+    html += '<div class="pd-rate-row"><span class="pd-rate-pct mid">60%</span><span>Lô Đề 3 Miền</span></div>';
+    html += '<div class="pd-rate-row"><span class="pd-rate-pct low">25%</span><span>Nổ Hũ, Bắn Cá</span></div>';
+    html += '<div class="pd-rate-row"><span class="pd-rate-pct zero">0%</span><span>Tất cả sản phẩm không được liệt kê ở trên</span></div>';
+    html += '</div>';
+    html += '<div class="pd-terms-text" style="margin-top:8px;">';
+    html += '<p><em>Lưu ý:</em> Doanh số cược thể thao chỉ áp dụng cho cá cược thể thao. Các trò chơi khác tích hợp trong nền tảng nhà cung cấp thể thao sẽ không được tính.</p>';
+    html += '</div>';
+    html += '</div></div></div>';
+
+    // Accordion 3: Sản phẩm không áp dụng
+    html += '<div class="pd-accordion" id="pdAcc3">';
+    html += '<div class="pd-accordion-header" onclick="togglePdAccordion(\'pdAcc3\')">';
+    html += '<span class="pd-accordion-header-title">Sản phẩm không áp dụng</span>';
+    html += '<span class="pd-accordion-arrow">' + arrSvg + '</span>';
+    html += '</div>';
+    html += '<div class="pd-accordion-body"><div class="pd-accordion-body-inner">';
+    html += '<div class="pd-terms-text">';
+    html += '<p>Khi tham gia khuyến mãi, người chơi <strong>không</strong> được chơi các sản phẩm/danh mục sau:</p>';
+    html += '<ul class="pd-terms">';
+    html += '<li>Game Bài, Table Games, Live Casino</li>';
+    html += '<li>Lô Đề Siêu Tốc, Lô Đề MD5, Keno, Lucky 28</li>';
+    html += '<li>Thể Thao Ảo Volta</li>';
+    html += '<li>Toàn bộ Mini Game (Tài Xỉu, Roulette MD5, Xóc Đĩa MD5, Mr.Bean Go Home MD5, Tom & Jerry MD5, Vé Số Cào, Mini Poker, Trên Dưới, Super Wheel)</li>';
+    html += '<li>Nhà cung cấp: QTech, PGSoft, Microgaming, Askmebet, Jili, Play\'n Go, Evoplay, Fachai, Tom Horn, Red Tiger, Netent, Onegame, Spribe, Pragmatic, TechPlay, Rik, B52, Go88</li>';
+    html += '<li>Toàn bộ game Slots của Habanero</li>';
+    html += '<li>Tất cả game freespin</li>';
+    html += '</ul></div>';
+    html += '</div></div></div>';
+
+    // Accordion 4: Quy định chung
+    html += '<div class="pd-accordion" id="pdAcc4">';
+    html += '<div class="pd-accordion-header" onclick="togglePdAccordion(\'pdAcc4\')">';
+    html += '<span class="pd-accordion-header-title">Quy định chung</span>';
+    html += '<span class="pd-accordion-arrow">' + arrSvg + '</span>';
+    html += '</div>';
+    html += '<div class="pd-accordion-body"><div class="pd-accordion-body-inner">';
+    html += '<ul class="pd-terms">';
+    html += '<li>Nếu hủy khuyến mãi, tài khoản sẽ bị khấu trừ toàn bộ tiền khuyến mãi và tiền thắng phát sinh liên quan.</li>';
+    html += '<li>Công ty có quyền hủy vé cược và tịch thu số dư đối với hành vi thông đồng, gian lận hoặc lạm dụng khuyến mãi.</li>';
+    html += '<li>Công ty có quyền sửa đổi, cập nhật hoặc bổ sung nội dung chương trình mà không cần thông báo trước.</li>';
+    html += '<li>Điều khoản và Điều kiện chung của MUBET được áp dụng.</li>';
+    html += '</ul>';
+    html += '</div></div></div>';
+
+    html += '</div>'; // close accordion-group
+  }
+
   document.getElementById('promoDetailBody').innerHTML = html;
+
+  // CTA — render in sticky bottom
+  var ctaWrap = document.getElementById('promoDetailCta');
+  if (!ctaWrap) {
+    ctaWrap = document.createElement('div');
+    ctaWrap.id = 'promoDetailCta';
+    ctaWrap.className = 'pd-cta-wrap';
+    document.getElementById('promoDetailDrawer').appendChild(ctaWrap);
+  }
+  if (isLocked) {
+    ctaWrap.innerHTML = '<button class="pd-cta secondary" onclick="closePromoDetail()">Đóng</button>';
+  } else if (isHistoryItem) {
+    ctaWrap.innerHTML = '<div style="text-align:center;font-size:12px;color:var(--muted);padding:4px 0;">' + (isUsed ? 'Đã sử dụng' : isExpired ? 'Đã hết hạn' : 'Không đủ điều kiện') + '</div>';
+  } else {
+    ctaWrap.innerHTML = '<button class="pd-cta primary" onclick="useVoucher(\'' + v.id + '\')">Dùng ngay</button>';
+  }
+
   document.getElementById('promoDetailOverlay').classList.add('active');
   document.getElementById('promoDetailDrawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
 function openPromoDetail(id) {
-  const p = MOCK_ACTIVE_PROMOS.find(x => x.id === id);
+  const p = findPromoById(id);
   if (!p) return;
   document.getElementById('promoDetailTitle').textContent = p.title;
   let html = '';
-  if (p.type === 'welcome') {
-    html = renderWelcomeDetail(p);
-  } else if (p.type === 'cashback') {
+  if (p.type === 'cashback') {
     html = renderCashbackDetail(p);
+  } else {
+    // welcome, deposit, event — all use turnover detail
+    html = renderWelcomeDetail(p);
   }
   document.getElementById('promoDetailBody').innerHTML = html;
   document.getElementById('promoDetailOverlay').classList.add('active');
   document.getElementById('promoDetailDrawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
 function renderWelcomeDetail(p) {
-  const pct = Math.round((p.turnoverCompleted / p.turnoverRequired) * 100);
-  let html = '<div class="promo-detail-value">' + lcIcon('party','neon-gold') + ' +100%</div>';
-  html += '<div class="promo-detail-name">' + p.title + '</div>';
-  html += '<div class="promo-detail-desc">' + p.desc + '</div>';
-  // Stats
-  html += '<div style="display:flex;gap:8px;margin:16px 0;flex-wrap:wrap;">';
-  html += '<div class="promo-detail-stat-pill">Thưởng: <strong>' + (p.bonusReceived/1000000).toFixed(1) + 'M</strong></div>';
-  html += '<div class="promo-detail-stat-pill">Turnover: <strong>' + pct + '%</strong></div>';
+  var pct = Math.round((p.turnoverCompleted / p.turnoverRequired) * 100);
+  var bonusStr = formatMoney(p.bonusReceived, true);
+  var toReqStr = formatMoney(p.turnoverRequired, true);
+  var toCompStr = formatMoney(p.turnoverCompleted, true);
+  var html = '<div style="padding:16px;">';
+  // Description
+  html += '<div class="promo-detail-desc" style="margin-bottom:12px;">' + p.desc + '</div>';
+  // Stat pills
+  html += '<div style="display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap;">';
+  html += '<div class="promo-detail-stat-pill" style="flex:1;justify-content:center;">' + lcIcon('gift','neon-green','14') + ' Thưởng: <strong>' + bonusStr + '</strong></div>';
+  html += '<div class="promo-detail-stat-pill" style="flex:1;justify-content:center;">' + lcIcon('chart','neon-gold','14') + ' Turnover: <strong>' + pct + '%</strong></div>';
   html += '</div>';
-  // Progress
-  html += '<div class="promo-active-progress-wrap">';
+  // Progress bar
+  html += '<div class="promo-active-progress-wrap" style="margin-bottom:16px;">';
   html += '<div class="promo-active-progress-bar"><div class="promo-active-progress-fill" style="width:' + pct + '%"></div></div>';
-  html += '<div class="promo-active-progress-label">' + (p.turnoverCompleted/1000000).toFixed(1) + 'M / ' + (p.turnoverRequired/1000000).toFixed(0) + 'M</div>';
-  html += '</div>';
+  html += '<div class="promo-active-progress-label" style="display:flex;justify-content:space-between;margin-top:4px;">';
+  html += '<span>Đã hoàn thành: <strong style="color:var(--success-100);">' + toCompStr + '</strong></span>';
+  html += '<span>Yêu cầu: <strong>' + toReqStr + '</strong></span>';
+  html += '</div></div>';
   // Steps
-  html += '<div class="promo-detail-steps">';
-  p.steps.forEach((s,i) => {
+  html += '<div class="promo-detail-steps" style="margin-bottom:16px;">';
+  p.steps.forEach(function(s) {
     html += '<div class="promo-detail-step ' + (s.done ? 'done' : '') + '">';
     html += '<span>' + s.label + '</span>';
     html += '</div>';
@@ -11304,38 +13181,67 @@ function renderWelcomeDetail(p) {
   html += '<div class="promo-detail-row"><span>Bắt đầu</span><span>' + p.startDate + '</span></div>';
   html += '<div class="promo-detail-row"><span>Kết thúc</span><span>' + p.endDate + '</span></div>';
   html += '</div>';
-  // Products & Terms
-  html += '<div class="promo-detail-products"><strong>Sản phẩm:</strong> ' + p.products.join(', ') + '</div>';
-  html += '<div class="promo-detail-terms"><strong>Điều kiện:</strong><ul>';
-  p.terms.forEach(t => { html += '<li>' + t + '</li>'; });
-  html += '</ul></div>';
+  // Products
+  if (p.products && p.products.length) {
+    html += '<div class="promo-detail-products"><strong>Sản phẩm áp dụng:</strong> ' + (Array.isArray(p.products) ? p.products.join(', ') : p.products) + '</div>';
+  }
+  // Terms in accordion
+  if (p.terms && p.terms.length) {
+    html += '<div class="pd-accordion-group" style="margin:14px 0 0;">';
+    html += '<div class="pd-accordion" id="pdAccPromoTerms">';
+    html += '<div class="pd-accordion-header" onclick="togglePdAccordion(\'pdAccPromoTerms\')">';
+    html += '<span style="font-size:13px;font-weight:700;">Điều kiện & Quy định</span>';
+    html += '<span class="pd-accordion-arrow">›</span>';
+    html += '</div>';
+    html += '<div class="pd-accordion-body"><div style="padding:12px 14px;">';
+    html += '<ul style="padding-left:18px;margin:0;font-size:12px;color:var(--muted);line-height:1.8;">';
+    p.terms.forEach(function(t) { html += '<li>' + t + '</li>'; });
+    html += '</ul></div></div></div></div>';
+  }
+  // Cancel CTA
+  html += '<div style="margin-top:20px;display:flex;gap:8px;">';
+  html += '<button class="pd-cta secondary" style="flex:1;" onclick="cancelActivePromo(\'' + p.id + '\')">Hủy ưu đãi</button>';
+  html += '</div>';
+  html += '</div>'; // close padding wrapper
   return html;
 }
 
 function renderCashbackDetail(p) {
-  let html = '<div class="promo-detail-value">' + lcIcon('cash','neon-green') + ' ' + p.rate + '%</div>';
-  html += '<div class="promo-detail-name">' + p.title + '</div>';
-  html += '<div class="promo-detail-desc">' + p.desc + '</div>';
+  var html = '<div style="padding:16px;">';
+  // Description
+  html += '<div class="promo-detail-desc" style="margin-bottom:12px;">' + p.desc + '</div>';
   // Stats
-  html += '<div style="display:flex;gap:8px;margin:16px 0;flex-wrap:wrap;">';
-  html += '<div class="promo-detail-stat-pill">Hôm nay: <strong>' + (p.todayCashback/1000).toFixed(0) + 'K</strong></div>';
-  html += '<div class="promo-detail-stat-pill">Tổng: <strong>' + (p.totalCashback/1000000).toFixed(1) + 'M</strong></div>';
+  html += '<div style="display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap;">';
+  html += '<div class="promo-detail-stat-pill" style="flex:1;justify-content:center;">' + lcIcon('clock','neon-gold','14') + ' Hôm nay: <strong>' + formatMoney(p.todayCashback, true) + '</strong></div>';
+  html += '<div class="promo-detail-stat-pill" style="flex:1;justify-content:center;">' + lcIcon('chart','neon-green','14') + ' Tổng: <strong>' + formatMoney(p.totalCashback, true) + '</strong></div>';
   html += '</div>';
   // Rate table
   html += '<div class="promo-detail-rows">';
-  p.products.forEach(pr => {
-    html += '<div class="promo-detail-row"><span>' + pr.name + '</span><span>' + pr.rate + '</span></div>';
-  });
+  if (Array.isArray(p.products)) {
+    p.products.forEach(function(pr) {
+      html += '<div class="promo-detail-row"><span>' + pr.name + '</span><span style="color:var(--success-100);font-weight:700;">' + pr.rate + '</span></div>';
+    });
+  }
   html += '</div>';
   // Cycle info
-  html += '<div class="promo-detail-rows" style="margin-top:12px;">';
+  html += '<div class="promo-detail-rows" style="margin-top:10px;">';
   html += '<div class="promo-detail-row"><span>Chu kỳ</span><span>' + p.cycle + '</span></div>';
   html += '<div class="promo-detail-row"><span>Nhận thưởng</span><span>' + p.nextPayout + '</span></div>';
   html += '</div>';
-  // Terms
-  html += '<div class="promo-detail-terms"><strong>Điều kiện:</strong><ul>';
-  p.terms.forEach(t => { html += '<li>' + t + '</li>'; });
-  html += '</ul></div>';
+  // Terms in accordion
+  if (p.terms && p.terms.length) {
+    html += '<div class="pd-accordion-group" style="margin:14px 0 0;">';
+    html += '<div class="pd-accordion" id="pdAccCbTerms">';
+    html += '<div class="pd-accordion-header" onclick="togglePdAccordion(\'pdAccCbTerms\')">';
+    html += '<span style="font-size:13px;font-weight:700;">Điều kiện</span>';
+    html += '<span class="pd-accordion-arrow">›</span>';
+    html += '</div>';
+    html += '<div class="pd-accordion-body"><div style="padding:12px 14px;">';
+    html += '<ul style="padding-left:18px;margin:0;font-size:12px;color:var(--muted);line-height:1.8;">';
+    p.terms.forEach(function(t) { html += '<li>' + t + '</li>'; });
+    html += '</ul></div></div></div></div>';
+  }
+  html += '</div>'; // close padding wrapper
   return html;
 }
 
@@ -11343,7 +13249,7 @@ function openFeaturedPromoDetail(id) {
   const p = MOCK_FEATURED_PROMOS.find(x => x.id === id);
   if (!p) return;
   document.getElementById('promoDetailTitle').textContent = p.title;
-  let html = '';
+  let html = '<div style="padding:16px;">';
   if (p.badge) html += '<div class="promo-featured-badge" style="display:inline-block;margin-bottom:12px;">' + p.badge + '</div>';
   html += '<div class="promo-detail-name">' + p.title + '</div>';
   html += '<div class="promo-detail-desc" style="margin:12px 0;line-height:1.6;">' + p.detail + '</div>';
@@ -11352,26 +13258,218 @@ function openFeaturedPromoDetail(id) {
   html += '<div class="promo-detail-row"><span>Thời gian</span><span>' + p.timeLabel + '</span></div>';
   html += '</div>';
   html += '<button class="promo-detail-cta" onclick="closePromoDetail();navigateTo(\'/account/deposit\');">' + p.cta + '</button>';
+  html += '</div>';
   document.getElementById('promoDetailBody').innerHTML = html;
   document.getElementById('promoDetailOverlay').classList.add('active');
   document.getElementById('promoDetailDrawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function togglePdAccordion(id) {
+  document.getElementById(id).classList.toggle('open');
 }
 
 function closePromoDetail() {
   document.getElementById('promoDetailOverlay').classList.remove('active');
   document.getElementById('promoDetailDrawer').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 function useVoucher(id) {
   closePromoDetail();
-  navigateTo('/account/deposit');
+  // Store selected voucher and navigate to deposit/bank with voucher pre-selected
+  window._selectedVoucherId = id;
+  navigateTo('/account/deposit/bank/' + id);
 }
 
 function cancelActivePromo(id) {
-  if (!confirm('Bạn có chắc muốn hủy chương trình khuyến mãi này? Hành động không thể hoàn tác.')) return;
-  const idx = MOCK_ACTIVE_PROMOS.findIndex(x => x.id === id);
-  if (idx > -1) MOCK_ACTIVE_PROMOS.splice(idx, 1);
-  renderPromoSections();
+  // Find promo to show details in dialog
+  var promos = getPromosForCurrentUser();
+  var promo = promos.find(function(x) { return x.id === id; });
+  if (!promo) return;
+
+  // Build custom confirmation dialog
+  var overlay = document.createElement('div');
+  overlay.className = 'cancel-promo-overlay';
+  var bonusText = formatMoney(promo.bonusReceived || 0, false);
+  var turnoverText = formatMoney((promo.turnoverCompleted || 0), false) + ' / ' + formatMoney((promo.turnoverRequired || 0), false);
+
+  overlay.innerHTML = '<div class="cancel-promo-dialog">'
+    + '<div class="cancel-promo-icon">⚠️</div>'
+    + '<div class="cancel-promo-title">Hủy ưu đãi?</div>'
+    + '<div class="cancel-promo-name">' + promo.title + '</div>'
+    + '<div class="cancel-promo-warnings">'
+    +   '<div class="cancel-promo-warn-item"><span class="cancel-warn-dot" style="background:var(--error-100);"></span>Bonus <strong>' + bonusText + '</strong> sẽ bị thu hồi</div>'
+    +   '<div class="cancel-promo-warn-item"><span class="cancel-warn-dot" style="background:var(--error-100);"></span>Tiến độ turnover <strong>' + turnoverText + '</strong> sẽ bị mất</div>'
+    +   '<div class="cancel-promo-warn-item"><span class="cancel-warn-dot" style="background:var(--success-100);"></span>Voucher bị khóa có thể được mở lại</div>'
+    + '</div>'
+    + '<div class="cancel-promo-note">Hành động này không thể hoàn tác.</div>'
+    + '<div class="cancel-promo-actions">'
+    +   '<button class="cancel-promo-btn cancel-promo-btn-back" id="cancelPromoBack">Quay lại</button>'
+    +   '<button class="cancel-promo-btn cancel-promo-btn-confirm" id="cancelPromoConfirm">Xác nhận hủy</button>'
+    + '</div>'
+    + '</div>';
+
+  document.body.appendChild(overlay);
+  // Animate in
+  requestAnimationFrame(function() { overlay.classList.add('open'); });
+
+  // Back button — close dialog
+  document.getElementById('cancelPromoBack').onclick = function() {
+    overlay.classList.remove('open');
+    setTimeout(function() { overlay.remove(); }, 250);
+  };
+  // Overlay click — close dialog
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+      setTimeout(function() { overlay.remove(); }, 250);
+    }
+  });
+
+  // Confirm button — execute cancel
+  document.getElementById('cancelPromoConfirm').onclick = function() {
+    // Remove promo
+    var idx = promos.findIndex(function(x) { return x.id === id; });
+    if (idx > -1) promos.splice(idx, 1);
+
+    // Close dialog
+    overlay.classList.remove('open');
+    setTimeout(function() { overlay.remove(); }, 250);
+
+    // Close detail drawer
+    closePromoDetail();
+
+    // Re-render promo sections (voucher lock/unlock is auto-computed)
+    renderPromoSections();
+
+    // Update floating voucher badge (unlocked vouchers increase available count)
+    updateFloatingVoucher();
+
+    // Re-render account dashboard if currently on /account
+    if (currentRoute === '/account' || currentRoute === '') {
+      var mainContent = document.getElementById('mainContent');
+      if (mainContent && typeof renderAccountDashboard === 'function') {
+        renderAccountDashboard();
+      }
+    }
+  };
+}
+
+// ===== SPRINT 3: BUSINESS LOGIC =====
+
+// Rolling conflict is now computed dynamically in getVouchersForCurrentUser().
+// These functions are kept as no-ops for backward compatibility with callers.
+function recheckVoucherLocks() { /* auto-computed in getVouchersForCurrentUser() */ }
+function checkRollingConflict() { /* auto-computed in getVouchersForCurrentUser() */ }
+
+// Welcome voucher invalidation: after using 1, invalidate other 2
+function invalidateWelcomeVouchers(usedVoucherId) {
+  var vouchers = getVouchersForCurrentUser();
+  vouchers.forEach(function(v) {
+    if (v.isWelcome && v.id !== usedVoucherId && v.status === 'available') {
+      v.status = 'ineligible';
+    }
+  });
+}
+
+// First deposit validation: check if user already made a deposit
+function checkFirstDeposit() {
+  if (!currentUser) return false;
+  return (currentUser.totalDeposit || 0) > 0;
+}
+
+// Cashback apply-time check: returns warning message if conflict
+function checkCashbackConflict(voucherId) {
+  var v = findVoucherById(voucherId);
+  if (!v) return null;
+  if (v.cashbackCompatible) return null; // no conflict
+  // Check if user has active cashback
+  var promos = getPromosForCurrentUser();
+  var hasCashback = promos.some(function(p) {
+    return p.type === 'cashback' && p.status === 'active';
+  });
+  if (hasCashback) {
+    return 'Voucher này không áp dụng đồng thời với chương trình hoàn trả. Nếu bạn tiếp tục, hoàn trả sẽ tạm dừng cho giao dịch này.';
+  }
+  return null;
+}
+
+// Validate voucher before apply at deposit time
+function validateVoucherForDeposit(voucherId, depositAmount) {
+  var v = findVoucherById(voucherId);
+  if (!v) return { valid: false, error: 'Voucher không tồn tại' };
+  // Check status
+  if (v.status !== 'available') {
+    var statusMsg = { locked: 'Voucher đang bị khóa', used: 'Voucher đã được sử dụng', expired: 'Voucher đã hết hạn', ineligible: 'Voucher không còn đủ điều kiện' };
+    return { valid: false, error: statusMsg[v.status] || 'Voucher không khả dụng' };
+  }
+  // Check expiry
+  if (v.expiresAt < Date.now()) {
+    v.status = 'expired';
+    return { valid: false, error: 'Voucher đã hết hạn' };
+  }
+  // Check first deposit requirement
+  if (v.firstDepositOnly && checkFirstDeposit()) {
+    return { valid: false, error: 'Voucher chỉ áp dụng cho lần nạp đầu tiên. Bạn đã nạp tiền trước đó.' };
+  }
+  // Check min deposit
+  if (v.minDeposit && v.minDeposit !== '0đ' && v.minDeposit !== 'Không yêu cầu') {
+    var minNum = parseInt(v.minDeposit.replace(/[^0-9]/g, ''));
+    if (depositAmount && depositAmount < minNum) {
+      return { valid: false, error: 'Nạp tối thiểu ' + v.minDeposit + ' để sử dụng voucher này' };
+    }
+  }
+  // Check cashback conflict (warning, not blocking)
+  var cashbackWarning = checkCashbackConflict(voucherId);
+  // Rolling conflict is already handled by status check above (auto-computed as 'locked')
+  return { valid: true, warning: cashbackWarning };
+}
+
+// Simulate applying a voucher after successful deposit
+function applyVoucherAfterDeposit(voucherId) {
+  var v = findVoucherById(voucherId);
+  if (!v) return false;
+  // Mark voucher as used
+  v.status = 'used';
+  // If welcome voucher → invalidate others
+  if (v.isWelcome) {
+    invalidateWelcomeVouchers(voucherId);
+  }
+  // Create promotion runtime
+  var bonus = 0;
+  if (v.type === 'bonus' && v.maxBonus) {
+    bonus = v.maxBonus; // simplified: use max bonus as received
+  } else if (v.type === 'cash' && v.maxBonus) {
+    bonus = v.maxBonus;
+  }
+  var rollingMultiplier = parseInt(v.rolling) || 1;
+  var turnoverRequired = bonus * rollingMultiplier;
+  var newPromo = {
+    id: 'ap_' + Date.now(),
+    title: v.title,
+    type: v.isWelcome ? 'welcome' : 'deposit',
+    status: 'active',
+    desc: v.desc,
+    bonusReceived: bonus,
+    turnoverRequired: turnoverRequired,
+    turnoverCompleted: 0,
+    startDate: new Date().toISOString().split('T')[0],
+    endDate: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0],
+    steps: [
+      { label: 'Nạp tiền', done: true },
+      { label: 'Nhận thưởng ' + v.value, done: true },
+      { label: 'Hoàn thành turnover ' + v.rolling, done: false },
+      { label: 'Rút tiền thưởng', done: false }
+    ],
+    products: v.products || [],
+    terms: v.terms || []
+  };
+  var promos = getPromosForCurrentUser();
+  promos.push(newPromo);
+  // Re-check rolling locks
+  checkRollingConflict();
+  return true;
 }
 
 // ===== LOBBY DATA & RENDERING =====
@@ -11917,6 +14015,76 @@ function initFloatingPromoDrag(el) {
   document.addEventListener('mouseup', onEnd);
 
   // Prevent click navigation after drag
+  el.addEventListener('click', function(e) {
+    if (wasDragged) { e.stopPropagation(); e.preventDefault(); wasDragged = false; }
+  }, true);
+}
+
+// ===== FLOATING VOUCHER ICON =====
+function closeFloatingVoucher() {
+  var el = document.getElementById('floatingVoucher');
+  if (el) el.classList.add('hidden');
+  window.floatingVoucherClosed = true;
+}
+
+function updateFloatingVoucher() {
+  if (window.floatingVoucherClosed) return;
+  var el = document.getElementById('floatingVoucher');
+  if (!el) return;
+  // Only show when logged in
+  if (!isLoggedIn) { el.classList.add('hidden'); return; }
+  var vouchers = getVouchersForCurrentUser();
+  var availableCount = vouchers.filter(function(v) { return v.status === 'available'; }).length;
+  var badge = document.getElementById('floatingVoucherBadge');
+  if (availableCount > 0) {
+    el.classList.remove('hidden');
+    if (badge) {
+      badge.textContent = availableCount;
+      badge.style.display = '';
+    }
+    initFloatingVoucherDrag(el);
+  } else {
+    el.classList.add('hidden');
+  }
+}
+
+function initFloatingVoucherDrag(el) {
+  if (el._dragInited) return;
+  el._dragInited = true;
+  var isDragging = false, wasDragged = false;
+  var startX, startY, origX, origY;
+  function onStart(e) {
+    var t = e.touches ? e.touches[0] : e;
+    isDragging = true; wasDragged = false;
+    startX = t.clientX; startY = t.clientY;
+    var r = el.getBoundingClientRect();
+    origX = r.left; origY = r.top;
+    el.style.animation = 'none'; el.style.transition = 'none';
+  }
+  function onMove(e) {
+    if (!isDragging) return;
+    var t = e.touches ? e.touches[0] : e;
+    var dx = t.clientX - startX, dy = t.clientY - startY;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) wasDragged = true;
+    if (!wasDragged) return;
+    e.preventDefault();
+    el.style.position = 'fixed'; el.style.left = (origX + dx) + 'px';
+    el.style.top = (origY + dy) + 'px'; el.style.bottom = 'auto'; el.style.marginLeft = '0'; el.style.transform = 'none';
+  }
+  function onEnd() {
+    if (!isDragging) return;
+    isDragging = false; el.style.transition = 'opacity .3s, transform .3s';
+    if (!wasDragged) return;
+    var r = el.getBoundingClientRect();
+    el.style.left = Math.max(0, Math.min(r.left, window.innerWidth - r.width)) + 'px';
+    el.style.top = Math.max(0, Math.min(r.top, window.innerHeight - r.height)) + 'px';
+  }
+  el.addEventListener('touchstart', onStart, {passive: true});
+  el.addEventListener('touchmove', onMove, {passive: false});
+  el.addEventListener('touchend', onEnd);
+  el.addEventListener('mousedown', onStart);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
   el.addEventListener('click', function(e) {
     if (wasDragged) { e.stopPropagation(); e.preventDefault(); wasDragged = false; }
   }, true);
@@ -13692,7 +15860,7 @@ function lcRenderLeaderboardContent() {
   top3.forEach(function(p, idx) {
     var pct = idx === 0 ? 80 : (idx === 1 ? 65 : 50);
     var colors = ['gold','silver','bronze'];
-    var medals = ['<img src="Assets/rank-1.webp" style="width:36px;height:36px;object-fit:contain;">','<img src="Assets/rank-2.webp" style="width:36px;height:36px;object-fit:contain;">','<img src="Assets/rank-3.webp" style="width:36px;height:36px;object-fit:contain;">'];
+    var medals = ['<img src="Assets/rank-1.webp" style="width:56px;height:56px;object-fit:contain;">','<img src="Assets/rank-2.webp" style="width:56px;height:56px;object-fit:contain;">','<img src="Assets/rank-3.webp" style="width:56px;height:56px;object-fit:contain;">'];
     var barColors = [
       'linear-gradient(90deg, rgba(245,158,11,.05) 0%, rgba(245,158,11,.3) 50%, rgba(245,158,11,.6) 100%)',
       'linear-gradient(90deg, rgba(156,163,175,.04) 0%, rgba(156,163,175,.25) 50%, rgba(156,163,175,.45) 100%)',
@@ -14187,6 +16355,206 @@ function initBannerSlider() {
   bannerAutoplay = setInterval(function() { goTo(bannerCurrentIdx + 1); }, 6000);
 }
 
+// ===== DEVTOOLS LISTENER =====
+// Listen for state changes from devtools.html via BroadcastChannel + localStorage
+(function initDevToolsListener() {
+  // Heartbeat — let devtools know prototype is alive
+  function sendHeartbeat() {
+    try { localStorage.setItem('mubet_prototype_heartbeat', JSON.stringify({ ts: Date.now() })); } catch(e) {}
+  }
+  sendHeartbeat();
+  setInterval(sendHeartbeat, 2000);
+
+  function applyDevToolsState(state) {
+    if (!state) return;
+    // Profile & Auth
+    if (state.isLoggedIn !== undefined) {
+      if (state.isLoggedIn) {
+        isLoggedIn = true;
+        if (!currentUser) currentUser = {};
+        currentUser.username = state.username || 'player01';
+        currentUser.displayName = state.displayName || 'Player 01';
+        currentUser.tier = state.tier || 0;
+        currentUser.balance = state.balance || '0';
+        currentUser.totalDeposit = state.totalDeposit || 0;
+        currentUser.totalWager = state.totalWager || 0;
+        currentUser.depositThisPeriod = state.depositThisPeriod || 0;
+        currentUser.wagerThisPeriod = state.wagerThisPeriod || 0;
+        currentUser.totalCashbackReceived = state.totalCashbackReceived || 0;
+        currentUser.totalBonusReceived = state.totalBonusReceived || 0;
+        currentUser.isTrial = state.isTrial || false;
+        currentUser.tierSince = state.tierSince || '';
+      } else {
+        isLoggedIn = false;
+        currentUser = null;
+      }
+    }
+    // XP
+    if (typeof USER_XP !== 'undefined') {
+      var newLevel = state.currentLevel || 1;
+      USER_XP.currentLevel = newLevel;
+      // If lifetimeXp was explicitly provided, use it; otherwise auto-calculate from level
+      if (state.lifetimeXp && state.lifetimeXp > 0) {
+        USER_XP.lifetimeXp = state.lifetimeXp;
+      } else {
+        // Auto-sync: set lifetimeXp to cumulative XP at current level + small offset
+        USER_XP.lifetimeXp = getCumulativeXp(newLevel) + Math.round(getXpForLevel(newLevel) * 0.3);
+      }
+      // Safety: ensure lifetimeXp >= cumulative for current level
+      var minXp = getCumulativeXp(USER_XP.currentLevel);
+      if (USER_XP.lifetimeXp < minXp) {
+        USER_XP.lifetimeXp = minXp + Math.round(getXpForLevel(USER_XP.currentLevel) * 0.3);
+      }
+      USER_XP.todayXp = state.todayXp || 0;
+      USER_XP.lastCheckinDate = state.lastCheckinDate || '';
+      USER_XP.todayDeposit = state.todayDeposit || 0;
+      if (state.todaySources) USER_XP.todaySources = state.todaySources;
+    }
+    // Trial
+    if (typeof trialState !== 'undefined' && state.trial) {
+      Object.assign(trialState, state.trial);
+    }
+    // Mission overrides
+    if (state.missionOverrides) {
+      var ov = state.missionOverrides;
+      function overrideMissions(arr, mode) {
+        if (!arr || mode === 'default') return;
+        var statusMap = { all_progress: 'in_progress', all_completed: 'completed', all_claimed: 'claimed' };
+        var s = statusMap[mode]; if (!s) return;
+        arr.forEach(function(m) {
+          m.status = s;
+          if (s === 'completed' || s === 'claimed') m.current = m.target;
+          if (s === 'in_progress') m.current = Math.floor(m.target * 0.4);
+        });
+      }
+      if (typeof MOCK_NEWBIE_MISSIONS !== 'undefined') overrideMissions(MOCK_NEWBIE_MISSIONS, ov.newbie);
+      if (typeof MOCK_WARRIOR_MISSIONS !== 'undefined') overrideMissions(MOCK_WARRIOR_MISSIONS, ov.warrior);
+      if (typeof MOCK_LC_MISSIONS !== 'undefined') overrideMissions(MOCK_LC_MISSIONS, ov.lc);
+      if (typeof MOCK_WORLDCUP_MISSIONS !== 'undefined') overrideMissions(MOCK_WORLDCUP_MISSIONS, ov.wc);
+    }
+    // Refresh UI
+    if (typeof updateUIForAuthState === 'function') updateUIForAuthState();
+    if (typeof router === 'function') router();
+    window.__devtoolsListener = true;
+    console.log('[DevTools] State applied:', state);
+  }
+
+  // BroadcastChannel listener
+  try {
+    var bc = new BroadcastChannel('mubet_devtools');
+    bc.onmessage = function(e) {
+      if (e.data && e.data.type === 'state_update') applyDevToolsState(e.data.state);
+      if (e.data && e.data.type === 'voucher_grant') handleVoucherGrant(e.data);
+      if (e.data && e.data.type === 'voucher_grant_bulk') handleVoucherGrantBulk(e.data);
+      if (e.data && e.data.type === 'voucher_clear') handleVoucherClear(e.data);
+    };
+    console.log('[DevTools] BroadcastChannel listener ready');
+  } catch(ex) { console.warn('[DevTools] BroadcastChannel not available'); }
+
+  // Poll localStorage fallback
+  var lastStateTs = 0;
+  setInterval(function() {
+    try {
+      var raw = localStorage.getItem('mubet_devtools_state');
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      var ts = s._appliedTs || 0;
+      if (ts > lastStateTs) { lastStateTs = ts; applyDevToolsState(s); }
+    } catch(ex) {}
+  }, 1000);
+
+  // Poll localStorage for voucher grants too
+  var lastGrantTs = 0;
+  setInterval(function() {
+    try {
+      var raw = localStorage.getItem('mubet_devtools_voucher_grant');
+      if (!raw) return;
+      var cmd = JSON.parse(raw);
+      var ts = cmd.ts || 0;
+      if (ts > lastGrantTs) {
+        lastGrantTs = ts;
+        if (cmd.type === 'voucher_grant') handleVoucherGrant(cmd);
+        if (cmd.type === 'voucher_grant_bulk') handleVoucherGrantBulk(cmd);
+        if (cmd.type === 'voucher_clear') handleVoucherClear(cmd);
+      }
+    } catch(ex) {}
+  }, 1000);
+
+  window.__devtoolsListener = true;
+})();
+
+// === VOUCHER GRANT HANDLERS (from DevTools) ===
+function resolveGrantTargets(targets) {
+  var result = [];
+  var currentUsername = currentUser ? currentUser.username : '';
+  for (var i = 0; i < targets.length; i++) {
+    var t = targets[i];
+    if (t === '_current') {
+      // Use current logged-in user, or '_default'
+      var key = currentUsername && ACCOUNT_DATA[currentUsername] ? currentUsername : '_default';
+      if (result.indexOf(key) === -1) result.push(key);
+    } else {
+      if (result.indexOf(t) === -1) result.push(t);
+    }
+  }
+  return result;
+}
+
+function handleVoucherGrant(cmd) {
+  var targets = resolveGrantTargets(cmd.targets || []);
+  var v = cmd.voucher;
+  if (!v) return;
+  for (var i = 0; i < targets.length; i++) {
+    var key = targets[i];
+    if (!ACCOUNT_DATA[key]) {
+      ACCOUNT_DATA[key] = { vouchers: [], activePromos: [] };
+    }
+    // Clone voucher with unique id per target
+    var inst = JSON.parse(JSON.stringify(v));
+    inst.id = v.id + '_' + key;
+    ACCOUNT_DATA[key].vouchers.push(inst);
+  }
+  console.log('[DevTools] Voucher granted:', v.title, '→', targets);
+  if (typeof renderPage === 'function') renderPage();
+  updateFloatingVoucher();
+}
+
+function handleVoucherGrantBulk(cmd) {
+  var targets = resolveGrantTargets(cmd.targets || []);
+  var vouchers = cmd.vouchers || [];
+  for (var i = 0; i < targets.length; i++) {
+    var key = targets[i];
+    if (!ACCOUNT_DATA[key]) {
+      ACCOUNT_DATA[key] = { vouchers: [], activePromos: [] };
+    }
+    // If replaceWelcome, remove existing welcome vouchers first
+    if (cmd.replaceWelcome) {
+      ACCOUNT_DATA[key].vouchers = ACCOUNT_DATA[key].vouchers.filter(function(v) { return !v.isWelcome; });
+    }
+    for (var j = 0; j < vouchers.length; j++) {
+      var inst = JSON.parse(JSON.stringify(vouchers[j]));
+      inst.id = vouchers[j].id + '_' + key;
+      ACCOUNT_DATA[key].vouchers.push(inst);
+    }
+  }
+  console.log('[DevTools] Bulk voucher granted:', vouchers.length, 'vouchers →', targets);
+  if (typeof renderPage === 'function') renderPage();
+  updateFloatingVoucher();
+}
+
+function handleVoucherClear(cmd) {
+  var targets = resolveGrantTargets(cmd.targets || []);
+  for (var i = 0; i < targets.length; i++) {
+    var key = targets[i];
+    if (ACCOUNT_DATA[key]) {
+      ACCOUNT_DATA[key].vouchers = [];
+    }
+  }
+  console.log('[DevTools] Vouchers cleared for:', targets);
+  if (typeof renderPage === 'function') renderPage();
+  updateFloatingVoucher();
+}
+
 // ===== INIT =====
 restoreLoginState();
 renderLobbyContent();
@@ -14196,6 +16564,7 @@ if (!window.missionPopupShown) {
   setTimeout(showMissionPopup, 1500);
 }
 showFloatingPromo();
+updateFloatingVoucher();
 renderVipSelector();
 renderFAQ();
 updateEstimator();

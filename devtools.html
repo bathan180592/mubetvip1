@@ -3,559 +3,2005 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mubet Trial DevTools</title>
+<title>Mubet DevTools — User Profile Manager</title>
 <style>
+:root {
+  --bg-0: #0a0c13;
+  --bg-1: #11131c;
+  --bg-2: #181b28;
+  --bg-3: #1f2335;
+  --border: rgba(255,255,255,.08);
+  --border-hover: rgba(202,41,48,.4);
+  --text-0: #f5f7fb;
+  --text-1: #c8cdd6;
+  --text-2: #9aa3b2;
+  --text-3: #636e80;
+  --red: #ca2930;
+  --green: #05a158;
+  --gold: #ffe23e;
+  --blue: #7eb8ff;
+  --purple: #c084fc;
+  --teal: #80e8a8;
+  --orange: #fb923c;
+}
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Inter', -apple-system, sans-serif;
-  background: #0a0c13; color: #f5f7fb; padding: 24px; min-height: 100vh;
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-0); color: var(--text-0); padding: 16px; min-height: 100vh; }
+
+/* Layout */
+.header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.header h1 { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 800; color: var(--red); }
+.header .badge { font-size: 8px; font-weight: 700; padding: 3px 8px; border-radius: 10px; background: var(--red); color: #fff; text-transform: uppercase; letter-spacing: .5px; }
+.header .conn-status { margin-left: auto; font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 8px; }
+.conn-status.connected { background: rgba(5,161,88,.15); color: var(--green); }
+.conn-status.disconnected { background: rgba(202,41,48,.15); color: var(--red); }
+
+/* ===== TWO-PANEL LAYOUT ===== */
+.main-layout { display: grid; grid-template-columns: 280px 1fr; gap: 12px; min-height: calc(100vh - 80px); }
+@media (max-width: 700px) { .main-layout { grid-template-columns: 1fr; } }
+
+/* ===== LEFT PANEL — PROFILE LIST ===== */
+.panel-left {
+  background: var(--bg-1); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px; display: flex; flex-direction: column;
+  max-height: calc(100vh - 80px); position: sticky; top: 16px;
 }
-h1 { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800; margin-bottom: 24px; color: #ca2930; }
-h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #9aa3b2; margin-bottom: 12px; }
-section { background: #11131c; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
-.preset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.preset-btn {
-  padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.1);
-  background: rgba(255,255,255,.04); color: #f5f7fb; font-size: 12px; font-weight: 600;
-  cursor: pointer; transition: all .2s; text-align: left;
+.panel-title {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--text-2); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
 }
-.preset-btn:hover { border-color: #ca2930; background: rgba(222,46,54,.06); }
-.preset-btn.active { border-color: #ca2930; background: rgba(222,46,54,.1); }
-.preset-btn-title { font-weight: 700; margin-bottom: 2px; }
-.preset-btn-desc { font-size: 10px; color: #9aa3b2; }
-.field { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.field label { font-size: 12px; flex: 1; cursor: pointer; }
-.field input[type="checkbox"] {
-  width: 18px; height: 18px; accent-color: #05a158; cursor: pointer;
+.panel-title .count { font-size: 9px; background: var(--bg-3); padding: 2px 6px; border-radius: 10px; color: var(--text-3); }
+
+/* Profile list */
+.profile-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+.profile-list::-webkit-scrollbar { width: 4px; }
+.profile-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 2px; }
+
+.profile-card {
+  padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg-2); cursor: pointer; transition: all .15s; position: relative;
 }
-.field input[type="range"] { flex: 1; accent-color: #ca2930; }
-.field-value { font-size: 12px; font-weight: 700; color: #ffe23e; min-width: 40px; text-align: right; }
-.actions { display: flex; gap: 8px; margin-top: 16px; }
-.btn-apply {
-  flex: 1; padding: 12px; border-radius: 10px; border: none;
-  background: #ca2930; color: #fff; font-size: 13px; font-weight: 700;
-  cursor: pointer; transition: all .2s;
+.profile-card:hover { border-color: var(--border-hover); background: var(--bg-3); }
+.profile-card.active { border-color: var(--red); background: rgba(202,41,48,.08); }
+.profile-card.builtin { border-left: 3px solid var(--gold); }
+.profile-card.custom { border-left: 3px solid var(--teal); }
+
+.pc-header { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+.pc-name { font-size: 12px; font-weight: 700; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pc-badge {
+  font-size: 7px; font-weight: 700; padding: 2px 5px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: .03em; flex-shrink: 0;
 }
-.btn-apply:hover { background: #e63946; }
-.btn-apply.applied { background: #05a158; }
-@keyframes applyFlash { 0% { box-shadow: 0 0 0 0 rgba(5,161,88,.5); } 100% { box-shadow: 0 0 0 12px rgba(5,161,88,0); } }
-.btn-reset {
-  padding: 12px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,.15);
-  background: transparent; color: #9aa3b2; font-size: 13px; font-weight: 600;
-  cursor: pointer; transition: all .2s;
+.pc-badge.b-builtin { background: rgba(255,226,62,.12); color: var(--gold); }
+.pc-badge.b-custom { background: rgba(128,232,168,.12); color: var(--teal); }
+
+.pc-summary { font-size: 9px; color: var(--text-3); line-height: 1.4; }
+.pc-summary strong { color: var(--text-2); font-weight: 600; }
+
+.pc-actions {
+  position: absolute; top: 6px; right: 6px; display: flex; gap: 2px;
+  opacity: 0; transition: opacity .15s;
 }
-.btn-reset:hover { border-color: #ca2930; color: #f5f7fb; }
-.status { margin-top: 16px; padding: 12px; border-radius: 10px; background: rgba(255,255,255,.03); font-size: 11px; color: #9aa3b2; }
-.status strong { color: #ffe23e; }
+.profile-card:hover .pc-actions { opacity: 1; }
+.pc-act-btn {
+  width: 22px; height: 22px; border-radius: 4px; border: none; cursor: pointer;
+  background: rgba(255,255,255,.06); color: var(--text-3); font-size: 10px;
+  display: flex; align-items: center; justify-content: center; transition: all .15s;
+}
+.pc-act-btn:hover { background: rgba(255,255,255,.12); color: var(--text-0); }
+.pc-act-btn.danger:hover { background: rgba(202,41,48,.2); color: var(--red); }
+
+/* Action buttons at bottom of left panel */
+.profile-actions { display: flex; flex-direction: column; gap: 4px; }
+.btn-create-profile {
+  width: 100%; padding: 10px; border-radius: 8px; border: 1px dashed rgba(128,232,168,.3);
+  background: rgba(128,232,168,.05); color: var(--teal); font-size: 11px; font-weight: 700;
+  cursor: pointer; transition: all .15s; text-transform: uppercase; letter-spacing: .04em;
+}
+.btn-create-profile:hover { background: rgba(128,232,168,.1); border-color: var(--teal); }
+
+/* ===== RIGHT PANEL — EDITOR ===== */
+.panel-right { display: flex; flex-direction: column; gap: 12px; }
+
+/* Tabs in right panel */
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); padding-bottom: 8px; flex-wrap: wrap; }
+.tab {
+  padding: 7px 12px; border-radius: 8px 8px 0 0; border: 1px solid transparent;
+  background: transparent; color: var(--text-2); font-size: 10px; font-weight: 700;
+  cursor: pointer; transition: all .15s; text-transform: uppercase; letter-spacing: .04em;
+}
+.tab:hover { color: var(--text-0); background: var(--bg-2); }
+.tab.active { background: var(--bg-2); color: var(--red); border-color: var(--border); border-bottom-color: var(--bg-0); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Sections */
+section {
+  background: var(--bg-1); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px; margin-bottom: 10px;
+}
+section h2 {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--text-2); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+section h2 .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* Form Controls */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.form-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.form-grid.cols-1 { grid-template-columns: 1fr; }
+.form-field {
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px; transition: border-color .15s;
+}
+.form-field:focus-within { border-color: var(--border-hover); }
+.form-field label {
+  display: block; font-size: 8px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--text-3); margin-bottom: 3px;
+}
+.form-field input[type="text"],
+.form-field input[type="number"],
+.form-field select {
+  width: 100%; background: transparent; border: none; outline: none;
+  color: var(--text-0); font-size: 12px; font-weight: 600; font-family: inherit;
+}
+.form-field select { cursor: pointer; }
+.form-field select option { background: var(--bg-1); color: var(--text-0); }
+.form-field input::placeholder { color: var(--text-3); }
+
+/* Checkbox field */
+.check-field {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+  background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px;
+  cursor: pointer; transition: all .15s;
+}
+.check-field:hover { border-color: var(--border-hover); }
+.check-field input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--green); cursor: pointer; flex-shrink: 0; }
+.check-field .check-label { font-size: 11px; font-weight: 600; flex: 1; cursor: pointer; }
+.check-field .check-icon { font-size: 13px; }
+
+/* Range field */
+.range-field {
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px;
+}
+.range-field label { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-3); }
+.range-row { display: flex; align-items: center; gap: 8px; margin-top: 3px; }
+.range-row input[type="range"] { flex: 1; accent-color: var(--red); }
+.range-val { font-size: 12px; font-weight: 700; color: var(--gold); min-width: 45px; text-align: right; }
+
+/* Buttons */
+.btn-row { display: flex; gap: 6px; margin-top: 10px; }
+.btn {
+  flex: 1; padding: 9px; border-radius: 8px; border: none;
+  font-size: 11px; font-weight: 700; cursor: pointer; transition: all .15s;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.btn-primary { background: var(--red); color: #fff; }
+.btn-primary:hover { background: #e63946; }
+.btn-primary.success { background: var(--green); }
+.btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text-2); }
+.btn-secondary:hover { border-color: var(--red); color: var(--text-0); }
+.btn-green { background: var(--green); color: #fff; }
+.btn-green:hover { background: #06c46a; }
+.btn-sm { padding: 5px 9px; font-size: 10px; flex: none; }
 
 /* Sitemap */
-.sitemap-group { margin-bottom: 14px; }
-.sitemap-group-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #636e80; margin-bottom: 6px; padding-left: 2px; }
-.sitemap-links { display: flex; flex-wrap: wrap; gap: 6px; }
-.sitemap-link {
-  padding: 7px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.03); color: #c8cdd6; font-size: 11px; font-weight: 600;
-  cursor: pointer; transition: all .2s; white-space: nowrap; text-decoration: none; display: inline-block;
-}
-.sitemap-link:hover { border-color: #ca2930; background: rgba(222,46,54,.06); color: #f5f7fb; }
-.sitemap-link .sl-icon { margin-right: 4px; }
-.sitemap-link.sl-hash { color: #7eb8ff; }
-.sitemap-link.sl-js { color: #ffe23e; }
-.sitemap-link.sl-sub { color: #80e8a8; }
-.sitemap-divider { height: 1px; background: rgba(255,255,255,.06); margin: 12px 0; }
-
-/* Sitemap tree */
 .sitemap-tree { padding-left: 0; }
-.sitemap-branch { margin-bottom: 10px; }
+.sitemap-branch { margin-bottom: 8px; }
 .sitemap-branch-label {
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
-  color: #636e80; margin-bottom: 6px; padding-left: 2px; display: flex; align-items: center; gap: 6px;
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--text-3); margin-bottom: 4px; display: flex; align-items: center; gap: 4px;
 }
-.sitemap-branch-label::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-.sitemap-branch-label.br-main::before { background: #ffe23e; }
-.sitemap-branch-label.br-mission::before { background: #7eb8ff; }
-.sitemap-branch-label.br-redeem::before { background: #80e8a8; }
-.sitemap-branch-label.br-lc::before { background: #ff6b6b; }
-.sitemap-branch-label.br-wc::before { background: #4ecdc4; }
-.sitemap-branch-label.br-onb::before { background: #c084fc; }
-.sitemap-branch-label.br-account::before { background: #fb923c; }
-.sitemap-children { padding-left: 16px; border-left: 2px solid rgba(255,255,255,.06); margin-left: 5px; display: flex; flex-direction: column; gap: 4px; }
-.sitemap-children .sitemap-link { display: block; width: fit-content; position: relative; }
-.sitemap-children .sitemap-link::before {
-  content: ''; position: absolute; left: -16px; top: 50%;
-  width: 12px; height: 0; border-top: 1px solid rgba(255,255,255,.1);
+.sitemap-branch-label::before { content: ''; width: 6px; height: 6px; border-radius: 2px; flex-shrink: 0; }
+.br-main::before { background: var(--gold); }
+.br-mission::before { background: var(--blue); }
+.br-redeem::before { background: var(--teal); }
+.br-lc::before { background: #ff6b6b; }
+.br-wc::before { background: #4ecdc4; }
+.br-onb::before { background: var(--purple); }
+.br-account::before { background: var(--orange); }
+.sitemap-children { padding-left: 14px; border-left: 1px solid rgba(255,255,255,.06); margin-left: 4px; display: flex; flex-direction: column; gap: 3px; }
+.sitemap-link {
+  display: block; width: fit-content; padding: 4px 9px; border-radius: 6px;
+  border: 1px solid transparent; background: transparent; color: var(--text-1);
+  font-size: 10px; font-weight: 600; cursor: pointer; transition: all .15s;
+  text-decoration: none; white-space: nowrap;
 }
-.sitemap-nest { margin-top: 6px; margin-bottom: 6px; }
+.sitemap-link:hover { border-color: var(--border-hover); background: rgba(202,41,48,.04); color: var(--text-0); }
+.sitemap-link .sl-icon { margin-right: 3px; }
+.sitemap-divider { height: 1px; background: var(--border); margin: 8px 0; }
+.sitemap-nest { margin-top: 4px; margin-bottom: 4px; }
 
-/* Onboarding Journey */
-.journey-group { margin-bottom: 16px; }
-.journey-label {
-  font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px;
-  display: inline-block; margin-bottom: 8px; letter-spacing: .04em;
-}
-.journey-label.flow-a { background: rgba(255,226,62,.12); color: #ffe23e; }
-.journey-label.flow-b { background: rgba(74,125,254,.12); color: #7eb8ff; }
-.journey-label.flow-c { background: rgba(5,161,88,.12); color: #80e8a8; }
-.journey-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+/* Journey */
+.journey-group { margin-bottom: 10px; }
+.journey-label { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 5px; }
+.flow-a { background: rgba(255,226,62,.12); color: var(--gold); }
+.flow-b { background: rgba(74,125,254,.12); color: var(--blue); }
+.flow-c { background: rgba(5,161,88,.12); color: var(--teal); }
+.journey-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 3px; }
 .journey-step {
-  padding: 6px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.03); font-size: 11px; font-weight: 600;
-  cursor: pointer; transition: all .2s; white-space: nowrap; color: #c8cdd6;
+  padding: 4px 7px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg-2); font-size: 9px; font-weight: 600; cursor: pointer;
+  color: var(--text-1); transition: all .15s;
 }
-.journey-step:hover { border-color: #ca2930; background: rgba(222,46,54,.06); color: #f5f7fb; }
-.journey-step .step-num { display: inline-block; width: 16px; height: 16px; border-radius: 50%; background: rgba(255,255,255,.08); text-align: center; line-height: 16px; font-size: 9px; font-weight: 800; margin-right: 4px; }
-.journey-arrow { color: #636e80; font-size: 12px; font-weight: 300; }
-.journey-desc { font-size: 10px; color: #636e80; margin-top: 4px; }
+.journey-step:hover { border-color: var(--border-hover); color: var(--text-0); }
+.journey-step .step-num { display: inline-block; width: 13px; height: 13px; border-radius: 50%; background: rgba(255,255,255,.08); text-align: center; line-height: 13px; font-size: 8px; font-weight: 800; margin-right: 3px; }
+.journey-arrow { color: var(--text-3); font-size: 10px; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  background: rgba(5,161,88,.95); color: #fff; padding: 10px 20px;
+  border-radius: 10px; font-size: 12px; font-weight: 700;
+  opacity: 0; transition: opacity .3s; z-index: 999; pointer-events: none;
+}
+.toast.show { opacity: 1; }
+
+/* Modal */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100; opacity: 0; visibility: hidden; transition: all .2s;
+}
+.modal-overlay.open { opacity: 1; visibility: visible; }
+.modal {
+  background: var(--bg-1); border: 1px solid var(--border); border-radius: 14px;
+  padding: 20px; width: 340px; max-width: 90vw; transform: scale(.95); transition: transform .2s;
+}
+.modal-overlay.open .modal { transform: scale(1); }
+.modal h3 { font-size: 14px; font-weight: 800; margin-bottom: 12px; }
+.modal .form-field { margin-bottom: 8px; }
+.modal .btn-row { margin-top: 16px; }
+
+/* ===== VOUCHER TAB ===== */
+.voucher-list { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.voucher-card-dt {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--bg-2); transition: all .15s; position: relative;
+}
+.voucher-card-dt:hover { border-color: var(--border-hover); }
+.voucher-card-dt .vc-icon {
+  width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.vc-icon.bonus { background: rgba(202,41,48,.15); }
+.vc-icon.cash { background: rgba(5,161,88,.15); }
+.vc-info { flex: 1; min-width: 0; }
+.vc-title { font-size: 12px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vc-meta { font-size: 9px; color: var(--text-3); margin-top: 2px; display: flex; gap: 6px; flex-wrap: wrap; }
+.vc-meta span { display: inline-flex; align-items: center; gap: 2px; }
+.vc-actions-dt { display: flex; gap: 3px; flex-shrink: 0; }
+
+.voucher-def-tag {
+  display: inline-block; font-size: 7px; font-weight: 700; padding: 2px 5px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: .03em;
+}
+.vt-welcome { background: rgba(255,226,62,.12); color: var(--gold); }
+.vt-bonus { background: rgba(202,41,48,.12); color: var(--red); }
+.vt-cash { background: rgba(5,161,88,.12); color: var(--green); }
+
+.grant-target-selector {
+  display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px;
+}
+.grant-target-btn {
+  padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg-2); color: var(--text-1); font-size: 10px; font-weight: 600;
+  cursor: pointer; transition: all .15s;
+}
+.grant-target-btn:hover { border-color: var(--border-hover); color: var(--text-0); }
+.grant-target-btn.selected { border-color: var(--green); background: rgba(5,161,88,.1); color: var(--green); }
+
+.voucher-preview-card {
+  background: var(--bg-2); border: 1px solid var(--border); border-radius: 10px;
+  padding: 12px; margin-top: 8px;
+}
+.vpc-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.vpc-header .vpc-type { font-size: 20px; }
+.vpc-header .vpc-title { font-size: 13px; font-weight: 700; flex: 1; }
+.vpc-header .vpc-value { font-size: 13px; font-weight: 800; color: var(--gold); }
+.vpc-details { display: flex; flex-wrap: wrap; gap: 4px; }
+.vpc-chip {
+  font-size: 9px; font-weight: 600; padding: 3px 7px; border-radius: 4px;
+  background: rgba(255,255,255,.06); color: var(--text-2);
+}
+
+.grant-log { margin-top: 10px; max-height: 160px; overflow-y: auto; }
+.grant-log-entry {
+  font-size: 10px; padding: 5px 8px; border-radius: 6px; margin-bottom: 3px;
+  background: rgba(5,161,88,.06); color: var(--text-1); display: flex; align-items: center; gap: 6px;
+}
+.grant-log-entry .gl-time { color: var(--text-3); font-size: 9px; flex-shrink: 0; }
+.grant-log-entry .gl-icon { font-size: 12px; }
+
+/* Status bar */
+.status-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--bg-1); border-top: 1px solid var(--border);
+  padding: 8px 16px; display: flex; align-items: center; gap: 10px; z-index: 10;
+}
+.status-text { flex: 1; font-size: 10px; color: var(--text-2); }
+.status-text strong { color: var(--gold); }
+
+/* Search */
+.profile-search {
+  width: 100%; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg-2); color: var(--text-0); font-size: 11px; font-weight: 500;
+  outline: none; margin-bottom: 8px; font-family: inherit;
+}
+.profile-search:focus { border-color: var(--border-hover); }
+.profile-search::placeholder { color: var(--text-3); }
+
+/* Separator label */
+.sep-label {
+  font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--text-3); padding: 6px 0 4px; display: flex; align-items: center; gap: 6px;
+}
+.sep-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+@media (max-width: 700px) {
+  .panel-left { max-height: none; position: static; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+  body { padding-bottom: 50px; }
+}
 </style>
 </head>
 <body>
 
-<h1>&#9881; Mubet Loyalty DevTools</h1>
+<!-- Header -->
+<div class="header">
+  <h1>&#9881; Mubet DevTools</h1>
+  <span class="badge">Profile Manager</span>
+  <div class="conn-status disconnected" id="connStatus">&#9679; Disconnected</div>
+</div>
 
-<section>
-  <h2>&#128506; Sitemap — All Routes</h2>
+<!-- Two-panel layout -->
+<div class="main-layout">
 
-  <div class="sitemap-tree">
+  <!-- ===== LEFT PANEL: Profile List ===== -->
+  <div class="panel-left">
+    <div class="panel-title">
+      &#128100; Profiles <span class="count" id="profileCount">0</span>
+    </div>
+    <input type="text" class="profile-search" id="profileSearch" placeholder="Search profiles..." oninput="renderProfileList()">
+    <div class="profile-list" id="profileList"></div>
+    <div class="profile-actions">
+      <button class="btn-create-profile" onclick="openSaveModal()">+ Save Current as Profile</button>
+      <div style="display:flex;gap:4px;">
+        <button class="btn btn-secondary btn-sm" style="flex:1" onclick="exportAllProfiles()">&#128229; Export</button>
+        <button class="btn btn-secondary btn-sm" style="flex:1" onclick="importProfiles()">&#128228; Import</button>
+      </div>
+    </div>
+  </div>
 
-    <!-- Main Views -->
-    <div class="sitemap-branch">
-      <div class="sitemap-branch-label br-main">Main Views</div>
-      <div class="sitemap-children">
-        <a class="sitemap-link sl-js" onclick="navTo('lobby')"><span class="sl-icon">🏠</span>Lobby</a>
-        <a class="sitemap-link sl-js" onclick="navTo('vipclub')"><span class="sl-icon">👑</span>VIP Club</a>
+  <!-- ===== RIGHT PANEL: Editor ===== -->
+  <div class="panel-right">
+    <!-- Active profile indicator -->
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <div style="font-size:11px;color:var(--text-3);">Editing:</div>
+      <div style="font-size:13px;font-weight:700;" id="activeProfileName">Unsaved Changes</div>
+      <div style="margin-left:auto;display:flex;gap:4px;">
+        <button class="btn btn-green btn-sm" onclick="quickSaveProfile()" id="btnQuickSave" title="Save to current profile">&#128190; Save</button>
+        <button class="btn btn-primary btn-sm" onclick="applyFullState()" id="btnApply">&#9889; Apply</button>
+        <button class="btn btn-secondary btn-sm" onclick="resetToDefault()">Reset</button>
       </div>
     </div>
 
-    <div class="sitemap-divider"></div>
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('user',this)">&#128100; User State</button>
+      <button class="tab" onclick="switchTab('sitemap',this)">&#128506; Sitemap</button>
+      <button class="tab" onclick="switchTab('raw',this)">&#128736; Raw JSON</button>
+      <button class="tab" onclick="switchTab('voucher',this)">&#127915; Vouchers</button>
+    </div>
 
-    <!-- Mission -->
-    <div class="sitemap-branch">
-      <div class="sitemap-branch-label br-mission">Mission — #/mission</div>
-      <div class="sitemap-children">
-        <a class="sitemap-link sl-hash" onclick="navTo('#/mission')"><span class="sl-icon">🎯</span>Mission Hub</a>
-        <a class="sitemap-link sl-js" onclick="navTo('mission-tab-missions')"><span class="sl-icon">📋</span>Tab: Missions</a>
-        <a class="sitemap-link sl-js" onclick="navTo('mission-tab-redeem')"><span class="sl-icon">🎁</span>Tab: Redeem</a>
-        <a class="sitemap-link sl-js" onclick="navTo('mission-tab-leaderboard')"><span class="sl-icon">🏆</span>Tab: Leaderboard</a>
+    <!-- ==================== TAB: USER STATE ==================== -->
+    <div class="tab-panel active" id="panel-user">
 
-        <!-- Redeem nested -->
-        <div class="sitemap-nest">
-          <div class="sitemap-branch-label br-redeem">Redeem — #/redeem/*</div>
-          <div class="sitemap-children">
-            <a class="sitemap-link sl-sub" onclick="navTo('#/redeem/hub')"><span class="sl-icon">🏪</span>Hub</a>
-            <a class="sitemap-link sl-sub" onclick="navTo('#/redeem/shop')"><span class="sl-icon">🛍️</span>Shop</a>
-            <a class="sitemap-link sl-sub" onclick="navTo('#/redeem/spin')"><span class="sl-icon">🎰</span>Spin</a>
-            <a class="sitemap-link sl-sub" onclick="navTo('#/redeem/collect')"><span class="sl-icon">📦</span>Collect</a>
-            <a class="sitemap-link sl-sub" onclick="navTo('#/redeem/vip')"><span class="sl-icon">💎</span>VIP Shop</a>
+      <!-- PROFILE -->
+      <section>
+        <h2><span class="dot" style="background:var(--red)"></span> Profile & Auth</h2>
+        <div class="form-grid">
+          <div class="form-field">
+            <label>Username</label>
+            <input type="text" id="f_username" value="player01" placeholder="player01">
+          </div>
+          <div class="form-field">
+            <label>Display Name</label>
+            <input type="text" id="f_displayName" value="Player 01" placeholder="Player 01">
+          </div>
+          <div class="form-field">
+            <label>Balance (display)</label>
+            <input type="text" id="f_balance" value="12.500.000" placeholder="12.500.000">
+          </div>
+          <div class="form-field">
+            <label>Login Status</label>
+            <select id="f_isLoggedIn">
+              <option value="true">Logged In</option>
+              <option value="false">Logged Out</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIP -->
+      <section>
+        <h2><span class="dot" style="background:var(--gold)"></span> VIP System</h2>
+        <div class="form-grid">
+          <div class="form-field">
+            <label>VIP Tier (0-9)</label>
+            <select id="f_tier">
+              <option value="0">0 — Non-VIP</option>
+              <option value="1">1 — Dong 1 (Bronze)</option>
+              <option value="2" selected>2 — Dong 2 (Bronze)</option>
+              <option value="3">3 — Bac 1 (Silver)</option>
+              <option value="4">4 — Bac 2 (Silver)</option>
+              <option value="5">5 — Vang 1 (Gold)</option>
+              <option value="6">6 — Vang 2 (Gold)</option>
+              <option value="7">7 — Bach Kim 1 (Platinum)</option>
+              <option value="8">8 — Bach Kim 2 (Invite)</option>
+              <option value="9">9 — Kim Cuong (Invite)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Tier Since</label>
+            <input type="text" id="f_tierSince" value="2025-11-20" placeholder="YYYY-MM-DD">
+          </div>
+          <div class="form-field">
+            <label>Total Deposit (VND)</label>
+            <input type="number" id="f_totalDeposit" value="180000000">
+          </div>
+          <div class="form-field">
+            <label>Total Wager (VND)</label>
+            <input type="number" id="f_totalWager" value="900000000">
+          </div>
+          <div class="form-field">
+            <label>Deposit This Period</label>
+            <input type="number" id="f_depositThisPeriod" value="120000000">
+          </div>
+          <div class="form-field">
+            <label>Wager This Period</label>
+            <input type="number" id="f_wagerThisPeriod" value="350000000">
+          </div>
+          <div class="form-field">
+            <label>Total Cashback Received</label>
+            <input type="number" id="f_totalCashbackReceived" value="5400000">
+          </div>
+          <div class="form-field">
+            <label>Total Bonus Received</label>
+            <input type="number" id="f_totalBonusReceived" value="750000">
+          </div>
+        </div>
+      </section>
+
+      <!-- XP & LEVEL -->
+      <section>
+        <h2><span class="dot" style="background:var(--purple)"></span> XP & Level</h2>
+        <div class="form-grid">
+          <div class="range-field" style="grid-column:span 2">
+            <label>Current Level</label>
+            <div class="range-row">
+              <input type="range" id="f_currentLevel" min="1" max="30" value="1" oninput="updateLevelDisplay()">
+              <div class="range-val" id="levelVal">Lv.1</div>
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Lifetime XP</label>
+            <input type="number" id="f_lifetimeXp" value="30">
+          </div>
+          <div class="form-field">
+            <label>Today XP (cap: 250)</label>
+            <input type="number" id="f_todayXp" value="30" max="250">
+          </div>
+          <div class="form-field">
+            <label>Last Checkin Date</label>
+            <input type="text" id="f_lastCheckinDate" value="2026-04-12" placeholder="YYYY-MM-DD">
+          </div>
+          <div class="form-field">
+            <label>Today Deposit</label>
+            <input type="number" id="f_todayDeposit" value="0">
+          </div>
+        </div>
+        <div style="margin-top:6px;">
+          <label style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);display:block;margin-bottom:5px;">XP Sources Today</label>
+          <div class="form-grid cols-3" style="gap:5px;">
+            <div class="form-field" style="padding:7px 9px;">
+              <label>Check-in</label>
+              <input type="number" id="f_xpCheckin" value="10">
+            </div>
+            <div class="form-field" style="padding:7px 9px;">
+              <label>Deposit</label>
+              <input type="number" id="f_xpDeposit" value="0">
+            </div>
+            <div class="form-field" style="padding:7px 9px;">
+              <label>Bet</label>
+              <input type="number" id="f_xpBet" value="15">
+            </div>
+            <div class="form-field" style="padding:7px 9px;">
+              <label>Mission</label>
+              <input type="number" id="f_xpMission" value="5">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRIAL PROGRAM -->
+      <section>
+        <h2><span class="dot" style="background:var(--teal)"></span> Trial Program (VIP 7 ngay)</h2>
+        <div class="form-grid cols-1" style="gap:5px;">
+          <div class="check-field">
+            <span class="check-icon">&#128241;</span>
+            <input type="checkbox" id="f_trialPhone">
+            <span class="check-label">Phone verified</span>
+          </div>
+          <div class="check-field">
+            <span class="check-icon">&#9992;&#65039;</span>
+            <input type="checkbox" id="f_trialTelegram">
+            <span class="check-label">Telegram connected</span>
+          </div>
+          <div class="check-field">
+            <span class="check-icon">&#128176;</span>
+            <input type="checkbox" id="f_trialDeposit">
+            <span class="check-label">First deposit (&ge; 1M)</span>
+          </div>
+        </div>
+        <div class="range-field" style="margin-top:6px;">
+          <label>Active Days (streak)</label>
+          <div class="range-row">
+            <input type="range" id="f_trialActiveDays" min="0" max="3" value="0" oninput="document.getElementById('trialDaysVal').textContent=this.value+'/3'">
+            <div class="range-val" id="trialDaysVal">0/3</div>
+          </div>
+        </div>
+        <div class="form-grid" style="margin-top:6px;">
+          <div class="check-field">
+            <span class="check-icon">&#9889;</span>
+            <input type="checkbox" id="f_trialActivated">
+            <span class="check-label">Trial Activated</span>
+          </div>
+          <div class="range-field">
+            <label>Time Remaining</label>
+            <div class="range-row">
+              <input type="range" id="f_trialTimeLeft" min="0" max="168" value="168" oninput="updateTrialTimeDisplay()">
+              <div class="range-val" id="trialTimeVal">7d 0h</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MISSIONS -->
+      <section>
+        <h2><span class="dot" style="background:var(--blue)"></span> Mission Status Overrides</h2>
+        <div class="form-grid">
+          <div class="form-field">
+            <label>Newbie Missions</label>
+            <select id="f_missionNewbie">
+              <option value="default">Default (mixed)</option>
+              <option value="all_progress">All In Progress</option>
+              <option value="all_completed">All Completed</option>
+              <option value="all_claimed">All Claimed</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Warrior Missions</label>
+            <select id="f_missionWarrior">
+              <option value="default">Default (mixed)</option>
+              <option value="all_progress">All In Progress</option>
+              <option value="all_completed">All Completed</option>
+              <option value="all_claimed">All Claimed</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Live Challenge</label>
+            <select id="f_missionLC">
+              <option value="default">Default (mixed)</option>
+              <option value="all_progress">All In Progress</option>
+              <option value="all_completed">All Completed</option>
+              <option value="all_claimed">All Claimed</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>World Cup</label>
+            <select id="f_missionWC">
+              <option value="default">Default (mixed)</option>
+              <option value="all_progress">All In Progress</option>
+              <option value="all_completed">All Completed</option>
+              <option value="all_claimed">All Claimed</option>
+            </select>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== TAB: SITEMAP ==================== -->
+    <div class="tab-panel" id="panel-sitemap">
+      <section>
+        <h2><span class="dot" style="background:var(--gold)"></span> All Routes</h2>
+        <div class="sitemap-tree">
+          <div class="sitemap-branch">
+            <div class="sitemap-branch-label br-main">Main Views</div>
+            <div class="sitemap-children">
+              <a class="sitemap-link" onclick="navTo('lobby')"><span class="sl-icon">&#127968;</span>Lobby</a>
+              <a class="sitemap-link" onclick="navTo('#/vip')"><span class="sl-icon">&#128081;</span>VIP Club</a>
+            </div>
+          </div>
+          <div class="sitemap-divider"></div>
+          <div class="sitemap-branch">
+            <div class="sitemap-branch-label br-mission">Mission</div>
+            <div class="sitemap-children">
+              <a class="sitemap-link" onclick="navTo('#/mission')"><span class="sl-icon">&#127919;</span>Mission Hub</a>
+              <a class="sitemap-link" onclick="navTo('mission-tab-missions')"><span class="sl-icon">&#128203;</span>Tab: Missions</a>
+              <a class="sitemap-link" onclick="navTo('mission-tab-redeem')"><span class="sl-icon">&#127873;</span>Tab: Redeem</a>
+              <a class="sitemap-link" onclick="navTo('mission-tab-leaderboard')"><span class="sl-icon">&#127942;</span>Tab: Leaderboard</a>
+              <div class="sitemap-nest">
+                <div class="sitemap-branch-label br-redeem">Redeem</div>
+                <div class="sitemap-children">
+                  <a class="sitemap-link" onclick="navTo('#/redeem/hub')"><span class="sl-icon">&#127978;</span>Hub</a>
+                  <a class="sitemap-link" onclick="navTo('#/redeem/shop')"><span class="sl-icon">&#128717;</span>Shop</a>
+                  <a class="sitemap-link" onclick="navTo('#/redeem/spin')"><span class="sl-icon">&#127920;</span>Spin</a>
+                  <a class="sitemap-link" onclick="navTo('#/redeem/collect')"><span class="sl-icon">&#128230;</span>Collect</a>
+                  <a class="sitemap-link" onclick="navTo('#/redeem/vip')"><span class="sl-icon">&#128142;</span>VIP Shop</a>
+                </div>
+              </div>
+              <div class="sitemap-nest">
+                <div class="sitemap-branch-label br-lc">Live Challenge</div>
+                <div class="sitemap-children">
+                  <a class="sitemap-link" onclick="navTo('#/mission/live-challenge')"><span class="sl-icon">&#9889;</span>Home</a>
+                  <a class="sitemap-link" onclick="navTo('#/mission/live-challenge/rewards')"><span class="sl-icon">&#127873;</span>Rewards</a>
+                  <a class="sitemap-link" onclick="navTo('#/mission/live-challenge/leaderboard')"><span class="sl-icon">&#127942;</span>Leaderboard</a>
+                  <a class="sitemap-link" onclick="navTo('#/mission/live-challenge/rules')"><span class="sl-icon">&#128214;</span>Rules</a>
+                  <a class="sitemap-link" onclick="navTo('#/mission/live-challenge/mission/1')"><span class="sl-icon">&#128221;</span>Mission Detail</a>
+                  <a class="sitemap-link" onclick="navTo('#/mission/live-challenge/milestones')"><span class="sl-icon">&#127941;</span>Milestones</a>
+                  <a class="sitemap-link" onclick="navTo('#/mission/live-challenge/history')"><span class="sl-icon">&#128220;</span>History</a>
+                  <a class="sitemap-link" onclick="navTo('#/mission/live-challenge/end-season')"><span class="sl-icon">&#127937;</span>End Season</a>
+                </div>
+              </div>
+              <div class="sitemap-nest">
+                <div class="sitemap-branch-label br-wc">World Cup</div>
+                <div class="sitemap-children">
+                  <a class="sitemap-link" onclick="navTo('#/mission/worldcup')"><span class="sl-icon">&#9917;</span>World Cup</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sitemap-divider"></div>
+          <div class="sitemap-branch">
+            <div class="sitemap-branch-label br-onb">Onboarding</div>
+            <div class="sitemap-children">
+              <a class="sitemap-link" onclick="navTo('#/onboarding/welcome')"><span class="sl-icon">&#128075;</span>Welcome</a>
+              <a class="sitemap-link" onclick="navTo('#/onboarding/login')"><span class="sl-icon">&#128273;</span>Login</a>
+              <a class="sitemap-link" onclick="navTo('#/onboarding/offer-confirm')"><span class="sl-icon">&#9989;</span>Offer Confirm</a>
+              <a class="sitemap-link" onclick="navTo('#/onboarding/offer-select')"><span class="sl-icon">&#127919;</span>Offer Select</a>
+              <a class="sitemap-link" onclick="navTo('#/onboarding/deposit')"><span class="sl-icon">&#128176;</span>Deposit</a>
+              <a class="sitemap-link" onclick="navTo('#/onboarding/deposit-confirm')"><span class="sl-icon">&#127974;</span>Deposit Confirm</a>
+              <a class="sitemap-link" onclick="navTo('#/onboarding/deposit-success')"><span class="sl-icon">&#127881;</span>Success</a>
+            </div>
+          </div>
+          <div class="sitemap-divider"></div>
+          <div style="margin-bottom:12px;">
+            <h2 style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-2);margin-bottom:8px;"><span class="dot" style="background:var(--purple);display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px;"></span> Onboarding Journeys</h2>
+            <div class="journey-group">
+              <div class="journey-label flow-a">Luong A &mdash; Da biet uu dai + Da dang nhap</div>
+              <div class="journey-flow">
+                <a class="journey-step" onclick="navTo('#/onboarding/offer-confirm')"><span class="step-num">1</span>Offer Confirm</a>
+                <span class="journey-arrow">&rarr;</span>
+                <a class="journey-step" onclick="navTo('#/onboarding/deposit')"><span class="step-num">2</span>Deposit</a>
+                <span class="journey-arrow">&rarr;</span>
+                <a class="journey-step" onclick="navTo('#/onboarding/deposit-success')"><span class="step-num">3</span>Success</a>
+              </div>
+            </div>
+            <div class="journey-group">
+              <div class="journey-label flow-b">Luong B &mdash; Chua biet uu dai + Da dang nhap</div>
+              <div class="journey-flow">
+                <a class="journey-step" onclick="navTo('#/onboarding/offer-select')"><span class="step-num">1</span>Offer Select</a>
+                <span class="journey-arrow">&rarr;</span>
+                <a class="journey-step" onclick="navTo('#/onboarding/deposit')"><span class="step-num">2</span>Deposit</a>
+                <span class="journey-arrow">&rarr;</span>
+                <a class="journey-step" onclick="navTo('#/onboarding/deposit-success')"><span class="step-num">3</span>Success</a>
+              </div>
+            </div>
+            <div class="journey-group">
+              <div class="journey-label flow-c">Luong C &mdash; Chua dang nhap</div>
+              <div class="journey-flow">
+                <a class="journey-step" onclick="navTo('#/onboarding/welcome')"><span class="step-num">1</span>Welcome</a>
+                <span class="journey-arrow">&rarr;</span>
+                <a class="journey-step" onclick="navTo('#/onboarding/login')"><span class="step-num">2</span>Login</a>
+                <span class="journey-arrow">&rarr;</span>
+                <a class="journey-step" onclick="navTo('#/onboarding/offer-select')"><span class="step-num">3</span>Offer Select</a>
+                <span class="journey-arrow">&rarr;</span>
+                <a class="journey-step" onclick="navTo('#/onboarding/deposit')"><span class="step-num">4</span>Deposit</a>
+                <span class="journey-arrow">&rarr;</span>
+                <a class="journey-step" onclick="navTo('#/onboarding/deposit-success')"><span class="step-num">5</span>Success</a>
+              </div>
+            </div>
+          </div>
+          <div class="sitemap-divider"></div>
+          <div class="sitemap-branch">
+            <div class="sitemap-branch-label br-account">Account</div>
+            <div class="sitemap-children">
+              <a class="sitemap-link" onclick="navTo('#/account')"><span class="sl-icon">&#128100;</span>Account</a>
+              <a class="sitemap-link" onclick="navTo('#/account/my-promotions')"><span class="sl-icon">&#127915;</span>My Promotions</a>
+              <a class="sitemap-link" onclick="navTo('#/account/deposit')"><span class="sl-icon">&#128176;</span>Deposit</a>
+              <a class="sitemap-link" onclick="navTo('#/account/withdraw')"><span class="sl-icon">&#128184;</span>Withdraw</a>
+              <a class="sitemap-link" onclick="navTo('#/account/transaction-history')"><span class="sl-icon">&#128202;</span>Transactions</a>
+              <a class="sitemap-link" onclick="navTo('#/account/bet-history')"><span class="sl-icon">&#127922;</span>Bet History</a>
+              <a class="sitemap-link" onclick="navTo('#/account/gift-code')"><span class="sl-icon">&#127903;</span>Gift Code</a>
+              <a class="sitemap-link" onclick="navTo('#/account/bank-info')"><span class="sl-icon">&#127974;</span>Bank Info</a>
+              <a class="sitemap-link" onclick="navTo('#/account/my-profile')"><span class="sl-icon">&#9999;&#65039;</span>My Profile</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== TAB: RAW JSON ==================== -->
+    <div class="tab-panel" id="panel-raw">
+      <section>
+        <h2><span class="dot" style="background:var(--orange)"></span> Raw State JSON</h2>
+        <p style="font-size:10px;color:var(--text-3);margin-bottom:8px;">Edit the full state JSON directly. Click "Import" to apply.</p>
+        <textarea id="rawJson" style="width:100%;min-height:300px;background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:12px;color:var(--text-0);font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.6;resize:vertical;outline:none;" spellcheck="false"></textarea>
+        <div class="btn-row">
+          <button class="btn btn-primary btn-sm" onclick="importRawJson()">&#128229; Import JSON</button>
+          <button class="btn btn-secondary btn-sm" onclick="exportToClipboard()">&#128203; Copy to Clipboard</button>
+          <button class="btn btn-secondary btn-sm" onclick="refreshRawJson()">&#128260; Refresh</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== TAB: VOUCHERS ==================== -->
+    <div class="tab-panel" id="panel-voucher">
+
+      <!-- CREATE VOUCHER DEFINITION -->
+      <section>
+        <h2><span class="dot" style="background:var(--gold)"></span> Tạo Voucher Definition</h2>
+        <div class="form-grid">
+          <div class="form-field">
+            <label>Tên voucher</label>
+            <input type="text" id="vc_title" value="" placeholder="VD: Welcome 50%">
+          </div>
+          <div class="form-field">
+            <label>Mô tả</label>
+            <input type="text" id="vc_desc" value="" placeholder="Thưởng 50% giá trị nạp">
+          </div>
+          <div class="form-field">
+            <label>Loại voucher</label>
+            <select id="vc_type">
+              <option value="bonus">Bonus (% nạp)</option>
+              <option value="cash">Cash (tiền cố định)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Giá trị hiển thị</label>
+            <input type="text" id="vc_value" value="" placeholder="VD: +50% hoặc 500K">
+          </div>
+          <div class="form-field">
+            <label>Max Bonus (VND)</label>
+            <input type="number" id="vc_maxBonus" value="1000000" placeholder="1000000">
+          </div>
+          <div class="form-field">
+            <label>Min Deposit</label>
+            <input type="text" id="vc_minDeposit" value="0đ" placeholder="VD: 500.000đ">
+          </div>
+          <div class="form-field">
+            <label>Rolling / Turnover</label>
+            <input type="text" id="vc_rolling" value="10x" placeholder="VD: 10x">
+          </div>
+          <div class="form-field">
+            <label>Hạn sử dụng (giờ)</label>
+            <input type="number" id="vc_expiryHours" value="24" placeholder="24">
+          </div>
+        </div>
+        <div class="form-grid cols-1" style="gap:5px;margin-top:6px;">
+          <div class="check-field">
+            <span class="check-icon">&#127381;</span>
+            <input type="checkbox" id="vc_isWelcome">
+            <span class="check-label">Welcome voucher</span>
+          </div>
+          <div class="check-field">
+            <span class="check-icon">&#128176;</span>
+            <input type="checkbox" id="vc_firstDepositOnly">
+            <span class="check-label">Chỉ lần nạp đầu tiên</span>
+          </div>
+          <div class="check-field">
+            <span class="check-icon">&#128257;</span>
+            <input type="checkbox" id="vc_cashbackCompatible" checked>
+            <span class="check-label">Tương thích với Cashback</span>
+          </div>
+        </div>
+        <div class="form-grid cols-1" style="margin-top:8px;">
+          <div class="form-field">
+            <label>Sản phẩm áp dụng (phân cách bởi dấu phẩy)</label>
+            <input type="text" id="vc_products" value="Tất cả sản phẩm" placeholder="Slots, Bắn cá, Thể thao">
+          </div>
+          <div class="form-field">
+            <label>Điều khoản (mỗi dòng = 1 điều khoản)</label>
+            <textarea id="vc_terms" rows="3" style="width:100%;background:transparent;border:none;outline:none;color:var(--text-0);font-size:11px;font-family:inherit;resize:vertical;" placeholder="Áp dụng 1 lần duy nhất&#10;Turnover 10x&#10;Hết hạn sau 24 giờ"></textarea>
           </div>
         </div>
 
-        <!-- Live Challenge nested -->
-        <div class="sitemap-nest">
-          <div class="sitemap-branch-label br-lc">Live Challenge — #/mission/live-challenge/*</div>
-          <div class="sitemap-children">
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge')"><span class="sl-icon">⚡</span>Live Challenge (Tab: Thử thách)</a>
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rewards')"><span class="sl-icon">🎁</span>Tab: Thưởng (inline)</a>
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/leaderboard')"><span class="sl-icon">🏆</span>Tab: Xếp hạng (inline)</a>
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/rules')"><span class="sl-icon">📖</span>Tab: Thể lệ (inline)</a>
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/mission/1')"><span class="sl-icon">📝</span>Mission Detail</a>
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/milestones')"><span class="sl-icon">🏅</span>Milestones</a>
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/history')"><span class="sl-icon">📜</span>History</a>
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/live-challenge/end-season')"><span class="sl-icon">🏁</span>End Season</a>
+        <!-- Preview -->
+        <div id="vcPreview" style="margin-top:10px;"></div>
+
+        <div class="btn-row">
+          <button class="btn btn-green" onclick="createVoucherDef()">&#10133; Tạo Voucher</button>
+          <button class="btn btn-secondary" onclick="resetVoucherForm()">&#128260; Reset</button>
+        </div>
+      </section>
+
+      <!-- QUICK TEMPLATES -->
+      <section>
+        <h2><span class="dot" style="background:var(--purple)"></span> Mẫu nhanh</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <button class="btn btn-secondary btn-sm" onclick="loadVoucherTemplate('welcome50')">Welcome 50%</button>
+          <button class="btn btn-secondary btn-sm" onclick="loadVoucherTemplate('welcome100')">Welcome 100%</button>
+          <button class="btn btn-secondary btn-sm" onclick="loadVoucherTemplate('welcome200')">Welcome 200%</button>
+          <button class="btn btn-secondary btn-sm" onclick="loadVoucherTemplate('reload30')">Nạp lại 30%</button>
+          <button class="btn btn-secondary btn-sm" onclick="loadVoucherTemplate('free500k')">Free 500K</button>
+          <button class="btn btn-secondary btn-sm" onclick="loadVoucherTemplate('vip_bonus')">VIP +30%</button>
+        </div>
+      </section>
+
+      <!-- VOUCHER DEFINITIONS LIST -->
+      <section>
+        <h2><span class="dot" style="background:var(--teal)"></span> Voucher Definitions <span class="count" id="voucherDefCount">0</span></h2>
+        <div id="voucherDefList" class="voucher-list">
+          <div style="text-align:center;padding:16px;color:var(--text-3);font-size:11px;">Chưa có voucher nào. Tạo mới ở trên.</div>
+        </div>
+      </section>
+
+      <!-- GRANT VOUCHER -->
+      <section>
+        <h2><span class="dot" style="background:var(--green)"></span> Grant Voucher cho User</h2>
+        <p style="font-size:10px;color:var(--text-3);margin-bottom:8px;">Voucher luôn được grant với trạng thái <strong style="color:var(--green)">available</strong>. Hệ thống sẽ tự động chuyển sang <strong style="color:var(--red)">locked</strong> nếu user đang có turnover chưa hoàn thành.</p>
+        <div class="form-grid cols-1">
+          <div class="form-field">
+            <label>Chọn Voucher Definition</label>
+            <select id="grant_voucherId">
+              <option value="">— Chọn voucher —</option>
+            </select>
           </div>
         </div>
-
-        <!-- World Cup nested -->
-        <div class="sitemap-nest">
-          <div class="sitemap-branch-label br-wc">World Cup — #/mission/worldcup</div>
-          <div class="sitemap-children">
-            <a class="sitemap-link sl-hash" onclick="navTo('#/mission/worldcup')"><span class="sl-icon">⚽</span>World Cup</a>
+        <div style="margin-top:8px;">
+          <label style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);display:block;margin-bottom:5px;">Grant tới account</label>
+          <div class="grant-target-selector" id="grantTargets">
+            <button class="grant-target-btn selected" onclick="toggleGrantTarget(this,'_current')" data-target="_current">&#128100; User hiện tại</button>
+            <button class="grant-target-btn" onclick="toggleGrantTarget(this,'userwelcomepackage')" data-target="userwelcomepackage">userwelcomepackage</button>
+            <button class="grant-target-btn" onclick="toggleGrantTarget(this,'usercommisionpackage')" data-target="usercommisionpackage">usercommisionpackage</button>
+            <button class="grant-target-btn" onclick="toggleGrantTarget(this,'usernonpackage')" data-target="usernonpackage">usernonpackage</button>
+            <button class="grant-target-btn" onclick="toggleGrantTarget(this,'_default')" data-target="_default">_default (fallback)</button>
           </div>
         </div>
-      </div>
-    </div>
+        <div class="btn-row">
+          <button class="btn btn-green" onclick="grantVoucher()">&#127873; Grant Voucher</button>
+        </div>
+        <!-- Grant log -->
+        <div class="grant-log" id="grantLog"></div>
+      </section>
 
-    <div class="sitemap-divider"></div>
+      <!-- BULK OPERATIONS -->
+      <section>
+        <h2><span class="dot" style="background:var(--red)"></span> Thao tác nhanh</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <button class="btn btn-secondary btn-sm" onclick="grantWelcomeSet('usernonpackage')">&#127381; Grant 3 Welcome → usernonpackage</button>
+          <button class="btn btn-secondary btn-sm" onclick="grantWelcomeSet('_current')">&#127381; Grant 3 Welcome → User hiện tại</button>
+          <button class="btn btn-secondary btn-sm" onclick="clearVouchersForTarget()">&#128465; Xóa tất cả voucher của user</button>
+          <button class="btn btn-secondary btn-sm" onclick="clearAllVoucherDefs()">&#128465; Xóa tất cả definitions</button>
+        </div>
+      </section>
 
-    <!-- Onboarding -->
-    <div class="sitemap-branch">
-      <div class="sitemap-branch-label br-onb">Onboarding — #/onboarding/*</div>
-      <div class="sitemap-children">
-        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/welcome')"><span class="sl-icon">👋</span>Welcome</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/login')"><span class="sl-icon">🔑</span>Login</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/offer-confirm')"><span class="sl-icon">✅</span>Offer Confirm</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/offer-select')"><span class="sl-icon">🎯</span>Offer Select</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit')"><span class="sl-icon">💰</span>Deposit</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit-confirm')"><span class="sl-icon">🏦</span>Deposit Confirm</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/onboarding/deposit-success')"><span class="sl-icon">🎉</span>Success</a>
-      </div>
-    </div>
-
-    <div class="sitemap-divider"></div>
-
-    <!-- Account -->
-    <div class="sitemap-branch">
-      <div class="sitemap-branch-label br-account">Account — #/account/*</div>
-      <div class="sitemap-children">
-        <a class="sitemap-link sl-hash" onclick="navTo('#/account')"><span class="sl-icon">👤</span>Account</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/account/my-promotions')"><span class="sl-icon">🎫</span>My Promotions</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/account/deposit')"><span class="sl-icon">💰</span>Deposit</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/account/withdraw')"><span class="sl-icon">💸</span>Withdraw</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/account/transaction-history')"><span class="sl-icon">📊</span>Transaction History</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/account/bet-history')"><span class="sl-icon">🎲</span>Bet History</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/account/gift-code')"><span class="sl-icon">🎟️</span>Gift Code</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/account/bank-info')"><span class="sl-icon">🏦</span>Bank Info</a>
-        <a class="sitemap-link sl-hash" onclick="navTo('#/account/my-profile')"><span class="sl-icon">✏️</span>My Profile</a>
-      </div>
     </div>
 
   </div>
+</div>
 
-  <div class="status" id="navStatus" style="margin-top:12px">Click a route to navigate the prototype in another tab.</div>
-</section>
-
-<section>
-  <h2>🚀 Onboarding Journeys</h2>
-
-  <div class="journey-group">
-    <div class="journey-label flow-a">Luồng A — Đã biết ưu đãi + Đã đăng nhập</div>
-    <div class="journey-flow">
-      <a class="journey-step" onclick="navTo('#/onboarding/offer-confirm')"><span class="step-num">1</span>Offer Confirm</a>
-      <span class="journey-arrow">→</span>
-      <a class="journey-step" onclick="navTo('#/onboarding/deposit')"><span class="step-num">2</span>Deposit</a>
-      <span class="journey-arrow">→</span>
-      <a class="journey-step" onclick="navTo('#/onboarding/deposit-confirm')"><span class="step-num">3</span>Bank Confirm</a>
-      <span class="journey-arrow">→</span>
-      <a class="journey-step" onclick="navTo('#/onboarding/deposit-success')"><span class="step-num">4</span>Success</a>
+<!-- Save Profile Modal -->
+<div class="modal-overlay" id="saveModal">
+  <div class="modal">
+    <h3>&#128190; Save Profile</h3>
+    <div class="form-field">
+      <label>Profile Name</label>
+      <input type="text" id="m_profileName" placeholder="e.g. VIP5 with active trial">
     </div>
-    <div class="journey-desc">Xác nhận ưu đãi → Nạp → Xác nhận CK → Thành công</div>
-  </div>
-
-  <div class="sitemap-divider"></div>
-
-  <div class="journey-group">
-    <div class="journey-label flow-b">Luồng B — Chưa biết ưu đãi + Đã đăng nhập</div>
-    <div class="journey-flow">
-      <a class="journey-step" onclick="navTo('#/onboarding/offer-select')"><span class="step-num">1</span>Offer Select</a>
-      <span class="journey-arrow">→</span>
-      <a class="journey-step" onclick="navTo('#/onboarding/deposit')"><span class="step-num">2</span>Deposit</a>
-      <span class="journey-arrow">→</span>
-      <a class="journey-step" onclick="navTo('#/onboarding/deposit-confirm')"><span class="step-num">3</span>Bank Confirm</a>
-      <span class="journey-arrow">→</span>
-      <a class="journey-step" onclick="navTo('#/onboarding/deposit-success')"><span class="step-num">4</span>Success</a>
+    <div class="form-field">
+      <label>Description (optional)</label>
+      <input type="text" id="m_profileDesc" placeholder="Short note about this config">
     </div>
-    <div class="journey-desc">Chọn ưu đãi → Nạp → Xác nhận CK → Thành công</div>
-  </div>
-
-  <div class="sitemap-divider"></div>
-
-  <div class="journey-group">
-    <div class="journey-label flow-c">Luồng C — Chưa biết ưu đãi + Chưa đăng nhập</div>
-    <div class="journey-flow">
-      <a class="journey-step" onclick="navTo('#/onboarding/welcome')"><span class="step-num">1</span>Welcome</a>
-      <span class="journey-arrow">→</span>
-      <a class="journey-step" onclick="navTo('#/onboarding/login')"><span class="step-num">2</span>Login</a>
-      <span class="journey-arrow">→</span>
-      <a class="journey-step" onclick="navTo('#/onboarding/offer-select')"><span class="step-num">3</span>Offer Select</a>
-      <span class="journey-arrow">→</span>
-      <a class="journey-step" onclick="navTo('#/onboarding/deposit')"><span class="step-num">4</span>Deposit</a>
-      <span class="journey-arrow">→</span>
-      <a class="journey-step" onclick="navTo('#/onboarding/deposit-confirm')"><span class="step-num">5</span>Bank Confirm</a>
-      <span class="journey-arrow">→</span>
-      <a class="journey-step" onclick="navTo('#/onboarding/deposit-success')"><span class="step-num">6</span>Success</a>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="closeSaveModal()">Cancel</button>
+      <button class="btn btn-green" onclick="confirmSaveProfile()">&#128190; Save</button>
     </div>
-    <div class="journey-desc">Welcome/Trust → Đăng nhập → Chọn ưu đãi → Nạp → Xác nhận CK → Thành công</div>
   </div>
-</section>
+</div>
 
-<section>
-  <h2>Quick States</h2>
-  <div class="preset-grid">
-    <button class="preset-btn" onclick="setPreset(1)">
-      <div class="preset-btn-title">State 1: Fresh</div>
-      <div class="preset-btn-desc">0/4 conditions, no progress</div>
-    </button>
-    <button class="preset-btn" onclick="setPreset(2)">
-      <div class="preset-btn-title">State 2: Partial</div>
-      <div class="preset-btn-desc">Phone + Telegram done, 2/3 days</div>
-    </button>
-    <button class="preset-btn" onclick="setPreset(3)">
-      <div class="preset-btn-title">State 3: All Complete</div>
-      <div class="preset-btn-desc">4/4 done, ready to activate</div>
-    </button>
-    <button class="preset-btn" onclick="setPreset(4)">
-      <div class="preset-btn-title">State 4: Trial Active</div>
-      <div class="preset-btn-desc">Activated, 5 days remaining</div>
-    </button>
-    <button class="preset-btn" onclick="setPreset(5)">
-      <div class="preset-btn-title">State 5: Ending Soon</div>
-      <div class="preset-btn-desc">Activated, 12 hours remaining</div>
-    </button>
-    <button class="preset-btn" onclick="setPreset(6)">
-      <div class="preset-btn-title">State 6: Almost Done</div>
-      <div class="preset-btn-desc">3/4 done, 1/3 active days</div>
-    </button>
+<!-- Rename Modal -->
+<div class="modal-overlay" id="renameModal">
+  <div class="modal">
+    <h3>&#9999;&#65039; Rename Profile</h3>
+    <div class="form-field">
+      <label>New Name</label>
+      <input type="text" id="m_renameName" placeholder="New profile name">
+    </div>
+    <div class="form-field">
+      <label>Description</label>
+      <input type="text" id="m_renameDesc" placeholder="Updated description">
+    </div>
+    <input type="hidden" id="m_renameId">
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="closeRenameModal()">Cancel</button>
+      <button class="btn btn-green" onclick="confirmRename()">&#9989; Update</button>
+    </div>
   </div>
-</section>
+</div>
 
-<section>
-  <h2>Conditions</h2>
-  <div class="field">
-    <input type="checkbox" id="phone">
-    <label for="phone">&#128241; Phone verified</label>
-  </div>
-  <div class="field">
-    <input type="checkbox" id="telegram">
-    <label for="telegram">&#9992; Telegram connected</label>
-  </div>
-  <div class="field">
-    <input type="checkbox" id="deposit">
-    <label for="deposit">&#128176; First deposit done</label>
-  </div>
-  <div class="field">
-    <label>&#128197; Active days:</label>
-    <input type="range" id="activeDays" min="0" max="3" value="0" oninput="document.getElementById('activeDaysVal').textContent=this.value+'/3'">
-    <div class="field-value" id="activeDaysVal">0/3</div>
-  </div>
-</section>
+<!-- Status Bar -->
+<div class="status-bar">
+  <div class="status-text" id="statusBar">Ready. Open <strong>mubet-prototype.html</strong> in another tab.</div>
+  <button class="btn btn-primary btn-sm" onclick="applyFullState()" style="flex:none;">&#9889; Apply</button>
+</div>
 
-<section>
-  <h2>Trial</h2>
-  <div class="field">
-    <input type="checkbox" id="activated">
-    <label for="activated">Trial activated</label>
-  </div>
-  <div class="field">
-    <label>Time remaining:</label>
-    <input type="range" id="timeLeft" min="0" max="168" value="168" oninput="updateTimeDisplay()">
-    <div class="field-value" id="timeLeftVal">7d 0h</div>
-  </div>
-  <div class="actions">
-    <button class="btn-apply" onclick="applyState()">Apply State</button>
-    <button class="btn-reset" onclick="resetState()">Reset</button>
-  </div>
-  <div class="status" id="statusText">Ready. Open mubet-prototype.html in another tab.</div>
-</section>
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Hidden file input for import -->
+<input type="file" id="fileImport" accept=".json" style="display:none" onchange="handleFileImport(event)">
 
 <script>
-function updateTimeDisplay() {
-  const h = parseInt(document.getElementById('timeLeft').value);
-  const d = Math.floor(h / 24);
-  const hr = h % 24;
-  document.getElementById('timeLeftVal').textContent = `${d}d ${hr}h`;
+// ===== BROADCAST CHANNEL =====
+let bc;
+try { bc = new BroadcastChannel('mubet_devtools'); } catch(e) {}
+
+// ===== VIP TIER NAMES =====
+const VIP_NAMES = ['Non-VIP','Dong 1','Dong 2','Bac 1','Bac 2','Vang 1','Vang 2','Bach Kim 1','Bach Kim 2','Kim Cuong'];
+
+// ===== DEFAULT STATE =====
+const DEFAULT_STATE = {
+  isLoggedIn: true,
+  username: 'player01', displayName: 'Player 01', balance: '12.500.000',
+  tier: 2, tierSince: '2025-11-20',
+  totalDeposit: 180000000, totalWager: 900000000,
+  depositThisPeriod: 120000000, wagerThisPeriod: 350000000,
+  totalCashbackReceived: 5400000, totalBonusReceived: 750000, isTrial: false,
+  currentLevel: 1, lifetimeXp: 30, todayXp: 30,
+  lastCheckinDate: '2026-04-12', todayDeposit: 0,
+  todaySources: { checkin: 10, deposit: 0, bet: 15, mission: 5 },
+  trial: { phone: false, telegram: false, deposit: false, activeDays: 0, activated: false, activatedAt: null, expiresAt: null },
+  missionOverrides: { newbie: 'default', warrior: 'default', lc: 'default', wc: 'default' }
+};
+
+// ===== BUILT-IN PRESETS =====
+const BUILTIN_PRESETS = [
+  {
+    id: '__new_user', name: 'New User', desc: 'Logged out, tier 0, level 1, 0 XP', builtin: true,
+    state: {
+      isLoggedIn: false, username: 'newuser', displayName: 'New User', balance: '0',
+      tier: 0, tierSince: '', totalDeposit: 0, totalWager: 0,
+      depositThisPeriod: 0, wagerThisPeriod: 0, totalCashbackReceived: 0, totalBonusReceived: 0, isTrial: false,
+      currentLevel: 1, lifetimeXp: 0, todayXp: 0, lastCheckinDate: '', todayDeposit: 0,
+      todaySources: { checkin: 0, deposit: 0, bet: 0, mission: 0 },
+      trial: { phone: false, telegram: false, deposit: false, activeDays: 0, activated: false },
+      missionOverrides: { newbie: 'default', warrior: 'default', lc: 'default', wc: 'default' }
+    }
+  },
+  {
+    id: '__casual', name: 'Casual Player', desc: 'VIP 1, Level 5, small deposit', builtin: true,
+    state: {
+      isLoggedIn: true, username: 'vip1', displayName: 'Casual Gamer', balance: '2.300.000',
+      tier: 1, tierSince: '2026-03-01', totalDeposit: 65000000, totalWager: 250000000,
+      depositThisPeriod: 30000000, wagerThisPeriod: 100000000, totalCashbackReceived: 1500000, totalBonusReceived: 200000, isTrial: false,
+      currentLevel: 5, lifetimeXp: 380, todayXp: 45, lastCheckinDate: '2026-04-12', todayDeposit: 500000,
+      todaySources: { checkin: 10, deposit: 15, bet: 10, mission: 10 },
+      trial: { phone: true, telegram: false, deposit: true, activeDays: 1, activated: false },
+      missionOverrides: { newbie: 'default', warrior: 'default', lc: 'default', wc: 'default' }
+    }
+  },
+  {
+    id: '__regular', name: 'Regular Player', desc: 'VIP 2, Level 12, active missions', builtin: true,
+    state: {
+      isLoggedIn: true, username: 'player01', displayName: 'Player 01', balance: '12.500.000',
+      tier: 2, tierSince: '2025-11-20', totalDeposit: 180000000, totalWager: 900000000,
+      depositThisPeriod: 120000000, wagerThisPeriod: 350000000, totalCashbackReceived: 5400000, totalBonusReceived: 750000, isTrial: false,
+      currentLevel: 12, lifetimeXp: 1540, todayXp: 120, lastCheckinDate: '2026-04-12', todayDeposit: 1000000,
+      todaySources: { checkin: 10, deposit: 25, bet: 60, mission: 25 },
+      trial: { phone: true, telegram: true, deposit: true, activeDays: 3, activated: false },
+      missionOverrides: { newbie: 'default', warrior: 'default', lc: 'default', wc: 'default' }
+    }
+  },
+  {
+    id: '__vip_high', name: 'VIP High Roller', desc: 'VIP 5, Level 22, large deposit', builtin: true,
+    state: {
+      isLoggedIn: true, username: 'vip5', displayName: 'High Roller', balance: '128.000.000',
+      tier: 5, tierSince: '2025-06-15', totalDeposit: 5000000000, totalWager: 15000000000,
+      depositThisPeriod: 2500000000, wagerThisPeriod: 7000000000, totalCashbackReceived: 150000000, totalBonusReceived: 21000000, isTrial: false,
+      currentLevel: 22, lifetimeXp: 4545, todayXp: 250, lastCheckinDate: '2026-04-12', todayDeposit: 5000000,
+      todaySources: { checkin: 10, deposit: 100, bet: 120, mission: 20 },
+      trial: { phone: true, telegram: true, deposit: true, activeDays: 3, activated: false },
+      missionOverrides: { newbie: 'all_claimed', warrior: 'default', lc: 'default', wc: 'default' }
+    }
+  },
+  {
+    id: '__whale', name: 'Diamond Whale', desc: 'VIP 9, Level 30 MAX, all claimed', builtin: true,
+    state: {
+      isLoggedIn: true, username: 'diamond', displayName: 'Diamond King', balance: '985.000.000',
+      tier: 9, tierSince: '2024-12-01', totalDeposit: 50000000000, totalWager: 200000000000,
+      depositThisPeriod: 15000000000, wagerThisPeriod: 60000000000, totalCashbackReceived: 2800000000, totalBonusReceived: 120000000, isTrial: false,
+      currentLevel: 30, lifetimeXp: 7505, todayXp: 250, lastCheckinDate: '2026-04-12', todayDeposit: 20000000,
+      todaySources: { checkin: 10, deposit: 100, bet: 130, mission: 10 },
+      trial: { phone: true, telegram: true, deposit: true, activeDays: 3, activated: false },
+      missionOverrides: { newbie: 'all_claimed', warrior: 'all_claimed', lc: 'all_claimed', wc: 'all_claimed' }
+    }
+  },
+  {
+    id: '__trial_ready', name: 'Trial Ready', desc: '4/4 conditions, ready to activate', builtin: true,
+    state: {
+      ...DEFAULT_STATE,
+      trial: { phone: true, telegram: true, deposit: true, activeDays: 3, activated: false }
+    }
+  },
+  {
+    id: '__trial_active', name: 'Trial Active', desc: 'Activated, 5 days remaining', builtin: true,
+    state: {
+      ...DEFAULT_STATE, isTrial: true,
+      trial: { phone: true, telegram: true, deposit: true, activeDays: 3, activated: true,
+        activatedAt: Date.now() - 2*24*3600000, expiresAt: Date.now() + 5*24*3600000 }
+    }
+  },
+  {
+    id: '__trial_ending', name: 'Trial Ending', desc: 'Activated, 12 hours remaining', builtin: true,
+    state: {
+      ...DEFAULT_STATE, isTrial: true,
+      trial: { phone: true, telegram: true, deposit: true, activeDays: 3, activated: true,
+        activatedAt: Date.now() - 6.5*24*3600000, expiresAt: Date.now() + 12*3600000 }
+    }
+  },
+  {
+    id: '__missions_claimable', name: 'All Missions Claimable', desc: 'All missions completed', builtin: true,
+    state: {
+      ...DEFAULT_STATE, currentLevel: 10, lifetimeXp: 1080,
+      missionOverrides: { newbie: 'all_completed', warrior: 'all_completed', lc: 'all_completed', wc: 'all_completed' }
+    }
+  },
+  {
+    id: '__max_xp', name: 'Max XP Day', desc: '250/250 daily cap reached', builtin: true,
+    state: {
+      ...DEFAULT_STATE, todayXp: 250, lifetimeXp: 530, currentLevel: 5,
+      todaySources: { checkin: 10, deposit: 100, bet: 120, mission: 20 }
+    }
+  }
+];
+
+// ===== PROFILE STORAGE =====
+const STORAGE_KEY = 'mubet_devtools_profiles';
+let customProfiles = [];
+let activeProfileId = null;
+
+function loadProfiles() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) customProfiles = JSON.parse(raw);
+  } catch(e) { customProfiles = []; }
 }
 
-function buildState() {
-  const hours = parseInt(document.getElementById('timeLeft').value);
-  const activated = document.getElementById('activated').checked;
+function saveProfiles() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(customProfiles));
+}
+
+function getAllProfiles() {
+  return [...BUILTIN_PRESETS, ...customProfiles];
+}
+
+function generateId() {
+  return 'p_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+}
+
+// ===== PROFILE SUMMARY =====
+function profileSummary(state) {
+  const parts = [];
+  if (state.isLoggedIn === false) { parts.push('Logged out'); }
+  else {
+    parts.push('VIP ' + (state.tier || 0));
+    parts.push('Lv.' + (state.currentLevel || 1));
+    if (state.balance) parts.push(state.balance + ' d');
+  }
+  return parts.join(' | ');
+}
+
+// ===== RENDER PROFILE LIST =====
+function renderProfileList() {
+  const container = document.getElementById('profileList');
+  const search = document.getElementById('profileSearch').value.toLowerCase();
+  const all = getAllProfiles();
+  const filtered = search ? all.filter(p => p.name.toLowerCase().includes(search) || (p.desc||'').toLowerCase().includes(search)) : all;
+
+  const builtins = filtered.filter(p => p.builtin);
+  const customs = filtered.filter(p => !p.builtin);
+
+  let html = '';
+
+  // Built-in section
+  if (builtins.length) {
+    html += '<div class="sep-label">Built-in Presets</div>';
+    builtins.forEach(p => {
+      const isActive = activeProfileId === p.id;
+      html += '<div class="profile-card builtin' + (isActive ? ' active' : '') + '" onclick="loadProfile(\'' + p.id + '\')">';
+      html += '<div class="pc-header"><div class="pc-name">' + escHtml(p.name) + '</div><span class="pc-badge b-builtin">Preset</span></div>';
+      html += '<div class="pc-summary">' + escHtml(p.desc || profileSummary(p.state)) + '</div>';
+      html += '</div>';
+    });
+  }
+
+  // Custom section
+  if (customs.length) {
+    html += '<div class="sep-label">Custom Profiles (' + customs.length + ')</div>';
+    customs.forEach(p => {
+      const isActive = activeProfileId === p.id;
+      html += '<div class="profile-card custom' + (isActive ? ' active' : '') + '" onclick="loadProfile(\'' + p.id + '\')">';
+      html += '<div class="pc-header"><div class="pc-name">' + escHtml(p.name) + '</div><span class="pc-badge b-custom">Custom</span></div>';
+      html += '<div class="pc-summary">' + escHtml(p.desc || profileSummary(p.state)) + '</div>';
+      html += '<div class="pc-actions">';
+      html += '<button class="pc-act-btn" onclick="event.stopPropagation();openRenameModal(\'' + p.id + '\')" title="Rename">&#9999;</button>';
+      html += '<button class="pc-act-btn" onclick="event.stopPropagation();duplicateProfile(\'' + p.id + '\')" title="Duplicate">&#128203;</button>';
+      html += '<button class="pc-act-btn danger" onclick="event.stopPropagation();deleteProfile(\'' + p.id + '\')" title="Delete">&#128465;</button>';
+      html += '</div>';
+      html += '</div>';
+    });
+  }
+
+  if (!filtered.length) {
+    html = '<div style="text-align:center;padding:20px;color:var(--text-3);font-size:11px;">No profiles found</div>';
+  }
+
+  container.innerHTML = html;
+  document.getElementById('profileCount').textContent = all.length;
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ===== LOAD PROFILE =====
+function loadProfile(id) {
+  const all = getAllProfiles();
+  const p = all.find(x => x.id === id);
+  if (!p) return;
+
+  activeProfileId = id;
+  syncUIFromState(p.state);
+  applyFullState();
+  document.getElementById('activeProfileName').textContent = p.name;
+  document.getElementById('btnQuickSave').style.display = p.builtin ? 'none' : '';
+  renderProfileList();
+  showToast('Loaded: ' + p.name);
+}
+
+// ===== SAVE / CREATE PROFILE =====
+function openSaveModal() {
+  document.getElementById('m_profileName').value = '';
+  document.getElementById('m_profileDesc').value = '';
+  document.getElementById('saveModal').classList.add('open');
+  setTimeout(() => document.getElementById('m_profileName').focus(), 100);
+}
+
+function closeSaveModal() {
+  document.getElementById('saveModal').classList.remove('open');
+}
+
+function confirmSaveProfile() {
+  const name = document.getElementById('m_profileName').value.trim();
+  if (!name) { showToast('Please enter a name'); return; }
+  const desc = document.getElementById('m_profileDesc').value.trim();
+  const state = buildFullState();
+  // Remove internal keys
+  delete state._appliedTs;
+
+  const profile = {
+    id: generateId(),
+    name: name,
+    desc: desc || profileSummary(state),
+    state: JSON.parse(JSON.stringify(state)),
+    createdAt: Date.now(),
+    updatedAt: Date.now()
+  };
+
+  customProfiles.push(profile);
+  saveProfiles();
+  activeProfileId = profile.id;
+  document.getElementById('activeProfileName').textContent = name;
+  document.getElementById('btnQuickSave').style.display = '';
+  closeSaveModal();
+  renderProfileList();
+  showToast('Profile saved: ' + name);
+}
+
+// ===== QUICK SAVE (overwrite current) =====
+function quickSaveProfile() {
+  if (!activeProfileId || activeProfileId.startsWith('__')) {
+    openSaveModal();
+    return;
+  }
+  const p = customProfiles.find(x => x.id === activeProfileId);
+  if (!p) { openSaveModal(); return; }
+
+  const state = buildFullState();
+  delete state._appliedTs;
+  p.state = JSON.parse(JSON.stringify(state));
+  p.desc = profileSummary(state);
+  p.updatedAt = Date.now();
+  saveProfiles();
+  renderProfileList();
+  showToast('Profile updated: ' + p.name);
+}
+
+// ===== DELETE PROFILE =====
+function deleteProfile(id) {
+  const p = customProfiles.find(x => x.id === id);
+  if (!p) return;
+  if (!confirm('Delete profile "' + p.name + '"?')) return;
+  customProfiles = customProfiles.filter(x => x.id !== id);
+  saveProfiles();
+  if (activeProfileId === id) {
+    activeProfileId = null;
+    document.getElementById('activeProfileName').textContent = 'Unsaved Changes';
+  }
+  renderProfileList();
+  showToast('Deleted: ' + p.name);
+}
+
+// ===== DUPLICATE PROFILE =====
+function duplicateProfile(id) {
+  const p = customProfiles.find(x => x.id === id);
+  if (!p) return;
+  const dup = {
+    id: generateId(),
+    name: p.name + ' (copy)',
+    desc: p.desc,
+    state: JSON.parse(JSON.stringify(p.state)),
+    createdAt: Date.now(),
+    updatedAt: Date.now()
+  };
+  customProfiles.push(dup);
+  saveProfiles();
+  renderProfileList();
+  showToast('Duplicated: ' + dup.name);
+}
+
+// ===== RENAME PROFILE =====
+function openRenameModal(id) {
+  const p = customProfiles.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('m_renameId').value = id;
+  document.getElementById('m_renameName').value = p.name;
+  document.getElementById('m_renameDesc').value = p.desc || '';
+  document.getElementById('renameModal').classList.add('open');
+  setTimeout(() => document.getElementById('m_renameName').focus(), 100);
+}
+
+function closeRenameModal() {
+  document.getElementById('renameModal').classList.remove('open');
+}
+
+function confirmRename() {
+  const id = document.getElementById('m_renameId').value;
+  const p = customProfiles.find(x => x.id === id);
+  if (!p) return;
+  const name = document.getElementById('m_renameName').value.trim();
+  if (!name) { showToast('Please enter a name'); return; }
+  p.name = name;
+  p.desc = document.getElementById('m_renameDesc').value.trim();
+  p.updatedAt = Date.now();
+  saveProfiles();
+  if (activeProfileId === id) {
+    document.getElementById('activeProfileName').textContent = name;
+  }
+  closeRenameModal();
+  renderProfileList();
+  showToast('Renamed to: ' + name);
+}
+
+// ===== EXPORT / IMPORT PROFILES =====
+function exportAllProfiles() {
+  const data = { version: 1, exportedAt: new Date().toISOString(), profiles: customProfiles };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'mubet-devtools-profiles.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Exported ' + customProfiles.length + ' profiles');
+}
+
+function importProfiles() {
+  document.getElementById('fileImport').click();
+}
+
+function handleFileImport(evt) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      const profiles = data.profiles || data;
+      if (!Array.isArray(profiles)) throw new Error('Invalid format');
+      let count = 0;
+      profiles.forEach(p => {
+        if (p.name && p.state) {
+          p.id = generateId(); // assign new ID to avoid conflict
+          customProfiles.push(p);
+          count++;
+        }
+      });
+      saveProfiles();
+      renderProfileList();
+      showToast('Imported ' + count + ' profiles');
+    } catch(err) {
+      showToast('Import failed: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  evt.target.value = ''; // reset
+}
+
+// ===== TAB SWITCHING =====
+function switchTab(name, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+  if (name === 'raw') refreshRawJson();
+}
+
+// ===== HELPERS =====
+function updateLevelDisplay() {
+  const v = document.getElementById('f_currentLevel').value;
+  document.getElementById('levelVal').textContent = 'Lv.' + v;
+}
+function updateTrialTimeDisplay() {
+  const h = parseInt(document.getElementById('f_trialTimeLeft').value);
+  const d = Math.floor(h / 24);
+  const hr = h % 24;
+  document.getElementById('trialTimeVal').textContent = d + 'd ' + hr + 'h';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ===== BUILD STATE FROM FORM =====
+function buildFullState() {
+  const trialHours = parseInt(document.getElementById('f_trialTimeLeft').value);
+  const trialActivated = document.getElementById('f_trialActivated').checked;
   return {
-    phone: document.getElementById('phone').checked,
-    telegram: document.getElementById('telegram').checked,
-    deposit: document.getElementById('deposit').checked,
-    activeDays: parseInt(document.getElementById('activeDays').value),
-    activated: activated,
-    activatedAt: activated ? Date.now() - ((168 - hours) * 60 * 60 * 1000) : null,
-    expiresAt: activated ? Date.now() + (hours * 60 * 60 * 1000) : null
+    isLoggedIn: document.getElementById('f_isLoggedIn').value === 'true',
+    username: document.getElementById('f_username').value,
+    displayName: document.getElementById('f_displayName').value,
+    balance: document.getElementById('f_balance').value,
+    tier: parseInt(document.getElementById('f_tier').value),
+    tierSince: document.getElementById('f_tierSince').value,
+    totalDeposit: parseInt(document.getElementById('f_totalDeposit').value) || 0,
+    totalWager: parseInt(document.getElementById('f_totalWager').value) || 0,
+    depositThisPeriod: parseInt(document.getElementById('f_depositThisPeriod').value) || 0,
+    wagerThisPeriod: parseInt(document.getElementById('f_wagerThisPeriod').value) || 0,
+    totalCashbackReceived: parseInt(document.getElementById('f_totalCashbackReceived').value) || 0,
+    totalBonusReceived: parseInt(document.getElementById('f_totalBonusReceived').value) || 0,
+    isTrial: trialActivated,
+    currentLevel: parseInt(document.getElementById('f_currentLevel').value),
+    lifetimeXp: parseInt(document.getElementById('f_lifetimeXp').value) || 0,
+    todayXp: parseInt(document.getElementById('f_todayXp').value) || 0,
+    lastCheckinDate: document.getElementById('f_lastCheckinDate').value,
+    todayDeposit: parseInt(document.getElementById('f_todayDeposit').value) || 0,
+    todaySources: {
+      checkin: parseInt(document.getElementById('f_xpCheckin').value) || 0,
+      deposit: parseInt(document.getElementById('f_xpDeposit').value) || 0,
+      bet: parseInt(document.getElementById('f_xpBet').value) || 0,
+      mission: parseInt(document.getElementById('f_xpMission').value) || 0
+    },
+    trial: {
+      phone: document.getElementById('f_trialPhone').checked,
+      telegram: document.getElementById('f_trialTelegram').checked,
+      deposit: document.getElementById('f_trialDeposit').checked,
+      activeDays: parseInt(document.getElementById('f_trialActiveDays').value),
+      activated: trialActivated,
+      activatedAt: trialActivated ? Date.now() - ((168 - trialHours) * 3600000) : null,
+      expiresAt: trialActivated ? Date.now() + (trialHours * 3600000) : null
+    },
+    missionOverrides: {
+      newbie: document.getElementById('f_missionNewbie').value,
+      warrior: document.getElementById('f_missionWarrior').value,
+      lc: document.getElementById('f_missionLC').value,
+      wc: document.getElementById('f_missionWC').value
+    }
   };
 }
 
-function applyState() {
-  const state = buildState();
-  localStorage.setItem('mubet_trial_state', JSON.stringify(state));
-  updateStatus(state);
-
-  // Highlight active preset
-  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-
-  // Flash feedback
-  const btn = document.querySelector('.btn-apply');
-  btn.classList.add('applied');
-  btn.textContent = 'Applied!';
-  btn.style.animation = 'applyFlash .5s ease';
-  setTimeout(() => {
-    btn.classList.remove('applied');
-    btn.textContent = 'Apply State';
-    btn.style.animation = '';
-  }, 1200);
-}
-
-function resetState() {
-  const state = { phone: false, telegram: false, deposit: false, activeDays: 0, activated: false, activatedAt: null, expiresAt: null };
-  localStorage.setItem('mubet_trial_state', JSON.stringify(state));
-  syncUI(state);
-  updateStatus(state);
-}
-
-function setPreset(n) {
-  let state = { phone: false, telegram: false, deposit: false, activeDays: 0, activated: false, activatedAt: null, expiresAt: null };
-
-  switch(n) {
-    case 1: break; // fresh
-    case 2: state.phone = true; state.telegram = true; state.activeDays = 2; break;
-    case 3: state.phone = true; state.telegram = true; state.deposit = true; state.activeDays = 3; break;
-    case 4:
-      state.phone = true; state.telegram = true; state.deposit = true; state.activeDays = 3;
-      state.activated = true; state.activatedAt = Date.now() - 2*24*60*60*1000;
-      state.expiresAt = Date.now() + 5*24*60*60*1000;
-      break;
-    case 5:
-      state.phone = true; state.telegram = true; state.deposit = true; state.activeDays = 3;
-      state.activated = true; state.activatedAt = Date.now() - 6.5*24*60*60*1000;
-      state.expiresAt = Date.now() + 12*60*60*1000;
-      break;
-    case 6:
-      state.phone = true; state.telegram = true; state.deposit = true; state.activeDays = 1;
-      break;
-  }
-
-  localStorage.setItem('mubet_trial_state', JSON.stringify(state));
-  syncUI(state);
-  updateStatus(state);
-
-  // Highlight preset
-  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-  event.currentTarget.classList.add('active');
-
-  // Flash status
-  const statusEl = document.getElementById('statusText');
-  statusEl.style.transition = 'background .15s';
-  statusEl.style.background = 'rgba(5,161,88,.15)';
-  setTimeout(() => { statusEl.style.background = ''; }, 800);
-}
-
-function syncUI(state) {
-  document.getElementById('phone').checked = state.phone;
-  document.getElementById('telegram').checked = state.telegram;
-  document.getElementById('deposit').checked = state.deposit;
-  document.getElementById('activeDays').value = state.activeDays;
-  document.getElementById('activeDaysVal').textContent = state.activeDays + '/3';
-  document.getElementById('activated').checked = state.activated;
-
-  if (state.activated && state.expiresAt) {
-    const hours = Math.max(0, Math.round((state.expiresAt - Date.now()) / (60*60*1000)));
-    document.getElementById('timeLeft').value = hours;
-    updateTimeDisplay();
+// ===== SYNC UI FROM STATE =====
+function syncUIFromState(s) {
+  document.getElementById('f_isLoggedIn').value = s.isLoggedIn ? 'true' : 'false';
+  document.getElementById('f_username').value = s.username || '';
+  document.getElementById('f_displayName').value = s.displayName || '';
+  document.getElementById('f_balance').value = s.balance || '0';
+  document.getElementById('f_tier').value = s.tier || 0;
+  document.getElementById('f_tierSince').value = s.tierSince || '';
+  document.getElementById('f_totalDeposit').value = s.totalDeposit || 0;
+  document.getElementById('f_totalWager').value = s.totalWager || 0;
+  document.getElementById('f_depositThisPeriod').value = s.depositThisPeriod || 0;
+  document.getElementById('f_wagerThisPeriod').value = s.wagerThisPeriod || 0;
+  document.getElementById('f_totalCashbackReceived').value = s.totalCashbackReceived || 0;
+  document.getElementById('f_totalBonusReceived').value = s.totalBonusReceived || 0;
+  // XP
+  document.getElementById('f_currentLevel').value = s.currentLevel || 1;
+  updateLevelDisplay();
+  document.getElementById('f_lifetimeXp').value = s.lifetimeXp || 0;
+  document.getElementById('f_todayXp').value = s.todayXp || 0;
+  document.getElementById('f_lastCheckinDate').value = s.lastCheckinDate || '';
+  document.getElementById('f_todayDeposit').value = s.todayDeposit || 0;
+  const src = s.todaySources || {};
+  document.getElementById('f_xpCheckin').value = src.checkin || 0;
+  document.getElementById('f_xpDeposit').value = src.deposit || 0;
+  document.getElementById('f_xpBet').value = src.bet || 0;
+  document.getElementById('f_xpMission').value = src.mission || 0;
+  // Trial
+  const t = s.trial || {};
+  document.getElementById('f_trialPhone').checked = !!t.phone;
+  document.getElementById('f_trialTelegram').checked = !!t.telegram;
+  document.getElementById('f_trialDeposit').checked = !!t.deposit;
+  document.getElementById('f_trialActiveDays').value = t.activeDays || 0;
+  document.getElementById('trialDaysVal').textContent = (t.activeDays || 0) + '/3';
+  document.getElementById('f_trialActivated').checked = !!t.activated;
+  if (t.activated && t.expiresAt) {
+    const hrs = Math.max(0, Math.round((t.expiresAt - Date.now()) / 3600000));
+    document.getElementById('f_trialTimeLeft').value = hrs;
   } else {
-    document.getElementById('timeLeft').value = 168;
-    updateTimeDisplay();
+    document.getElementById('f_trialTimeLeft').value = 168;
   }
+  updateTrialTimeDisplay();
+  // Mission overrides
+  const mo = s.missionOverrides || {};
+  document.getElementById('f_missionNewbie').value = mo.newbie || 'default';
+  document.getElementById('f_missionWarrior').value = mo.warrior || 'default';
+  document.getElementById('f_missionLC').value = mo.lc || 'default';
+  document.getElementById('f_missionWC').value = mo.wc || 'default';
 }
 
-function updateStatus(state) {
-  const count = (state.phone?1:0) + (state.telegram?1:0) + (state.deposit?1:0) + (state.activeDays>=3?1:0);
-  let phase = 1;
-  if (state.activated && state.expiresAt) {
-    const rem = state.expiresAt - Date.now();
-    if (rem <= 0) phase = 1;
-    else if (rem <= 24*60*60*1000) phase = 5;
-    else phase = 4;
-  } else if (count === 4) phase = 3;
-  else if (count > 0) phase = 2;
+// ===== APPLY STATE =====
+function applyFullState() {
+  const state = buildFullState();
+  state._appliedTs = Date.now();
+  localStorage.setItem('mubet_devtools_state', JSON.stringify(state));
+  localStorage.setItem('mubet_trial_state', JSON.stringify(state.trial));
+  try { if (bc) bc.postMessage({ type: 'state_update', state: state }); } catch(e) {}
 
-  document.getElementById('statusText').innerHTML =
-    `Applied! Phase: <strong>${phase}</strong> | Conditions: <strong>${count}/4</strong> | ` +
-    (state.activated ? `Trial: <strong>Active</strong>` : `Trial: Inactive`);
+  const btn = document.getElementById('btnApply');
+  btn.classList.add('success');
+  btn.innerHTML = '&#9989; OK';
+  setTimeout(() => { btn.classList.remove('success'); btn.innerHTML = '&#9889; Apply'; }, 1200);
+  updateStatusBar(state);
 }
 
-// Load existing state on page load
+function resetToDefault() {
+  activeProfileId = null;
+  document.getElementById('activeProfileName').textContent = 'Unsaved Changes';
+  document.getElementById('btnQuickSave').style.display = '';
+  syncUIFromState(DEFAULT_STATE);
+  applyFullState();
+  renderProfileList();
+  showToast('Reset to default');
+}
+
+function updateStatusBar(state) {
+  if (!state) state = buildFullState();
+  const tc = (state.trial.phone?1:0) + (state.trial.telegram?1:0) + (state.trial.deposit?1:0) + ((state.trial.activeDays||0)>=3?1:0);
+  document.getElementById('statusBar').innerHTML =
+    'Login: <strong>' + (state.isLoggedIn ? 'Yes' : 'No') + '</strong> | ' +
+    'VIP: <strong>' + state.tier + '</strong> | ' +
+    'Level: <strong>' + state.currentLevel + '</strong> | ' +
+    'XP: <strong>' + state.lifetimeXp + '</strong> | ' +
+    'Trial: <strong>' + tc + '/4</strong>' +
+    (state.trial.activated ? ' <strong style="color:#80e8a8">ACTIVE</strong>' : '');
+}
+
+// ===== RAW JSON =====
+function refreshRawJson() {
+  document.getElementById('rawJson').value = JSON.stringify(buildFullState(), null, 2);
+}
+function importRawJson() {
+  try {
+    const state = JSON.parse(document.getElementById('rawJson').value);
+    syncUIFromState(state);
+    applyFullState();
+    showToast('Imported JSON state');
+  } catch(e) { showToast('Invalid JSON: ' + e.message); }
+}
+function exportToClipboard() {
+  const text = JSON.stringify(buildFullState(), null, 2);
+  navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard'));
+}
+
+// ===== NAVIGATION =====
+function navTo(route) {
+  const cmd = { route: route, ts: Date.now() };
+  localStorage.setItem('mubet_devtools_nav', JSON.stringify(cmd));
+  try { if (bc) bc.postMessage({ type: 'nav', ...cmd }); } catch(e) {}
+}
+
+// ===== CONNECTION CHECK =====
+function checkConnection() {
+  const status = document.getElementById('connStatus');
+  try {
+    const raw = localStorage.getItem('mubet_prototype_heartbeat');
+    if (raw) {
+      const hb = JSON.parse(raw);
+      if (Date.now() - hb.ts < 5000) {
+        status.className = 'conn-status connected';
+        status.innerHTML = '&#9679; Connected';
+        return;
+      }
+    }
+  } catch(e) {}
+  status.className = 'conn-status disconnected';
+  status.innerHTML = '&#9679; Disconnected';
+}
+setInterval(checkConnection, 2000);
+checkConnection();
+
+// ===== INIT =====
+loadProfiles();
+renderProfileList();
+
+// Restore last applied state
 try {
-  const saved = localStorage.getItem('mubet_trial_state');
+  const saved = localStorage.getItem('mubet_devtools_state');
   if (saved) {
     const state = JSON.parse(saved);
-    syncUI(state);
-    updateStatus(state);
+    syncUIFromState(state);
+    updateStatusBar(state);
   }
 } catch(e) {}
 
-// ── Sitemap Navigation ──
-function navTo(route) {
-  const navStatusEl = document.getElementById('navStatus');
+// Close modals on backdrop click
+document.getElementById('saveModal').addEventListener('click', function(e) { if (e.target === this) closeSaveModal(); });
+document.getElementById('renameModal').addEventListener('click', function(e) { if (e.target === this) closeRenameModal(); });
 
-  // Store the navigation command
-  const cmd = { route: route, ts: Date.now() };
-  localStorage.setItem('mubet_devtools_nav', JSON.stringify(cmd));
+// Keyboard: Enter to confirm in modals
+document.getElementById('m_profileName').addEventListener('keydown', e => { if (e.key === 'Enter') confirmSaveProfile(); });
+document.getElementById('m_renameName').addEventListener('keydown', e => { if (e.key === 'Enter') confirmRename(); });
 
-  // Try to send via BroadcastChannel
+// ===== VOUCHER MANAGEMENT =====
+const VOUCHER_STORAGE_KEY = 'mubet_devtools_voucher_defs';
+let voucherDefs = [];
+let grantLogEntries = [];
+
+function loadVoucherDefs() {
   try {
-    const bc = new BroadcastChannel('mubet_devtools');
-    bc.postMessage(cmd);
-    bc.close();
-  } catch(e) {}
-
-  // Visual feedback
-  navStatusEl.style.transition = 'background .15s';
-  navStatusEl.style.background = 'rgba(5,161,88,.15)';
-  navStatusEl.innerHTML = `Navigating to: <strong>${route}</strong>`;
-  setTimeout(() => { navStatusEl.style.background = ''; }, 800);
+    const raw = localStorage.getItem(VOUCHER_STORAGE_KEY);
+    if (raw) voucherDefs = JSON.parse(raw);
+  } catch(e) { voucherDefs = []; }
 }
-</script>
 
-<script>
-// ── Inject navigation listener into prototype via shared JS ──
-// The prototype should include this listener. We also store a small
-// helper that the prototype can pick up on load.
-const NAV_LISTENER_CODE = `
-// DevTools navigation listener
-(function() {
-  try {
-    var bc = new BroadcastChannel('mubet_devtools');
-    bc.onmessage = function(e) {
-      var route = e.data.route;
-      if (!route) return;
-      handleDevToolsNav(route);
-    };
-  } catch(ex) {}
+function saveVoucherDefs() {
+  localStorage.setItem(VOUCHER_STORAGE_KEY, JSON.stringify(voucherDefs));
+}
 
-  // Also poll localStorage fallback
-  setInterval(function() {
-    try {
-      var raw = localStorage.getItem('mubet_devtools_nav');
-      if (!raw) return;
-      var cmd = JSON.parse(raw);
-      if (cmd._handled) return;
-      cmd._handled = true;
-      localStorage.setItem('mubet_devtools_nav', JSON.stringify(cmd));
-      handleDevToolsNav(cmd.route);
-    } catch(ex) {}
-  }, 500);
-
-  function handleDevToolsNav(route) {
-    // Hash routes
-    if (route.startsWith('#')) {
-      location.hash = route;
-      return;
-    }
-    // JS-based navigation
-    switch(route) {
-      case 'lobby':
-        if (typeof goToLobby === 'function') goToLobby();
-        break;
-      case 'vipclub':
-        handleDevToolsNav('#/vip');
-        break;
-      case 'mission-tab-missions':
-        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('missions'); }
-        break;
-      case 'mission-tab-redeem':
-        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
-        break;
-      case 'mission-tab-leaderboard':
-        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('leaderboard'); }
-        break;
-      case 'redeem-hub':
-      case 'redeem-shop':
-      case 'redeem-spin':
-      case 'redeem-collect':
-      case 'redeem-vip':
-        var subView = route.replace('redeem-', '');
-        if (typeof navigateTo === 'function') navigateTo('/redeem/' + subView);
-        break;
-      default:
-        console.log('Unknown devtools route:', route);
-    }
+// Voucher templates
+const VOUCHER_TEMPLATES = {
+  welcome50: {
+    title: 'Welcome 50%', desc: 'Thưởng 50% giá trị nạp lần đầu',
+    type: 'bonus', value: '+50%', maxBonus: 1000000, minDeposit: '0đ', rolling: '10x',
+    expiryHours: 24, isWelcome: true, firstDepositOnly: true, cashbackCompatible: false,
+    products: 'Tất cả sản phẩm',
+    terms: 'Chỉ áp dụng cho lần nạp đầu tiên\nTurnover 10x số tiền thưởng\nKhông áp dụng cùng hoàn trả\nHết hạn sau 24 giờ'
+  },
+  welcome100: {
+    title: 'Welcome 100%', desc: 'Thưởng 100% giá trị nạp lần đầu',
+    type: 'bonus', value: '+100%', maxBonus: 2000000, minDeposit: '500.000đ', rolling: '15x',
+    expiryHours: 24, isWelcome: true, firstDepositOnly: true, cashbackCompatible: false,
+    products: 'Slots, Bắn cá, Thể thao',
+    terms: 'Nạp tối thiểu 500.000đ\nChỉ áp dụng cho lần nạp đầu tiên\nTurnover 15x số tiền thưởng\nKhông áp dụng cùng hoàn trả\nHết hạn sau 24 giờ'
+  },
+  welcome200: {
+    title: 'Welcome 200%', desc: 'Thưởng 200% giá trị nạp lần đầu',
+    type: 'bonus', value: '+200%', maxBonus: 3000000, minDeposit: '1.000.000đ', rolling: '20x',
+    expiryHours: 24, isWelcome: true, firstDepositOnly: true, cashbackCompatible: false,
+    products: 'Slots, Bắn cá',
+    terms: 'Nạp tối thiểu 1.000.000đ\nChỉ áp dụng cho lần nạp đầu tiên\nTurnover 20x số tiền thưởng\nKhông áp dụng cùng hoàn trả\nHết hạn sau 24 giờ'
+  },
+  reload30: {
+    title: 'Nạp lại +30%', desc: 'Thưởng 30% cho mỗi lần nạp',
+    type: 'bonus', value: '+30%', maxBonus: 5000000, minDeposit: '1.000.000đ', rolling: '10x',
+    expiryHours: 720, isWelcome: false, firstDepositOnly: false, cashbackCompatible: true,
+    products: 'Thể thao, Casino',
+    terms: 'Không áp dụng cùng KM khác\nYêu cầu nạp tối thiểu 1.000.000đ\nHoàn thành turnover trong 30 ngày'
+  },
+  free500k: {
+    title: 'Tặng 500K Free Credit', desc: 'Tặng 500.000đ miễn phí, turnover 8x',
+    type: 'cash', value: '500K', maxBonus: 500000, minDeposit: '1.000.000đ', rolling: '8x',
+    expiryHours: 120, isWelcome: false, firstDepositOnly: false, cashbackCompatible: false,
+    products: 'Slots, Bắn cá',
+    terms: 'Không áp dụng cùng hoàn trả\nTurnover 8x\nNạp tối thiểu 1.000.000đ'
+  },
+  vip_bonus: {
+    title: 'Thưởng nạp VIP +30%', desc: 'Thưởng thêm 30% giá trị nạp, tối đa 5.000.000đ',
+    type: 'bonus', value: '+30%', maxBonus: 5000000, minDeposit: '1.000.000đ', rolling: '10x',
+    expiryHours: 720, isWelcome: false, firstDepositOnly: false, cashbackCompatible: false,
+    products: 'Thể thao, Casino',
+    terms: 'Không áp dụng cùng KM khác\nYêu cầu nạp tối thiểu 1.000.000đ\nHoàn thành turnover trong 30 ngày'
   }
-})();
-`;
-localStorage.setItem('mubet_devtools_listener', NAV_LISTENER_CODE);
+};
+
+function loadVoucherTemplate(key) {
+  const t = VOUCHER_TEMPLATES[key];
+  if (!t) return;
+  document.getElementById('vc_title').value = t.title;
+  document.getElementById('vc_desc').value = t.desc;
+  document.getElementById('vc_type').value = t.type;
+  document.getElementById('vc_value').value = t.value;
+  document.getElementById('vc_maxBonus').value = t.maxBonus;
+  document.getElementById('vc_minDeposit').value = t.minDeposit;
+  document.getElementById('vc_rolling').value = t.rolling;
+  document.getElementById('vc_expiryHours').value = t.expiryHours;
+  document.getElementById('vc_isWelcome').checked = t.isWelcome;
+  document.getElementById('vc_firstDepositOnly').checked = t.firstDepositOnly;
+  document.getElementById('vc_cashbackCompatible').checked = t.cashbackCompatible;
+  document.getElementById('vc_products').value = t.products;
+  document.getElementById('vc_terms').value = t.terms;
+  updateVoucherPreview();
+  showToast('Đã load mẫu: ' + t.title);
+}
+
+function resetVoucherForm() {
+  document.getElementById('vc_title').value = '';
+  document.getElementById('vc_desc').value = '';
+  document.getElementById('vc_type').value = 'bonus';
+  document.getElementById('vc_value').value = '';
+  document.getElementById('vc_maxBonus').value = 1000000;
+  document.getElementById('vc_minDeposit').value = '0đ';
+  document.getElementById('vc_rolling').value = '10x';
+  document.getElementById('vc_expiryHours').value = 24;
+  document.getElementById('vc_isWelcome').checked = false;
+  document.getElementById('vc_firstDepositOnly').checked = false;
+  document.getElementById('vc_cashbackCompatible').checked = true;
+  document.getElementById('vc_products').value = 'Tất cả sản phẩm';
+  document.getElementById('vc_terms').value = '';
+  document.getElementById('vcPreview').innerHTML = '';
+}
+
+function buildVoucherFromForm() {
+  const title = document.getElementById('vc_title').value.trim();
+  const desc = document.getElementById('vc_desc').value.trim();
+  if (!title) return null;
+  return {
+    id: 'vd_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+    type: document.getElementById('vc_type').value,
+    title: title,
+    desc: desc || title,
+    value: document.getElementById('vc_value').value.trim() || '+0%',
+    maxBonus: parseInt(document.getElementById('vc_maxBonus').value) || 0,
+    minDeposit: document.getElementById('vc_minDeposit').value.trim() || '0đ',
+    rolling: document.getElementById('vc_rolling').value.trim() || '0x',
+    expiryHours: parseInt(document.getElementById('vc_expiryHours').value) || 24,
+    isWelcome: document.getElementById('vc_isWelcome').checked,
+    firstDepositOnly: document.getElementById('vc_firstDepositOnly').checked,
+    cashbackCompatible: document.getElementById('vc_cashbackCompatible').checked,
+    products: document.getElementById('vc_products').value.split(',').map(s => s.trim()).filter(Boolean),
+    terms: document.getElementById('vc_terms').value.split('\n').map(s => s.trim()).filter(Boolean),
+    createdAt: Date.now()
+  };
+}
+
+function createVoucherDef() {
+  const def = buildVoucherFromForm();
+  if (!def) { showToast('Vui lòng nhập tên voucher'); return; }
+  voucherDefs.push(def);
+  saveVoucherDefs();
+  renderVoucherDefList();
+  updateGrantSelector();
+  showToast('Đã tạo: ' + def.title);
+}
+
+function deleteVoucherDef(id) {
+  voucherDefs = voucherDefs.filter(v => v.id !== id);
+  saveVoucherDefs();
+  renderVoucherDefList();
+  updateGrantSelector();
+  showToast('Đã xóa voucher definition');
+}
+
+function clearAllVoucherDefs() {
+  if (!confirm('Xóa tất cả voucher definitions?')) return;
+  voucherDefs = [];
+  saveVoucherDefs();
+  renderVoucherDefList();
+  updateGrantSelector();
+  showToast('Đã xóa tất cả definitions');
+}
+
+function formatVndShort(n) {
+  if (n >= 1000000) return (n/1000000).toFixed(n%1000000===0?0:1) + 'M';
+  if (n >= 1000) return (n/1000).toFixed(0) + 'K';
+  return n.toString();
+}
+
+function renderVoucherDefList() {
+  const container = document.getElementById('voucherDefList');
+  document.getElementById('voucherDefCount').textContent = voucherDefs.length;
+
+  if (!voucherDefs.length) {
+    container.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text-3);font-size:11px;">Chưa có voucher nào. Tạo mới ở trên.</div>';
+    return;
+  }
+
+  let html = '';
+  voucherDefs.forEach(v => {
+    const tagClass = v.isWelcome ? 'vt-welcome' : (v.type === 'cash' ? 'vt-cash' : 'vt-bonus');
+    const tagLabel = v.isWelcome ? 'Welcome' : (v.type === 'cash' ? 'Cash' : 'Bonus');
+    const iconEmoji = v.type === 'cash' ? '&#128176;' : '&#127915;';
+    html += '<div class="voucher-card-dt">';
+    html += '<div class="vc-icon ' + v.type + '">' + iconEmoji + '</div>';
+    html += '<div class="vc-info">';
+    html += '<div class="vc-title">' + escHtml(v.title) + ' <span class="voucher-def-tag ' + tagClass + '">' + tagLabel + '</span></div>';
+    html += '<div class="vc-meta">';
+    html += '<span>&#128178; ' + escHtml(v.value) + '</span>';
+    html += '<span>&#127919; Max ' + formatVndShort(v.maxBonus) + '</span>';
+    html += '<span>&#128260; ' + escHtml(v.rolling) + '</span>';
+    html += '<span>&#9200; ' + v.expiryHours + 'h</span>';
+    if (!v.cashbackCompatible) html += '<span style="color:var(--red);">&#9940; No CB</span>';
+    if (v.firstDepositOnly) html += '<span style="color:var(--gold);">&#128176; 1st dep</span>';
+    html += '</div></div>';
+    html += '<div class="vc-actions-dt">';
+    html += '<button class="pc-act-btn" onclick="editVoucherDef(\'' + v.id + '\')" title="Load to editor">&#9999;</button>';
+    html += '<button class="pc-act-btn" onclick="quickGrantDef(\'' + v.id + '\')" title="Quick grant">&#127873;</button>';
+    html += '<button class="pc-act-btn danger" onclick="deleteVoucherDef(\'' + v.id + '\')" title="Delete">&#128465;</button>';
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+function editVoucherDef(id) {
+  const v = voucherDefs.find(x => x.id === id);
+  if (!v) return;
+  document.getElementById('vc_title').value = v.title;
+  document.getElementById('vc_desc').value = v.desc;
+  document.getElementById('vc_type').value = v.type;
+  document.getElementById('vc_value').value = v.value;
+  document.getElementById('vc_maxBonus').value = v.maxBonus;
+  document.getElementById('vc_minDeposit').value = v.minDeposit;
+  document.getElementById('vc_rolling').value = v.rolling;
+  document.getElementById('vc_expiryHours').value = v.expiryHours;
+  document.getElementById('vc_isWelcome').checked = v.isWelcome;
+  document.getElementById('vc_firstDepositOnly').checked = v.firstDepositOnly;
+  document.getElementById('vc_cashbackCompatible').checked = v.cashbackCompatible;
+  document.getElementById('vc_products').value = (v.products || []).join(', ');
+  document.getElementById('vc_terms').value = (v.terms || []).join('\n');
+  updateVoucherPreview();
+  showToast('Loaded: ' + v.title);
+  // Scroll to top of form
+  document.getElementById('panel-voucher').scrollIntoView({ behavior: 'smooth' });
+}
+
+function updateGrantSelector() {
+  const sel = document.getElementById('grant_voucherId');
+  const currentVal = sel.value;
+  let html = '<option value="">— Chọn voucher —</option>';
+  voucherDefs.forEach(v => {
+    const label = v.title + ' (' + v.value + ', ' + formatVndShort(v.maxBonus) + ')';
+    html += '<option value="' + v.id + '"' + (v.id === currentVal ? ' selected' : '') + '>' + escHtml(label) + '</option>';
+  });
+  sel.innerHTML = html;
+}
+
+function updateVoucherPreview() {
+  const def = buildVoucherFromForm();
+  const container = document.getElementById('vcPreview');
+  if (!def || !def.title) { container.innerHTML = ''; return; }
+
+  const typeIcon = def.type === 'cash' ? '&#128176;' : '&#127915;';
+  let chips = '';
+  chips += '<span class="vpc-chip">' + escHtml(def.rolling) + ' turnover</span>';
+  chips += '<span class="vpc-chip">Min: ' + escHtml(def.minDeposit) + '</span>';
+  chips += '<span class="vpc-chip">' + def.expiryHours + 'h</span>';
+  if (def.isWelcome) chips += '<span class="vpc-chip" style="color:var(--gold)">Welcome</span>';
+  if (def.firstDepositOnly) chips += '<span class="vpc-chip" style="color:var(--orange)">1st deposit</span>';
+  if (!def.cashbackCompatible) chips += '<span class="vpc-chip" style="color:var(--red)">No Cashback</span>';
+
+  container.innerHTML =
+    '<div class="voucher-preview-card">' +
+    '<div class="vpc-header">' +
+    '<div class="vpc-type">' + typeIcon + '</div>' +
+    '<div class="vpc-title">' + escHtml(def.title) + '</div>' +
+    '<div class="vpc-value">' + escHtml(def.value) + '</div>' +
+    '</div>' +
+    '<div style="font-size:10px;color:var(--text-2);margin-bottom:6px;">' + escHtml(def.desc) + '</div>' +
+    '<div class="vpc-details">' + chips + '</div>' +
+    '</div>';
+}
+
+// Debounced preview update
+['vc_title','vc_desc','vc_type','vc_value','vc_maxBonus','vc_minDeposit','vc_rolling','vc_expiryHours'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', updateVoucherPreview);
+});
+['vc_isWelcome','vc_firstDepositOnly','vc_cashbackCompatible'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', updateVoucherPreview);
+});
+
+// === GRANT LOGIC ===
+let selectedGrantTargets = ['_current'];
+
+function toggleGrantTarget(btn, target) {
+  const idx = selectedGrantTargets.indexOf(target);
+  if (idx >= 0) {
+    if (selectedGrantTargets.length <= 1) return; // keep at least 1
+    selectedGrantTargets.splice(idx, 1);
+    btn.classList.remove('selected');
+  } else {
+    selectedGrantTargets.push(target);
+    btn.classList.add('selected');
+  }
+}
+
+function defToInstance(def) {
+  return {
+    id: 'vi_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+    type: def.type,
+    isWelcome: def.isWelcome,
+    firstDepositOnly: def.firstDepositOnly,
+    cashbackCompatible: def.cashbackCompatible,
+    title: def.title,
+    desc: def.desc,
+    value: def.value,
+    maxBonus: def.maxBonus,
+    minDeposit: def.minDeposit,
+    rolling: def.rolling,
+    icon: def.type === 'cash'
+      ? '<img src="Assets/voucher-icon-cash.png" alt="cash" style="width:56px;height:56px;object-fit:contain;">'
+      : '<img src="Assets/voucher-icon-bonus.png" alt="voucher" style="width:56px;height:56px;object-fit:contain;">',
+    status: 'available',
+    lockReason: '',
+    expiresAt: Date.now() + (def.expiryHours || 24) * 60 * 60 * 1000,
+    products: def.products || [],
+    terms: def.terms || []
+  };
+}
+
+function grantVoucher() {
+  const defId = document.getElementById('grant_voucherId').value;
+  if (!defId) { showToast('Chọn voucher definition trước'); return; }
+  const def = voucherDefs.find(v => v.id === defId);
+  if (!def) { showToast('Voucher definition không tồn tại'); return; }
+
+  const targets = [...selectedGrantTargets];
+  const instance = defToInstance(def);
+
+  // Send to prototype via BroadcastChannel
+  const grantCmd = {
+    type: 'voucher_grant',
+    targets: targets,
+    voucher: instance,
+    ts: Date.now()
+  };
+
+  localStorage.setItem('mubet_devtools_voucher_grant', JSON.stringify(grantCmd));
+  try { if (bc) bc.postMessage(grantCmd); } catch(e) {}
+
+  // Log entry
+  const now = new Date();
+  const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0') + ':' + now.getSeconds().toString().padStart(2,'0');
+  grantLogEntries.unshift({
+    time: timeStr,
+    title: def.title,
+    targets: targets.join(', ')
+  });
+  if (grantLogEntries.length > 20) grantLogEntries.length = 20;
+  renderGrantLog();
+  showToast('Đã grant "' + def.title + '" → ' + targets.join(', '));
+}
+
+function quickGrantDef(defId) {
+  const def = voucherDefs.find(v => v.id === defId);
+  if (!def) return;
+
+  const instance = defToInstance(def);
+  const targets = [...selectedGrantTargets];
+
+  const grantCmd = {
+    type: 'voucher_grant',
+    targets: targets,
+    voucher: instance,
+    ts: Date.now()
+  };
+
+  localStorage.setItem('mubet_devtools_voucher_grant', JSON.stringify(grantCmd));
+  try { if (bc) bc.postMessage(grantCmd); } catch(e) {}
+
+  const now = new Date();
+  const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0') + ':' + now.getSeconds().toString().padStart(2,'0');
+  grantLogEntries.unshift({
+    time: timeStr,
+    title: def.title,
+    targets: targets.join(', ')
+  });
+  if (grantLogEntries.length > 20) grantLogEntries.length = 20;
+  renderGrantLog();
+  showToast('Quick grant: ' + def.title);
+}
+
+function grantWelcomeSet(target) {
+  const welcomeKeys = ['welcome50', 'welcome100', 'welcome200'];
+  const vouchers = welcomeKeys.map(key => {
+    const t = VOUCHER_TEMPLATES[key];
+    return {
+      id: 'vi_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4) + '_' + key,
+      type: t.type, isWelcome: t.isWelcome, firstDepositOnly: t.firstDepositOnly,
+      cashbackCompatible: t.cashbackCompatible, title: t.title, desc: t.desc,
+      value: t.value, maxBonus: t.maxBonus, minDeposit: t.minDeposit, rolling: t.rolling,
+      icon: '<img src="Assets/voucher-icon-bonus.png" alt="voucher" style="width:56px;height:56px;object-fit:contain;">',
+      status: 'available', lockReason: '',
+      expiresAt: Date.now() + 24 * 60 * 60 * 1000,
+      products: t.products.split(', '),
+      terms: t.terms.split('\n')
+    };
+  });
+
+  const grantCmd = {
+    type: 'voucher_grant_bulk',
+    targets: [target],
+    vouchers: vouchers,
+    replaceWelcome: true,
+    ts: Date.now()
+  };
+
+  localStorage.setItem('mubet_devtools_voucher_grant', JSON.stringify(grantCmd));
+  try { if (bc) bc.postMessage(grantCmd); } catch(e) {}
+
+  const now = new Date();
+  const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0') + ':' + now.getSeconds().toString().padStart(2,'0');
+  grantLogEntries.unshift({
+    time: timeStr,
+    title: '3 Welcome Voucher (50%/100%/200%)',
+    targets: target
+  });
+  renderGrantLog();
+  showToast('Đã grant bộ Welcome → ' + target);
+}
+
+function clearVouchersForTarget() {
+  const targets = [...selectedGrantTargets];
+  if (!confirm('Xóa tất cả voucher của: ' + targets.join(', ') + '?')) return;
+
+  const cmd = {
+    type: 'voucher_clear',
+    targets: targets,
+    ts: Date.now()
+  };
+
+  localStorage.setItem('mubet_devtools_voucher_grant', JSON.stringify(cmd));
+  try { if (bc) bc.postMessage(cmd); } catch(e) {}
+  showToast('Đã gửi lệnh xóa voucher → ' + targets.join(', '));
+}
+
+function renderGrantLog() {
+  const container = document.getElementById('grantLog');
+  if (!grantLogEntries.length) { container.innerHTML = ''; return; }
+
+  let html = '<div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:4px;">Lịch sử grant</div>';
+  grantLogEntries.forEach(e => {
+    html += '<div class="grant-log-entry">';
+    html += '<span class="gl-icon">&#127873;</span>';
+    html += '<span class="gl-time">' + e.time + '</span>';
+    html += '<span><strong>' + escHtml(e.title) + '</strong> → ' + escHtml(e.targets) + '</span>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+}
+
+// Init voucher tab
+loadVoucherDefs();
+renderVoucherDefList();
+updateGrantSelector();
 </script>
 </body>
 </html>
