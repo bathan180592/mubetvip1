@@ -890,6 +890,46 @@ section h2 .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
         </div>
       </section>
 
+      <!-- LIVE CHALLENGE DATE PICKER -->
+      <section>
+        <h2><span class="dot" style="background:var(--orange)"></span> Live Challenge — Mock Date</h2>
+        <div style="margin-bottom:8px;font-size:10px;color:var(--text-3);">Chọn ngày để xem nhiệm vụ daily thay đổi theo lịch vận hành season (08/08 – 04/09/2026)</div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <select id="lcDatePicker" class="form-select" style="flex:1;min-width:200px;" onchange="applyLCDate()">
+            <option value="2026-08-08">T7 08/08 — Cuối tuần — Mở season</option>
+            <option value="2026-08-09">CN 09/08 — Cuối tuần</option>
+            <option value="2026-08-10">T2 10/08 — Ngày thường</option>
+            <option value="2026-08-11">T3 11/08 — Ngày thường</option>
+            <option value="2026-08-12">T4 12/08 — Ngày thường — UEFA Super Cup</option>
+            <option value="2026-08-13">T5 13/08 — Ngày thường</option>
+            <option value="2026-08-14">T6 14/08 — Ngày thường</option>
+            <option value="2026-08-15">T7 15/08 — Cuối tuần</option>
+            <option value="2026-08-16">CN 16/08 — Cuối tuần — Community Shield</option>
+            <option value="2026-08-17">T2 17/08 — Ngày thường</option>
+            <option value="2026-08-18">T3 18/08 — Ngày thường</option>
+            <option value="2026-08-19">T4 19/08 — Ngày thường</option>
+            <option value="2026-08-20">T5 20/08 — Ngày thường</option>
+            <option value="2026-08-21">T6 21/08 — Ngày thường</option>
+            <option value="2026-08-22">T7 22/08 — Cuối tuần — Opening EPL</option>
+            <option value="2026-08-23">CN 23/08 — Cuối tuần — Opening Serie A</option>
+            <option value="2026-08-24">T2 24/08 — Ngày thường</option>
+            <option value="2026-08-25">T3 25/08 — Ngày thường</option>
+            <option value="2026-08-26">T4 26/08 — Ngày thường</option>
+            <option value="2026-08-27">T5 27/08 — Ngày thường</option>
+            <option value="2026-08-28">T6 28/08 — Ngày thường — Opening Bundesliga</option>
+            <option value="2026-08-29">T7 29/08 — Lễ Quốc khánh</option>
+            <option value="2026-08-30">CN 30/08 — Lễ Quốc khánh</option>
+            <option value="2026-08-31">T2 31/08 — Lễ Quốc khánh</option>
+            <option value="2026-09-01">T3 01/09 — Lễ Quốc khánh</option>
+            <option value="2026-09-02">T4 02/09 — Lễ Quốc khánh</option>
+            <option value="2026-09-03">T5 03/09 — Ngày thường</option>
+            <option value="2026-09-04">T6 04/09 — Ngày thường</option>
+          </select>
+          <button class="btn btn-primary btn-sm" onclick="applyLCDate()" style="flex:none;">&#9889; Apply</button>
+        </div>
+        <div id="lcDateInfo" style="margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg-2);border:1px solid var(--border);font-size:11px;color:var(--text-2);display:none;"></div>
+      </section>
+
     </div>
 
   </div>
@@ -1982,6 +2022,74 @@ function clearVouchersForTarget() {
   try { if (bc) bc.postMessage(cmd); } catch(e) {}
   showToast('Đã gửi lệnh xóa voucher → ' + targets.join(', '));
 }
+
+// ===== LIVE CHALLENGE DATE =====
+const LC_SCHEDULE_META = {
+  '2026-08-08':{daily:12,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D23'],ncc:['D33']},
+  '2026-08-09':{daily:12,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D08','D21'],game:['D24'],ncc:['D34']},
+  '2026-08-10':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D19','D22'],game:['D25'],ncc:['D35']},
+  '2026-08-11':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D06','D11'],game:['D26'],ncc:['D36']},
+  '2026-08-12':{daily:12,type:'Ngày thường',hot:['D13','D14','D16','D17'],rotation:['D06','D08'],game:['D27'],ncc:['D37']},
+  '2026-08-13':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D07','D10'],game:['D28'],ncc:['D33']},
+  '2026-08-14':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D20','D12'],game:['D29'],ncc:['D34']},
+  '2026-08-15':{daily:12,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D30'],ncc:['D35']},
+  '2026-08-16':{daily:13,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D06','D08','D21'],game:['D31'],ncc:['D36']},
+  '2026-08-17':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D19','D11'],game:['D23'],ncc:['D37']},
+  '2026-08-18':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D07','D10'],game:['D24'],ncc:['D33']},
+  '2026-08-19':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D06','D12'],game:['D25'],ncc:['D34']},
+  '2026-08-20':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D05','D22'],game:['D26'],ncc:['D35']},
+  '2026-08-21':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D20','D11'],game:['D27'],ncc:['D36']},
+  '2026-08-22':{daily:13,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D28'],ncc:['D33','D35']},
+  '2026-08-23':{daily:13,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D06','D09'],game:['D29'],ncc:['D34','D36']},
+  '2026-08-24':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D07','D10'],game:['D30'],ncc:['D37']},
+  '2026-08-25':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D19','D22'],game:['D31'],ncc:['D33']},
+  '2026-08-26':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D06','D11'],game:['D32'],ncc:['D34']},
+  '2026-08-27':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D20','D12'],game:['D23'],ncc:['D35']},
+  '2026-08-28':{daily:12,type:'Ngày thường',hot:['D13','D14','D16','D17'],rotation:['D08','D10'],game:['D24'],ncc:['D36']},
+  '2026-08-29':{daily:13,type:'Lễ',hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D25'],ncc:['D33','D37']},
+  '2026-08-30':{daily:13,type:'Lễ',hot:['D13','D14','D16','D17'],rotation:['D06','D09'],game:['D26'],ncc:['D34','D35']},
+  '2026-08-31':{daily:12,type:'Lễ',hot:['D13','D14','D16','D17'],rotation:['D07','D10'],game:['D27'],ncc:['D36']},
+  '2026-09-01':{daily:12,type:'Lễ',hot:['D13','D14','D16','D17'],rotation:['D20','D11'],game:['D28'],ncc:['D33']},
+  '2026-09-02':{daily:12,type:'Lễ',hot:['D13','D14','D16','D17'],rotation:['D19','D22'],game:['D29'],ncc:['D34']},
+  '2026-09-03':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D07','D10'],game:['D30'],ncc:['D35']},
+  '2026-09-04':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D20','D12'],game:['D31'],ncc:['D36']}
+};
+
+function applyLCDate() {
+  const picker = document.getElementById('lcDatePicker');
+  const dateVal = picker.value;
+
+  // Send to prototype
+  const cmd = { type: 'lc_date_change', date: dateVal, ts: Date.now() };
+  localStorage.setItem('mubet_devtools_lc_date', dateVal);
+  try { if (bc) bc.postMessage(cmd); } catch(e) {}
+
+  // Show info
+  const meta = LC_SCHEDULE_META[dateVal];
+  const infoEl = document.getElementById('lcDateInfo');
+  if (meta && infoEl) {
+    let html = '<div style="display:flex;gap:12px;flex-wrap:wrap;">';
+    html += '<div><strong>' + meta.daily + '</strong> daily</div>';
+    html += '<div>Loại: <strong>' + meta.type + '</strong></div>';
+    html += '</div>';
+    html += '<div style="margin-top:4px;font-size:10px;color:var(--text-3);">';
+    html += 'Hot: ' + meta.hot.join(', ') + ' &bull; Rotation: ' + meta.rotation.join(', ') + ' &bull; Game: ' + meta.game.join(', ') + ' &bull; NCC: ' + meta.ncc.join(', ');
+    html += '</div>';
+    infoEl.innerHTML = html;
+    infoEl.style.display = '';
+  }
+
+  showToast('LC Date → ' + dateVal);
+}
+
+// Restore LC date from localStorage on load
+(function() {
+  const saved = localStorage.getItem('mubet_devtools_lc_date');
+  if (saved) {
+    const picker = document.getElementById('lcDatePicker');
+    if (picker) picker.value = saved;
+  }
+})();
 
 function renderGrantLog() {
   const container = document.getElementById('grantLog');
