@@ -3593,7 +3593,7 @@ img { max-width: 100%; display: block; }
 }
 .promo-active-icon.welcome { background: rgba(5,161,88,.12); color: var(--success-100); }
 .promo-active-icon.cashback { background: rgba(255,226,62,.12); color: var(--tertiary-400); }
-.promo-active-title { font-family: Montserrat,sans-serif; font-size: 15px; font-weight: 700; flex: 1; }
+.promo-active-title { font-family: Montserrat,sans-serif; font-size: 13px; font-weight: 700; flex: 1; }
 .promo-active-status {
   font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 6px;
   background: rgba(5,161,88,.12); color: var(--success-100);
@@ -3628,15 +3628,15 @@ img { max-width: 100%; display: block; }
 .promo-active-btn.danger:hover { background: rgba(255,39,78,.06); }
 .promo-active-header {
   display: flex; align-items: center; gap: 8px;
-  padding: 10px 16px;
+  padding: 8px 14px;
   background: rgba(255,255,255,.04);
   border-bottom: 1px solid var(--line);
   margin: 0;
 }
 .promo-active-card .promo-active-title { color: var(--text); opacity: .85; }
-.promo-active-body { padding: 12px 16px 14px; }
-.promo-active-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; margin-bottom: 10px; }
-.promo-active-progress-wrap { margin-bottom: 12px; }
+.promo-active-body { padding: 8px 14px 10px; }
+.promo-active-desc { font-size: 11px; color: var(--muted); line-height: 1.3; margin-bottom: 5px; }
+.promo-active-progress-wrap { margin-bottom: 6px; }
 .promo-active-progress-bar {
   height: 6px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden;
   margin-bottom: 6px;
@@ -3646,14 +3646,41 @@ img { max-width: 100%; display: block; }
   background: var(--success-100);
   transition: width .5s;
 }
-.promo-active-progress-label { font-size: 11px; color: var(--muted); }
+.promo-active-progress-label { font-size: 10px; color: var(--muted); }
 .promo-active-rate-pill, .promo-detail-stat-pill {
   display: inline-flex; align-items: center; gap: 4px;
-  padding: 6px 12px; border-radius: var(--radius-stage-3); font-size: 13px; color: var(--text-2);
+  padding: 4px 10px; border-radius: var(--radius-stage-3); font-size: 11px; color: var(--text-2);
   background: var(--panel-2); border: 1px solid var(--line);
 }
 .promo-active-rate-pill strong, .promo-detail-stat-pill strong {
-  color: var(--tertiary-400); font-size: 13px; font-family: Montserrat,sans-serif; font-weight: 700;
+  color: var(--tertiary-400); font-size: 12px; font-family: Montserrat,sans-serif; font-weight: 700;
+}
+
+/* Live Challenge Banner */
+.lc-banner-card {
+  position: relative; border-radius: var(--radius-stage-1); overflow: hidden;
+  margin-bottom: 12px; cursor: pointer; transition: transform .15s;
+  border: 1px solid var(--line);
+}
+.lc-banner-card:hover { transform: translateY(-1px); }
+.lc-banner-img { width: 100%; height: 120px; object-fit: cover; display: block; }
+.lc-banner-overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 12px 14px;
+  background: linear-gradient(0deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.15) 50%, transparent 100%);
+}
+.lc-banner-badge {
+  position: absolute; top: 8px; left: 10px;
+  font-size: 9px; font-weight: 800; padding: 2px 8px; border-radius: 4px;
+  background: var(--error-100); color: #fff; text-transform: uppercase; letter-spacing: .04em;
+}
+.lc-banner-title {
+  font-family: Montserrat,sans-serif; font-size: 15px; font-weight: 800;
+  color: #fff; text-transform: uppercase; text-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
+.lc-banner-sub {
+  font-size: 11px; color: rgba(255,255,255,.75); margin-top: 2px;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
 /* Featured Promos (Section C) */
@@ -3683,27 +3710,28 @@ img { max-width: 100%; display: block; }
 .promo-featured-hero-title { font-family: Montserrat,sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; }
 .promo-featured-hero-benefit { font-size: 13px; color: var(--tertiary-400); font-weight: 600; margin-top: 4px; }
 .promo-featured-hero-time { font-size: 11px; color: var(--muted); margin-top: 6px; display: flex; align-items: center; gap: 4px; }
-.promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.promo-grid { display: flex; flex-direction: column; gap: 8px; }
 .promo-grid-card {
+  display: flex; align-items: stretch;
   background: var(--surface-texture), var(--grad-surface);
   border: 1px solid var(--line); border-radius: var(--radius-stage-1);
   overflow: hidden; cursor: pointer; transition: all .2s;
 }
 .promo-grid-card:hover { border-color: var(--line-strong); transform: translateY(-1px); }
 .promo-grid-card-img {
-  width: 100%; aspect-ratio: 21/9; overflow: hidden;
+  width: 100px; flex-shrink: 0; overflow: hidden;
   background: linear-gradient(135deg, rgba(222,46,54,.12), rgba(74,125,254,.08));
   display: flex; align-items: center; justify-content: center; font-size: 28px;
 }
-.promo-grid-card-body { padding: 12px 14px 14px; }
+.promo-grid-card-body { padding: 10px 14px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
 .promo-grid-card-badge {
-  font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: inline-block;
+  font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: inline-block; width: fit-content;
 }
 .promo-grid-card-badge.hot { background: rgba(222,46,54,.15); color: var(--primary-300); }
 .promo-grid-card-badge.event { background: rgba(74,125,254,.15); color: var(--secondary-300); }
-.promo-grid-card-title { font-family: Montserrat,sans-serif; font-size: 13px; font-weight: 700; margin-top: 8px; line-height: 1.3; }
-.promo-grid-card-benefit { font-size: 11px; color: var(--tertiary-400); margin-top: 4px; font-weight: 600; }
-.promo-grid-card-time { font-size: 10px; color: var(--muted); margin-top: 4px; }
+.promo-grid-card-title { font-family: Montserrat,sans-serif; font-size: 12px; font-weight: 700; margin-top: 4px; line-height: 1.3; }
+.promo-grid-card-benefit { font-size: 11px; color: var(--tertiary-400); margin-top: 2px; font-weight: 600; }
+.promo-grid-card-time { font-size: 10px; color: var(--muted); margin-top: 2px; }
 
 /* Promo Detail Steps */
 .promo-detail-steps { counter-reset: step; margin-top: 8px; }
@@ -3810,7 +3838,7 @@ img { max-width: 100%; display: block; }
 .promo-voucher-title { font-size: 13px; }
 .promo-voucher-right { padding: 12px 14px; min-width: 72px; }
 .promo-voucher-value { font-size: 16px; }
-.promo-grid { grid-template-columns: 1fr; }
+/* .promo-grid now uses flex column, no grid override needed */
 .promo-featured-hero { min-height: 130px; }
 .promo-featured-hero-content { min-height: 130px; padding: 16px; }
 .promo-featured-hero-title { font-size: 16px; }
@@ -8592,7 +8620,7 @@ img { max-width: 100%; display: block; }
 <div class="promo-overlay" id="promoOverlay"></div>
 <div class="promo-view" id="promoView" role="dialog" aria-modal="true">
   <div class="promo-header">
-    <div class="promo-header-title">Ưu đãi của tôi</div>
+    <div class="promo-header-title">Ví voucher</div>
     <button class="promo-close" id="promoClose" aria-label="Đóng">×</button>
   </div>
   <div class="promo-body" id="promoBody"></div>
@@ -9036,7 +9064,7 @@ function lcMissionIcon(m) { return lcIcon(m.icon, lcNeonClass(m.iconColor)); }
 
 // ===== ROUTER =====
 const ACCOUNT_NAV = [
-  { path: '/account/my-promotions', label: 'Ưu đãi của tôi', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><polyline points="12 3 12 15"/><path d="M8 8l4-5 4 5"/><rect x="4" y="12" width="16" height="2" rx="1"/></svg>' },
+  { path: '/account/my-promotions', label: 'Ví voucher', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><polyline points="12 3 12 15"/><path d="M8 8l4-5 4 5"/><rect x="4" y="12" width="16" height="2" rx="1"/></svg>' },
   { path: '/account/deposit', label: 'Nạp tiền', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12"/></svg>' },
   { path: '/account/withdraw', label: 'Rút tiền', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M2 10h20"/></svg>' },
   { divider: true },
@@ -9890,7 +9918,7 @@ function renderPromoPage(container) {
   const activeCount = userPromos.length;
   let html = '<div class="promo-inline">';
   html += '<div class="account-page-header">';
-  html += '<div class="account-page-title">Ưu đãi của tôi</div>';
+  html += '<div class="account-page-title">Ví voucher</div>';
   html += '<div class="account-page-sub">Quản lý voucher, khuyến mãi và sự kiện</div>';
   html += '</div>';
 
@@ -9908,20 +9936,13 @@ function renderPromoPage(container) {
     }
   }
 
-  // Summary stats bar
-  html += '<div class="promo-summary-bar">';
-  html += '<div class="promo-summary-stat"><span class="promo-summary-num">' + availCount + '</span><span class="promo-summary-label">Voucher khả dụng</span></div>';
-  html += '<div class="promo-summary-divider"></div>';
-  html += '<div class="promo-summary-stat"><span class="promo-summary-num">' + activeCount + '</span><span class="promo-summary-label">KM đang tham gia</span></div>';
-  html += '<div class="promo-summary-divider"></div>';
-  html += '<div class="promo-summary-stat"><span class="promo-summary-num">' + MOCK_FEATURED_PROMOS.length + '</span><span class="promo-summary-label">Ưu đãi nổi bật</span></div>';
-  html += '</div>';
+  // Summary stats bar — removed per design decision
   html += '<div id="promoInlineBody"></div>';
   html += '</div>';
   container.innerHTML = html;
   const body = document.getElementById('promoInlineBody');
   if (body) {
-    body.innerHTML = renderVoucherSection() + renderActivePromoSection() + renderFeaturedPromoSection();
+    body.innerHTML = renderActivePromoSection() + renderVoucherSection() + renderFeaturedPromoSection();
   }
 }
 
@@ -12655,7 +12676,7 @@ function closePromoView() {
 }
 
 function renderPromoSections() {
-  var content = renderVoucherSection() + renderActivePromoSection() + renderFeaturedPromoSection();
+  var content = renderActivePromoSection() + renderVoucherSection() + renderFeaturedPromoSection();
   // Update both overlay and inline body if they exist
   var body = document.getElementById('promoBody');
   if (body) body.innerHTML = content;
@@ -12891,12 +12912,11 @@ function renderVoucherSection() {
 function renderActivePromoSection() {
   var activePromos = getPromosForCurrentUser();
   if (activePromos.length === 0) return '';
-  let html = '<div class="promo-section-title">' + lcIcon('shield','neon-green') + ' Khuyến mãi đang áp dụng</div>';
+  let html = '<div class="promo-section-title">' + lcIcon('shield','neon-green') + ' Đang áp dụng</div>';
   activePromos.forEach(p => {
     if (p.type === 'cashback') {
       html += renderCashbackPromoCard(p);
     } else {
-      // welcome, deposit, event — all use the same turnover progress card
       html += renderWelcomePromoCard(p);
     }
   });
@@ -12914,7 +12934,7 @@ function renderWelcomePromoCard(p) {
   html += '<div class="promo-active-desc">' + p.desc + '</div>';
   html += '<div class="promo-active-progress-wrap">';
   html += '<div class="promo-active-progress-bar"><div class="promo-active-progress-fill" style="width:' + pct + '%"></div></div>';
-  html += '<div class="promo-active-progress-label">' + (p.turnoverCompleted/1000000).toFixed(1) + 'M / ' + (p.turnoverRequired/1000000).toFixed(0) + 'M turnover (' + pct + '%)</div>';
+  html += '<div class="promo-active-progress-label" style="display:flex;justify-content:space-between;"><span>' + (p.turnoverCompleted/1000000).toFixed(1) + 'M / ' + (p.turnoverRequired/1000000).toFixed(0) + 'M turnover</span><span style="color:var(--success-100);font-weight:700;">' + pct + '%</span></div>';
   html += '</div>';
   html += '</div>';
   html += '</div>';
@@ -12929,10 +12949,6 @@ function renderCashbackPromoCard(p) {
   html += '</div>';
   html += '<div class="promo-active-body">';
   html += '<div class="promo-active-desc">' + p.desc + '</div>';
-  html += '<div style="display:flex;gap:12px;margin:8px 0;">';
-  html += '<div class="promo-active-rate-pill">Tỷ lệ: <strong>' + p.rate + '%</strong></div>';
-  html += '<div class="promo-active-rate-pill">Hôm nay: <strong>' + (p.todayCashback/1000).toFixed(0) + 'K</strong></div>';
-  html += '</div>';
   html += '</div>';
   html += '</div>';
   return html;
@@ -12942,18 +12958,15 @@ function renderFeaturedPromoSection() {
   let html = '<div class="promo-section-title">' + lcIcon('sparkle','neon-gold') + ' Ưu đãi & sự kiện nổi bật</div>';
   const hero = MOCK_FEATURED_PROMOS.find(p => p.featured);
   const grid = MOCK_FEATURED_PROMOS.filter(p => !p.featured);
-  if (hero) {
-    html += '<div class="promo-featured-hero" onclick="openFeaturedPromoDetail(\'' + hero.id + '\')">';
-    html += '<div class="promo-featured-hero-bg"></div>';
-    if (hero.badge) html += '<div class="promo-featured-hero-badge">' + hero.badge + '</div>';
-    html += '<div class="promo-featured-hero-content">';
-    html += '<div class="promo-featured-hero-title">' + hero.title + '</div>';
-    html += '<div class="promo-featured-hero-benefit">' + hero.benefit + '</div>';
-    html += '<div class="promo-featured-hero-desc" style="font-size:13px;color:var(--text-secondary);margin-top:6px;">' + hero.desc + '</div>';
-    html += '<div class="promo-featured-hero-time">' + hero.timeLabel + '</div>';
-    html += '</div>';
-    html += '</div>';
-  }
+  // Live Challenge banner — full-width image
+  html += '<div class="lc-banner-card" onclick="navigateTo(\'/mission/live-challenge\')">';
+  html += '<img class="lc-banner-img" src="Assets/mission-hero-banner.png" alt="Live Challenge"/>';
+  html += '<div class="lc-banner-overlay">';
+  html += '<div class="lc-banner-badge">HOT</div>';
+  html += '<div class="lc-banner-title">Live Challenge</div>';
+  html += '<div class="lc-banner-sub">Nhiệm vụ hàng ngày — nhận thưởng liên tục</div>';
+  html += '</div>';
+  html += '</div>';
   if (grid.length > 0) {
     html += '<div class="promo-grid">';
     grid.forEach(p => {
@@ -13287,6 +13300,8 @@ function cancelActivePromo(id) {
   var promos = getPromosForCurrentUser();
   var promo = promos.find(function(x) { return x.id === id; });
   if (!promo) return;
+  // Cashback is a background program — cannot be cancelled
+  if (promo.type === 'cashback') return;
 
   // Build custom confirmation dialog
   var overlay = document.createElement('div');
@@ -13295,7 +13310,7 @@ function cancelActivePromo(id) {
   var turnoverText = formatMoney((promo.turnoverCompleted || 0), false) + ' / ' + formatMoney((promo.turnoverRequired || 0), false);
 
   overlay.innerHTML = '<div class="cancel-promo-dialog">'
-    + '<div class="cancel-promo-icon">⚠️</div>'
+    + '<div class="cancel-promo-icon"><span class="neon-red"><span class="lc-icon-svg" style="width:36px;height:36px;"><svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2z"/><path d="M12 9v5" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg></span></span></div>'
     + '<div class="cancel-promo-title">Hủy ưu đãi?</div>'
     + '<div class="cancel-promo-name">' + promo.title + '</div>'
     + '<div class="cancel-promo-warnings">'
