@@ -8204,7 +8204,7 @@ img { max-width: 100%; display: block; }
 <div class="user-dropdown-backdrop" id="userDropdownBackdrop"></div>
 
 <!-- ===== MAIN CONTENT (Home) ===== -->
-<div id="missionPopupOverlay" class="mission-popup-overlay" onclick="if(event.target===this)closeMissionPopup()"></div>
+<div id="missionPopupOverlay" class="mission-popup-overlay" onclick="if(event.target===this)closeMissionPopupToSticker()"></div>
 
 <!-- ===== XP BOTTOM SHEET ===== -->
 <div id="xpSheetBackdrop" class="xp-sheet-backdrop" onclick="closeXpSheet()"></div>
@@ -8474,7 +8474,7 @@ img { max-width: 100%; display: block; }
   <span class="floating-voucher-badge" id="floatingVoucherBadge">0</span>
 </div>
 
-<div class="floating-promo" id="floatingPromo" onclick="navigateTo('/mission/live-challenge')">
+<div class="floating-promo" id="floatingPromo" onclick="showMissionPopup()">
   <button class="floating-promo-close" onclick="event.stopPropagation();closeFloatingPromo();">&times;</button>
   <img class="floating-promo-img" src="Assets/floating-promo-icon.png" alt="Promo"/>
   <span class="floating-promo-badge" id="floatingPromoBadge">3</span>
@@ -13937,7 +13937,7 @@ function showMissionPopup() {
   });
   html += '</div>';
   html += '<div class="mission-popup-actions">';
-  html += '<button class="mission-popup-btn secondary" onclick="closeMissionPopup()">Để sau</button>';
+  html += '<button class="mission-popup-btn secondary" onclick="closeMissionPopupToSticker()">Để sau</button>';
   html += '<button class="mission-popup-btn primary" onclick="closeMissionPopup();navigateTo(\'/mission/live-challenge\')">Xem Nhiệm Vụ</button>';
   html += '</div>';
   html += '</div>';
@@ -13947,6 +13947,54 @@ function showMissionPopup() {
 function closeMissionPopup() {
   var overlay = document.getElementById('missionPopupOverlay');
   if (overlay) overlay.classList.remove('open');
+}
+
+function closeMissionPopupToSticker() {
+  var overlay = document.getElementById('missionPopupOverlay');
+  var popup = overlay ? overlay.querySelector('.mission-popup') : null;
+  var sticker = document.getElementById('floatingPromo');
+  if (!popup || !sticker) { closeMissionPopup(); return; }
+
+  var stickerRect = sticker.getBoundingClientRect();
+  var popupRect = popup.getBoundingClientRect();
+
+  // Create a flying ghost that shrinks from popup position to sticker
+  var ghost = document.createElement('div');
+  ghost.style.cssText = 'position:fixed;z-index:9999;pointer-events:none;'
+    + 'width:' + popupRect.width + 'px;height:' + popupRect.height + 'px;'
+    + 'left:' + popupRect.left + 'px;top:' + popupRect.top + 'px;'
+    + 'border-radius:20px;overflow:hidden;'
+    + 'background:linear-gradient(170deg,#1a1a1e,#101012,#0c0c0e);'
+    + 'border:1px solid rgba(255,50,50,.2);'
+    + 'box-shadow:0 20px 60px rgba(0,0,0,.7);'
+    + 'transition:all .5s cubic-bezier(.4,0,.2,1);';
+  document.body.appendChild(ghost);
+
+  // Immediately hide the real popup & overlay
+  overlay.classList.remove('open');
+
+  // Force reflow then animate ghost to sticker
+  ghost.offsetHeight;
+  var stickerCx = stickerRect.left + stickerRect.width / 2;
+  var stickerCy = stickerRect.top + stickerRect.height / 2;
+  ghost.style.left = (stickerCx - 32) + 'px';
+  ghost.style.top = (stickerCy - 32) + 'px';
+  ghost.style.width = '64px';
+  ghost.style.height = '64px';
+  ghost.style.borderRadius = '50%';
+  ghost.style.opacity = '0.3';
+  ghost.style.boxShadow = '0 0 20px rgba(255,50,50,.5)';
+
+  // Clean up ghost & pulse sticker
+  setTimeout(function() {
+    ghost.remove();
+    sticker.style.transition = 'transform .25s cubic-bezier(.2,0,.3,2)';
+    sticker.style.transform = 'scale(1.35)';
+    setTimeout(function() {
+      sticker.style.transform = '';
+      setTimeout(function() { sticker.style.transition = ''; }, 300);
+    }, 250);
+  }, 500);
 }
 
 // ===== FLOATING PROMO ICON =====
@@ -14251,36 +14299,56 @@ var MOCK_WORLDCUP_MISSIONS = [
 ];
 
 var MOCK_LC_MISSIONS = [
-  { id:'lc1', title:'Cuối tuần bùng nổ', desc:'Cược tối thiểu 200K vào cuối tuần để nhận thưởng', icon:'lightning', iconColor:'orange', status:'claimable', action:'Nhận', group:'recommended', points:20,
-    rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:500000,label:'500K'}] },
-  { id:'lc2', title:'Chuỗi 3 ngày liên tiếp', desc:'Đăng nhập và cược 3 ngày liên tiếp', icon:'fire', iconColor:'red', current:2, target:3, group:'recommended', points:15,
-    rewards:[{type:'coin',amount:15,label:'+15'}] },
-  { id:'lc3', title:'Vượt hôm qua', desc:'Cược hôm nay nhiều hơn hôm qua', icon:'chart_up', iconColor:'teal', current:150000, target:200000, group:'recommended', points:25,
-    rewards:[{type:'coin',amount:25,label:'+25'},{type:'voucher',label:'Freebet 50K'}] },
-  { id:'lc4', title:'Cược 500K hôm nay', desc:'Tổng cược trong ngày đạt 500.000đ', icon:'target', iconColor:'blue', current:300000, target:500000, group:'daily', points:10,
+  /* ── DAILY ── claimable / completed / active ── */
+  { id:'d01a', code:'D01', title:'Điểm danh sự kiện', desc:'Đăng nhập hôm nay để nhận quà', icon:'check', iconColor:'green', status:'claimable', action:'Nhận', group:'recommended', points:10, reset:'daily', cta:'Nhận', autoComplete:true,
+    rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:50000,label:'50K'}] },
+  { id:'d01b', code:'D01', title:'Điểm danh sự kiện', desc:'Đã điểm danh hôm nay', icon:'check', iconColor:'green', status:'completed', current:1, target:1, group:'daily', points:10, reset:'daily', autoComplete:true,
     rewards:[{type:'coin',amount:10,label:'+10'}] },
-  { id:'lc5', title:'Nạp 100K hôm nay', desc:'Nạp tối thiểu 100.000đ hôm nay', icon:'money', iconColor:'green', current:0, target:100000, group:'daily', points:15,
+  { id:'d02', code:'D02', title:'Nạp Nhẹ Nhận Quà', desc:'Nạp tối thiểu 50K hôm nay', icon:'money', iconColor:'green', current:0, target:1, group:'daily', points:15, reset:'daily', cta:'Nạp ngay',
     rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}] },
-  { id:'lc6', title:'Chơi 3 môn khác nhau', desc:'Đặt cược ít nhất 3 bộ môn trong ngày', icon:'dice', iconColor:'purple', current:1, target:3, group:'daily', points:20,
-    rewards:[{type:'coin',amount:20,label:'+20'},{type:'voucher',label:'5 Free Spin'}] },
-  { id:'lc7', title:'Top 50 ngày hôm nay', desc:'Lọt Top 50 bảng xếp hạng ngày', icon:'medal', iconColor:'orange', current:0, target:1, group:'hot', points:30, tag:'HOT',
-    rewards:[{type:'coin',amount:30,label:'+30'},{type:'cash',amount:200000,label:'200K'}] },
-  { id:'lc8', title:'Tổng cược 5 triệu tuần', desc:'Tổng cược trong tuần đạt 5.000.000đ', icon:'chart_bar', iconColor:'blue', current:2100000, target:5000000, group:'progress', points:50,
-    rewards:[{type:'coin',amount:50,label:'+50'},{type:'cash',amount:500000,label:'500K'}] },
-  { id:'lc9', title:'Hoàn thành 10 NV', desc:'Hoàn thành tổng cộng 10 nhiệm vụ trong mùa', icon:'check', iconColor:'green', current:5, target:10, group:'progress', points:40,
-    rewards:[{type:'coin',amount:40,label:'+40'},{type:'voucher',label:'Freebet 200K'}] },
-  { id:'lc10', title:'Mời 2 bạn tham gia', desc:'Giới thiệu 2 người bạn tham gia Live Challenge', icon:'handshake', iconColor:'teal', current:0, target:2, group:'progress', points:60,
-    rewards:[{type:'coin',amount:60,label:'+60'},{type:'cash',amount:1000000,label:'1M'}] },
-  { id:'lc11', title:'Cược VIP x3', desc:'Đặt 3 cược VIP trong ngày (tỷ lệ ≥ 3.0)', icon:'crown', iconColor:'red', current:1, target:3, group:'vip', points:35, tag:'VIP', vipRequired:1,
-    rewards:[{type:'coin',amount:35,label:'+35'},{type:'cash',amount:300000,label:'300K'},{type:'voucher',label:'10 Free Spin'}] },
-  { id:'lc12', title:'Nạp tích lũy 2 triệu', desc:'Tổng nạp trong mùa đạt 2.000.000đ', icon:'diamond', iconColor:'purple', current:850000, target:2000000, group:'vip', points:80, tag:'VIP', vipRequired:1,
-    rewards:[{type:'coin',amount:80,label:'+80'},{type:'cash',amount:2000000,label:'2M'}] },
-  { id:'lc13', title:'Đăng nhập 5 ngày', desc:'Đăng nhập liên tiếp 5 ngày', icon:'check', iconColor:'green', current:5, target:5, status:'completed', group:'daily', points:10,
+  { id:'d03', code:'D03', title:'Khai hỏa hằng ngày', desc:'Đặt cược đầu tiên trong ngày', icon:'lightning', iconColor:'orange', current:0, target:1, group:'daily', points:10, reset:'daily', cta:'Cược ngay',
     rewards:[{type:'coin',amount:10,label:'+10'}] },
-  { id:'lc14', title:'Cược đầu tiên', desc:'Đặt cược đầu tiên trong mùa Live Challenge', icon:'target', iconColor:'blue', current:1, target:1, status:'completed', group:'recommended', points:5,
-    rewards:[{type:'coin',amount:5,label:'+5'}] },
-  { id:'lc15', title:'Nạp lần đầu', desc:'Nạp tiền lần đầu trong mùa giải', icon:'money', iconColor:'green', current:200000, target:100000, status:'completed', group:'recommended', points:15,
-    rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:50000,label:'50K'}] }
+  { id:'d05', code:'D05', title:'Cược liền tay, quà về ngay', desc:'Đặt 10 cược bất kỳ trong ngày', icon:'fire', iconColor:'red', current:3, target:10, group:'daily', points:20, reset:'daily', cta:'Cược ngay',
+    rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:200000,label:'200K'}] },
+  { id:'d06', code:'D06', title:'Tay to cược khỏe', desc:'Tổng cược trong ngày đạt 2 triệu', icon:'chart_up', iconColor:'teal', current:0, target:2000000, group:'daily', points:25, reset:'daily', cta:'Cược ngay',
+    rewards:[{type:'coin',amount:25,label:'+25'},{type:'cash',amount:300000,label:'300K'}] },
+  { id:'d07', code:'D07', title:'Cược to nhận quà to', desc:'Tổng cược trong ngày đạt 5 triệu', icon:'target', iconColor:'blue', current:1200000, target:5000000, group:'daily', points:40, reset:'daily', cta:'Cược ngay',
+    rewards:[{type:'coin',amount:40,label:'+40'},{type:'cash',amount:500000,label:'500K'}] },
+  { id:'d13', code:'D13', title:'Điểm Danh Giờ Vàng', desc:'Đăng nhập trong khung giờ vàng (19h-21h)', icon:'timer', iconColor:'gold', current:0, target:1, group:'hot', points:15, reset:'daily', tag:'Giờ Vàng', cta:'Mở app',
+    rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}] },
+  { id:'d23', code:'D23', title:'Game hot trong ngày', desc:'Chơi Tài Xỉu Live hôm nay', icon:'dice', iconColor:'purple', current:0, target:1, group:'hot', points:20, reset:'daily', tag:'Game Hot', cta:'Chơi ngay',
+    rewards:[{type:'coin',amount:20,label:'+20'},{type:'voucher',label:'Freebet 50K'}] },
+  { id:'d33', code:'D33', title:'Võ lâm hội tụ - B52', desc:'Chơi game từ NCC B52 hôm nay', icon:'swords', iconColor:'red', current:0, target:1, group:'hot', points:15, reset:'daily', tag:'NCC Hot', cta:'Chơi ngay',
+    rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:150000,label:'150K'}] },
+  /* extra completed daily */
+  { id:'d03done', code:'D03', title:'Khai hỏa hằng ngày', desc:'Đã đặt cược đầu tiên', icon:'lightning', iconColor:'orange', current:1, target:1, status:'completed', group:'daily', points:10, reset:'daily',
+    rewards:[{type:'coin',amount:10,label:'+10'}] },
+
+  /* ── WEEKLY ── */
+  { id:'w01', code:'W01', title:'Tay to cược khỏe', desc:'Tổng cược trong tuần đạt 10 triệu', icon:'chart_bar', iconColor:'blue', current:0, target:10000000, group:'progress', points:50, reset:'weekly', cta:'Cược ngay',
+    rewards:[{type:'coin',amount:50,label:'+50'},{type:'cash',amount:1000000,label:'1M'}] },
+  { id:'w03', code:'W03', title:'Cược to nhận quà to', desc:'Tổng cược trong tuần đạt 50 triệu', icon:'diamond', iconColor:'purple', current:12000000, target:50000000, group:'progress', points:80, reset:'weekly', cta:'Cược ngay',
+    rewards:[{type:'coin',amount:80,label:'+80'},{type:'cash',amount:3000000,label:'3M'}] },
+  { id:'w11', code:'W11', title:'Đổi Gió Săn Quà', desc:'Chơi thể loại game mới trong tuần', icon:'refresh', iconColor:'teal', current:0, target:1, group:'progress', points:15, reset:'weekly', cta:'Khám phá',
+    rewards:[{type:'coin',amount:15,label:'+15'},{type:'voucher',label:'Freebet 100K'}] },
+  { id:'w18', code:'W18', title:'Thử game mới tuần này', desc:'Trải nghiệm game mới ra mắt trong tuần', icon:'sparkle', iconColor:'gold', current:0, target:1, group:'progress', points:20, reset:'weekly', cta:'Chơi thử',
+    rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:200000,label:'200K'}] },
+  { id:'w21', code:'W21', title:'Săn mảnh nhận Sao', desc:'Thu thập mảnh ghép để đổi sao', icon:'star', iconColor:'orange', current:0, target:1, group:'progress', points:30, reset:'weekly', tag:'Collectible', cta:'Săn mảnh',
+    rewards:[{type:'coin',amount:30,label:'+30'},{type:'voucher',label:'1 Sao Vàng'}] },
+  { id:'w28', code:'W28', title:'Ghé Shop Có Quà', desc:'Truy cập Shop đổi quà trong tuần', icon:'gift', iconColor:'green', current:0, target:1, group:'progress', points:10, reset:'weekly', cta:'Vào Shop', autoComplete:true,
+    rewards:[{type:'coin',amount:10,label:'+10'}] },
+
+  /* ── MONTHLY ── */
+  { id:'m01', code:'M01', title:'Chiến thần 100tr', desc:'Tổng cược trong tháng đạt 100 triệu', icon:'crown', iconColor:'red', current:22000000, target:100000000, group:'vip', points:100, reset:'monthly', tag:'VIP', vipRequired:1, cta:'Cược ngay',
+    rewards:[{type:'coin',amount:100,label:'+100'},{type:'cash',amount:5000000,label:'5M'}] },
+  { id:'m04', code:'M04', title:'Bất khả chiến bại', desc:'Tổng cược trong tháng đạt 50 triệu', icon:'trophy', iconColor:'gold', current:8000000, target:50000000, group:'vip', points:80, reset:'monthly', tag:'VIP', vipRequired:1, cta:'Cược ngay',
+    rewards:[{type:'coin',amount:80,label:'+80'},{type:'cash',amount:2000000,label:'2M'}] },
+  { id:'m09', code:'M09', title:'Nhà chinh phục', desc:'Hoàn thành 10 mốc trên lộ trình tháng', icon:'target', iconColor:'blue', current:3, target:10, group:'vip', points:60, reset:'monthly', cta:'Xem lộ trình',
+    rewards:[{type:'coin',amount:60,label:'+60'},{type:'voucher',label:'Freebet 500K'}] },
+  { id:'m10', code:'M10', title:'Dấu ấn anh hùng', desc:'Hoàn thành 20 nhiệm vụ trong tháng', icon:'medal', iconColor:'orange', current:7, target:20, group:'vip', points:50, reset:'monthly', cta:'Làm nhiệm vụ',
+    rewards:[{type:'coin',amount:50,label:'+50'},{type:'cash',amount:1000000,label:'1M'}] },
+  { id:'m15', code:'M15', title:'Anh hùng thăng cấp', desc:'Đạt Level 10 trong tháng', icon:'chart_up', iconColor:'teal', current:10, target:10, status:'claimable', action:'Nhận', group:'recommended', points:100, reset:'monthly', tag:'NHẬN', cta:'Nhận',
+    rewards:[{type:'coin',amount:100,label:'+100'},{type:'cash',amount:3000000,label:'3M'},{type:'voucher',label:'VIP Voucher'}] }
 ];
 
 // Helper: render reward badges from rewards array
