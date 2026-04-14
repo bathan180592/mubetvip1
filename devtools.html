@@ -315,6 +315,106 @@ section h2 .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 .grant-log-entry .gl-time { color: var(--text-3); font-size: 9px; flex-shrink: 0; }
 .grant-log-entry .gl-icon { font-size: 12px; }
 
+/* ===== MISSION CONFIG TAB ===== */
+.mcfg-toolbar { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px; }
+.mcfg-toolbar .btn { flex: none; }
+
+.mcfg-search {
+  width: 100%; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg-2); color: var(--text-0); font-size: 11px; font-weight: 500;
+  outline: none; margin-bottom: 8px; font-family: inherit;
+}
+.mcfg-search:focus { border-color: var(--border-hover); }
+.mcfg-search::placeholder { color: var(--text-3); }
+
+.mcfg-tabs { display: flex; gap: 3px; margin-bottom: 10px; }
+.mcfg-subtab {
+  padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg-2); color: var(--text-2); font-size: 10px; font-weight: 700;
+  cursor: pointer; transition: all .15s;
+}
+.mcfg-subtab:hover { border-color: var(--border-hover); color: var(--text-0); }
+.mcfg-subtab.active { border-color: var(--red); background: rgba(202,41,48,.1); color: var(--red); }
+.mcfg-subpanel { display: none; }
+.mcfg-subpanel.active { display: block; }
+
+.mcfg-mission-list { display: flex; flex-direction: column; gap: 4px; }
+.mcfg-mission-row {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg-2); transition: all .15s; cursor: pointer;
+}
+.mcfg-mission-row:hover { border-color: var(--border-hover); background: var(--bg-3); }
+.mcfg-mission-row.editing { border-color: var(--gold); background: rgba(255,226,62,.04); }
+.mcfg-code {
+  font-size: 10px; font-weight: 800; font-family: 'Courier New', monospace;
+  padding: 2px 6px; border-radius: 4px; min-width: 32px; text-align: center; flex-shrink: 0;
+}
+.mcfg-code.core { background: rgba(5,161,88,.12); color: var(--green); }
+.mcfg-code.hot { background: rgba(255,226,62,.12); color: var(--gold); }
+.mcfg-code.daily { background: rgba(126,184,255,.12); color: var(--blue); }
+.mcfg-code.discovery { background: rgba(192,132,252,.12); color: var(--purple); }
+.mcfg-mission-info { flex: 1; min-width: 0; }
+.mcfg-mission-title { font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mcfg-mission-desc { font-size: 9px; color: var(--text-3); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mcfg-mission-meta { display: flex; gap: 6px; font-size: 8px; color: var(--text-3); flex-shrink: 0; }
+.mcfg-mission-meta span { display: flex; align-items: center; gap: 2px; }
+
+.mcfg-editor-form { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
+.mcfg-editor-form.cols-1 { grid-template-columns: 1fr; }
+.mcfg-editor-form.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+/* Schedule editor */
+.mcfg-schedule-day {
+  padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg-2); margin-bottom: 6px; transition: all .15s;
+}
+.mcfg-schedule-day:hover { border-color: var(--border-hover); }
+.mcfg-schedule-day.editing { border-color: var(--gold); background: rgba(255,226,62,.04); }
+.mcfg-sday-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; cursor: pointer; }
+.mcfg-sday-date { font-size: 12px; font-weight: 800; min-width: 70px; }
+.mcfg-sday-type {
+  font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.mcfg-sday-type.normal { background: rgba(126,184,255,.12); color: var(--blue); }
+.mcfg-sday-type.weekend { background: rgba(255,226,62,.12); color: var(--gold); }
+.mcfg-sday-type.holiday { background: rgba(202,41,48,.12); color: var(--red); }
+.mcfg-sday-ctx { font-size: 9px; color: var(--text-2); font-weight: 600; flex: 1; }
+.mcfg-sday-count { font-size: 9px; font-weight: 700; color: var(--text-3); flex-shrink: 0; }
+.mcfg-sday-codes { display: flex; flex-wrap: wrap; gap: 3px; }
+.mcfg-sday-code {
+  font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+  border: 1px solid var(--border); cursor: pointer; transition: all .15s;
+}
+.mcfg-sday-code:hover { border-color: var(--red); }
+.mcfg-sday-code.removing { opacity: .4; text-decoration: line-through; }
+.mcfg-sday-add-area {
+  margin-top: 6px; padding: 6px 8px; border-radius: 6px;
+  border: 1px dashed rgba(128,232,168,.3); background: rgba(128,232,168,.03);
+}
+.mcfg-sday-add-area select {
+  background: var(--bg-1); border: 1px solid var(--border); border-radius: 4px;
+  color: var(--text-0); font-size: 10px; padding: 3px 6px; font-family: inherit;
+}
+
+/* JSON panel */
+.mcfg-json-area {
+  width: 100%; min-height: 200px; max-height: 400px; resize: vertical;
+  background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--teal); font-size: 11px; font-family: 'Courier New', monospace;
+  padding: 10px; outline: none;
+}
+.mcfg-json-area:focus { border-color: var(--border-hover); }
+
+/* Reward tag */
+.mcfg-reward-tag {
+  display: inline-block; font-size: 8px; font-weight: 600; padding: 1px 5px;
+  border-radius: 3px; margin-right: 2px;
+}
+.mcfg-reward-tag.coin { background: rgba(255,226,62,.12); color: var(--gold); }
+.mcfg-reward-tag.cash { background: rgba(5,161,88,.12); color: var(--green); }
+.mcfg-reward-tag.voucher { background: rgba(192,132,252,.12); color: var(--purple); }
+
 /* Status bar */
 .status-bar {
   position: fixed; bottom: 0; left: 0; right: 0;
@@ -340,11 +440,54 @@ section h2 .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 }
 .sep-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
+/* ===== LC CALENDAR ===== */
+.lc-cal-header { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; margin-bottom: 4px; }
+.lc-cal-header span { text-align: center; font-size: 8px; font-weight: 700; text-transform: uppercase; color: var(--text-3); padding: 4px 0; }
+.lc-cal-week-label { font-size: 8px; font-weight: 700; color: var(--text-3); padding: 6px 0 3px; text-transform: uppercase; letter-spacing: .06em; }
+.lc-cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; margin-bottom: 6px; }
+.lc-day {
+  padding: 6px 4px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg-2); cursor: pointer; transition: all .15s; text-align: center; min-height: 52px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+}
+.lc-day:hover { border-color: var(--border-hover); background: var(--bg-3); }
+.lc-day.selected { border-color: var(--red); background: rgba(202,41,48,.1); }
+.lc-day.empty { background: transparent; border-color: transparent; cursor: default; }
+.lc-day .day-num { font-size: 13px; font-weight: 800; line-height: 1; }
+.lc-day .day-dow { font-size: 7px; font-weight: 600; color: var(--text-3); text-transform: uppercase; }
+.lc-day .day-count { font-size: 8px; font-weight: 700; color: var(--text-2); margin-top: 1px; }
+.lc-day .day-type-dot { width: 5px; height: 5px; border-radius: 50%; margin-top: 1px; }
+.dot-normal { background: var(--text-3); }
+.dot-weekend { background: var(--blue); }
+.dot-holiday { background: var(--red); }
+.dot-event { background: var(--gold); }
+
+.lc-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+.lc-detail-stat { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+.lc-detail-stat .ds-label { font-size: 8px; font-weight: 700; text-transform: uppercase; color: var(--text-3); margin-bottom: 2px; }
+.lc-detail-stat .ds-value { font-size: 14px; font-weight: 800; }
+.lc-mission-group { margin-bottom: 8px; }
+.lc-mission-group .mg-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--text-3); margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+.lc-mission-group .mg-label .mg-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.lc-mission-chips { display: flex; flex-wrap: wrap; gap: 3px; }
+.lc-code-chip {
+  font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 5px;
+  background: rgba(255,255,255,.06); color: var(--text-1); border: 1px solid var(--border);
+}
+.lc-code-chip.core { border-color: rgba(5,161,88,.25); color: var(--green); background: rgba(5,161,88,.06); }
+.lc-code-chip.hot { border-color: rgba(255,226,62,.25); color: var(--gold); background: rgba(255,226,62,.06); }
+.lc-code-chip.rotation { border-color: rgba(126,184,255,.25); color: var(--blue); background: rgba(126,184,255,.06); }
+.lc-code-chip.game { border-color: rgba(192,132,252,.25); color: var(--purple); background: rgba(192,132,252,.06); }
+.lc-code-chip.ncc { border-color: rgba(251,146,60,.25); color: var(--orange); background: rgba(251,146,60,.06); }
+
 @media (max-width: 700px) {
   .panel-left { max-height: none; position: static; }
   .form-grid { grid-template-columns: 1fr; }
   .form-grid.cols-3 { grid-template-columns: 1fr 1fr; }
   body { padding-bottom: 50px; }
+  .lc-cal-grid { gap: 2px; }
+  .lc-day { padding: 4px 2px; min-height: 44px; }
+  .lc-day .day-num { font-size: 11px; }
 }
 </style>
 </head>
@@ -395,6 +538,8 @@ section h2 .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
       <button class="tab" onclick="switchTab('sitemap',this)">&#128506; Sitemap</button>
       <button class="tab" onclick="switchTab('raw',this)">&#128736; Raw JSON</button>
       <button class="tab" onclick="switchTab('voucher',this)">&#127915; Vouchers</button>
+      <button class="tab" onclick="switchTab('lc',this)">&#127942; Live Challenge</button>
+      <button class="tab" onclick="switchTab('mcfg',this)">&#9881; Mission Config</button>
     </div>
 
     <!-- ==================== TAB: USER STATE ==================== -->
@@ -890,45 +1035,231 @@ section h2 .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
         </div>
       </section>
 
-      <!-- LIVE CHALLENGE DATE PICKER -->
+    </div>
+
+    <!-- ==================== TAB: LIVE CHALLENGE ==================== -->
+    <div class="tab-panel" id="panel-lc">
+
+      <!-- Season Header -->
       <section>
-        <h2><span class="dot" style="background:var(--orange)"></span> Live Challenge — Mock Date</h2>
-        <div style="margin-bottom:8px;font-size:10px;color:var(--text-3);">Chọn ngày để xem nhiệm vụ daily thay đổi theo lịch vận hành season (08/08 – 04/09/2026)</div>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <select id="lcDatePicker" class="form-select" style="flex:1;min-width:200px;" onchange="applyLCDate()">
-            <option value="2026-08-08">T7 08/08 — Cuối tuần — Mở season</option>
-            <option value="2026-08-09">CN 09/08 — Cuối tuần</option>
-            <option value="2026-08-10">T2 10/08 — Ngày thường</option>
-            <option value="2026-08-11">T3 11/08 — Ngày thường</option>
-            <option value="2026-08-12">T4 12/08 — Ngày thường — UEFA Super Cup</option>
-            <option value="2026-08-13">T5 13/08 — Ngày thường</option>
-            <option value="2026-08-14">T6 14/08 — Ngày thường</option>
-            <option value="2026-08-15">T7 15/08 — Cuối tuần</option>
-            <option value="2026-08-16">CN 16/08 — Cuối tuần — Community Shield</option>
-            <option value="2026-08-17">T2 17/08 — Ngày thường</option>
-            <option value="2026-08-18">T3 18/08 — Ngày thường</option>
-            <option value="2026-08-19">T4 19/08 — Ngày thường</option>
-            <option value="2026-08-20">T5 20/08 — Ngày thường</option>
-            <option value="2026-08-21">T6 21/08 — Ngày thường</option>
-            <option value="2026-08-22">T7 22/08 — Cuối tuần — Opening EPL</option>
-            <option value="2026-08-23">CN 23/08 — Cuối tuần — Opening Serie A</option>
-            <option value="2026-08-24">T2 24/08 — Ngày thường</option>
-            <option value="2026-08-25">T3 25/08 — Ngày thường</option>
-            <option value="2026-08-26">T4 26/08 — Ngày thường</option>
-            <option value="2026-08-27">T5 27/08 — Ngày thường</option>
-            <option value="2026-08-28">T6 28/08 — Ngày thường — Opening Bundesliga</option>
-            <option value="2026-08-29">T7 29/08 — Lễ Quốc khánh</option>
-            <option value="2026-08-30">CN 30/08 — Lễ Quốc khánh</option>
-            <option value="2026-08-31">T2 31/08 — Lễ Quốc khánh</option>
-            <option value="2026-09-01">T3 01/09 — Lễ Quốc khánh</option>
-            <option value="2026-09-02">T4 02/09 — Lễ Quốc khánh</option>
-            <option value="2026-09-03">T5 03/09 — Ngày thường</option>
-            <option value="2026-09-04">T6 04/09 — Ngày thường</option>
-          </select>
-          <button class="btn btn-primary btn-sm" onclick="applyLCDate()" style="flex:none;">&#9889; Apply</button>
+        <h2><span class="dot" style="background:var(--orange)"></span> Season Config</h2>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+          <div>
+            <div style="font-size:14px;font-weight:800;color:var(--text-0);">Live Challenge Season 1</div>
+            <div style="font-size:10px;color:var(--text-3);margin-top:2px;">08/08/2026 — 04/09/2026 &bull; 28 ngày &bull; 4 tuần</div>
+          </div>
+          <div id="lcCurrentBadge" style="font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;background:rgba(202,41,48,.12);color:var(--red);"></div>
         </div>
-        <div id="lcDateInfo" style="margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--bg-2);border:1px solid var(--border);font-size:11px;color:var(--text-2);display:none;"></div>
       </section>
+
+      <!-- Calendar Grid -->
+      <section>
+        <h2><span class="dot" style="background:var(--gold)"></span> Lịch Nhiệm Vụ Daily</h2>
+        <div style="font-size:9px;color:var(--text-3);margin-bottom:10px;">Click vào ngày để xem chi tiết và apply sang prototype</div>
+        <div id="lcCalendar"></div>
+      </section>
+
+      <!-- Day Detail -->
+      <section id="lcDayDetail" style="display:none;">
+        <h2><span class="dot" style="background:var(--green)"></span> Chi tiết ngày <span id="lcDetailTitle" style="color:var(--text-0);font-size:11px;text-transform:none;letter-spacing:0;font-weight:800;margin-left:4px;"></span></h2>
+        <div id="lcDetailBody"></div>
+        <div style="margin-top:10px;display:flex;gap:6px;">
+          <button class="btn btn-primary btn-sm" onclick="applyLCDate()" style="flex:1;">&#9889; Apply ngày này</button>
+          <button class="btn btn-secondary btn-sm" onclick="lcNavDay(-1)">&#9664; Trước</button>
+          <button class="btn btn-secondary btn-sm" onclick="lcNavDay(1)">Sau &#9654;</button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ==================== TAB: MISSION CONFIG ==================== -->
+    <div class="tab-panel" id="panel-mcfg">
+
+      <!-- Sub-tabs -->
+      <section>
+        <h2><span class="dot" style="background:var(--orange)"></span> Cấu hình Nhiệm vụ</h2>
+        <div class="mcfg-tabs">
+          <button class="mcfg-subtab active" onclick="mcfgSwitchSub('catalog',this)">&#128218; Catalog (D01-D37)</button>
+          <button class="mcfg-subtab" onclick="mcfgSwitchSub('schedule',this)">&#128197; Lịch Daily</button>
+          <button class="mcfg-subtab" onclick="mcfgSwitchSub('weekly',this)">&#128200; Weekly/Monthly</button>
+          <button class="mcfg-subtab" onclick="mcfgSwitchSub('json',this)">&#128190; Xuất / Nhập JSON</button>
+        </div>
+      </section>
+
+      <!-- Sub: CATALOG -->
+      <div class="mcfg-subpanel active" id="mcfg-sub-catalog">
+        <section>
+          <h2><span class="dot" style="background:var(--green)"></span> Mission Catalog <span id="mcfgCatalogCount" style="font-size:9px;background:var(--bg-3);padding:2px 6px;border-radius:10px;color:var(--text-3);margin-left:auto;"></span></h2>
+          <input class="mcfg-search" id="mcfgCatalogSearch" type="text" placeholder="Tìm theo code, tên, group... (VD: D05, cược, hot)" oninput="renderMcfgCatalog()">
+          <div class="mcfg-toolbar">
+            <button class="btn btn-secondary btn-sm" onclick="mcfgFilterGroup('')" style="font-size:9px;">Tất cả</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgFilterGroup('core')" style="font-size:9px;color:var(--green);">Core</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgFilterGroup('hot')" style="font-size:9px;color:var(--gold);">Hot</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgFilterGroup('daily')" style="font-size:9px;color:var(--blue);">Rotation</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgFilterGroup('discovery')" style="font-size:9px;color:var(--purple);">Game/NCC</button>
+          </div>
+          <div class="mcfg-mission-list" id="mcfgCatalogList"></div>
+        </section>
+
+        <!-- Mission Editor -->
+        <section id="mcfgEditorSection" style="display:none;">
+          <h2><span class="dot" style="background:var(--gold)"></span> Sửa nhiệm vụ <span id="mcfgEditorCode" style="color:var(--text-0);font-weight:800;text-transform:none;letter-spacing:0;margin-left:4px;"></span></h2>
+          <div class="mcfg-editor-form">
+            <div class="form-field"><label>Code</label><input type="text" id="mc_code" readonly style="color:var(--text-3);"></div>
+            <div class="form-field"><label>Group</label>
+              <select id="mc_group"><option value="core">Core</option><option value="hot">Hot</option><option value="daily">Rotation/Daily</option><option value="discovery">Discovery/Game/NCC</option></select>
+            </div>
+          </div>
+          <div class="mcfg-editor-form cols-1" style="margin-top:6px;">
+            <div class="form-field"><label>Tên nhiệm vụ</label><input type="text" id="mc_title" placeholder="VD: Điểm danh sự kiện"></div>
+            <div class="form-field"><label>Mô tả</label><input type="text" id="mc_desc" placeholder="VD: Đăng nhập và mở Live Challenge"></div>
+          </div>
+          <div class="mcfg-editor-form cols-3" style="margin-top:6px;">
+            <div class="form-field"><label>Điểm (Points)</label><input type="number" id="mc_points" min="0" max="500"></div>
+            <div class="form-field"><label>Target</label><input type="number" id="mc_target" min="0"></div>
+            <div class="form-field"><label>Icon</label>
+              <select id="mc_icon">
+                <option value="check">&#10003; check</option><option value="money">&#128176; money</option>
+                <option value="lightning">&#9889; lightning</option><option value="fire">&#128293; fire</option>
+                <option value="chart_up">&#128200; chart_up</option><option value="chart_bar">&#128202; chart_bar</option>
+                <option value="target">&#127919; target</option><option value="trophy">&#127942; trophy</option>
+                <option value="diamond">&#128142; diamond</option><option value="shield">&#128737; shield</option>
+                <option value="timer">&#9201; timer</option><option value="moon">&#127769; moon</option>
+                <option value="swords">&#9876; swords</option><option value="dice">&#127922; dice</option>
+                <option value="sparkle">&#10024; sparkle</option><option value="refresh">&#128260; refresh</option>
+                <option value="star">&#11088; star</option><option value="gift">&#127873; gift</option>
+                <option value="crown">&#128081; crown</option><option value="medal">&#127941; medal</option>
+                <option value="heart">&#10084; heart</option>
+              </select>
+            </div>
+          </div>
+          <div class="mcfg-editor-form" style="margin-top:6px;">
+            <div class="form-field"><label>Icon Color</label>
+              <select id="mc_iconColor">
+                <option value="green">Green</option><option value="gold">Gold</option>
+                <option value="red">Red</option><option value="blue">Blue</option>
+                <option value="orange">Orange</option><option value="teal">Teal</option>
+                <option value="purple">Purple</option>
+              </select>
+            </div>
+            <div class="form-field"><label>CTA Text</label><input type="text" id="mc_cta" placeholder="VD: Vào cược"></div>
+          </div>
+          <div class="mcfg-editor-form" style="margin-top:6px;">
+            <div class="form-field"><label>Tag (nếu có)</label><input type="text" id="mc_tag" placeholder="VD: Giờ Vàng, Game Hot..."></div>
+            <label class="check-field" style="margin-top:0;">
+              <input type="checkbox" id="mc_autoComplete"><span class="check-label">Auto Complete</span>
+            </label>
+          </div>
+          <div class="mcfg-editor-form cols-1" style="margin-top:6px;">
+            <div class="form-field">
+              <label>Rewards (JSON array)</label>
+              <input type="text" id="mc_rewards" placeholder='[{"type":"coin","amount":10,"label":"+10"},{"type":"cash","amount":50000,"label":"50K"}]'>
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:10px;">
+            <button class="btn btn-primary btn-sm" onclick="mcfgSaveMission()">&#9989; Lưu thay đổi</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgCancelEdit()">&#10060; Hủy</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgResetMission()" style="color:var(--orange);">&#128260; Reset gốc</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Sub: SCHEDULE -->
+      <div class="mcfg-subpanel" id="mcfg-sub-schedule">
+        <section>
+          <h2><span class="dot" style="background:var(--blue)"></span> Lịch Nhiệm Vụ Daily — 28 ngày</h2>
+          <div style="font-size:9px;color:var(--text-3);margin-bottom:8px;">Click vào ngày để mở editor. Thêm/xóa mission code cho từng ngày.</div>
+          <div class="mcfg-toolbar">
+            <button class="btn btn-secondary btn-sm" onclick="mcfgFilterWeek(0)">Tất cả</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgFilterWeek(1)">Tuần 1</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgFilterWeek(2)">Tuần 2</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgFilterWeek(3)">Tuần 3</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgFilterWeek(4)">Tuần 4</button>
+          </div>
+          <div id="mcfgScheduleList"></div>
+        </section>
+      </div>
+
+      <!-- Sub: WEEKLY/MONTHLY -->
+      <div class="mcfg-subpanel" id="mcfg-sub-weekly">
+        <section>
+          <h2><span class="dot" style="background:var(--purple)"></span> Weekly Missions <span id="mcfgWeeklyCount" style="font-size:9px;background:var(--bg-3);padding:2px 6px;border-radius:10px;color:var(--text-3);margin-left:auto;"></span></h2>
+          <div class="mcfg-mission-list" id="mcfgWeeklyList"></div>
+        </section>
+        <section>
+          <h2><span class="dot" style="background:var(--gold)"></span> Monthly Missions <span id="mcfgMonthlyCount" style="font-size:9px;background:var(--bg-3);padding:2px 6px;border-radius:10px;color:var(--text-3);margin-left:auto;"></span></h2>
+          <div class="mcfg-mission-list" id="mcfgMonthlyList"></div>
+        </section>
+
+        <!-- WM Editor -->
+        <section id="mcfgWMEditorSection" style="display:none;">
+          <h2><span class="dot" style="background:var(--gold)"></span> Sửa <span id="mcfgWMEditorCode" style="color:var(--text-0);font-weight:800;text-transform:none;letter-spacing:0;margin-left:4px;"></span></h2>
+          <div class="mcfg-editor-form cols-1">
+            <div class="form-field"><label>Tên</label><input type="text" id="wm_title"></div>
+            <div class="form-field"><label>Mô tả</label><input type="text" id="wm_desc"></div>
+          </div>
+          <div class="mcfg-editor-form cols-3" style="margin-top:6px;">
+            <div class="form-field"><label>Points</label><input type="number" id="wm_points" min="0"></div>
+            <div class="form-field"><label>Target</label><input type="number" id="wm_target" min="0"></div>
+            <div class="form-field"><label>Current (mock)</label><input type="number" id="wm_current" min="0"></div>
+          </div>
+          <div class="mcfg-editor-form" style="margin-top:6px;">
+            <div class="form-field"><label>Icon</label>
+              <select id="wm_icon">
+                <option value="chart_bar">chart_bar</option><option value="diamond">diamond</option>
+                <option value="refresh">refresh</option><option value="sparkle">sparkle</option>
+                <option value="star">star</option><option value="gift">gift</option>
+                <option value="crown">crown</option><option value="trophy">trophy</option>
+                <option value="target">target</option><option value="medal">medal</option>
+                <option value="chart_up">chart_up</option><option value="fire">fire</option>
+              </select>
+            </div>
+            <div class="form-field"><label>CTA</label><input type="text" id="wm_cta"></div>
+          </div>
+          <div class="mcfg-editor-form cols-1" style="margin-top:6px;">
+            <div class="form-field"><label>Rewards (JSON)</label><input type="text" id="wm_rewards"></div>
+          </div>
+          <div class="btn-row" style="margin-top:10px;">
+            <button class="btn btn-primary btn-sm" onclick="mcfgSaveWM()">&#9989; Lưu</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgCancelWM()">&#10060; Hủy</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Sub: JSON EXPORT/IMPORT -->
+      <div class="mcfg-subpanel" id="mcfg-sub-json">
+        <section>
+          <h2><span class="dot" style="background:var(--teal)"></span> Xuất JSON</h2>
+          <div style="font-size:9px;color:var(--text-3);margin-bottom:8px;">Xuất toàn bộ cấu hình (Catalog + Schedule + Weekly + Monthly) thành JSON để backup hoặc chia sẻ.</div>
+          <div class="btn-row">
+            <button class="btn btn-primary btn-sm" onclick="mcfgExportAll()">&#128229; Xuất tất cả</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgExportCatalog()">&#128218; Chỉ Catalog</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgExportSchedule()">&#128197; Chỉ Schedule</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgCopyToClipboard()">&#128203; Copy clipboard</button>
+          </div>
+          <textarea class="mcfg-json-area" id="mcfgJsonOutput" readonly placeholder="JSON sẽ hiện ở đây sau khi xuất..."></textarea>
+        </section>
+
+        <section>
+          <h2><span class="dot" style="background:var(--orange)"></span> Nhập JSON</h2>
+          <div style="font-size:9px;color:var(--text-3);margin-bottom:8px;">Paste JSON vào đây hoặc chọn file .json để nhập. Dữ liệu sẽ được merge/overwrite theo code.</div>
+          <textarea class="mcfg-json-area" id="mcfgJsonInput" placeholder='Paste JSON ở đây... (hỗ trợ format "all", "catalog", "schedule")'></textarea>
+          <div class="btn-row" style="margin-top:8px;">
+            <button class="btn btn-green btn-sm" onclick="mcfgImportJson()">&#128228; Nhập & Áp dụng</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgImportFile()">&#128193; Chọn file .json</button>
+            <button class="btn btn-secondary btn-sm" onclick="mcfgResetAll()" style="color:var(--red);">&#128465; Reset về mặc định</button>
+          </div>
+          <input type="file" id="mcfgFileInput" accept=".json" style="display:none" onchange="mcfgHandleFile(event)">
+        </section>
+
+        <section>
+          <h2><span class="dot" style="background:var(--green)"></span> Áp dụng sang Prototype</h2>
+          <div style="font-size:9px;color:var(--text-3);margin-bottom:8px;">Push toàn bộ cấu hình hiện tại sang prototype đang mở. Prototype sẽ rebuild lại mission list.</div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="mcfgApplyToPrototype()">&#9889; Apply tất cả sang Prototype</button>
+          </div>
+        </section>
+      </div>
 
     </div>
 
@@ -1389,6 +1720,7 @@ function switchTab(name, el) {
   if (el) el.classList.add('active');
   document.getElementById('panel-' + name).classList.add('active');
   if (name === 'raw') refreshRawJson();
+  if (name === 'lc') { renderLCCalendar(); renderLCDayDetail(); }
 }
 
 // ===== HELPERS =====
@@ -2023,72 +2355,198 @@ function clearVouchersForTarget() {
   showToast('Đã gửi lệnh xóa voucher → ' + targets.join(', '));
 }
 
-// ===== LIVE CHALLENGE DATE =====
+// ===== LIVE CHALLENGE DATE SYSTEM =====
+const LC_SEASON_DATES = [
+  {d:'2026-08-08',dow:'T7',dd:'08',mm:'08',type:'weekend',ctx:'Mở season',week:1},
+  {d:'2026-08-09',dow:'CN',dd:'09',mm:'08',type:'weekend',ctx:'',week:1},
+  {d:'2026-08-10',dow:'T2',dd:'10',mm:'08',type:'normal',ctx:'',week:1},
+  {d:'2026-08-11',dow:'T3',dd:'11',mm:'08',type:'normal',ctx:'',week:1},
+  {d:'2026-08-12',dow:'T4',dd:'12',mm:'08',type:'normal',ctx:'UEFA Super Cup',week:1},
+  {d:'2026-08-13',dow:'T5',dd:'13',mm:'08',type:'normal',ctx:'',week:1},
+  {d:'2026-08-14',dow:'T6',dd:'14',mm:'08',type:'normal',ctx:'',week:1},
+  {d:'2026-08-15',dow:'T7',dd:'15',mm:'08',type:'weekend',ctx:'',week:2},
+  {d:'2026-08-16',dow:'CN',dd:'16',mm:'08',type:'weekend',ctx:'Community Shield',week:2},
+  {d:'2026-08-17',dow:'T2',dd:'17',mm:'08',type:'normal',ctx:'',week:2},
+  {d:'2026-08-18',dow:'T3',dd:'18',mm:'08',type:'normal',ctx:'',week:2},
+  {d:'2026-08-19',dow:'T4',dd:'19',mm:'08',type:'normal',ctx:'',week:2},
+  {d:'2026-08-20',dow:'T5',dd:'20',mm:'08',type:'normal',ctx:'',week:2},
+  {d:'2026-08-21',dow:'T6',dd:'21',mm:'08',type:'normal',ctx:'',week:2},
+  {d:'2026-08-22',dow:'T7',dd:'22',mm:'08',type:'weekend',ctx:'Opening EPL',week:3},
+  {d:'2026-08-23',dow:'CN',dd:'23',mm:'08',type:'weekend',ctx:'Opening Serie A',week:3},
+  {d:'2026-08-24',dow:'T2',dd:'24',mm:'08',type:'normal',ctx:'',week:3},
+  {d:'2026-08-25',dow:'T3',dd:'25',mm:'08',type:'normal',ctx:'',week:3},
+  {d:'2026-08-26',dow:'T4',dd:'26',mm:'08',type:'normal',ctx:'',week:3},
+  {d:'2026-08-27',dow:'T5',dd:'27',mm:'08',type:'normal',ctx:'',week:3},
+  {d:'2026-08-28',dow:'T6',dd:'28',mm:'08',type:'normal',ctx:'Opening Bundesliga',week:3},
+  {d:'2026-08-29',dow:'T7',dd:'29',mm:'08',type:'holiday',ctx:'',week:4},
+  {d:'2026-08-30',dow:'CN',dd:'30',mm:'08',type:'holiday',ctx:'',week:4},
+  {d:'2026-08-31',dow:'T2',dd:'31',mm:'08',type:'holiday',ctx:'',week:4},
+  {d:'2026-09-01',dow:'T3',dd:'01',mm:'09',type:'holiday',ctx:'',week:4},
+  {d:'2026-09-02',dow:'T4',dd:'02',mm:'09',type:'holiday',ctx:'',week:4},
+  {d:'2026-09-03',dow:'T5',dd:'03',mm:'09',type:'normal',ctx:'',week:4},
+  {d:'2026-09-04',dow:'T6',dd:'04',mm:'09',type:'normal',ctx:'',week:4}
+];
+
 const LC_SCHEDULE_META = {
-  '2026-08-08':{daily:12,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D23'],ncc:['D33']},
-  '2026-08-09':{daily:12,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D08','D21'],game:['D24'],ncc:['D34']},
-  '2026-08-10':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D19','D22'],game:['D25'],ncc:['D35']},
-  '2026-08-11':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D06','D11'],game:['D26'],ncc:['D36']},
-  '2026-08-12':{daily:12,type:'Ngày thường',hot:['D13','D14','D16','D17'],rotation:['D06','D08'],game:['D27'],ncc:['D37']},
-  '2026-08-13':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D07','D10'],game:['D28'],ncc:['D33']},
-  '2026-08-14':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D20','D12'],game:['D29'],ncc:['D34']},
-  '2026-08-15':{daily:12,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D30'],ncc:['D35']},
-  '2026-08-16':{daily:13,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D06','D08','D21'],game:['D31'],ncc:['D36']},
-  '2026-08-17':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D19','D11'],game:['D23'],ncc:['D37']},
-  '2026-08-18':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D07','D10'],game:['D24'],ncc:['D33']},
-  '2026-08-19':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D06','D12'],game:['D25'],ncc:['D34']},
-  '2026-08-20':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D05','D22'],game:['D26'],ncc:['D35']},
-  '2026-08-21':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D20','D11'],game:['D27'],ncc:['D36']},
-  '2026-08-22':{daily:13,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D28'],ncc:['D33','D35']},
-  '2026-08-23':{daily:13,type:'Cuối tuần',hot:['D13','D14','D16','D17'],rotation:['D06','D09'],game:['D29'],ncc:['D34','D36']},
-  '2026-08-24':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D07','D10'],game:['D30'],ncc:['D37']},
-  '2026-08-25':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D19','D22'],game:['D31'],ncc:['D33']},
-  '2026-08-26':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D06','D11'],game:['D32'],ncc:['D34']},
-  '2026-08-27':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D20','D12'],game:['D23'],ncc:['D35']},
-  '2026-08-28':{daily:12,type:'Ngày thường',hot:['D13','D14','D16','D17'],rotation:['D08','D10'],game:['D24'],ncc:['D36']},
-  '2026-08-29':{daily:13,type:'Lễ',hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D25'],ncc:['D33','D37']},
-  '2026-08-30':{daily:13,type:'Lễ',hot:['D13','D14','D16','D17'],rotation:['D06','D09'],game:['D26'],ncc:['D34','D35']},
-  '2026-08-31':{daily:12,type:'Lễ',hot:['D13','D14','D16','D17'],rotation:['D07','D10'],game:['D27'],ncc:['D36']},
-  '2026-09-01':{daily:12,type:'Lễ',hot:['D13','D14','D16','D17'],rotation:['D20','D11'],game:['D28'],ncc:['D33']},
-  '2026-09-02':{daily:12,type:'Lễ',hot:['D13','D14','D16','D17'],rotation:['D19','D22'],game:['D29'],ncc:['D34']},
-  '2026-09-03':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D07','D10'],game:['D30'],ncc:['D35']},
-  '2026-09-04':{daily:10,type:'Ngày thường',hot:['D14','D15'],rotation:['D20','D12'],game:['D31'],ncc:['D36']}
+  '2026-08-08':{daily:12,type:'Cuối tuần',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D23'],ncc:['D33']},
+  '2026-08-09':{daily:12,type:'Cuối tuần',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D08','D21'],game:['D24'],ncc:['D34']},
+  '2026-08-10':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D19','D22'],game:['D25'],ncc:['D35']},
+  '2026-08-11':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D06','D11'],game:['D26'],ncc:['D36']},
+  '2026-08-12':{daily:12,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D06','D08'],game:['D27'],ncc:['D37']},
+  '2026-08-13':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D07','D10'],game:['D28'],ncc:['D33']},
+  '2026-08-14':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D20','D12'],game:['D29'],ncc:['D34']},
+  '2026-08-15':{daily:12,type:'Cuối tuần',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D30'],ncc:['D35']},
+  '2026-08-16':{daily:13,type:'Cuối tuần',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D06','D08','D21'],game:['D31'],ncc:['D36']},
+  '2026-08-17':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D19','D11'],game:['D23'],ncc:['D37']},
+  '2026-08-18':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D07','D10'],game:['D24'],ncc:['D33']},
+  '2026-08-19':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D06','D12'],game:['D25'],ncc:['D34']},
+  '2026-08-20':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D05','D22'],game:['D26'],ncc:['D35']},
+  '2026-08-21':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D20','D11'],game:['D27'],ncc:['D36']},
+  '2026-08-22':{daily:13,type:'Cuối tuần',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D28'],ncc:['D33','D35']},
+  '2026-08-23':{daily:13,type:'Cuối tuần',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D06','D09'],game:['D29'],ncc:['D34','D36']},
+  '2026-08-24':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D07','D10'],game:['D30'],ncc:['D37']},
+  '2026-08-25':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D19','D22'],game:['D31'],ncc:['D33']},
+  '2026-08-26':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D06','D11'],game:['D32'],ncc:['D34']},
+  '2026-08-27':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D20','D12'],game:['D23'],ncc:['D35']},
+  '2026-08-28':{daily:12,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D08','D10'],game:['D24'],ncc:['D36']},
+  '2026-08-29':{daily:13,type:'Lễ',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D05','D18'],game:['D25'],ncc:['D33','D37']},
+  '2026-08-30':{daily:13,type:'Lễ',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D06','D09'],game:['D26'],ncc:['D34','D35']},
+  '2026-08-31':{daily:12,type:'Lễ',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D07','D10'],game:['D27'],ncc:['D36']},
+  '2026-09-01':{daily:12,type:'Lễ',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D20','D11'],game:['D28'],ncc:['D33']},
+  '2026-09-02':{daily:12,type:'Lễ',core:['D01','D02','D03','D04'],hot:['D13','D14','D16','D17'],rotation:['D19','D22'],game:['D29'],ncc:['D34']},
+  '2026-09-03':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D07','D10'],game:['D30'],ncc:['D35']},
+  '2026-09-04':{daily:10,type:'Ngày thường',core:['D01','D02','D03','D04'],hot:['D14','D15'],rotation:['D20','D12'],game:['D31'],ncc:['D36']}
 };
 
-function applyLCDate() {
-  const picker = document.getElementById('lcDatePicker');
-  const dateVal = picker.value;
+let lcSelectedDate = '2026-08-08';
 
-  // Send to prototype
-  const cmd = { type: 'lc_date_change', date: dateVal, ts: Date.now() };
-  localStorage.setItem('mubet_devtools_lc_date', dateVal);
-  try { if (bc) bc.postMessage(cmd); } catch(e) {}
+function renderLCCalendar() {
+  const el = document.getElementById('lcCalendar');
+  if (!el) return;
+  let html = '';
 
-  // Show info
-  const meta = LC_SCHEDULE_META[dateVal];
-  const infoEl = document.getElementById('lcDateInfo');
-  if (meta && infoEl) {
-    let html = '<div style="display:flex;gap:12px;flex-wrap:wrap;">';
-    html += '<div><strong>' + meta.daily + '</strong> daily</div>';
-    html += '<div>Loại: <strong>' + meta.type + '</strong></div>';
+  // Column headers
+  html += '<div class="lc-cal-header"><span>T7</span><span>CN</span><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span></div>';
+
+  // Group by week
+  for (let w = 1; w <= 4; w++) {
+    const weekDays = LC_SEASON_DATES.filter(d => d.week === w);
+    const weekStart = weekDays[0].dd + '/' + weekDays[0].mm;
+    const weekEnd = weekDays[weekDays.length-1].dd + '/' + weekDays[weekDays.length-1].mm;
+    html += '<div class="lc-cal-week-label">Tu\u1EA7n ' + w + ' &mdash; ' + weekStart + ' \u2192 ' + weekEnd + '</div>';
+    html += '<div class="lc-cal-grid">';
+    weekDays.forEach(day => {
+      const meta = LC_SCHEDULE_META[day.d];
+      const sel = lcSelectedDate === day.d ? ' selected' : '';
+      const dotClass = day.ctx ? 'dot-event' : day.type === 'holiday' ? 'dot-holiday' : day.type === 'weekend' ? 'dot-weekend' : 'dot-normal';
+      html += '<div class="lc-day' + sel + '" onclick="lcSelectDay(\'' + day.d + '\')" title="' + day.dow + ' ' + day.dd + '/' + day.mm + (day.ctx ? ' — ' + day.ctx : '') + '">';
+      html += '<div class="day-num">' + parseInt(day.dd) + '</div>';
+      html += '<div class="day-dow">' + day.dow + '</div>';
+      html += '<div class="day-type-dot ' + dotClass + '"></div>';
+      if (meta) html += '<div class="day-count">' + meta.daily + ' nv</div>';
+      html += '</div>';
+    });
     html += '</div>';
-    html += '<div style="margin-top:4px;font-size:10px;color:var(--text-3);">';
-    html += 'Hot: ' + meta.hot.join(', ') + ' &bull; Rotation: ' + meta.rotation.join(', ') + ' &bull; Game: ' + meta.game.join(', ') + ' &bull; NCC: ' + meta.ncc.join(', ');
-    html += '</div>';
-    infoEl.innerHTML = html;
-    infoEl.style.display = '';
   }
 
-  showToast('LC Date → ' + dateVal);
+  // Legend
+  html += '<div style="display:flex;gap:12px;margin-top:6px;font-size:8px;color:var(--text-3);flex-wrap:wrap;">';
+  html += '<span><span class="day-type-dot dot-normal" style="display:inline-block;vertical-align:middle;margin-right:3px;"></span>Th\u01B0\u1EDDng</span>';
+  html += '<span><span class="day-type-dot dot-weekend" style="display:inline-block;vertical-align:middle;margin-right:3px;"></span>Cu\u1ED1i tu\u1EA7n</span>';
+  html += '<span><span class="day-type-dot dot-holiday" style="display:inline-block;vertical-align:middle;margin-right:3px;"></span>L\u1EC5</span>';
+  html += '<span><span class="day-type-dot dot-event" style="display:inline-block;vertical-align:middle;margin-right:3px;"></span>S\u1EF1 ki\u1EC7n</span>';
+  html += '</div>';
+
+  el.innerHTML = html;
+  updateLCBadge();
 }
 
-// Restore LC date from localStorage on load
-(function() {
+function lcSelectDay(dateStr) {
+  lcSelectedDate = dateStr;
+  renderLCCalendar();
+  renderLCDayDetail();
+}
+
+function renderLCDayDetail() {
+  const meta = LC_SCHEDULE_META[lcSelectedDate];
+  const dayInfo = LC_SEASON_DATES.find(d => d.d === lcSelectedDate);
+  if (!meta || !dayInfo) return;
+
+  const detailEl = document.getElementById('lcDayDetail');
+  const titleEl = document.getElementById('lcDetailTitle');
+  const bodyEl = document.getElementById('lcDetailBody');
+
+  titleEl.innerHTML = dayInfo.dow + ' ' + dayInfo.dd + '/' + dayInfo.mm + (dayInfo.ctx ? ' &mdash; ' + dayInfo.ctx : '');
+  detailEl.style.display = '';
+
+  let html = '';
+
+  // Stats row
+  html += '<div class="lc-detail-grid">';
+  html += '<div class="lc-detail-stat"><div class="ds-label">Daily Missions</div><div class="ds-value" style="color:var(--gold);">' + meta.daily + '</div></div>';
+  const typeColor = meta.type === 'L\u1EC5' || meta.type === 'Lễ' ? 'var(--red)' : meta.type.includes('Cu\u1ED1i') || meta.type.includes('Cuối') ? 'var(--blue)' : 'var(--text-2)';
+  html += '<div class="lc-detail-stat"><div class="ds-label">Lo\u1EA1i ng\u00E0y</div><div class="ds-value" style="color:' + typeColor + ';">' + meta.type + '</div></div>';
+  html += '</div>';
+
+  // Mission groups
+  const groups = [
+    {key:'core',label:'Core (lu\u00F4n c\u00F3)',color:'var(--green)',codes:meta.core},
+    {key:'hot',label:'Khung gi\u1EDD / Event',color:'var(--gold)',codes:meta.hot},
+    {key:'rotation',label:'Xoay tua c\u01B0\u1EE3c / th\u1EAFng / thua',color:'var(--blue)',codes:meta.rotation},
+    {key:'game',label:'Game Hot',color:'var(--purple)',codes:meta.game},
+    {key:'ncc',label:'NCC Hot',color:'var(--orange)',codes:meta.ncc}
+  ];
+
+  groups.forEach(g => {
+    html += '<div class="lc-mission-group">';
+    html += '<div class="mg-label"><span class="mg-dot" style="background:' + g.color + ';"></span>' + g.label + ' <span style="color:var(--text-3);font-weight:400;">(' + g.codes.length + ')</span></div>';
+    html += '<div class="lc-mission-chips">';
+    g.codes.forEach(c => {
+      html += '<span class="lc-code-chip ' + g.key + '">' + c + '</span>';
+    });
+    html += '</div></div>';
+  });
+
+  bodyEl.innerHTML = html;
+}
+
+function applyLCDate() {
+  const cmd = { type: 'lc_date_change', date: lcSelectedDate, ts: Date.now() };
+  localStorage.setItem('mubet_devtools_lc_date', lcSelectedDate);
+  try { if (bc) bc.postMessage(cmd); } catch(e) {}
+  updateLCBadge();
+  showToast('LC Date \u2192 ' + lcSelectedDate);
+}
+
+function lcNavDay(dir) {
+  const idx = LC_SEASON_DATES.findIndex(d => d.d === lcSelectedDate);
+  const next = idx + dir;
+  if (next >= 0 && next < LC_SEASON_DATES.length) {
+    lcSelectDay(LC_SEASON_DATES[next].d);
+  }
+}
+
+function updateLCBadge() {
+  const badge = document.getElementById('lcCurrentBadge');
+  if (!badge) return;
   const saved = localStorage.getItem('mubet_devtools_lc_date');
   if (saved) {
-    const picker = document.getElementById('lcDatePicker');
-    if (picker) picker.value = saved;
+    const info = LC_SEASON_DATES.find(d => d.d === saved);
+    badge.textContent = 'Active: ' + (info ? info.dow + ' ' + info.dd + '/' + info.mm : saved);
+  } else {
+    badge.textContent = 'Default: T7 08/08';
   }
+}
+
+// Init LC tab
+(function() {
+  const saved = localStorage.getItem('mubet_devtools_lc_date');
+  if (saved) lcSelectedDate = saved;
+  // Defer rendering until DOM ready
+  setTimeout(() => {
+    renderLCCalendar();
+    renderLCDayDetail();
+  }, 100);
 })();
 
 function renderGrantLog() {
@@ -2110,6 +2568,624 @@ function renderGrantLog() {
 loadVoucherDefs();
 renderVoucherDefList();
 updateGrantSelector();
+
+// ===== MISSION CONFIG TAB =====
+const MCFG_STORAGE_KEY = 'mubet_devtools_mission_config';
+
+// Deep-copy of original catalog + schedule for reset
+const MCFG_ORIGINAL_CATALOG = JSON.parse(JSON.stringify(LC_SCHEDULE_META)); // we'll build from prototype
+
+// Editable copies (initialized from LC_ constants which mirror prototype)
+let mcfgCatalog = {};
+let mcfgSchedule = {};
+let mcfgWeekly = [];
+let mcfgMonthly = [];
+let mcfgGroupFilter = '';
+let mcfgWeekFilter = 0;
+let mcfgEditingCode = null;
+let mcfgEditingWMIdx = null;
+let mcfgEditingWMType = null; // 'weekly' or 'monthly'
+
+// Build local editable catalog from LC_SCHEDULE_META codes + hardcoded definitions
+// We duplicate the structure from the prototype's LC_MISSION_CATALOG
+function mcfgBuildDefaultCatalog() {
+  // This mirrors LC_MISSION_CATALOG from prototype
+  const defs = {
+    'D01':{code:'D01',title:'Điểm danh sự kiện',desc:'Đăng nhập và mở Live Challenge trong ngày',icon:'check',iconColor:'green',points:10,target:1,group:'core',cta:'Mở sự kiện',autoComplete:true,rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:50000,label:'50K'}]},
+    'D02':{code:'D02',title:'Nạp Nhẹ Nhận Quà',desc:'Nạp thành công 1 lần trong ngày',icon:'money',iconColor:'green',points:15,target:1,group:'core',cta:'Nạp ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D03':{code:'D03',title:'Khai hỏa hằng ngày',desc:'Hoàn thành 1 vé cược hợp lệ đầu tiên trong ngày',icon:'lightning',iconColor:'orange',points:10,target:1,group:'core',cta:'Vào cược',rewards:[{type:'coin',amount:10,label:'+10'}]},
+    'D04':{code:'D04',title:'Thấu trải cuộc chơi',desc:'Tự động hoàn thành khi balance về 0',icon:'heart',iconColor:'teal',points:10,target:1,group:'core',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
+    'D05':{code:'D05',title:'Cược liền tay, quà về ngay',desc:'Hoàn thành 10 vé cược hợp lệ trong ngày',icon:'fire',iconColor:'red',points:20,target:10,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:200000,label:'200K'}]},
+    'D06':{code:'D06',title:'Tay to cược khỏe - mốc 2 triệu',desc:'Có 1 vé cược hợp lệ từ 2 triệu trong ngày',icon:'chart_up',iconColor:'teal',points:25,target:2000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:25,label:'+25'},{type:'cash',amount:300000,label:'300K'}]},
+    'D07':{code:'D07',title:'Cược to nhận quà to - mốc 5 triệu',desc:'Tích lũy 5 triệu tiền cược hợp lệ trong ngày',icon:'target',iconColor:'blue',points:40,target:5000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:40,label:'+40'},{type:'cash',amount:500000,label:'500K'}]},
+    'D08':{code:'D08',title:'Thử tài chơi lớn - mốc 5 triệu',desc:'Có 1 vé thắng từ 5 triệu trong ngày',icon:'trophy',iconColor:'gold',points:30,target:5000000,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:30,label:'+30'},{type:'cash',amount:300000,label:'300K'},{type:'voucher',label:'Freebet 100K'}]},
+    'D09':{code:'D09',title:'Khai hỏa liên hoàn',desc:'Có 10 vé thắng hợp lệ trong ngày',icon:'fire',iconColor:'orange',points:25,target:10,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:25,label:'+25'},{type:'cash',amount:200000,label:'200K'}]},
+    'D10':{code:'D10',title:'Gom thắng rinh quà',desc:'Tích lũy 10 triệu tiền thắng trong ngày',icon:'chart_bar',iconColor:'blue',points:35,target:10000000,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:35,label:'+35'},{type:'cash',amount:500000,label:'500K'}]},
+    'D11':{code:'D11',title:'Bản lĩnh lật kèo - mốc 5 triệu',desc:'Có 1 vé thua từ 5 triệu, quà an ủi tự động',icon:'shield',iconColor:'purple',points:15,target:5000000,group:'daily',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:200000,label:'200K'}]},
+    'D12':{code:'D12',title:'Bản lĩnh lật kèo - mốc tích lũy 10 triệu',desc:'Tích lũy 10 triệu tiền thua, quà an ủi tự động',icon:'shield',iconColor:'purple',points:20,target:10000000,group:'daily',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:300000,label:'300K'}]},
+    'D13':{code:'D13',title:'Điểm Danh Giờ Vàng',desc:'Đăng nhập trong khung giờ vàng (19h-21h)',icon:'timer',iconColor:'gold',points:15,target:1,group:'hot',tag:'Giờ Vàng',cta:'Mở sự kiện',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D14':{code:'D14',title:'Giờ vàng săn ngay',desc:'Hoàn thành 1 vé cược trong khung giờ vàng',icon:'lightning',iconColor:'gold',points:20,target:1,group:'hot',tag:'Giờ Vàng',cta:'Vào cược',rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:200000,label:'200K'}]},
+    'D15':{code:'D15',title:'Canh Khuya Rinh Lộc',desc:'Hoàn thành 1 hành động trong khung 23h-01h',icon:'moon',iconColor:'purple',points:15,target:1,group:'hot',tag:'Canh Khuya',cta:'Xem chi tiết',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D16':{code:'D16',title:'Điểm Danh Giờ G',desc:'Check-in trong khung countdown trước trận',icon:'timer',iconColor:'red',points:15,target:1,group:'hot',tag:'Giờ G',cta:'Mở sự kiện',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D17':{code:'D17',title:'Rung kèo Nhịp Trận',desc:'Hoàn thành 1 vé cược trong khung trận đấu',icon:'swords',iconColor:'red',points:20,target:1,group:'hot',tag:'Theo trận',cta:'Vào cược',rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:200000,label:'200K'}]},
+    'D18':{code:'D18',title:'Tay to cược khỏe - mốc 1 triệu',desc:'Có 1 vé cược hợp lệ từ 1 triệu trong ngày',icon:'chart_up',iconColor:'teal',points:15,target:1000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D19':{code:'D19',title:'Cược to nhận quà to - mốc 3 triệu',desc:'Tích lũy 3 triệu tiền cược hợp lệ trong ngày',icon:'target',iconColor:'blue',points:25,target:3000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:25,label:'+25'},{type:'cash',amount:300000,label:'300K'}]},
+    'D20':{code:'D20',title:'Tay to cược khỏe - mốc 10 triệu',desc:'Có 1 vé cược hợp lệ từ 10 triệu trong ngày',icon:'diamond',iconColor:'purple',points:50,target:10000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:50,label:'+50'},{type:'cash',amount:1000000,label:'1M'}]},
+    'D21':{code:'D21',title:'Khai hỏa liên hoàn',desc:'Có 2 vé thắng hợp lệ trong ngày',icon:'fire',iconColor:'orange',points:15,target:2,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D22':{code:'D22',title:'Bản lĩnh lật kèo - mốc 2 triệu',desc:'Có 1 vé thua từ 2 triệu, quà an ủi tự động',icon:'shield',iconColor:'teal',points:10,target:2000000,group:'daily',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
+    'D23':{code:'D23',title:'Game hot - Tài Xỉu Live',desc:'Chơi Tài Xỉu Live hôm nay',icon:'dice',iconColor:'purple',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D24':{code:'D24',title:'Game hot - Baccarat Live',desc:'Chơi Baccarat Live hôm nay',icon:'dice',iconColor:'red',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D25':{code:'D25',title:'Game hot - Rồng Hổ Live',desc:'Chơi Rồng Hổ Live hôm nay',icon:'dice',iconColor:'orange',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D26':{code:'D26',title:'Game hot - Roulette Live',desc:'Chơi Roulette Live hôm nay',icon:'dice',iconColor:'teal',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D27':{code:'D27',title:'Game hot - Blackjack Live',desc:'Chơi Blackjack Live hôm nay',icon:'dice',iconColor:'blue',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D28':{code:'D28',title:'Game hot - Sicbo Live',desc:'Chơi Sicbo Live hôm nay',icon:'dice',iconColor:'green',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D29':{code:'D29',title:'Game hot - Nổ Hũ Hot',desc:'Chơi Nổ Hũ Hot hôm nay',icon:'sparkle',iconColor:'gold',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D30':{code:'D30',title:'Game hot - Bắn Cá Hot',desc:'Chơi Bắn Cá Hot hôm nay',icon:'sparkle',iconColor:'blue',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D31':{code:'D31',title:'Game hot - Aviator',desc:'Chơi Aviator hôm nay',icon:'sparkle',iconColor:'red',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D32':{code:'D32',title:'Game hot - Mini Poker',desc:'Chơi Mini Poker hôm nay',icon:'sparkle',iconColor:'purple',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
+    'D33':{code:'D33',title:'Võ lâm hội tụ - B52',desc:'Chơi 1 game thuộc B52 hôm nay',icon:'swords',iconColor:'red',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
+    'D34':{code:'D34',title:'Võ lâm hội tụ - HitClub',desc:'Chơi 1 game thuộc HitClub hôm nay',icon:'swords',iconColor:'orange',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
+    'D35':{code:'D35',title:'Võ lâm hội tụ - Sunwin',desc:'Chơi 1 game thuộc Sunwin hôm nay',icon:'swords',iconColor:'gold',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
+    'D36':{code:'D36',title:'Võ lâm hội tụ - Techplay',desc:'Chơi 1 game thuộc Techplay hôm nay',icon:'swords',iconColor:'blue',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
+    'D37':{code:'D37',title:'Võ lâm hội tụ - Pragmatic',desc:'Chơi 1 game thuộc Pragmatic hôm nay',icon:'swords',iconColor:'purple',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]}
+  };
+  return defs;
+}
+
+function mcfgBuildDefaultSchedule() {
+  const sch = {};
+  LC_SEASON_DATES.forEach(d => {
+    const meta = LC_SCHEDULE_META[d.d];
+    if (meta) {
+      sch[d.d] = {
+        dayType: d.type,
+        label: d.dow + ' ' + d.dd + '/' + d.mm,
+        context: d.ctx || '',
+        codes: [...meta.core, ...meta.hot, ...meta.rotation, ...meta.game, ...meta.ncc]
+      };
+    }
+  });
+  return sch;
+}
+
+function mcfgBuildDefaultWeekly() {
+  return [
+    {code:'W01',title:'Tay to cược khỏe',desc:'Tổng cược trong tuần đạt 10 triệu',icon:'chart_bar',iconColor:'blue',current:0,target:10000000,points:50,reset:'weekly',cta:'Cược ngay',rewards:[{type:'coin',amount:50,label:'+50'},{type:'cash',amount:1000000,label:'1M'}]},
+    {code:'W03',title:'Cược to nhận quà to',desc:'Tổng cược trong tuần đạt 50 triệu',icon:'diamond',iconColor:'purple',current:12000000,target:50000000,points:80,reset:'weekly',cta:'Cược ngay',rewards:[{type:'coin',amount:80,label:'+80'},{type:'cash',amount:3000000,label:'3M'}]},
+    {code:'W11',title:'Đổi Gió Săn Quà',desc:'Chơi thể loại game mới trong tuần',icon:'refresh',iconColor:'teal',current:0,target:1,points:15,reset:'weekly',cta:'Khám phá',rewards:[{type:'coin',amount:15,label:'+15'},{type:'voucher',label:'Freebet 100K'}]},
+    {code:'W18',title:'Thử game mới tuần này',desc:'Trải nghiệm game mới ra mắt trong tuần',icon:'sparkle',iconColor:'gold',current:0,target:1,points:20,reset:'weekly',cta:'Chơi thử',rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:200000,label:'200K'}]},
+    {code:'W21',title:'Săn mảnh nhận Sao',desc:'Thu thập mảnh ghép để đổi sao',icon:'star',iconColor:'orange',current:0,target:1,points:30,reset:'weekly',tag:'Collectible',cta:'Săn mảnh',rewards:[{type:'coin',amount:30,label:'+30'},{type:'voucher',label:'1 Sao Vàng'}]},
+    {code:'W28',title:'Ghé Shop Có Quà',desc:'Truy cập Shop đổi quà trong tuần',icon:'gift',iconColor:'green',current:0,target:1,points:10,reset:'weekly',cta:'Vào Shop',autoComplete:true,rewards:[{type:'coin',amount:10,label:'+10'}]}
+  ];
+}
+
+function mcfgBuildDefaultMonthly() {
+  return [
+    {code:'M01',title:'Chiến thần 100tr',desc:'Tổng cược trong tháng đạt 100 triệu',icon:'crown',iconColor:'red',current:22000000,target:100000000,points:100,reset:'monthly',tag:'VIP',cta:'Cược ngay',rewards:[{type:'coin',amount:100,label:'+100'},{type:'cash',amount:5000000,label:'5M'}]},
+    {code:'M04',title:'Bất khả chiến bại',desc:'Tổng cược trong tháng đạt 50 triệu',icon:'trophy',iconColor:'gold',current:8000000,target:50000000,points:80,reset:'monthly',tag:'VIP',cta:'Cược ngay',rewards:[{type:'coin',amount:80,label:'+80'},{type:'cash',amount:2000000,label:'2M'}]},
+    {code:'M09',title:'Nhà chinh phục',desc:'Hoàn thành 10 mốc trên lộ trình tháng',icon:'target',iconColor:'blue',current:3,target:10,points:60,reset:'monthly',cta:'Xem lộ trình',rewards:[{type:'coin',amount:60,label:'+60'},{type:'voucher',label:'Freebet 500K'}]},
+    {code:'M10',title:'Dấu ấn anh hùng',desc:'Hoàn thành 20 nhiệm vụ trong tháng',icon:'medal',iconColor:'orange',current:7,target:20,points:50,reset:'monthly',cta:'Làm nhiệm vụ',rewards:[{type:'coin',amount:50,label:'+50'},{type:'cash',amount:1000000,label:'1M'}]},
+    {code:'M15',title:'Anh hùng thăng cấp',desc:'Đạt Level 10 trong tháng',icon:'chart_up',iconColor:'teal',current:10,target:10,points:100,reset:'monthly',tag:'NHẬN',cta:'Nhận',rewards:[{type:'coin',amount:100,label:'+100'},{type:'cash',amount:3000000,label:'3M'},{type:'voucher',label:'VIP Voucher'}]}
+  ];
+}
+
+// Save / Load from localStorage
+function mcfgSaveConfig() {
+  localStorage.setItem(MCFG_STORAGE_KEY, JSON.stringify({
+    catalog: mcfgCatalog,
+    schedule: mcfgSchedule,
+    weekly: mcfgWeekly,
+    monthly: mcfgMonthly,
+    savedAt: Date.now()
+  }));
+}
+
+function mcfgLoadConfig() {
+  try {
+    const raw = localStorage.getItem(MCFG_STORAGE_KEY);
+    if (raw) {
+      const data = JSON.parse(raw);
+      if (data.catalog) mcfgCatalog = data.catalog;
+      if (data.schedule) mcfgSchedule = data.schedule;
+      if (data.weekly) mcfgWeekly = data.weekly;
+      if (data.monthly) mcfgMonthly = data.monthly;
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+// Init
+if (!mcfgLoadConfig()) {
+  mcfgCatalog = mcfgBuildDefaultCatalog();
+  mcfgSchedule = mcfgBuildDefaultSchedule();
+  mcfgWeekly = mcfgBuildDefaultWeekly();
+  mcfgMonthly = mcfgBuildDefaultMonthly();
+}
+// Keep defaults for reset
+const MCFG_DEFAULT_CATALOG = mcfgBuildDefaultCatalog();
+const MCFG_DEFAULT_SCHEDULE = mcfgBuildDefaultSchedule();
+const MCFG_DEFAULT_WEEKLY = mcfgBuildDefaultWeekly();
+const MCFG_DEFAULT_MONTHLY = mcfgBuildDefaultMonthly();
+
+// Sub-tab switching
+function mcfgSwitchSub(name, el) {
+  document.querySelectorAll('.mcfg-subtab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.mcfg-subpanel').forEach(p => p.classList.remove('active'));
+  if (el) el.classList.add('active');
+  const panel = document.getElementById('mcfg-sub-' + name);
+  if (panel) panel.classList.add('active');
+  if (name === 'catalog') renderMcfgCatalog();
+  if (name === 'schedule') renderMcfgSchedule();
+  if (name === 'weekly') { renderMcfgWeekly(); renderMcfgMonthly(); }
+}
+
+// ===== CATALOG RENDERING =====
+function mcfgGetGroupColor(g) {
+  const m = {core:'var(--green)',hot:'var(--gold)',daily:'var(--blue)',discovery:'var(--purple)'};
+  return m[g] || 'var(--text-3)';
+}
+
+function mcfgFormatTarget(t) {
+  if (t >= 1000000) return (t/1000000) + 'M';
+  if (t >= 1000) return (t/1000) + 'K';
+  return t;
+}
+
+function renderMcfgCatalog() {
+  const search = (document.getElementById('mcfgCatalogSearch')?.value || '').toLowerCase();
+  const codes = Object.keys(mcfgCatalog).sort();
+  const filtered = codes.filter(code => {
+    const m = mcfgCatalog[code];
+    if (mcfgGroupFilter && m.group !== mcfgGroupFilter) return false;
+    if (search) {
+      const haystack = (code + ' ' + m.title + ' ' + m.desc + ' ' + m.group + ' ' + (m.tag||'')).toLowerCase();
+      if (!haystack.includes(search)) return false;
+    }
+    return true;
+  });
+
+  document.getElementById('mcfgCatalogCount').textContent = filtered.length + '/' + codes.length;
+
+  let html = '';
+  filtered.forEach(code => {
+    const m = mcfgCatalog[code];
+    const isEditing = mcfgEditingCode === code;
+    const rewardTags = (m.rewards||[]).map(r => {
+      return '<span class="mcfg-reward-tag ' + r.type + '">' + (r.label||r.type) + '</span>';
+    }).join('');
+
+    html += '<div class="mcfg-mission-row' + (isEditing ? ' editing' : '') + '" onclick="mcfgEditMission(\'' + code + '\')">';
+    html += '<span class="mcfg-code ' + m.group + '">' + code + '</span>';
+    html += '<div class="mcfg-mission-info">';
+    html += '<div class="mcfg-mission-title">' + escHtml(m.title) + (m.tag ? ' <span style="font-size:8px;color:var(--gold);font-weight:600;">[' + escHtml(m.tag) + ']</span>' : '') + '</div>';
+    html += '<div class="mcfg-mission-desc">' + escHtml(m.desc) + '</div>';
+    html += '</div>';
+    html += '<div class="mcfg-mission-meta">';
+    html += '<span>&#11088; ' + m.points + 'pt</span>';
+    html += '<span>&#127919; ' + mcfgFormatTarget(m.target) + '</span>';
+    html += '</div>';
+    html += '<div style="font-size:8px;">' + rewardTags + '</div>';
+    html += '</div>';
+  });
+
+  if (!filtered.length) {
+    html = '<div style="text-align:center;padding:20px;color:var(--text-3);font-size:11px;">Không tìm thấy nhiệm vụ nào</div>';
+  }
+  document.getElementById('mcfgCatalogList').innerHTML = html;
+}
+
+function mcfgFilterGroup(g) {
+  mcfgGroupFilter = g;
+  renderMcfgCatalog();
+}
+
+// ===== CATALOG EDITOR =====
+function mcfgEditMission(code) {
+  const m = mcfgCatalog[code];
+  if (!m) return;
+  mcfgEditingCode = code;
+
+  document.getElementById('mcfgEditorSection').style.display = '';
+  document.getElementById('mcfgEditorCode').textContent = code + ' — ' + m.title;
+  document.getElementById('mc_code').value = code;
+  document.getElementById('mc_group').value = m.group || 'daily';
+  document.getElementById('mc_title').value = m.title || '';
+  document.getElementById('mc_desc').value = m.desc || '';
+  document.getElementById('mc_points').value = m.points || 0;
+  document.getElementById('mc_target').value = m.target || 0;
+  document.getElementById('mc_icon').value = m.icon || 'check';
+  document.getElementById('mc_iconColor').value = m.iconColor || 'green';
+  document.getElementById('mc_cta').value = m.cta || '';
+  document.getElementById('mc_tag').value = m.tag || '';
+  document.getElementById('mc_autoComplete').checked = !!m.autoComplete;
+  document.getElementById('mc_rewards').value = JSON.stringify(m.rewards || []);
+
+  renderMcfgCatalog();
+  document.getElementById('mcfgEditorSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+function mcfgSaveMission() {
+  if (!mcfgEditingCode) return;
+  const code = mcfgEditingCode;
+
+  let rewards = [];
+  try { rewards = JSON.parse(document.getElementById('mc_rewards').value); } catch(e) { showToast('Rewards JSON không hợp lệ'); return; }
+
+  mcfgCatalog[code] = {
+    code: code,
+    title: document.getElementById('mc_title').value.trim(),
+    desc: document.getElementById('mc_desc').value.trim(),
+    icon: document.getElementById('mc_icon').value,
+    iconColor: document.getElementById('mc_iconColor').value,
+    points: parseInt(document.getElementById('mc_points').value) || 0,
+    target: parseInt(document.getElementById('mc_target').value) || 0,
+    group: document.getElementById('mc_group').value,
+    cta: document.getElementById('mc_cta').value.trim(),
+    tag: document.getElementById('mc_tag').value.trim() || undefined,
+    autoComplete: document.getElementById('mc_autoComplete').checked || undefined,
+    rewards: rewards
+  };
+
+  mcfgSaveConfig();
+  renderMcfgCatalog();
+  showToast('Đã lưu: ' + code + ' — ' + mcfgCatalog[code].title);
+}
+
+function mcfgCancelEdit() {
+  mcfgEditingCode = null;
+  document.getElementById('mcfgEditorSection').style.display = 'none';
+  renderMcfgCatalog();
+}
+
+function mcfgResetMission() {
+  if (!mcfgEditingCode) return;
+  const code = mcfgEditingCode;
+  if (!MCFG_DEFAULT_CATALOG[code]) { showToast('Không tìm thấy bản gốc'); return; }
+  if (!confirm('Reset ' + code + ' về mặc định?')) return;
+  mcfgCatalog[code] = JSON.parse(JSON.stringify(MCFG_DEFAULT_CATALOG[code]));
+  mcfgSaveConfig();
+  mcfgEditMission(code); // reload editor
+  showToast('Đã reset: ' + code);
+}
+
+// ===== SCHEDULE RENDERING =====
+let mcfgScheduleEditingDate = null;
+
+function renderMcfgSchedule() {
+  const container = document.getElementById('mcfgScheduleList');
+  let html = '';
+
+  LC_SEASON_DATES.forEach(d => {
+    if (mcfgWeekFilter > 0 && d.week !== mcfgWeekFilter) return;
+
+    const sch = mcfgSchedule[d.d];
+    if (!sch) return;
+    const isEditing = mcfgScheduleEditingDate === d.d;
+    const typeClass = d.type;
+
+    html += '<div class="mcfg-schedule-day' + (isEditing ? ' editing' : '') + '">';
+    html += '<div class="mcfg-sday-header" onclick="mcfgToggleScheduleDay(\'' + d.d + '\')">';
+    html += '<span class="mcfg-sday-date">' + d.dow + ' ' + d.dd + '/' + d.mm + '</span>';
+    html += '<span class="mcfg-sday-type ' + typeClass + '">' + d.type + '</span>';
+    if (sch.context) html += '<span class="mcfg-sday-ctx">' + escHtml(sch.context) + '</span>';
+    html += '<span class="mcfg-sday-count">' + sch.codes.length + ' nv</span>';
+    html += '</div>';
+
+    // Code chips
+    html += '<div class="mcfg-sday-codes">';
+    sch.codes.forEach((code, idx) => {
+      const def = mcfgCatalog[code];
+      const groupClass = def ? def.group : '';
+      html += '<span class="mcfg-sday-code lc-code-chip ' + groupClass + '" title="' + (def ? escHtml(def.title) : code) + '"';
+      if (isEditing) html += ' onclick="event.stopPropagation();mcfgRemoveCode(\'' + d.d + '\',' + idx + ')"';
+      html += '>' + code;
+      if (isEditing) html += ' &#10005;';
+      html += '</span>';
+    });
+    html += '</div>';
+
+    // Add area (only when editing)
+    if (isEditing) {
+      html += '<div class="mcfg-sday-add-area">';
+      html += '<div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;">';
+      html += '<select id="mcfgAddCode_' + d.d + '" style="flex:1;">';
+      html += '<option value="">— Thêm code —</option>';
+      Object.keys(mcfgCatalog).sort().forEach(code => {
+        if (!sch.codes.includes(code)) {
+          html += '<option value="' + code + '">' + code + ' — ' + escHtml(mcfgCatalog[code].title) + '</option>';
+        }
+      });
+      html += '</select>';
+      html += '<button class="btn btn-green btn-sm" onclick="mcfgAddCode(\'' + d.d + '\')">+ Thêm</button>';
+      html += '</div>';
+      // Context editor
+      html += '<div style="display:flex;gap:4px;align-items:center;margin-top:4px;">';
+      html += '<input type="text" id="mcfgCtx_' + d.d + '" value="' + escHtml(sch.context||'') + '" placeholder="Context (VD: UEFA Super Cup)" style="flex:1;background:var(--bg-1);border:1px solid var(--border);border-radius:4px;color:var(--text-0);font-size:10px;padding:3px 6px;font-family:inherit;">';
+      html += '<select id="mcfgDayType_' + d.d + '" style="flex:none;">';
+      ['normal','weekend','holiday'].forEach(t => {
+        html += '<option value="' + t + '"' + (sch.dayType === t ? ' selected' : '') + '>' + t + '</option>';
+      });
+      html += '</select>';
+      html += '<button class="btn btn-primary btn-sm" onclick="mcfgSaveDay(\'' + d.d + '\')">&#9989; Lưu</button>';
+      html += '</div>';
+      html += '</div>';
+    }
+
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
+}
+
+function mcfgFilterWeek(w) {
+  mcfgWeekFilter = w;
+  renderMcfgSchedule();
+}
+
+function mcfgToggleScheduleDay(dateStr) {
+  mcfgScheduleEditingDate = mcfgScheduleEditingDate === dateStr ? null : dateStr;
+  renderMcfgSchedule();
+}
+
+function mcfgRemoveCode(dateStr, idx) {
+  const sch = mcfgSchedule[dateStr];
+  if (!sch) return;
+  const removed = sch.codes.splice(idx, 1)[0];
+  mcfgSaveConfig();
+  renderMcfgSchedule();
+  showToast('Đã xóa ' + removed + ' khỏi ' + dateStr);
+}
+
+function mcfgAddCode(dateStr) {
+  const sel = document.getElementById('mcfgAddCode_' + dateStr);
+  const code = sel ? sel.value : '';
+  if (!code) { showToast('Chọn code trước'); return; }
+  const sch = mcfgSchedule[dateStr];
+  if (!sch) return;
+  if (sch.codes.includes(code)) { showToast(code + ' đã có trong ngày này'); return; }
+  sch.codes.push(code);
+  mcfgSaveConfig();
+  renderMcfgSchedule();
+  showToast('Đã thêm ' + code + ' vào ' + dateStr);
+}
+
+function mcfgSaveDay(dateStr) {
+  const sch = mcfgSchedule[dateStr];
+  if (!sch) return;
+  const ctxEl = document.getElementById('mcfgCtx_' + dateStr);
+  const typeEl = document.getElementById('mcfgDayType_' + dateStr);
+  if (ctxEl) sch.context = ctxEl.value.trim();
+  if (typeEl) sch.dayType = typeEl.value;
+  mcfgSaveConfig();
+  mcfgScheduleEditingDate = null;
+  renderMcfgSchedule();
+  showToast('Đã lưu ngày ' + dateStr);
+}
+
+// ===== WEEKLY/MONTHLY RENDERING =====
+function renderMcfgWeekly() {
+  const container = document.getElementById('mcfgWeeklyList');
+  document.getElementById('mcfgWeeklyCount').textContent = mcfgWeekly.length;
+  let html = '';
+  mcfgWeekly.forEach((m, idx) => {
+    const isEditing = mcfgEditingWMType === 'weekly' && mcfgEditingWMIdx === idx;
+    html += '<div class="mcfg-mission-row' + (isEditing ? ' editing' : '') + '" onclick="mcfgEditWM(\'weekly\',' + idx + ')">';
+    html += '<span class="mcfg-code daily">' + m.code + '</span>';
+    html += '<div class="mcfg-mission-info"><div class="mcfg-mission-title">' + escHtml(m.title) + '</div>';
+    html += '<div class="mcfg-mission-desc">' + escHtml(m.desc) + '</div></div>';
+    html += '<div class="mcfg-mission-meta"><span>&#11088; ' + m.points + 'pt</span><span>&#127919; ' + mcfgFormatTarget(m.target) + '</span></div>';
+    html += '</div>';
+  });
+  container.innerHTML = html || '<div style="text-align:center;padding:16px;color:var(--text-3);font-size:11px;">Chưa có weekly missions</div>';
+}
+
+function renderMcfgMonthly() {
+  const container = document.getElementById('mcfgMonthlyList');
+  document.getElementById('mcfgMonthlyCount').textContent = mcfgMonthly.length;
+  let html = '';
+  mcfgMonthly.forEach((m, idx) => {
+    const isEditing = mcfgEditingWMType === 'monthly' && mcfgEditingWMIdx === idx;
+    html += '<div class="mcfg-mission-row' + (isEditing ? ' editing' : '') + '" onclick="mcfgEditWM(\'monthly\',' + idx + ')">';
+    html += '<span class="mcfg-code hot">' + m.code + '</span>';
+    html += '<div class="mcfg-mission-info"><div class="mcfg-mission-title">' + escHtml(m.title) + (m.tag ? ' <span style="font-size:8px;color:var(--gold);">[' + escHtml(m.tag) + ']</span>' : '') + '</div>';
+    html += '<div class="mcfg-mission-desc">' + escHtml(m.desc) + '</div></div>';
+    html += '<div class="mcfg-mission-meta"><span>&#11088; ' + m.points + 'pt</span><span>&#127919; ' + mcfgFormatTarget(m.target) + '</span></div>';
+    html += '</div>';
+  });
+  container.innerHTML = html || '<div style="text-align:center;padding:16px;color:var(--text-3);font-size:11px;">Chưa có monthly missions</div>';
+}
+
+function mcfgEditWM(type, idx) {
+  const list = type === 'weekly' ? mcfgWeekly : mcfgMonthly;
+  const m = list[idx];
+  if (!m) return;
+  mcfgEditingWMType = type;
+  mcfgEditingWMIdx = idx;
+
+  document.getElementById('mcfgWMEditorSection').style.display = '';
+  document.getElementById('mcfgWMEditorCode').textContent = m.code + ' — ' + m.title + ' (' + type + ')';
+  document.getElementById('wm_title').value = m.title || '';
+  document.getElementById('wm_desc').value = m.desc || '';
+  document.getElementById('wm_points').value = m.points || 0;
+  document.getElementById('wm_target').value = m.target || 0;
+  document.getElementById('wm_current').value = m.current || 0;
+  document.getElementById('wm_icon').value = m.icon || 'chart_bar';
+  document.getElementById('wm_cta').value = m.cta || '';
+  document.getElementById('wm_rewards').value = JSON.stringify(m.rewards || []);
+
+  renderMcfgWeekly();
+  renderMcfgMonthly();
+  document.getElementById('mcfgWMEditorSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+function mcfgSaveWM() {
+  if (mcfgEditingWMType === null || mcfgEditingWMIdx === null) return;
+  const list = mcfgEditingWMType === 'weekly' ? mcfgWeekly : mcfgMonthly;
+  const m = list[mcfgEditingWMIdx];
+  if (!m) return;
+
+  let rewards = [];
+  try { rewards = JSON.parse(document.getElementById('wm_rewards').value); } catch(e) { showToast('Rewards JSON không hợp lệ'); return; }
+
+  m.title = document.getElementById('wm_title').value.trim();
+  m.desc = document.getElementById('wm_desc').value.trim();
+  m.points = parseInt(document.getElementById('wm_points').value) || 0;
+  m.target = parseInt(document.getElementById('wm_target').value) || 0;
+  m.current = parseInt(document.getElementById('wm_current').value) || 0;
+  m.icon = document.getElementById('wm_icon').value;
+  m.cta = document.getElementById('wm_cta').value.trim();
+  m.rewards = rewards;
+
+  mcfgSaveConfig();
+  renderMcfgWeekly();
+  renderMcfgMonthly();
+  showToast('Đã lưu: ' + m.code);
+}
+
+function mcfgCancelWM() {
+  mcfgEditingWMType = null;
+  mcfgEditingWMIdx = null;
+  document.getElementById('mcfgWMEditorSection').style.display = 'none';
+  renderMcfgWeekly();
+  renderMcfgMonthly();
+}
+
+// ===== JSON EXPORT/IMPORT =====
+function mcfgExportAll() {
+  const data = {
+    _format: 'mubet_mission_config_v1',
+    _exportedAt: new Date().toISOString(),
+    catalog: mcfgCatalog,
+    schedule: mcfgSchedule,
+    weekly: mcfgWeekly,
+    monthly: mcfgMonthly
+  };
+  document.getElementById('mcfgJsonOutput').value = JSON.stringify(data, null, 2);
+  showToast('Đã xuất tất cả (' + Object.keys(mcfgCatalog).length + ' missions, ' + Object.keys(mcfgSchedule).length + ' ngày)');
+}
+
+function mcfgExportCatalog() {
+  const data = {
+    _format: 'mubet_mission_catalog_v1',
+    _exportedAt: new Date().toISOString(),
+    catalog: mcfgCatalog
+  };
+  document.getElementById('mcfgJsonOutput').value = JSON.stringify(data, null, 2);
+  showToast('Đã xuất Catalog (' + Object.keys(mcfgCatalog).length + ' missions)');
+}
+
+function mcfgExportSchedule() {
+  const data = {
+    _format: 'mubet_mission_schedule_v1',
+    _exportedAt: new Date().toISOString(),
+    schedule: mcfgSchedule
+  };
+  document.getElementById('mcfgJsonOutput').value = JSON.stringify(data, null, 2);
+  showToast('Đã xuất Schedule (' + Object.keys(mcfgSchedule).length + ' ngày)');
+}
+
+function mcfgCopyToClipboard() {
+  const text = document.getElementById('mcfgJsonOutput').value;
+  if (!text) { showToast('Chưa có gì để copy — hãy Xuất trước'); return; }
+  navigator.clipboard.writeText(text).then(() => showToast('Đã copy JSON vào clipboard'));
+}
+
+function mcfgImportJson() {
+  const text = document.getElementById('mcfgJsonInput').value.trim();
+  if (!text) { showToast('Vui lòng paste JSON vào'); return; }
+
+  try {
+    const data = JSON.parse(text);
+    let imported = [];
+
+    if (data.catalog) {
+      Object.keys(data.catalog).forEach(code => {
+        mcfgCatalog[code] = data.catalog[code];
+      });
+      imported.push('Catalog: ' + Object.keys(data.catalog).length + ' missions');
+    }
+    if (data.schedule) {
+      Object.keys(data.schedule).forEach(date => {
+        mcfgSchedule[date] = data.schedule[date];
+      });
+      imported.push('Schedule: ' + Object.keys(data.schedule).length + ' ngày');
+    }
+    if (data.weekly) {
+      mcfgWeekly = data.weekly;
+      imported.push('Weekly: ' + data.weekly.length);
+    }
+    if (data.monthly) {
+      mcfgMonthly = data.monthly;
+      imported.push('Monthly: ' + data.monthly.length);
+    }
+
+    if (!imported.length) {
+      showToast('Không tìm thấy dữ liệu hợp lệ (cần catalog/schedule/weekly/monthly)');
+      return;
+    }
+
+    mcfgSaveConfig();
+    showToast('Đã nhập: ' + imported.join(', '));
+  } catch(e) {
+    showToast('JSON không hợp lệ: ' + e.message);
+  }
+}
+
+function mcfgImportFile() {
+  document.getElementById('mcfgFileInput').click();
+}
+
+function mcfgHandleFile(evt) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('mcfgJsonInput').value = e.target.result;
+    showToast('Đã load file: ' + file.name + ' — bấm "Nhập & Áp dụng" để import');
+  };
+  reader.readAsText(file);
+  evt.target.value = '';
+}
+
+function mcfgResetAll() {
+  if (!confirm('Reset TẤT CẢ cấu hình về mặc định? Không thể hoàn tác!')) return;
+  mcfgCatalog = JSON.parse(JSON.stringify(MCFG_DEFAULT_CATALOG));
+  mcfgSchedule = JSON.parse(JSON.stringify(MCFG_DEFAULT_SCHEDULE));
+  mcfgWeekly = JSON.parse(JSON.stringify(MCFG_DEFAULT_WEEKLY));
+  mcfgMonthly = JSON.parse(JSON.stringify(MCFG_DEFAULT_MONTHLY));
+  mcfgSaveConfig();
+  showToast('Đã reset về mặc định');
+}
+
+// ===== APPLY TO PROTOTYPE =====
+function mcfgApplyToPrototype() {
+  const cmd = {
+    type: 'mission_config_update',
+    catalog: mcfgCatalog,
+    schedule: mcfgSchedule,
+    weekly: mcfgWeekly,
+    monthly: mcfgMonthly,
+    ts: Date.now()
+  };
+  localStorage.setItem('mubet_devtools_mission_config_push', JSON.stringify(cmd));
+  try { if (bc) bc.postMessage(cmd); } catch(e) {}
+  showToast('Đã push cấu hình sang prototype — prototype sẽ rebuild missions');
+}
+
+// Update switchTab
+const _origSwitchTab = switchTab;
+switchTab = function(name, el) {
+  _origSwitchTab(name, el);
+  if (name === 'mcfg') {
+    renderMcfgCatalog();
+  }
+};
+
+// Initial render (deferred)
+setTimeout(() => {
+  renderMcfgCatalog();
+}, 150);
 </script>
 </body>
 </html>

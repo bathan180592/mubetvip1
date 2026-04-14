@@ -883,7 +883,16 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 0 6px #ff3232;
   animation: lcLivePulse 1.5s infinite;
 }
-.mission-popup-list { padding: 8px 14px; display: flex; flex-direction: column; gap: 6px; }
+.mission-popup-tabs {
+  display: flex; border-bottom: 1px solid rgba(255,255,255,.06); padding: 0 14px;
+}
+.mission-popup-tab {
+  flex: 1; padding: 10px 0; font-size: 12px; font-weight: 700; text-align: center;
+  color: rgba(255,255,255,.35); cursor: pointer; border-bottom: 2px solid transparent;
+  transition: all .2s;
+}
+.mission-popup-tab.active { color: #ff4040; border-bottom-color: #ff4040; }
+.mission-popup-list { padding: 16px 14px 4px; display: flex; flex-direction: column; gap: 14px; min-height: 316px; }
 .mission-popup-item {
   display: flex; align-items: center; gap: 10px;
   padding: 10px 12px; border-radius: 12px;
@@ -891,33 +900,40 @@ img { max-width: 100%; display: block; }
   border: 1px solid rgba(255,255,255,.06);
   cursor: pointer; transition: all .2s; position: relative;
 }
-.mission-popup-item:hover {
+.mission-popup-item:active {
   background: rgba(255,255,255,.06);
   border-color: rgba(255,50,50,.2);
-  box-shadow: 0 0 12px rgba(255,50,50,.06);
+  transform: scale(.98);
 }
 .mission-popup-item-icon {
-  width: 36px; height: 36px; border-radius: 10px;
+  width: 38px; height: 38px; border-radius: 10px;
   background: rgba(255,255,255,.04);
   border: 1px solid rgba(255,50,50,.12);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  overflow: hidden;
 }
 .mission-popup-item-info { flex: 1; min-width: 0; }
-.mission-popup-item-title { font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; }
-.mission-popup-item-desc { font-size: 10px; color: rgba(255,255,255,.35); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.mission-popup-item-reward {
-  flex-shrink: 0; font-size: 12px; font-weight: 800;
-  color: #ff4040; display: flex; align-items: center; gap: 4px;
-  text-shadow: 0 0 8px rgba(255,50,50,.3);
+.mission-popup-item-title { font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mission-popup-item-desc { font-size: 10px; color: rgba(255,255,255,.35); margin-top: 3px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.mission-popup-item-badges { position: absolute; top: -8px; right: 10px; display: flex; gap: 3px; }
+.mission-popup-badge {
+  font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 8px;
+  display: inline-flex; align-items: center; gap: 2px; white-space: nowrap;
+  line-height: 1.4;
 }
+.mission-popup-badge.coin { background: linear-gradient(135deg, #b45309, #f59e0b); color: #1a0a00; box-shadow: 0 2px 6px rgba(255,152,0,.35); }
+.mission-popup-badge.cash { background: linear-gradient(135deg, #15803d, #4ade80); color: #052e16; box-shadow: 0 2px 6px rgba(74,222,128,.35); }
+.mission-popup-badge.xp { background: linear-gradient(135deg, #6d28d9, #a78bfa); color: #f5f3ff; box-shadow: 0 2px 6px rgba(167,139,250,.35); }
+.mission-popup-badge.voucher { background: linear-gradient(135deg, #1d4ed8, #60a5fa); color: #eff6ff; box-shadow: 0 2px 6px rgba(96,165,250,.35); }
 .mission-popup-item-right {
   flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
 }
 .mission-popup-item-tag {
-  font-size: 8px; font-weight: 800; padding: 2px 5px; border-radius: 4px; letter-spacing: .5px;
-  background: rgba(255,50,50,.12);
-  color: #ff4040; border: 1px solid rgba(255,50,50,.2);
+  font-size: 8px; font-weight: 800; padding: 3px 6px; border-radius: 4px; letter-spacing: .5px;
 }
+.mission-popup-item-tag.claim { background: linear-gradient(135deg,#b91c1c,#ef4444); color: #fff; }
+.mission-popup-item-tag.go { background: rgba(255,255,255,.06); color: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.1); }
+.mission-popup-item-tag.vip { background: rgba(251,191,36,.12); color: #fbbf24; border: 1px solid rgba(251,191,36,.2); }
 .mission-popup-actions {
   padding: 10px 14px 20px; display: flex; gap: 8px;
 }
@@ -6567,6 +6583,7 @@ img { max-width: 100%; display: block; }
 .lc-card-progress-bar { flex: 1; height: 3px; background: rgba(0,0,0,.3); border-radius: 2px; overflow: hidden; }
 .lc-card-progress-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #b45309, #fbbf24); transition: width .6s ease; }
 .lc-card-progress-text { font-size: 9px; color: var(--tertiary-300); font-weight: 700; white-space: nowrap; }
+.lc-card-chevron { font-size: 22px; color: rgba(255,255,255,.3); font-weight: 300; line-height: 1; padding: 0 2px; }
 
 /* LC Progress / Milestones block */
 .lc-milestones {
@@ -6628,24 +6645,193 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(135deg, #b45309, #f59e0b);
   border-color: #fbbf24; color: #fff;
 }
+.lc-live-dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: #ef4444; margin-right: 2px; vertical-align: middle;
+  animation: lcLivePulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(239,68,68,.6);
+}
 
-/* Mission Detail */
+/* Chuỗi thử thách — Vertical Timeline */
+.lc-chain { padding: 12px 16px 4px; }
+.lc-chain-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+
+/* Vertical line container */
+.lc-vchain { position: relative; padding: 0 0 8px; }
+.lc-vchain::before {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(245,158,11,.15), rgba(255,255,255,.06));
+  transform: translateX(-50%);
+}
+
+/* Each row = match node */
+.lc-vchain-row { position: relative; padding: 0 0 6px; }
+
+/* Branches row (side events) */
+.lc-vchain-branches { display: flex; align-items: center; justify-content: center; gap: 0; min-height: 32px; position: relative; }
+.lc-vchain-branch-left, .lc-vchain-branch-right {
+  flex: 1; display: flex; align-items: center; min-height: 28px;
+}
+.lc-vchain-branch-left { justify-content: flex-end; padding-right: 6px; }
+.lc-vchain-branch-right { justify-content: flex-start; padding-left: 6px; }
+.lc-vchain-branch-tag {
+  font-size: 9px; padding: 4px 8px; border-radius: 8px; white-space: nowrap; cursor: pointer;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  color: var(--muted); transition: all .2s; max-width: 130px; overflow: hidden; text-overflow: ellipsis;
+}
+.lc-vchain-branch-tag:active { transform: scale(.95); }
+.lc-vchain-branch-tag .lc-icon-svg { width: 10px; height: 10px; }
+
+/* Connector lines from branches to center */
+.lc-vchain-branch-left .lc-vchain-branch-tag::after {
+  content: ''; display: inline-block; width: 12px; height: 1px;
+  background: rgba(255,255,255,.1); vertical-align: middle; margin-left: 6px;
+}
+.lc-vchain-branch-right .lc-vchain-branch-tag::before {
+  content: ''; display: inline-block; width: 12px; height: 1px;
+  background: rgba(255,255,255,.1); vertical-align: middle; margin-right: 6px;
+}
+
+/* Center dot between branches */
+.lc-vchain-center-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.1); z-index: 1;
+}
+
+/* Main match node */
+.lc-vchain-match { display: flex; align-items: center; justify-content: center; position: relative; padding: 4px 0; cursor: pointer; }
+.lc-vchain-match-dot {
+  width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  gap: 2px; background: var(--panel); border: 2px solid rgba(245,158,11,.3); z-index: 2;
+  font-size: 18px; flex-shrink: 0; transition: all .25s;
+}
+.lc-vchain-match:active .lc-vchain-match-dot { transform: scale(.9); }
+.lc-vchain-row.is-past .lc-vchain-match-dot { border-color: #4ade80; background: rgba(74,222,128,.1); }
+.lc-vchain-row.is-live .lc-vchain-match-dot {
+  border-color: #ef4444; background: rgba(239,68,68,.12);
+  box-shadow: 0 0 14px rgba(239,68,68,.4); animation: lcLivePulse 1.5s ease-in-out infinite;
+}
+.lc-vchain-row.is-future .lc-vchain-match-dot { border-color: var(--line); opacity: .55; }
+.lc-vchain-row.selected .lc-vchain-match-dot { border-color: #fbbf24; box-shadow: 0 0 12px rgba(251,191,36,.3); opacity: 1; }
+
+/* Match info — left and right of dot */
+.lc-vchain-match-left, .lc-vchain-match-right { flex: 1; }
+.lc-vchain-match-left { text-align: right; padding-right: 10px; }
+.lc-vchain-match-right { text-align: left; padding-left: 10px; }
+.lc-vchain-match-teams { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.3; }
+.lc-vchain-match-vs { font-size: 10px; color: var(--muted); font-weight: 400; }
+.lc-vchain-match-meta { font-size: 9px; color: var(--muted); margin-top: 1px; }
+.lc-vchain-match-coin { font-size: 10px; font-weight: 600; color: #fbbf24; }
+.lc-vchain-row.is-future .lc-vchain-match-teams { color: var(--muted); }
+.lc-vchain-row.is-live .lc-vchain-match-teams { color: #fbbf24; }
+
+/* Segment connector between rows */
+.lc-vchain-seg { height: 16px; position: relative; }
+.lc-vchain-seg::before {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+  background: rgba(255,255,255,.08); transform: translateX(-50%);
+}
+
+/* Chain detail card */
+.lc-chain-detail {
+  margin: 8px 0 4px; border-radius: 14px; overflow: hidden;
+  background: linear-gradient(135deg, rgba(180,83,9,.12), rgba(245,158,11,.06));
+  border: 1px solid rgba(245,158,11,.2);
+}
+.lc-chain-detail-banner {
+  aspect-ratio: 21/6; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #1a0e05, #2d1a08);
+}
+.lc-chain-detail-banner img { width: 100%; height: 100%; object-fit: cover; }
+.lc-chain-detail-body { padding: 12px 14px; }
+.lc-chain-detail-teams { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.lc-chain-detail-vs { color: var(--muted); font-size: 11px; font-weight: 400; }
+.lc-chain-detail-meta { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 10px; }
+.lc-chain-detail-tag {
+  font-size: 10px; padding: 3px 8px; border-radius: 10px;
+  background: rgba(255,255,255,.06); color: var(--muted); white-space: nowrap;
+}
+.lc-chain-detail-tag.live { background: rgba(239,68,68,.15); color: #fca5a5; }
+.lc-chain-detail-tag.league { background: rgba(59,130,246,.12); color: #93c5fd; }
+.lc-chain-detail-reward { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+.lc-chain-detail-cta {
+  width: 100%; padding: 10px; border: none; border-radius: 10px; cursor: pointer;
+  background: linear-gradient(135deg, #b45309, #f59e0b); color: #fff;
+  font-size: 13px; font-weight: 700; text-align: center;
+}
+
+/* Mission Detail — Banner 21:6 (image only) */
+.lc-detail-banner {
+  position: relative; overflow: hidden; border-radius: 14px; margin: 12px 0 0;
+  aspect-ratio: 21/6;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #1a0e05 0%, #2d1a08 40%, #1c1008 100%);
+  border: 1px solid rgba(255,160,40,.18);
+}
+.lc-detail-banner-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 60% 130% at 50% 50%, rgba(251,191,36,.1) 0%, transparent 60%),
+              radial-gradient(ellipse 80% 100% at 20% 80%, rgba(180,83,9,.08) 0%, transparent 50%),
+              radial-gradient(ellipse 60% 100% at 80% 20%, rgba(202,41,48,.06) 0%, transparent 50%);
+}
+.lc-detail-banner-pattern {
+  position: absolute; inset: 0; z-index: 0;
+  opacity: .035;
+  background-image: repeating-linear-gradient(120deg, transparent, transparent 40px, rgba(255,255,255,.5) 40px, rgba(255,255,255,.5) 41px);
+}
+.lc-detail-banner-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+}
+.lc-detail-banner-icon {
+  position: relative; z-index: 1;
+  font-size: 44px;
+  filter: drop-shadow(0 0 24px rgba(251,191,36,.3));
+  animation: lc-banner-glow 3s ease-in-out infinite;
+}
+@keyframes lc-banner-glow {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(251,191,36,.2)); }
+  50% { filter: drop-shadow(0 0 32px rgba(251,191,36,.45)); }
+}
+.lc-detail-banner-tag {
+  position: absolute; top: 10px; left: 12px; z-index: 2;
+  padding: 3px 10px; border-radius: 6px; font-size: 9px; font-weight: 700;
+  background: linear-gradient(135deg, #b45309, #f59e0b); color: #fff;
+  letter-spacing: .03em;
+}
+.lc-detail-banner-shine {
+  position: absolute; top: -50%; right: -20%; width: 60%; height: 200%; z-index: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.03) 45%, rgba(255,255,255,.06) 50%, rgba(255,255,255,.03) 55%, transparent 60%);
+  animation: lc-banner-shine 6s ease-in-out infinite;
+}
+@keyframes lc-banner-shine {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+/* Mission Detail — Text below banner */
 .lc-detail-summary {
-  padding: 20px; border-radius: 16px; margin: 16px 0;
-  background: linear-gradient(135deg, rgba(180,83,9,.12), rgba(251,191,36,.06));
-  border: 1px solid rgba(255,160,40,.2);
+  padding: 14px 4px 0;
 }
 .lc-detail-tag {
   display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: 10px; font-weight: 700;
-  background: linear-gradient(135deg, #b45309, #f59e0b); color: #fff; margin-bottom: 8px;
+  background: linear-gradient(135deg, #b45309, #f59e0b); color: #fff; margin-bottom: 6px;
 }
 .lc-detail-name {
-  font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800; color: var(--text-1); margin-bottom: 6px;
+  font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 800; color: var(--text-1);
+  line-height: 1.25; margin-bottom: 4px;
 }
-.lc-detail-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
-.lc-detail-meta { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+.lc-detail-desc {
+  font-size: 13px; color: var(--muted); line-height: 1.5;
+}
+.lc-detail-meta {
+  display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;
+}
 .lc-detail-meta-item {
-  display: flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(255,255,255,.5);
+  display: flex; align-items: center; gap: 4px; font-size: 11px;
+  color: rgba(255,255,255,.45);
+  background: rgba(255,255,255,.06); padding: 4px 10px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.06);
 }
 .lc-detail-meta-item strong { color: var(--tertiary-300); }
 
@@ -8060,7 +8246,7 @@ img { max-width: 100%; display: block; }
 /* XP compact widget (mission hub / LC) */
 .xp-compact-widget {
   display: flex; align-items: center; gap: 12px;
-  padding: 14px 16px; border-radius: 12px; margin-bottom: 16px;
+  padding: 14px 16px 10px; border-radius: 12px; margin-bottom: 4px;
   background: linear-gradient(135deg, rgba(255,50,50,.06), rgba(20,20,24,.5));
   border: 1px solid rgba(255,50,50,.1);
 }
@@ -9063,6 +9249,29 @@ function lcIcon(name, neonClass) {
 var LC_NEON_MAP = {orange:'neon-orange', red:'neon-red', teal:'neon-teal', blue:'neon-blue', green:'neon-green', purple:'neon-purple', gold:'neon-gold'};
 function lcNeonClass(iconColor) { return LC_NEON_MAP[iconColor] || 'neon-red'; }
 function lcMissionIcon(m) { return lcIcon(m.icon, lcNeonClass(m.iconColor)); }
+
+// Mission group icon images
+var LC_MISSION_ICON_MAP = {
+  'core':'mi-daily.png','daily':'mi-daily.png',
+  'hot':'mi-hot.png',
+  'discovery':'mi-discovery.png',
+  'progress':'mi-weekly.png','weekly':'mi-weekly.png',
+  'vip':'mi-monthly.png','monthly':'mi-monthly.png'
+};
+function lcMissionImgIcon(m, size) {
+  size = size || 36;
+  var group = m.group || '';
+  var reset = m.reset || '';
+  // NCC missions
+  if (m.code && m.code >= 'D33' && m.code <= 'D37') group = 'ncc';
+  // Weekly/monthly by reset
+  if (reset === 'weekly') group = 'weekly';
+  if (reset === 'monthly') group = 'monthly';
+  var file = LC_MISSION_ICON_MAP[group];
+  if (group === 'ncc') file = 'mi-ncc.png';
+  if (!file) file = 'mi-daily.png';
+  return '<img src="Assets/Mission-icon/' + file + '" alt="" style="width:' + size + 'px;height:' + size + 'px;object-fit:contain;display:block;">';
+}
 
 // ===== ROUTER =====
 const ACCOUNT_NAV = [
@@ -13901,50 +14110,101 @@ function goToLobby() {
 }
 
 // ===== MISSION POPUP =====
+var missionPopupTab = 'todo'; // 'todo' or 'claim'
+
+function mpRewardBadges(m) {
+  if (!m.rewards || !m.rewards.length) return '';
+  var h = '';
+  m.rewards.forEach(function(r) {
+    if (r.type === 'coin') h += '<span class="mission-popup-badge coin"><span class="mcoin sm"></span>' + r.label + '</span>';
+    else if (r.type === 'xp') h += '<span class="mission-popup-badge xp">' + r.label + '</span>';
+    else if (r.type === 'cash') h += '<span class="mission-popup-badge cash">' + r.label + '</span>';
+    else h += '<span class="mission-popup-badge voucher">' + r.label + '</span>';
+  });
+  return h;
+}
+
+function mpRenderCard(m, onclick) {
+  var detailClick = "closeMissionPopup();showLcMissionDetail('" + (m.id || '') + "')";
+  var h = '<div class="mission-popup-item" onclick="' + detailClick + '">';
+  h += '<div class="mission-popup-item-badges">' + mpRewardBadges(m) + '</div>';
+  h += '<div class="mission-popup-item-icon">' + lcMissionImgIcon(m, 30) + '</div>';
+  h += '<div class="mission-popup-item-info">';
+  h += '<div class="mission-popup-item-title">' + m.title + '</div>';
+  if (m.desc) h += '<div class="mission-popup-item-desc">' + m.desc + '</div>';
+  h += '</div>';
+  h += '<div class="mission-popup-item-right">';
+  if (m.status === 'claimable') h += '<span class="mission-popup-item-tag claim">NHẬN</span>';
+  else h += '<span class="lc-card-chevron" style="font-size:20px;">&#8250;</span>';
+  h += '</div>';
+  h += '</div>';
+  return h;
+}
+
 function showMissionPopup() {
   var overlay = document.getElementById('missionPopupOverlay');
   if (!overlay) return;
-  // Pick 3 hot missions: claimable first, then active with highest rewards
-  var missions = MOCK_LC_MISSIONS.filter(function(m) { return m.status === 'claimable'; });
-  var active = MOCK_LC_MISSIONS.filter(function(m) { return !m.status || m.status === 'active'; });
-  active.sort(function(a, b) { return (b.points || 0) - (a.points || 0); });
-  while (missions.length < 3 && active.length) { missions.push(active.shift()); }
-  missions = missions.slice(0, 3);
-
-  var html = '<div class="mission-popup">';
-  html += '<div class="mission-popup-header">';
-  html += '<div class="mission-popup-header-title">Nhiệm Vụ Hôm Nay</div>';
-  html += '<div class="mission-popup-header-sub">Hoàn thành ngay để nhận Coin & thưởng lớn</div>';
-  html += '</div>';
-  html += '<div class="mission-popup-list">';
-  missions.forEach(function(m) {
-    var rewardText = '';
-    if (m.rewards && m.rewards.length) {
-      var parts = [];
-      m.rewards.forEach(function(r) { parts.push(r.label); });
-      rewardText = parts.join(' + ');
-    }
-    html += '<div class="mission-popup-item" onclick="closeMissionPopup();navigateTo(\'/mission/live-challenge\')">';
-    html += '<div class="mission-popup-item-icon">' + lcIcon(m.icon, m.iconColor || 'neon-gold') + '</div>';
-    html += '<div class="mission-popup-item-info">';
-    html += '<div class="mission-popup-item-title">' + m.title + '</div>';
-    html += '<div class="mission-popup-item-desc">' + m.desc + '</div>';
-    html += '</div>';
-    html += '<div class="mission-popup-item-right">';
-    if (m.status === 'claimable') html += '<span class="mission-popup-item-tag">NHẬN</span>';
-    else if (m.tag) html += '<span class="mission-popup-item-tag">' + m.tag + '</span>';
-    html += '<div class="mission-popup-item-reward"><span class="mcoin sm"></span> ' + rewardText + '</div>';
-    html += '</div>';
-    html += '</div>';
-  });
-  html += '</div>';
-  html += '<div class="mission-popup-actions">';
-  html += '<button class="mission-popup-btn secondary" onclick="closeMissionPopupToSticker()">Để sau</button>';
-  html += '<button class="mission-popup-btn primary" onclick="closeMissionPopup();navigateTo(\'/mission/live-challenge\')">Xem Nhiệm Vụ</button>';
-  html += '</div>';
-  html += '</div>';
-  overlay.innerHTML = html;
+  renderMissionPopupContent(overlay);
   overlay.classList.add('open');
+}
+
+function renderMissionPopupContent(overlay) {
+  if (!overlay) overlay = document.getElementById('missionPopupOverlay');
+  if (!overlay) return;
+
+  var claimable = MOCK_LC_MISSIONS.filter(function(m) { return m.status === 'claimable'; });
+  var active = MOCK_LC_MISSIONS.filter(function(m) { return m.status !== 'claimable' && m.status !== 'completed'; });
+  active.sort(function(a, b) { return (b.points || 0) - (a.points || 0); });
+  var todoList = active.slice(0, 3);
+  var claimCount = claimable.length;
+
+  // Check if popup shell already exists (tab switch) or need full render (first open)
+  var popup = overlay.querySelector('.mission-popup');
+  if (!popup) {
+    // First render — build full popup shell
+    var shell = '<div class="mission-popup">';
+    shell += '<div class="mission-popup-header">';
+    shell += '<div class="mission-popup-header-title">Nhiệm Vụ Hôm Nay</div>';
+    shell += '<div class="mission-popup-header-sub">Hoàn thành ngay để nhận Coin & thưởng lớn</div>';
+    shell += '</div>';
+    shell += '<div class="mission-popup-tabs"></div>';
+    shell += '<div class="mission-popup-list"></div>';
+    shell += '<div class="mission-popup-actions"></div>';
+    shell += '</div>';
+    overlay.innerHTML = shell;
+    popup = overlay.querySelector('.mission-popup');
+  }
+
+  // Update tabs
+  var tabsHtml = '';
+  tabsHtml += '<div class="mission-popup-tab ' + (missionPopupTab === 'todo' ? 'active' : '') + '" onclick="missionPopupTab=\'todo\';renderMissionPopupContent()">Làm ngay</div>';
+  tabsHtml += '<div class="mission-popup-tab ' + (missionPopupTab === 'claim' ? 'active' : '') + '" onclick="missionPopupTab=\'claim\';renderMissionPopupContent()">Nhận quà' + (claimCount > 0 ? ' <span style="background:#ef4444;color:#fff;font-size:8px;padding:1px 4px;border-radius:8px;margin-left:2px;">' + claimCount + '</span>' : '') + '</div>';
+  popup.querySelector('.mission-popup-tabs').innerHTML = tabsHtml;
+
+  // Update list
+  var listHtml = '';
+  if (missionPopupTab === 'todo') {
+    if (todoList.length === 0) {
+      listHtml += '<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;">Đã hoàn thành tất cả!</div>';
+    }
+    todoList.forEach(function(m) {
+      listHtml += mpRenderCard(m, "closeMissionPopup();navigateTo('/mission/live-challenge')");
+    });
+  } else {
+    if (claimable.length === 0) {
+      listHtml += '<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;">Chưa có quà để nhận</div>';
+    }
+    claimable.forEach(function(m) {
+      listHtml += mpRenderCard(m, "closeMissionPopup();navigateTo('/mission/live-challenge')");
+    });
+  }
+  popup.querySelector('.mission-popup-list').innerHTML = listHtml;
+
+  // Update actions
+  var actHtml = '';
+  actHtml += '<button class="mission-popup-btn secondary" onclick="closeMissionPopupToSticker()">Để sau</button>';
+  actHtml += '<button class="mission-popup-btn primary" onclick="closeMissionPopup();navigateTo(\'/mission/live-challenge\')">' + (missionPopupTab === 'todo' ? 'Xem Nhiệm Vụ' : 'Nhận quà ngay') + '</button>';
+  popup.querySelector('.mission-popup-actions').innerHTML = actHtml;
 }
 function closeMissionPopup() {
   var overlay = document.getElementById('missionPopupOverlay');
@@ -14305,44 +14565,75 @@ var lcMockDate = null; // DevTools override, format: '2026-08-08'
 
 // Full catalog D01–D37
 var LC_MISSION_CATALOG = {
-  'D01':{code:'D01',title:'Điểm danh sự kiện',desc:'Đăng nhập và mở Live Challenge trong ngày',icon:'check',iconColor:'green',points:10,target:1,group:'core',cta:'Mở sự kiện',autoComplete:true,rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:50000,label:'50K'}]},
-  'D02':{code:'D02',title:'Nạp Nhẹ Nhận Quà',desc:'Nạp thành công 1 lần trong ngày',icon:'money',iconColor:'green',points:15,target:1,group:'core',cta:'Nạp ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D03':{code:'D03',title:'Khai hỏa hằng ngày',desc:'Hoàn thành 1 vé cược hợp lệ đầu tiên trong ngày',icon:'lightning',iconColor:'orange',points:10,target:1,group:'core',cta:'Vào cược',rewards:[{type:'coin',amount:10,label:'+10'}]},
-  'D04':{code:'D04',title:'Thấu trải cuộc chơi',desc:'Tự động hoàn thành khi balance về 0',icon:'heart',iconColor:'teal',points:10,target:1,group:'core',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
-  'D05':{code:'D05',title:'Cược liền tay, quà về ngay',desc:'Hoàn thành 10 vé cược hợp lệ trong ngày',icon:'fire',iconColor:'red',points:20,target:10,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:200000,label:'200K'}]},
-  'D06':{code:'D06',title:'Tay to cược khỏe - mốc 2 triệu',desc:'Có 1 vé cược hợp lệ từ 2 triệu trong ngày',icon:'chart_up',iconColor:'teal',points:25,target:2000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:25,label:'+25'},{type:'cash',amount:300000,label:'300K'}]},
-  'D07':{code:'D07',title:'Cược to nhận quà to - mốc 5 triệu',desc:'Tích lũy 5 triệu tiền cược hợp lệ trong ngày',icon:'target',iconColor:'blue',points:40,target:5000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:40,label:'+40'},{type:'cash',amount:500000,label:'500K'}]},
-  'D08':{code:'D08',title:'Thử tài chơi lớn - mốc 5 triệu',desc:'Có 1 vé thắng từ 5 triệu trong ngày',icon:'trophy',iconColor:'gold',points:30,target:5000000,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:30,label:'+30'},{type:'cash',amount:300000,label:'300K'},{type:'voucher',label:'Freebet 100K'}]},
-  'D09':{code:'D09',title:'Khai hỏa liên hoàn',desc:'Có 10 vé thắng hợp lệ trong ngày',icon:'fire',iconColor:'orange',points:25,target:10,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:25,label:'+25'},{type:'cash',amount:200000,label:'200K'}]},
-  'D10':{code:'D10',title:'Gom thắng rinh quà',desc:'Tích lũy 10 triệu tiền thắng trong ngày',icon:'chart_bar',iconColor:'blue',points:35,target:10000000,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:35,label:'+35'},{type:'cash',amount:500000,label:'500K'}]},
-  'D11':{code:'D11',title:'Bản lĩnh lật kèo - mốc 5 triệu',desc:'Có 1 vé thua từ 5 triệu, quà an ủi tự động',icon:'shield',iconColor:'purple',points:15,target:5000000,group:'daily',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:200000,label:'200K'}]},
-  'D12':{code:'D12',title:'Bản lĩnh lật kèo - mốc tích lũy 10 triệu',desc:'Tích lũy 10 triệu tiền thua, quà an ủi tự động',icon:'shield',iconColor:'purple',points:20,target:10000000,group:'daily',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:300000,label:'300K'}]},
-  'D13':{code:'D13',title:'Điểm Danh Giờ Vàng',desc:'Đăng nhập trong khung giờ vàng (19h-21h)',icon:'timer',iconColor:'gold',points:15,target:1,group:'hot',tag:'Giờ Vàng',cta:'Mở sự kiện',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D14':{code:'D14',title:'Giờ vàng săn ngay',desc:'Hoàn thành 1 vé cược trong khung giờ vàng',icon:'lightning',iconColor:'gold',points:20,target:1,group:'hot',tag:'Giờ Vàng',cta:'Vào cược',rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:200000,label:'200K'}]},
-  'D15':{code:'D15',title:'Canh Khuya Rinh Lộc',desc:'Hoàn thành 1 hành động trong khung 23h-01h',icon:'moon',iconColor:'purple',points:15,target:1,group:'hot',tag:'Canh Khuya',cta:'Xem chi tiết',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D16':{code:'D16',title:'Điểm Danh Giờ G',desc:'Check-in trong khung countdown trước trận',icon:'timer',iconColor:'red',points:15,target:1,group:'hot',tag:'Giờ G',cta:'Mở sự kiện',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D17':{code:'D17',title:'Rung kèo Nhịp Trận',desc:'Hoàn thành 1 vé cược trong khung trận đấu',icon:'swords',iconColor:'red',points:20,target:1,group:'hot',tag:'Theo trận',cta:'Vào cược',rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:200000,label:'200K'}]},
-  'D18':{code:'D18',title:'Tay to cược khỏe - mốc 1 triệu',desc:'Có 1 vé cược hợp lệ từ 1 triệu trong ngày',icon:'chart_up',iconColor:'teal',points:15,target:1000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D19':{code:'D19',title:'Cược to nhận quà to - mốc 3 triệu',desc:'Tích lũy 3 triệu tiền cược hợp lệ trong ngày',icon:'target',iconColor:'blue',points:25,target:3000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:25,label:'+25'},{type:'cash',amount:300000,label:'300K'}]},
-  'D20':{code:'D20',title:'Tay to cược khỏe - mốc 10 triệu',desc:'Có 1 vé cược hợp lệ từ 10 triệu trong ngày',icon:'diamond',iconColor:'purple',points:50,target:10000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:50,label:'+50'},{type:'cash',amount:1000000,label:'1M'}]},
-  'D21':{code:'D21',title:'Khai hỏa liên hoàn',desc:'Có 2 vé thắng hợp lệ trong ngày',icon:'fire',iconColor:'orange',points:15,target:2,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D22':{code:'D22',title:'Bản lĩnh lật kèo - mốc 2 triệu',desc:'Có 1 vé thua từ 2 triệu, quà an ủi tự động',icon:'shield',iconColor:'teal',points:10,target:2000000,group:'daily',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
-  'D23':{code:'D23',title:'Game hot trong ngày - Tài Xỉu Live',desc:'Chơi Tài Xỉu Live hôm nay',icon:'dice',iconColor:'purple',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D24':{code:'D24',title:'Game hot trong ngày - Baccarat Live',desc:'Chơi Baccarat Live hôm nay',icon:'dice',iconColor:'red',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D25':{code:'D25',title:'Game hot trong ngày - Rồng Hổ Live',desc:'Chơi Rồng Hổ Live hôm nay',icon:'dice',iconColor:'orange',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D26':{code:'D26',title:'Game hot trong ngày - Roulette Live',desc:'Chơi Roulette Live hôm nay',icon:'dice',iconColor:'teal',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D27':{code:'D27',title:'Game hot trong ngày - Blackjack Live',desc:'Chơi Blackjack Live hôm nay',icon:'dice',iconColor:'blue',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D28':{code:'D28',title:'Game hot trong ngày - Sicbo Live',desc:'Chơi Sicbo Live hôm nay',icon:'dice',iconColor:'green',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D29':{code:'D29',title:'Game hot trong ngày - Nổ Hũ Hot',desc:'Chơi Nổ Hũ Hot hôm nay',icon:'sparkle',iconColor:'gold',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D30':{code:'D30',title:'Game hot trong ngày - Bắn Cá Hot',desc:'Chơi Bắn Cá Hot hôm nay',icon:'sparkle',iconColor:'blue',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D31':{code:'D31',title:'Game hot trong ngày - Aviator',desc:'Chơi Aviator hôm nay',icon:'sparkle',iconColor:'red',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D32':{code:'D32',title:'Game hot trong ngày - Mini Poker',desc:'Chơi Mini Poker hôm nay',icon:'sparkle',iconColor:'purple',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'cash',amount:100000,label:'100K'}]},
-  'D33':{code:'D33',title:'Võ lâm hội tụ - B52',desc:'Chơi 1 game thuộc B52 hôm nay',icon:'swords',iconColor:'red',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
-  'D34':{code:'D34',title:'Võ lâm hội tụ - HitClub',desc:'Chơi 1 game thuộc HitClub hôm nay',icon:'swords',iconColor:'orange',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
-  'D35':{code:'D35',title:'Võ lâm hội tụ - Sunwin',desc:'Chơi 1 game thuộc Sunwin hôm nay',icon:'swords',iconColor:'gold',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
-  'D36':{code:'D36',title:'Võ lâm hội tụ - Techplay',desc:'Chơi 1 game thuộc Techplay hôm nay',icon:'swords',iconColor:'blue',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]},
-  'D37':{code:'D37',title:'Võ lâm hội tụ - Pragmatic',desc:'Chơi 1 game thuộc Pragmatic hôm nay',icon:'swords',iconColor:'purple',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'cash',amount:100000,label:'100K'}]}
+  'D01':{code:'D01',title:'Điểm danh sự kiện',desc:'Đăng nhập và mở Live Challenge trong ngày',icon:'check',iconColor:'green',points:10,target:1,group:'core',cta:'Mở sự kiện',autoComplete:true,rewards:[{type:'coin',amount:10,label:'+10'},{type:'xp',amount:20,label:'+20 XP'}]},
+  'D02':{code:'D02',title:'Nạp Nhẹ Nhận Quà',desc:'Nạp thành công 1 lần trong ngày',icon:'money',iconColor:'green',points:15,target:1,group:'core',cta:'Nạp ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D03':{code:'D03',title:'Khai hỏa hằng ngày',desc:'Hoàn thành 1 vé cược hợp lệ đầu tiên trong ngày',icon:'lightning',iconColor:'orange',points:10,target:1,group:'core',cta:'Vào cược',rewards:[{type:'coin',amount:10,label:'+10'},{type:'xp',amount:20,label:'+20 XP'}]},
+  'D04':{code:'D04',title:'Thấu trải cuộc chơi',desc:'Tự động hoàn thành khi balance về 0',icon:'heart',iconColor:'teal',points:10,target:1,group:'core',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:25,label:'+25 XP'}]},
+  'D05':{code:'D05',title:'Cược liền tay, quà về ngay',desc:'Hoàn thành 10 vé cược hợp lệ trong ngày',icon:'fire',iconColor:'red',points:20,target:10,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:20,label:'+20'},{type:'xp',amount:40,label:'+40 XP'}]},
+  'D06':{code:'D06',title:'Tay to cược khỏe - mốc 2 triệu',desc:'Có 1 vé cược hợp lệ từ 2 triệu trong ngày',icon:'chart_up',iconColor:'teal',points:25,target:2000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:25,label:'+25'},{type:'xp',amount:50,label:'+50 XP'}]},
+  'D07':{code:'D07',title:'Cược to nhận quà to - mốc 5 triệu',desc:'Tích lũy 5 triệu tiền cược hợp lệ trong ngày',icon:'target',iconColor:'blue',points:40,target:5000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:40,label:'+40'},{type:'xp',amount:80,label:'+80 XP'},{type:'voucher',label:'Freebet 50K'}]},
+  'D08':{code:'D08',title:'Thử tài chơi lớn - mốc 5 triệu',desc:'Có 1 vé thắng từ 5 triệu trong ngày',icon:'trophy',iconColor:'gold',points:30,target:5000000,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:30,label:'+30'},{type:'xp',amount:60,label:'+60 XP'},{type:'voucher',label:'Thưởng nạp 5%'}]},
+  'D09':{code:'D09',title:'Khai hỏa liên hoàn',desc:'Có 10 vé thắng hợp lệ trong ngày',icon:'fire',iconColor:'orange',points:25,target:10,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:25,label:'+25'},{type:'xp',amount:50,label:'+50 XP'},{type:'voucher',label:'Freebet 30K'}]},
+  'D10':{code:'D10',title:'Gom thắng rinh quà',desc:'Tích lũy 10 triệu tiền thắng trong ngày',icon:'chart_bar',iconColor:'blue',points:35,target:10000000,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:35,label:'+35'},{type:'xp',amount:70,label:'+70 XP'},{type:'voucher',label:'Freebet 100K'}]},
+  'D11':{code:'D11',title:'Bản lĩnh lật kèo - mốc 5 triệu',desc:'Có 1 vé thua từ 5 triệu, quà an ủi tự động',icon:'shield',iconColor:'purple',points:15,target:5000000,group:'daily',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D12':{code:'D12',title:'Bản lĩnh lật kèo - mốc tích lũy 10 triệu',desc:'Tích lũy 10 triệu tiền thua, quà an ủi tự động',icon:'shield',iconColor:'purple',points:20,target:10000000,group:'daily',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:20,label:'+20'},{type:'xp',amount:40,label:'+40 XP'},{type:'voucher',label:'Freebet 50K'}]},
+  'D13':{code:'D13',title:'Điểm Danh Giờ Vàng',desc:'Đăng nhập trong khung giờ vàng (19h-21h)',icon:'timer',iconColor:'gold',points:15,target:1,group:'hot',tag:'Giờ Vàng',cta:'Mở sự kiện',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D14':{code:'D14',title:'Giờ vàng săn ngay',desc:'Hoàn thành 1 vé cược trong khung giờ vàng',icon:'lightning',iconColor:'gold',points:20,target:1,group:'hot',tag:'Giờ Vàng',cta:'Vào cược',rewards:[{type:'coin',amount:20,label:'+20'},{type:'xp',amount:40,label:'+40 XP'}]},
+  'D15':{code:'D15',title:'Canh Khuya Rinh Lộc',desc:'Hoàn thành 1 hành động trong khung 23h-01h',icon:'moon',iconColor:'purple',points:15,target:1,group:'hot',tag:'Canh Khuya',cta:'Xem chi tiết',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D16':{code:'D16',title:'Điểm Danh Giờ G',desc:'Check-in trong khung countdown trước trận',icon:'timer',iconColor:'red',points:15,target:1,group:'hot',tag:'Giờ G',cta:'Mở sự kiện',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D17':{code:'D17',title:'Rung kèo Nhịp Trận',desc:'Hoàn thành 1 vé cược trong khung trận đấu',icon:'swords',iconColor:'red',points:20,target:1,group:'hot',tag:'Theo trận',cta:'Vào cược',rewards:[{type:'coin',amount:20,label:'+20'},{type:'xp',amount:40,label:'+40 XP'}]},
+  'D18':{code:'D18',title:'Tay to cược khỏe - mốc 1 triệu',desc:'Có 1 vé cược hợp lệ từ 1 triệu trong ngày',icon:'chart_up',iconColor:'teal',points:15,target:1000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D19':{code:'D19',title:'Cược to nhận quà to - mốc 3 triệu',desc:'Tích lũy 3 triệu tiền cược hợp lệ trong ngày',icon:'target',iconColor:'blue',points:25,target:3000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:25,label:'+25'},{type:'xp',amount:50,label:'+50 XP'}]},
+  'D20':{code:'D20',title:'Tay to cược khỏe - mốc 10 triệu',desc:'Có 1 vé cược hợp lệ từ 10 triệu trong ngày',icon:'diamond',iconColor:'purple',points:50,target:10000000,group:'daily',cta:'Vào cược',rewards:[{type:'coin',amount:50,label:'+50'},{type:'xp',amount:100,label:'+100 XP'},{type:'voucher',label:'Thưởng nạp 10%'}]},
+  'D21':{code:'D21',title:'Khai hỏa liên hoàn',desc:'Có 2 vé thắng hợp lệ trong ngày',icon:'fire',iconColor:'orange',points:15,target:2,group:'daily',cta:'Xem chi tiết',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D22':{code:'D22',title:'Bản lĩnh lật kèo - mốc 2 triệu',desc:'Có 1 vé thua từ 2 triệu, quà an ủi tự động',icon:'shield',iconColor:'teal',points:10,target:2000000,group:'daily',cta:'Theo dõi',autoComplete:true,rewards:[{type:'coin',amount:10,label:'+10'},{type:'xp',amount:20,label:'+20 XP'}]},
+  'D23':{code:'D23',title:'Game hot trong ngày - Tài Xỉu Live',desc:'Chơi Tài Xỉu Live hôm nay',icon:'dice',iconColor:'purple',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D24':{code:'D24',title:'Game hot trong ngày - Baccarat Live',desc:'Chơi Baccarat Live hôm nay',icon:'dice',iconColor:'red',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D25':{code:'D25',title:'Game hot trong ngày - Rồng Hổ Live',desc:'Chơi Rồng Hổ Live hôm nay',icon:'dice',iconColor:'orange',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D26':{code:'D26',title:'Game hot trong ngày - Roulette Live',desc:'Chơi Roulette Live hôm nay',icon:'dice',iconColor:'teal',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D27':{code:'D27',title:'Game hot trong ngày - Blackjack Live',desc:'Chơi Blackjack Live hôm nay',icon:'dice',iconColor:'blue',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D28':{code:'D28',title:'Game hot trong ngày - Sicbo Live',desc:'Chơi Sicbo Live hôm nay',icon:'dice',iconColor:'green',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D29':{code:'D29',title:'Game hot trong ngày - Nổ Hũ Hot',desc:'Chơi Nổ Hũ Hot hôm nay',icon:'sparkle',iconColor:'gold',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D30':{code:'D30',title:'Game hot trong ngày - Bắn Cá Hot',desc:'Chơi Bắn Cá Hot hôm nay',icon:'sparkle',iconColor:'blue',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D31':{code:'D31',title:'Game hot trong ngày - Aviator',desc:'Chơi Aviator hôm nay',icon:'sparkle',iconColor:'red',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D32':{code:'D32',title:'Game hot trong ngày - Mini Poker',desc:'Chơi Mini Poker hôm nay',icon:'sparkle',iconColor:'purple',points:15,target:1,group:'discovery',tag:'Game Hot',cta:'Chơi ngay',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  'D33':{code:'D33',title:'Võ lâm hội tụ - B52',desc:'Chơi 1 game thuộc B52 hôm nay',icon:'swords',iconColor:'red',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'xp',amount:20,label:'+20 XP'}]},
+  'D34':{code:'D34',title:'Võ lâm hội tụ - HitClub',desc:'Chơi 1 game thuộc HitClub hôm nay',icon:'swords',iconColor:'orange',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'xp',amount:20,label:'+20 XP'}]},
+  'D35':{code:'D35',title:'Võ lâm hội tụ - Sunwin',desc:'Chơi 1 game thuộc Sunwin hôm nay',icon:'swords',iconColor:'gold',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'xp',amount:20,label:'+20 XP'}]},
+  'D36':{code:'D36',title:'Võ lâm hội tụ - Techplay',desc:'Chơi 1 game thuộc Techplay hôm nay',icon:'swords',iconColor:'blue',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'xp',amount:20,label:'+20 XP'}]},
+  'D37':{code:'D37',title:'Võ lâm hội tụ - Pragmatic',desc:'Chơi 1 game thuộc Pragmatic hôm nay',icon:'swords',iconColor:'purple',points:10,target:1,group:'discovery',tag:'NCC Hot',cta:'Vào game',rewards:[{type:'coin',amount:10,label:'+10'},{type:'xp',amount:20,label:'+20 XP'}]}
 };
+
+// Banner image mapping for mission detail
+var LC_BANNER_MAP = {
+  'D01':'bn-d01-diem-danh.png','D02':'bn-d02-nap-nhe-nhan-qua.png','D03':'bn-d03-khai-hoa-hang-ngay.png',
+  'D04':'bn-d04-thau-trai.png','D05':'bn-d05-cuoc-lien-tay.png',
+  'D06':'bn-d06-tay-to.png','D07':'bn-d07-cuoc-to.png','D08':'bn-d08-thu-tai.png',
+  'D09':'bn-d09-khai-hoa-lien-hoan.png','D10':'bn-d10-gom-thang.png',
+  'D11':'bn-d11-ban-linh.png','D12':'bn-d11-ban-linh.png',
+  'D13':'bn-d13-diem-danh-gio-vang.png','D14':'bn-d14-gio-vang-san.png',
+  'D15':'bn-d15-canh-khuya.png','D16':'bn-d16-diem-danh-gio-g.png',
+  'D17':'bn-d17-rung-keo.png',
+  'D18':'bn-d06-tay-to.png','D19':'bn-d07-cuoc-to.png','D20':'bn-d06-tay-to.png',
+  'D21':'bn-d09-khai-hoa-lien-hoan.png','D22':'bn-d11-ban-linh.png',
+  'D23':'bn-game-hot.png','D24':'bn-game-hot.png','D25':'bn-game-hot.png',
+  'D26':'bn-game-hot.png','D27':'bn-game-hot.png','D28':'bn-game-hot.png',
+  'D29':'bn-game-hot-thuong.png','D30':'bn-game-hot-thuong.png',
+  'D31':'bn-game-hot-thuong.png','D32':'bn-game-hot-thuong.png',
+  'D33':'bn-ncc-vo-lam.png','D34':'bn-ncc-vo-lam.png','D35':'bn-ncc-vo-lam.png',
+  'D36':'bn-ncc-anh-hung.png','D37':'bn-ncc-anh-hung.png',
+  'W01':'bn-d06-tay-to.png','W03':'bn-d07-cuoc-to.png',
+  'W11':'bn-w11-doi-gio.png','W18':'bn-game-hot-thuong.png',
+  'W21':'bn-w21-san-manh.png','W28':'bn-w21-gom-manh.png',
+  'M01':'bn-m01-chien-than.png','M04':'bn-m04-bat-kha.png',
+  'M09':'bn-m09-nha-chinh-phuc.png','M10':'bn-m10-dau-an.png',
+  'M15':'bn-m15-anh-hung-thang-cap.png'
+};
+function lcGetBanner(code) {
+  var file = LC_BANNER_MAP[code];
+  if (file) return 'Assets/Challenge banner/' + file;
+  return '';
+}
 
 // Daily schedule: 28 ngày season (08/08 – 04/09/2026)
 var LC_DAILY_SCHEDULE = {
@@ -14378,20 +14669,20 @@ var LC_DAILY_SCHEDULE = {
 
 // Weekly & Monthly pools (static for season)
 var LC_WEEKLY_POOL = [
-  {id:'w01',code:'W01',title:'Tay to cược khỏe',desc:'Tổng cược trong tuần đạt 10 triệu',icon:'chart_bar',iconColor:'blue',current:0,target:10000000,group:'progress',points:50,reset:'weekly',cta:'Cược ngay',rewards:[{type:'coin',amount:50,label:'+50'},{type:'cash',amount:1000000,label:'1M'}]},
-  {id:'w03',code:'W03',title:'Cược to nhận quà to',desc:'Tổng cược trong tuần đạt 50 triệu',icon:'diamond',iconColor:'purple',current:12000000,target:50000000,group:'progress',points:80,reset:'weekly',cta:'Cược ngay',rewards:[{type:'coin',amount:80,label:'+80'},{type:'cash',amount:3000000,label:'3M'}]},
-  {id:'w11',code:'W11',title:'Đổi Gió Săn Quà',desc:'Chơi thể loại game mới trong tuần',icon:'refresh',iconColor:'teal',current:0,target:1,group:'progress',points:15,reset:'weekly',cta:'Khám phá',rewards:[{type:'coin',amount:15,label:'+15'},{type:'voucher',label:'Freebet 100K'}]},
-  {id:'w18',code:'W18',title:'Thử game mới tuần này',desc:'Trải nghiệm game mới ra mắt trong tuần',icon:'sparkle',iconColor:'gold',current:0,target:1,group:'progress',points:20,reset:'weekly',cta:'Chơi thử',rewards:[{type:'coin',amount:20,label:'+20'},{type:'cash',amount:200000,label:'200K'}]},
-  {id:'w21',code:'W21',title:'Săn mảnh nhận Sao',desc:'Thu thập mảnh ghép để đổi sao',icon:'star',iconColor:'orange',current:0,target:1,group:'progress',points:30,reset:'weekly',tag:'Collectible',cta:'Săn mảnh',rewards:[{type:'coin',amount:30,label:'+30'},{type:'voucher',label:'1 Sao Vàng'}]},
-  {id:'w28',code:'W28',title:'Ghé Shop Có Quà',desc:'Truy cập Shop đổi quà trong tuần',icon:'gift',iconColor:'green',current:0,target:1,group:'progress',points:10,reset:'weekly',cta:'Vào Shop',autoComplete:true,rewards:[{type:'coin',amount:10,label:'+10'}]}
+  {id:'w01',code:'W01',title:'Tay to cược khỏe',desc:'Tổng cược trong tuần đạt 10 triệu',icon:'chart_bar',iconColor:'blue',current:0,target:10000000,group:'progress',points:50,reset:'weekly',cta:'Cược ngay',rewards:[{type:'coin',amount:50,label:'+50'},{type:'xp',amount:100,label:'+100 XP'}]},
+  {id:'w03',code:'W03',title:'Cược to nhận quà to',desc:'Tổng cược trong tuần đạt 50 triệu',icon:'diamond',iconColor:'purple',current:12000000,target:50000000,group:'progress',points:80,reset:'weekly',cta:'Cược ngay',rewards:[{type:'coin',amount:80,label:'+80'},{type:'xp',amount:150,label:'+150 XP'},{type:'voucher',label:'Freebet 100K'}]},
+  {id:'w11',code:'W11',title:'Đổi Gió Săn Quà',desc:'Chơi thể loại game mới trong tuần',icon:'refresh',iconColor:'teal',current:0,target:1,group:'progress',points:15,reset:'weekly',cta:'Khám phá',rewards:[{type:'coin',amount:15,label:'+15'},{type:'xp',amount:30,label:'+30 XP'}]},
+  {id:'w18',code:'W18',title:'Thử game mới tuần này',desc:'Trải nghiệm game mới ra mắt trong tuần',icon:'sparkle',iconColor:'gold',current:0,target:1,group:'progress',points:20,reset:'weekly',cta:'Chơi thử',rewards:[{type:'coin',amount:20,label:'+20'},{type:'xp',amount:40,label:'+40 XP'}]},
+  {id:'w21',code:'W21',title:'Săn mảnh nhận Sao',desc:'Thu thập mảnh ghép để đổi sao',icon:'star',iconColor:'orange',current:0,target:1,group:'progress',points:30,reset:'weekly',tag:'Collectible',cta:'Săn mảnh',rewards:[{type:'coin',amount:30,label:'+30'},{type:'xp',amount:60,label:'+60 XP'}]},
+  {id:'w28',code:'W28',title:'Ghé Shop Có Quà',desc:'Truy cập Shop đổi quà trong tuần',icon:'gift',iconColor:'green',current:0,target:1,group:'progress',points:10,reset:'weekly',cta:'Vào Shop',autoComplete:true,rewards:[{type:'coin',amount:10,label:'+10'},{type:'xp',amount:15,label:'+15 XP'}]}
 ];
 
 var LC_MONTHLY_POOL = [
-  {id:'m01',code:'M01',title:'Chiến thần 100tr',desc:'Tổng cược trong tháng đạt 100 triệu',icon:'crown',iconColor:'red',current:22000000,target:100000000,group:'vip',points:100,reset:'monthly',tag:'VIP',vipRequired:1,cta:'Cược ngay',rewards:[{type:'coin',amount:100,label:'+100'},{type:'cash',amount:5000000,label:'5M'}]},
-  {id:'m04',code:'M04',title:'Bất khả chiến bại',desc:'Tổng cược trong tháng đạt 50 triệu',icon:'trophy',iconColor:'gold',current:8000000,target:50000000,group:'vip',points:80,reset:'monthly',tag:'VIP',vipRequired:1,cta:'Cược ngay',rewards:[{type:'coin',amount:80,label:'+80'},{type:'cash',amount:2000000,label:'2M'}]},
-  {id:'m09',code:'M09',title:'Nhà chinh phục',desc:'Hoàn thành 10 mốc trên lộ trình tháng',icon:'target',iconColor:'blue',current:3,target:10,group:'vip',points:60,reset:'monthly',cta:'Xem lộ trình',rewards:[{type:'coin',amount:60,label:'+60'},{type:'voucher',label:'Freebet 500K'}]},
-  {id:'m10',code:'M10',title:'Dấu ấn anh hùng',desc:'Hoàn thành 20 nhiệm vụ trong tháng',icon:'medal',iconColor:'orange',current:7,target:20,group:'vip',points:50,reset:'monthly',cta:'Làm nhiệm vụ',rewards:[{type:'coin',amount:50,label:'+50'},{type:'cash',amount:1000000,label:'1M'}]},
-  {id:'m15',code:'M15',title:'Anh hùng thăng cấp',desc:'Đạt Level 10 trong tháng',icon:'chart_up',iconColor:'teal',current:10,target:10,status:'claimable',action:'Nhận',group:'vip',points:100,reset:'monthly',tag:'NHẬN',cta:'Nhận',rewards:[{type:'coin',amount:100,label:'+100'},{type:'cash',amount:3000000,label:'3M'},{type:'voucher',label:'VIP Voucher'}]}
+  {id:'m01',code:'M01',title:'Chiến thần 100tr',desc:'Tổng cược trong tháng đạt 100 triệu',icon:'crown',iconColor:'red',current:22000000,target:100000000,group:'vip',points:100,reset:'monthly',tag:'VIP',vipRequired:1,cta:'Cược ngay',rewards:[{type:'coin',amount:100,label:'+100'},{type:'xp',amount:200,label:'+200 XP'},{type:'voucher',label:'Thưởng nạp 15%'}]},
+  {id:'m04',code:'M04',title:'Bất khả chiến bại',desc:'Tổng cược trong tháng đạt 50 triệu',icon:'trophy',iconColor:'gold',current:8000000,target:50000000,group:'vip',points:80,reset:'monthly',tag:'VIP',vipRequired:1,cta:'Cược ngay',rewards:[{type:'coin',amount:80,label:'+80'},{type:'xp',amount:150,label:'+150 XP'},{type:'voucher',label:'Freebet 200K'}]},
+  {id:'m09',code:'M09',title:'Nhà chinh phục',desc:'Hoàn thành 10 mốc trên lộ trình tháng',icon:'target',iconColor:'blue',current:3,target:10,group:'vip',points:60,reset:'monthly',cta:'Xem lộ trình',rewards:[{type:'coin',amount:60,label:'+60'},{type:'xp',amount:120,label:'+120 XP'},{type:'voucher',label:'Freebet 100K'}]},
+  {id:'m10',code:'M10',title:'Dấu ấn anh hùng',desc:'Hoàn thành 20 nhiệm vụ trong tháng',icon:'medal',iconColor:'orange',current:7,target:20,group:'vip',points:50,reset:'monthly',cta:'Làm nhiệm vụ',rewards:[{type:'coin',amount:50,label:'+50'},{type:'xp',amount:100,label:'+100 XP'}]},
+  {id:'m15',code:'M15',title:'Anh hùng thăng cấp',desc:'Đạt Level 10 trong tháng',icon:'chart_up',iconColor:'teal',current:10,target:10,status:'claimable',action:'Nhận',group:'vip',points:100,reset:'monthly',tag:'NHẬN',cta:'Nhận',rewards:[{type:'coin',amount:100,label:'+100'},{type:'xp',amount:250,label:'+250 XP'},{type:'voucher',label:'Thưởng nạp 20%'}]}
 ];
 
 // Deterministic hash for mock progress
@@ -14499,6 +14790,7 @@ function lcRewardSummary(m) {
   if (!m.rewards || !m.rewards.length) return '';
   return m.rewards.map(function(r){
     if (r.type==='coin') return r.label + ' <span class="mcoin sm"></span>';
+    if (r.type==='xp') return '<span style="color:#a78bfa">' + r.label + '</span>';
     if (r.type==='cash') return '<span style="color:#4ade80">' + r.label + '</span>';
     if (r.type==='voucher') return '<span style="color:#60a5fa">' + r.label + '</span>';
     return r.label;
@@ -14516,6 +14808,7 @@ var lcSubTab = 'recommended';
 var wcSubTab = 'predict';
 
 function missionScrollTop() {
+  if (window._lcSkipScrollTop) return;
   var mv = document.getElementById('missionView');
   if (mv) mv.scrollTo(0, 0);
   window.scrollTo(0, 0);
@@ -14598,7 +14891,7 @@ function showLiveChallengeFullPage() {
   var lcDateLabel = lcDayInfo.label || getLCDate();
   var lcDayBadge = lcDayInfo.dayType === 'holiday' ? ' &bull; L\u1EC5' : lcDayInfo.dayType === 'weekend' ? ' &bull; Cu\u1ED1i tu\u1EA7n' : '';
   var lcCtx = lcDayInfo.context ? ' &bull; ' + lcDayInfo.context : '';
-  html += '<div class="lc-hero-subtitle">' + lcDateLabel + lcDayBadge + lcCtx + ' &mdash; K\u1EBFt th\u00FAc sau 27 ng\u00E0y</div>';
+  html += '<div class="lc-hero-subtitle">K\u1EBFt th\u00FAc sau 27 ng\u00E0y</div>';
   html += '<div class="lc-hero-spacer"></div>';
   html += '<div class="lc-hero-stats" style="gap:20px;">';
   html += '<div class="lc-hero-stat"><div class="lc-hero-stat-value">' + lcCompletedMissions + '/' + lcTotalMissions + '</div><div class="lc-hero-stat-label">Thử thách</div></div>';
@@ -14658,12 +14951,286 @@ function showLiveChallengeFullPage() {
   html += '<div style="padding:16px 16px 0;">';
   html += '<div class="lc-section-title">' + lcIcon('list','neon-blue') + ' Danh sách thử thách</div>';
   html += '</div>';
-  html += '<div id="lcMissionListInline" style="padding:4px 16px 80px;"></div>';
+  html += '<div id="lcMissionListInline" style="padding:4px 16px 16px;"></div>';
+
+  // Section 3: Chuỗi thử thách — Timeline trận cầu nóng
+  html += lcRenderChainTimeline();
+  html += '<div style="height:60px;"></div>';
 
 
   container.innerHTML = html;
   lcRenderFilteredList();
+  lcScrollChainToLive();
   missionScrollTop();
+}
+
+// ===== Chuỗi thử thách — Hot Match Timeline =====
+var LC_HOT_MATCHES = [
+  {id:'hm17',code:'HM17',home:'Hà Nội FC',away:'TP.HCM',league:'V-League',leagueShort:'VLE',time:'2026-08-23T19:15:00+07:00',coin:20,icon:'⚽',banner:'Assets/Challenge banner/bn-event-cuoi-tuan.png'},
+  {id:'hm01',code:'HM01',home:'Inter',away:'Juventus',league:'Serie A',leagueShort:'SEA',time:'2026-08-23T21:00:00+07:00',coin:30,icon:'⚽',banner:'Assets/Challenge banner/bn-event-serie-a.png'},
+  {id:'hm10',code:'HM10',home:'Arsenal',away:'Chelsea',league:'Premier League',leagueShort:'EPL',time:'2026-08-22T22:30:00+07:00',coin:50,icon:'⚽',banner:'Assets/Challenge banner/bn-event-epl.png'},
+  {id:'hm04',code:'HM04',home:'Leverkusen',away:'Leipzig',league:'Bundesliga',leagueShort:'BUN',time:'2026-08-28T21:30:00+07:00',coin:30,icon:'⚽',banner:'Assets/Challenge banner/bn-event-bundesliga.png'},
+  {id:'hm11',code:'HM11',home:'Liverpool',away:'Man United',league:'Premier League',leagueShort:'EPL',time:'2026-08-29T23:00:00+07:00',coin:50,icon:'🔥',banner:'Assets/Challenge banner/bn-event-epl.png'},
+  {id:'hm05',code:'HM05',home:'Barcelona',away:'Real Madrid',league:'La Liga',leagueShort:'LAL',time:'2026-08-30T21:00:00+07:00',coin:30,icon:'🔥',banner:'Assets/Challenge banner/bn-event-cuoi-tuan.png'},
+  {id:'hm18',code:'HM18',home:'Viettel',away:'HAGL',league:'V-League',leagueShort:'VLE',time:'2026-08-30T19:15:00+07:00',coin:20,icon:'⚽',banner:'Assets/Challenge banner/bn-event-cuoi-tuan.png'},
+  {id:'hm02',code:'HM02',home:'AC Milan',away:'Napoli',league:'Serie A',leagueShort:'SEA',time:'2026-08-30T21:45:00+07:00',coin:30,icon:'⚽',banner:'Assets/Challenge banner/bn-event-serie-a.png'},
+  {id:'hm07',code:'HM07',home:'PSG',away:'Marseille',league:'Ligue 1',leagueShort:'LI1',time:'2026-08-31T02:45:00+07:00',coin:30,icon:'⚽',banner:'Assets/Challenge banner/bn-event-cuoi-tuan.png'},
+  {id:'hm08',code:'HM08',home:'Real Madrid',away:'Bayern Munich',league:'Champions League',leagueShort:'UCL',time:'2026-09-02T02:00:00+07:00',coin:30,icon:'🏆',banner:'Assets/Challenge banner/bn-event-san-cup.png'},
+  {id:'hm09',code:'HM09',home:'Man City',away:'Inter',league:'Champions League',leagueShort:'UCL',time:'2026-09-03T02:00:00+07:00',coin:30,icon:'🏆',banner:'Assets/Challenge banner/bn-event-san-cup.png'},
+  {id:'hm03',code:'HM03',home:'Bayern Munich',away:'Dortmund',league:'Bundesliga',leagueShort:'BUN',time:'2026-09-04T21:30:00+07:00',coin:30,icon:'⚽',banner:'Assets/Challenge banner/bn-event-bundesliga.png'},
+  {id:'hm12',code:'HM12',home:'Man City',away:'Tottenham',league:'Premier League',leagueShort:'EPL',time:'2026-09-05T21:00:00+07:00',coin:50,icon:'⚽',banner:'Assets/Challenge banner/bn-event-epl.png'},
+  {id:'hm15',code:'HM15',home:'Roma',away:'Porto',league:'Europa League',leagueShort:'UEL',time:'2026-09-17T02:00:00+07:00',coin:35,icon:'🏆',banner:'Assets/Challenge banner/bn-event-sieu-cup.png'},
+  {id:'hm13',code:'HM13',home:'Newcastle',away:'Arsenal',league:'Premier League',leagueShort:'EPL',time:'2026-09-12T22:30:00+07:00',coin:40,icon:'⚽',banner:'Assets/Challenge banner/bn-event-epl.png'}
+];
+// League & Club logo CDN (TheSportsDB)
+var LC_LEAGUE_LOGOS = {
+  'EPL':'https://r2.thesportsdb.com/images/media/league/badge/gasy9d1737743125.png',
+  'SEA':'https://r2.thesportsdb.com/images/media/league/badge/67q3q21679951383.png',
+  'BUN':'https://r2.thesportsdb.com/images/media/league/badge/teqh1b1679952008.png',
+  'LAL':'https://r2.thesportsdb.com/images/media/league/badge/ja4it51687628717.png',
+  'LI1':'https://r2.thesportsdb.com/images/media/league/badge/9f7z9d1742983155.png',
+  'UCL':'https://r2.thesportsdb.com/images/media/league/badge/facv1u1742998896.png',
+  'UEL':'https://r2.thesportsdb.com/images/media/league/badge/mlsr7d1718774547.png',
+  'VLE':''
+};
+var LC_CLUB_LOGOS = {
+  'Arsenal':'https://r2.thesportsdb.com/images/media/team/badge/uyhbfe1612467038.png',
+  'Chelsea':'https://r2.thesportsdb.com/images/media/team/badge/yvwvtu1448813215.png',
+  'Liverpool':'https://r2.thesportsdb.com/images/media/team/badge/kfaher1737969724.png',
+  'Man United':'https://r2.thesportsdb.com/images/media/team/badge/xzqdr11517660252.png',
+  'Man City':'https://r2.thesportsdb.com/images/media/team/badge/vwpvry1467462651.png',
+  'Tottenham':'https://r2.thesportsdb.com/images/media/team/badge/dfyfhl1604094109.png',
+  'Newcastle':'https://r2.thesportsdb.com/images/media/team/badge/lhwuiz1621593302.png',
+  'Inter':'https://r2.thesportsdb.com/images/media/team/badge/ryhu6d1617113103.png',
+  'Juventus':'https://r2.thesportsdb.com/images/media/team/badge/uxf0gr1742983727.png',
+  'AC Milan':'https://r2.thesportsdb.com/images/media/team/badge/wvspur1448806617.png',
+  'Napoli':'https://r2.thesportsdb.com/images/media/team/badge/l8qyxv1742982541.png',
+  'Bayern Munich':'https://r2.thesportsdb.com/images/media/team/badge/01ogkh1716960412.png',
+  'Dortmund':'https://r2.thesportsdb.com/images/media/team/badge/tqo8ge1716960353.png',
+  'Leverkusen':'https://r2.thesportsdb.com/images/media/team/badge/3x9k851726760113.png',
+  'Leipzig':'https://r2.thesportsdb.com/images/media/team/badge/zjgapo1594244951.png',
+  'Barcelona':'https://r2.thesportsdb.com/images/media/team/badge/wq9sir1639406443.png',
+  'Real Madrid':'https://r2.thesportsdb.com/images/media/team/badge/vwvwrw1473502969.png',
+  'PSG':'https://r2.thesportsdb.com/images/media/team/badge/rwqrrq1473504808.png',
+  'Marseille':'https://r2.thesportsdb.com/images/media/team/badge/uutsyt1473504764.png',
+  'Roma':'https://r2.thesportsdb.com/images/media/team/badge/jwro2s1760820674.png',
+  'Porto':'https://r2.thesportsdb.com/images/media/team/badge/xu47rb1628855600.png',
+  'Hà Nội FC':'',
+  'TP.HCM':'',
+  'Viettel':'',
+  'HAGL':''
+};
+function lcClubLogo(name, size) {
+  size = size || 20;
+  var url = LC_CLUB_LOGOS[name];
+  if (url) return '<img src="' + url + '/tiny" alt="' + name + '" style="width:' + size + 'px;height:' + size + 'px;object-fit:contain;border-radius:50%;background:rgba(255,255,255,.1);">';
+  // Fallback: first 2 letters
+  return '<span style="display:inline-flex;align-items:center;justify-content:center;width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:rgba(255,255,255,.1);font-size:' + Math.round(size*0.45) + 'px;font-weight:700;color:#fff;">' + name.substring(0,2).toUpperCase() + '</span>';
+}
+function lcLeagueLogo(code, size) {
+  size = size || 18;
+  var url = LC_LEAGUE_LOGOS[code];
+  if (url) return '<img src="' + url + '/tiny" alt="' + code + '" style="width:' + size + 'px;height:' + size + 'px;object-fit:contain;">';
+  return '';
+}
+
+// Side events that accompany matches
+var LC_SIDE_EVENTS = {
+  'D13': {code:'D13', label:'Điểm Danh Giờ Vàng', icon:'timer', neon:'neon-gold', time:'19h-21h'},
+  'D14': {code:'D14', label:'Giờ vàng săn ngay', icon:'lightning', neon:'neon-gold', time:'Giờ vàng'},
+  'D15': {code:'D15', label:'Canh Khuya Rinh Lộc', icon:'moon', neon:'neon-purple', time:'23h-01h'},
+  'D16': {code:'D16', label:'Điểm Danh Giờ G', icon:'timer', neon:'neon-red', time:'Trước trận'},
+  'D17': {code:'D17', label:'Rung kèo Nhịp Trận', icon:'swords', neon:'neon-red', time:'Trong trận'}
+};
+// Sort by time
+LC_HOT_MATCHES.sort(function(a,b) { return new Date(a.time) - new Date(b.time); });
+// Assign side events based on match type
+LC_HOT_MATCHES.forEach(function(hm) {
+  if (!hm.sides) {
+    var d = new Date(hm.time);
+    var h = d.getHours();
+    var dow = d.getDay(); // 0=Sun, 6=Sat
+    var isBig = hm.coin >= 50 || hm.leagueShort === 'UCL';
+    var isWeekend = dow === 0 || dow === 6;
+    var isLate = h >= 23 || h < 3;
+    if (isBig) {
+      hm.sides = isLate ? ['D13','D15','D17'] : ['D13','D16','D17'];
+    } else if (isWeekend) {
+      hm.sides = isLate ? ['D14','D15'] : ['D16','D17'];
+    } else {
+      hm.sides = isLate ? ['D14','D15'] : ['D14','D16'];
+    }
+  }
+});
+
+var lcChainSelected = null;
+
+function lcHMStatus(hm) {
+  var now = lcMockDate ? new Date(lcMockDate + 'T20:00:00+07:00') : new Date();
+  var start = new Date(hm.time);
+  var end = new Date(start.getTime() + 2 * 3600000);
+  if (now >= end) return 'past';
+  if (now >= new Date(start.getTime() - 3 * 3600000) && now < end) return 'live';
+  return 'future';
+}
+
+function lcHMTimeLabel(hm) {
+  var d = new Date(hm.time);
+  var day = d.getDate(); var mon = d.getMonth() + 1;
+  var h = d.getHours(); var m = d.getMinutes();
+  return (day<10?'0':'') + day + '/' + (mon<10?'0':'') + mon + ' ' + (h<10?'0':'') + h + ':' + (m<10?'0':'') + m;
+}
+
+function lcRenderChainTimeline() {
+  if (!LC_HOT_MATCHES.length) return '';
+  var html = '<div class="lc-chain">';
+  html += '<div class="lc-chain-title">' + lcIcon('fire','neon-red') + ' Chuỗi sự kiện LIVE</div>';
+  html += '<div class="lc-vchain">';
+
+  LC_HOT_MATCHES.forEach(function(hm, i) {
+    var st = lcHMStatus(hm);
+    var sel = lcChainSelected === hm.id;
+    var sides = hm.sides || [];
+
+    html += '<div class="lc-vchain-row is-' + st + (sel ? ' selected' : '') + '">';
+
+    // Side event branches (above match dot)
+    if (sides.length > 0) {
+      html += '<div class="lc-vchain-branches">';
+      // Left branch
+      html += '<div class="lc-vchain-branch-left">';
+      if (sides[0] && LC_SIDE_EVENTS[sides[0]]) {
+        var se = LC_SIDE_EVENTS[sides[0]];
+        html += '<div class="lc-vchain-branch-tag" onclick="event.stopPropagation();lcChainSideClick(\'' + se.code + '\')">' + lcIcon(se.icon, se.neon) + ' ' + se.label + '</div>';
+      }
+      html += '</div>';
+      // Center connector
+      html += '<div class="lc-vchain-center-dot"></div>';
+      // Right branch
+      html += '<div class="lc-vchain-branch-right">';
+      if (sides[1] && LC_SIDE_EVENTS[sides[1]]) {
+        var se2 = LC_SIDE_EVENTS[sides[1]];
+        html += '<div class="lc-vchain-branch-tag" onclick="event.stopPropagation();lcChainSideClick(\'' + se2.code + '\')">' + lcIcon(se2.icon, se2.neon) + ' ' + se2.label + '</div>';
+      }
+      html += '</div>';
+      html += '</div>';
+
+      // Third side event (if exists) — below as another branch row
+      if (sides[2] && LC_SIDE_EVENTS[sides[2]]) {
+        var se3 = LC_SIDE_EVENTS[sides[2]];
+        html += '<div class="lc-vchain-branches" style="min-height:24px;">';
+        html += '<div class="lc-vchain-branch-left"></div>';
+        html += '<div class="lc-vchain-center-dot" style="width:6px;height:6px;"></div>';
+        html += '<div class="lc-vchain-branch-right">';
+        html += '<div class="lc-vchain-branch-tag" onclick="event.stopPropagation();lcChainSideClick(\'' + se3.code + '\')">' + lcIcon(se3.icon, se3.neon) + ' ' + se3.label + '</div>';
+        html += '</div>';
+        html += '</div>';
+      }
+    }
+
+    // Main match node
+    html += '<div class="lc-vchain-match" onclick="lcSelectChain(\'' + hm.id + '\')">';
+    // Left side — time + league
+    html += '<div class="lc-vchain-match-left">';
+    html += '<div class="lc-vchain-match-meta">' + lcHMTimeLabel(hm) + '</div>';
+    html += '<div class="lc-vchain-match-meta">' + lcLeagueLogo(hm.leagueShort, 14) + ' ' + hm.leagueShort + '</div>';
+    html += '</div>';
+    // Dot
+    html += '<div class="lc-vchain-match-dot">' + lcClubLogo(hm.home, 18) + lcClubLogo(hm.away, 18) + '</div>';
+    // Right side — teams + coin
+    html += '<div class="lc-vchain-match-right">';
+    html += '<div class="lc-vchain-match-teams">' + hm.home + ' <span class="lc-vchain-match-vs">vs</span> ' + hm.away + '</div>';
+    html += '<div class="lc-vchain-match-coin">+' + hm.coin + ' <span class="mcoin sm"></span></div>';
+    html += '</div>';
+    html += '</div>';
+
+    // Detail card (expanded)
+    if (sel) html += lcRenderChainDetail(hm);
+
+    html += '</div>'; // end row
+
+    // Segment between rows
+    if (i < LC_HOT_MATCHES.length - 1) html += '<div class="lc-vchain-seg"></div>';
+  });
+
+  html += '</div></div>';
+  return html;
+}
+
+function lcChainSideClick(code) {
+  // Navigate to mission detail
+  var m = MOCK_LC_MISSIONS.filter(function(x) { return x.code === code; })[0];
+  if (m) navigateTo('/mission/live-challenge/mission/' + m.id);
+}
+
+function lcRenderChainDetail(hm) {
+  var st = lcHMStatus(hm);
+  var d = new Date(hm.time);
+  var dayNames = ['CN','T2','T3','T4','T5','T6','T7'];
+  var dayLabel = dayNames[d.getDay()] + ' ' + lcHMTimeLabel(hm);
+
+  var html = '<div class="lc-chain-detail">';
+
+  // Banner
+  html += '<div class="lc-chain-detail-banner">';
+  var bannerSrc = hm.banner || lcGetBanner(hm.code);
+  if (bannerSrc) {
+    html += '<img src="' + bannerSrc + '" alt="' + hm.home + ' vs ' + hm.away + '">';
+  } else {
+    html += '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a0e05,#2d1a08);">';
+    html += '<span style="font-size:32px;">' + hm.icon + '</span>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // Body
+  html += '<div class="lc-chain-detail-body">';
+  html += '<div class="lc-chain-detail-teams">' + lcClubLogo(hm.home, 22) + ' ' + hm.home + ' <span class="lc-chain-detail-vs">vs</span> ' + hm.away + ' ' + lcClubLogo(hm.away, 22) + '</div>';
+
+  // Meta tags
+  html += '<div class="lc-chain-detail-meta">';
+  if (st === 'live') html += '<div class="lc-chain-detail-tag live"><span class="lc-live-dot"></span> LIVE</div>';
+  html += '<div class="lc-chain-detail-tag league">' + lcLeagueLogo(hm.leagueShort, 14) + ' ' + hm.league + '</div>';
+  html += '<div class="lc-chain-detail-tag">' + lcIcon('calendar','') + ' ' + dayLabel + '</div>';
+  html += '</div>';
+
+  // Reward
+  html += '<div class="lc-chain-detail-reward">';
+  html += '<span style="font-size:12px;color:var(--muted);">Phần thưởng:</span> ';
+  html += '<span style="font-size:13px;font-weight:700;color:#fbbf24;">+' + hm.coin + ' <span class="mcoin sm"></span></span>';
+  html += '</div>';
+
+  // Mission description
+  html += '<div style="font-size:11px;color:var(--muted);margin-bottom:12px;">Đặt 1 vé đúng trận này trên K-Sport để nhận quà</div>';
+
+  // CTA
+  var ctaLabel = st === 'past' ? '✓ Đã kết thúc' : (st === 'live' ? '🔥 Vào K-Sport ngay' : '⏰ Đặt nhắc nhở');
+  var ctaDisabled = st === 'past' ? ' style="opacity:.5;pointer-events:none;"' : '';
+  html += '<button class="lc-chain-detail-cta"' + ctaDisabled + '>' + ctaLabel + '</button>';
+
+  html += '</div></div>';
+  return html;
+}
+
+function lcSelectChain(id) {
+  lcChainSelected = (lcChainSelected === id) ? null : id;
+  window._lcSkipScrollTop = true;
+  // Re-render LC page
+  if (typeof showLiveChallengeFullPage === 'function') showLiveChallengeFullPage();
+  // Scroll to detail or timeline after re-render
+  setTimeout(function() {
+    var detail = document.querySelector('.lc-chain-detail');
+    if (detail) { detail.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+    else { var chain = document.querySelector('.lc-chain'); if(chain) chain.scrollIntoView({behavior:'smooth', block:'start'}); }
+    lcScrollChainToLive();
+    window._lcSkipScrollTop = false;
+  }, 50);
+}
+
+function lcScrollChainToLive() {
+  // Scroll to first live match or selected in vertical timeline
+  var live = document.querySelector('.lc-vchain-row.is-live') || document.querySelector('.lc-vchain-row.selected');
+  // No auto-scroll needed for vertical layout
 }
 
 function lcRenderFilteredList() {
@@ -14672,13 +15239,13 @@ function lcRenderFilteredList() {
 
   var html = '';
 
-  // Filter chips: Hot (default), VIP, Hoàn thành, Tất cả
+  // Filter chips: Tuần này (default), Mùa này, Live
   html += '<div class="lc-filter-chips">';
   var filters = [
-    {key:'hot', label:lcIcon('fire','neon-red')+' Hot'},
-    {key:'vip', label:lcIcon('crown','neon-gold')+' VIP'},
-    {key:'completed', label:'Hoàn thành'},
-    {key:'all', label:'Tất cả'}
+    {key:'weekly', label:lcIcon('calendar','neon-blue')+' Tuần này'},
+    {key:'season', label:lcIcon('trophy','neon-gold')+' Mùa này'},
+    {key:'live', label:'<span class="lc-live-dot"></span> Live'},
+    {key:'completed', label:lcIcon('check','neon-green')+' Hoàn thành'}
   ];
   filters.forEach(function(f) {
     html += '<div class="lc-filter-chip ' + (lcFilterActive === f.key ? 'active' : '') + '" onclick="lcFilterActive=\'' + f.key + '\';lcRenderFilteredList()">' + f.label + '</div>';
@@ -14687,10 +15254,12 @@ function lcRenderFilteredList() {
 
   // Filter missions
   var filtered;
-  if (lcFilterActive === 'hot') {
-    filtered = MOCK_LC_MISSIONS.filter(function(m) { return m.status !== 'completed'; }).slice(0, 10);
-  } else if (lcFilterActive === 'vip') {
-    filtered = MOCK_LC_MISSIONS.filter(function(m) { return m.tag === 'VIP' || m.group === 'vip'; });
+  if (lcFilterActive === 'weekly') {
+    filtered = MOCK_LC_MISSIONS.filter(function(m) { return m.reset === 'weekly' || m.group === 'progress'; });
+  } else if (lcFilterActive === 'season') {
+    filtered = MOCK_LC_MISSIONS.filter(function(m) { return m.reset === 'monthly' || m.group === 'vip'; });
+  } else if (lcFilterActive === 'live') {
+    filtered = MOCK_LC_MISSIONS.filter(function(m) { return m.group === 'hot' || m.tag === 'Giờ Vàng' || m.tag === 'Giờ G' || m.tag === 'Canh Khuya' || m.tag === 'Theo trận'; });
   } else if (lcFilterActive === 'completed') {
     filtered = MOCK_LC_MISSIONS.filter(function(m) { return m.status === 'completed' || m.status === 'claimable'; });
   } else {
@@ -15422,11 +15991,11 @@ function renderMissionOverview() {
 
   var mcoinImg = '<span class="mcoin sm"></span>';
   var feats = [
-    {name:'Cuối tuần bùng nổ', source:'Live Challenge', reward:'+20 ' + mcoinImg + ' + <span style="color:#4ade80">500K</span>', iconKey:'lightning', neon:'neon-red', claimable:true, xp:30},
-    {name:'Chuỗi 3 ngày', source:'Live Challenge', reward:'+15 ' + mcoinImg, iconKey:'fire', neon:'neon-red', time:'Còn 1 ngày', urgent:true, pct:66, xp:20},
-    {name:'Vượt hôm qua', source:'Live Challenge', reward:'+25 ' + mcoinImg + ' + <span style="color:#60a5fa">Freebet 50K</span>', iconKey:'chart_up', neon:'neon-teal', time:'Hôm nay', urgent:true, pct:75, xp:25},
-    {name:'Đặt cược đầu tiên', source:'Tân thủ', reward:'+10 ' + mcoinImg, iconKey:'target', neon:'neon-blue', xp:15},
-    {name:'Cược hôm nay 500K', source:'Chiến binh • Ngày', reward:'+10 ' + mcoinImg, iconKey:'swords', neon:'neon-red', pct:60, xp:10}
+    {name:'Cuối tuần bùng nổ', source:'Live Challenge', reward:'+20 ' + mcoinImg + ' + <span style="color:#4ade80">500K</span>', iconGroup:'hot', claimable:true, xp:30},
+    {name:'Chuỗi 3 ngày', source:'Live Challenge', reward:'+15 ' + mcoinImg, iconGroup:'weekly', time:'Còn 1 ngày', urgent:true, pct:66, xp:20},
+    {name:'Vượt hôm qua', source:'Live Challenge', reward:'+25 ' + mcoinImg + ' + <span style="color:#60a5fa">Freebet 50K</span>', iconGroup:'daily', time:'Hôm nay', urgent:true, pct:75, xp:25},
+    {name:'Đặt cược đầu tiên', source:'Tân thủ', reward:'+10 ' + mcoinImg, iconGroup:'discovery', xp:15},
+    {name:'Cược hôm nay 500K', source:'Chiến binh • Ngày', reward:'+10 ' + mcoinImg, iconGroup:'daily', pct:60, xp:10}
   ];
 
   var visibleCount = 3;
@@ -15435,7 +16004,8 @@ function renderMissionOverview() {
     var hiddenClass = i >= visibleCount ? ' mhub-feat-hidden' : '';
     var urgentClass = f.urgent ? ' feat-urgent' : '';
     html += '<div class="mhub-feat-card' + (f.claimable ? ' claimable' : '') + urgentClass + hiddenClass + '">';
-    html += '<div class="mhub-feat-icon">' + (f.iconKey ? lcIcon(f.iconKey, f.neon) : f.icon) + '</div>';
+    var featIconFile = LC_MISSION_ICON_MAP[f.iconGroup] || 'mi-daily.png';
+    html += '<div class="mhub-feat-icon"><img src="Assets/Mission-icon/' + featIconFile + '" alt="" style="width:32px;height:32px;object-fit:contain;"></div>';
     html += '<div class="mhub-feat-info">';
     html += '<div class="mhub-feat-name">' + f.name + '</div>';
     html += '<div class="mhub-feat-meta">';
@@ -15616,7 +16186,7 @@ function renderNewbieMissions() {
     var statusClass = m.status === 'completed' ? 'completed' : (m.status === 'locked' ? 'locked' : '');
     html += '<div class="mission-card ' + statusClass + '">';
     html += '<div class="mission-reward-badge">+' + m.coin + ' <span class="mcoin sm"></span></div>';
-    html += '<div class="mission-card-icon ' + m.iconColor + '">' + (LC_ICONS[m.icon] ? lcIcon(m.icon, lcNeonClass(m.iconColor)) : m.icon) + '</div>';
+    html += '<div class="mission-card-icon ' + m.iconColor + '">' + lcMissionImgIcon({group:'core'}, 28) + '</div>';
     html += '<div class="mission-card-info">';
     html += '<div class="mission-card-title">' + m.title + '</div>';
     html += '<div class="mission-card-desc">' + m.desc + '</div>';
@@ -15673,7 +16243,7 @@ function renderWarriorMissions() {
     var iconNeon = warriorSubTab === 'deposit' ? 'neon-red' : 'neon-blue';
 
     html += '<div class="mission-card lc-card' + (isComplete ? ' claimable' : '') + '" style="border-left-color:' + (warriorSubTab === 'deposit' ? 'rgba(222,46,54,.4)' : 'rgba(59,130,246,.4)') + ';">';
-    html += '<div class="mission-card-icon">' + (LC_ICONS[m.icon] ? lcIcon(m.icon, iconNeon) : m.icon) + '</div>';
+    html += '<div class="mission-card-icon">' + lcMissionImgIcon({group:'progress'}, 28) + '</div>';
     html += '<div class="mission-card-body" style="flex:1;min-width:0;">';
     html += '<div class="mission-card-title">' + m.title + '</div>';
     html += '<div style="display:flex;align-items:center;gap:6px;margin-top:4px;">';
@@ -15715,7 +16285,7 @@ function switchWcSubTab(tab) {
   container.innerHTML = '<div style="padding:16px;">' + renderWorldCupMissions() + '</div>';
 }
 
-var lcFilterActive = 'hot';
+var lcFilterActive = 'weekly';
 
 function lcSetupPage(title, backPath, opts) {
   homeScrollY = window.scrollY;
@@ -15759,7 +16329,7 @@ function lcRenderCard(m, clickable) {
   } else {
     h += '<div class="mission-reward-badge" style="background:linear-gradient(135deg,#b45309,#f59e0b)">' + lcRewardBadgeText(m) + ' <span class="mcoin sm"></span></div>';
   }
-  h += '<div class="mission-card-icon" style="font-size:24px;">' + lcMissionIcon(m) + '</div>';
+  h += '<div class="mission-card-icon" style="font-size:24px;">' + lcMissionImgIcon(m, 32) + '</div>';
   h += '<div class="mission-card-info"><div class="mission-card-title">' + m.title + '</div>';
   h += '<div class="mission-card-desc">' + m.desc + '</div>';
   if (vipLocked) {
@@ -15771,13 +16341,13 @@ function lcRenderCard(m, clickable) {
   h += '</div>';
   h += '<div class="mission-card-right">';
   if (vipLocked) {
-    h += '<button class="mission-btn mission-btn-go" style="background:rgba(158,158,158,.15);color:#9e9e9e;" onclick="event.stopPropagation();navigateTo(\'/mission/live-challenge/mission/' + m.id + '\')">Xem</button>';
+    h += '<span class="lc-card-chevron" style="opacity:.3;">&#8250;</span>';
   } else if (m.status === 'completed') {
     h += '<div class="mission-card-status done">\u2713 Xong</div>';
   } else if (isClaimable) {
     h += '<button class="mission-btn mission-btn-claim" onclick="event.stopPropagation()">Nh\u1EADn</button>';
   } else {
-    h += '<button class="mission-btn mission-btn-go" onclick="event.stopPropagation();navigateTo(\'/mission/live-challenge/mission/' + m.id + '\')">Chi ti\u1EBFt</button>';
+    h += '<span class="lc-card-chevron">&#8250;</span>';
   }
   h += '</div></div>';
   return h;
@@ -15801,11 +16371,21 @@ function showLcMissionDetail(missionId) {
 
   var html = '<div class="lc-page">';
 
-  // Summary card
+  // Banner 21:6 — image illustration
+  var bannerSrc = lcGetBanner(m.code || '');
+  html += '<div class="lc-detail-banner">';
+  if (bannerSrc) {
+    html += '<img class="lc-detail-banner-img" src="' + bannerSrc + '" alt="' + m.title + '">';
+  } else {
+    html += '<div class="lc-detail-banner-bg"></div>';
+    html += '<div class="lc-detail-banner-pattern"></div>';
+    html += '<div class="lc-detail-banner-shine"></div>';
+    html += '<div class="lc-detail-banner-icon">' + lcMissionImgIcon(m, 56) + '</div>';
+  }
+  html += '</div>';
+
+  // Text content below banner
   html += '<div class="lc-detail-summary">';
-  if (m.tag) html += '<div class="lc-detail-tag">' + m.tag + '</div>';
-  html += '<div style="font-size:32px;margin-bottom:8px;">' + lcMissionIcon(m) + '</div>';
-  html += '<div class="lc-detail-name">' + m.title + '</div>';
   html += '<div class="lc-detail-desc">' + m.desc + '</div>';
   html += '<div class="lc-detail-meta">';
   html += '<div class="lc-detail-meta-item">' + lcIcon('timer','neon-orange') + ' <strong>C\u00F2n 2 ng\u00E0y</strong></div>';
@@ -15835,15 +16415,14 @@ function showLcMissionDetail(missionId) {
   html += '<div class="lc-detail-block-title">' + lcIcon('gift','neon-gold') + ' Ph\u1EA7n th\u01B0\u1EDFng</div>';
   html += '<div class="lc-detail-reward-grid">';
   if (m.rewards) {
-    var rwdIcons = {coin:'<span class="mcoin lg"></span>', cash:lcIcon('money','neon-green'), voucher:lcIcon('gift','neon-blue')};
-    var rwdLabels = {coin:'Coin', cash:'Ti\u1EC1n th\u01B0\u1EDFng', voucher:'Voucher'};
+    var rwdIcons = {coin:'<span class="mcoin lg"></span>', xp:lcIcon('star','neon-purple'), cash:lcIcon('money','neon-green'), voucher:lcIcon('gift','neon-blue')};
+    var rwdLabels = {coin:'Coin', xp:'Kinh nghi\u1EC7m', cash:'Ti\u1EC1n th\u01B0\u1EDFng', voucher:'Voucher'};
     m.rewards.forEach(function(r) {
       var icon = rwdIcons[r.type] || lcIcon('gift','neon-gold');
       var name = r.type === 'coin' ? r.label + ' <span class="mcoin"></span>' : r.label;
-      html += '<div class="lc-detail-reward-item"><div class="lc-detail-reward-icon">' + icon + '</div><div class="lc-detail-reward-name">' + name + '</div><div class="lc-detail-reward-val">' + rwdLabels[r.type] + '</div></div>';
+      html += '<div class="lc-detail-reward-item"><div class="lc-detail-reward-icon">' + icon + '</div><div class="lc-detail-reward-name">' + name + '</div><div class="lc-detail-reward-val">' + (rwdLabels[r.type] || r.type) + '</div></div>';
     });
   }
-  html += '<div class="lc-detail-reward-item"><div class="lc-detail-reward-icon">' + lcIcon('star','neon-gold') + '</div><div class="lc-detail-reward-name">+' + m.points + ' <span class="mcoin sm"></span></div><div class="lc-detail-reward-val">Coin m\u00F9a</div></div>';
   html += '</div></div>';
 
   // Related missions
@@ -16440,7 +17019,7 @@ function renderWorldCupMissions() {
 
     html += '<div class="mission-card wc-card ' + statusClass + '">';
     html += '<div class="mission-reward-badge">+' + m.coin + ' <span class="mcoin sm"></span></div>';
-    html += '<div class="mission-card-icon ' + m.iconColor + '">' + (LC_ICONS[m.icon] ? lcIcon(m.icon, lcNeonClass(m.iconColor)) : m.icon) + '</div>';
+    html += '<div class="mission-card-icon ' + m.iconColor + '">' + lcMissionImgIcon({group:'hot'}, 28) + '</div>';
     html += '<div class="mission-card-info">';
     html += '<div class="mission-card-title">' + m.title + '</div>';
     html += '<div class="mission-card-desc">' + m.desc + '</div>';
@@ -16673,6 +17252,45 @@ function initBannerSlider() {
         lcMockDate = e.data.date || null;
         rebuildLCMissions();
         // Re-render if on mission page
+        if (typeof showLiveChallengeFullPage === 'function' && document.getElementById('missionView') && document.getElementById('missionView').style.display !== 'none') {
+          showLiveChallengeFullPage();
+        }
+      }
+      if (e.data && e.data.type === 'mission_config_update') {
+        console.log('[DevTools] Received mission_config_update');
+        if (e.data.catalog && typeof LC_MISSION_CATALOG !== 'undefined') {
+          var keys = Object.keys(e.data.catalog);
+          for (var ki = 0; ki < keys.length; ki++) {
+            LC_MISSION_CATALOG[keys[ki]] = e.data.catalog[keys[ki]];
+          }
+        }
+        if (e.data.schedule && typeof LC_DAILY_SCHEDULE !== 'undefined') {
+          var skeys = Object.keys(e.data.schedule);
+          for (var si = 0; si < skeys.length; si++) {
+            LC_DAILY_SCHEDULE[skeys[si]] = e.data.schedule[skeys[si]];
+          }
+        }
+        if (e.data.weekly && typeof LC_WEEKLY_POOL !== 'undefined') {
+          LC_WEEKLY_POOL.length = 0;
+          for (var wi = 0; wi < e.data.weekly.length; wi++) {
+            var wm = e.data.weekly[wi];
+            wm.id = wm.code ? wm.code.toLowerCase() : ('w_' + wi);
+            wm.reset = 'weekly';
+            wm.group = wm.group || 'progress';
+            LC_WEEKLY_POOL.push(wm);
+          }
+        }
+        if (e.data.monthly && typeof LC_MONTHLY_POOL !== 'undefined') {
+          LC_MONTHLY_POOL.length = 0;
+          for (var mi = 0; mi < e.data.monthly.length; mi++) {
+            var mm = e.data.monthly[mi];
+            mm.id = mm.code ? mm.code.toLowerCase() : ('m_' + mi);
+            mm.reset = 'monthly';
+            mm.group = mm.group || 'vip';
+            LC_MONTHLY_POOL.push(mm);
+          }
+        }
+        rebuildLCMissions();
         if (typeof showLiveChallengeFullPage === 'function' && document.getElementById('missionView') && document.getElementById('missionView').style.display !== 'none') {
           showLiveChallengeFullPage();
         }
