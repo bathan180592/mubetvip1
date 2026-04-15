@@ -4074,35 +4074,13 @@ img { max-width: 100%; display: block; }
 /* ===== SUPPORT VIEW ===== */
 .support-view {
   min-height: 100vh; background: var(--bg);
-  padding-top: 60px; padding-bottom: 80px;
+  padding-bottom: 80px;
 }
-.support-header-bar {
-  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
-  width: 100%; max-width: var(--max-w, 430px); height: 56px; z-index: 100;
-  display: flex; align-items: center; gap: 12px; padding: 0 16px;
-  background: rgba(12,14,20,.95); backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.support-back-btn {
-  width: 36px; height: 36px; border-radius: 10px; border: none;
-  background: rgba(255,255,255,.06); color: rgba(255,255,255,.7);
-  display: flex; align-items: center; justify-content: center; cursor: pointer;
-}
-.support-back-btn svg { width: 18px; height: 18px; }
-.support-header-title {
-  font-size: 15px; font-weight: 700; color: #fff;
-  font-family: Montserrat, sans-serif;
-}
-.support-header-opts {
-  margin-left: auto; width: 36px; height: 36px; border-radius: 10px; border: none;
-  background: rgba(255,255,255,.06); color: rgba(255,255,255,.5);
-  display: flex; align-items: center; justify-content: center; cursor: pointer;
-}
-.support-body { padding: 16px; }
+.support-body { padding: 12px 16px; }
 
 /* Hero */
 .sp-hero {
-  position: relative; padding: 24px 20px 20px; border-radius: 16px; margin-bottom: 16px;
+  position: relative; padding: 20px 18px 16px; border-radius: 16px; margin-bottom: 12px;
   background: linear-gradient(135deg, rgba(255,180,50,.08) 0%, rgba(255,50,50,.06) 50%, rgba(100,50,255,.06) 100%);
   border: 1px solid rgba(255,255,255,.06); overflow: hidden;
 }
@@ -4155,7 +4133,7 @@ img { max-width: 100%; display: block; }
 
 /* Section blocks */
 .sp-section {
-  margin-bottom: 16px; border-radius: 14px;
+  margin-bottom: 12px; border-radius: 14px;
   background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06);
   overflow: hidden;
 }
@@ -4219,7 +4197,7 @@ img { max-width: 100%; display: block; }
 
 /* Promo CTA */
 .sp-promo {
-  position: relative; margin-bottom: 16px; border-radius: 14px; overflow: hidden;
+  position: relative; margin-bottom: 12px; border-radius: 14px; overflow: hidden;
   background: linear-gradient(135deg, rgba(255,180,50,.06) 0%, rgba(245,158,11,.03) 100%);
   border: 1px solid rgba(255,180,50,.12); padding: 20px;
 }
@@ -4258,7 +4236,212 @@ img { max-width: 100%; display: block; }
 }
 
 /* Links */
-.sp-links { margin-bottom: 16px; }
+/* VIP Support Perks */
+.sp-vip-section {
+  margin-bottom: 12px; border-radius: 14px; overflow: hidden;
+  background: linear-gradient(135deg, rgba(212,175,55,.04) 0%, rgba(255,180,50,.02) 100%);
+  border: 1px solid rgba(212,175,55,.12);
+}
+.sp-vip-header {
+  display: flex; align-items: center; gap: 10px; padding: 14px 16px 10px;
+}
+.sp-vip-icon {
+  width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(212,175,55,.15), rgba(212,175,55,.05));
+  display: flex; align-items: center; justify-content: center;
+}
+.sp-vip-icon img { width: 24px; height: 24px; object-fit: contain; }
+.sp-vip-htext { flex: 1; min-width: 0; }
+.sp-vip-title {
+  font-size: 13px; font-weight: 800; color: #d4af37;
+  font-family: Montserrat, sans-serif;
+}
+.sp-vip-desc { font-size: 10.5px; color: rgba(255,255,255,.35); margin-top: 1px; }
+.sp-vip-badge {
+  font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
+  padding: 3px 8px; border-radius: 6px; flex-shrink: 0;
+  color: #d4af37; background: rgba(212,175,55,.1); border: 1px solid rgba(212,175,55,.15);
+}
+.sp-vip-perks { padding: 0 12px 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.sp-vip-perk {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; border-radius: 10px;
+  background: rgba(212,175,55,.04); border: 1px solid rgba(212,175,55,.06);
+}
+.sp-vip-perk-icon {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: rgba(212,175,55,.08);
+  display: flex; align-items: center; justify-content: center;
+}
+.sp-vip-perk-icon .lc-icon-svg { width: 14px; height: 14px; }
+.sp-vip-perk-text {
+  font-size: 10px; font-weight: 600; color: rgba(255,255,255,.55); line-height: 1.3;
+}
+
+/* VIP Free Trial Card */
+.sp-vip-free-trial {
+  position: relative; margin-bottom: 12px; border-radius: 14px; overflow: hidden;
+  background: linear-gradient(135deg, rgba(67,160,71,.06) 0%, rgba(67,160,71,.02) 100%);
+  border: 1px solid rgba(67,160,71,.15); padding: 16px;
+  animation: trialCardGlow 3s ease-in-out infinite;
+}
+.sp-vip-free-trial-top {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+}
+.sp-vip-free-trial-icon {
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(67,160,71,.12), rgba(67,160,71,.04));
+  border: 1px solid rgba(67,160,71,.2);
+  display: flex; align-items: center; justify-content: center; position: relative;
+}
+.sp-vip-free-trial-icon img { width: 30px; height: 30px; object-fit: contain; }
+.sp-vip-free-trial-icon::after {
+  content: 'FREE'; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
+  font-size: 7px; font-weight: 800; letter-spacing: .5px;
+  color: #fff; background: #43a047; padding: 1px 6px; border-radius: 4px;
+  border: 1.5px solid rgba(12,14,20,.8);
+}
+.sp-vip-free-trial-info { flex: 1; }
+.sp-vip-free-trial-label {
+  font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+  color: #43a047; margin-bottom: 2px;
+}
+.sp-vip-free-trial-title {
+  font-size: 14px; font-weight: 800; color: #fff;
+  font-family: Montserrat, sans-serif; line-height: 1.3;
+}
+.sp-vip-free-trial-desc {
+  font-size: 11px; color: rgba(255,255,255,.4); line-height: 1.5; margin-bottom: 12px;
+}
+.sp-vip-free-trial-progress {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  padding: 10px 12px; border-radius: 10px;
+  background: rgba(0,0,0,.25); border: 1px solid rgba(255,255,255,.05);
+}
+.sp-vip-free-trial-dots { display: flex; gap: 6px; }
+.sp-vip-free-trial-dot {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.12); background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .3s;
+}
+.sp-vip-free-trial-dot.done {
+  background: #43a047; border-color: #43a047;
+}
+.sp-vip-free-trial-dot.done::after {
+  content: ''; width: 7px; height: 4px;
+  border-left: 1.5px solid #fff; border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg); margin-top: -1px;
+}
+.sp-vip-free-trial-ptext {
+  flex: 1; font-size: 11px; font-weight: 600; color: rgba(255,255,255,.5);
+}
+.sp-vip-free-trial-pcount {
+  font-size: 13px; font-weight: 800; color: #43a047;
+  font-family: Montserrat, sans-serif;
+}
+.sp-vip-free-trial-conditions {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
+}
+.sp-vip-free-trial-cond {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 9.5px; font-weight: 600; padding: 4px 10px; border-radius: 8px;
+  transition: all .2s;
+}
+.sp-vip-free-trial-cond.done {
+  color: #43a047; background: rgba(67,160,71,.08); border: 1px solid rgba(67,160,71,.15);
+  text-decoration: line-through; opacity: .6;
+}
+.sp-vip-free-trial-cond:not(.done) {
+  color: rgba(255,255,255,.5); background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+}
+.sp-vip-free-trial-cond .lc-icon-svg { width: 12px; height: 12px; }
+.sp-vip-free-trial-btn {
+  width: 100%; padding: 11px 0; border-radius: 10px; border: none;
+  font-size: 12px; font-weight: 700; font-family: Montserrat, sans-serif;
+  cursor: pointer; transition: all .2s; position: relative; z-index: 1;
+}
+.sp-vip-free-trial-btn.start {
+  background: linear-gradient(135deg, #43a047, #2e7d32); color: #fff;
+  box-shadow: 0 2px 10px rgba(67,160,71,.25);
+}
+.sp-vip-free-trial-btn.activate {
+  background: linear-gradient(135deg, #d4af37, #b8962e); color: #000;
+  box-shadow: 0 2px 10px rgba(212,175,55,.25);
+}
+.sp-vip-free-trial-btn.active {
+  background: rgba(67,160,71,.1); color: #43a047;
+  border: 1px solid rgba(67,160,71,.2);
+}
+
+/* VIP Trial Card (non-VIP promo) */
+.sp-vip-trial {
+  position: relative; margin-bottom: 12px; border-radius: 14px; overflow: hidden;
+  background: linear-gradient(135deg, rgba(212,175,55,.08) 0%, rgba(100,50,255,.04) 50%, rgba(212,175,55,.06) 100%);
+  border: 1px solid rgba(212,175,55,.15); padding: 20px;
+}
+.sp-vip-trial::before {
+  content: ''; position: absolute; top: -20px; right: -20px;
+  width: 100px; height: 100px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.sp-vip-trial::after {
+  content: ''; position: absolute; bottom: -30px; left: -10px;
+  width: 80px; height: 80px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(100,50,255,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.sp-vip-trial-top {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+}
+.sp-vip-trial-badges {
+  display: flex; gap: -4px; flex-shrink: 0;
+}
+.sp-vip-trial-badge-img {
+  width: 36px; height: 36px; object-fit: contain;
+  border-radius: 50%; border: 2px solid rgba(12,14,20,.8);
+  margin-left: -8px;
+}
+.sp-vip-trial-badge-img:first-child { margin-left: 0; }
+.sp-vip-trial-info { flex: 1; }
+.sp-vip-trial-label {
+  font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+  color: #d4af37; margin-bottom: 3px;
+}
+.sp-vip-trial-title {
+  font-size: 15px; font-weight: 800; color: #fff;
+  font-family: Montserrat, sans-serif; line-height: 1.3;
+}
+.sp-vip-trial-desc {
+  font-size: 11px; color: rgba(255,255,255,.4); line-height: 1.5; margin-bottom: 14px;
+}
+.sp-vip-trial-features {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px;
+}
+.sp-vip-trial-feat {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 9.5px; font-weight: 600; color: rgba(255,255,255,.5);
+  padding: 4px 10px; border-radius: 8px;
+  background: rgba(212,175,55,.06); border: 1px solid rgba(212,175,55,.1);
+}
+.sp-vip-trial-feat .lc-icon-svg { width: 12px; height: 12px; }
+.sp-vip-trial-btns { display: flex; gap: 8px; position: relative; z-index: 1; }
+.sp-vip-trial-btn {
+  padding: 10px 20px; border-radius: 10px; font-size: 11.5px; font-weight: 700;
+  font-family: Montserrat, sans-serif; cursor: pointer; border: none;
+  transition: all .2s;
+}
+.sp-vip-trial-btn.primary {
+  background: linear-gradient(135deg, #d4af37, #b8962e); color: #000;
+  box-shadow: 0 2px 10px rgba(212,175,55,.25);
+}
+.sp-vip-trial-btn.secondary {
+  background: rgba(255,255,255,.06); color: rgba(255,255,255,.6);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.sp-links { margin-bottom: 12px; }
 .sp-links-header {
   display: flex; align-items: center; gap: 8px;
   padding: 0 4px; margin-bottom: 10px;
@@ -4289,11 +4472,435 @@ img { max-width: 100%; display: block; }
 .sp-link-icon {
   width: 32px; height: 32px; border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; font-size: 15px;
+  flex-shrink: 0; background: rgba(255,255,255,.03);
 }
+.sp-link-icon .lc-icon-svg { width: 16px; height: 16px; }
 .sp-link-text {
   font-size: 11px; font-weight: 600; color: rgba(255,255,255,.6);
   line-height: 1.3;
+}
+
+/* ===== AGENT PAGE ===== */
+.agent-page { min-height: 100vh; background: var(--bg); padding-bottom: 80px; }
+.agent-page-body { padding: 12px 16px; }
+
+/* Agent Tabs */
+.ag-tabs {
+  display: flex; gap: 0; border-bottom: 1px solid rgba(255,255,255,.06); margin-bottom: 16px;
+}
+.ag-tab {
+  flex: 1; padding: 10px 0 8px; border: none; border-bottom: 2px solid transparent;
+  background: transparent; color: var(--muted); font-size: 11.5px; font-weight: 700;
+  font-family: Montserrat, sans-serif; cursor: pointer; transition: all .25s;
+  text-align: center;
+}
+.ag-tab.active {
+  color: #f59e0b; border-bottom-color: #f59e0b;
+  background: linear-gradient(to top, rgba(245,158,11,.06) 0%, transparent 70%);
+}
+
+/* Agent Registration Form */
+.ag-form { margin-bottom: 16px; }
+.ag-form-group { margin-bottom: 12px; }
+.ag-form-label {
+  display: block; font-size: 10.5px; font-weight: 700; color: rgba(255,255,255,.5);
+  margin-bottom: 5px; text-transform: uppercase; letter-spacing: .3px;
+}
+.ag-form-input {
+  width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03); color: #fff; font-size: 13px; font-family: inherit;
+  outline: none; transition: border-color .2s; box-sizing: border-box;
+}
+.ag-form-input:focus { border-color: rgba(245,158,11,.3); }
+.ag-form-input::placeholder { color: rgba(255,255,255,.2); }
+.ag-form-select {
+  width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03); color: #fff; font-size: 13px; font-family: inherit;
+  outline: none; appearance: none; box-sizing: border-box;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='rgba(255,255,255,.3)' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+}
+.ag-form-row { display: flex; gap: 10px; }
+.ag-form-row .ag-form-group { flex: 1; }
+.ag-form-check {
+  display: flex; align-items: flex-start; gap: 8px; margin: 14px 0;
+}
+.ag-form-checkbox {
+  width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.03); flex-shrink: 0; margin-top: 1px;
+  cursor: pointer; appearance: none; display: flex; align-items: center; justify-content: center;
+}
+.ag-form-checkbox:checked {
+  background: #f59e0b; border-color: #f59e0b;
+}
+.ag-form-checkbox:checked::after {
+  content: '✓'; color: #000; font-size: 11px; font-weight: 900;
+}
+.ag-form-check-label {
+  font-size: 10.5px; color: rgba(255,255,255,.4); line-height: 1.4;
+}
+.ag-form-check-label a { color: #f59e0b; text-decoration: none; }
+.ag-form-submit {
+  width: 100%; padding: 13px 0; border-radius: 12px; border: none;
+  font-size: 13px; font-weight: 800; font-family: Montserrat, sans-serif;
+  background: linear-gradient(135deg, #f59e0b, #d97706); color: #000;
+  box-shadow: 0 4px 16px rgba(245,158,11,.3); cursor: pointer; transition: all .2s;
+  margin-top: 4px;
+}
+.ag-form-submit:active { transform: scale(.98); }
+
+/* Agent Portal Dashboard */
+.ag-portal-header {
+  position: relative; padding: 20px 18px 16px; border-radius: 14px; margin-bottom: 14px;
+  background: linear-gradient(135deg, rgba(245,158,11,.08) 0%, rgba(245,158,11,.03) 100%);
+  border: 1px solid rgba(245,158,11,.12); overflow: hidden;
+}
+.ag-portal-header::before {
+  content: ''; position: absolute; top: -30px; right: -20px;
+  width: 100px; height: 100px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.ag-portal-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.ag-portal-avatar {
+  width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(245,158,11,.2), rgba(245,158,11,.05));
+  border: 2px solid rgba(245,158,11,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 900; color: #f59e0b; font-family: Montserrat, sans-serif;
+}
+.ag-portal-info { flex: 1; }
+.ag-portal-name { font-size: 15px; font-weight: 800; color: #fff; font-family: Montserrat, sans-serif; }
+.ag-portal-level { font-size: 10px; color: rgba(255,255,255,.4); margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+.ag-portal-level-badge {
+  font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: .4px;
+}
+.ag-portal-id { font-size: 9px; color: rgba(255,255,255,.25); margin-top: 3px; }
+.ag-portal-stats {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+  border-radius: 10px; background: rgba(0,0,0,.25); border: 1px solid rgba(255,255,255,.05);
+  overflow: hidden;
+}
+.ag-portal-stat {
+  padding: 10px 8px; text-align: center;
+}
+.ag-portal-stat + .ag-portal-stat { border-left: 1px solid rgba(255,255,255,.05); }
+.ag-portal-stat-val {
+  font-size: 15px; font-weight: 900; color: #f59e0b;
+  font-family: Montserrat, sans-serif;
+}
+.ag-portal-stat-lbl {
+  font-size: 8px; font-weight: 600; color: rgba(255,255,255,.3);
+  text-transform: uppercase; letter-spacing: .3px; margin-top: 2px;
+}
+
+/* Portal quick actions */
+.ag-portal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.ag-portal-action {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px; border-radius: 12px;
+  background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06);
+  cursor: pointer; transition: all .2s;
+}
+.ag-portal-action:active { background: rgba(255,255,255,.05); }
+.ag-portal-action-icon {
+  width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ag-portal-action-icon .lc-icon-svg { width: 16px; height: 16px; }
+.ag-portal-action-text { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.6); }
+
+/* Portal milestones */
+.ag-milestones { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.ag-milestone {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px; border-radius: 12px;
+  background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06);
+}
+.ag-milestone.reached { background: rgba(67,160,71,.04); border-color: rgba(67,160,71,.12); }
+.ag-milestone.current { background: rgba(245,158,11,.04); border-color: rgba(245,158,11,.12); }
+.ag-milestone-icon {
+  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ag-milestone-icon .lc-icon-svg { width: 16px; height: 16px; }
+.ag-milestone-info { flex: 1; min-width: 0; }
+.ag-milestone-name { font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,.7); }
+.ag-milestone-desc { font-size: 9.5px; color: rgba(255,255,255,.3); margin-top: 1px; }
+.ag-milestone-reward {
+  font-size: 12px; font-weight: 800; font-family: Montserrat, sans-serif;
+  flex-shrink: 0;
+}
+.ag-milestone.reached .ag-milestone-reward { color: #43a047; }
+.ag-milestone.current .ag-milestone-reward { color: #f59e0b; }
+.ag-milestone:not(.reached):not(.current) .ag-milestone-reward { color: rgba(255,255,255,.2); }
+.ag-milestone-check {
+  font-size: 10px; color: #43a047; flex-shrink: 0;
+}
+
+/* Portal monthly bonus */
+.ag-monthly { margin-bottom: 14px; }
+.ag-monthly-card {
+  padding: 14px 16px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(245,158,11,.06), rgba(245,158,11,.02));
+  border: 1px solid rgba(245,158,11,.1);
+}
+.ag-monthly-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.ag-monthly-title { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.7); }
+.ag-monthly-period { font-size: 9px; color: rgba(255,255,255,.3); }
+.ag-monthly-amount {
+  font-size: 22px; font-weight: 900; color: #f59e0b;
+  font-family: Montserrat, sans-serif; margin-bottom: 4px;
+}
+.ag-monthly-sub { font-size: 10px; color: rgba(255,255,255,.35); margin-bottom: 10px; }
+.ag-monthly-bar-wrap { margin-bottom: 6px; }
+.ag-monthly-bar {
+  height: 6px; border-radius: 3px; background: rgba(255,255,255,.06); overflow: hidden;
+}
+.ag-monthly-bar-fill {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+.ag-monthly-bar-text {
+  display: flex; justify-content: space-between; margin-top: 4px;
+  font-size: 9px; color: rgba(255,255,255,.3);
+}
+
+/* Portal referral link */
+.ag-ref-link {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; border-radius: 10px; margin-bottom: 14px;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+}
+.ag-ref-link-text {
+  flex: 1; font-size: 11px; color: rgba(255,255,255,.4);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-family: monospace;
+}
+.ag-ref-link-copy {
+  padding: 6px 14px; border-radius: 8px; border: none;
+  background: rgba(245,158,11,.12); color: #f59e0b;
+  font-size: 10px; font-weight: 700; cursor: pointer; flex-shrink: 0;
+}
+
+/* Portal members table */
+.ag-members-list { margin-bottom: 14px; }
+.ag-member {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.ag-member:last-child { border-bottom: none; }
+.ag-member-avatar {
+  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+  background: rgba(255,255,255,.06);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: rgba(255,255,255,.4);
+}
+.ag-member-info { flex: 1; min-width: 0; }
+.ag-member-name { font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,.6); }
+.ag-member-date { font-size: 9px; color: rgba(255,255,255,.25); margin-top: 1px; }
+.ag-member-rev {
+  text-align: right; flex-shrink: 0;
+}
+.ag-member-rev-val { font-size: 11px; font-weight: 700; color: #f59e0b; }
+.ag-member-rev-lbl { font-size: 8px; color: rgba(255,255,255,.25); }
+
+/* Agent Hero */
+.ag-hero {
+  position: relative; padding: 24px 0 20px; text-align: center;
+  margin-bottom: 16px;
+}
+.ag-hero::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,180,50,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.ag-hero-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px;
+  color: #f59e0b; background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.15);
+  padding: 4px 12px; border-radius: 20px; margin-bottom: 14px;
+}
+.ag-hero-title {
+  font-size: 22px; font-weight: 900; color: #fff;
+  font-family: Montserrat, sans-serif; line-height: 1.3; margin-bottom: 8px;
+}
+.ag-hero-title span { color: #f59e0b; }
+.ag-hero-desc {
+  font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.6;
+  max-width: 320px; margin: 0 auto;
+}
+.ag-hero-stats {
+  display: flex; gap: 0; margin-top: 18px; border-radius: 12px;
+  background: rgba(0,0,0,.3); border: 1px solid rgba(255,255,255,.06);
+  overflow: hidden;
+}
+.ag-hero-stat {
+  flex: 1; padding: 12px 8px; display: flex; flex-direction: column;
+  align-items: center; gap: 2px;
+}
+.ag-hero-stat + .ag-hero-stat { border-left: 1px solid rgba(255,255,255,.06); }
+.ag-hero-stat-val {
+  font-size: 16px; font-weight: 800; color: #f59e0b;
+  font-family: Montserrat, sans-serif;
+}
+.ag-hero-stat-lbl {
+  font-size: 8.5px; font-weight: 600; color: rgba(255,255,255,.35);
+  text-transform: uppercase; letter-spacing: .3px; text-align: center;
+}
+
+/* Agent Section */
+.ag-section { margin-bottom: 16px; }
+.ag-section-title {
+  font-size: 13px; font-weight: 800; color: #fff;
+  font-family: Montserrat, sans-serif; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.ag-section-title .lc-icon-svg { width: 16px; height: 16px; }
+
+/* Commission tiers */
+.ag-comm-tiers { display: flex; flex-direction: column; gap: 8px; }
+.ag-comm-tier {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: 12px;
+  background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06);
+  position: relative; overflow: hidden;
+}
+.ag-comm-tier.highlight {
+  background: linear-gradient(135deg, rgba(245,158,11,.06), rgba(245,158,11,.02));
+  border-color: rgba(245,158,11,.15);
+}
+.ag-comm-tier.highlight::before {
+  content: 'HOT'; position: absolute; top: 6px; right: 8px;
+  font-size: 7px; font-weight: 800; letter-spacing: .5px;
+  color: #fff; background: #e53935; padding: 2px 6px; border-radius: 4px;
+}
+.ag-comm-icon {
+  width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ag-comm-icon .lc-icon-svg { width: 18px; height: 18px; }
+.ag-comm-info { flex: 1; min-width: 0; }
+.ag-comm-name { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.8); }
+.ag-comm-desc { font-size: 10px; color: rgba(255,255,255,.35); margin-top: 1px; }
+.ag-comm-rate {
+  font-size: 16px; font-weight: 900; font-family: Montserrat, sans-serif;
+  color: #f59e0b; flex-shrink: 0;
+}
+
+/* How it works */
+.ag-steps { display: flex; flex-direction: column; gap: 0; position: relative; }
+.ag-step {
+  display: flex; gap: 14px; position: relative; padding-bottom: 16px;
+}
+.ag-step:last-child { padding-bottom: 0; }
+.ag-step-line {
+  position: absolute; left: 17px; top: 38px; bottom: 0; width: 2px;
+  background: rgba(255,255,255,.06);
+}
+.ag-step:last-child .ag-step-line { display: none; }
+.ag-step-num {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(245,158,11,.1); border: 2px solid rgba(245,158,11,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; color: #f59e0b;
+  font-family: Montserrat, sans-serif; position: relative; z-index: 1;
+}
+.ag-step-content { flex: 1; padding-top: 6px; }
+.ag-step-title { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.8); }
+.ag-step-desc { font-size: 10.5px; color: rgba(255,255,255,.35); margin-top: 2px; line-height: 1.4; }
+
+/* Agent levels */
+.ag-levels { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+.ag-levels::-webkit-scrollbar { display: none; }
+.ag-level {
+  flex-shrink: 0; width: 120px; padding: 14px 12px; border-radius: 12px;
+  background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06);
+  text-align: center; position: relative;
+}
+.ag-level.gold {
+  background: linear-gradient(135deg, rgba(245,158,11,.06), rgba(245,158,11,.02));
+  border-color: rgba(245,158,11,.15);
+}
+.ag-level-badge {
+  font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
+  padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px;
+}
+.ag-level-name {
+  font-size: 13px; font-weight: 800; color: #fff;
+  font-family: Montserrat, sans-serif; margin-bottom: 4px;
+}
+.ag-level-req { font-size: 9px; color: rgba(255,255,255,.3); margin-bottom: 8px; }
+.ag-level-comm {
+  font-size: 18px; font-weight: 900; font-family: Montserrat, sans-serif;
+  margin-bottom: 2px;
+}
+.ag-level-label { font-size: 8px; color: rgba(255,255,255,.3); text-transform: uppercase; letter-spacing: .3px; }
+
+/* Agent benefits */
+.ag-benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ag-benefit {
+  padding: 12px; border-radius: 12px;
+  background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06);
+}
+.ag-benefit-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(255,255,255,.04); margin-bottom: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ag-benefit-icon .lc-icon-svg { width: 16px; height: 16px; }
+.ag-benefit-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.7); margin-bottom: 2px; }
+.ag-benefit-desc { font-size: 9.5px; color: rgba(255,255,255,.3); line-height: 1.4; }
+
+/* Agent tools */
+.ag-tools { display: flex; flex-direction: column; gap: 8px; }
+.ag-tool {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px; border-radius: 12px;
+  background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06);
+}
+.ag-tool-icon {
+  width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ag-tool-icon .lc-icon-svg { width: 16px; height: 16px; }
+.ag-tool-text { flex: 1; }
+.ag-tool-name { font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,.7); }
+.ag-tool-desc { font-size: 9.5px; color: rgba(255,255,255,.3); margin-top: 1px; }
+
+/* Agent FAQ */
+.ag-faq-item {
+  padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.04);
+  cursor: pointer;
+}
+.ag-faq-item:last-child { border-bottom: none; }
+.ag-faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,.6);
+}
+.ag-faq-arrow { font-size: 14px; color: rgba(255,255,255,.2); transition: transform .2s; }
+.ag-faq-item.open .ag-faq-arrow { transform: rotate(180deg); }
+.ag-faq-a {
+  font-size: 10.5px; color: rgba(255,255,255,.35); line-height: 1.5;
+  max-height: 0; overflow: hidden; transition: max-height .3s, padding .3s;
+  padding-top: 0;
+}
+.ag-faq-item.open .ag-faq-a { max-height: 200px; padding-top: 8px; }
+
+/* Agent CTA */
+.ag-cta-wrap { padding: 16px 0 8px; }
+.ag-cta {
+  width: 100%; padding: 14px 0; border-radius: 12px; border: none;
+  font-size: 14px; font-weight: 800; font-family: Montserrat, sans-serif;
+  background: linear-gradient(135deg, #f59e0b, #d97706); color: #000;
+  box-shadow: 0 4px 16px rgba(245,158,11,.3); cursor: pointer; transition: all .2s;
+}
+.ag-cta:active { transform: scale(.98); }
+.ag-cta-sub {
+  text-align: center; font-size: 10px; color: rgba(255,255,255,.3);
+  margin-top: 8px;
 }
 
 /* ===== ACCOUNT VIEW ===== */
@@ -9439,17 +10046,13 @@ img { max-width: 100%; display: block; }
 </div><!-- /#mainContent -->
 
 <!-- ===== ACCOUNT VIEW ===== -->
+<!-- ===== AGENT PAGE ===== -->
+<div id="agentPage" class="agent-page" style="display:none">
+  <div class="agent-page-body" id="agentPageBody"></div>
+</div>
+
 <!-- ===== SUPPORT VIEW ===== -->
 <div id="supportView" class="support-view" style="display:none">
-  <div class="support-header-bar">
-    <button class="support-back-btn" onclick="navigateTo('')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    </button>
-    <div class="support-header-title">Trung tâm hỗ trợ</div>
-    <button class="support-header-opts" onclick="showToast('Tuỳ chọn')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
-    </button>
-  </div>
   <div class="support-body" id="supportBody"></div>
 </div>
 
@@ -10196,6 +10799,8 @@ function router() {
     showVipView();
   } else if (hash === '/support') {
     showSupportView();
+  } else if (hash === '/agent' || hash.startsWith('/agent/')) {
+    showAgentPage(hash);
   } else if (hash === '/account' || hash.startsWith('/account/')) {
     if (!isLoggedIn) {
       pendingAction = () => navigateTo(hash);
@@ -10214,6 +10819,7 @@ function showHomeView() {
   document.getElementById('missionView').style.display = 'none';
   document.getElementById('onboardingView').style.display = 'none';
   document.getElementById('supportView').style.display = 'none';
+  document.getElementById('agentPage').style.display = 'none';
   document.getElementById('mainContent').style.display = '';
   // Restore cat-nav-bar & bottom-nav
   var catNav = document.querySelector('.cat-nav-bar');
@@ -10240,11 +10846,16 @@ function showSupportView() {
   document.getElementById('missionView').style.display = 'none';
   document.getElementById('onboardingView').style.display = 'none';
   document.getElementById('accountView').style.display = 'none';
+  document.getElementById('agentPage').style.display = 'none';
   document.getElementById('supportView').style.display = '';
+  // Keep main header visible, hide cat-nav-bar
   var catNav = document.querySelector('.cat-nav-bar');
   if (catNav) catNav.style.display = 'none';
   var bottomNav = document.querySelector('.bottom-nav');
   if (bottomNav) bottomNav.style.display = '';
+  // Show header nav links
+  var headerNav = document.querySelector('.header-nav');
+  if (headerNav) headerNav.style.display = '';
   window.scrollTo(0, 0);
   document.body.style.overflow = '';
   renderSupportPage();
@@ -10309,27 +10920,141 @@ function renderSupportPage() {
   html += '</div>';
   html += '</div></div>';
 
+  // VIP Free Trial — for logged in, non-VIP users
+  var userTier = (isLoggedIn && currentUser) ? (currentUser.tier || 0) : 0;
+  var isVip = userTier >= 1;
+  var isVipMember = isLoggedIn && currentUser && currentUser.tier >= 1 && !currentUser.isTrial;
+
+  if (isLoggedIn && !isVipMember) {
+    var phase = getTrialPhase();
+    var count = getCompletedCount();
+    var conditions = [
+      { id: 'phone', label: 'Xác minh SĐT', icon: 'user', done: trialState.phone },
+      { id: 'telegram', label: 'Kết nối Telegram', icon: 'send', done: trialState.telegram },
+      { id: 'deposit', label: 'Nạp tiền lần đầu', icon: 'cash', done: trialState.deposit },
+      { id: 'active', label: trialState.activeDays + '/3 ngày hoạt động', icon: 'calendar', done: trialState.activeDays >= 3 }
+    ];
+
+    html += '<div class="sp-vip-free-trial">';
+    html += '<div class="sp-vip-free-trial-top">';
+    html += '<div class="sp-vip-free-trial-icon"><img src="' + TIER_ICONS[1] + '" alt="VIP1"></div>';
+    html += '<div class="sp-vip-free-trial-info">';
+    html += '<div class="sp-vip-free-trial-label">Miễn phí 7 ngày</div>';
+    if (phase <= 3) {
+      html += '<div class="sp-vip-free-trial-title">Trải nghiệm VIP 1</div>';
+    } else if (phase === 5) {
+      html += '<div class="sp-vip-free-trial-title">Trial sắp kết thúc!</div>';
+    } else {
+      html += '<div class="sp-vip-free-trial-title">Đang trải nghiệm VIP</div>';
+    }
+    html += '</div></div>';
+
+    if (phase <= 3) {
+      html += '<div class="sp-vip-free-trial-desc">Hoàn thành các điều kiện đơn giản để nhận 7 ngày trải nghiệm đặc quyền VIP 1 — CSKH ưu tiên, hoàn trả cao hơn và nhiều hơn nữa.</div>';
+      // Progress dots
+      html += '<div class="sp-vip-free-trial-progress">';
+      html += '<div class="sp-vip-free-trial-dots">';
+      conditions.forEach(function(c) {
+        html += '<div class="sp-vip-free-trial-dot ' + (c.done ? 'done' : '') + '"></div>';
+      });
+      html += '</div>';
+      html += '<div class="sp-vip-free-trial-ptext">' + (count === 4 ? 'Sẵn sàng kích hoạt!' : 'Đã hoàn thành') + '</div>';
+      html += '<div class="sp-vip-free-trial-pcount">' + count + '/4</div>';
+      html += '</div>';
+      // Condition tags
+      html += '<div class="sp-vip-free-trial-conditions">';
+      conditions.forEach(function(c) {
+        html += '<div class="sp-vip-free-trial-cond ' + (c.done ? 'done' : '') + '">' + lcIcon(c.icon, c.done ? 'neon-green' : '') + ' ' + c.label + '</div>';
+      });
+      html += '</div>';
+      // CTA
+      if (count === 4) {
+        html += '<button class="sp-vip-free-trial-btn activate" onclick="openTrialView()">Kích hoạt VIP 1 miễn phí</button>';
+      } else {
+        html += '<button class="sp-vip-free-trial-btn start" onclick="openTrialView()">Thực hiện ngay — ' + (4 - count) + ' điều kiện còn lại</button>';
+      }
+    } else {
+      // Active trial
+      html += '<div class="sp-vip-free-trial-desc">Bạn đang trải nghiệm đặc quyền VIP 1 — tận hưởng CSKH ưu tiên, hoàn trả cao và các quyền lợi đặc biệt.</div>';
+      html += '<button class="sp-vip-free-trial-btn active" onclick="openTrialView()">' + lcIcon('star','neon-green') + ' Xem quyền lợi VIP Trial</button>';
+    }
+    html += '</div>';
+  }
+
+  // Đặc quyền chăm sóc VIP + VIP trial card
+
+  if (isVip) {
+    // VIP user — show their VIP support perks
+    var tierBadge = TIER_ICONS[userTier] || TIER_ICONS[1];
+    var vd = VIP_DATA.find(function(v){ return v.tier === userTier; }) || VIP_DATA[0];
+    html += '<div class="sp-vip-section">';
+    html += '<div class="sp-vip-header">';
+    html += '<div class="sp-vip-icon"><img src="' + tierBadge + '" alt="VIP"></div>';
+    html += '<div class="sp-vip-htext"><div class="sp-vip-title">Đặc quyền chăm sóc ' + vd.name + '</div><div class="sp-vip-desc">Hỗ trợ ưu tiên dành riêng cho bạn</div></div>';
+    html += '<span class="sp-vip-badge">Exclusive</span>';
+    html += '</div>';
+    html += '<div class="sp-vip-perks">';
+    html += '<div class="sp-vip-perk"><div class="sp-vip-perk-icon">' + lcIcon('star','neon-gold') + '</div><div class="sp-vip-perk-text">CSKH riêng<br>ưu tiên</div></div>';
+    html += '<div class="sp-vip-perk"><div class="sp-vip-perk-icon">' + lcIcon('lightning','neon-gold') + '</div><div class="sp-vip-perk-text">Phản hồi<br>dưới 15s</div></div>';
+    html += '<div class="sp-vip-perk"><div class="sp-vip-perk-icon">' + lcIcon('send','neon-gold') + '</div><div class="sp-vip-perk-text">Kênh Telegram<br>riêng</div></div>';
+    html += '<div class="sp-vip-perk"><div class="sp-vip-perk-icon">' + lcIcon('gift','neon-gold') + '</div><div class="sp-vip-perk-text">Quà sinh nhật<br>& sự kiện</div></div>';
+    html += '</div></div>';
+  } else {
+    // Non-VIP or not logged in — show VIP trial card
+    html += '<div class="sp-vip-trial">';
+    html += '<div class="sp-vip-trial-top">';
+    html += '<div class="sp-vip-trial-badges">';
+    html += '<img class="sp-vip-trial-badge-img" src="' + TIER_ICONS[1] + '" alt="VIP1">';
+    html += '<img class="sp-vip-trial-badge-img" src="' + TIER_ICONS[3] + '" alt="VIP3">';
+    html += '<img class="sp-vip-trial-badge-img" src="' + TIER_ICONS[5] + '" alt="VIP5">';
+    html += '</div>';
+    html += '<div class="sp-vip-trial-info">';
+    html += '<div class="sp-vip-trial-label">Trải nghiệm VIP</div>';
+    html += '<div class="sp-vip-trial-title">Nâng cấp hỗ trợ<br>của bạn</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="sp-vip-trial-desc">Thành viên VIP được hưởng đặc quyền hỗ trợ riêng — phản hồi ưu tiên, CSKH chuyên trách và nhiều phúc lợi hấp dẫn.</div>';
+    html += '<div class="sp-vip-trial-features">';
+    html += '<div class="sp-vip-trial-feat">' + lcIcon('star','neon-gold') + ' CSKH riêng</div>';
+    html += '<div class="sp-vip-trial-feat">' + lcIcon('lightning','neon-gold') + ' Ưu tiên xử lý</div>';
+    html += '<div class="sp-vip-trial-feat">' + lcIcon('send','neon-gold') + ' Kênh riêng</div>';
+    html += '<div class="sp-vip-trial-feat">' + lcIcon('gift','neon-gold') + ' Quà VIP</div>';
+    html += '<div class="sp-vip-trial-feat">' + lcIcon('cash','neon-gold') + ' Hoàn trả cao</div>';
+    html += '<div class="sp-vip-trial-feat">' + lcIcon('crown','neon-gold') + ' Đặc quyền riêng</div>';
+    html += '</div>';
+    html += '<div class="sp-vip-trial-btns">';
+    if (!isLoggedIn) {
+      html += '<button class="sp-vip-trial-btn primary" onclick="openAuthModal(\'register\')">Đăng ký ngay</button>';
+      html += '<button class="sp-vip-trial-btn secondary" onclick="navigateTo(\'/vip\')">Tìm hiểu VIP</button>';
+    } else {
+      html += '<button class="sp-vip-trial-btn primary" onclick="navigateTo(\'/vip\')">Khám phá VIP Club</button>';
+      html += '<button class="sp-vip-trial-btn secondary" onclick="navigateTo(\'/account/deposit\')">Nạp tiền nâng hạng</button>';
+    }
+    html += '</div>';
+    html += '</div>';
+  }
+
   // Promo CTA — Đại lý Mubet
   html += '<div class="sp-promo">';
   html += '<div class="sp-promo-badge">Đặc quyền mới</div>';
   html += '<div class="sp-promo-title">Trở thành đại lý Mubet</div>';
   html += '<div class="sp-promo-desc">Tham gia chương trình đại lý — nhận hoa hồng hấp dẫn, công cụ quản lý chuyên nghiệp và đặc quyền riêng.</div>';
   html += '<div class="sp-promo-btns">';
-  html += '<button class="sp-promo-btn primary" onclick="showToast(\'Đăng ký đại lý...\')">Đăng ký ngay</button>';
-  html += '<button class="sp-promo-btn secondary" onclick="showToast(\'Chi tiết chương trình...\')">Chi tiết</button>';
+  html += '<button class="sp-promo-btn primary" onclick="navigateTo(\'/agent/register\')">Đăng ký ngay</button>';
+  html += '<button class="sp-promo-btn secondary" onclick="navigateTo(\'/agent\')">Chi tiết</button>';
   html += '</div>';
   html += '</div>';
 
   // Liên kết hữu ích
   var links = [
-    { icon: 'ℹ️', text: 'Giới thiệu' },
-    { icon: '📝', text: 'Hướng dẫn đăng ký' },
-    { icon: '🔒', text: 'Chính sách bảo mật' },
-    { icon: '💰', text: 'Hướng dẫn nạp tiền' },
-    { icon: '📋', text: 'Điều kiện & điều khoản' },
-    { icon: '💸', text: 'Hướng dẫn rút tiền' },
-    { icon: '📰', text: 'Tin tức' },
-    { icon: '🛡️', text: 'Chơi có trách nhiệm' }
+    { icon: lcIcon('info','neon-blue'), text: 'Giới thiệu' },
+    { icon: lcIcon('user','neon-green'), text: 'Hướng dẫn đăng ký' },
+    { icon: lcIcon('lock','neon-purple'), text: 'Chính sách bảo mật' },
+    { icon: lcIcon('cash','neon-gold'), text: 'Hướng dẫn nạp tiền' },
+    { icon: lcIcon('clipboard','neon-orange'), text: 'Điều kiện & điều khoản' },
+    { icon: lcIcon('cash_out','neon-teal'), text: 'Hướng dẫn rút tiền' },
+    { icon: lcIcon('flag','neon-red'), text: 'Tin tức' },
+    { icon: lcIcon('shield','neon-green'), text: 'Chơi có trách nhiệm' }
   ];
   html += '<div class="sp-links">';
   html += '<div class="sp-links-header">';
@@ -10349,12 +11074,279 @@ function renderSupportPage() {
   document.getElementById('supportBody').innerHTML = html;
 }
 
+// ===== AGENT PAGE =====
+var agentState = {
+  registered: false,
+  name: '', code: 'AG-', level: 'Đồng', levelColor: '#CD7F32',
+  members: 7, totalRevenue: 12500000, totalComm: 3750000,
+  monthlyTarget: 50000000, monthlyRevenue: 12500000, monthlyComm: 3750000,
+  refLink: 'mubet.com/ref/agent_demo',
+  memberList: [
+    { name: 'Nguyễn V.A', date: '10/04/2026', rev: 3200000 },
+    { name: 'Trần T.B', date: '08/04/2026', rev: 2800000 },
+    { name: 'Lê H.C', date: '05/04/2026', rev: 2100000 },
+    { name: 'Phạm M.D', date: '01/04/2026', rev: 1900000 },
+    { name: 'Hoàng K.E', date: '28/03/2026', rev: 1500000 }
+  ]
+};
+var agentTab = 'info'; // info | register | portal
+
+function showAgentPage(hash) {
+  homeScrollY = window.scrollY;
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('missionView').style.display = 'none';
+  document.getElementById('onboardingView').style.display = 'none';
+  document.getElementById('supportView').style.display = 'none';
+  document.getElementById('accountView').style.display = 'none';
+  document.getElementById('agentPage').style.display = '';
+  var catNav = document.querySelector('.cat-nav-bar');
+  if (catNav) catNav.style.display = 'none';
+  var bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) bottomNav.style.display = '';
+  window.scrollTo(0, 0);
+  document.body.style.overflow = '';
+  if (hash === '/agent/register') agentTab = 'register';
+  else if (hash === '/agent/portal' || agentState.registered) agentTab = 'portal';
+  else agentTab = 'info';
+  renderAgentPage();
+}
+
+function renderAgentPage() {
+  var html = '';
+  // Tabs
+  html += '<div class="ag-tabs">';
+  html += '<button class="ag-tab' + (agentTab === 'info' ? ' active' : '') + '" onclick="agentTab=\'info\';renderAgentPage();window.scrollTo(0,0);">Giới thiệu</button>';
+  html += '<button class="ag-tab' + (agentTab === 'register' ? ' active' : '') + '" onclick="agentTab=\'register\';renderAgentPage();window.scrollTo(0,0);">Đăng ký</button>';
+  html += '<button class="ag-tab' + (agentTab === 'portal' ? ' active' : '') + '" onclick="' + (agentState.registered ? "agentTab=\'portal\';renderAgentPage();window.scrollTo(0,0);" : "showToast(\'Vui lòng đăng ký đại lý trước\')") + '">' + lcIcon('chart_bar','') + ' Portal</button>';
+  html += '</div>';
+
+  if (agentTab === 'info') html += renderAgentInfo();
+  else if (agentTab === 'register') html += renderAgentRegister();
+  else html += renderAgentPortal();
+
+  document.getElementById('agentPageBody').innerHTML = html;
+}
+
+function renderAgentInfo() {
+  var h = '';
+  // Hero
+  h += '<div class="ag-hero">';
+  h += '<div class="ag-hero-badge">' + lcIcon('crown','neon-gold') + ' Chương trình đối tác</div>';
+  h += '<div class="ag-hero-title">Trở thành <span>Đại lý Mubet</span></div>';
+  h += '<div class="ag-hero-desc">Kiếm thu nhập không giới hạn bằng cách giới thiệu người chơi — nhận hoa hồng trọn đời từ doanh thu người giới thiệu.</div>';
+  h += '<div class="ag-hero-stats">';
+  h += '<div class="ag-hero-stat"><div class="ag-hero-stat-val">45%</div><div class="ag-hero-stat-lbl">Hoa hồng<br>cao nhất</div></div>';
+  h += '<div class="ag-hero-stat"><div class="ag-hero-stat-val">5.200+</div><div class="ag-hero-stat-lbl">Đại lý<br>đang hoạt động</div></div>';
+  h += '<div class="ag-hero-stat"><div class="ag-hero-stat-val">72h</div><div class="ag-hero-stat-lbl">Thanh toán<br>nhanh nhất</div></div>';
+  h += '</div></div>';
+  // Commission
+  h += '<div class="ag-section"><div class="ag-section-title">' + lcIcon('chart_up','neon-gold') + ' Cơ cấu hoa hồng</div><div class="ag-comm-tiers">';
+  [{icon:'target',neon:'neon-blue',bg:'rgba(59,130,246,.1)',name:'Thể thao',desc:'Cược thể thao & eSports',rate:'30-40%'},
+   {icon:'dice',neon:'neon-red',bg:'rgba(255,50,50,.1)',name:'Casino',desc:'Live Casino & Game bài',rate:'25-35%',hot:true},
+   {icon:'slot',neon:'neon-purple',bg:'rgba(168,85,247,.1)',name:'Slot & Nổ hũ',desc:'Slot games & Jackpot',rate:'30-45%',hot:true},
+   {icon:'star',neon:'neon-green',bg:'rgba(67,160,71,.1)',name:'Xổ số & Keno',desc:'Số đề, Lô đề, Keno',rate:'20-30%'}
+  ].forEach(function(ct){
+    h+='<div class="ag-comm-tier'+(ct.hot?' highlight':'')+'"><div class="ag-comm-icon" style="background:'+ct.bg+'">'+lcIcon(ct.icon,ct.neon)+'</div><div class="ag-comm-info"><div class="ag-comm-name">'+ct.name+'</div><div class="ag-comm-desc">'+ct.desc+'</div></div><div class="ag-comm-rate">'+ct.rate+'</div></div>';
+  });
+  h += '</div></div>';
+  // Levels
+  h += '<div class="ag-section"><div class="ag-section-title">' + lcIcon('crown','neon-gold') + ' Cấp bậc đại lý</div><div class="ag-levels">';
+  [{name:'Đồng',req:'1-10 TV',comm:'25%',c:'#CD7F32',bg:'rgba(205,127,50,.12)',bb:'rgba(205,127,50,.3)'},
+   {name:'Bạc',req:'11-50 TV',comm:'30%',c:'#C0C0C0',bg:'rgba(192,192,192,.12)',bb:'rgba(192,192,192,.3)'},
+   {name:'Vàng',req:'51-200 TV',comm:'35%',c:'#FFD700',bg:'rgba(255,215,0,.12)',bb:'rgba(255,215,0,.3)',gold:true},
+   {name:'Bạch Kim',req:'201-500 TV',comm:'40%',c:'#E5E4E2',bg:'rgba(229,228,226,.12)',bb:'rgba(229,228,226,.3)'},
+   {name:'Kim Cương',req:'500+ TV',comm:'45%',c:'#B9F2FF',bg:'rgba(185,242,255,.12)',bb:'rgba(185,242,255,.3)'}
+  ].forEach(function(lv){
+    h+='<div class="ag-level'+(lv.gold?' gold':'')+'"><div class="ag-level-badge" style="background:'+lv.bg+';color:'+lv.c+';border:1px solid '+lv.bb+'">'+lv.name+'</div><div class="ag-level-name" style="color:'+lv.c+'">'+lv.name+'</div><div class="ag-level-req">'+lv.req+'</div><div class="ag-level-comm" style="color:'+lv.c+'">lên đến '+lv.comm+'</div><div class="ag-level-label">Hoa hồng</div></div>';
+  });
+  h += '</div></div>';
+  // Steps
+  h += '<div class="ag-section"><div class="ag-section-title">' + lcIcon('flag','neon-green') + ' Cách thức hoạt động</div><div class="ag-steps">';
+  [{t:'Đăng ký tài khoản đại lý',d:'Điền thông tin cơ bản, xác minh danh tính. Hoàn tất trong 5 phút.'},
+   {t:'Nhận link & công cụ tiếp thị',d:'Link giới thiệu cá nhân, banner, QR code, landing page riêng.'},
+   {t:'Chia sẻ & mời người chơi',d:'Chia sẻ qua mạng xã hội, website, group chat hoặc trực tiếp.'},
+   {t:'Nhận hoa hồng trọn đời',d:'Hoa hồng tính trên doanh thu ròng hàng tuần, thanh toán tự động.'}
+  ].forEach(function(s,i){
+    h+='<div class="ag-step"><div class="ag-step-num">'+(i+1)+'</div><div class="ag-step-line"></div><div class="ag-step-content"><div class="ag-step-title">'+s.t+'</div><div class="ag-step-desc">'+s.d+'</div></div></div>';
+  });
+  h += '</div></div>';
+  // Benefits
+  h += '<div class="ag-section"><div class="ag-section-title">' + lcIcon('gift','neon-red') + ' Quyền lợi đại lý</div><div class="ag-benefits">';
+  [{i:'cash',n:'neon-gold',bg:'rgba(245,158,11,.08)',t:'Hoa hồng trọn đời',d:'Thu nhập thụ động từ mỗi người chơi giới thiệu'},
+   {i:'lightning',n:'neon-green',bg:'rgba(67,160,71,.08)',t:'Thanh toán nhanh',d:'Rút hoa hồng mỗi tuần, không giới hạn'},
+   {i:'chart_bar',n:'neon-blue',bg:'rgba(59,130,246,.08)',t:'Dashboard chuyên nghiệp',d:'Theo dõi realtime: thành viên, doanh thu'},
+   {i:'users',n:'neon-purple',bg:'rgba(168,85,247,.08)',t:'Hệ thống cấp dưới',d:'Mạng lưới đại lý đa cấp, thưởng thêm'},
+   {i:'star',n:'neon-gold',bg:'rgba(245,158,11,.08)',t:'Thưởng hiệu suất',d:'Bonus hàng tháng theo doanh thu'},
+   {i:'shield',n:'neon-teal',bg:'rgba(38,166,226,.08)',t:'Hỗ trợ 1-1',d:'Account Manager riêng'}
+  ].forEach(function(b){
+    h+='<div class="ag-benefit"><div class="ag-benefit-icon" style="background:'+b.bg+'">'+lcIcon(b.i,b.n)+'</div><div class="ag-benefit-title">'+b.t+'</div><div class="ag-benefit-desc">'+b.d+'</div></div>';
+  });
+  h += '</div></div>';
+  // FAQ
+  h += '<div class="ag-section"><div class="ag-section-title">' + lcIcon('question','neon-orange') + ' Câu hỏi thường gặp</div>';
+  [{q:'Ai có thể đăng ký làm đại lý?',a:'Bất kỳ ai từ 18 tuổi trở lên. Không yêu cầu kinh nghiệm hay vốn đầu tư ban đầu.'},
+   {q:'Hoa hồng được tính như thế nào?',a:'Tính trên doanh thu ròng (Net Revenue) của người chơi bạn giới thiệu. Tỷ lệ 25-45% tuỳ cấp bậc.'},
+   {q:'Khi nào nhận được hoa hồng?',a:'Tính và cộng mỗi tuần (thứ 2). Rút bất cứ lúc nào, xử lý trong 24-72 giờ.'},
+   {q:'Có giới hạn thu nhập không?',a:'Không. Thu nhập hoàn toàn không giới hạn.'},
+   {q:'Hoa hồng cấp dưới hoạt động ra sao?',a:'Đại lý cấp dưới mang về thành viên, bạn nhận thêm 5-10% hoa hồng từ hệ thống cấp dưới.'}
+  ].forEach(function(f){
+    h+='<div class="ag-faq-item" onclick="this.classList.toggle(\'open\')"><div class="ag-faq-q"><span>'+f.q+'</span><span class="ag-faq-arrow">▾</span></div><div class="ag-faq-a">'+f.a+'</div></div>';
+  });
+  h += '</div>';
+  // CTA
+  h += '<div class="ag-cta-wrap"><button class="ag-cta" onclick="agentTab=\'register\';renderAgentPage();window.scrollTo(0,0);">Đăng ký đại lý ngay</button>';
+  h += '<div class="ag-cta-sub">Miễn phí đăng ký — Bắt đầu kiếm thu nhập ngay hôm nay</div></div>';
+  return h;
+}
+
+function renderAgentRegister() {
+  var h = '';
+  h += '<div class="ag-hero" style="padding:16px 0 12px;">';
+  h += '<div class="ag-hero-badge">' + lcIcon('user','neon-green') + ' Đăng ký miễn phí</div>';
+  h += '<div class="ag-hero-title" style="font-size:18px;">Đăng ký <span>Đại lý</span></div>';
+  h += '<div class="ag-hero-desc">Điền thông tin bên dưới để bắt đầu. Tài khoản đại lý sẽ được kích hoạt ngay lập tức.</div>';
+  h += '</div>';
+  // Form
+  h += '<div class="ag-form">';
+  h += '<div class="ag-form-group"><label class="ag-form-label">Họ và tên</label><input class="ag-form-input" id="agFormName" placeholder="Nhập họ tên đầy đủ" value="' + (currentUser ? currentUser.displayName : '') + '"></div>';
+  h += '<div class="ag-form-row">';
+  h += '<div class="ag-form-group"><label class="ag-form-label">Số điện thoại</label><input class="ag-form-input" id="agFormPhone" placeholder="09xx xxx xxx" type="tel"></div>';
+  h += '<div class="ag-form-group"><label class="ag-form-label">Email</label><input class="ag-form-input" id="agFormEmail" placeholder="email@example.com" type="email"></div>';
+  h += '</div>';
+  h += '<div class="ag-form-group"><label class="ag-form-label">Kênh tiếp thị chính</label><select class="ag-form-select" id="agFormChannel"><option value="">Chọn kênh...</option><option>Facebook</option><option>Telegram / Zalo</option><option>Website / Blog</option><option>YouTube / TikTok</option><option>Giới thiệu trực tiếp</option><option>Khác</option></select></div>';
+  h += '<div class="ag-form-row">';
+  h += '<div class="ag-form-group"><label class="ag-form-label">Tỉnh / Thành</label><select class="ag-form-select" id="agFormCity"><option value="">Chọn...</option><option>Hà Nội</option><option>TP.HCM</option><option>Đà Nẵng</option><option>Hải Phòng</option><option>Cần Thơ</option><option>Khác</option></select></div>';
+  h += '<div class="ag-form-group"><label class="ag-form-label">Mã giới thiệu (nếu có)</label><input class="ag-form-input" id="agFormRef" placeholder="AG-XXXX"></div>';
+  h += '</div>';
+  h += '<div class="ag-form-group"><label class="ag-form-label">Ghi chú / Kinh nghiệm</label><input class="ag-form-input" id="agFormNote" placeholder="VD: Đã có kinh nghiệm làm affiliate 2 năm..."></div>';
+  h += '<div class="ag-form-check"><input type="checkbox" class="ag-form-checkbox" id="agFormAgree"><label class="ag-form-check-label" for="agFormAgree">Tôi đồng ý với <a href="#">Điều khoản Đại lý</a> và <a href="#">Chính sách Hoa hồng</a> của Mubet.</label></div>';
+  h += '<button class="ag-form-submit" onclick="submitAgentForm()">Đăng ký Đại lý</button>';
+  h += '</div>';
+  // Info summary
+  h += '<div class="ag-section" style="margin-top:8px;">';
+  h += '<div class="ag-section-title">' + lcIcon('shield','neon-green') + ' Cam kết</div>';
+  h += '<div class="ag-tools">';
+  h += '<div class="ag-tool"><div class="ag-tool-icon" style="background:rgba(67,160,71,.08)">' + lcIcon('check','neon-green') + '</div><div class="ag-tool-text"><div class="ag-tool-name">Kích hoạt tức thì</div><div class="ag-tool-desc">Tài khoản đại lý hoạt động ngay sau đăng ký thành công</div></div></div>';
+  h += '<div class="ag-tool"><div class="ag-tool-icon" style="background:rgba(59,130,246,.08)">' + lcIcon('lock','neon-blue') + '</div><div class="ag-tool-text"><div class="ag-tool-name">Bảo mật tuyệt đối</div><div class="ag-tool-desc">Thông tin cá nhân được mã hoá và bảo vệ hoàn toàn</div></div></div>';
+  h += '<div class="ag-tool"><div class="ag-tool-icon" style="background:rgba(245,158,11,.08)">' + lcIcon('cash','neon-gold') + '</div><div class="ag-tool-text"><div class="ag-tool-name">Miễn phí 100%</div><div class="ag-tool-desc">Không phí đăng ký, không phí duy trì, không rủi ro</div></div></div>';
+  h += '</div></div>';
+  return h;
+}
+
+function submitAgentForm() {
+  var name = document.getElementById('agFormName').value.trim();
+  var phone = document.getElementById('agFormPhone').value.trim();
+  var agree = document.getElementById('agFormAgree').checked;
+  if (!name) { showToast('Vui lòng nhập họ tên'); return; }
+  if (!phone) { showToast('Vui lòng nhập số điện thoại'); return; }
+  if (!agree) { showToast('Vui lòng đồng ý điều khoản'); return; }
+  agentState.registered = true;
+  agentState.name = name;
+  agentState.code = 'AG-' + Math.random().toString(36).substr(2,6).toUpperCase();
+  showToast('Đăng ký thành công! Chào mừng Đại lý ' + name);
+  agentTab = 'portal';
+  renderAgentPage();
+  window.scrollTo(0,0);
+}
+
+function renderAgentPortal() {
+  var h = '';
+  var s = agentState;
+  var commPct = Math.round((s.monthlyRevenue / s.monthlyTarget) * 100);
+  // Portal header
+  h += '<div class="ag-portal-header">';
+  h += '<div class="ag-portal-top">';
+  h += '<div class="ag-portal-avatar">' + (s.name ? s.name.charAt(0).toUpperCase() : 'A') + '</div>';
+  h += '<div class="ag-portal-info">';
+  h += '<div class="ag-portal-name">' + (s.name || 'Đại lý') + '</div>';
+  h += '<div class="ag-portal-level"><span class="ag-portal-level-badge" style="background:rgba(205,127,50,.12);color:' + s.levelColor + ';border:1px solid rgba(205,127,50,.3);">' + s.level + '</span> Đại lý cấp ' + s.level + '</div>';
+  h += '<div class="ag-portal-id">Mã: ' + s.code + '</div>';
+  h += '</div></div>';
+  h += '<div class="ag-portal-stats">';
+  h += '<div class="ag-portal-stat"><div class="ag-portal-stat-val">' + s.members + '</div><div class="ag-portal-stat-lbl">Thành viên</div></div>';
+  h += '<div class="ag-portal-stat"><div class="ag-portal-stat-val">' + (s.totalRevenue / 1000000).toFixed(1) + 'M</div><div class="ag-portal-stat-lbl">Doanh thu</div></div>';
+  h += '<div class="ag-portal-stat"><div class="ag-portal-stat-val">' + (s.totalComm / 1000000).toFixed(1) + 'M</div><div class="ag-portal-stat-lbl">Hoa hồng</div></div>';
+  h += '</div></div>';
+
+  // Referral link
+  h += '<div class="ag-ref-link">';
+  h += '<div class="ag-ref-link-text">' + s.refLink + '</div>';
+  h += '<button class="ag-ref-link-copy" onclick="navigator.clipboard.writeText(\'' + s.refLink + '\');showToast(\'Đã copy link giới thiệu!\')">Copy</button>';
+  h += '</div>';
+
+  // Quick actions
+  h += '<div class="ag-portal-actions">';
+  h += '<div class="ag-portal-action" onclick="showToast(\'Mở công cụ marketing...\')"><div class="ag-portal-action-icon" style="background:rgba(67,160,71,.08)">' + lcIcon('link','neon-green') + '</div><div class="ag-portal-action-text">Chia sẻ link</div></div>';
+  h += '<div class="ag-portal-action" onclick="showToast(\'Mở quản lý tài chính...\')"><div class="ag-portal-action-icon" style="background:rgba(245,158,11,.08)">' + lcIcon('cash_out','neon-gold') + '</div><div class="ag-portal-action-text">Rút hoa hồng</div></div>';
+  h += '<div class="ag-portal-action" onclick="showToast(\'Mở banner & landing page...\')"><div class="ag-portal-action-icon" style="background:rgba(168,85,247,.08)">' + lcIcon('diamond_shape','neon-purple') + '</div><div class="ag-portal-action-text">Marketing</div></div>';
+  h += '<div class="ag-portal-action" onclick="showToast(\'Mở báo cáo...\')"><div class="ag-portal-action-icon" style="background:rgba(59,130,246,.08)">' + lcIcon('chart_bar','neon-blue') + '</div><div class="ag-portal-action-text">Báo cáo</div></div>';
+  h += '</div>';
+
+  // Monthly bonus
+  h += '<div class="ag-section"><div class="ag-section-title">' + lcIcon('cash','neon-gold') + ' Thưởng tháng 04/2026</div>';
+  h += '<div class="ag-monthly-card">';
+  h += '<div class="ag-monthly-top"><div class="ag-monthly-title">Hoa hồng tháng này</div><div class="ag-monthly-period">01/04 - 30/04</div></div>';
+  h += '<div class="ag-monthly-amount">' + (s.monthlyComm).toLocaleString() + 'đ</div>';
+  h += '<div class="ag-monthly-sub">Doanh thu ròng: ' + (s.monthlyRevenue).toLocaleString() + 'đ</div>';
+  h += '<div class="ag-monthly-bar-wrap"><div class="ag-monthly-bar"><div class="ag-monthly-bar-fill" style="width:' + commPct + '%"></div></div>';
+  h += '<div class="ag-monthly-bar-text"><span>Hiện tại</span><span>Mục tiêu ' + (s.monthlyTarget / 1000000) + 'M</span></div></div>';
+  h += '</div></div>';
+
+  // Milestones
+  h += '<div class="ag-section"><div class="ag-section-title">' + lcIcon('trophy','neon-gold') + ' Mốc thưởng</div>';
+  h += '<div class="ag-milestones">';
+  var milestones = [
+    { name: 'Thành viên đầu tiên', desc: 'Giới thiệu thành công 1 người chơi', reward: '100K', target: 1, reached: s.members >= 1 },
+    { name: '5 thành viên', desc: 'Xây dựng nhóm 5 người chơi', reward: '500K', target: 5, reached: s.members >= 5 },
+    { name: '10 thành viên', desc: 'Lên hạng Đại lý Bạc', reward: '1.5M', target: 10, reached: s.members >= 10, current: s.members >= 5 && s.members < 10 },
+    { name: '50 thành viên', desc: 'Lên hạng Đại lý Vàng', reward: '5M', target: 50, reached: s.members >= 50 },
+    { name: 'Doanh thu 100M', desc: 'Tổng doanh thu đạt 100 triệu', reward: '10M', target: 100000000, reached: s.totalRevenue >= 100000000 }
+  ];
+  milestones.forEach(function(m) {
+    var cls = m.reached ? 'reached' : m.current ? 'current' : '';
+    h += '<div class="ag-milestone ' + cls + '">';
+    h += '<div class="ag-milestone-icon" style="background:' + (m.reached ? 'rgba(67,160,71,.1)' : m.current ? 'rgba(245,158,11,.1)' : 'rgba(255,255,255,.03)') + '">' + lcIcon(m.reached ? 'check' : 'star', m.reached ? 'neon-green' : m.current ? 'neon-gold' : '') + '</div>';
+    h += '<div class="ag-milestone-info"><div class="ag-milestone-name">' + m.name + '</div><div class="ag-milestone-desc">' + m.desc + '</div></div>';
+    h += '<div class="ag-milestone-reward">' + m.reward + '</div>';
+    if (m.reached) h += '<div class="ag-milestone-check">✓</div>';
+    h += '</div>';
+  });
+  h += '</div></div>';
+
+  // Members list
+  h += '<div class="ag-section"><div class="ag-section-title">' + lcIcon('users','neon-blue') + ' Thành viên gần đây</div>';
+  h += '<div class="ag-members-list">';
+  s.memberList.forEach(function(m) {
+    h += '<div class="ag-member">';
+    h += '<div class="ag-member-avatar">' + m.name.charAt(0) + '</div>';
+    h += '<div class="ag-member-info"><div class="ag-member-name">' + m.name + '</div><div class="ag-member-date">Tham gia: ' + m.date + '</div></div>';
+    h += '<div class="ag-member-rev"><div class="ag-member-rev-val">' + (m.rev / 1000000).toFixed(1) + 'M</div><div class="ag-member-rev-lbl">Doanh thu</div></div>';
+    h += '</div>';
+  });
+  h += '</div></div>';
+
+  // Commission breakdown
+  h += '<div class="ag-section"><div class="ag-section-title">' + lcIcon('chart_up','neon-green') + ' Chi tiết hoa hồng</div>';
+  h += '<div class="ag-comm-tiers">';
+  [{name:'Thể thao',rev:'4.2M',comm:'1.3M',rate:'30%',icon:'target',neon:'neon-blue',bg:'rgba(59,130,246,.1)'},
+   {name:'Casino',rev:'3.8M',comm:'1.1M',rate:'28%',icon:'dice',neon:'neon-red',bg:'rgba(255,50,50,.1)'},
+   {name:'Slot',rev:'3.1M',comm:'1.0M',rate:'32%',icon:'slot',neon:'neon-purple',bg:'rgba(168,85,247,.1)'},
+   {name:'Khác',rev:'1.4M',comm:'0.35M',rate:'25%',icon:'star',neon:'neon-green',bg:'rgba(67,160,71,.1)'}
+  ].forEach(function(ct){
+    h+='<div class="ag-comm-tier"><div class="ag-comm-icon" style="background:'+ct.bg+'">'+lcIcon(ct.icon,ct.neon)+'</div><div class="ag-comm-info"><div class="ag-comm-name">'+ct.name+'</div><div class="ag-comm-desc">DT: '+ct.rev+' → HH: '+ct.comm+'</div></div><div class="ag-comm-rate">'+ct.rate+'</div></div>';
+  });
+  h += '</div></div>';
+
+  return h;
+}
+
 function showAccountView(path) {
   homeScrollY = window.scrollY;
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('missionView').style.display = 'none';
   document.getElementById('onboardingView').style.display = 'none';
   document.getElementById('supportView').style.display = 'none';
+  document.getElementById('agentPage').style.display = 'none';
   document.getElementById('accountView').style.display = '';
   // Hide cat-nav-bar on account pages
   var catNav = document.querySelector('.cat-nav-bar');
@@ -13424,6 +14416,8 @@ function loadTrialState() {
   } catch(e) {}
 }
 
+// Agent page — no overlay needed (standalone page)
+
 // Trial event listeners
 document.getElementById('trialClose').addEventListener('click', closeTrialView);
 document.getElementById('trialOverlay').addEventListener('click', closeTrialView);
@@ -15497,6 +16491,7 @@ function showVipView() {
   document.getElementById('accountView').style.display = 'none';
   document.getElementById('onboardingView').style.display = 'none';
   document.getElementById('supportView').style.display = 'none';
+  document.getElementById('agentPage').style.display = 'none';
   document.getElementById('mainContent').style.display = '';
   var catNav = document.querySelector('.cat-nav-bar');
   if (catNav) catNav.style.display = '';
@@ -16150,6 +17145,7 @@ function showMissionView() {
   document.getElementById('accountView').style.display = 'none';
   document.getElementById('onboardingView').style.display = 'none';
   document.getElementById('supportView').style.display = 'none';
+  document.getElementById('agentPage').style.display = 'none';
   document.getElementById('missionView').style.display = '';
   var catNav = document.querySelector('.cat-nav-bar');
   if (catNav) catNav.style.display = 'none';
