@@ -4071,6 +4071,231 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0; opacity: .8;
 }
 
+/* ===== SUPPORT VIEW ===== */
+.support-view {
+  min-height: 100vh; background: var(--bg);
+  padding-top: 60px; padding-bottom: 80px;
+}
+.support-header-bar {
+  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: var(--max-w, 430px); height: 56px; z-index: 100;
+  display: flex; align-items: center; gap: 12px; padding: 0 16px;
+  background: rgba(12,14,20,.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.support-back-btn {
+  width: 36px; height: 36px; border-radius: 10px; border: none;
+  background: rgba(255,255,255,.06); color: rgba(255,255,255,.7);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.support-back-btn svg { width: 18px; height: 18px; }
+.support-header-title {
+  font-size: 15px; font-weight: 700; color: #fff;
+  font-family: Montserrat, sans-serif;
+}
+.support-header-opts {
+  margin-left: auto; width: 36px; height: 36px; border-radius: 10px; border: none;
+  background: rgba(255,255,255,.06); color: rgba(255,255,255,.5);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.support-body { padding: 16px; }
+
+/* Hero */
+.sp-hero {
+  position: relative; padding: 24px 20px 20px; border-radius: 16px; margin-bottom: 16px;
+  background: linear-gradient(135deg, rgba(255,180,50,.08) 0%, rgba(255,50,50,.06) 50%, rgba(100,50,255,.06) 100%);
+  border: 1px solid rgba(255,255,255,.06); overflow: hidden;
+}
+.sp-hero::before {
+  content: ''; position: absolute; top: -40px; right: -40px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,180,50,.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.sp-hero-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+  color: #43a047; background: rgba(67,160,71,.1); border: 1px solid rgba(67,160,71,.2);
+  padding: 3px 10px; border-radius: 20px; margin-bottom: 12px;
+}
+.sp-hero-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: #43a047; animation: spPulse 2s ease-in-out infinite;
+}
+@keyframes spPulse {
+  0%,100% { opacity: 1; box-shadow: 0 0 4px rgba(67,160,71,.4); }
+  50% { opacity: .5; box-shadow: 0 0 8px rgba(67,160,71,.6); }
+}
+.sp-hero-title {
+  font-size: 20px; font-weight: 800; color: #fff;
+  font-family: Montserrat, sans-serif; line-height: 1.3; margin-bottom: 6px;
+}
+.sp-hero-desc {
+  font-size: 12px; color: rgba(255,255,255,.45); line-height: 1.5; margin-bottom: 16px;
+}
+.sp-hero-stats {
+  display: flex; gap: 0; border-radius: 10px;
+  background: rgba(0,0,0,.3); border: 1px solid rgba(255,255,255,.06);
+  overflow: hidden;
+}
+.sp-hero-stat {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 10px 8px;
+}
+.sp-hero-stat + .sp-hero-stat { border-left: 1px solid rgba(255,255,255,.06); }
+.sp-hero-stat-val {
+  font-size: 13px; font-weight: 800; color: #fff;
+  font-family: Montserrat, sans-serif;
+}
+.sp-hero-stat-val.online { color: #43a047; }
+.sp-hero-stat-lbl {
+  font-size: 9px; font-weight: 600; color: rgba(255,255,255,.35);
+  text-transform: uppercase; letter-spacing: .3px;
+}
+
+/* Section blocks */
+.sp-section {
+  margin-bottom: 16px; border-radius: 14px;
+  background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06);
+  overflow: hidden;
+}
+.sp-section-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px 10px;
+}
+.sp-section-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.sp-section-icon svg { width: 18px; height: 18px; }
+.sp-section-icon.support { background: rgba(67,160,71,.1); color: #43a047; }
+.sp-section-icon.community { background: rgba(59,130,246,.1); color: #3b82f6; }
+.sp-section-htext { flex: 1; min-width: 0; }
+.sp-section-title {
+  font-size: 13px; font-weight: 800; color: #fff;
+  font-family: Montserrat, sans-serif;
+}
+.sp-section-desc {
+  font-size: 10.5px; color: rgba(255,255,255,.35); margin-top: 1px;
+}
+.sp-section-badge {
+  font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
+  padding: 3px 8px; border-radius: 6px; flex-shrink: 0;
+}
+.sp-section-badge.live { color: #43a047; background: rgba(67,160,71,.1); border: 1px solid rgba(67,160,71,.2); }
+.sp-section-badge.promo { color: #f59e0b; background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.2); }
+
+/* Action items */
+.sp-actions { padding: 0 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+.sp-action {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: 12px;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+  cursor: pointer; transition: all .2s;
+}
+.sp-action:active { transform: scale(.98); background: rgba(255,255,255,.06); }
+.sp-action-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.sp-action-icon svg { width: 20px; height: 20px; }
+.sp-action-icon.chat { background: linear-gradient(135deg, rgba(67,160,71,.15), rgba(67,160,71,.05)); color: #66bb6a; }
+.sp-action-icon.phone { background: linear-gradient(135deg, rgba(255,180,50,.15), rgba(255,180,50,.05)); color: #ffb74d; }
+.sp-action-icon.fb { background: linear-gradient(135deg, rgba(59,130,246,.15), rgba(59,130,246,.05)); color: #60a5fa; }
+.sp-action-icon.tele { background: linear-gradient(135deg, rgba(38,166,226,.15), rgba(38,166,226,.05)); color: #29b6f6; }
+.sp-action-text { flex: 1; min-width: 0; }
+.sp-action-title {
+  font-size: 12.5px; font-weight: 700; color: rgba(255,255,255,.85);
+}
+.sp-action-sub {
+  font-size: 10.5px; color: rgba(255,255,255,.35); margin-top: 1px;
+}
+.sp-action-arrow {
+  color: rgba(255,255,255,.2); flex-shrink: 0;
+}
+.sp-action-arrow svg { width: 16px; height: 16px; }
+
+/* Promo CTA */
+.sp-promo {
+  position: relative; margin-bottom: 16px; border-radius: 14px; overflow: hidden;
+  background: linear-gradient(135deg, rgba(255,180,50,.06) 0%, rgba(245,158,11,.03) 100%);
+  border: 1px solid rgba(255,180,50,.12); padding: 20px;
+}
+.sp-promo::before {
+  content: ''; position: absolute; bottom: -30px; right: -20px;
+  width: 100px; height: 100px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,180,50,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.sp-promo-badge {
+  display: inline-block; font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px;
+  color: #f59e0b; background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.15);
+  padding: 3px 8px; border-radius: 6px; margin-bottom: 10px;
+}
+.sp-promo-title {
+  font-size: 16px; font-weight: 800; color: #fff;
+  font-family: Montserrat, sans-serif; margin-bottom: 6px;
+}
+.sp-promo-desc {
+  font-size: 11.5px; color: rgba(255,255,255,.4); line-height: 1.5; margin-bottom: 16px;
+}
+.sp-promo-btns { display: flex; gap: 8px; position: relative; z-index: 1; }
+.sp-promo-btn {
+  padding: 9px 18px; border-radius: 10px; font-size: 11px; font-weight: 700;
+  font-family: Montserrat, sans-serif; cursor: pointer; border: none;
+  transition: all .2s;
+}
+.sp-promo-btn.primary {
+  background: linear-gradient(135deg, #f59e0b, #d97706); color: #000;
+  box-shadow: 0 2px 8px rgba(245,158,11,.2);
+}
+.sp-promo-btn.secondary {
+  background: rgba(255,255,255,.06); color: rgba(255,255,255,.6);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+/* Links */
+.sp-links { margin-bottom: 16px; }
+.sp-links-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 4px; margin-bottom: 10px;
+}
+.sp-links-icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(255,255,255,.04); color: rgba(255,255,255,.4);
+  display: flex; align-items: center; justify-content: center;
+}
+.sp-links-icon svg { width: 14px; height: 14px; }
+.sp-links-title {
+  font-size: 13px; font-weight: 800; color: #fff;
+  font-family: Montserrat, sans-serif;
+}
+.sp-links-desc {
+  font-size: 10px; color: rgba(255,255,255,.3); margin-left: auto;
+}
+.sp-links-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+.sp-link-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border-radius: 12px;
+  background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06);
+  cursor: pointer; transition: all .2s;
+}
+.sp-link-item:active { background: rgba(255,255,255,.05); }
+.sp-link-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 15px;
+}
+.sp-link-text {
+  font-size: 11px; font-weight: 600; color: rgba(255,255,255,.6);
+  line-height: 1.3;
+}
+
 /* ===== ACCOUNT VIEW ===== */
 .account-view {
   min-height: 100vh; background: transparent;
@@ -9214,6 +9439,20 @@ img { max-width: 100%; display: block; }
 </div><!-- /#mainContent -->
 
 <!-- ===== ACCOUNT VIEW ===== -->
+<!-- ===== SUPPORT VIEW ===== -->
+<div id="supportView" class="support-view" style="display:none">
+  <div class="support-header-bar">
+    <button class="support-back-btn" onclick="navigateTo('')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    </button>
+    <div class="support-header-title">Trung tâm hỗ trợ</div>
+    <button class="support-header-opts" onclick="showToast('Tuỳ chọn')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+    </button>
+  </div>
+  <div class="support-body" id="supportBody"></div>
+</div>
+
 <div id="accountView" class="account-view" style="display:none">
   <div class="account-header-bar">
     <button class="account-back-btn" onclick="navigateTo('')">
@@ -9955,6 +10194,8 @@ function router() {
     showLeaderboardPage();
   } else if (hash === '/vip') {
     showVipView();
+  } else if (hash === '/support') {
+    showSupportView();
   } else if (hash === '/account' || hash.startsWith('/account/')) {
     if (!isLoggedIn) {
       pendingAction = () => navigateTo(hash);
@@ -9972,6 +10213,7 @@ function showHomeView() {
   document.getElementById('accountView').style.display = 'none';
   document.getElementById('missionView').style.display = 'none';
   document.getElementById('onboardingView').style.display = 'none';
+  document.getElementById('supportView').style.display = 'none';
   document.getElementById('mainContent').style.display = '';
   // Restore cat-nav-bar & bottom-nav
   var catNav = document.querySelector('.cat-nav-bar');
@@ -9992,11 +10234,127 @@ function showHomeView() {
   document.body.style.overflow = '';
 }
 
+function showSupportView() {
+  homeScrollY = window.scrollY;
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('missionView').style.display = 'none';
+  document.getElementById('onboardingView').style.display = 'none';
+  document.getElementById('accountView').style.display = 'none';
+  document.getElementById('supportView').style.display = '';
+  var catNav = document.querySelector('.cat-nav-bar');
+  if (catNav) catNav.style.display = 'none';
+  var bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) bottomNav.style.display = '';
+  window.scrollTo(0, 0);
+  document.body.style.overflow = '';
+  renderSupportPage();
+}
+
+function renderSupportPage() {
+  var html = '';
+
+  // Hero
+  html += '<div class="sp-hero">';
+  html += '<div class="sp-hero-badge">Hỗ trợ 24/7</div>';
+  html += '<div class="sp-hero-title">Xin chào!<br>Mubet có thể giúp gì?</div>';
+  html += '<div class="sp-hero-desc">Tìm câu trả lời nhanh hoặc liên hệ trực tiếp đội ngũ hỗ trợ — luôn sẵn sàng phản hồi mọi lúc.</div>';
+  html += '<div class="sp-hero-stats">';
+  html += '<div class="sp-hero-stat"><span class="sp-hero-stat-val online">Online</span><span class="sp-hero-stat-lbl">Trạng thái</span></div>';
+  html += '<div class="sp-hero-stat"><span class="sp-hero-stat-val">~30s</span><span class="sp-hero-stat-lbl">Phản hồi</span></div>';
+  html += '<div class="sp-hero-stat"><span class="sp-hero-stat-val">4+</span><span class="sp-hero-stat-lbl">Kênh hỗ trợ</span></div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Đội ngũ hỗ trợ
+  html += '<div class="sp-section">';
+  html += '<div class="sp-section-header">';
+  html += '<div class="sp-section-icon support"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>';
+  html += '<div class="sp-section-htext"><div class="sp-section-title">Đội ngũ hỗ trợ</div><div class="sp-section-desc">Phản hồi nhanh, hỗ trợ trực tiếp</div></div>';
+  html += '<span class="sp-section-badge live">Live</span>';
+  html += '</div>';
+  html += '<div class="sp-actions">';
+  // Chat
+  html += '<div class="sp-action" onclick="showToast(\'Đang kết nối CSKH...\')">';
+  html += '<div class="sp-action-icon chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h8M8 13h4"/></svg></div>';
+  html += '<div class="sp-action-text"><div class="sp-action-title">Chat với CSKH</div><div class="sp-action-sub">Tư vấn trực tiếp, phản hồi nhanh</div></div>';
+  html += '<div class="sp-action-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></div>';
+  html += '</div>';
+  // Hotline
+  html += '<div class="sp-action" onclick="showToast(\'Đang gọi Hotline...\')">';
+  html += '<div class="sp-action-icon phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>';
+  html += '<div class="sp-action-text"><div class="sp-action-title">Liên hệ Hotline</div><div class="sp-action-sub">Xử lý nhanh các trường hợp khẩn</div></div>';
+  html += '<div class="sp-action-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></div>';
+  html += '</div>';
+  html += '</div></div>';
+
+  // Cộng đồng Mubet
+  html += '<div class="sp-section">';
+  html += '<div class="sp-section-header">';
+  html += '<div class="sp-section-icon community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="17" cy="7" r="3"/><path d="M21 21v-2a3 3 0 00-3-3"/></svg></div>';
+  html += '<div class="sp-section-htext"><div class="sp-section-title">Cộng đồng Mubet</div><div class="sp-section-desc">Cập nhật ưu đãi và thông báo mới</div></div>';
+  html += '<span class="sp-section-badge promo">Ưu đãi</span>';
+  html += '</div>';
+  html += '<div class="sp-actions">';
+  // Facebook
+  html += '<div class="sp-action" onclick="showToast(\'Mở Facebook Mubet...\')">';
+  html += '<div class="sp-action-icon fb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>';
+  html += '<div class="sp-action-text"><div class="sp-action-title">Facebook</div><div class="sp-action-sub">Tin tức và hoạt động cộng đồng</div></div>';
+  html += '<div class="sp-action-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></div>';
+  html += '</div>';
+  // Telegram
+  html += '<div class="sp-action" onclick="showToast(\'Mở Telegram Mubet...\')">';
+  html += '<div class="sp-action-icon tele"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>';
+  html += '<div class="sp-action-text"><div class="sp-action-title">Tham gia ngay</div><div class="sp-action-sub">Nhận thông báo và quà nhanh hơn</div></div>';
+  html += '<div class="sp-action-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></div>';
+  html += '</div>';
+  html += '</div></div>';
+
+  // Promo CTA — Đại lý Mubet
+  html += '<div class="sp-promo">';
+  html += '<div class="sp-promo-badge">Đặc quyền mới</div>';
+  html += '<div class="sp-promo-title">Trở thành đại lý Mubet</div>';
+  html += '<div class="sp-promo-desc">Tham gia chương trình đại lý — nhận hoa hồng hấp dẫn, công cụ quản lý chuyên nghiệp và đặc quyền riêng.</div>';
+  html += '<div class="sp-promo-btns">';
+  html += '<button class="sp-promo-btn primary" onclick="showToast(\'Đăng ký đại lý...\')">Đăng ký ngay</button>';
+  html += '<button class="sp-promo-btn secondary" onclick="showToast(\'Chi tiết chương trình...\')">Chi tiết</button>';
+  html += '</div>';
+  html += '</div>';
+
+  // Liên kết hữu ích
+  var links = [
+    { icon: 'ℹ️', text: 'Giới thiệu' },
+    { icon: '📝', text: 'Hướng dẫn đăng ký' },
+    { icon: '🔒', text: 'Chính sách bảo mật' },
+    { icon: '💰', text: 'Hướng dẫn nạp tiền' },
+    { icon: '📋', text: 'Điều kiện & điều khoản' },
+    { icon: '💸', text: 'Hướng dẫn rút tiền' },
+    { icon: '📰', text: 'Tin tức' },
+    { icon: '🛡️', text: 'Chơi có trách nhiệm' }
+  ];
+  html += '<div class="sp-links">';
+  html += '<div class="sp-links-header">';
+  html += '<div class="sp-links-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.07.01l2.83-2.83a5 5 0 00-7.08-7.07l-1.41 1.41"/><path d="M14 11a5 5 0 00-7.07-.01l-2.83 2.83a5 5 0 007.08 7.07l1.41-1.41"/></svg></div>';
+  html += '<div class="sp-links-title">Liên kết hữu ích</div>';
+  html += '<div class="sp-links-desc">Tra cứu nhanh</div>';
+  html += '</div>';
+  html += '<div class="sp-links-grid">';
+  links.forEach(function(l) {
+    html += '<div class="sp-link-item" onclick="showToast(\'' + l.text + '\')">';
+    html += '<div class="sp-link-icon">' + l.icon + '</div>';
+    html += '<div class="sp-link-text">' + l.text + '</div>';
+    html += '</div>';
+  });
+  html += '</div></div>';
+
+  document.getElementById('supportBody').innerHTML = html;
+}
+
 function showAccountView(path) {
   homeScrollY = window.scrollY;
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('missionView').style.display = 'none';
   document.getElementById('onboardingView').style.display = 'none';
+  document.getElementById('supportView').style.display = 'none';
   document.getElementById('accountView').style.display = '';
   // Hide cat-nav-bar on account pages
   var catNav = document.querySelector('.cat-nav-bar');
@@ -10777,6 +11135,9 @@ function updateBottomNavActive() {
   if (currentRoute === '/account' || currentRoute.startsWith('/account/')) {
     const el = document.getElementById('navAccount');
     if (el) el.classList.add('active');
+  } else if (currentRoute === '/support') {
+    const el = document.getElementById('navSupport');
+    if (el) el.classList.add('active');
   } else if (currentRoute === '/mission') {
     // No specific bottom nav item for mission, keep home active
     const el = document.getElementById('navHome');
@@ -11339,6 +11700,15 @@ function updateUIForAuthState() {
       } else {
         navigateTo('/account');
       }
+    };
+  }
+
+  // Update support nav
+  const navSupport = document.getElementById('navSupport');
+  if (navSupport) {
+    navSupport.onclick = (e) => {
+      e.preventDefault();
+      navigateTo('/support');
     };
   }
 
@@ -15122,10 +15492,11 @@ function goToVipClub() {
 }
 
 function showVipView() {
-  // Hide mission/account/onboarding views
+  // Hide mission/account/onboarding/support views
   document.getElementById('missionView').style.display = 'none';
   document.getElementById('accountView').style.display = 'none';
   document.getElementById('onboardingView').style.display = 'none';
+  document.getElementById('supportView').style.display = 'none';
   document.getElementById('mainContent').style.display = '';
   var catNav = document.querySelector('.cat-nav-bar');
   if (catNav) catNav.style.display = '';
@@ -15778,6 +16149,7 @@ function showMissionView() {
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('accountView').style.display = 'none';
   document.getElementById('onboardingView').style.display = 'none';
+  document.getElementById('supportView').style.display = 'none';
   document.getElementById('missionView').style.display = '';
   var catNav = document.querySelector('.cat-nav-bar');
   if (catNav) catNav.style.display = 'none';
