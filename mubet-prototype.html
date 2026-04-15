@@ -4532,6 +4532,31 @@ img { max-width: 100%; display: block; }
 }
 .floating-promo-close:hover { background: rgba(60,60,65,.9); color: #fff; }
 
+/* Floating Arena Icon */
+.floating-arena {
+  position: fixed; bottom: 230px; z-index: 200;
+  left: 50%; margin-left: calc(min(430px, 100vw) / 2 - 72px - 8px);
+  width: 72px; height: 72px; cursor: pointer;
+  animation: floatBounce 3s ease-in-out infinite;
+  animation-delay: 1s;
+  transition: opacity .3s, transform .3s;
+  touch-action: none; user-select: none;
+}
+.floating-arena.hidden { opacity: 0; pointer-events: none; transform: scale(.5); }
+.floating-arena-img {
+  width: 72px; height: 72px; object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.5)) drop-shadow(0 0 16px rgba(255,180,0,.25));
+}
+.floating-arena-label {
+  position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%);
+  font-size: 8px; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, #e53935, #ff6f00);
+  padding: 1px 7px; border-radius: 6px;
+  white-space: nowrap; letter-spacing: .3px;
+  box-shadow: 0 2px 6px rgba(229,57,53,.5);
+  border: 1px solid rgba(255,255,255,.15);
+}
+
 /* Floating Voucher Icon */
 .floating-voucher {
   position: fixed; bottom: 155px; z-index: 200;
@@ -5124,36 +5149,39 @@ img { max-width: 100%; display: block; }
   background: rgba(245,158,11,.12); color: var(--tertiary-300);
 }
 .lb-tabs {
-  display: flex; gap: 4px; padding: 12px 16px; position: sticky; top: 0; z-index: 5;
-  background: var(--bg);
+  display: flex; gap: 0; padding: 0 16px; position: sticky; top: 0; z-index: 5;
+  background: var(--bg); border-bottom: 1px solid rgba(255,255,255,.06);
 }
 .lb-tab {
-  flex: 1; padding: 10px 0; border-radius: 10px; border: 1px solid var(--line);
-  background: transparent; color: var(--muted); font-size: 12px; font-weight: 700;
-  font-family: Montserrat, sans-serif; cursor: pointer; transition: all .2s ease;
+  flex: 1; padding: 12px 0 10px; border: none; border-bottom: 2px solid transparent;
+  background: transparent; color: var(--muted); font-size: 12.5px; font-weight: 700;
+  font-family: Montserrat, sans-serif; cursor: pointer; transition: all .25s ease;
+  position: relative; letter-spacing: .2px;
 }
+.lb-tab:hover { color: rgba(255,255,255,.5); }
 .lb-tab.active {
-  background: linear-gradient(135deg, rgba(212,175,55,.12), rgba(212,175,55,.04));
-  border-color: rgba(212,175,55,.3); color: var(--tertiary-300);
+  color: #fcd34d; border-bottom-color: #fcd34d;
+  background: linear-gradient(to top, rgba(252,211,77,.06) 0%, transparent 70%);
 }
 .lb-banner {
   position: relative; overflow: hidden; height: 160px;
 }
 .lb-banner-img {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  object-fit: cover; object-position: 65% center; opacity: .9;
+  object-fit: cover; object-position: center 30%; opacity: .9;
 }
 .lb-banner-overlay {
   position: absolute; inset: 0;
   background:
-    linear-gradient(to right, rgba(13,17,23,.9) 0%, rgba(13,17,23,.55) 40%, rgba(13,17,23,.15) 70%, transparent 100%),
-    linear-gradient(to top, var(--bg) 0%, var(--bg) 2%, transparent 30%);
+    linear-gradient(to right, rgba(13,17,23,.6) 0%, rgba(13,17,23,.2) 30%, transparent 55%),
+    linear-gradient(to top, var(--bg) 0%, transparent 15%);
 }
 .lb-hero {
-  position: relative; z-index: 1; padding: 0 16px; text-align: left; max-width: 50%;
+  position: absolute; top: 0; bottom: 0; left: 0; z-index: 1; padding: 0 16px; text-align: left; max-width: 50%;
   display: flex; flex-direction: column; justify-content: center; height: 100%;
-  position: absolute; top: 0; bottom: 0; left: 0;
 }
+.lb-banner-countdown { position: absolute; bottom: 10px; right: 12px; z-index: 2; font-size: 10.5px; font-weight: 600; color: rgba(255,255,255,.7); background: rgba(0,0,0,.45); backdrop-filter: blur(6px); padding: 4px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,.08); }
+.lb-banner-cd-num { font-size: 14px; font-weight: 900; color: #fbbf24; font-family: Montserrat, sans-serif; margin-right: 2px; }
 .lb-hero-icon { margin-bottom: 4px; }
 .lb-hero-icon svg { width: 28px; height: 28px; }
 .lb-hero-title {
@@ -5244,16 +5272,23 @@ img { max-width: 100%; display: block; }
   margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
 }
 .lb-section-title svg { width: 18px; height: 18px; }
+.lb-dist-header { display: flex; align-items: center; padding: 0 14px 6px; }
+.lb-dist-hrank { flex: 0 0 30%; font-size: 10px; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .5px; }
+.lb-dist-hcoin { flex: 0 0 30%; font-size: 10px; font-weight: 700; color: var(--text-tertiary); display: flex; align-items: center; gap: 4px; }
+.lb-dist-hvoucher { flex: 1; font-size: 10px; font-weight: 700; color: var(--text-tertiary); display: flex; align-items: center; gap: 4px; }
+.lb-dist-header .lc-icon-svg { width: 12px; height: 12px; }
 .lb-dist-list { display: flex; flex-direction: column; gap: 6px; }
 .lb-dist-item {
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; align-items: center;
   padding: 10px 14px; border-radius: 10px; background: rgba(255,255,255,.03);
   border: 1px solid var(--white-06);
 }
 .lb-dist-item.gold { border-color: rgba(255,226,62,.2); background: rgba(255,226,62,.05); }
 .lb-dist-item.silver { border-color: rgba(192,192,192,.15); background: rgba(192,192,192,.03); }
 .lb-dist-item.bronze { border-color: rgba(205,127,50,.15); background: rgba(205,127,50,.03); }
-.lb-dist-rank { font-size: 12px; font-weight: 700; }
+.lb-dist-rank { flex: 0 0 30%; font-size: 12px; font-weight: 700; }
+.lb-dist-coin { flex: 0 0 30%; font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 800; color: var(--tertiary-400); }
+.lb-dist-voucher { flex: 1; font-size: 11px; font-weight: 600; color: var(--text-secondary); }
 .lb-dist-prize { font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 800; color: var(--tertiary-400); }
 .lb-tnc-section { margin: 24px 16px 0; }
 .lb-tnc-list {
@@ -5261,7 +5296,7 @@ img { max-width: 100%; display: block; }
   background: var(--grad-glass); border: 1px solid var(--line);
 }
 .lb-tnc-item {
-  font-size: 10px; color: var(--muted); line-height: 1.6;
+  font-size: 11px; color: var(--muted); line-height: 1.6;
   padding: 4px 0 4px 14px; position: relative;
 }
 .lb-tnc-item::before { content: '•'; position: absolute; left: 0; color: var(--tertiary-400); }
@@ -5273,7 +5308,7 @@ img { max-width: 100%; display: block; }
 .lb-faq-item.open { border-color: rgba(255,226,62,.2); }
 .lb-faq-q {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 14px; font-size: 12px; font-weight: 600;
+  padding: 12px 14px; font-size: 11px; font-weight: 600;
 }
 .lb-faq-chevron {
   width: 16px; height: 16px; color: var(--muted); flex-shrink: 0;
@@ -5281,10 +5316,446 @@ img { max-width: 100%; display: block; }
 }
 .lb-faq-item.open .lb-faq-chevron { transform: rotate(180deg); color: var(--tertiary-400); }
 .lb-faq-a {
-  max-height: 0; overflow: hidden; font-size: 12px; color: var(--muted);
+  max-height: 0; overflow: hidden; font-size: 11px; color: var(--muted);
   line-height: 1.6; padding: 0 14px; transition: max-height .3s ease, padding .3s ease;
 }
 .lb-faq-item.open .lb-faq-a { max-height: 200px; padding: 0 14px 14px; }
+
+/* ===== Đường tới Đấu Trường CSS ===== */
+.pp-section { margin-top: 20px; }
+.pp-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.pp-header-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, rgba(255,152,0,.15), rgba(255,226,62,.1)); border: 1px solid rgba(255,152,0,.2); display: flex; align-items: center; justify-content: center; }
+.pp-header-title { font-size: 15px; font-weight: 800; color: #fff; }
+.pp-header-sub { font-size: 11px; color: rgba(255,255,255,.4); margin-top: 2px; }
+.pp-progress-row { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding-bottom: 15px; }
+.pp-progress-bar { flex: 1; height: 6px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; }
+.pp-progress-fill { height: 100%; background: linear-gradient(90deg, #ff6b35, #fbbf24); border-radius: 3px; transition: width .4s; }
+.pp-progress-label { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.5); }
+
+/* Path Tabs */
+.pp-tabs { display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 2px; }
+.pp-tabs::-webkit-scrollbar { display: none; }
+.pp-tab { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 8px 10px; border-radius: 10px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); cursor: pointer; min-width: 60px; flex-shrink: 0; position: relative; transition: all .2s; }
+.pp-tab:hover { background: rgba(255,255,255,.06); }
+.pp-tab.active { background: rgba(255,152,0,.08); border-color: rgba(255,152,0,.25); }
+.pp-tab.done { border-color: rgba(74,222,128,.15); }
+.pp-tab.active.done { background: rgba(74,222,128,.08); border-color: rgba(74,222,128,.25); }
+.pp-tab-icon { font-size: 18px; line-height: 1; }
+.pp-tab-name { font-size: 9px; font-weight: 700; color: rgba(255,255,255,.5); white-space: nowrap; }
+.pp-tab.active .pp-tab-name { color: #fff; }
+.pp-tab-check { position: absolute; top: -3px; right: -3px; width: 14px; height: 14px; border-radius: 50%; background: #4ade80; color: #000; font-size: 8px; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+
+/* Path Card */
+.pp-path-card { padding: 14px; border-radius: 12px; background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06); margin-bottom: 14px; }
+.pp-path-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.pp-path-icon { flex-shrink: 0; }
+.pp-path-hero { width: 52px; height: 52px; border-radius: 14px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, rgba(255,255,255,.06), rgba(15,15,25,.9)); border: 1.5px solid rgba(255,255,255,.1); }
+.pp-path-hero img { width: 100%; height: 100%; object-fit: cover; object-position: top center; filter: drop-shadow(0 2px 6px rgba(0,0,0,.4)); }
+.pp-path-info { flex: 1; min-width: 0; }
+.pp-path-name { font-size: 14px; font-weight: 800; color: #fff; }
+.pp-path-desc { font-size: 10px; color: rgba(255,255,255,.35); margin-top: 2px; }
+.pp-path-badge { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 6px; white-space: nowrap; }
+.pp-path-badge.done { background: rgba(74,222,128,.12); color: #4ade80; }
+.pp-path-badge.active { background: rgba(255,152,0,.12); color: #f59e0b; }
+.pp-path-badge.locked { background: rgba(255,255,255,.06); color: rgba(255,255,255,.35); }
+
+/* PP Entrance Cards */
+.pp-entrance-list { display: flex; flex-direction: column; gap: 24px; margin-top: 10px; }
+.pp-entrance-card { position: relative; border-radius: 16px; overflow: visible; cursor: pointer; transition: all .25s; padding: 0; border: 1px solid rgba(255,255,255,.06); height: 82px; display: flex; align-items: stretch; flex-direction: row; }
+.pp-ent-content::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.04) 40%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.04) 60%, transparent 100%); animation: pp-shimmer 4s ease-in-out infinite; pointer-events: none; z-index: 3; }
+.pp-entrance-card:nth-child(2) .pp-ent-content::after { animation-delay: .8s; }
+.pp-entrance-card:nth-child(3) .pp-ent-content::after { animation-delay: 1.6s; }
+.pp-entrance-card:nth-child(4) .pp-ent-content::after { animation-delay: 2.4s; }
+.pp-entrance-card:nth-child(5) .pp-ent-content::after { animation-delay: 3.2s; }
+@keyframes pp-shimmer { 0%, 100% { left: -100%; } 50% { left: 150%; } }
+.pp-entrance-card::before { content: ''; position: absolute; inset: 0; border-radius: 16px; background: radial-gradient(ellipse at 10% 50%, var(--pp-color-glow, transparent) 0%, transparent 50%); pointer-events: none; opacity: .5; z-index: 0; }
+/* Alternate cards: even cards (2nd, 4th) flip hero to right */
+.pp-entrance-card.pp-flip { flex-direction: row-reverse; }
+.pp-entrance-card.pp-flip::before { background: radial-gradient(ellipse at 90% 50%, var(--pp-color-glow, transparent) 0%, transparent 50%); }
+.pp-entrance-card.pp-flip .pp-ent-hero-img { left: auto; right: 4px; }
+.pp-entrance-card.pp-flip .pp-ent-content { padding: 12px 0 10px 14px; }
+.pp-entrance-card:active { transform: scale(.97); }
+.pp-entrance-card.active { background: linear-gradient(135deg, rgba(10,10,18,.95) 0%, rgba(20,18,30,.9) 100%); border-color: var(--pp-color-border, rgba(255,255,255,.08)); }
+.pp-entrance-card.done { background: linear-gradient(135deg, rgba(10,18,14,.95) 0%, rgba(14,20,16,.9) 100%); border-color: rgba(74,222,128,.12); }
+.pp-entrance-card:not(.active):not(.done) { background: linear-gradient(135deg, rgba(14,14,22,.9) 0%, rgba(18,16,24,.85) 100%); }
+
+/* Hero character area — overflows card top */
+.pp-ent-hero-wrap { position: relative; width: 90px; flex-shrink: 0; overflow: visible; z-index: 2; }
+.pp-ent-hero-img { position: absolute; bottom: -2px; left: 4px; width: 88px; height: 115px; object-fit: contain; object-position: bottom center; display: block; transition: transform .35s ease; filter: drop-shadow(0 2px 10px rgba(0,0,0,.6)); }
+.pp-entrance-card:active .pp-ent-hero-img { transform: scale(1.05); }
+.pp-entrance-card:not(.active):not(.done) .pp-ent-hero-img { filter: saturate(.35) brightness(.55) drop-shadow(0 2px 8px rgba(0,0,0,.5)); }
+.pp-ent-hero-img.pp-hero-sm { width: 79px; height: 104px; }
+
+/* Content area */
+.pp-ent-content { flex: 1; min-width: 0; padding: 12px 14px 10px 0; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; overflow: hidden; }
+.pp-ent-top { display: flex; align-items: flex-start; gap: 0; margin-bottom: 8px; position: relative; z-index: 1; }
+.pp-ent-info { flex: 1; min-width: 0; }
+.pp-ent-name { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 2px; letter-spacing: -.01em; line-height: 1.2; }
+.pp-entrance-card.done .pp-ent-name { color: #a7f3d0; }
+.pp-ent-done-icon { display: inline-flex; vertical-align: middle; margin-right: 4px; }
+.pp-ent-done-icon .lc-icon-svg { width: 15px; height: 15px; }
+.pp-ent-rank { display: inline-flex; align-items: center; gap: 3px; font-size: 13px; font-weight: 800; color: #fbbf24; letter-spacing: -.02em; }
+.pp-ent-rank .lc-icon-svg { width: 13px; height: 13px; }
+.pp-ent-desc { font-size: 10px; color: rgba(255,255,255,.35); line-height: 1.3; }
+.pp-ent-status-wrap { flex-shrink: 0; margin-left: 6px; }
+.pp-ent-status { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; display: flex; align-items: center; gap: 4px; white-space: nowrap; backdrop-filter: blur(4px); }
+.pp-ent-status.done { background: rgba(74,222,128,.12); color: #4ade80; border: 1px solid rgba(74,222,128,.15); }
+.pp-ent-status.active { background: rgba(251,191,36,.1); color: #fbbf24; border: 1px solid rgba(251,191,36,.15); }
+.pp-ent-status.locked { background: rgba(255,255,255,.03); color: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.06); }
+.pp-ent-status.cta { background: linear-gradient(135deg, rgba(251,191,36,.18), rgba(251,191,36,.08)); color: #fbbf24; border: 1px solid rgba(251,191,36,.25); letter-spacing: .02em; }
+.pp-ent-status .lc-icon-svg { width: 11px; height: 11px; }
+
+.pp-ent-bottom { display: flex; align-items: center; gap: 8px; z-index: 1; }
+.pp-ent-steps { display: flex; align-items: center; gap: 3px; flex-shrink: 0; }
+.pp-ent-step { width: 18px; height: 3.5px; border-radius: 2px; background: rgba(255,255,255,.06); }
+.pp-ent-step.done { background: var(--pp-color); box-shadow: 0 0 6px var(--pp-color-shadow, transparent); }
+.pp-ent-step.active { background: linear-gradient(90deg, var(--pp-color), transparent); }
+.pp-entrance-card.done .pp-ent-step.done { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,.3); }
+
+.pp-ent-rewards { display: flex; gap: 4px; align-items: center; }
+.pp-ent-arrow { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; font-size: 14px; color: rgba(255,255,255,.3); flex-shrink: 0; transition: all .2s; position: absolute; top: 9px; right: 12px; }
+.pp-entrance-card.active .pp-ent-arrow { background: linear-gradient(135deg, var(--pp-color-bg), transparent); border-color: var(--pp-color-border); color: var(--pp-color); }
+.pp-entrance-card.done .pp-ent-arrow { background: linear-gradient(135deg, rgba(74,222,128,.12), transparent); border-color: rgba(74,222,128,.15); color: #4ade80; }
+
+/* PP Detail Modal */
+.pp-modal-overlay { position: fixed; inset: 0; z-index: 600; background: rgba(0,0,0,.7); backdrop-filter: blur(6px); display: flex; align-items: flex-end; justify-content: center; opacity: 0; transition: opacity .25s ease; pointer-events: none; overflow: hidden; }
+.pp-modal-overlay.show { opacity: 1; pointer-events: auto; }
+.pp-modal-sheet { width: 100%; max-width: 500px; max-height: 80vh; background: linear-gradient(180deg, #181824 0%, #0f0f1a 100%); border-radius: 20px 20px 0 0; overflow: hidden; display: flex; flex-direction: column; transform: translateY(100%); transition: transform .3s cubic-bezier(.22,1,.36,1); flex-shrink: 0; }
+.pp-modal-overlay.show .pp-modal-sheet { transform: translateY(0); }
+.pp-modal-sheet-header { position: relative; overflow: hidden; padding: 18px 20px 14px; flex-shrink: 0; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.pp-modal-sheet-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, var(--pp-modal-glow, rgba(74,222,128,.08)) 0%, transparent 70%); pointer-events: none; }
+.pp-modal-hero { width: 56px; height: 72px; flex-shrink: 0; position: relative; z-index: 1; }
+.pp-modal-hero img { width: 100%; height: 100%; object-fit: contain; object-position: bottom center; filter: drop-shadow(0 2px 8px rgba(0,0,0,.5)); }
+.pp-modal-hinfo { flex: 1; min-width: 0; position: relative; z-index: 1; }
+.pp-modal-hname { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+.pp-modal-hdesc { font-size: 11px; color: rgba(255,255,255,.4); }
+.pp-modal-hbadge { margin-top: 6px; display: inline-flex; }
+.pp-modal-close { position: absolute; top: 14px; right: 14px; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.5); font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; transition: all .2s; }
+.pp-modal-close:active { background: rgba(255,255,255,.12); }
+.pp-modal-sheet-body { flex: 1; overflow-y: auto; padding: 16px 20px 32px; -webkit-overflow-scrolling: touch; padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); }
+.pp-modal-handle { width: 36px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.15); margin: 8px auto 0; flex-shrink: 0; }
+
+/* PP Join Section */
+.pp-join-section { text-align: center; padding: 8px 0 20px; border-bottom: 1px solid rgba(255,255,255,.06); margin-bottom: 16px; }
+.pp-join-info { margin-bottom: 16px; }
+.pp-join-icon { margin-bottom: 8px; }
+.pp-join-icon .lc-icon-svg { width: 28px; height: 28px; }
+.pp-join-title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.pp-join-desc { font-size: 12px; color: rgba(255,255,255,.45); line-height: 1.5; margin-bottom: 12px; padding: 0 8px; }
+.pp-join-rewards { display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; }
+.pp-join-reward-item { font-size: 11px; color: rgba(255,255,255,.5); display: flex; align-items: center; gap: 4px; flex-wrap: wrap; justify-content: center; }
+.pp-join-btn { width: 100%; padding: 14px; border: none; border-radius: 12px; color: #000; font-size: 15px; font-weight: 800; cursor: pointer; transition: all .2s; letter-spacing: .02em; }
+.pp-join-btn:active { transform: scale(.97); opacity: .9; }
+
+/* Timeline locked overlay */
+.pp-timeline-locked { position: relative; }
+.pp-timeline-locked::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 0%, rgba(15,15,26,.85) 40%); pointer-events: none; z-index: 1; border-radius: 12px; }
+.pp-timeline-locked .pp-timeline { filter: blur(2px) saturate(.3); opacity: .4; pointer-events: none; }
+
+/* PP Teaser Card (in Newbie page) */
+.pp-teaser-card { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-radius: 12px; background: linear-gradient(135deg, rgba(255,152,0,.06), rgba(255,226,62,.03)); border: 1px solid rgba(255,152,0,.15); margin-top: 20px; cursor: pointer; transition: all .2s; }
+.pp-teaser-card:active { transform: scale(.98); }
+.pp-teaser-left { display: flex; align-items: center; gap: 10px; }
+.pp-teaser-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, rgba(255,152,0,.15), rgba(255,226,62,.1)); border: 1px solid rgba(255,152,0,.2); display: flex; align-items: center; justify-content: center; }
+.pp-teaser-title { font-size: 14px; font-weight: 800; color: #fff; }
+.pp-teaser-sub { font-size: 10px; color: rgba(255,255,255,.4); margin-top: 2px; }
+.pp-teaser-right { display: flex; align-items: center; gap: 10px; }
+.pp-teaser-progress { width: 50px; height: 5px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; }
+.pp-teaser-progress-fill { height: 100%; background: linear-gradient(90deg, #ff6b35, #fbbf24); border-radius: 3px; }
+
+/* Newbie sub-tabs */
+.newbie-subtabs { display: flex; gap: 0; margin-bottom: 16px; border-radius: 10px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); overflow: hidden; }
+.newbie-subtab { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 8px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,.4); cursor: pointer; transition: all .2s; border-bottom: 2px solid transparent; }
+.newbie-subtab:hover { color: rgba(255,255,255,.6); background: rgba(255,255,255,.02); }
+.newbie-subtab.active { color: #fbbf24; border-bottom-color: #fbbf24; background: rgba(251,191,36,.04); }
+.newbie-subtab .lc-icon-svg { width: 14px; height: 14px; }
+
+.pp-timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
+.pp-checkpoint { display: flex; gap: 12px; }
+.pp-checkpoint-dot-col { display: flex; flex-direction: column; align-items: center; width: 28px; flex-shrink: 0; padding-top: 12px; }
+.pp-checkpoint-dot {
+  width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.06); border: 2px solid rgba(255,255,255,.1); position: relative; z-index: 2;
+}
+.pp-checkpoint.done .pp-checkpoint-dot { background: linear-gradient(135deg, #15803d, #4ade80); border-color: #4ade80; color: #fff; }
+.pp-checkpoint.active .pp-checkpoint-dot { background: linear-gradient(135deg, #b45309, #f59e0b); border-color: #f59e0b; }
+.pp-checkpoint.locked .pp-checkpoint-dot { opacity: .5; }
+.pp-dot-pulse { width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: ppPulse 1.5s ease-in-out infinite; }
+@keyframes ppPulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: .6; } }
+.pp-connector { width: 2px; flex: 1; min-height: 16px; background: rgba(255,255,255,.08); margin: 2px 0; }
+.pp-connector.done { background: linear-gradient(180deg, #4ade80, rgba(74,222,128,.2)); }
+
+.pp-checkpoint-card {
+  flex: 1; min-width: 0; padding: 10px 12px; border-radius: 10px;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+  margin-bottom: 8px;
+}
+.pp-checkpoint.active .pp-checkpoint-card { border-color: rgba(255,152,0,.2); background: rgba(255,152,0,.04); }
+.pp-checkpoint.done .pp-checkpoint-card { border-color: rgba(74,222,128,.12); }
+.pp-checkpoint.locked .pp-checkpoint-card { opacity: .5; }
+.pp-cp-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.pp-cp-label { font-size: 9px; font-weight: 800; color: #fbbf24; background: rgba(251,191,36,.12); padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
+.pp-cp-title { font-size: 13px; font-weight: 700; color: #fff; }
+.pp-cp-desc { font-size: 10px; color: rgba(255,255,255,.35); margin-bottom: 6px; }
+.pp-cp-progress { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+.pp-cp-bar { flex: 1; height: 5px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; }
+.pp-cp-bar-fill { height: 100%; background: linear-gradient(90deg, #ff6b35, #fbbf24); border-radius: 3px; }
+.pp-cp-bar-text { font-size: 9px; font-weight: 700; color: rgba(255,255,255,.4); white-space: nowrap; }
+.pp-cp-rewards { display: flex; flex-wrap: wrap; gap: 3px; }
+.pp-cp-status { font-size: 10px; color: rgba(255,255,255,.35); margin-top: 6px; display: flex; align-items: center; gap: 4px; }
+.pp-cp-status.done { color: #4ade80; }
+.pp-cp-claim { font-size: 11px; font-weight: 700; color: #fff; background: linear-gradient(135deg, #d42a2a, #ff6b35); border: none; border-radius: 6px; padding: 5px 12px; margin-top: 6px; cursor: pointer; }
+
+.pp-fullpath {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; margin-top: 4px;
+  background: linear-gradient(135deg, rgba(251,191,36,.06), rgba(255,152,0,.03));
+  border: 1px dashed rgba(251,191,36,.2);
+}
+.pp-fullpath-icon { font-size: 20px; flex-shrink: 0; }
+.pp-fullpath-info { flex: 1; min-width: 0; }
+.pp-fullpath-title { font-size: 12px; font-weight: 700; color: #fbbf24; margin-bottom: 4px; }
+.pp-fullpath-rewards { display: flex; flex-wrap: wrap; gap: 3px; }
+.pp-fullpath-status { flex-shrink: 0; font-size: 16px; }
+/* Arena CTA */
+.pp-arena-cta-wrap { padding: 16px 0 4px; }
+.pp-arena-cta { width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px 0; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); color: var(--text-secondary); font-size: 13px; font-weight: 700; cursor: pointer; transition: all .2s; }
+.pp-arena-cta .lc-icon-svg { width: 16px; height: 16px; color: var(--pp-color, #fcd34d); }
+.pp-arena-cta:hover { background: rgba(255,255,255,.06); color: #fff; border-color: rgba(255,255,255,.15); }
+/* Tournament Ticket (inline in fullpath) */
+/* Tournament ticket — voucher style (purple stub) */
+.pp-ticket-voucher {
+  display: flex; align-items: stretch; margin-top: 10px;
+  background: var(--surface-texture), var(--grad-surface);
+  border: 1px solid var(--line); border-left: none;
+  border-radius: var(--radius-stage-1);
+  overflow: hidden; position: relative;
+}
+.pp-ticket-voucher::before {
+  content: ''; position: absolute; left: -5px; top: 0; bottom: 0; width: 10px; z-index: 3;
+  background: radial-gradient(circle 5px, var(--bg) 99%, transparent 100%) 0 0 / 10px 10px repeat-y;
+}
+.pp-ticket-stub {
+  width: 56px; flex-shrink: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px;
+  padding: 10px 14px 10px 10px; position: relative; margin-right: -6px; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 25% 20%, rgba(180,140,255,.2), transparent),
+    radial-gradient(ellipse 50% 60% at 65% 80%, rgba(120,80,220,.15), transparent),
+    linear-gradient(160deg, #7c3aed 0%, #5b21b6 40%, #3b0f7a 100%);
+  box-shadow: inset 0 0 24px rgba(139,92,246,.15), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.pp-ticket-stub-icon { display: flex; align-items: center; justify-content: center; flex: 1; }
+.pp-ticket-stub-icon img { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 0 6px rgba(200,170,255,.5)) drop-shadow(0 1px 3px rgba(0,0,0,.3)); }
+.pp-ticket-stub-icon .lc-icon-svg { width: 18px; height: 18px; color: rgba(255,255,255,.9); filter: drop-shadow(0 0 4px rgba(200,170,255,.5)); }
+.pp-ticket-stub-label {
+  font-size: 9px; font-weight: 800; color: rgba(255,255,255,.85);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+/* Zigzag divider between stub and body */
+.pp-ticket-voucher .pp-ticket-stub::after {
+  content: ''; position: absolute; right: -4px; top: 0; bottom: 0; width: 8px; z-index: 2;
+  background: radial-gradient(circle 4px at 4px 0, transparent 99%, var(--surface-1) 100%) 0 -4px / 8px 8px repeat-y;
+}
+.pp-ticket-body {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  padding: 10px 12px 10px 16px; min-width: 0;
+}
+.pp-ticket-title {
+  font-size: 11.5px; font-weight: 700; color: #c4b5fd; line-height: 1.3;
+}
+.pp-ticket-sub {
+  font-size: 10px; font-weight: 500; color: var(--text-secondary); line-height: 1.3; margin-top: 1px;
+}
+
+.pp-tournament-teaser {
+  margin-top: 14px; padding: 14px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(220,38,38,.06), rgba(255,50,50,.03));
+  border: 1px solid rgba(255,50,50,.12);
+}
+.pp-tt-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.pp-tt-icon { font-size: 18px; }
+.pp-tt-info { flex: 1; }
+.pp-tt-title { font-size: 14px; font-weight: 800; color: #fff; }
+.pp-tt-sub { font-size: 11px; color: rgba(255,255,255,.35); }
+.pp-tt-badge { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 6px; display: flex; align-items: center; gap: 3px; }
+.pp-tt-badge.locked { background: rgba(255,50,50,.12); color: #f87171; }
+.pp-tt-badge.unlocked { background: rgba(74,222,128,.12); color: #4ade80; }
+.pp-tt-wager { text-align: center; padding: 12px; background: rgba(0,0,0,.2); border-radius: 10px; margin-bottom: 10px; }
+.pp-tt-wager-label { font-size: 10px; color: rgba(255,255,255,.35); margin-bottom: 4px; }
+.pp-tt-wager-value { font-size: 24px; font-weight: 900; color: #fbbf24; font-family: 'Montserrat', sans-serif; }
+.pp-tt-wager-note { font-size: 9px; color: rgba(255,255,255,.25); margin-top: 4px; }
+.pp-tt-cta { text-align: center; font-size: 11px; color: rgba(255,255,255,.35); font-style: italic; }
+.pp-tt-cta-btn { width: 100%; padding: 10px; border: none; border-radius: 8px; background: linear-gradient(135deg, #d42a2a, #ff6b35); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; }
+
+/* Season category sub-tabs */
+/* Season Tournament — category entrance cards */
+.st-cat-cards { display: flex; flex-direction: column; gap: 24px; margin-bottom: 14px; padding: 0 8px; }
+.st-cat-entry:not(.done):not(.active) { opacity: .55; filter: saturate(.5); }
+.st-cat-wager { font-size: 11px; font-weight: 700; color: var(--tertiary-300); margin-left: 6px; }
+
+/* Category Leaderboard Page */
+.lb-cat-page { padding: 0 16px 32px; }
+.lb-cat-page .lb-reward-dist { padding: 16px; margin: 8px 0 0; }
+
+/* Banner */
+.lb-cat-banner { position: relative; padding: 14px 0 14px; margin: 0 -16px 0; height: 155px; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,.06); }
+.lb-cat-banner-bg { position: absolute; inset: 0; z-index: 0; }
+.lb-cat-banner-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.3) 0%, rgba(0,0,0,.5) 50%, var(--bg) 100%); }
+.lb-cat-back { position: absolute; top: 14px; left: 14px; z-index: 5; width: 34px; height: 34px; border-radius: 50%; background: rgba(0,0,0,.4); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; transition: background .2s; }
+.lb-cat-back:hover { background: rgba(255,255,255,.1); }
+.lb-cat-banner-content { position: relative; z-index: 1; display: flex; align-items: flex-end; gap: 16px; margin-top: 2px; padding-left: 15px; }
+.lb-cat-banner-hero { width: 105px; flex-shrink: 0; align-self: flex-end; margin-bottom: -24px; }
+.lb-cat-banner-hero img { width: 105px; height: 130px; object-fit: contain; object-position: bottom; filter: drop-shadow(0 4px 20px rgba(0,0,0,.6)) drop-shadow(0 0 24px var(--pp-color, rgba(255,255,255,.1))); }
+.lb-cat-banner-info { flex: 1; }
+.lb-cat-banner-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--pp-color); opacity: .85; margin-bottom: 6px; }
+.lb-cat-banner-name { font-size: 22px; font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 4px; text-shadow: 0 2px 8px rgba(0,0,0,.3); }
+.lb-cat-banner-desc { font-size: 11.5px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 22px; }
+.lb-cat-banner-stats { position: absolute; bottom: 10px; left: 136px; right: 14px; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 0; padding: 5px 12px; border-radius: 8px; background: rgba(0,0,0,.45); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.08); }
+.lb-cat-bstat-lock { display: flex; align-items: center; }
+.lb-cat-bstat-lock .lc-icon-svg { width: 14px; height: 14px; color: rgba(255,255,255,.35); }
+.lb-cat-banner-stat { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.lb-cat-bstat-val { font-size: 13px; font-weight: 800; font-family: Montserrat, sans-serif; color: #fbbf24; }
+.lb-cat-bstat-lbl { font-size: 9px; font-weight: 600; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .3px; white-space: nowrap; }
+.lb-cat-banner-stat-sep { width: 1px; height: 12px; background: rgba(255,255,255,.15); margin: 0 8px; }
+
+/* Stats row */
+.lb-cat-stats { display: flex; gap: 8px; padding: 16px 0; }
+.lb-cat-stat { flex: 1; text-align: center; padding: 14px 8px 12px; border-radius: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); }
+.lb-cat-stat-value { font-size: 20px; font-weight: 800; color: #fff; font-family: Montserrat, sans-serif; display: flex; align-items: center; justify-content: center; gap: 4px; line-height: 1.2; }
+.lb-cat-stat-value .lc-icon-svg { width: 20px; height: 20px; }
+.lb-cat-stat-label { font-size: 8.5px; font-weight: 700; color: var(--text-tertiary); margin-top: 4px; text-transform: uppercase; letter-spacing: .8px; }
+
+/* Lock card */
+.lb-cat-lock-card { display: flex; align-items: center; gap: 8px; padding: 10px 12px; margin: 12px 0 8px; border-radius: 12px; background: linear-gradient(135deg, rgba(255,50,50,.06), rgba(255,50,50,.02)); border: 1px solid rgba(255,50,50,.15); }
+.lb-cat-lock-icon { flex-shrink: 0; }
+.lb-cat-lock-icon .lc-icon-svg { width: 24px; height: 24px; }
+.lb-cat-lock-text { flex: 1; min-width: 0; }
+.lb-cat-lock-title { font-size: 12.5px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.lb-cat-lock-desc { font-size: 10px; color: var(--text-secondary); line-height: 1.35; }
+.lb-cat-lock-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; max-width: 115px; }
+.lb-cat-lock-progress { font-size: 15px; font-weight: 800; font-family: Montserrat, sans-serif; color: #fff; }
+.lb-cat-lock-cta { flex-shrink: 0; display: flex; align-items: center; gap: 4px; padding: 7px 12px; border-radius: 8px; border: none; color: #000; font-size: 9.5px; font-weight: 700; cursor: pointer; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+.lb-cat-lock-cta .lc-icon-svg { width: 13px; height: 13px; }
+
+/* Leaderboard section */
+.lb-cat-section { padding: 8px 0 16px; }
+.lb-cat-section-title { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.lb-cat-section-title .lc-icon-svg { width: 16px; height: 16px; }
+.lb-cat-locked { position: relative; }
+.lb-cat-locked .lb-list { filter: blur(3px); pointer-events: none; opacity: .5; }
+
+/* Tab bar */
+.lb-cat-tab-bar { display: flex; gap: 0; padding: 0; border-bottom: 1px solid rgba(255,255,255,.06); margin-bottom: 12px; }
+.lb-cat-tab-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 10px 0 8px; border: none; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); font-size: 12px; font-weight: 700; cursor: pointer; transition: all .25s; }
+.lb-cat-tab-btn .lc-icon-svg { width: 14px; height: 14px; }
+.lb-cat-tab-btn:hover { color: rgba(255,255,255,.5); }
+.lb-cat-tab-btn.active { color: #fcd34d; border-bottom-color: #fcd34d; background: linear-gradient(to top, rgba(252,211,77,.06) 0%, transparent 70%); }
+
+/* ── Hall of Fame — GOAT Spotlight ── */
+.hof-section { padding-top: 4px; }
+.hof-spotlight { padding: 18px 16px; margin-bottom: 16px; border-radius: 16px; background: linear-gradient(160deg, rgba(255,200,50,.07) 0%, rgba(255,140,0,.03) 50%, rgba(255,200,50,.05) 100%); border: 1px solid rgba(255,200,50,.15); position: relative; overflow: hidden; display: flex; align-items: center; gap: 16px; }
+.hof-spotlight-glow { position: absolute; top: -20px; left: 20px; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, rgba(255,200,50,.1) 0%, transparent 70%); pointer-events: none; }
+.hof-spotlight-hero { position: relative; flex-shrink: 0; }
+.hof-spotlight-img { display: block; width: 110px; height: 110px; object-fit: contain; filter: drop-shadow(0 4px 16px rgba(255,200,50,.25)); }
+.hof-spotlight-crown { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); z-index: 2; }
+.hof-spotlight-crown .lc-icon-svg { width: 22px; height: 22px; color: #fcd34d; filter: drop-shadow(0 0 8px rgba(255,200,50,.5)); }
+.hof-spotlight-info { position: relative; flex: 1; min-width: 0; }
+.hof-spotlight-label { font-size: 9px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,200,50,.5); margin-bottom: 4px; }
+.hof-spotlight-name { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -.3px; margin-bottom: 6px; }
+.hof-spotlight-stat { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
+.hof-spotlight-num { font-size: 28px; font-weight: 900; font-family: Montserrat, sans-serif; color: #fcd34d; line-height: 1; }
+.hof-spotlight-unit { font-size: 12px; font-weight: 700; color: rgba(255,200,50,.65); }
+.hof-spotlight-sub { font-size: 10.5px; color: var(--text-tertiary); }
+.hof-spotlight-seasons { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
+.hof-season-chip { font-size: 8.5px; font-weight: 700; padding: 2px 6px; border-radius: 5px; background: rgba(255,200,50,.1); color: #fcd34d; border: 1px solid rgba(255,200,50,.15); white-space: nowrap; }
+
+/* ── Hall of Fame — Records Row ── */
+.hof-records-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.hof-rec { padding: 14px 12px; border-radius: 14px; position: relative; overflow: hidden; text-align: center; }
+.hof-rec-score { background: linear-gradient(145deg, rgba(100,180,255,.08) 0%, rgba(59,130,246,.03) 100%); border: 1px solid rgba(100,180,255,.12); }
+.hof-rec-streak { background: linear-gradient(145deg, rgba(255,120,50,.08) 0%, rgba(239,68,68,.03) 100%); border: 1px solid rgba(255,120,50,.12); }
+.hof-rec-img { display: block; width: 52px; height: 52px; object-fit: cover; object-position: center top; margin: 0 auto 6px; filter: drop-shadow(0 2px 6px rgba(0,0,0,.3)); border-radius: 50%; }
+.hof-rec-icon { margin-bottom: 8px; }
+.hof-rec-score .hof-rec-icon .lc-icon-svg { width: 18px; height: 18px; color: #60a5fa; }
+.hof-rec-streak .hof-rec-icon .lc-icon-svg { width: 18px; height: 18px; color: #f97316; }
+.hof-rec-label { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px; }
+.hof-rec-score .hof-rec-label { color: rgba(100,180,255,.7); }
+.hof-rec-streak .hof-rec-label { color: rgba(255,120,50,.7); }
+.hof-rec-value { font-size: 20px; font-weight: 900; font-family: Montserrat, sans-serif; color: #fff; line-height: 1.1; margin-bottom: 8px; }
+.hof-rec-player { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.85); }
+.hof-rec-meta { font-size: 10px; color: var(--text-tertiary); margin-top: 1px; }
+
+/* ── Hall of Fame — Champions Timeline ── */
+.hof-timeline { margin-top: 4px; }
+.hof-timeline-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.hof-timeline-title { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #fff; }
+.hof-timeline-title .lc-icon-svg { width: 15px; height: 15px; color: var(--text-secondary); }
+.hof-timeline-count { font-size: 10.5px; font-weight: 600; color: var(--text-tertiary); background: rgba(255,255,255,.05); padding: 3px 8px; border-radius: 6px; }
+
+.hof-entry { display: flex; align-items: center; gap: 0; margin-bottom: 0; min-height: 48px; position: relative; }
+.hof-entry-season { width: 46px; flex-shrink: 0; font-size: 10px; font-weight: 700; color: var(--text-tertiary); text-align: right; padding-right: 10px; }
+.hof-entry-line { width: 20px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; position: relative; }
+.hof-entry-line::before { content: ''; position: absolute; top: -24px; bottom: -24px; left: 50%; width: 2px; background: rgba(255,255,255,.06); transform: translateX(-50%); }
+.hof-entry:first-child .hof-entry-line::before { top: 50%; }
+.hof-entry:last-child .hof-entry-line::before { bottom: 50%; }
+.hof-entry-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.15); border: 2px solid rgba(255,255,255,.08); position: relative; z-index: 1; }
+.hof-entry-current .hof-entry-dot { width: 10px; height: 10px; background: #fcd34d; border-color: rgba(255,200,50,.3); box-shadow: 0 0 8px rgba(255,200,50,.4); }
+
+.hof-entry-card { flex: 1; display: flex; align-items: center; gap: 8px; padding: 8px 10px; margin-left: 6px; border-radius: 10px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.04); }
+.hof-entry-current .hof-entry-card { background: rgba(255,200,50,.06); border-color: rgba(255,200,50,.12); }
+.hof-entry-rank { flex-shrink: 0; }
+.hof-entry-rank .lc-icon-svg { width: 16px; height: 16px; color: rgba(255,200,50,.5); }
+.hof-entry-current .hof-entry-rank .lc-icon-svg { color: #fcd34d; filter: drop-shadow(0 0 4px rgba(255,200,50,.4)); }
+.hof-entry-info { flex: 1; min-width: 0; }
+.hof-entry-name { font-size: 12px; font-weight: 700; color: #fff; }
+.hof-entry-meta { font-size: 10px; color: var(--text-tertiary); }
+.hof-entry-current .hof-entry-name { color: #fcd34d; }
+.hof-entry-score { font-size: 12px; font-weight: 800; font-family: Montserrat, sans-serif; color: rgba(255,255,255,.6); flex-shrink: 0; }
+.hof-entry-current .hof-entry-score { color: rgba(255,200,50,.8); }
+.hof-entry-live { font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: rgba(255,200,50,.12); color: #fcd34d; border: 1px solid rgba(255,200,50,.2); text-transform: uppercase; letter-spacing: .5px; flex-shrink: 0; margin-left: 6px; }
+
+/* ===== Season Tournament CSS ===== */
+.st-intro-desc { font-size: 11px; line-height: 1.55; color: var(--text-tertiary); padding: 4px 16px 16px; font-style: italic; position: relative; z-index: 2; }
+.st-season-card { padding: 14px; border-radius: 12px; background: linear-gradient(135deg, rgba(220,38,38,.08), rgba(255,50,50,.03)); border: 1px solid rgba(255,50,50,.12); margin-bottom: 12px; }
+.st-season-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.st-season-icon { font-size: 20px; }
+.st-season-info { flex: 1; }
+.st-season-name { font-size: 16px; font-weight: 800; color: #fff; }
+.st-season-dates { font-size: 11px; color: rgba(255,255,255,.35); }
+.st-season-countdown { text-align: center; background: rgba(0,0,0,.3); padding: 8px 12px; border-radius: 10px; }
+.st-countdown-num { font-size: 22px; font-weight: 900; color: #fbbf24; font-family: 'Montserrat', sans-serif; }
+.st-countdown-label { font-size: 9px; color: rgba(255,255,255,.35); }
+.st-user-wager { text-align: center; padding: 12px; background: rgba(0,0,0,.2); border-radius: 10px; }
+.st-wager-label { font-size: 10px; color: rgba(255,255,255,.35); margin-bottom: 4px; }
+.st-wager-value { font-size: 28px; font-weight: 900; color: #fbbf24; font-family: 'Montserrat', sans-serif; }
+.st-wager-note { font-size: 9px; color: rgba(255,255,255,.25); margin-top: 4px; }
+
+.st-locked-card { padding: 20px; border-radius: 12px; background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06); text-align: center; margin-bottom: 14px; }
+.st-locked-icon { font-size: 28px; margin-bottom: 8px; }
+.st-locked-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.st-locked-desc { font-size: 11px; color: rgba(255,255,255,.4); line-height: 1.5; margin-bottom: 12px; }
+.st-locked-progress { display: flex; align-items: center; gap: 8px; justify-content: center; margin-bottom: 10px; }
+.st-locked-progress span { font-size: 11px; color: rgba(255,255,255,.4); font-weight: 600; white-space: nowrap; }
+.st-locked-bar { width: 80px; height: 5px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; }
+.st-locked-bar-fill { height: 100%; background: linear-gradient(90deg, #ff6b35, #fbbf24); border-radius: 3px; }
+.st-locked-hint { font-size: 10px; color: rgba(255,255,255,.25); font-style: italic; margin-bottom: 12px; }
+.st-locked-cta { padding: 10px 20px; border: none; border-radius: 8px; background: linear-gradient(135deg, #d42a2a, #ff6b35); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; }
+
+.st-rank-card { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; background: linear-gradient(135deg, rgba(251,191,36,.08), rgba(255,152,0,.04)); border: 1px solid rgba(251,191,36,.15); margin-bottom: 14px; }
+.st-rank-img { width: 36px; height: 36px; }
+.st-rank-label { font-size: 10px; color: rgba(255,255,255,.35); }
+.st-rank-value { font-size: 24px; font-weight: 900; color: #fbbf24; font-family: 'Montserrat', sans-serif; }
+
+.st-leaderboard { margin-bottom: 14px; position: relative; }
+.st-leaderboard.blurred .lb-list { filter: blur(4px); pointer-events: none; opacity: .5; }
+.st-lb-title { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.st-lb-overlay {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  background: rgba(0,0,0,.7); padding: 10px 16px; border-radius: 8px;
+  font-size: 12px; color: rgba(255,255,255,.6); font-weight: 600;
+  display: flex; align-items: center; gap: 6px; white-space: nowrap; z-index: 3;
+}
 
 .mhub-cards { padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 10px; }
 .mhub-cards-row { display: flex; gap: 8px; align-items: stretch; }
@@ -5944,39 +6415,76 @@ img { max-width: 100%; display: block; }
 /* Collect formation */
 .collect-formation {
   background: linear-gradient(180deg, #0a3d0a 0%, #1a5c1a 30%, #2d7d2d 60%, #1a5c1a 100%);
-  border-radius: 16px; padding: 20px 8px; position: relative; overflow: hidden;
+  border-radius: 16px; padding: 20px 6px; position: relative; overflow: hidden;
   border: 1px solid rgba(255,255,255,.1);
 }
-.collect-formation::before {
+.collect-field-lines { position: absolute; inset: 0; pointer-events: none; }
+.collect-field-lines::before {
   content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-  width: 80px; height: 80px; border-radius: 50%; border: 1px solid rgba(255,255,255,.1);
+  width: 70px; height: 70px; border-radius: 50%; border: 1px solid rgba(255,255,255,.08);
 }
-.collect-formation::after {
+.collect-field-lines::after {
   content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px;
-  background: rgba(255,255,255,.08);
+  background: rgba(255,255,255,.06);
 }
-.collect-row { display: flex; justify-content: center; gap: 6px; margin-bottom: 10px; }
+.collect-row { display: flex; justify-content: center; gap: 6px; margin-bottom: 8px; position: relative; z-index: 1; }
 .collect-row:last-child { margin-bottom: 0; }
 .collect-player {
-  width: 72px; text-align: center; padding: 6px 4px; border-radius: 10px;
-  background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.1);
-  backdrop-filter: blur(4px); transition: all .2s; cursor: pointer;
+  width: 78px; text-align: center; cursor: pointer; transition: transform .2s;
 }
-.collect-player.owned {
-  background: rgba(255,226,62,.1); border-color: rgba(255,226,62,.3);
-  box-shadow: 0 0 12px rgba(255,226,62,.1);
+.collect-player:active { transform: scale(.95); }
+.collect-player-card {
+  position: relative; width: 68px; height: 82px; margin: 0 auto 3px; border-radius: 4px;
+  overflow: hidden; border: none;
+  background: transparent; box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.collect-player.owned .collect-player-card {
+  box-shadow: 0 0 12px rgba(255,226,62,.2), 0 2px 8px rgba(0,0,0,.4);
+}
+.collect-player-img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  display: block;
+}
+.collect-player:not(.owned) .collect-player-img {
+  filter: brightness(.25) grayscale(.8);
+}
+.collect-player-overlay {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.3);
+}
+.collect-player-lock .lc-icon-svg { width: 18px; height: 18px; color: rgba(255,255,255,.4); }
+.collect-player-info {
+  display: flex; align-items: center; justify-content: center; gap: 3px;
 }
 .collect-player-pos {
-  font-size: 9px; font-weight: 800; color: rgba(255,255,255,.5);
-  font-family: Montserrat,sans-serif; margin-bottom: 2px;
+  font-size: 8px; font-weight: 800; color: rgba(255,255,255,.45);
+  font-family: Montserrat,sans-serif;
 }
 .collect-player.owned .collect-player-pos { color: var(--tertiary-400); }
 .collect-player-name {
-  font-size: 8px; font-weight: 600; color: var(--text-2);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 8.5px; font-weight: 600; color: rgba(255,255,255,.5);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50px;
 }
 .collect-player.owned .collect-player-name { color: #fff; font-weight: 700; }
-.collect-player-cost { font-size: 8px; color: var(--muted); margin-top: 2px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+.collect-player-cost {
+  font-size: 8px; color: rgba(255,255,255,.4); margin-top: 1px;
+  display: flex; align-items: center; justify-content: center; gap: 2px;
+}
+
+/* Player card detail modal */
+.pcard-modal { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .25s; }
+.pcard-modal.show { opacity: 1; }
+.pcard-modal-bg { position: absolute; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(8px); }
+.pcard-modal-content { position: relative; text-align: center; transform: scale(.9); transition: transform .25s; }
+.pcard-modal.show .pcard-modal-content { transform: scale(1); }
+.pcard-modal-img { width: 200px; height: auto; border-radius: 8px; filter: drop-shadow(0 8px 30px rgba(0,0,0,.6)); margin-bottom: 12px; }
+.pcard-modal-name { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+.pcard-modal-status { font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 4px; }
+.pcard-modal-status.owned { color: #4ade80; }
+.pcard-modal-status.owned .lc-icon-svg { width: 16px; height: 16px; }
+.pcard-modal-price { font-size: 16px; font-weight: 800; color: var(--tertiary-400); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+.pcard-modal-btn { padding: 12px 32px; border-radius: 12px; border: none; background: linear-gradient(135deg, var(--tertiary-400), #d4af37); color: #000; font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(255,226,62,.3); }
+.pcard-modal-close { position: absolute; top: -10px; right: -10px; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; cursor: pointer; }
 
 /* VIP card */
 .redeem-card-vip { border-color: rgba(255,226,62,.15); }
@@ -8653,6 +9161,13 @@ img { max-width: 100%; display: block; }
   </div>
 </div>
 
+<!-- ===== FLOATING ARENA ICON ===== -->
+<div class="floating-arena" id="floatingArena" onclick="window.lbTab='season';navigateTo('/leaderboard')">
+  <button class="floating-promo-close" onclick="event.stopPropagation();document.getElementById('floatingArena').classList.add('hidden');">&times;</button>
+  <img class="floating-arena-img" src="Assets/float-arena-s8.png" alt="Đấu Trường Mùa 8"/>
+  <span class="floating-arena-label">Mùa 8</span>
+</div>
+
 <!-- ===== FLOATING PROMO ICON ===== -->
 <div class="floating-voucher hidden" id="floatingVoucher" onclick="navigateTo('/account/my-promotions')">
   <button class="floating-promo-close" onclick="event.stopPropagation();closeFloatingVoucher();">&times;</button>
@@ -8716,7 +9231,7 @@ img { max-width: 100%; display: block; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18"/><path d="M12 8c-2-3-6-3-6 0s4 4 6 0"/><path d="M12 8c2-3 6-3 6 0s-4 4-6 0"/></svg>
       <span>Đổi quà</span>
     </a>
-    <a href="javascript:void(0)" class="mission-nav-item" data-tab="leaderboard" onclick="switchMissionNav('leaderboard', this)">
+    <a href="javascript:void(0)" class="mission-nav-item" data-tab="leaderboard" onclick="navigateTo('/leaderboard')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 15l-2 5-1.5-3.5L5 15l3.5-1.5L10 10z"/><path d="M18 4l-1 2-2 1 2 1 1 2 1-2 2-1-2-1z"/><path d="M6 2l-.5 1-1 .5 1 .5L6 5l.5-1 1-.5-1-.5z"/></svg>
       <span>Xếp hạng</span>
     </a>
@@ -9326,6 +9841,20 @@ function router() {
     showLcHistory();
   } else if (hash === '/mission/live-challenge/end-season') {
     showLcEndSeason();
+  } else if (hash === '/mission/newbie/personal-path') {
+    window.newbieSubTab = 'personal-path';
+    showNewbieFullPage();
+  } else if (hash.indexOf('/mission/newbie/') === 0) {
+    var pathSlug = hash.replace('/mission/newbie/', '');
+    var pathMap = {sport:'sports', casino:'casino', number:'lottery', jackpot:'jackpot', slot:'quick'};
+    window.newbieSubTab = 'personal-path';
+    showNewbieFullPage();
+    if (pathMap[pathSlug]) {
+      setTimeout(function() { showPathDetailModal(pathMap[pathSlug]); }, 100);
+    }
+  } else if (hash === '/mission/newbie') {
+    window.newbieSubTab = 'missions';
+    showNewbieFullPage();
   } else if (hash === '/mission/live-challenge') {
     showLiveChallengeFullPage();
   } else if (hash === '/mission/worldcup') {
@@ -9339,6 +9868,11 @@ function router() {
     renderMissionContent();
   } else if (hash.startsWith('/onboarding/')) {
     showOnboardingPage(hash.replace('/onboarding/', ''));
+  } else if (hash.startsWith('/leaderboard/') && hash !== '/leaderboard/') {
+    var lbSlug = hash.replace('/leaderboard/', '');
+    showCategoryLeaderboard(lbSlug);
+  } else if (hash === '/leaderboard') {
+    showLeaderboardPage();
   } else if (hash === '/vip') {
     showVipView();
   } else if (hash === '/account' || hash.startsWith('/account/')) {
@@ -13804,6 +14338,12 @@ function renderLobbyContent() {
       onclick: "navigateTo('/mission/live-challenge')"
     },
     {
+      img: 'Assets/home-page-banner/banner-arena-s8.png', alt: 'Đấu Trường Mùa 8',
+      tag: 'ĐẤU TRƯỜNG MÙA 8', sub: 'Xếp hạng theo danh mục — Chinh phục Sảnh Huyền Thoại',
+      badge: 'TOURNAMENT', badgeColor: 'gold', endsInHours: 3432,
+      onclick: "window.lbTab='season';navigateTo('/leaderboard')"
+    },
+    {
       img: 'Assets/home-page-banner/asset 7.webp', alt: 'Fire Warrior',
       tag: 'JACKPOT SIÊU TO', sub: 'Nổ hũ mỗi ngày — Hơn 1 tỷ đang chờ bạn',
       badge: 'NỔ HŨ', badgeColor: 'gold', endsInHours: 72
@@ -14345,6 +14885,60 @@ function initFloatingPromoDrag(el) {
   }, true);
 }
 
+// ===== FLOATING ARENA ICON =====
+function initFloatingArenaDrag(el) {
+  if (el._dragInited) return;
+  el._dragInited = true;
+  var isDragging = false, wasDragged = false;
+  var startX, startY, origX, origY;
+  function onStart(e) {
+    var t = e.touches ? e.touches[0] : e;
+    isDragging = true; wasDragged = false;
+    startX = t.clientX; startY = t.clientY;
+    var r = el.getBoundingClientRect();
+    origX = r.left; origY = r.top;
+    el.style.animation = 'none'; el.style.transition = 'none';
+  }
+  function onMove(e) {
+    if (!isDragging) return;
+    var t = e.touches ? e.touches[0] : e;
+    var dx = t.clientX - startX, dy = t.clientY - startY;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) wasDragged = true;
+    if (!wasDragged) return;
+    e.preventDefault();
+    el.style.position = 'fixed';
+    el.style.left = (origX + dx) + 'px';
+    el.style.top = (origY + dy) + 'px';
+    el.style.bottom = 'auto';
+    el.style.marginLeft = '0';
+    el.style.transform = 'none';
+  }
+  function onEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    el.style.transition = 'opacity .3s, transform .3s';
+    if (!wasDragged) return;
+    var r = el.getBoundingClientRect();
+    var x = Math.max(0, Math.min(r.left, window.innerWidth - r.width));
+    var y = Math.max(0, Math.min(r.top, window.innerHeight - r.height));
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+  }
+  el.addEventListener('touchstart', onStart, {passive: true});
+  el.addEventListener('touchmove', onMove, {passive: false});
+  el.addEventListener('touchend', onEnd);
+  el.addEventListener('mousedown', onStart);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
+  el.addEventListener('click', function(e) {
+    if (wasDragged) { e.stopPropagation(); e.preventDefault(); wasDragged = false; }
+  }, true);
+}
+(function() {
+  var arenaEl = document.getElementById('floatingArena');
+  if (arenaEl) initFloatingArenaDrag(arenaEl);
+})();
+
 // ===== FLOATING VOUCHER ICON =====
 function closeFloatingVoucher() {
   var el = document.getElementById('floatingVoucher');
@@ -14513,6 +15107,270 @@ function toggleVipClub() {
 }
 
 // ===== MISSION PAGE =====
+
+// ===== Đường tới Đấu Trườngs Data (5 paths by game category) =====
+window.ppActiveTab = 'sports';
+
+var PERSONAL_PATHS = [
+  {
+    id: 'sports', name: 'Chiến thần thể thao', icon: '⚽', color: '#4ade80',
+    desc: 'Thể thao, thể thao ảo, Volta',
+    status: 'active', startedAt: '2026-08-08',
+    checkpoints: [
+      { code: 'd1', label: 'Ngày 1', title: 'Khởi động sân cỏ',
+        desc: 'Nạp tối thiểu 200K và đặt 1 cược thể thao',
+        target: 2, current: 2, status: 'claimed',
+        rewards: [{type:'coin',amount:20,label:'+20'},{type:'xp',amount:50,label:'+50 XP'}],
+        completedAt: '2026-08-08' },
+      { code: 'd3', label: 'Ngày 3', title: 'Cam kết bền bỉ',
+        desc: 'Tích lũy 2 triệu tiền cược thể thao trong 3 ngày',
+        target: 2000000, current: 1400000, status: 'in_progress',
+        rewards: [{type:'coin',amount:40,label:'+40'},{type:'xp',amount:100,label:'+100 XP'},{type:'voucher',label:'Freebet 50K'}],
+        completedAt: null },
+      { code: 'd7', label: 'Ngày 7', title: 'Chinh phục sân đấu',
+        desc: 'Tích lũy 10 triệu tiền cược thể thao trong 7 ngày',
+        target: 10000000, current: 0, status: 'locked',
+        rewards: [{type:'coin',amount:100,label:'+100'},{type:'xp',amount:250,label:'+250 XP'},{type:'voucher',label:'Thưởng nạp 10%'}],
+        completedAt: null }
+    ],
+    fullPathReward: [{type:'coin',amount:200,label:'+200'},{type:'xp',amount:500,label:'+500 XP'}]
+  },
+  {
+    id: 'casino', name: 'Cao thủ sòng bài', icon: '🃏', color: '#f59e0b',
+    desc: 'Casino, live casino, game bài',
+    status: 'completed', startedAt: '2026-08-06',
+    checkpoints: [
+      { code: 'd1', label: 'Ngày 1', title: 'Vào sòng thử vận',
+        desc: 'Nạp tối thiểu 200K và chơi 1 ván bài',
+        target: 2, current: 2, status: 'claimed',
+        rewards: [{type:'coin',amount:20,label:'+20'},{type:'xp',amount:50,label:'+50 XP'}],
+        completedAt: '2026-08-06' },
+      { code: 'd3', label: 'Ngày 3', title: 'Sát phạt cao thủ',
+        desc: 'Tích lũy 2 triệu tiền cược casino trong 3 ngày',
+        target: 2000000, current: 2000000, status: 'claimed',
+        rewards: [{type:'coin',amount:40,label:'+40'},{type:'xp',amount:100,label:'+100 XP'},{type:'voucher',label:'Freebet 50K'}],
+        completedAt: '2026-08-08' },
+      { code: 'd7', label: 'Ngày 7', title: 'Vua sòng bài',
+        desc: 'Tích lũy 10 triệu tiền cược casino trong 7 ngày',
+        target: 10000000, current: 10000000, status: 'claimed',
+        rewards: [{type:'coin',amount:100,label:'+100'},{type:'xp',amount:250,label:'+250 XP'},{type:'voucher',label:'Thưởng nạp 10%'}],
+        completedAt: '2026-08-12' }
+    ],
+    fullPathReward: [{type:'coin',amount:200,label:'+200'},{type:'xp',amount:500,label:'+500 XP'}]
+  },
+  {
+    id: 'lottery', name: 'Thần cơ diệu toán', icon: '🎯', color: '#a78bfa',
+    desc: 'Quay số, keno, lô đề, xổ số',
+    status: 'active', startedAt: '2026-08-10',
+    checkpoints: [
+      { code: 'd1', label: 'Ngày 1', title: 'Thử vận may',
+        desc: 'Nạp tối thiểu 200K và chơi 1 vé số',
+        target: 2, current: 2, status: 'claimed',
+        rewards: [{type:'coin',amount:20,label:'+20'},{type:'xp',amount:50,label:'+50 XP'}],
+        completedAt: '2026-08-10' },
+      { code: 'd3', label: 'Ngày 3', title: 'Người chơi kiên trì',
+        desc: 'Tích lũy 1 triệu tiền cược xổ số trong 3 ngày',
+        target: 1000000, current: 850000, status: 'in_progress',
+        rewards: [{type:'coin',amount:40,label:'+40'},{type:'xp',amount:100,label:'+100 XP'}],
+        completedAt: null },
+      { code: 'd7', label: 'Ngày 7', title: 'Thần toán số học',
+        desc: 'Tích lũy 5 triệu tiền cược xổ số trong 7 ngày',
+        target: 5000000, current: 0, status: 'locked',
+        rewards: [{type:'coin',amount:100,label:'+100'},{type:'xp',amount:250,label:'+250 XP'},{type:'voucher',label:'Freebet 30K'}],
+        completedAt: null }
+    ],
+    fullPathReward: [{type:'coin',amount:200,label:'+200'},{type:'xp',amount:500,label:'+500 XP'}]
+  },
+  {
+    id: 'jackpot', name: 'Chiến thần nổ hũ', icon: '💥', color: '#f87171',
+    desc: 'Bắn cá, nổ hũ, jackpot',
+    status: 'not_started', startedAt: null,
+    checkpoints: [
+      { code: 'd1', label: 'Ngày 1', title: 'Thả lưới đầu tiên',
+        desc: 'Nạp tối thiểu 200K và chơi 1 game nổ hũ/bắn cá',
+        target: 2, current: 0, status: 'locked',
+        rewards: [{type:'coin',amount:20,label:'+20'},{type:'xp',amount:50,label:'+50 XP'}],
+        completedAt: null },
+      { code: 'd3', label: 'Ngày 3', title: 'Thợ săn bền bỉ',
+        desc: 'Tích lũy 2 triệu tiền cược nổ hũ/bắn cá trong 3 ngày',
+        target: 2000000, current: 0, status: 'locked',
+        rewards: [{type:'coin',amount:40,label:'+40'},{type:'xp',amount:100,label:'+100 XP'},{type:'voucher',label:'Freebet 50K'}],
+        completedAt: null },
+      { code: 'd7', label: 'Ngày 7', title: 'Chiến thần nổ hũ',
+        desc: 'Tích lũy 10 triệu tiền cược nổ hũ/bắn cá trong 7 ngày',
+        target: 10000000, current: 0, status: 'locked',
+        rewards: [{type:'coin',amount:100,label:'+100'},{type:'xp',amount:250,label:'+250 XP'},{type:'voucher',label:'Thưởng nạp 10%'}],
+        completedAt: null }
+    ],
+    fullPathReward: [{type:'coin',amount:200,label:'+200'},{type:'xp',amount:500,label:'+500 XP'}]
+  },
+  {
+    id: 'quick', name: 'Đại tướng game nhanh', icon: '⚡', color: '#38bdf8',
+    desc: 'Slot, game nhanh',
+    status: 'not_started', startedAt: null,
+    checkpoints: [
+      { code: 'd1', label: 'Ngày 1', title: 'Quay thử vận may',
+        desc: 'Nạp tối thiểu 200K và chơi 1 game slot/nhanh',
+        target: 2, current: 0, status: 'locked',
+        rewards: [{type:'coin',amount:20,label:'+20'},{type:'xp',amount:50,label:'+50 XP'}],
+        completedAt: null },
+      { code: 'd3', label: 'Ngày 3', title: 'Tay quay bền bỉ',
+        desc: 'Tích lũy 1.5 triệu tiền cược slot/game nhanh trong 3 ngày',
+        target: 1500000, current: 0, status: 'locked',
+        rewards: [{type:'coin',amount:40,label:'+40'},{type:'xp',amount:100,label:'+100 XP'}],
+        completedAt: null },
+      { code: 'd7', label: 'Ngày 7', title: 'Đại tướng tốc chiến',
+        desc: 'Tích lũy 8 triệu tiền cược slot/game nhanh trong 7 ngày',
+        target: 8000000, current: 0, status: 'locked',
+        rewards: [{type:'coin',amount:100,label:'+100'},{type:'xp',amount:250,label:'+250 XP'},{type:'voucher',label:'Freebet 50K'}],
+        completedAt: null }
+    ],
+    fullPathReward: [{type:'coin',amount:200,label:'+200'},{type:'xp',amount:500,label:'+500 XP'}]
+  }
+];
+
+// ===== Season Tournament Data =====
+var SEASON_TOURNAMENT = {
+  id: 's1',
+  code: 'SEASON_01',
+  name: 'Đấu Trường Mùa 1',
+  startAt: '2026-08-08',
+  endAt: '2026-09-05',
+  status: 'active',
+  scoreType: 'total_wager',
+  userScore: {
+    seasonTotalWager: 14500000,
+    wagerByCategory: {
+      sports: 5200000,
+      casino: 4800000,
+      lottery: 1900000,
+      jackpot: 1600000,
+      quick: 1000000
+    },
+    rankCached: null,
+    rankByCategory: {
+      sports: null,
+      casino: 45,
+      lottery: null,
+      jackpot: null,
+      quick: null
+    },
+    tournamentUnlocked: false,
+    eligibleForReward: false
+  },
+  rewardTiers: [
+    {rank:'Top 1', coin:'50.000', voucher:'Voucher 200%', cls:'gold'},
+    {rank:'Top 2', coin:'30.000', voucher:'Voucher 150%', cls:'silver'},
+    {rank:'Top 3', coin:'15.000', voucher:'Voucher 100%', cls:'bronze'},
+    {rank:'Top 4-10', coin:'5.000', voucher:'Voucher 50%', cls:''},
+    {rank:'Top 11-50', coin:'2.000', voucher:'Voucher 30%', cls:''},
+    {rank:'Top 51-100', coin:'500', voucher:'—', cls:''}
+  ],
+  leaderboards: {
+    sports: [
+      {name:'PhucLong***', wager:285000000, tier:'VIP 5'},
+      {name:'VuongGia***', wager:241000000, tier:'VIP 5'},
+      {name:'HoangLong***', wager:198000000, tier:'VIP 4'},
+      {name:'DuyAn***', wager:167000000, tier:'VIP 4'},
+      {name:'MinhTuan***', wager:143000000, tier:'VIP 3'},
+      {name:'QuocBao***', wager:118000000, tier:'VIP 3'},
+      {name:'ThanhHa***', wager:95000000, tier:'VIP 3'},
+      {name:'BaoKhanh***', wager:82000000, tier:'VIP 4'},
+      {name:'HaiDang***', wager:71000000, tier:'VIP 3'},
+      {name:'TuanAnh***', wager:58000000, tier:'VIP 3'}
+    ],
+    casino: [
+      {name:'BaoKhanh***', wager:320000000, tier:'VIP 5'},
+      {name:'DuyAn***', wager:275000000, tier:'VIP 5'},
+      {name:'ThanhHa***', wager:210000000, tier:'VIP 4'},
+      {name:'MinhTuan***', wager:185000000, tier:'VIP 4'},
+      {name:'VuongGia***', wager:156000000, tier:'VIP 3'},
+      {name:'QuocBao***', wager:132000000, tier:'VIP 3'},
+      {name:'HaiDang***', wager:108000000, tier:'VIP 3'},
+      {name:'PhucLong***', wager:91000000, tier:'VIP 3'},
+      {name:'TuanAnh***', wager:74000000, tier:'VIP 3'},
+      {name:'NhatMinh***', wager:62000000, tier:'VIP 2'}
+    ],
+    lottery: [
+      {name:'HoangLong***', wager:145000000, tier:'VIP 4'},
+      {name:'QuocBao***', wager:128000000, tier:'VIP 3'},
+      {name:'DuyAn***', wager:115000000, tier:'VIP 4'},
+      {name:'ThanhHa***', wager:98000000, tier:'VIP 3'},
+      {name:'MinhTuan***', wager:86000000, tier:'VIP 3'},
+      {name:'TuanAnh***', wager:72000000, tier:'VIP 3'},
+      {name:'VuongGia***', wager:61000000, tier:'VIP 3'},
+      {name:'BaoKhanh***', wager:53000000, tier:'VIP 2'},
+      {name:'HaiDang***', wager:44000000, tier:'VIP 2'},
+      {name:'PhucLong***', wager:38000000, tier:'VIP 2'}
+    ],
+    jackpot: [
+      {name:'MinhTuan***', wager:195000000, tier:'VIP 4'},
+      {name:'PhucLong***', wager:172000000, tier:'VIP 4'},
+      {name:'ThanhHa***', wager:148000000, tier:'VIP 3'},
+      {name:'HoangLong***', wager:125000000, tier:'VIP 4'},
+      {name:'DuyAn***', wager:110000000, tier:'VIP 3'},
+      {name:'VuongGia***', wager:93000000, tier:'VIP 3'},
+      {name:'QuocBao***', wager:78000000, tier:'VIP 3'},
+      {name:'TuanAnh***', wager:65000000, tier:'VIP 2'},
+      {name:'BaoKhanh***', wager:52000000, tier:'VIP 2'},
+      {name:'HaiDang***', wager:41000000, tier:'VIP 2'}
+    ],
+    quick: [
+      {name:'TuanAnh***', wager:230000000, tier:'VIP 5'},
+      {name:'HaiDang***', wager:198000000, tier:'VIP 4'},
+      {name:'BaoKhanh***', wager:175000000, tier:'VIP 4'},
+      {name:'QuocBao***', wager:152000000, tier:'VIP 3'},
+      {name:'MinhTuan***', wager:130000000, tier:'VIP 3'},
+      {name:'PhucLong***', wager:112000000, tier:'VIP 3'},
+      {name:'VuongGia***', wager:95000000, tier:'VIP 3'},
+      {name:'DuyAn***', wager:81000000, tier:'VIP 3'},
+      {name:'ThanhHa***', wager:67000000, tier:'VIP 2'},
+      {name:'HoangLong***', wager:55000000, tier:'VIP 2'}
+    ]
+  }
+};
+
+window.stCatTab = 'sports';
+
+function getActivePersonalPath() {
+  return PERSONAL_PATHS.find(function(p) { return p.id === window.ppActiveTab; }) || PERSONAL_PATHS[0];
+}
+function isPathCompleted(pathOrId) {
+  if (!pathOrId) { // check ALL paths completed (for tournament unlock)
+    return PERSONAL_PATHS.every(function(p) { return p.status === 'completed'; });
+  }
+  var p = typeof pathOrId === 'string' ? PERSONAL_PATHS.find(function(pp) { return pp.id === pathOrId; }) : pathOrId;
+  return p && p.status === 'completed';
+}
+function getPathCompletedCount(path) {
+  var p = path || getActivePersonalPath();
+  return p.checkpoints.filter(function(c) { return c.status === 'completed' || c.status === 'claimed'; }).length;
+}
+function getAllPathsCompletedCount() {
+  return PERSONAL_PATHS.filter(function(p) { return p.status === 'completed'; }).length;
+}
+function getAllPathsTotalCount() {
+  return PERSONAL_PATHS.length;
+}
+function switchPPTab(tabId) {
+  window.ppActiveTab = tabId;
+  var container = document.querySelector('.pp-section');
+  if (container) {
+    container.outerHTML = renderPersonalPath();
+  }
+}
+function fmtWager(v) {
+  if (v >= 1000000000) return (v/1000000000).toFixed(1).replace(/\.0$/,'') + 'tỷ';
+  if (v >= 1000000) return (v/1000000).toFixed(1).replace(/\.0$/,'') + 'tr';
+  if (v >= 1000) return Math.round(v/1000) + 'K';
+  return v + '';
+}
+function getDaysRemaining() {
+  var end = new Date('2026-09-05T23:59:59+07:00');
+  var now = new Date('2026-08-10T12:00:00+07:00'); // mock current time
+  var diff = Math.ceil((end - now) / (1000*60*60*24));
+  return Math.max(0, diff);
+}
 
 var MOCK_NEWBIE_MISSIONS = [
   { id:'n1', title:'Xác minh tài khoản', desc:'Hoàn thành xác minh danh tính để mở khóa đầy đủ tính năng', icon:'shield', iconColor:'blue', status:'completed', coin:10, action:'Đã xong' },
@@ -14835,6 +15693,271 @@ function showMissionView() {
   var overviewTab = document.querySelector('.mission-nav-item[data-tab="overview"]');
   if(overviewTab) overviewTab.classList.add('active');
   renderMissionOverview();
+}
+
+function showLeaderboardPage() {
+  homeScrollY = window.scrollY;
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('accountView').style.display = 'none';
+  document.getElementById('onboardingView').style.display = 'none';
+  document.getElementById('missionView').style.display = '';
+  var catNav = document.querySelector('.cat-nav-bar');
+  if (catNav) catNav.style.display = 'none';
+  var bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) bottomNav.style.display = '';
+  var headerBar = document.querySelector('.mission-header-bar');
+  var missionNav = document.getElementById('missionNav');
+  if (headerBar) headerBar.style.display = 'none';
+  if (missionNav) missionNav.style.display = '';
+  // Mark leaderboard tab as active
+  document.querySelectorAll('.mission-nav-item').forEach(function(a){ a.classList.remove('active'); });
+  var lbTab = document.querySelector('.mission-nav-item[data-tab="leaderboard"]');
+  if (lbTab) lbTab.classList.add('active');
+  missionNavActive = 'leaderboard';
+  missionScrollTop();
+  document.body.style.overflow = '';
+  renderMissionContent();
+}
+
+function showCategoryLeaderboard(slug) {
+  // Map slug to path id
+  var slugToId = {sport:'sports', casino:'casino', number:'lottery', jackpot:'jackpot', slot:'quick'};
+  var pathId = slugToId[slug] || slug;
+  var pp = PERSONAL_PATHS.find(function(p) { return p.id === pathId; });
+  if (!pp) { navigateTo('/leaderboard'); return; }
+
+  homeScrollY = window.scrollY;
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('accountView').style.display = 'none';
+  document.getElementById('onboardingView').style.display = 'none';
+  document.getElementById('missionView').style.display = '';
+  var catNav = document.querySelector('.cat-nav-bar');
+  if (catNav) catNav.style.display = 'none';
+  var bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) bottomNav.style.display = '';
+  var headerBar = document.querySelector('.mission-header-bar');
+  var missionNav = document.getElementById('missionNav');
+  if (headerBar) headerBar.style.display = 'none';
+  if (missionNav) missionNav.style.display = '';
+  document.body.style.overflow = '';
+
+  var st = SEASON_TOURNAMENT;
+  var isDone = pp.status === 'completed';
+  var unlocked = isDone;
+  var catWager = st.userScore.wagerByCategory[pathId] || 0;
+  var heroImg = 'Assets/' + slug + '.png';
+
+  var container = document.getElementById('missionContent');
+  var h = '';
+  var catRank = st.userScore.rankByCategory[pathId];
+  var cpDone = getPathCompletedCount(pp);
+  var cpTotal = pp.checkpoints.length;
+
+  h += '<div class="lb-cat-page" style="--pp-color:' + pp.color + ';">';
+
+  // ── Full-width hero banner ──
+  h += '<div class="lb-cat-banner">';
+  var arenaBg = 'Assets/bg-arena-' + slug + '.png';
+  h += '<div class="lb-cat-banner-bg" style="background: url(\'' + arenaBg + '\') center/cover no-repeat;"></div>';
+  h += '<button class="lb-cat-back" onclick="window.lbTab=\'season\';navigateTo(\'/leaderboard\')">';
+  h += '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="18" height="18"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>';
+  h += '</button>';
+  h += '<div class="lb-cat-banner-content">';
+  h += '<div class="lb-cat-banner-hero"><img src="' + heroImg + '" alt="' + pp.name + '"></div>';
+  h += '<div class="lb-cat-banner-info">';
+  h += '<div class="lb-cat-banner-label">BXH Đấu Trường Mùa 1</div>';
+  h += '<div class="lb-cat-banner-name">' + pp.name + '</div>';
+  h += '<div class="lb-cat-banner-desc">' + pp.desc + '</div>';
+  h += '</div>';
+  h += '</div>';
+  // ── Stats inside banner ──
+  h += '<div class="lb-cat-banner-stats">';
+  // Rank
+  h += '<div class="lb-cat-banner-stat">';
+  if (unlocked && catRank) {
+    h += '<span class="lb-cat-bstat-val" style="color:' + pp.color + ';">#' + catRank + '</span>';
+  } else {
+    h += '<span class="lb-cat-bstat-lock">' + lcIcon('lock','') + '</span>';
+  }
+  h += '<span class="lb-cat-bstat-lbl">Thứ hạng</span>';
+  h += '</div>';
+  h += '<div class="lb-cat-banner-stat-sep"></div>';
+  // Wager
+  h += '<div class="lb-cat-banner-stat"><span class="lb-cat-bstat-val">' + fmtWager(catWager) + '</span><span class="lb-cat-bstat-lbl">Tổng cược mùa này</span></div>';
+  h += '</div>';
+  h += '</div>';
+
+  // ── Locked state ──
+  if (!unlocked) {
+    h += '<div class="lb-cat-lock-card">';
+    h += '<div class="lb-cat-lock-icon">' + lcIcon('lock','neon-red') + '</div>';
+    h += '<div class="lb-cat-lock-text">';
+    // title removed
+    h += '<div class="lb-cat-lock-desc">Hoàn thành hành trình ' + pp.name + ' để tham gia xếp hạng mùa này</div>';
+    h += '</div>';
+    h += '<div class="lb-cat-lock-right">';
+    h += '<div class="lb-cat-lock-progress">' + cpDone + '/' + cpTotal + '</div>';
+    h += '<button class="lb-cat-lock-cta" onclick="showPathDetailModal(\'' + pp.id + '\')" style="background:' + pp.color + ';">' + lcIcon('target','') + ' Đi tới hành trình</button>';
+    h += '</div>';
+    h += '</div>';
+  }
+
+  // ── Tab switcher ──
+  if (!window.lbCatTab) window.lbCatTab = 'season';
+  h += '<div class="lb-cat-tab-bar">';
+  h += '<button class="lb-cat-tab-btn' + (window.lbCatTab === 'season' ? ' active' : '') + '" onclick="window.lbCatTab=\'season\';showCategoryLeaderboard(\'' + slug + '\')">' + lcIcon('trophy','') + ' BXH Mùa</button>';
+  h += '<button class="lb-cat-tab-btn' + (window.lbCatTab === 'legends' ? ' active' : '') + '" onclick="window.lbCatTab=\'legends\';showCategoryLeaderboard(\'' + slug + '\')">' + lcIcon('crown','') + ' Sảnh Huyền Thoại</button>';
+  h += '</div>';
+
+  if (window.lbCatTab === 'season') {
+    // ── Season Leaderboard ──
+    var lbData = st.leaderboards[pathId] || st.leaderboards.sports;
+    h += '<div class="lb-cat-section' + (!unlocked ? ' lb-cat-locked' : '') + '">';
+    h += '<div class="lb-list">';
+    lbData.forEach(function(l, idx) {
+      var rank = idx + 1;
+      var rankImgs = ['Assets/rank-1.webp','Assets/rank-2.webp','Assets/rank-3.webp'];
+      var isTop3 = rank <= 3;
+      h += '<div class="lb-item' + (isTop3 ? ' top3 top3-'+rank : '') + '">';
+      h += '<div class="lb-rank">' + (isTop3 ? '<img src="'+rankImgs[rank-1]+'" class="lb-rank-img"/>' : '<span class="lb-rank-num">'+rank+'</span>') + '</div>';
+      h += '<div class="lb-info"><div class="lb-name">' + l.name + '</div><div class="lb-tier">' + l.tier + '</div></div>';
+      h += '<div class="lb-coins" style="font-size:11px;">' + fmtWager(l.wager) + '</div>';
+      h += '</div>';
+    });
+    h += '</div>';
+    if (!unlocked) {
+      h += '<div class="st-lb-overlay">' + lcIcon('lock','') + ' Mở khóa để xem vị trí của bạn</div>';
+    }
+    h += '</div>';
+
+    // Reward tiers
+    h += '<div class="lb-reward-dist">';
+    h += '<div class="lb-section-title">' + lcIcon('gift','neon-gold') + ' Giải thưởng mùa</div>';
+    h += '<div class="lb-dist-header"><span class="lb-dist-hrank">Hạng</span><span class="lb-dist-hcoin">' + lcIcon('coin','') + ' Coin</span><span class="lb-dist-hvoucher">' + lcIcon('ticket','') + ' Voucher</span></div>';
+    h += '<div class="lb-dist-list">';
+    st.rewardTiers.forEach(function(t) {
+      h += '<div class="lb-dist-item ' + (t.cls || '') + '">';
+      h += '<span class="lb-dist-rank">' + t.rank + '</span>';
+      h += '<span class="lb-dist-coin">' + t.coin + '</span>';
+      h += '<span class="lb-dist-voucher">' + t.voucher + '</span>';
+      h += '</div>';
+    });
+    h += '</div></div>';
+
+  } else {
+    // ── Hall of Fame — Huyền Thoại Mubet ──
+    var legends = {
+      sports: {
+        allTime: {name:'PhucLong***', titles:5, vip:5, bestScore:'1.2tỷ', seasons:['M1','M2','M3','M5','M7']},
+        bestScore: {name:'VuongGia***', score:'1.8tỷ', season:'Mùa 4', vip:5},
+        streak: {name:'BaoKhanh***', count:3, seasons:'M5–M7', vip:5},
+        entries: [
+          {season:'Mùa 7', name:'PhucLong***', vip:5, score:'985tr'},
+          {season:'Mùa 6', name:'HoangLong***', vip:4, score:'1.1tỷ'},
+          {season:'Mùa 5', name:'PhucLong***', vip:5, score:'1.2tỷ'},
+          {season:'Mùa 4', name:'VuongGia***', vip:5, score:'1.8tỷ'},
+          {season:'Mùa 3', name:'PhucLong***', vip:5, score:'890tr'},
+          {season:'Mùa 2', name:'PhucLong***', vip:5, score:'720tr'},
+          {season:'Mùa 1', name:'PhucLong***', vip:5, score:'650tr'},
+        ]
+      },
+      casino: {
+        allTime: {name:'BaoKhanh***', titles:4, vip:5, bestScore:'980tr', seasons:['M1','M3','M5','M7']},
+        bestScore: {name:'DuyAn***', score:'1.5tỷ', season:'Mùa 6', vip:5},
+        streak: {name:'BaoKhanh***', count:2, seasons:'M5–M7', vip:5},
+        entries: [
+          {season:'Mùa 7', name:'BaoKhanh***', vip:5, score:'320tr'},
+          {season:'Mùa 6', name:'DuyAn***', vip:5, score:'1.5tỷ'},
+          {season:'Mùa 5', name:'BaoKhanh***', vip:5, score:'980tr'},
+          {season:'Mùa 4', name:'ThanhHa***', vip:4, score:'750tr'},
+          {season:'Mùa 3', name:'BaoKhanh***', vip:5, score:'680tr'},
+          {season:'Mùa 2', name:'MinhTuan***', vip:4, score:'520tr'},
+          {season:'Mùa 1', name:'BaoKhanh***', vip:5, score:'410tr'},
+        ]
+      }
+    };
+    var leg = legends[pathId] || legends.sports;
+
+    h += '<div class="lb-cat-section hof-section">';
+
+    // ── GOAT Spotlight ──
+    h += '<div class="hof-spotlight">';
+    h += '<div class="hof-spotlight-glow"></div>';
+    h += '<div class="hof-spotlight-hero">';
+    h += '<div class="hof-spotlight-crown">' + lcIcon('crown','') + '</div>';
+    h += '<img class="hof-spotlight-img" src="Assets/Hall-of-fame/' + slug + '-goat_processed.png" alt="">';
+    h += '</div>';
+    h += '<div class="hof-spotlight-info">';
+    h += '<div class="hof-spotlight-label">HUYỀN THOẠI</div>';
+    h += '<div class="hof-spotlight-name">' + leg.allTime.name + '</div>';
+    h += '<div class="hof-spotlight-stat">';
+    h += '<span class="hof-spotlight-num">' + leg.allTime.titles + '</span>';
+    h += '<span class="hof-spotlight-unit">× Vô Địch</span>';
+    h += '</div>';
+    h += '<div class="hof-spotlight-seasons">';
+    leg.allTime.seasons.forEach(function(s) {
+      h += '<span class="hof-season-chip">Mùa ' + s.replace('M','') + '</span>';
+    });
+    h += '</div>';
+    h += '</div>';
+    h += '</div>';
+
+    // ── Records row — 2 compact cards ──
+    h += '<div class="hof-records-row">';
+
+    // Best Score
+    h += '<div class="hof-rec hof-rec-score">';
+    h += '<img class="hof-rec-img" src="Assets/Hall-of-fame/' + slug + '-record_processed.png" alt="">';
+    h += '<div class="hof-rec-label">Kỷ Lục Cược Mùa</div>';
+    h += '<div class="hof-rec-value">' + leg.bestScore.score + '</div>';
+    h += '<div class="hof-rec-player">' + leg.bestScore.name + '</div>';
+    h += '<div class="hof-rec-meta">' + leg.bestScore.season + '</div>';
+    h += '</div>';
+
+    // Reigning Champion
+    var currentChamp = leg.entries[0];
+    h += '<div class="hof-rec hof-rec-streak">';
+    h += '<img class="hof-rec-img" src="Assets/Hall-of-fame/' + slug + '-king_processed.png" alt="">';
+    h += '<div class="hof-rec-label">Đương Kim Vô Địch</div>';
+    h += '<div class="hof-rec-value">' + currentChamp.score + '</div>';
+    h += '<div class="hof-rec-player">' + currentChamp.name + '</div>';
+    h += '<div class="hof-rec-meta">' + currentChamp.season + '</div>';
+    h += '</div>';
+
+    h += '</div>';
+
+    // ── Champions Timeline ──
+    h += '<div class="hof-timeline">';
+    h += '<div class="hof-timeline-header">';
+    h += '<div class="hof-timeline-title">' + lcIcon('scroll','') + ' Nhà vô địch qua các mùa</div>';
+    h += '<div class="hof-timeline-count">' + leg.entries.length + ' mùa</div>';
+    h += '</div>';
+    leg.entries.forEach(function(e, idx) {
+      var isFirst = idx === 0;
+      // Check if same player won multiple consecutive
+      var isRepeat = idx > 0 && leg.entries[idx-1].name === e.name;
+      h += '<div class="hof-entry' + (isFirst ? ' hof-entry-current' : '') + '">';
+      h += '<div class="hof-entry-season">' + e.season.replace('Mùa ','M') + '</div>';
+      h += '<div class="hof-entry-line"><div class="hof-entry-dot"></div></div>';
+      h += '<div class="hof-entry-card">';
+      h += '<div class="hof-entry-rank">' + lcIcon('trophy','') + '</div>';
+      h += '<div class="hof-entry-info">';
+      h += '<div class="hof-entry-name">' + e.name + '</div>';
+      h += '<div class="hof-entry-meta">VIP ' + e.vip + '</div>';
+      h += '</div>';
+      h += '<div class="hof-entry-score">' + e.score + '</div>';
+      h += '</div>';
+      if (isFirst) h += '<span class="hof-entry-live">LIVE</span>';
+      h += '</div>';
+    });
+    h += '</div>';
+
+    h += '</div>';
+  }
+
+  h += '</div>'; // lb-cat-page
+  container.innerHTML = h;
+  missionScrollTop();
 }
 
 function goToMission() {
@@ -15332,8 +16455,10 @@ function showMissionFullPage(title, renderFn) {
 }
 
 function showNewbieFullPage() {
+  showMissionView();
   showMissionFullPage('Nhiệm Vụ Tân Thủ', renderNewbieMissions);
 }
+
 
 function showWarriorFullPage() {
   showMissionFullPage('Chiến Binh', renderWarriorMissions);
@@ -15539,6 +16664,28 @@ function renderRedeemSpin() {
   return html;
 }
 
+function showPlayerCardDetail(name, cost, owned, img) {
+  var existing = document.querySelector('.pcard-modal');
+  if (existing) existing.remove();
+  var modal = document.createElement('div');
+  modal.className = 'pcard-modal';
+  var h = '<div class="pcard-modal-bg" onclick="this.parentElement.remove()"></div>';
+  h += '<div class="pcard-modal-content">';
+  h += '<img class="pcard-modal-img" src="Assets/player-card/' + img + '" alt="' + name + '">';
+  h += '<div class="pcard-modal-name">' + name + '</div>';
+  if (owned) {
+    h += '<div class="pcard-modal-status owned">' + lcIcon('check','') + ' Đã sở hữu</div>';
+  } else {
+    h += '<div class="pcard-modal-price"><span class="mcoin sm"></span> ' + cost + ' Coin</div>';
+    h += '<button class="pcard-modal-btn" onclick="alert(\'Bạn cần thêm Coin để đổi thẻ này!\');this.closest(\'.pcard-modal\').remove()">Đổi thẻ cầu thủ</button>';
+  }
+  h += '<div class="pcard-modal-close" onclick="this.closest(\'.pcard-modal\').remove()">✕</div>';
+  h += '</div>';
+  modal.innerHTML = h;
+  document.body.appendChild(modal);
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ modal.classList.add('show'); }); });
+}
+
 function renderRedeemCollect() {
   var html = '<div class="redeem-page">';
   html += '<div class="redeem-sub-banner">';
@@ -15562,61 +16709,53 @@ function renderRedeemCollect() {
   html += '<span style="font-size:11px;font-weight:700;color:var(--success-100)">'+collected+'/11</span>';
   html += '</div>';
 
-  // Formation grid (4-3-3)
+  // Formation grid (4-3-3) with player cards
   var players = [
-    {pos:'GK', name:'—', cost:30, owned:false, row:0},
-    {pos:'LB', name:'Alphonso Davies', cost:25, owned:true, row:1},
-    {pos:'CB', name:'—', cost:20, owned:false, row:1},
-    {pos:'CB', name:'Virgil van Dijk', cost:35, owned:true, row:1},
-    {pos:'RB', name:'—', cost:20, owned:false, row:1},
-    {pos:'CM', name:'Pedri', cost:30, owned:true, row:2},
-    {pos:'CM', name:'—', cost:25, owned:false, row:2},
-    {pos:'CM', name:'—', cost:25, owned:false, row:2},
-    {pos:'LW', name:'Vinícius Jr', cost:50, owned:true, row:3},
-    {pos:'ST', name:'—', cost:40, owned:false, row:3},
-    {pos:'RW', name:'—', cost:45, owned:false, row:3}
+    {pos:'GK', name:'Donnarumma', cost:30, owned:false, row:0, img:'Donnarumma_fc25_download-1.webp'},
+    {pos:'LB', name:'Nuno Mendes', cost:25, owned:true, row:1, img:'Nuno-Mendes_fc25_download-2.webp'},
+    {pos:'CB', name:'Saliba', cost:20, owned:false, row:1, img:'Saliba_fc25_download.webp'},
+    {pos:'CB', name:'Koundé', cost:35, owned:true, row:1, img:'Kounde_fc25_download-1.webp'},
+    {pos:'RB', name:'Rice', cost:20, owned:false, row:1, img:'Rice_fc25_download-3.webp'},
+    {pos:'CM', name:'Pedri', cost:30, owned:true, row:2, img:'Pedri_fc25_download-1.webp'},
+    {pos:'CM', name:'Vitinha', cost:25, owned:false, row:2, img:'Vitinha_fc25_download-1.webp'},
+    {pos:'CM', name:'Dembélé', cost:25, owned:false, row:2, img:'Dembele_fc25_download-2.webp'},
+    {pos:'LW', name:'Raphinha', cost:50, owned:true, row:3, img:'Raphinha_fc25_download-2.webp'},
+    {pos:'ST', name:'Haaland', cost:40, owned:false, row:3, img:'Haaland_fc25_download.webp'},
+    {pos:'RW', name:'Mbappé', cost:45, owned:false, row:3, img:'custom_Mbapp_fc24_download_iabwerxljkn.webp'}
   ];
 
+  function renderPlayerCard(p) {
+    var h = '<div class="collect-player'+(p.owned?' owned':'')+'" onclick="showPlayerCardDetail(\''+p.name+'\','+p.cost+','+p.owned+',\''+p.img+'\')">';
+    h += '<div class="collect-player-card">';
+    h += '<img class="collect-player-img" src="Assets/player-card/'+p.img+'" alt="'+p.name+'">';
+    if (!p.owned) h += '<div class="collect-player-overlay"><div class="collect-player-lock">' + lcIcon('lock','') + '</div></div>';
+    h += '</div>';
+    h += '<div class="collect-player-info">';
+    h += '<span class="collect-player-pos">'+p.pos+'</span>';
+    h += '<span class="collect-player-name">'+(p.owned?p.name.split(' ').pop():'?')+'</span>';
+    h += '</div>';
+    if (!p.owned) h += '<div class="collect-player-cost"><span class="mcoin sm"></span> '+p.cost+'</div>';
+    h += '</div>';
+    return h;
+  }
+
   html += '<div class="collect-formation">';
-  // Row 3 - Forwards (3)
+  html += '<div class="collect-field-lines"></div>';
+  // Row 3 - Forwards
   html += '<div class="collect-row">';
-  players.filter(function(p){return p.row===3}).forEach(function(p){
-    html += '<div class="collect-player'+(p.owned?' owned':'')+'">';
-    html += '<div class="collect-player-pos">'+p.pos+'</div>';
-    html += '<div class="collect-player-name">'+(p.owned?p.name.split(' ').pop():'?')+'</div>';
-    if (!p.owned) html += '<div class="collect-player-cost"><span class="mcoin sm"></span> '+p.cost+'</div>';
-    html += '</div>';
-  });
+  players.filter(function(p){return p.row===3}).forEach(function(p){ html += renderPlayerCard(p); });
   html += '</div>';
-  // Row 2 - Midfield (3)
+  // Row 2 - Midfield
   html += '<div class="collect-row">';
-  players.filter(function(p){return p.row===2}).forEach(function(p){
-    html += '<div class="collect-player'+(p.owned?' owned':'')+'">';
-    html += '<div class="collect-player-pos">'+p.pos+'</div>';
-    html += '<div class="collect-player-name">'+(p.owned?p.name.split(' ').pop():'?')+'</div>';
-    if (!p.owned) html += '<div class="collect-player-cost"><span class="mcoin sm"></span> '+p.cost+'</div>';
-    html += '</div>';
-  });
+  players.filter(function(p){return p.row===2}).forEach(function(p){ html += renderPlayerCard(p); });
   html += '</div>';
-  // Row 1 - Defense (4)
+  // Row 1 - Defense
   html += '<div class="collect-row">';
-  players.filter(function(p){return p.row===1}).forEach(function(p){
-    html += '<div class="collect-player'+(p.owned?' owned':'')+'">';
-    html += '<div class="collect-player-pos">'+p.pos+'</div>';
-    html += '<div class="collect-player-name">'+(p.owned?p.name.split(' ').pop():'?')+'</div>';
-    if (!p.owned) html += '<div class="collect-player-cost"><span class="mcoin sm"></span> '+p.cost+'</div>';
-    html += '</div>';
-  });
+  players.filter(function(p){return p.row===1}).forEach(function(p){ html += renderPlayerCard(p); });
   html += '</div>';
-  // Row 0 - GK (1)
+  // Row 0 - GK
   html += '<div class="collect-row">';
-  players.filter(function(p){return p.row===0}).forEach(function(p){
-    html += '<div class="collect-player'+(p.owned?' owned':'')+'">';
-    html += '<div class="collect-player-pos">'+p.pos+'</div>';
-    html += '<div class="collect-player-name">'+(p.owned?p.name:'?')+'</div>';
-    if (!p.owned) html += '<div class="collect-player-cost"><span class="mcoin sm"></span> '+p.cost+'</div>';
-    html += '</div>';
-  });
+  players.filter(function(p){return p.row===0}).forEach(function(p){ html += renderPlayerCard(p); });
   html += '</div>';
   html += '</div>'; // .collect-formation
 
@@ -15735,10 +16874,14 @@ function renderMissionContent() {
 
     // Banner with image
     html += '<div class="lb-banner">';
-    html += '<img src="' + (window.lbTab === 'vip' ? 'Assets/hero-top-chien-binh.png' : 'Assets/hero-leaderboard-banner.png') + '" alt="" class="lb-banner-img"/>';
+    var bannerImg = window.lbTab === 'season' ? 'Assets/bg-leaderboard.png' : (window.lbTab === 'vip' ? 'Assets/hero-top-chien-binh.png' : 'Assets/hero-leaderboard-banner.png');
+    html += '<img src="' + bannerImg + '" alt="" class="lb-banner-img"/>';
     html += '<div class="lb-banner-overlay"></div>';
     html += '<div class="lb-hero">';
-    if (window.lbTab === 'normal') {
+    if (window.lbTab === 'season') {
+      html += '<div class="lb-hero-title">Đấu Trường Mùa 8</div>';
+      html += '<div class="lb-hero-sub">Xếp hạng theo tổng cược hợp lệ toàn mùa</div>';
+    } else if (window.lbTab === 'normal') {
       html += '<div class="lb-hero-title">Bảng Xếp Hạng</div>';
       html += '<div class="lb-hero-sub">Top người chơi tích Coin nhiều nhất tuần</div>';
     } else {
@@ -15747,12 +16890,18 @@ function renderMissionContent() {
       html += '<div style="margin-top:8px;font-size:12px;color:var(--tertiary-300);display:flex;align-items:center;gap:4px;"><img src="Assets/promotion-free-cash.webp" style="width:16px;height:16px;"/> <strong>100tr</strong> hũ thưởng</div>';
     }
     html += '</div>';
+    if (window.lbTab === 'season') {
+      var sEnd = new Date(SEASON_TOURNAMENT.endAt);
+      var sDays = Math.max(0, Math.ceil((sEnd - new Date()) / 86400000));
+      html += '<div class="lb-banner-countdown"><span class="lb-banner-cd-num">' + sDays + '</span> ngày còn lại</div>';
+    }
     html += '</div>';
 
     // Tab switcher
     html += '<div class="lb-tabs">';
     html += '<button class="lb-tab'+(window.lbTab==='normal'?' active':'')+'" onclick="window.lbTab=\'normal\';renderMissionContent()">BXH Thường</button>';
     html += '<button class="lb-tab'+(window.lbTab==='vip'?' active':'')+'" onclick="window.lbTab=\'vip\';renderMissionContent()">BXH VIP</button>';
+    html += '<button class="lb-tab'+(window.lbTab==='season'?' active':'')+'" onclick="window.lbTab=\'season\';renderMissionContent()">Đấu Trường</button>';
     html += '</div>';
 
     // Week switcher
@@ -15764,6 +16913,7 @@ function renderMissionContent() {
     var curLabel = fmtD(weekStart) + ' - ' + fmtD(weekEnd);
     var prevLabel = fmtD(prevStart) + ' - ' + fmtD(prevEnd);
 
+    if (window.lbTab !== 'season') {
     html += '<div class="lb-week-switcher">';
     html += '<button class="lb-week-btn' + (window.lbWeek === 'prev' ? ' active' : '') + '" onclick="window.lbWeek=\'prev\';renderMissionContent()">';
     html += '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="12" height="12"><path d="M15 18l-6-6 6-6"/></svg>';
@@ -15781,15 +16931,16 @@ function renderMissionContent() {
     html += '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="12" height="12"><path d="M9 18l6-6-6-6"/></svg>';
     html += '</button>';
     html += '</div>';
+    } // end if not season
 
     if (window.lbTab === 'normal') {
-      // VIP 3+ users are in BXH VIP, not BXH Thường
-      var isVip3Plus = currentUser && currentUser.tier >= 3;
-      if (isVip3Plus && window.lbWeek === 'current') {
+      // VIP 1+ users are in BXH VIP, not BXH Thường
+      var isVip1Plus = currentUser && currentUser.tier >= 1;
+      if (isVip1Plus && window.lbWeek === 'current') {
         html += '<div class="lb-lock-card">';
         html += '<div class="lb-lock-icon">' + lcIcon('trophy','neon-gold') + '</div>';
         html += '<div class="lb-lock-title">Bạn đang ở BXH VIP</div>';
-        html += '<div class="lb-lock-sub">VIP 3 trở lên tham gia BXH VIP với giải thưởng lớn hơn</div>';
+        html += '<div class="lb-lock-sub">VIP 1 trở lên tham gia BXH VIP với giải thưởng lớn hơn</div>';
         html += '<button class="lb-lock-cta" onclick="window.lbTab=\'vip\';renderMissionContent()">Xem BXH VIP</button>';
         html += '</div>';
       }
@@ -15823,14 +16974,14 @@ function renderMissionContent() {
         ];
       }
       html += renderLeaderboardList(leaders);
-    } else {
+    } else if (window.lbTab === 'vip') {
       // BXH VIP
 
-      var isVipEligible = currentUser && currentUser.tier >= 3;
+      var isVipEligible = currentUser && currentUser.tier >= 1;
       if (!isVipEligible && window.lbWeek === 'current') {
         html += '<div class="lb-lock-card">';
         html += '<div class="lb-lock-icon">' + lcIcon('lock','muted') + '</div>';
-        html += '<div class="lb-lock-title">Yêu cầu VIP 3 trở lên</div>';
+        html += '<div class="lb-lock-title">Yêu cầu VIP 1 trở lên</div>';
         html += '<div class="lb-lock-sub">Nâng hạng VIP để tham gia BXH và tranh giải thưởng lớn</div>';
         html += '<button class="lb-lock-cta" onclick="goToVipClub()">Xem Đặc Quyền VIP</button>';
         html += '</div>';
@@ -15875,31 +17026,56 @@ function renderMissionContent() {
       html += '<div class="lb-dist-item bronze"><span class="lb-dist-rank">Top 3</span><span class="lb-dist-prize">5.000.000đ</span></div>';
       html += '<div class="lb-dist-item"><span class="lb-dist-rank">Top 4-10</span><span class="lb-dist-prize">Chia 15.000.000đ</span></div>';
       html += '</div></div>';
+    } else if (window.lbTab === 'season') {
+      // ===== Season Tournament Tab =====
+      html += '<div class="st-intro-desc">Đấu trường mở ra những bảng xếp hạng riêng để bạn thể hiện đúng sở trường, tích lũy tổng cược và cạnh tranh vị trí cao nhất. Hãy chứng tỏ bản thân, chinh phục những phần thưởng xếp hạng cao quý và bước vào ngôi đền những Huyền thoại của MUBET.</div>';
+      html += renderSeasonTournament();
     }
 
     // TnC & FAQ
     html += '<div class="lb-tnc-section">';
     html += '<div class="lb-section-title">' + lcIcon('info','muted') + ' Điều Khoản & FAQ</div>';
 
-    // TnC items
+    // TnC items — khác nhau theo tab
     html += '<div class="lb-tnc-list">';
-    html += '<div class="lb-tnc-item">BXH được chốt và chi thưởng hằng tuần (Thứ 2 - Chủ nhật)</div>';
-    html += '<div class="lb-tnc-item">Bảng xếp hạng được cập nhật mỗi 15 phút</div>';
-    html += '<div class="lb-tnc-item">Coin tích lũy từ nhiệm vụ, nạp tiền và cược hợp lệ</div>';
-    html += '<div class="lb-tnc-item">VIP 3 trở lên chỉ tham gia BXH VIP, không tham gia BXH Thường</div>';
-    html += '<div class="lb-tnc-item">BXH Thường không áp dụng hệ số nhân VIP</div>';
-    html += '<div class="lb-tnc-item">Giải thưởng được cộng trực tiếp vào tài khoản trong 24h sau khi kết thúc tuần</div>';
-    html += '<div class="lb-tnc-item">Mubet có quyền điều chỉnh giải thưởng và điều khoản BXH</div>';
+    if (window.lbTab === 'season') {
+      html += '<div class="lb-tnc-item">Đấu Trường Mùa 8 diễn ra từ 08/08/2026 đến 04/09/2026</div>';
+      html += '<div class="lb-tnc-item">Xếp hạng theo tổng cược hợp lệ tại từng danh mục trong suốt mùa giải</div>';
+      html += '<div class="lb-tnc-item">Mỗi danh mục có BXH riêng, người chơi có thể tham gia nhiều danh mục cùng lúc</div>';
+      html += '<div class="lb-tnc-item">Cần hoàn thành Hành trình tương ứng để mở khóa BXH danh mục</div>';
+      html += '<div class="lb-tnc-item">Bảng xếp hạng được cập nhật mỗi 15 phút</div>';
+      html += '<div class="lb-tnc-item">Giải thưởng gồm Coin và Voucher, được phát trong 24h sau khi mùa giải kết thúc</div>';
+      html += '<div class="lb-tnc-item">Vô địch mùa giải sẽ được vinh danh trong Sảnh Huyền Thoại</div>';
+      html += '<div class="lb-tnc-item">Mubet có quyền điều chỉnh giải thưởng và điều khoản Đấu Trường</div>';
+    } else {
+      html += '<div class="lb-tnc-item">BXH được chốt và chi thưởng hằng tuần (Thứ 2 - Chủ nhật)</div>';
+      html += '<div class="lb-tnc-item">Bảng xếp hạng được cập nhật mỗi 15 phút</div>';
+      html += '<div class="lb-tnc-item">Coin tích lũy từ nhiệm vụ, nạp tiền và cược hợp lệ</div>';
+      html += '<div class="lb-tnc-item">VIP 1 trở lên chỉ tham gia BXH VIP, không tham gia BXH Thường</div>';
+      html += '<div class="lb-tnc-item">BXH Thường không áp dụng hệ số nhân VIP</div>';
+      html += '<div class="lb-tnc-item">Giải thưởng được cộng trực tiếp vào tài khoản trong 24h sau khi kết thúc tuần</div>';
+      html += '<div class="lb-tnc-item">Mubet có quyền điều chỉnh giải thưởng và điều khoản BXH</div>';
+    }
     html += '</div>';
 
-    // FAQ
+    // FAQ — khác nhau theo tab
     html += '<div class="lb-faq-list">';
-    var faqs = [
-      {q:'Coin được tính như thế nào?', a:'Coin được tích lũy từ hoàn thành nhiệm vụ, nạp tiền và cược hợp lệ. Trong BXH VIP, Coin được nhân hệ số theo hạng VIP.'},
-      {q:'BXH Thường và BXH VIP khác gì?', a:'BXH Thường dành cho VIP 1-2, xếp hạng theo Coin tuần, không có hệ số nhân. BXH VIP chỉ dành cho VIP 3+, có hũ thưởng riêng và hệ số nhân VIP.'},
-      {q:'Khi nào nhận được giải thưởng?', a:'BXH được chốt mỗi Chủ nhật. Giải thưởng được cộng tự động vào tài khoản trong vòng 24h sau khi kỳ BXH kết thúc.'},
-      {q:'Hệ số nhân VIP là gì?', a:'VIP 3: x1.2, VIP 4: x1.5, VIP 5: x2.0. Hệ số nhân chỉ áp dụng trong BXH VIP, giúp tăng Coin xếp hạng.'}
-    ];
+    var faqs;
+    if (window.lbTab === 'season') {
+      faqs = [
+        {q:'Đấu Trường khác BXH tuần như thế nào?', a:'Đấu Trường là giải đấu theo mùa (Mùa 8: 08/08 - 04/09/2026), xếp hạng theo tổng cược tại từng danh mục. BXH tuần xếp hạng theo Coin tích lũy hàng tuần.'},
+        {q:'Làm sao để mở khóa BXH danh mục?', a:'Hoàn thành Hành trình tương ứng (ví dụ: Chiến thần thể thao) để nhận Vé dự Đấu Trường và mở khóa BXH danh mục đó.'},
+        {q:'Tôi có thể tham gia nhiều danh mục không?', a:'Có, bạn có thể tham gia tất cả danh mục cùng lúc. Mỗi danh mục có BXH và giải thưởng riêng.'},
+        {q:'Sảnh Huyền Thoại là gì?', a:'Sảnh Huyền Thoại vinh danh những nhà vô địch qua các mùa giải. Người chơi đứng Top 1 tại mỗi danh mục sẽ được ghi danh vĩnh viễn.'}
+      ];
+    } else {
+      faqs = [
+        {q:'Coin được tính như thế nào?', a:'Coin được tích lũy từ hoàn thành nhiệm vụ, nạp tiền và cược hợp lệ. Trong BXH VIP, Coin được nhân hệ số theo hạng VIP.'},
+        {q:'BXH Thường và BXH VIP khác gì?', a:'BXH Thường dành cho tất cả người chơi, xếp hạng theo Coin tuần. BXH VIP dành cho VIP 1+, có hũ thưởng riêng và hệ số nhân VIP.'},
+        {q:'Khi nào nhận được giải thưởng?', a:'BXH được chốt mỗi Chủ nhật. Giải thưởng được cộng tự động vào tài khoản trong vòng 24h sau khi kỳ BXH kết thúc.'},
+        {q:'Hệ số nhân VIP là gì?', a:'VIP 1: x1.2, VIP 2: x1.5, VIP 3: x1.8, VIP 4: x2.0, VIP 5: x2.5. Hệ số nhân chỉ áp dụng trong BXH VIP, giúp tăng Coin xếp hạng.'}
+      ];
+    }
     for (var f=0; f<faqs.length; f++) {
       html += '<div class="lb-faq-item" onclick="this.classList.toggle(\'open\')">';
       html += '<div class="lb-faq-q"><span>'+faqs[f].q+'</span><svg class="lb-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>';
@@ -15950,6 +17126,71 @@ function renderLeaderboardList(leaders, showMult) {
     h += '</div>';
   }
   h += '</div>';
+  return h;
+}
+
+function renderSeasonTournament() {
+  var st = SEASON_TOURNAMENT;
+  var catPathForUnlock = PERSONAL_PATHS.find(function(p) { return p.id === window.stCatTab; });
+  var unlocked = catPathForUnlock && catPathForUnlock.status === 'completed';
+  var daysLeft = getDaysRemaining();
+  var h = '';
+
+
+  // Category entrance cards (same layout as Đường tới Đấu Trường)
+  h += '<div class="st-cat-cards">';
+  PERSONAL_PATHS.forEach(function(p, idx) {
+    var isSelected = p.id === window.stCatTab;
+    var catSlug = PP_ROUTE_SLUGS[p.id] || p.id;
+    var heroImg = 'Assets/' + catSlug + '.png';
+    var isFlip = (idx % 2 === 1);
+    var cpDone = getPathCompletedCount(p);
+    var cpTotal = p.checkpoints.length;
+    var isDone = p.status === 'completed';
+    var isActive = p.status === 'active';
+    var catWager = st.userScore.wagerByCategory[p.id] || 0;
+    var catRank = st.userScore.rankByCategory[p.id];
+    var heroSizeClass = (p.id === 'jackpot' || p.id === 'quick') ? ' pp-hero-sm' : '';
+
+    h += '<div class="pp-entrance-card st-cat-entry' + (isDone ? ' done' : '') + (isActive ? ' active' : '') + (isFlip ? ' pp-flip' : '') + '" onclick="navigateTo(\'/leaderboard/' + catSlug + '\')" style="--pp-color:' + p.color + ';--pp-color-bg:' + p.color + '15;--pp-color-border:' + p.color + '20;--pp-color-glow:' + p.color + '12;--pp-color-shadow:' + p.color + '30;">';
+
+    // Hero
+    h += '<div class="pp-ent-hero-wrap"><img class="pp-ent-hero-img' + heroSizeClass + '" src="' + heroImg + '" alt="' + p.name + '"></div>';
+
+    // Content
+    h += '<div class="pp-ent-content">';
+    h += '<div class="pp-ent-top"><div class="pp-ent-info">';
+    h += '<div class="pp-ent-name">' + p.name + '</div>';
+    h += '<div class="pp-ent-desc">' + p.desc + '</div>';
+    h += '</div></div>';
+
+    // Bottom: wager or status
+    h += '<div class="pp-ent-bottom">';
+    if (isDone && catRank) {
+      h += '<div class="pp-ent-rewards"><span class="pp-ent-rank">' + lcIcon('trophy','neon-gold') + ' #' + catRank + '</span></div>';
+      h += '<div class="st-cat-wager">' + fmtWager(catWager) + '</div>';
+    } else if (isDone) {
+      h += '<div class="pp-ent-rewards"><span class="pp-ent-rank">' + lcIcon('trophy','neon-gold') + ' —</span></div>';
+    } else {
+      h += '<div class="pp-ent-steps">';
+      p.checkpoints.forEach(function(cp) {
+        var stepDone = cp.status === 'completed' || cp.status === 'claimed';
+        var stepActive = cp.status === 'in_progress';
+        h += '<div class="pp-ent-step' + (stepDone ? ' done' : '') + (stepActive ? ' active' : '') + '"></div>';
+      });
+      h += '</div>';
+      h += '<span class="pp-ent-status cta" style="font-size:9px;">Chưa mở</span>';
+    }
+    h += '<div class="pp-ent-arrow">&#8250;</div>';
+    h += '</div>';
+
+    h += '</div>'; // content
+    h += '</div>'; // card
+  });
+  h += '</div>';
+
+  // (Wager, leaderboard, rewards now on sub-routes /leaderboard/{slug})
+
   return h;
 }
 
@@ -16056,7 +17297,7 @@ function renderMissionOverview() {
   html += '<div class="mhub-cards-row">';
 
   // Tân Thủ
-  html += '<div class="mhub-card rookie" onclick="showNewbieFullPage()">';
+  html += '<div class="mhub-card rookie" onclick="navigateTo(\'/mission/newbie\')">';
   html += '<div class="mhub-card-top">';
   html += '<div class="mhub-card-icon"><img src="Assets/rookie-star.png" alt="Rookie" style="width:36px;height:36px;object-fit:contain"></div>';
   html += '<div class="mhub-card-info"><div class="mhub-card-title">Tân Thủ</div><div class="mhub-card-sub">Onboarding</div></div>';
@@ -16129,7 +17370,7 @@ function renderMissionHub() {
 
   // Tabs — each navigates to its own full page
   html += '<div class="mission-tabs">';
-  html += '<div class="mission-tab" onclick="showNewbieFullPage()">Tân Thủ</div>';
+  html += '<div class="mission-tab" onclick="navigateTo(\'/mission/newbie\')">Tân Thủ</div>';
   html += '<div class="mission-tab mission-tab-lc" onclick="navigateTo(\'/mission/live-challenge\')">Live Challenge</div>';
   html += '<div class="mission-tab" onclick="showWarriorFullPage()">Chiến Binh</div>';
   html += '</div>';
@@ -16155,8 +17396,29 @@ function goToMissionTab(tab) {
   missionScrollTop();
 }
 
+window.newbieSubTab = 'missions'; // 'missions' or 'personal-path'
+
+function switchNewbieSubTab(tab) {
+  window.newbieSubTab = tab;
+  var container = document.getElementById('missionContent');
+  container.innerHTML = '<div style="padding:16px;">' + renderNewbieMissions() + '</div>';
+}
+
 function renderNewbieMissions() {
   var html = '';
+
+  // Sub-tabs
+  html += '<div class="newbie-subtabs">';
+  html += '<div class="newbie-subtab' + (window.newbieSubTab === 'missions' ? ' active' : '') + '" onclick="switchNewbieSubTab(\'missions\')">' + lcIcon('star','') + ' Nhiệm vụ tân binh</div>';
+  html += '<div class="newbie-subtab' + (window.newbieSubTab === 'personal-path' ? ' active' : '') + '" onclick="switchNewbieSubTab(\'personal-path\')">' + lcIcon('target','') + ' Đường tới Đấu Trường</div>';
+  html += '</div>';
+
+  if (window.newbieSubTab === 'personal-path') {
+    html += renderPersonalPath();
+    return html;
+  }
+
+  // === Missions tab ===
   var completed = MOCK_NEWBIE_MISSIONS.filter(function(m) { return m.status === 'completed'; }).length;
   var total = MOCK_NEWBIE_MISSIONS.length;
   var pct = Math.round((completed / total) * 100);
@@ -16202,6 +17464,344 @@ function renderNewbieMissions() {
     html += '</div></div>';
   });
   html += '</div>';
+
+  return html;
+}
+
+// ===== Đường tới Đấu Trường — Entrance Cards =====
+var PP_ROUTE_SLUGS = {sports:'sport', casino:'casino', lottery:'number', jackpot:'jackpot', quick:'slot'};
+
+function renderPersonalPath() {
+  var allDone = isPathCompleted();
+  var allCompletedCount = getAllPathsCompletedCount();
+  var allTotalCount = getAllPathsTotalCount();
+
+  var html = '';
+  html += '<div class="pp-section">';
+
+  // Header
+  html += '<div class="pp-header">';
+  html += '<div class="pp-header-icon">' + lcIcon('target','neon-gold') + '</div>';
+  html += '<div class="pp-header-text">';
+  html += '<div class="pp-header-title">Đường tới Đấu Trường</div>';
+  html += '<div class="pp-header-sub">Hoàn thành hành trình để tham gia Đấu Trường Mùa 1</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Overall progress
+  html += '<div class="pp-progress-row">';
+  html += '<div class="pp-progress-bar"><div class="pp-progress-fill" style="width:' + Math.round(allCompletedCount/allTotalCount*100) + '%"></div></div>';
+  html += '<span class="pp-progress-label">' + allCompletedCount + '/' + allTotalCount + ' hành trình</span>';
+  html += '</div>';
+
+  // 5 Entrance Cards
+  html += '<div class="pp-entrance-list">';
+  PERSONAL_PATHS.forEach(function(p, idx) {
+    var cpDone = getPathCompletedCount(p);
+    var cpTotal = p.checkpoints.length;
+    var pct = Math.round((cpDone / cpTotal) * 100);
+    var isDone = p.status === 'completed';
+    var isActive = p.status === 'active';
+    var slug = PP_ROUTE_SLUGS[p.id] || p.id;
+    var colorBg = p.color + '15';
+    var colorBorder = p.color + '20';
+    var colorGlow = p.color + '12';
+    var colorShadow = p.color + '30';
+    var isFlip = (idx % 2 === 1); // card 2, 4 flip hero to right
+
+    html += '<div class="pp-entrance-card' + (isDone ? ' done' : '') + (isActive ? ' active' : '') + (isFlip ? ' pp-flip' : '') + '" onclick="showPathDetailModal(\'' + p.id + '\')" style="--pp-color:' + p.color + ';--pp-color-bg:' + colorBg + ';--pp-color-border:' + colorBorder + ';--pp-color-glow:' + colorGlow + ';--pp-color-shadow:' + colorShadow + ';">';
+
+    // Hero character image
+    var heroImg = 'Assets/' + slug + '.png';
+    var heroSizeClass = (p.id === 'jackpot' || p.id === 'quick') ? ' pp-hero-sm' : '';
+    html += '<div class="pp-ent-hero-wrap">';
+    html += '<img class="pp-ent-hero-img' + heroSizeClass + '" src="' + heroImg + '" alt="' + p.name + '">';
+    html += '</div>';
+
+    // Content area
+    html += '<div class="pp-ent-content">';
+
+    // Top row: info + status
+    html += '<div class="pp-ent-top">';
+    html += '<div class="pp-ent-info">';
+    if (isDone) {
+      html += '<div class="pp-ent-name"><span class="pp-ent-done-icon">' + lcIcon('check','neon-green') + '</span>' + p.name + '</div>';
+    } else {
+      html += '<div class="pp-ent-name">' + p.name + '</div>';
+    }
+    html += '<div class="pp-ent-desc">' + p.desc + '</div>';
+    html += '</div>';
+    html += '<div class="pp-ent-status-wrap">';
+    if (isDone) {
+      // No badge needed — icon is inline with name
+    } else if (isActive) {
+      html += '<span class="pp-ent-status active">' + cpDone + '/' + cpTotal + ' bước</span>';
+    } else {
+      html += '<span class="pp-ent-status cta">Tham gia ›</span>';
+    }
+    html += '</div>';
+    html += '</div>';
+
+    // Bottom row: step bars + rewards + arrow
+    html += '<div class="pp-ent-bottom">';
+
+    // Step bars
+    html += '<div class="pp-ent-steps">';
+    p.checkpoints.forEach(function(cp) {
+      var stepDone = cp.status === 'completed' || cp.status === 'claimed';
+      var stepActive = cp.status === 'in_progress';
+      html += '<div class="pp-ent-step' + (stepDone ? ' done' : '') + (stepActive ? ' active' : '') + '"></div>';
+    });
+    html += '</div>';
+
+    // Rewards or Rank
+    html += '<div class="pp-ent-rewards">';
+    if (isDone) {
+      var catRank = SEASON_TOURNAMENT.userScore.rankByCategory[p.id];
+      html += '<span class="pp-ent-rank">' + lcIcon('trophy','neon-gold') + ' #' + (catRank || '—') + '</span>';
+    } else {
+      p.fullPathReward.forEach(function(r) {
+        var cls = r.type === 'coin' ? 'coin' : r.type === 'xp' ? 'xp' : 'voucher';
+        html += '<span class="mission-popup-badge ' + cls + '" style="font-size:9px;">' + (r.type === 'coin' ? '<span class="mcoin sm"></span>' : '') + r.label + '</span>';
+      });
+    }
+    html += '</div>';
+
+    // Arrow
+    html += '<div class="pp-ent-arrow">&#8250;</div>';
+
+    html += '</div>'; // bottom
+    html += '</div>'; // content
+    html += '</div>'; // card
+  });
+  html += '</div>';
+
+  // Tournament teaser
+  var st = SEASON_TOURNAMENT;
+  var anyPathDone = allCompletedCount > 0;
+  html += '<div class="pp-tournament-teaser">';
+  html += '<div class="pp-tt-header">';
+  html += '<div class="pp-tt-icon">' + lcIcon('swords','neon-red') + '</div>';
+  html += '<div class="pp-tt-info">';
+  html += '<div class="pp-tt-title">' + st.name + '</div>';
+  html += '<div class="pp-tt-sub">Còn ' + getDaysRemaining() + ' ngày · ' + allCompletedCount + '/' + allTotalCount + ' BXH đã mở</div>';
+  html += '</div>';
+  if (anyPathDone) {
+    html += '<span class="pp-tt-badge unlocked">' + lcIcon('check','') + ' Đang mở</span>';
+  } else {
+    html += '<span class="pp-tt-badge locked">' + lcIcon('lock','') + ' Chưa mở</span>';
+  }
+  html += '</div>';
+  html += '<div class="pp-tt-wager">';
+  html += '<div class="pp-tt-wager-label">Tổng cược mùa đang tích lũy</div>';
+  html += '<div class="pp-tt-wager-value">' + fmtWager(st.userScore.seasonTotalWager) + '</div>';
+  html += '<div class="pp-tt-wager-note">Tính từ ' + st.startAt.replace('2026-','').replace('-','/') + '</div>';
+  html += '</div>';
+  if (anyPathDone) {
+    html += '<button class="pp-tt-cta-btn" onclick="window.lbTab=\'season\';navigateTo(\'/leaderboard\')">Xem Bảng Xếp Hạng Mùa</button>';
+  } else {
+    html += '<div class="pp-tt-cta">Hoàn thành 1 hành trình để tham gia BXH mùa</div>';
+  }
+  html += '</div>';
+
+  html += '</div>'; // pp-section
+  return html;
+}
+
+// ===== Individual Path Detail Modal =====
+function showPathDetailModal(pathId) {
+  window.ppActiveTab = pathId;
+  var pp = getActivePersonalPath();
+  var slug = PP_ROUTE_SLUGS[pp.id] || pp.id;
+  var isComplete = pp.status === 'completed';
+  var statusBadge = '';
+  if (isComplete) statusBadge = '<span class="pp-ent-status done" style="font-size:11px;">' + lcIcon('check','') + ' Hoàn thành</span>';
+  else if (pp.status === 'active') statusBadge = '<span class="pp-ent-status active" style="font-size:11px;">Đang tiến hành</span>';
+  else statusBadge = '<span class="pp-ent-status locked" style="font-size:11px;">' + lcIcon('lock','') + ' Chưa bắt đầu</span>';
+
+  // Remove existing modal if any
+  var existing = document.querySelector('.pp-modal-overlay');
+  if (existing) existing.remove();
+
+  var modal = document.createElement('div');
+  modal.className = 'pp-modal-overlay';
+  modal.innerHTML = '<div class="pp-modal-sheet" style="--pp-modal-glow:' + pp.color + '15;">' +
+    '<div class="pp-modal-handle"></div>' +
+    '<div class="pp-modal-sheet-header">' +
+      '<div class="pp-modal-hero"><img src="Assets/' + slug + '.png" alt="' + pp.name + '"></div>' +
+      '<div class="pp-modal-hinfo">' +
+        '<div class="pp-modal-hname">' + pp.name + '</div>' +
+        '<div class="pp-modal-hdesc">' + pp.desc + '</div>' +
+        '<div class="pp-modal-hbadge">' + statusBadge + '</div>' +
+      '</div>' +
+      '<div class="pp-modal-close" onclick="closePathDetailModal()">✕</div>' +
+    '</div>' +
+    '<div class="pp-modal-sheet-body">' + renderPathDetail(pp) + '</div>' +
+  '</div>';
+
+  document.body.appendChild(modal);
+  // Trigger animation
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() { modal.classList.add('show'); });
+  });
+  // Close on overlay click
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closePathDetailModal();
+  });
+}
+
+function closePathDetailModal() {
+  var overlay = document.querySelector('.pp-modal-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('show');
+  setTimeout(function() { overlay.remove(); }, 300);
+}
+
+function joinPath(pathId) {
+  var pp = PERSONAL_PATHS.find(function(p) { return p.id === pathId; });
+  if (!pp || pp.status !== 'not_started') return;
+  // Activate path
+  pp.status = 'active';
+  pp.startedAt = '2026-08-14';
+  // Unlock first checkpoint
+  if (pp.checkpoints.length > 0) {
+    pp.checkpoints[0].status = 'in_progress';
+  }
+  // Re-render modal
+  closePathDetailModal();
+  setTimeout(function() {
+    showPathDetailModal(pathId);
+    // Also refresh the entrance cards behind the modal
+    var ppSection = document.querySelector('.pp-section');
+    if (ppSection) ppSection.outerHTML = '<div class="pp-section">' + renderPersonalPath().replace(/^<div class="pp-section">/, '').replace(/<\/div>$/, '') + '</div>';
+  }, 350);
+}
+
+function renderPathDetail(pp) {
+  var slug = PP_ROUTE_SLUGS[pp.id] || pp.id;
+  var cpDone = getPathCompletedCount(pp);
+  var cpTotal = pp.checkpoints.length;
+  var pathPct = Math.round((cpDone / cpTotal) * 100);
+  var isComplete = pp.status === 'completed';
+  var isNotStarted = pp.status === 'not_started';
+
+  var html = '';
+
+  // Join CTA for not_started paths
+  if (isNotStarted) {
+    html += '<div class="pp-join-section">';
+    html += '<div class="pp-join-info">';
+    html += '<div class="pp-join-icon">' + lcIcon('target','neon-gold') + '</div>';
+    html += '<div class="pp-join-title">Chọn hành trình này?</div>';
+    html += '<div class="pp-join-desc">Bắt đầu hành trình ' + pp.name + ' để nhận thưởng Coin, XP và mở khóa BXH Đấu Trường Mùa 1.</div>';
+    html += '<div class="pp-join-rewards">';
+    html += '<span class="pp-join-reward-item">🎁 Tổng thưởng: ';
+    pp.fullPathReward.forEach(function(r) {
+      var cls = r.type === 'coin' ? 'coin' : r.type === 'xp' ? 'xp' : 'voucher';
+      html += '<span class="mission-popup-badge ' + cls + '" style="font-size:10px;">' + (r.type === 'coin' ? '<span class="mcoin sm"></span>' : '') + r.label + '</span> ';
+    });
+    html += '</span>';
+    html += '</div>';
+    html += '</div>';
+    html += '<button class="pp-join-btn" style="background:linear-gradient(135deg,' + pp.color + ',' + pp.color + 'cc);" onclick="joinPath(\'' + pp.id + '\')">Tham gia hành trình</button>';
+    html += '</div>';
+  }
+
+  // Progress
+  html += '<div class="pp-path-card" style="border-left: 3px solid ' + pp.color + ';padding:14px 16px;">';
+  html += '<div class="pp-progress-row" style="margin-bottom:0;padding-bottom:0;">';
+  html += '<div class="pp-progress-bar"><div class="pp-progress-fill" style="width:' + pathPct + '%;background:linear-gradient(90deg,' + pp.color + ',' + pp.color + '99);"></div></div>';
+  html += '<span class="pp-progress-label">' + cpDone + '/' + cpTotal + '</span>';
+  html += '</div>';
+  html += '</div>';
+
+  // Checkpoint timeline (blurred if not started)
+  if (isNotStarted) html += '<div class="pp-timeline-locked">';
+  html += '<div class="pp-timeline">';
+  pp.checkpoints.forEach(function(cp, idx) {
+    var isDone = cp.status === 'completed' || cp.status === 'claimed';
+    var isActive = cp.status === 'in_progress';
+    var isLocked = cp.status === 'locked';
+    var cpPct = cp.target > 0 ? Math.min(100, Math.round((cp.current / cp.target) * 100)) : 0;
+
+    html += '<div class="pp-checkpoint' + (isDone ? ' done' : '') + (isActive ? ' active' : '') + (isLocked ? ' locked' : '') + '">';
+    html += '<div class="pp-checkpoint-dot-col">';
+    html += '<div class="pp-checkpoint-dot">';
+    if (isDone) html += '<svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+    else if (isActive) html += '<div class="pp-dot-pulse"></div>';
+    else html += '<svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" opacity=".4"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg>';
+    html += '</div>';
+    if (idx < cpTotal - 1) html += '<div class="pp-connector' + (isDone ? ' done' : '') + '"></div>';
+    html += '</div>';
+
+    html += '<div class="pp-checkpoint-card">';
+    html += '<div class="pp-cp-header">';
+    html += '<span class="pp-cp-label">' + cp.label + '</span>';
+    html += '<span class="pp-cp-title">' + cp.title + '</span>';
+    html += '</div>';
+    html += '<div class="pp-cp-desc">' + cp.desc + '</div>';
+
+    if (isActive) {
+      html += '<div class="pp-cp-progress">';
+      html += '<div class="pp-cp-bar"><div class="pp-cp-bar-fill" style="width:' + cpPct + '%;background:' + pp.color + ';"></div></div>';
+      html += '<span class="pp-cp-bar-text">' + fmtWager(cp.current) + '/' + fmtWager(cp.target) + '</span>';
+      html += '</div>';
+    }
+
+    html += '<div class="pp-cp-rewards">';
+    cp.rewards.forEach(function(r) {
+      var cls = r.type === 'coin' ? 'coin' : r.type === 'xp' ? 'xp' : 'voucher';
+      html += '<span class="mission-popup-badge ' + cls + '">' + (r.type === 'coin' ? '<span class="mcoin sm"></span>' : '') + r.label + '</span>';
+    });
+    html += '</div>';
+
+    if (isDone && cp.status === 'claimed') {
+      html += '<div class="pp-cp-status done">' + lcIcon('check','neon-green') + ' Đã nhận thưởng</div>';
+    } else if (isDone) {
+      html += '<button class="pp-cp-claim">Nhận thưởng</button>';
+    }
+
+    html += '</div></div>';
+  });
+  html += '</div>';
+  if (isNotStarted) html += '</div>'; // close pp-timeline-locked
+
+  // Full path reward
+  html += '<div class="pp-fullpath">';
+  html += '<div class="pp-fullpath-icon">' + lcIcon('trophy','neon-gold') + '</div>';
+  html += '<div class="pp-fullpath-info">';
+  html += '<div class="pp-fullpath-title">Thưởng hoàn thành hành trình</div>';
+  html += '<div class="pp-fullpath-rewards">';
+  pp.fullPathReward.forEach(function(r) {
+    var cls = r.type === 'coin' ? 'coin' : r.type === 'xp' ? 'xp' : 'voucher';
+    html += '<span class="mission-popup-badge ' + cls + '">' + (r.type === 'coin' ? '<span class="mcoin sm"></span>' : '') + r.label + '</span>';
+  });
+  html += '</div>';
+  // Tournament ticket inline (voucher style)
+  html += '<div class="pp-ticket-voucher">';
+  html += '<div class="pp-ticket-stub"><span class="pp-ticket-stub-icon"><img src="Assets/' + slug + '.png" alt=""></span></div>';
+  html += '<div class="pp-ticket-body">';
+  html += '<div class="pp-ticket-title">Vé dự Đấu Trường Mùa 1</div>';
+  html += '<div class="pp-ticket-sub">BXH ' + pp.name + '</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+  if (isComplete) {
+    html += '<div class="pp-fullpath-status done">' + lcIcon('check','neon-green') + '</div>';
+  } else {
+    html += '<div class="pp-fullpath-status">' + lcIcon('lock','muted') + '</div>';
+  }
+  html += '</div>';
+
+  // Tournament ticket is part of fullpath rewards (added inside the fullpath card above)
+
+  // CTA: Xem đấu trường
+  html += '<div class="pp-arena-cta-wrap">';
+  html += '<button class="pp-arena-cta" onclick="closePathDetailModal();setTimeout(function(){navigateTo(\'/leaderboard/' + slug + '\');},300);" style="--pp-color:' + pp.color + ';">';
+  html += lcIcon('trophy','') + ' Xem đấu trường';
+  html += '</button>';
+  html += '</div>';
+
   return html;
 }
 
@@ -17416,10 +19016,11 @@ function handleVoucherClear(cmd) {
 restoreLoginState();
 renderLobbyContent();
 // Mission popup — show once per session on homepage load
-if (!window.missionPopupShown) {
-  window.missionPopupShown = true;
-  setTimeout(showMissionPopup, 1500);
-}
+// Auto mission popup disabled
+// if (!window.missionPopupShown) {
+//   window.missionPopupShown = true;
+//   setTimeout(showMissionPopup, 1500);
+// }
 showFloatingPromo();
 updateFloatingVoucher();
 renderVipSelector();
@@ -18353,7 +19954,7 @@ function onbHubAction(id) {
         if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('redeem'); }
         break;
       case 'mission-tab-leaderboard':
-        if (typeof showMissionView === 'function') { showMissionView(); switchMissionNav('leaderboard'); }
+        navigateTo('/leaderboard');
         break;
       case 'redeem-hub':
       case 'redeem-shop':
