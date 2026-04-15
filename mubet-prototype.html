@@ -8634,6 +8634,73 @@ img { max-width: 100%; display: block; }
 .xp-daily-cap-fill.full { background: linear-gradient(90deg, #d42a2a, #ff4444); }
 .xp-daily-cap-text { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.6); white-space: nowrap; }
 
+/* Badge Collection */
+.xp-badge-collection { margin-top: 16px; margin-bottom: 8px; }
+.xp-badge-title { font-size: 12px; color: rgba(255,255,255,.4); font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.xp-badge-title .xp-badge-count { font-size: 10px; color: rgba(255,255,255,.3); font-weight: 600; margin-left: auto; }
+.xp-badge-grid {
+  display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 8px;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.xp-badge-grid::-webkit-scrollbar { display: none; }
+.xp-badge-item {
+  flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  width: 72px; cursor: default; position: relative;
+}
+.xp-badge-img-wrap {
+  width: 56px; height: 56px; border-radius: 14px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.03); border: 2px solid rgba(255,255,255,.06);
+  transition: all .3s;
+}
+.xp-badge-item.unlocked .xp-badge-img-wrap {
+  background: rgba(255,180,50,.06); border-color: rgba(255,180,50,.25);
+  box-shadow: 0 0 16px rgba(255,180,50,.1), 0 2px 8px rgba(0,0,0,.2);
+}
+.xp-badge-item.unlocked .xp-badge-img-wrap::after {
+  content: '✓'; position: absolute; bottom: -4px; right: -4px;
+  width: 16px; height: 16px; border-radius: 50%; background: #43a047;
+  border: 2px solid #0c0c0e; display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 900; color: #fff; z-index: 2;
+}
+.xp-badge-img {
+  width: 40px; height: 40px; object-fit: contain;
+  transition: all .3s;
+}
+.xp-badge-item:not(.unlocked) .xp-badge-img {
+  filter: brightness(.2) grayscale(1); opacity: .4;
+}
+.xp-badge-item.unlocked .xp-badge-img {
+  filter: drop-shadow(0 0 6px rgba(255,180,50,.3));
+}
+.xp-badge-num {
+  position: absolute; z-index: 2;
+  font-family: Montserrat, sans-serif; font-size: 14px; font-weight: 900;
+  color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.6), 0 0 8px rgba(0,0,0,.3);
+  line-height: 1; pointer-events: none;
+}
+.xp-badge-item:not(.unlocked) .xp-badge-num { opacity: .3; }
+.xp-badge-label {
+  font-size: 8.5px; font-weight: 700; color: rgba(255,255,255,.25);
+  text-align: center; line-height: 1.2; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; max-width: 72px;
+}
+.xp-badge-item.unlocked .xp-badge-label { color: rgba(255,255,255,.6); }
+.xp-badge-level {
+  font-size: 7.5px; font-weight: 600; color: rgba(255,255,255,.15);
+  text-transform: uppercase; letter-spacing: .3px;
+}
+.xp-badge-item.unlocked .xp-badge-level { color: rgba(255,180,50,.5); }
+@keyframes badgeUnlockShine {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+.xp-badge-item.unlocked .xp-badge-img-wrap::before {
+  content: ''; position: absolute; inset: 0; border-radius: 14px; z-index: 1;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.1) 45%, rgba(255,255,255,.2) 50%, rgba(255,255,255,.1) 55%, transparent 60%);
+  background-size: 200% 100%; animation: badgeUnlockShine 3s ease-in-out infinite;
+}
+
 /* Milestone Rewards Track — Vertical */
 .xp-milestones-section { margin-top: 16px; }
 .xp-milestones-title { font-size: 12px; color: rgba(255,255,255,.4); font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
@@ -8679,6 +8746,19 @@ img { max-width: 100%; display: block; }
 .xp-milestone-node .lc-icon-svg { width: 20px; height: 20px; }
 .xp-milestone.reached .xp-milestone-node .lc-icon-svg { filter: drop-shadow(0 0 4px rgba(67,160,71,.4)); }
 .xp-milestone.current .xp-milestone-node .lc-icon-svg { filter: drop-shadow(0 0 4px rgba(255,50,50,.4)); }
+.xp-milestone-badge-img {
+  width: 32px; height: 32px; object-fit: contain; transition: all .3s;
+}
+.xp-milestone:not(.reached) .xp-milestone-badge-img { filter: brightness(.25) grayscale(.8); opacity: .5; }
+.xp-milestone.reached .xp-milestone-badge-img { filter: drop-shadow(0 0 6px rgba(255,180,50,.4)); }
+.xp-milestone.current .xp-milestone-badge-img { filter: brightness(.6) grayscale(.3); opacity: .7; }
+.xp-milestone-badge-num {
+  position: absolute; z-index: 2;
+  font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 900;
+  color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.6), 0 0 8px rgba(0,0,0,.3);
+  line-height: 1; pointer-events: none;
+}
+.xp-milestone:not(.reached) .xp-milestone-badge-num { opacity: .3; }
 .xp-milestone-check {
   position: absolute; top: -3px; right: -3px; width: 16px; height: 16px; border-radius: 50%;
   background: #43a047; border: 2px solid #0c0c0e;
@@ -10930,6 +11010,26 @@ function renderXpProgressCard(opts) {
   });
   html += '</div>';
 
+  // Badge Collection
+  var badgeMsDescs = { 5: 'Mốc đầu tiên', 10: 'Chiến binh mới', 15: 'Thợ săn thưởng', 20: 'Cao thủ', 25: 'Huyền thoại', 30: 'Đỉnh cao vinh quang' };
+  var badgeMsImgs = { 5: 'Assets/level/bronze-badge.png', 10: 'Assets/level/silver-badge.png', 15: 'Assets/level/silver-badge.png', 20: 'Assets/level/gold-badge.png', 25: 'Assets/level/gold-badge.png', 30: 'Assets/level/diamond-badge.png' };
+  var unlockedCount = 0;
+  XP_MILESTONE_LEVELS.forEach(function(ml) { if (USER_XP.currentLevel >= ml) unlockedCount++; });
+  html += '<div class="xp-badge-collection">';
+  html += '<div class="xp-badge-title">' + lcIcon('badge','neon-gold') + ' Bộ sưu tập Huy hiệu <span class="xp-badge-count">' + unlockedCount + '/' + XP_MILESTONE_LEVELS.length + '</span></div>';
+  html += '<div class="xp-badge-grid">';
+  XP_MILESTONE_LEVELS.forEach(function(ml) {
+    var unlocked = USER_XP.currentLevel >= ml;
+    html += '<div class="xp-badge-item ' + (unlocked ? 'unlocked' : '') + '">';
+    html += '<div class="xp-badge-img-wrap">';
+    html += '<img class="xp-badge-img" src="' + badgeMsImgs[ml] + '" alt="Badge Lv' + ml + '"><span class="xp-badge-num">' + ml + '</span>';
+    html += '</div>';
+    html += '<div class="xp-badge-label">' + badgeMsDescs[ml] + '</div>';
+    html += '<div class="xp-badge-level">Lv.' + ml + '</div>';
+    html += '</div>';
+  });
+  html += '</div></div>';
+
   // Milestone rewards track — vertical
   html += '<div class="xp-milestones-section">';
   html += '<div class="xp-milestones-title">' + lcIcon('trophy','neon-gold') + ' Phần thưởng theo Level</div>';
@@ -10956,6 +11056,7 @@ function renderXpProgressCard(opts) {
   var msIcons = { 5: 'gift', 10: 'star', 15: 'trophy', 20: 'diamond', 25: 'crown', 30: 'sparkle' };
   var msNeons = { 5: 'neon-green', 10: 'neon-blue', 15: 'neon-gold', 20: 'neon-purple', 25: 'neon-red', 30: 'neon-gold' };
   var msDescs = { 5: 'Mốc đầu tiên', 10: 'Chiến binh mới', 15: 'Thợ săn thưởng', 20: 'Cao thủ', 25: 'Huyền thoại', 30: 'Đỉnh cao vinh quang' };
+  var msBadges = { 5: 'Assets/level/bronze-badge.png', 10: 'Assets/level/silver-badge.png', 15: 'Assets/level/silver-badge.png', 20: 'Assets/level/gold-badge.png', 25: 'Assets/level/gold-badge.png', 30: 'Assets/level/diamond-badge.png' };
 
   XP_MILESTONE_LEVELS.forEach(function(ml, idx) {
     var reached = USER_XP.currentLevel >= ml;
@@ -10972,11 +11073,11 @@ function renderXpProgressCard(opts) {
     html += '<div class="xp-milestone ' + cls + '">';
     html += '<div class="xp-milestone-node">';
     if (reached) html += '<div class="xp-milestone-check">✓</div>';
-    html += lcIcon(msIcons[ml] || 'gift', reached ? 'neon-green' : isCurrent ? 'neon-red' : msNeons[ml] || 'neon-red');
+    html += '<img class="xp-milestone-badge-img" src="' + msBadges[ml] + '" alt="Badge Lv' + ml + '"><span class="xp-milestone-badge-num">' + ml + '</span>';
     html += '</div>';
     html += '<div class="xp-milestone-info">';
     html += '<div class="xp-milestone-level">Level ' + ml + ' — ' + msDescs[ml] + '</div>';
-    html += '<div class="xp-milestone-reward">' + lcIcon('coin','neon-gold') + ' ' + (XP_MILESTONE_REWARDS[ml] / 1000) + 'K Coin' + (isCurrent ? ' <span class="xp-milestone-you">Tiếp theo</span>' : '') + '</div>';
+    html += '<div class="xp-milestone-reward">' + lcIcon('coin','neon-gold') + ' ' + (XP_MILESTONE_REWARDS[ml] / 1000) + 'K Coin + ' + lcIcon('badge','neon-gold') + ' Badge' + (isCurrent ? ' <span class="xp-milestone-you">Tiếp theo</span>' : '') + '</div>';
     html += '</div>';
     if (reached) html += '<div class="xp-milestone-status">' + lcIcon('check','neon-green') + '</div>';
     html += '</div>';
