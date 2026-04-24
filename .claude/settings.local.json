@@ -36,7 +36,14 @@
       "Bash(for i:*)",
       "Bash(do mv:*)",
       "Bash(mv \"Assets/assets \\(1\\)/asset 34.svg\" \"Assets/assets \\(1\\)/asset 36.webp\" \"Assets/assets \\(1\\)/asset 37.webp\" \"Assets/assets \\(1\\)/asset 38.webp\" \"Assets/assets \\(1\\)/asset 39.webp\" \"Assets/assets \\(1\\)/asset 40.webp\" Ref/)",
-      "Bash(mv \"Mubet layout.png\" Ref/)"
+      "Bash(mv \"Mubet layout.png\" Ref/)",
+      "Bash(git log *)",
+      "Bash(python \"/c/Users/1/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/aa701f6a-7274-4190-9a9b-514722d90928/2491ed42-db2f-4151-a60b-5896e0bbdcf6/skills/docx/scripts/office/unpack.py\" \"/c/Users/1/Desktop/Claude Code/Ref/VIP_Final.docx\" \"/tmp/vip_unpacked\")",
+      "Bash(mkdir -p /tmp/vip_unpacked)",
+      "Read(//tmp/**)",
+      "Bash(python -c \"import zipfile; zipfile.ZipFile\\('/c/Users/1/Desktop/Claude Code/Ref/VIP_Final.docx'\\).extractall\\('.'\\)\")",
+      "Bash(python -c \"import os; print\\(os.path.exists\\(r'C:\\\\Users\\\\1\\\\Desktop\\\\Claude Code\\\\Ref\\\\VIP_Final.docx'\\)\\)\")",
+      "Bash(python -c ' *)"
     ]
   }
 }
